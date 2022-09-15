@@ -1,0 +1,18 @@
+<script>
+	export let id;
+	export let value;
+	export let min;
+	export let max;
+	export let step;
+	export let label;
+	export let tooltip;
+	export let unit;
+</script>
+<div>
+	<span class="mt-3 has-text-weight-bold mr-5">{label}</span>
+	<span>				
+		<input id={id} class="slider pt-5 has-tooltip-arrow has-tooltip" data-tooltip={tooltip} step={step?step:1} min={min} max={max} type="range" bind:value={value} />
+		<span class="tag is-info">{value}{unit}</span>
+		
+	</span>
+</div>
