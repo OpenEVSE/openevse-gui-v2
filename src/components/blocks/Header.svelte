@@ -1,5 +1,5 @@
 <script>
-  import logo from '../assets/logo.png';
+  import logo from '../../assets/logo.png';
   let isBurgerActive = false;
   function toggleBurger() {
 		isBurgerActive = !isBurgerActive;

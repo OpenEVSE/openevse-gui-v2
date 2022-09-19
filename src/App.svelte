@@ -1,6 +1,6 @@
 <script>
-	import Header from './components/Header.svelte';
-	import Main from './components/Main.svelte';
+	import Header from './components/blocks/Header.svelte';
+	import Main from './components/pages/Main.svelte';
 </script>
 
 <main>

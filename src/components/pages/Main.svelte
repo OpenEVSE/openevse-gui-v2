@@ -1,18 +1,17 @@
 <script>
-	import Status from "./Status.svelte"
-	import Charge from "./Charge.svelte"
+	import Status from "../blocks/Status.svelte"
+	import Manual from "../blocks//Manual.svelte"
+	import Timers from "../blocks//Timers.svelte"
 </script>
 <div class="container px-3">
 	<Status />
 	<div class="container">
 		<div class="columns" >
 			<div class="column">
-				<Charge />
+				<Manual />
 			</div>
 			<div class="column">
-				<div class="box">	
-					<div class="is-size-4 has-text-weight-bold">Timers</div>
-				</div>
+				<Timers />
 			</div>
 		</div>
 	</div>

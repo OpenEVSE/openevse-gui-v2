@@ -1,7 +1,7 @@
 <script>
-	import Slider from "./ui/SliderForm.svelte";
-	import Switch from "./ui/SwitchForm.svelte";
-	import InputHalf from "./ui/InputHalfForm.svelte";
+	import Slider from "../ui/SliderForm.svelte";
+	import Switch from "../ui/SwitchForm.svelte";
+	import InputHalf from "../ui/InputHalfForm.svelte";
 
 	let man_data = {
 		shaper: {
@@ -36,8 +36,9 @@
 		</div>
 
 		<div class="columns is-mobile">
-				<InputHalf label="Time Limit" value={man_data.time_lmt} type="tel" placeholder="in minutes" />
-				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="tel" placeholder="in kWh" />			
+				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="in minutes" />
+				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number
+				" placeholder="in kWh" />			
 		</div>
 	</div>
 </div>
