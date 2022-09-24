@@ -7,7 +7,7 @@
 </script>
 <div class="container px-3">
 	<Status />
-	<div class="container">
+	<div class="box">
 		<TabMain />
 		{#if $location == "/"}
 		<Manual />

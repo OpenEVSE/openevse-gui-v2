@@ -2,7 +2,8 @@
 	import { link } from "svelte-spa-router";
 	import active from 'svelte-spa-router/active'
 </script>
-<div class="tabs is-boxed">
+
+<div class="tabs is-small">
 	<ul>
 	  <li use:active={{path: '/', className: 'is-active'}}>
 		<a href="/" use:link>

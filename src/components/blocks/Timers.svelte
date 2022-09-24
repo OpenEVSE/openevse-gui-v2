@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="box">	
+<div>	
 	<div class="is-size-4 has-text-weight-bold mb-3">Schedule</div>
 	<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
 	<table class="table is-size-6 has-text-weight-normall">

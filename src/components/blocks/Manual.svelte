@@ -21,7 +21,7 @@
 </script>
 
 
-<div class="box">	
+<div>	
 	<div class="is-size-4 has-text-weight-bold">Manual</div>
 	<button class="button mt-3 is-primary has-tooltip-arrow has-tooltip" data-tooltip="Enable charging">Enable Charge</button>
 	<div>
