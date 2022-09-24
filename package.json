@@ -22,6 +22,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "bulma-slider": "^2.0.5",
     "bulma-switch": "^2.0.4",
-    "svelte-fa": "^3.0.3"
+    "svelte-fa": "^3.0.3",
+    "svelte-spa-router": "^3.3.0"
   }
 }

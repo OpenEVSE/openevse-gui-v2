@@ -1,5 +1,7 @@
 <script>
   import logo from '../../assets/logo.png';
+  import { link } from "svelte-spa-router";
+
   let isBurgerActive = false;
   function toggleBurger() {
 		isBurgerActive = !isBurgerActive;
@@ -29,17 +31,17 @@
 	
 			<div class="navbar-start">
 
-				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/">Main</a>
-				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="#Advanced">Advanced</a>
+				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/" use:link>Main</a>
+				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/Advanced" use:link>Advanced</a>
 				<div class="navbar-item has-dropdown is-hoverable">
-					<a class="navbar-item is-size-6 has-text-weight-semibold has-text-grey-dark" href="#Config">Configuration</a>
+					<a class="navbar-item is-size-6 has-text-weight-semibold has-text-grey-dark" href="/Config" use:link>Configuration</a>
 					<div class="navbar-dropdown">
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="#Hardware">Hardware</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="#Settings">Settings</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="#Charge">Charge</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="#MQTT">MQTT</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="#Services">Services</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="#Vehicle">Vehicle</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/Hardware" use:link>Hardware</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/Settings" use:link>Settings</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/Charge" use:link>Charge</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/MQTT" use:link>MQTT</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/Services" use:link>Services</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/Vehicle" use:link>Vehicle</a>
 					</div>
 				</div>
 				

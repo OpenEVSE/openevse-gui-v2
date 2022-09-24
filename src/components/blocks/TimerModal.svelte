@@ -32,6 +32,8 @@ function checkAll(checked) {
 	}
 	else selected_days = [false,false,false,false,false,false,false,false];
 }
+
+
 </script>	
 
 

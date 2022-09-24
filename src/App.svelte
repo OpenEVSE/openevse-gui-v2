@@ -1,11 +1,12 @@
 <script>
 	import Header from './components/blocks/Header.svelte';
-	import Main from './components/pages/Main.svelte';
+	import Router from 'svelte-spa-router';
+	import { routes } from "./routes.js";
 </script>
 
 <main>
 	<Header />
-	<Main />
+	<Router {routes}/>
 </main>
 
 
