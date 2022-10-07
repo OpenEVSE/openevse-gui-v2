@@ -1,37 +1,108 @@
 <script>
 	export let timers_modal_opened;
-	export let t_id = 0;
-	export let t_time;
-	export let t_state;
-	export let selected_days;
+	export let timer;
+	import {timers_schedule} from "../../lib/stores.js"
 
-function saveTimer() {
-	if (t_id) {
-		//save edited timer
-		console.log("save edited timer");
-		timers_modal_opened = false;
+	let default_timer = 	{
+	  id: null,
+	  state: "active",
+	  time: "00:00",
+	  days: [
+		"monday",
+		"tuesday",
+		"wednesday",
+		"thirsday",
+		"friday",
+		"saturday",
+		"sunday"
+	  ]
+	};
+
+	let selected_days = [true,true,true,true,true,true,true,true];
+	
+	$: if (timer == null) {
+			days2table(default_timer.days)
+		}
+		else {
+			days2table($timers_schedule[timer].days)
+			$timers_schedule[timer].time = $timers_schedule[timer].time.slice(0,5)
+		}
+	
+	//$: days = days;
+
+	function days2table(sched) {
+		selected_days = [false,false,false,false,false,false,false,true];
+		for (let i = 0; i < sched.length; i++) {
+			switch (sched[i]) {
+				case "monday":
+					selected_days[0] = true;
+					break;
+				case "tuesday":
+					selected_days[1] = true;
+					break;
+				case "wednesday":
+					selected_days[2] = true;
+					break;
+				case "thirsday":
+					selected_days[3] = true;
+					break;
+				case "friday":
+					selected_days[4] = true;
+					break;
+				case "saturday":
+					selected_days[5] = true;
+					break;
+				case "sunday":
+					selected_days[6] = true;
+					break;
+				default:
+					break;
+			}
+		}
+		checkDays();
 	}
-	else {
-		// save new timer
-		console.log("save new timer");
-		timers_modal_opened = false;
+
+	function table2days() {
+		$timers_schedule[timer].days = [];
+		if (selected_days[0] == true) $timers_schedule[timer].days.push("monday");
+		if (selected_days[1] == true) $timers_schedule[timer].days.push("tuesday");
+		if (selected_days[2] == true) $timers_schedule[timer].days.push("wednesday");
+		if (selected_days[3] == true) $timers_schedule[timer].days.push("thirsday");
+		if (selected_days[4] == true) $timers_schedule[timer].days.push("friday");
+		if (selected_days[5] == true) $timers_schedule[timer].days.push("saturday");
+		if (selected_days[6] == true) $timers_schedule[timer].days.push("sunday");
+		console.log($timers_schedule[timer].days);
 	}
-}
 
-
-function checkDay() {
-	for (let i = 0; i < 7; i++) {		
-		if (selected_days[i] == false) {
-			selected_days[7] = false;
+	function saveTimer() {
+		table2days();
+		if ($timers_schedule[timer].id) {
+			//save edited timer
+			console.log("save edited timer");
+			timers_modal_opened = false;
+			
+		}
+		else {
+			// save new timer
+			console.log("save new timer");
+			timers_modal_opened = false;
 		}
 	}
-}
-function checkAll(checked) {
-	if (checked) {
-		selected_days = [true,true,true,true,true,true,true,true];
+
+
+	function checkDays() {
+		for (let i = 0; i < 7; i++) {		
+			if (selected_days[i] == false) {
+				selected_days[7] = false;
+			}
+		}
 	}
-	else selected_days = [false,false,false,false,false,false,false,false];
-}
+	function checkAll(checked) {
+		if (checked) {
+			selected_days = [true,true,true,true,true,true,true,true];
+		}
+		else selected_days = [false,false,false,false,false,false,false,false];
+	}
 
 
 </script>	
@@ -42,39 +113,39 @@ function checkAll(checked) {
 	<div class="modal-content p-3">
 		<div class="box">
 			<div class="is-size-4 has-text-weight-bold">
-				{#if t_id==0}
+				{#if timer == null}
 				New Timer
 				{:else}
-				Timer {t_id}
+				Timer {$timers_schedule[timer].id}
 				{/if}
 			</div>
 			<div class="is-size-6">				
 				<label class="checkbox">
-					<input id="d_mon" type="checkbox" bind:checked={selected_days[0]} on:change={checkDay} >
+					<input id="d_mon" type="checkbox" bind:checked={selected_days[0]} on:change={checkDays} >
 					Mon
 				</label>
 				<label class="checkbox">
-					<input id="d_tue" type="checkbox" bind:checked={selected_days[1]} on:change={checkDay}>
+					<input id="d_tue" type="checkbox" bind:checked={selected_days[1]} on:change={checkDays}>
 					Tue
 				</label>
 				<label class="checkbox">
-					<input id="d_wed" type="checkbox" bind:checked={selected_days[2]} on:change={checkDay}>
+					<input id="d_wed" type="checkbox" bind:checked={selected_days[2]} on:change={checkDays}>
 					Wed
 				</label>
 				<label class="checkbox">
-					<input id="d_thi" type="checkbox" bind:checked={selected_days[3]} on:change={checkDay}>
+					<input id="d_thi" type="checkbox" bind:checked={selected_days[3]} on:change={checkDays}>
 					Thi
 				</label>
 				<label class="checkbox">
-					<input id="d_fri" type="checkbox" bind:checked={selected_days[4]} on:change={checkDay}>
+					<input id="d_fri" type="checkbox" bind:checked={selected_days[4]} on:change={checkDays}>
 					Fri
 				</label>
 				<label class="checkbox">
-					<input id="d_sat" type="checkbox"bind:checked={selected_days[5]} on:change={checkDay}>
+					<input id="d_sat" type="checkbox"bind:checked={selected_days[5]} on:change={checkDays}>
 					Sat
 				</label>
 				<label class="checkbox">
-					<input id="d_sun" type="checkbox" bind:checked={selected_days[6]} on:change={checkDay}>
+					<input id="d_sun" type="checkbox" bind:checked={selected_days[6]} on:change={checkDays}>
 					Sun
 				</label>
 				<label class="checkbox has-text-weight-semibold">
@@ -90,15 +161,28 @@ function checkAll(checked) {
 				<div class="block">
 					<label class="checkbox has-text-weight-semibold">
 						Time: &nbsp;
-						<input id="t_start" type="time" bind:value={t_time}>
+						{#if timer == null}
+						<input id="t_start" type="time" bind:value={default_timer.time}>
+						{:else}
+						<input id="t_start" type="time" bind:value={$timers_schedule[timer].time}>
+						{/if}
+						
 					</label>
 				</div>
 				<div class="block">
 					<div class="select is-info">
-						<select bind:value={t_state}>
-						  <option value="active" selected>Active</option>
-						  <option value="disabled">Disabled</option>
-						</select>
+						{#if timer == null}
+						<select bind:value={default_timer.state}>
+							<option value="active" selected>Active</option>
+							<option value="disabled">Disabled</option>
+						  </select>
+						{:else}
+						<select bind:value={$timers_schedule[timer].state}>
+							<option value="active" selected>Active</option>
+							<option value="disabled">Disabled</option>
+						  </select>
+						{/if}
+
 					  </div>
 				</div>
 				<button class="button is-danger mt-3" on:click={()=>{saveTimer()}}>Save</button>
