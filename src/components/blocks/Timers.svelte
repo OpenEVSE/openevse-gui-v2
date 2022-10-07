@@ -26,6 +26,7 @@
 	<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
 	<table class="table is-size-6 has-text-weight-normall">
 		<tfoot>
+			
 			<TimerTableRow t_id={$timers_schedule[0].id} t_time={$timers_schedule[0].time} t_state={$timers_schedule[0].state} t_days={$timers_schedule[0].days} edit={() => {editTimer(0)}} />
 			<TimerTableRow t_id={$timers_schedule[1].id} t_time={$timers_schedule[1].time} t_state={$timers_schedule[1].state} t_days={$timers_schedule[1].days} edit={() => {editTimer(1)}} />
 		</tfoot>
