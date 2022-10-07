@@ -3,19 +3,24 @@
 
 	import TimerModal from "./TimerModal.svelte"
 	import TimerTableRow from "../ui/Timer_table_row.svelte"
-	import {timers_modal_opened, timers_schedule} from "../../stores.js"
-
+	import {timers_schedule} from "../../lib/stores.js"
+	let timers_modal_opened = false;
 	let t_modal_attr = {t_id: null, t_time: "00:00", t_state: "active",selected_days: [true,true,true,true,true,true,true,true] };
 
 	function addTimer() {
 		t_modal_attr = {t_id: 0, t_time: "00:00", t_state: "active",selected_days: [true,true,true,true,true,true,true,true] };
-		$timers_modal_opened = true;
+		//$timers_modal_opened = true;
+		timers_modal_opened = true;
+
 	}
 
 	function editTimer(id,time,state,days) {
 		t_modal_attr = {t_id: id, t_time: time, t_state: state,selected_days: days };
-		$timers_modal_opened = true
+		//$timers_modal_opened = true
+		timers_modal_opened = true;
 	}
+
+	$: timers_modal_opened = timers_modal_opened;
 </script>
 
 <div>	
@@ -30,5 +35,5 @@
 
 	</table>
 	<button class="button tag is-size-6 is-info mt-3 has-tooltip-arrow has-tooltip" data-tooltip="Add a new timer"  on:click={()=>{ addTimer()}}>New</button>
-	<TimerModal {...t_modal_attr} />
+	<TimerModal bind:timers_modal_opened={timers_modal_opened} {...t_modal_attr}  />
 </div>

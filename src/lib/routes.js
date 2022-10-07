@@ -1,5 +1,5 @@
-import Main from './routes/Main.svelte'
-import NotFound from './routes/NotFound.svelte'
+import Main from '../routes/Main.svelte'
+import NotFound from '../routes/NotFound.svelte'
 
 export const routes = {
     // Exact path

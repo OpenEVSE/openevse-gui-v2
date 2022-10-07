@@ -1,7 +1,7 @@
 <script>
 	import Header from './components/blocks/Header.svelte';
 	import Router from 'svelte-spa-router';
-	import { routes } from "./routes.js";
+	import { routes } from "./lib/routes.js";
 </script>
 
 <main>

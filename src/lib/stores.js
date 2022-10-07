@@ -1,6 +1,5 @@
 import { writable } from 'svelte/store';
 
-export const timers_modal_opened = writable(false);
 export const timers_schedule = writable([
 	{
 	  "id": 1,

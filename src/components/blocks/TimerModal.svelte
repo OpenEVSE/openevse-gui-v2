@@ -1,5 +1,5 @@
 <script>
-	import {timers_modal_opened} from "../../stores.js"
+	export let timers_modal_opened;
 	export let t_id = 0;
 	export let t_time;
 	export let t_state;
@@ -9,12 +9,12 @@ function saveTimer() {
 	if (t_id) {
 		//save edited timer
 		console.log("save edited timer");
-		$timers_modal_opened = false;
+		timers_modal_opened = false;
 	}
 	else {
 		// save new timer
 		console.log("save new timer");
-		$timers_modal_opened = false;
+		timers_modal_opened = false;
 	}
 }
 
@@ -37,7 +37,7 @@ function checkAll(checked) {
 </script>	
 
 
-<div id="t_modal" class="modal" class:is-active={$timers_modal_opened}>
+<div id="t_modal" class="modal" class:is-active={timers_modal_opened}>
 	<div class="modal-background"></div>
 	<div class="modal-content p-3">
 		<div class="box">
@@ -102,7 +102,7 @@ function checkAll(checked) {
 					  </div>
 				</div>
 				<button class="button is-danger mt-3" on:click={()=>{saveTimer()}}>Save</button>
-				<button class="button is-light mt-3" on:click={()=>{ $timers_modal_opened = false}}>Cancel</button>
+				<button class="button is-light mt-3" on:click={()=>{ timers_modal_opened = false}}>Cancel</button>
 			</div>
 		</div>
 	</div>
