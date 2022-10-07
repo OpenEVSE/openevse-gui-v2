@@ -2,7 +2,9 @@
 	export let timers_modal_opened;
 	export let timer;
 	import {timers_schedule} from "../../lib/stores.js"
+	import AlertBox from "../ui/AlertBox.svelte"
 
+	let alert_visible = false;
 	let default_timer = 	{
 	  id: null,
 	  state: "active",
@@ -20,15 +22,23 @@
 
 	let selected_days = [true,true,true,true,true,true,true,true];
 	
-	$: if (timer == null) {
-			days2table(default_timer.days)
-		}
-		else {
-			days2table($timers_schedule[timer].days)
-			$timers_schedule[timer].time = $timers_schedule[timer].time.slice(0,5)
+	$: if (timers_modal_opened) {
+		populate_checkboxes();
 		}
 	
-	//$: days = days;
+	function populate_checkboxes() {
+		
+	        if (timer == null) {
+				days2table(default_timer.days)
+			}
+			else {
+				days2table($timers_schedule[timer].days)
+				$timers_schedule[timer].time = $timers_schedule[timer].time.slice(0,5)
+			}
+		}
+	$: if (alert_visible == false) {
+			populate_checkboxes();
+	}
 
 	function days2table(sched) {
 		selected_days = [false,false,false,false,false,false,false,true];
@@ -71,22 +81,27 @@
 		if (selected_days[4] == true) $timers_schedule[timer].days.push("friday");
 		if (selected_days[5] == true) $timers_schedule[timer].days.push("saturday");
 		if (selected_days[6] == true) $timers_schedule[timer].days.push("sunday");
-		console.log($timers_schedule[timer].days);
 	}
 
 	function saveTimer() {
-		table2days();
-		if ($timers_schedule[timer].id) {
-			//save edited timer
-			console.log("save edited timer");
-			timers_modal_opened = false;
-			
+		
+		if (selected_days.every(element => element === false)) {
+			alert_visible = true;
 		}
 		else {
-			// save new timer
-			console.log("save new timer");
-			timers_modal_opened = false;
+			table2days();
+			if ($timers_schedule[timer].id) {
+				//to do save edited timer
+				timers_modal_opened = false;
+			
+			}
+			else {
+				//to do save new timer
+				timers_modal_opened = false;
+			}
+
 		}
+		
 	}
 
 
@@ -111,6 +126,9 @@
 <div id="t_modal" class="modal" class:is-active={timers_modal_opened}>
 	<div class="modal-background"></div>
 	<div class="modal-content p-3">
+
+		<AlertBox body="You must select at least one day" bind:visible={alert_visible} />
+
 		<div class="box">
 			<div class="is-size-4 has-text-weight-bold">
 				{#if timer == null}
