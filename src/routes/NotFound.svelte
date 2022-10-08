@@ -1,7 +1,7 @@
 <script>
 	import { link } from "svelte-spa-router";
 	import Status from "../components/blocks/Status.svelte";
-	export let params = {}; 
+	export const params = {}; 
 </script>
 
 <div class="container px-3">
