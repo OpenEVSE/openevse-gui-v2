@@ -3,8 +3,8 @@
 
 	import TimerModal from "./TimerModal.svelte"
 	import TimerTableRow from "../ui/Timer_table_row.svelte"
-	import { onMount } from "svelte";
-	import {timers_schedule, fetchSchedule} from "../../lib/stores.js"
+	import {timers_schedule} from "../../lib/stores.js"
+	import { SyncLoader } from 'svelte-loading-spinners'
 
 	let timers_modal_opened = false;
 	let timer = null;
@@ -20,16 +20,17 @@
 
 	}
 
-	fetchSchedule();
-
 </script>
-
 <div>	
 	<div class="is-size-4 has-text-weight-bold mb-3">Schedule</div>
 	<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
+	{#if !$timers_schedule.length}
+	<div class="box">
+		No event registered yet.
+	</div>
+	{/if}
 	<table class="table is-size-6 has-text-weight-normall">
 		<tfoot>
-			
 			{#each $timers_schedule as schedule} 
 				<TimerTableRow t_id={schedule.id} edit={() => {editTimer(schedule.id)}}/>
 			{/each}

@@ -18,8 +18,7 @@ export default defineConfig({
   server: {
       host: "0.0.0.0",
       proxy: {
-          '/schedule': 'http://openevse.local/schedule',
-          '^/schedule/.*': {
+          '/schedule': {
             target: 'http://openevse.local/schedule/',
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/schedule/, '')
