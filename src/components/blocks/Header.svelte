@@ -30,21 +30,21 @@
 				</div>
 		</div>
 	
-		<div id="evsenav" class="navbar-menu {isBurgerActive ? 'is-active' : ''}">
+		<div id="evsenav" class="navbar-menu  {isBurgerActive ? 'is-active' : ''}">
 
 	
 			<div class="navbar-end is-family-monospace">
 
-				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark {$location=="/"?"noevent":""}" class:is-active={$location=="/"} href="/" use:link>Main</a>
+				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark {$location=="/"?"has-text-grey noevent is-active":""}" href="/" use:link>Main</a>
 				<div class="navbar-item has-dropdown is-hoverable">
-					<a class="navbar-item is-size-6 has-text-weight-semibold has-text-grey-dark navbar-link" href="/Config" class:is-active={$location!="/"} use:link>Configuration</a>
+					<span class="navbar-item is-size-6 has-text-weight-semibold has-text-grey-dark navbar-link noevent">Configuration</span>
 					<div class="navbar-dropdown is-boxed">
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Hardware"?"has-text-grey noevent":"has-text-grey-dark"}" class:is-active={$location=="/Hardware"} href="/Hardware" use:link>Hardware</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Settings"?"has-text-grey noevent":"has-text-grey-dark"}" href="/Settings" use:link>Settings</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Charge"?"has-text-grey noevent":"has-text-grey-dark"}" href="/Charge" use:link>Charge</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/MQTT"?"has-text-grey noevent":"has-text-grey-dark"}" href="/MQTT" use:link>MQTT</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Services"?"has-text-grey noevent":"has-text-grey-dark"}" href="/Services" use:link>Services</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Vehicle"?"has-text-grey noevent":"has-text-grey-dark"}" href="/Vehicle" use:link>Vehicle</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Hardware"?"has-text-grey noevent is-active":"has-text-grey-dark"}" href="/Hardware" use:link>Hardware</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Settings"?"has-text-grey noevent is-active":"has-text-grey-dark"}" href="/Settings" use:link>Settings</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Charge"?"has-text-grey noevent is-active":"has-text-grey-dark"}" href="/Charge" use:link>Charge</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/MQTT"?"has-text-grey noevent is-active":"has-text-grey-dark"}" href="/MQTT" use:link>MQTT</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Services"?"has-text-grey noevent is-active":"has-text-grey-dark"}" href="/Services" use:link>Services</a>
+						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Vehicle"?"has-text-grey noevent is-active":"has-text-grey-dark"}" href="/Vehicle" use:link>Vehicle</a>
 					</div>
 				</div>
 				
