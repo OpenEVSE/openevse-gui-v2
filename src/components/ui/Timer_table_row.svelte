@@ -2,7 +2,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import { faSquarePen, faSquareMinus, faCalendarDays } from '@fortawesome/free-solid-svg-icons/index.js'
 	import { link } from "svelte-spa-router";
-	import {timers_schedule} from "../../lib/stores.js"
+	import {timers_schedule, deleteSchedule} from "../../lib/stores.js"
 	export let t_id;
 	export let edit = (id) => {};
 	let timer = $timers_schedule.findIndex(item => item.id === t_id);
@@ -14,6 +14,7 @@
 			$timers_schedule.splice(timer,1);
 			$timers_schedule = $timers_schedule;
 		}
+		deleteSchedule(t);
 	}
 
 	$: days = $timers_schedule[timer].days;

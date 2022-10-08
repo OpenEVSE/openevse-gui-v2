@@ -9,6 +9,10 @@
 	let timers_modal_opened = false;
 	let timer = null;
 	
+	function editTimer(t) {
+		timer = $timers_schedule.findIndex(item => item.id === t);
+		timers_modal_opened = true;
+	}
 
 	function addTimer() {
 		timer = null;
@@ -16,12 +20,7 @@
 
 	}
 
-
-
-
-	
-
-	onMount(fetchSchedule)
+	fetchSchedule();
 
 </script>
 
@@ -32,7 +31,7 @@
 		<tfoot>
 			
 			{#each $timers_schedule as schedule} 
-				<TimerTableRow t_id={schedule.id} />
+				<TimerTableRow t_id={schedule.id} edit={() => {editTimer(schedule.id)}}/>
 			{/each}
 			
 		</tfoot>
