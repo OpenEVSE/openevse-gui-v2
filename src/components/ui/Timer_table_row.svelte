@@ -8,6 +8,14 @@
 	let timer = $timers_schedule.findIndex(item => item.id === t_id);
 	let days;
 
+	function deleteTimer(t) {
+		timer = $timers_schedule.findIndex(item => item.id === t);
+		if (timer > -1) {
+			$timers_schedule.splice(timer,1);
+			$timers_schedule = $timers_schedule;
+		}
+	}
+
 	$: days = $timers_schedule[timer].days;
 
 
@@ -28,7 +36,7 @@
 		</a>
 	</th>
 	<th class="is-size-5 py-1 px-0" >
-		<a href="/schedule" use:link class="has-text-danger">
+		<a href="/schedule" use:link on:click={() => {deleteTimer($timers_schedule[timer].id)}} class="has-text-danger">
 			<Fa icon={faSquareMinus} />
 		</a>
 	</th>
