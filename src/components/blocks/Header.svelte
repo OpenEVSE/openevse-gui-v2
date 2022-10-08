@@ -29,10 +29,9 @@
 		<div id="evsenav" class="navbar-menu {isBurgerActive ? 'is-active' : ''}">
 
 	
-			<div class="navbar-start">
+			<div class="navbar-end is-family-monospace">
 
 				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/" use:link>Main</a>
-				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable has-text-grey-dark" href="/Advanced" use:link>Advanced</a>
 				<div class="navbar-item has-dropdown is-hoverable">
 					<a class="navbar-item is-size-6 has-text-weight-semibold has-text-grey-dark" href="/Config" use:link>Configuration</a>
 					<div class="navbar-dropdown">

@@ -3,7 +3,7 @@
 	import active from 'svelte-spa-router/active'
 </script>
 
-<div class="tabs is-small">
+<div class="tabs is-family-monospace has-text-weight-semibold">
 	<ul>
 	  <li use:active={{path: '/', className: 'is-active'}}>
 		<a href="/" use:link>
