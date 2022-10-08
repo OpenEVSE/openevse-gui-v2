@@ -1,26 +1,12 @@
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 
-export const timers_schedule = writable([
-	{
-	  id: 1,
-	  state: "active",
-	  time: "22:35",
-	  days: [
-		"monday",
-		"tuesday",
-		"wednesday",
-		"saturday"
-	  ]
-	},
-	{
-		id: 2,
-		state: "disabled",
-		time: "06:25",
-		days: [
-		  "monday",
-		  "tuesday",
-		  "wednesday",
-		  "saturday"
-		]
-	  }
-  ]);
+/** Store for your data. 
+This assumes the data you're pulling back will be an array.
+If it's going to be an object, default this to an empty object.
+**/
+export const timers_schedule = writable([]);
+
+/** Data transformation.
+For our use case, we only care about the drink names, not the other information.
+Here, we'll create a derived store to hold the drink names.
+**/

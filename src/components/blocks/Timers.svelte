@@ -3,6 +3,7 @@
 
 	import TimerModal from "./TimerModal.svelte"
 	import TimerTableRow from "../ui/Timer_table_row.svelte"
+	import { onMount } from "svelte";
 	import {timers_schedule} from "../../lib/stores.js"
 
 	let timers_modal_opened = false;
@@ -19,6 +20,22 @@
 		timer = $timers_schedule.findIndex(item => item.id === t);
 		timers_modal_opened = true;
 	}
+
+	async function fetchSchedule() {
+		fetch("/schedule")
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			timers_schedule.set(data);
+		}).catch(error => {
+			console.log(error);
+			return [];
+		});
+	};
+
+	onMount(fetchSchedule)
+	//$timers_schedule = $timers_schedule;
+
 </script>
 
 <div>	

@@ -13,7 +13,7 @@
 		"monday",
 		"tuesday",
 		"wednesday",
-		"thirsday",
+		"thursday",
 		"friday",
 		"saturday",
 		"sunday"
@@ -53,7 +53,7 @@
 				case "wednesday":
 					selected_days[2] = true;
 					break;
-				case "thirsday":
+				case "thursday":
 					selected_days[3] = true;
 					break;
 				case "friday":
@@ -77,7 +77,7 @@
 		if (selected_days[0] == true) sched.days.push("monday");
 		if (selected_days[1] == true) sched.days.push("tuesday");
 		if (selected_days[2] == true) sched.days.push("wednesday");
-		if (selected_days[3] == true) sched.days.push("thirsday");
+		if (selected_days[3] == true) sched.days.push("thursday");
 		if (selected_days[4] == true) sched.days.push("friday");
 		if (selected_days[5] == true) sched.days.push("saturday");
 		if (selected_days[6] == true) sched.days.push("sunday");
