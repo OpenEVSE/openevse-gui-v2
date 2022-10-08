@@ -4,7 +4,7 @@ export const timers_schedule = writable([
 	{
 	  id: 1,
 	  state: "active",
-	  time: "22:35",
+	  time: "20:35",
 	  days: [
 		"monday",
 		"tuesday",
@@ -15,12 +15,12 @@ export const timers_schedule = writable([
 	{
 		id: 2,
 		state: "disabled",
-		time: "06:25",
+		time: "09:25",
 		days: [
 		  "monday",
 		  "tuesday",
 		  "wednesday",
-		  "saturday"
+		  "sunday"
 		]
 	  }
   ]);
