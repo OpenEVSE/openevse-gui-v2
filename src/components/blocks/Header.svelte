@@ -23,7 +23,7 @@
 			<a href="/">
 				<img src={logo} class="" alt="logo"/>
 			</a>
-				<div role="button" class="navbar-burger burger  {isBurgerActive ? 'is-active' : ''}" aria-label="menu" aria-expanded="false" data-target="evsenav" on:click={toggleBurger}>
+				<div role="button" class="navbar-burger burger {isBurgerActive ? 'is-active' : ''}" aria-label="menu" aria-expanded="false" data-target="evsenav" on:click={toggleBurger}>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>

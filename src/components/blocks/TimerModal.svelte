@@ -81,6 +81,7 @@
 		if (selected_days[4] == true) sched.days.push("friday");
 		if (selected_days[5] == true) sched.days.push("saturday");
 		if (selected_days[6] == true) sched.days.push("sunday");
+		$timers_schedule = $timers_schedule; 
 	}
 
 	function saveTimer() {

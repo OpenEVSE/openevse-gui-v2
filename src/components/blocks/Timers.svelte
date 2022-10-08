@@ -4,10 +4,10 @@
 	import TimerModal from "./TimerModal.svelte"
 	import TimerTableRow from "../ui/Timer_table_row.svelte"
 	import {timers_schedule} from "../../lib/stores.js"
+
 	let timers_modal_opened = false;
 	let timer = null;
 	
-
 
 	function addTimer() {
 		timer = null;
@@ -26,9 +26,11 @@
 	<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
 	<table class="table is-size-6 has-text-weight-normall">
 		<tfoot>
+			
 			{#each $timers_schedule as schedule} 
-			<TimerTableRow t_id={schedule.id} t_time={schedule.time} t_state={schedule.state} t_days={schedule.days} edit={() => {editTimer(schedule.id)}} />
+				<TimerTableRow t_id={schedule.id} edit={() => {editTimer(schedule.id)}} />
 			{/each}
+			
 		</tfoot>
 
 
