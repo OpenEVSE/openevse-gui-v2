@@ -1,11 +1,11 @@
 <script>
 	export let timers_modal_opened;
-	export let timer;
+	export let timer = null;
 	import {timers_schedule} from "../../lib/stores.js"
 	import AlertBox from "../ui/AlertBox.svelte"
 
 	let alert_visible = false;
-	let default_timer = 	{
+	const default_timer = 	{
 	  id: null,
 	  state: "active",
 	  time: "00:00",
@@ -72,15 +72,15 @@
 		checkDays();
 	}
 
-	function table2days() {
-		$timers_schedule[timer].days = [];
-		if (selected_days[0] == true) $timers_schedule[timer].days.push("monday");
-		if (selected_days[1] == true) $timers_schedule[timer].days.push("tuesday");
-		if (selected_days[2] == true) $timers_schedule[timer].days.push("wednesday");
-		if (selected_days[3] == true) $timers_schedule[timer].days.push("thirsday");
-		if (selected_days[4] == true) $timers_schedule[timer].days.push("friday");
-		if (selected_days[5] == true) $timers_schedule[timer].days.push("saturday");
-		if (selected_days[6] == true) $timers_schedule[timer].days.push("sunday");
+	function table2days(sched) {
+		sched.days = [];
+		if (selected_days[0] == true) sched.days.push("monday");
+		if (selected_days[1] == true) sched.days.push("tuesday");
+		if (selected_days[2] == true) sched.days.push("wednesday");
+		if (selected_days[3] == true) sched.days.push("thirsday");
+		if (selected_days[4] == true) sched.days.push("friday");
+		if (selected_days[5] == true) sched.days.push("saturday");
+		if (selected_days[6] == true) sched.days.push("sunday");
 	}
 
 	function saveTimer() {
@@ -89,14 +89,20 @@
 			alert_visible = true;
 		}
 		else {
-			table2days();
-			if ($timers_schedule[timer].id) {
+			let schedule;
+			if (timer == null) schedule = {...default_timer};
+			else 			   schedule = $timers_schedule[timer];
+			table2days(schedule);
+			if (timer != null) {
 				//to do save edited timer
 				timers_modal_opened = false;
 			
 			}
 			else {
 				//to do save new timer
+				schedule.id = $timers_schedule[$timers_schedule.length-1].id + 1;
+				$timers_schedule.push(schedule);
+				$timers_schedule = $timers_schedule; // force redraw
 				timers_modal_opened = false;
 			}
 

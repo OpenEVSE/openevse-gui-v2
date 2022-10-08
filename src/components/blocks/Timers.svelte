@@ -6,7 +6,7 @@
 	import {timers_schedule} from "../../lib/stores.js"
 	let timers_modal_opened = false;
 	let timer = null;
-
+	
 
 
 	function addTimer() {
@@ -16,7 +16,7 @@
 	}
 
 	function editTimer(t) {
-		timer = t;
+		timer = $timers_schedule.findIndex(item => item.id === t);
 		timers_modal_opened = true;
 	}
 </script>
@@ -26,9 +26,9 @@
 	<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
 	<table class="table is-size-6 has-text-weight-normall">
 		<tfoot>
-			
-			<TimerTableRow t_id={$timers_schedule[0].id} t_time={$timers_schedule[0].time} t_state={$timers_schedule[0].state} t_days={$timers_schedule[0].days} edit={() => {editTimer(0)}} />
-			<TimerTableRow t_id={$timers_schedule[1].id} t_time={$timers_schedule[1].time} t_state={$timers_schedule[1].state} t_days={$timers_schedule[1].days} edit={() => {editTimer(1)}} />
+			{#each $timers_schedule as schedule} 
+			<TimerTableRow t_id={schedule.id} t_time={schedule.time} t_state={schedule.state} t_days={schedule.days} edit={() => {editTimer(schedule.id)}} />
+			{/each}
 		</tfoot>
 
 
