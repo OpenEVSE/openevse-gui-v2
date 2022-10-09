@@ -25,8 +25,8 @@
 	<div class="is-size-4 has-text-weight-bold mb-3">Schedule</div>
 	<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
 	{#if !$timers_schedule.length}
-	<div class="box">
-		No event registered yet.
+	<div class="content">
+		No event registered.
 	</div>
 	{/if}
 	<table class="table is-size-6 has-text-weight-normall">
