@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-export const timers_schedule = writable([
+export const schedule_store = writable([
 	{
 	  id: 1,
 	  state: "active",

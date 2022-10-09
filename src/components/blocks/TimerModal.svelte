@@ -1,7 +1,7 @@
 <script>
 	export let timers_modal_opened;
 	export let timer = null;
-	import {timers_schedule} from "../../lib/stores.js"
+	import {schedule_store} from "../../lib/stores/schedule.js"
 	import AlertBox from "../ui/AlertBox.svelte"
 
 	let alert_visible = false;
@@ -32,8 +32,7 @@
 				days2table(default_timer.days)
 			}
 			else {
-				days2table($timers_schedule[timer].days)
-				$timers_schedule[timer].time = $timers_schedule[timer].time.slice(0,5)
+				days2table($schedule_store[timer].days)
 			}
 		}
 	$: if (alert_visible == false) {
@@ -81,7 +80,7 @@
 		if (selected_days[4] == true) sched.days.push("friday");
 		if (selected_days[5] == true) sched.days.push("saturday");
 		if (selected_days[6] == true) sched.days.push("sunday");
-		$timers_schedule = $timers_schedule; 
+		$schedule_store = $schedule_store; 
 	}
 
 	function saveTimer() {
@@ -92,23 +91,23 @@
 		else {
 			let schedule;
 			if (timer == null) schedule = {...default_timer};
-			else 			   schedule = $timers_schedule[timer];
+			else 			   schedule = $schedule_store[timer];
 			table2days(schedule);
 			if (timer != null) {
 				//to do save edited timer
 				timers_modal_opened = false;
-			
 			}
 			else {
 				//to do save new timer
-				if ($timers_schedule.length) {
-					schedule.id = $timers_schedule[$timers_schedule.length-1].id + 1;
+				if ($schedule_store.length) {
+					schedule.id = $schedule_store[$schedule_store.length-1].id + 1;
 				}
 				else schedule.id = 1;
-				$timers_schedule.push(schedule);
-				$timers_schedule = $timers_schedule; // force redraw
+				$schedule_store.push(schedule);
 				timers_modal_opened = false;
 			}
+			schedule_store.update(schedule);
+			$schedule_store = $schedule_store; // force redraw
 
 		}
 		
@@ -144,7 +143,7 @@
 				{#if timer == null}
 				New Timer
 				{:else}
-				Timer {$timers_schedule[timer].id}
+				Timer {$schedule_store[timer].id}
 				{/if}
 			</div>
 			<div class="is-size-6">				
@@ -192,7 +191,7 @@
 						{#if timer == null}
 						<input id="t_start" type="time" bind:value={default_timer.time}>
 						{:else}
-						<input id="t_start" type="time" bind:value={$timers_schedule[timer].time}>
+						<input id="t_start" type="time" bind:value={$schedule_store[timer].time}>
 						{/if}
 						
 					</label>
@@ -205,7 +204,7 @@
 							<option value="disabled">Disabled</option>
 						  </select>
 						{:else}
-						<select bind:value={$timers_schedule[timer].state}>
+						<select bind:value={$schedule_store[timer].state}>
 							<option value="active" selected>Active</option>
 							<option value="disabled">Disabled</option>
 						  </select>
