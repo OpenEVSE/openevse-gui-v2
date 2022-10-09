@@ -101,7 +101,10 @@
 			}
 			else {
 				//to do save new timer
-				schedule.id = $timers_schedule[$timers_schedule.length-1].id + 1;
+				if ($timers_schedule.length) {
+					schedule.id = $timers_schedule[$timers_schedule.length-1].id + 1;
+				}
+				else schedule.id = 1;
 				$timers_schedule.push(schedule);
 				$timers_schedule = $timers_schedule; // force redraw
 				timers_modal_opened = false;
