@@ -3,7 +3,7 @@
 
 	import TimerModal from "./TimerModal.svelte"
 	import TimerTableRow from "../ui/Timer_table_row.svelte"
-	import {schedule_store} from "../../lib/stores/schedule.js"
+	import {schedule_store} from "../../lib/stores-live/schedule.js"
 	import Loader from "../ui/Loader.svelte"
 	import Error from "../ui/Error.svelte"
   	import { onMount } from "svelte";
