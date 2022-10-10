@@ -1,6 +1,6 @@
 <script>
 	export let title;
-	export let message;
+	export let message = "Can't reach OpenEVSE wifi module";
 	export let refetch = () => {}; 
 </script>
 

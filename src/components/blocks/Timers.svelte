@@ -10,6 +10,7 @@
 
 	let timers_modal_opened = false;
 	let timer = null;
+	let fetchedSched;
 	
 	function editTimer(t) {
 		timer = $schedule_store.findIndex(item => item.id === t);
@@ -26,7 +27,7 @@
 		fetchedSched = schedule_store.fetch()
 	}
 
-	let fetchedSched = null;
+	
 	onMount ( () => {
 		refreshData()
 		}
