@@ -1,16 +1,18 @@
 import { writable } from 'svelte/store'
 
 export function createScheduleStore() {
-    const { subscribe, set, update } = writable([])
-	
+    const { subscribe, set, update } = writable({
+        loaded: false,
+        schedule: []})
+
 	async function fetchSchedule() {
 		const response = await fetch('/schedule')
             if(response.ok) {
                 const json_response = await response.json()
-				console.log(json_response)
 				for ( let t = 0; t < json_response.length ; t++) {
 					json_response[t].time = json_response[t].time.slice(0,5) // remove useless seconds
 				}			
+                console.log(json_response)
                 set(json_response)
                 return json_response
             }
@@ -30,8 +32,13 @@ export function createScheduleStore() {
                 },
             })
             if(response.ok) {
-				fetchSchedule();
+				const json_response = await response.json()
+				console.log(json_response)
                 return response
+            }
+            else {
+                // refetch timers
+                fetchSchedule()
             }
             throw Error(response.statusText)
         },
