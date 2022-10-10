@@ -23,11 +23,7 @@
     	return d
     }
 
-
 	$: days = $schedule_store[timer].days;
-
-
-
 </script>
 
 <tr>
@@ -35,8 +31,8 @@
 	<th>{$schedule_store[timer].time}</th>
 	<th><span class="tag {$schedule_store[timer].state === 'active'?'is-primary':'is-danger'} py-0">{$schedule_store[timer].state}</span></th>
 	{#key $schedule_store[timer].days }
-	<th class="is-size-5 py-1 px-1 has-tooltip-arrow has-tooltip-multiline is-capitalized" data-tooltip={formatDays(days)}>
-		<Fa icon={faCalendarDays} />
+	<th class="py-1 px-1">
+		<div class="is-size-5  has-tooltip-arrow has-tooltip-info has-tooltip-multiline is-capitalized has-text-weight-normal has-text-centered" data-tooltip={formatDays(days)}><Fa icon={faCalendarDays} /></div>
 	</th>
 	{/key}
 	<th class="is-size-5 py-1 px-1 pr-2">
