@@ -1,7 +1,7 @@
 <script>
 	export let timers_modal_opened;
 	export let timer = null;
-	import {schedule_store} from "../../lib/stores-live/schedule.js"
+	import {schedule_store} from "../../lib/stores/schedule.js"
 	import AlertBox from "../ui/AlertBox.svelte"
 
 	let alert_visible = false;

@@ -2,7 +2,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import { faSquarePen, faSquareMinus, faCalendarDays } from '@fortawesome/free-solid-svg-icons/index.js'
 	import { link } from "svelte-spa-router";
-	import {schedule_store} from "../../lib/stores-live/schedule.js"
+	import {schedule_store} from "../../lib/stores/schedule.js"
 	export let t_id;
 	export let edit = (id) => {};
 	let timer = $schedule_store.findIndex(item => item.id === t_id);
