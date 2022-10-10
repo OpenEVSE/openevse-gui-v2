@@ -4,7 +4,8 @@
 	import TimerModal from "./TimerModal.svelte"
 	import TimerTableRow from "../ui/Timer_table_row.svelte"
 	import {schedule_store} from "../../lib/stores/schedule.js"
-	import { Stretch } from 'svelte-loading-spinners'
+	import Loader from "../ui/Loader.svelte"
+	import Error from "../ui/Error.svelte"
   	import { onMount } from "svelte";
 
 	let timers_modal_opened = false;
@@ -21,13 +22,13 @@
 
 	}
 
-	const schedPromise = new Promise((resolve, reject) => {
-
-	})
+	function refreshData() {
+		fetchedSched = schedule_store.fetch()
+	}
 
 	let fetchedSched = null;
 	onMount ( () => {
-		fetchedSched = schedule_store.fetch()
+		refreshData()
 		}
 
 	);
@@ -36,11 +37,13 @@
 </script>
 <style>
 	.timers {
-		max-width : 300px;
+		max-width : 302px;
+		min-width: 300px;
 		margin: auto;
 	}
 	.loading {
 		text-align: center;
+		margin: auto;
 	}
 </style>
 <div>	
@@ -48,11 +51,8 @@
 		<div class="box timers">
 			<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
 
-					{#await fetchedSched}
-					
-						<div class="container loading">
-							<Stretch size="40" color="#209CEE"/>
-						</div>
+					{#await fetchedSched}					
+						<Loader />
 					{:then}
 						<table class="table is-size-6 has-text-weight-normall">
 							<tfoot>
@@ -67,6 +67,8 @@
 							</tfoot>
 						</table>
 					<button class="button tag is-size-6 is-info mt-3 has-tooltip-arrow has-tooltip" data-tooltip="Add a new timer"  on:click={()=>{ addTimer()}}>New</button>
+					{:catch error}
+					<Error title="There was an error" message={error.message} refetch={refreshData} />
 					{/await}
 			<TimerModal bind:timers_modal_opened={timers_modal_opened} timer={timer}/>
 		</div>
