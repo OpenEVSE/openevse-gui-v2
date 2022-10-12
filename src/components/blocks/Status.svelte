@@ -1,21 +1,23 @@
 <script>
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
+	import WebSocket from "../data/WebSocket.svelte"
 
 	$: elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 19);
 
 </script>
 
+<WebSocket/>
 <div class="box has-background-light">
 	<div class="is-flex-direction-row">
 		<div class="px-0 pt-0 pb-2 is-narrow is-size-6 has-text-weight-semibold notification">Status&nbsp;
-			<span class="tag {$status_store.status == 'active'?'is-primary':'is-danger'}">{$status_store.status}</span>
+			<span class="tag is-capitalized {$status_store.status == 'active'?'is-primary':'is-danger'}">{$status_store.status}</span>
 			<div class="p-0 m-0 is-size-6 has-text-weight-semibold has-text-danger notification is-align-content-flex-end">Waiting - EV Not connected</div>
 		</div>
 	</div>
 
 	<div class="level is-mobile">
-		<div class="box level-item has-text-centered p-1">
+		<div class="box level-item has-text-centered p-1 tiles">
 			<div>
 				<p class="heading has-text-weight-semibold">Current</p>
 				<p class="is-size-5 has-text-weight-semibold">{$status_store.amp}A</p>
