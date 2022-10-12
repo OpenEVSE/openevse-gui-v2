@@ -20,4 +20,4 @@ function createPlanStore() {
     }
 }
 
-export const status_store = createPlanStore()
+export const plan_store = createPlanStore()

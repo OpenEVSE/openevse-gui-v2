@@ -2,7 +2,8 @@
 	import { onMount } from "svelte"
 	import {schedule_store} from "../../lib/stores/schedule.js"
 	import {status_store} from "../../lib/stores/status.js"
-	import icon from '../../assets/icon.png';
+	import {plan_store} from "../../lib/stores/plan.js"
+
 	let status = "Loading"
 
 	async function loadData() {
@@ -10,6 +11,8 @@
 		await schedule_store.download()
 		status = "Fetching Status"
 		await status_store.download()
+		status = "Fetch Schedule Plan"
+		await plan_store.download()
 		status = "Ok"
 	}
 
@@ -22,4 +25,4 @@
 
 </script>
 
-		<div class="pageloader {status!="Ok"?"is-active":""}"><span class="title">{status}</span></div>
+<div class="pageloader {status!="Ok"?"is-active":""}"><span class="title">{status}</span></div>
