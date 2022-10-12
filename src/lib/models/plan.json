@@ -1,7 +1,7 @@
 {
 	"current_day": null,
-	"current_offset":null,
-	"next_event_delay":null,
+	"current_offset": null,
+	"next_event_delay": null,
 	"current_event": null,
 	"next_event": null,
 	"sunday": [],
