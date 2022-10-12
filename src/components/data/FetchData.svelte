@@ -3,6 +3,7 @@
 	import {schedule_store} from "../../lib/stores/schedule.js"
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
+	import {config_store} from "../../lib/stores/config.js"
 
 	let status = "Loading"
 
@@ -13,6 +14,8 @@
 		await status_store.download()
 		status = "Fetch Schedule Plan"
 		await plan_store.download()
+		status = "Fetch Configuration"
+		await config_store.download()
 		status = "Ok"
 	}
 

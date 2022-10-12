@@ -6,11 +6,11 @@ export function createScheduleStore() {
     const { subscribe, set, update } = P
 	
 	async function download() {
-		await new Promise(resolve => setTimeout(resolve, 1000));
+		await new Promise(resolve => setTimeout(resolve, 500));
 	}
 
 	async function upload(sched) {
-		await new Promise(resolve => setTimeout(resolve, 1000));
+		await new Promise(resolve => setTimeout(resolve, 500));
 	}
 
 	async function remove(id) {

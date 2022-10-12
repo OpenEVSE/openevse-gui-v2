@@ -1,16 +1,15 @@
 import { writable } from 'svelte/store'
-import status_fakedata from './status.json'
+import config_fakedata from './config.json'
 
-function createStatusStore() {
+function createConfigStore() {
     const P  = writable()
     const { subscribe, set, update } = P
 
 	async function download() {
-        P.update(() => status_fakedata)
-        console.log(P)
+		P.update(() => config_fakedata)
+		console.log(P)
 		await new Promise(resolve => setTimeout(resolve, 500));
 	}
-    
 
     return {
         subscribe,
@@ -20,4 +19,4 @@ function createStatusStore() {
     }
 }
 
-export const status_store = createStatusStore()
+export const config_store = createConfigStore()
