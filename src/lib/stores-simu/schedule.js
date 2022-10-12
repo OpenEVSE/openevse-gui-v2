@@ -39,7 +39,7 @@ export function createScheduleStore() {
 
     return {
         subscribe,
-		set,,
+		set,
 		update,
         download,
         delete: (id) => "OK",
