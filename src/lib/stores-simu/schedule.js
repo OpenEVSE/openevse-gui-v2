@@ -33,13 +33,21 @@ export function createScheduleStore() {
 		await new Promise(resolve => setTimeout(resolve, 2000));
 	}
 
+	async function upload(data) {
+		await new Promise(resolve => setTimeout(resolve, 2000));
+	}
+
+	async function delete(id) {
+		await new Promise(resolve => setTimeout(resolve, 2000));
+	}
+
     return {
         subscribe,
 		set,
 		update,
         download,
         delete: (id) => "OK",
-        upload: (schedule) => update(schedule)
+        upload: (data) => update(data)
     }
 }
 
