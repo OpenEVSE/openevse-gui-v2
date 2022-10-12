@@ -26,26 +26,24 @@ let default_schedule = [
   ]
 
 export function createScheduleStore() {
-    const { subscribe, set, update } = writable([])
+	const P  = writable(default_schedule)
+    const { subscribe, set, update } = P
 	
-	async function fetchSchedule() {
-		const response = default_schedule	
-                set(response)
-                return response
+	async function download() {
+		await setTimeout( () => {
+			P.update(P => P)
+			return P
+		}, 2000)
+
 	}
 
     return {
         subscribe,
-		set: (data) => set(data),
-        fetch: fetchSchedule,
-
-        delete: () => "OK",
-
-        update: (schedule) => { 	
-                update(schedule => schedule)
-                return schedule
-            }
-
+		set,,
+		update,
+        download,
+        delete: (id) => "OK",
+        upload: (schedule) => update(schedule)
     }
 }
 
