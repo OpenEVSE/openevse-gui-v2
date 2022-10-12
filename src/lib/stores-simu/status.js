@@ -6,10 +6,12 @@ function createStatusStore() {
     const { subscribe, set, update } = P
 
 	async function download() {
-		await setTimeout( () => {
-			P.update(P => P)
-			return P
-		}, 2000)
+		async function download() {
+			await new Promise(resolve => setTimeout( () => {
+				P.update(P => P)
+				return P
+			}, 2000))
+		}
 	}
     
 

@@ -30,11 +30,10 @@ export function createScheduleStore() {
     const { subscribe, set, update } = P
 	
 	async function download() {
-		await setTimeout( () => {
+		await new Promise(resolve => setTimeout( () => {
 			P.update(P => P)
 			return P
-		}, 2000)
-
+		}, 2000))
 	}
 
     return {
