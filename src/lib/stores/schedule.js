@@ -54,7 +54,7 @@ function createScheduleStore() {
         set,
         update,
         download,
-        delete: (id) => remove(id),
+        remove: (id) => remove(id),
         upload: (schedule) => upload(schedule)
     }
 }

@@ -13,7 +13,7 @@
 		if (timer > -1) {
 			$schedule_store.splice(timer,1);
 			$schedule_store = $schedule_store;
-			schedule_store.delete(t);
+			schedule_store.remove(t);
 		}
 		
 	}

@@ -30,15 +30,15 @@ export function createScheduleStore() {
     const { subscribe, set, update } = P
 	
 	async function download() {
-		await new Promise(resolve => setTimeout(resolve, 2000));
+		await new Promise(resolve => setTimeout(resolve, 1000));
 	}
 
 	async function upload(sched) {
-		await new Promise(resolve => setTimeout(resolve, 2000));
+		await new Promise(resolve => setTimeout(resolve, 1000));
 	}
 
 	async function remove(id) {
-		await new Promise(resolve => setTimeout(resolve, 2000));
+		await new Promise(resolve => setTimeout(resolve, 200));
 	}
 
     return {
