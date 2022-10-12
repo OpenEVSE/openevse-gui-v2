@@ -32,11 +32,7 @@ export function createScheduleStore() {
 	async function download() {
 		const response = await new Promise(() => setTimeout( () => {
 		}, 2000))
-		if(response.ok) {
-			P.update(P => P)
-			return P
-		}
-		throw Error(response.statusText)
+		return response
 	}
 
     return {
