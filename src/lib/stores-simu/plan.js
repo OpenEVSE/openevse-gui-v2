@@ -7,8 +7,7 @@ function createPlanStore() {
 
 	async function download() {
 		P.update(() => plan_fakedata)
-		console.log(P)
-		await new Promise(resolve => setTimeout(resolve, 1000));
+		await new Promise(resolve => setTimeout(resolve, 500));
 	}
     
 

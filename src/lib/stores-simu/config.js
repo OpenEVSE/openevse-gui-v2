@@ -7,7 +7,6 @@ function createConfigStore() {
 
 	async function download() {
 		P.update(() => config_fakedata)
-		console.log(P)
 		await new Promise(resolve => setTimeout(resolve, 500));
 	}
 

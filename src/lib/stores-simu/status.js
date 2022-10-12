@@ -7,7 +7,6 @@ function createStatusStore() {
 
 	async function download() {
         P.update(() => status_fakedata)
-        console.log(P)
 		await new Promise(resolve => setTimeout(resolve, 500));
 	}
     

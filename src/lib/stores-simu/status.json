@@ -36,7 +36,7 @@
   "freeram": 191848,
   "divertmode": 1,
   "srssi": -62,
-  "status": "disabled",
+  "status": "enabled",
   "elapsed": 28458,
   "wattsec": 1.95815746e8,
   "watthour": 482241,

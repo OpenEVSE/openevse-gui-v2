@@ -1,7 +1,8 @@
 import { writable } from 'svelte/store'
+import plan_model from './plan.json'
 
 function createPlanStore() {
-    const P  = writable()
+    const P  = writable(plan_model)
     const { subscribe, set, update } = P
 
 	async function download() {

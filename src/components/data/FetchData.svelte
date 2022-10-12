@@ -8,23 +8,20 @@
 	let status = "Loading"
 
 	async function loadData() {
-		status = "Fetching Schedule"
-		await schedule_store.download()
-		status = "Fetching Status"
+		status = "Loading Status"
 		await status_store.download()
-		status = "Fetch Schedule Plan"
+		status = "Loading Schedule"
+		await schedule_store.download()
+		status = "Loading Schedule Plan"
 		await plan_store.download()
-		status = "Fetch Configuration"
+		status = "Loading Configuration"
 		await config_store.download()
 		status = "Ok"
 	}
 
 	$: console.log(status)
 	
-	onMount ( () => {
-		loadData()
-		}
-	);
+	loadData()
 
 </script>
 
