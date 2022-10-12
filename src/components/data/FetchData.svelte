@@ -2,7 +2,7 @@
 	import { onMount } from "svelte"
 	import {schedule_store} from "../../lib/stores/schedule.js"
 	import {status_store} from "../../lib/stores/status.js"
-
+	import icon from '../../assets/icon.png';
 	let status = "Loading"
 
 	async function loadData() {
@@ -22,9 +22,4 @@
 
 </script>
 
-
-	{#key status}
-		{#if status != "Ok"}
-		<div class="pageloader is-active" ><span class="title">{status}</span></div>
-		{/if}
-	{/key}
+		<div class="pageloader {status!="Ok"?"is-active":""}"><span class="title">{status}</span></div>
