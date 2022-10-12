@@ -34,7 +34,6 @@ export function createScheduleStore() {
 			P.update(P => P)
 			return P
 		}, 2000))
-		return P
 	}
 
     return {

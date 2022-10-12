@@ -5,14 +5,11 @@ function createStatusStore() {
     const P  = writable(status_model)
     const { subscribe, set, update } = P
 
-	
 	async function download() {
 		await new Promise(() => setTimeout( () => {
 			P.update(P => P)
 			return P
 		}, 2000))
-		return P
-		
 	}
     
 
