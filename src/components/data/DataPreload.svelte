@@ -7,10 +7,10 @@
 
 	async function loadData() {
 		status = "Fetching Schedule"
-		let fetch_sch = schedule_store.download()
-		status = await fetch_sch?"Fetching Status":"Error"
-		let fetch_stat = status_store.download()
-		status = await fetch_stat?"Ok":"Error"
+		await schedule_store.download()
+		status = "Fetching Status"
+		await status_store.download()
+		status = "Ok"
 	}
 
 	$: console.log(status)
