@@ -19,9 +19,29 @@ export default defineConfig({
       host: "0.0.0.0",
       proxy: {
           '/schedule': {
-            target: 'http://openevse.local/schedule/',
+            target: 'http://openevse.local/schedule',
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/schedule/, '')
+          },
+          '/status': {
+            target: 'http://openevse.local/status',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/status/, '')
+          },
+          '/config': {
+            target: 'http://openevse.local/config',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/config/, '')
+          },
+          '/claims': {
+            target: 'http://openevse.local/claims',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/claims/, '')
+          },
+          '/override': {
+            target: 'http://openevse.local/override',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/override/, '')
           }
       },
   }

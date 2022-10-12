@@ -106,7 +106,7 @@
 				$schedule_store.push(schedule);
 				timers_modal_opened = false;
 			}
-			schedule_store.update(schedule);
+			schedule_store.upload(schedule);
 			$schedule_store = $schedule_store; // force redraw
 
 		}

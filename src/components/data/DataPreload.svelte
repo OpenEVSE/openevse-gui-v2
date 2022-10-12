@@ -1,16 +1,19 @@
 <script>
-	import { onMount } from "svelte";
+	import { onMount } from "svelte"
 	import {schedule_store} from "../../lib/stores/schedule.js"
-	let fetched
+	import {status_store} from "../../lib/stores/status.js"
+
 	let status = "Loading"
 
 	async function loadData() {
 		status = "Fetching Schedule"
-		fetched = schedule_store.fetch()
-		status = await fetched?"Fetched Schedule":""
-		
+		let fetch_sch = schedule_store.download()
+		status = await fetch_sch?"Fetching Status":"Error"
+		let fetch_stat = status_store.download()
+		status = await fetch_stat?"Ok":"Error"
 	}
 
+	$: console.log(status)
 	
 	onMount ( () => {
 		loadData()
@@ -19,6 +22,9 @@
 
 </script>
 
-{#await fetched}
-<div class="pageloader is-active" ><span class="title">{status}</span></div>
-{/await}
+
+	{#key status}
+		{#if status != "Ok"}
+		<div class="pageloader is-active" ><span class="title">{status}</span></div>
+		{/if}
+	{/key}
