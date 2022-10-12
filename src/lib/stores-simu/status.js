@@ -6,9 +6,13 @@ function createStatusStore() {
     const { subscribe, set, update } = P
 
 	async function download() {
-		await new Promise(() => setTimeout( () => {
-			P.update(P => P)
+		const response = await new Promise(() => setTimeout( () => {
 		}, 2000))
+		if(response.ok) {
+			P.update(P => P)
+			return P
+		}
+		throw Error(response.statusText)
 	}
     
 
