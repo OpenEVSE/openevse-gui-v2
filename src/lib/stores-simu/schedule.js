@@ -1,32 +1,8 @@
 import { writable } from 'svelte/store'
-
-let default_schedule = [
-	{
-	  id: 1,
-	  state: "active",
-	  time: "20:35",
-	  days: [
-		"monday",
-		"tuesday",
-		"wednesday",
-		"saturday"
-	  ]
-	},
-	{
-		id: 2,
-		state: "disabled",
-		time: "09:25",
-		days: [
-		  "monday",
-		  "tuesday",
-		  "wednesday",
-		  "sunday"
-		]
-	  }
-  ]
+import schedule_fakedata from './schedule.json'
 
 export function createScheduleStore() {
-	const P  = writable(default_schedule)
+	const P  = writable(schedule_fakedata)
     const { subscribe, set, update } = P
 	
 	async function download() {
