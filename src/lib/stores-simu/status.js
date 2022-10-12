@@ -7,7 +7,7 @@ function createStatusStore() {
     const { subscribe, set, update } = P
 
 	async function download() {
-        P.update(status_fakedata)
+        P.update(() => status_fakedata)
         console.log(P)
 		await new Promise(resolve => setTimeout(resolve, 2000));
 	}

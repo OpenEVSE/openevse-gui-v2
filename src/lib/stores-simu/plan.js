@@ -7,7 +7,7 @@ function createPlanStore() {
     const { subscribe, set, update } = P
 
 	async function download() {
-		P.update(plan_fakedata)
+		P.update(() =>  plan_fakedata)
 		console.log(P)
 		await new Promise(resolve => setTimeout(resolve, 2000));
 	}
