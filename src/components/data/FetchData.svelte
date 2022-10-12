@@ -12,7 +12,7 @@
 		await status_store.download()
 		status = "Ok"
 	}
-	
+
 	$: console.log(status)
 	
 	onMount ( () => {

@@ -32,7 +32,6 @@ export function createScheduleStore() {
 	async function download() {
 		await new Promise(() => setTimeout( () => {
 			P.update(P => P)
-			return P
 		}, 2000))
 	}
 
