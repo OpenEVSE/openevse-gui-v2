@@ -9,16 +9,18 @@
 	if (import.meta.env.DEV) host = "openevse.local"  
 
 	if (host == "kipk.github.io") {
-		socket = "nosocket"
+		socket = null
 	}
 
-	else socket = new WebSocket("ws://" + host + "/ws")
+	else {
+		socket = new WebSocket("ws://" + host + "/ws")
 
-	socket.addEventListener("message", function (event) {
-		const jsondata = JSON.parse(event.data.toString())
-		let store = Object.assign({}, $status_store);
-		store = {...store, ...jsondata}
-		status_store.update(() => store)
-	});
+		socket.addEventListener("message", function (event) {
+			const jsondata = JSON.parse(event.data.toString())
+			let store = Object.assign({}, $status_store);
+			store = {...store, ...jsondata}
+			status_store.update(() => store)
+		});
+}	
 })
 </script>
