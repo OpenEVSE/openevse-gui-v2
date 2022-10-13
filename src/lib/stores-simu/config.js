@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 import config_fakedata from './config.json'
 
 function createConfigStore() {
-    const P  = writable()
+    const P  = writable(config_fakedata)
     const { subscribe, set, update } = P
 
 	async function download() {

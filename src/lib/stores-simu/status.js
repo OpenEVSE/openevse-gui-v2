@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 import status_fakedata from './status.json'
 
 function createStatusStore() {
-    const P  = writable()
+    const P  = writable(status_fakedata)
     const { subscribe, set, update } = P
 
 	async function download() {
