@@ -1,19 +1,40 @@
 <script>
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
+	import {config_store} from "../../lib/stores/config.js"
 	import WebSocket from "../data/WebSocket.svelte"
+	let time
+	let tz
+	let elapsed
 
 	$: elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 19);
+	$: time = utc2evseLocalTime($status_store.time, $config_store.time_zone)
+	$: console.log(time)
+	
+	function utc2evseLocalTime(t,s) {
+		let date = new Date(t)
+		let lt = date.toLocaleString(navigator.language, { timeZone: getTZ(s) })
+		return lt
+	}
+	function getTZ(s) { 
+    	let tz = s.split('|')[0]
+		return tz
+	}
 
 </script>
 
 <WebSocket/>
 <div class="box has-background-light">
-	<div class="is-flex-direction-row">
-		<div class="px-0 pt-0 pb-2 is-narrow is-size-6 has-text-weight-semibold notification">Status&nbsp;
-			<span class="tag is-capitalized {$status_store.status == 'active'?'is-primary':'is-danger'}">{$status_store.status}</span>
-			<div class="p-0 m-0 is-size-6 has-text-weight-semibold has-text-danger notification is-align-content-flex-end">Waiting - EV Not connected</div>
+	<div class="level is-mobile">
+		<div class="level-left p-0 m-0">
+			<div class="level-item pl-0 pt-0 pb-2 is-narrow is-size-6 has-text-weight-semibold notification">Status&nbsp;
+				<span class="tag is-capitalized {$status_store.status == 'active'?'is-primary':'is-danger'}">{$status_store.status}</span>
+			</div>
 		</div>
+		<div class="level-right p-0 m-0">
+			<div class="level-item m-0 is-size-6 has-text-weight-semibold has-text-danger notification">Waiting - EV Not connected</div>
+		</div>	
+		
 	</div>
 
 	<div class="level is-mobile">

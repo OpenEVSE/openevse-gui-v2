@@ -160,8 +160,8 @@
 					Wed
 				</label>
 				<label class="checkbox">
-					<input id="d_thi" type="checkbox" bind:checked={selected_days[3]} on:change={checkDays}>
-					Thi
+					<input id="d_thu" type="checkbox" bind:checked={selected_days[3]} on:change={checkDays}>
+					Thu
 				</label>
 				<label class="checkbox">
 					<input id="d_fri" type="checkbox" bind:checked={selected_days[4]} on:change={checkDays}>
