@@ -8,7 +8,10 @@
 	// Vite Proxy crash with openevse web socket so connecting directly in dev mode
 	if (import.meta.env.DEV) host = "openevse.local"  
 
-	socket = new WebSocket("ws://" + host + "/ws")
+	if (host == "kipk.github.io") {
+		socket = null
+	}
+	else socket = new WebSocket("ws://" + host + "/ws")
 
 	socket.addEventListener("message", function (event) {
 		const jsondata = JSON.parse(event.data.toString())
