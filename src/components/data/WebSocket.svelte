@@ -9,8 +9,9 @@
 	if (import.meta.env.DEV) host = "openevse.local"  
 
 	if (host == "kipk.github.io") {
-		socket = null
+		socket = "nosocket"
 	}
+
 	else socket = new WebSocket("ws://" + host + "/ws")
 
 	socket.addEventListener("message", function (event) {
