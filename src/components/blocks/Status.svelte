@@ -23,6 +23,12 @@
 
 </script>
 
+<style>
+	.break{
+		word-break: break-all;
+	}
+</style>
+
 <WebSocket/>
 <div class="box has-background-light">
 	<div class="level is-mobile">
@@ -31,8 +37,8 @@
 				<span class="tag is-capitalized {$status_store.status == 'active'?'is-primary':'is-danger'}">{$status_store.status}</span>
 			</div>
 		</div>
-		<div class="level-right p-0 m-0">
-			<div class="level-item m-0 is-size-6 has-text-weight-semibold has-text-danger notification">Waiting - EV Not connected</div>
+		<div class="level-right px-0 mx-0">
+			<div class="level-item break m-0 p-0 is-size-6 has-text-weight-semibold has-text-danger notification">Waiting - EV Not connected</div>
 		</div>	
 		
 	</div>

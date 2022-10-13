@@ -1,8 +1,8 @@
 <script>
-	import Slider from "../ui/SliderForm.svelte";
-	import Switch from "../ui/SwitchForm.svelte";
-	import InputHalf from "../ui/InputHalfForm.svelte";
-
+	import Slider from "../ui/SliderForm.svelte"
+	import Switch from "../ui/SwitchForm.svelte"
+	import InputHalf from "../ui/InputHalfForm.svelte"
+	import ButtonManual from "../ui/ManualButton.svelte"
 	let man_data = {
 		shaper: {
 			state: true,
@@ -23,7 +23,7 @@
 
 <div>	
 	<div class="is-size-4 has-text-weight-bold">Manual</div>
-	<button class="button is-size-6 mt-3 is-primary has-tooltip-arrow has-tooltip" data-tooltip="Enable charging">Enable Charge</button>
+	<ButtonManual />
 	<div>
 		<Slider id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max=32 step=1 bind:value={man_data.max_current} />
 		<div class="columns is-mobile">
