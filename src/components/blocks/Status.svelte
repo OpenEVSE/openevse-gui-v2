@@ -53,7 +53,7 @@
 	.arrow {
 		position: absolute;
         bottom: 5px;
-		right: 15px;
+		right: 5px;
 	}
 	.tiles {
 		max-width : 200px;
@@ -140,15 +140,15 @@
 			<div class="px-2"><span class="has-text-weight-bold is-size-7 is-align-content-flex-end">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
 		</div>
 	</div>
-	<div class="container arrow ">
+	<div class="container arrow">
 		{#if !expand}
-		<div class="is-clickable has-tooltip-arrow"  data-tooltip="Expand" on:click={() => {expand=true; size="sm"}} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
-			<Fa size={size} icon={faAngleDown} />
-		</div>
+			<button class="button is-dark has-background-light is-inverted" tabindex="0" on:click={() => {expand=true; size="sm"}} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
+				<Fa size={size} icon={faAngleDown} />
+			</button>
 		{:else}
-		<div class="is-clickable" on:click={() => {expand=false; size="sm"}} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
-			<Fa size={size} icon={faAngleUp} />
-		</div>
+			<button class="button is-dark has-background-light is-inverted" tabindex="0" on:click={() => {expand=false; size="sm"}} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
+				<Fa size={size} icon={faAngleUp} />
+			</button>
 		{/if}
 	</div>
 
