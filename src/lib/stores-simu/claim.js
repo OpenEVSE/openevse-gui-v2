@@ -1,5 +1,4 @@
 import { get, writable } from 'svelte/store'
-import {httpAPI} from '../api.js'
 import claim_fakedata from './claim.json'
 
 const EvseClient_OpenEVSE_Manual = 65537 //Client ID we use for claims
