@@ -1,5 +1,7 @@
 import { get, writable } from 'svelte/store'
 import {httpAPI} from '../api.js'
+import claim_fakedata from './claim.json'
+
 const EvseClient_OpenEVSE_Manual = 65537 //Client ID we use for claims
 
 function createClaimStore() {
@@ -8,26 +10,25 @@ function createClaimStore() {
 
 	// get claim from clientid EvseClient_OpenEVSE_Manual
 	async function getClaim() {
-		let res = await httpAPI("GET", "/claims/" + EvseClient_OpenEVSE_Manual)
-		P.update(() => res)
+		P.update(() => claim_fakedata)
+		await new Promise(resolve => setTimeout(resolve, 500));
 		return P
 }
 	// set {claim for clientid EvseClient_OpenEVSE_Manual
     async function setClaim(data) {
-        let res = await httpAPI("POST", "/claims/" + EvseClient_OpenEVSE_Manual, JSON.stringify(data))
-        let store = get(P)
+		let store = get(P)
 		store = {...store, ...data}
         console.log("set claim: " + store)
 		P.update(() => store)
-        getClaim()
+		await new Promise(resolve => setTimeout(resolve, 500));
         return P
     }
 
 	// remove clientid EvseClient_OpenEVSE_Manual claim 
     async function releaseClaim() {
-        let res = await httpAPI("DELETE", "/claims/" + EvseClient_OpenEVSE_Manual)
-        let store = {}
+		let store = {}
         P.update(() => store)
+        await new Promise(resolve => setTimeout(resolve, 500));
         return P
     }
 

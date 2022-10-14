@@ -1,0 +1,5 @@
+{
+  "priority": 5000,
+  "charge_current": 32,
+  "auto_release": false
+}
