@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from "svelte"
 	import {schedule_store} from "../../lib/stores/schedule.js"
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
@@ -23,8 +22,6 @@
 		status = "Ok"
 		$states_store.data.loaded = true;
 	}
-
-	$: console.log(status)
 	
 	loadData()
 

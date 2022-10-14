@@ -54,14 +54,12 @@
 </script>
 
 
-<div>	
-	<div class="is-size-4 has-text-weight-bold">Manual</div>
+<div class="is-unselectable">	
+	<div class="is-size-4 has-text-weight-bold ">Manual</div>
 	<ButtonManual mode=0/>
 	<div>
-		{#if $states_store.data.loaded == true}
 		{$states_store.settings.max_current = getMaxCurrent()}
 		<Slider  id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 value={$states_store.settings.max_current} onchange={(value) => setMaxCurrent(value)} />
-		{/if}	
 			<div class="columns is-mobile">
 			<div class="column is-half {!conf_data.current_shaper_enabled?"is-hidden":""}">
 				<Switch name="man-swShaper" label="Current Shaper" bind:checked={man_data.shaper.state} tooltip={man_data.shaper.state?"Disable Current Shaper":"Enable Current Shaper"} />

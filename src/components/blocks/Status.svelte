@@ -4,6 +4,8 @@
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
+	import {states_store} from "../../lib/stores/states.js"
+
 	// @ts-ignore
 	import WebSocket from "../data/WebSocket.svelte"
 	let time
@@ -61,6 +63,7 @@
 	}
 	
 </style>
+
 
 <WebSocket/>
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light">
