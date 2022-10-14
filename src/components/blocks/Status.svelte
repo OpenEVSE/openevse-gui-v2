@@ -55,7 +55,10 @@
         bottom: 5px;
 		right: 15px;
 	}
-  
+	.tiles {
+		max-width : 200px;
+		margin: auto;
+	}
 	
 </style>
 
@@ -80,19 +83,19 @@
 				<p class="is-size-5 has-text-weight-semibold">{$status_store.amp} A</p>
 			</div>
 		</div>
-		<div class="box level-item has-text-centered py-1 px-2">
+		<div class="box level-item has-text-centered py-1 px-2 tiles">
 			<div>
 				<p class="heading has-text-weight-semibold">Energy</p>
 				<p class="is-size-5 has-text-weight-semibold">{($status_store.session_energy/1000).toFixed(1)} kW/h</p>
 			</div>
 		</div>
-		<div class="box level-item has-text-centered py-1 px-2">
+		<div class="box level-item has-text-centered py-1 px-2 tiles">
 			<div>
 				<p class="heading has-text-weight-semibold">Temp°</p>
 				<p class="is-size-5 has-text-weight-semibold">{$status_store.temp/10} °C</p>
 			</div>
 		</div>
-		<div class="box level-item has-text-centered py-1 px-2">
+		<div class="box level-item has-text-centered py-1 px-2 tiles">
 			<div>
 				<p class="heading has-text-weight-semibold">Elapsed</p>
 				<p class="is-size-5 has-text-weight-semibold">{elapsed}</p>
@@ -102,24 +105,32 @@
 
 	{#if expand}
 	<div class="level is-mobile">
-		<div class="box level-item has-text-centered tiles py-1 px-2">
+		<div class="box level-item has-text-centered tiles py-1 px-2 tiles">
 			<div>
 				<p class="heading has-text-weight-semibold">Pilot</p>
 				<p class="is-size-5 has-text-weight-semibold">{$status_store.pilot} A</p>
 			</div>
 		</div>
-		<div class="box level-item has-text-centered py-1 px-2">
+		<div class="box level-item has-text-centered py-1 px-2 tiles">
 			<div>
 				<p class="heading has-text-weight-semibold">Voltage</p>
 				<p class="is-size-5 has-text-weight-semibold">{$status_store.voltage} V</p>
 			</div>
 		</div>
-		<div class="box level-item has-text-centered py-1 px-2">
+		<div class="box level-item has-text-centered py-1 px-2 tiles">
 			<div>
 				<p class="heading has-text-weight-semibold">Total</p>
 				<p class="is-size-5 has-text-weight-semibold">{$status_store.total_energy.toFixed(1)} kW/h</p>
 			</div>
 		</div>
+		{#if $status_store.battery_level}
+		<div class="box level-item has-text-centered py-1 px-2 tiles">
+			<div>
+				<p class="heading has-text-weight-semibold">SOC</p>
+				<p class="is-size-5 has-text-weight-semibold">{$status_store.battery_level} %</p>
+			</div>
+		</div>
+		{/if}
 	</div>
 	{/if}
 
@@ -131,11 +142,11 @@
 	</div>
 	<div class="container arrow ">
 		{#if !expand}
-		<div class="is-clickable" on:click={() => expand=true} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
+		<div class="is-clickable has-tooltip-arrow"  data-tooltip="Expand" on:click={() => {expand=true; size="sm"}} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
 			<Fa size={size} icon={faAngleDown} />
 		</div>
 		{:else}
-		<div class="is-clickable" on:click={() => expand=false} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
+		<div class="is-clickable" on:click={() => {expand=false; size="sm"}} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
 			<Fa size={size} icon={faAngleUp} />
 		</div>
 		{/if}
