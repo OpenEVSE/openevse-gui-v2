@@ -17,7 +17,6 @@ function createScheduleStore() {
     async function upload(data) {
         let res = await httpAPI("POST", "/schedule",JSON.stringify(data))
         const json_response = await res.json()
-        update(P => P)
         return P
     }
 

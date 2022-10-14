@@ -1,22 +1,6 @@
 const EvseClient_OpenEVSE_Manual = 65537 // Openevse Manual Client ID 
 
-export const claims = {
-	// get all claims
-	getClaims: async () => {
-		return await httpAPI("GET", "/claims")
-	},
-	// get only EvseClient_OpenEVSE_Manual id claim
-	getClaim: async () => {
-		return await httpAPI("GET", "/claims/" + EvseClient_OpenEVSE_Manual)
-	},
-	setClaim : async (data) => {
-		return await httpAPI("POST", "/claims/" + EvseClient_OpenEVSE_Manual, JSON.stringify(data))
-	},
-	releaseClaim : async () => {
-		return await httpAPI("DELETE", "/claims/" + EvseClient_OpenEVSE_Manual)
-	},
 
-}
 
 export const override = {
 	getOverride: async () => {
