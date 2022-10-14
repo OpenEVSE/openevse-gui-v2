@@ -1,4 +1,5 @@
 import preprocess from "svelte-preprocess";
+// Openevse hostname for dev proxy
 
 const config = {
   preprocess: [

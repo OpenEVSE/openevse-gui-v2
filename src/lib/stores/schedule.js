@@ -1,52 +1,29 @@
 import { writable } from 'svelte/store'
+import {httpAPI} from '../api.js'
 
 function createScheduleStore() {
     const P  = writable([])
     const { subscribe, set, update } = P
 
 	async function download() {
-		const response = await fetch('/schedule')
-            if(response.ok) {
-                const json_response = await response.json()
-				for ( let t = 0; t < json_response.length ; t++) {
-					json_response[t].time = json_response[t].time.slice(0,5) // remove useless seconds
-				}			
-                P.update(() => json_response)
-                return P
+            let res = await httpAPI("GET", "/schedule")
+            for ( let t = 0; t < res.length ; t++) {
+                res[t].time = res[t].time.slice(0,5) // remove useless seconds
             }
-            throw Error(response.statusText)
+            P.update(() => res)
+            return P
 	}
+
     async function upload(data) {
-        const response = await fetch('/schedule', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        if(response.ok) {
-            const json_response = await response.json()
-            update(P => P)
-            return P
-        }
-        throw Error(response.statusText)
+        let res = await httpAPI("POST", "/schedule",JSON.stringify(data))
+        const json_response = await res.json()
+        update(P => P)
+        return P
     }
+
     async function remove(id) {
-        const response = await fetch('/schedule/' + id, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        if(response.ok) {
-            await response.json()
-            return P
-        }
-        else {
-            // refetch timers
-            download()
-        }
-        throw Error(response.statusText)
+        let res = await httpAPI("DELETE", "/schedule/" + id)
+        return P
     }
 
     return {

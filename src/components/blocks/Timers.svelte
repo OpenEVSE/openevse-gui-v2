@@ -24,7 +24,7 @@
 </script>
 <style>
 	.timers {
-		max-width : 302px;
+		max-width : 400px;
 		min-width: 300px;
 		margin: auto;
 	}
