@@ -1,11 +1,16 @@
 <script>
+	import Fa from 'svelte-fa/src/fa.svelte'
+	import { faAngleDown, faAngleUp, faAngleRight } from '@fortawesome/free-solid-svg-icons/index.js'
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
+	// @ts-ignore
 	import WebSocket from "../data/WebSocket.svelte"
 	let time
 	let tz
 	let elapsed
+	let expand = false
+	let size = "sm"
 
 	$: elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 19);
 	$: time = utc2evseLocalTime($status_store.time, $config_store.time_zone)
@@ -21,16 +26,41 @@
 		return tz
 	}
 
+	
 </script>
 
 <style>
 	.break{
 		word-break: break-all;
 	}
+
+	.statusbox {
+	border-radius: 6px;
+	color: black;
+	background-color: hsl(0, 0%, 96%);
+	display: block;
+	padding: 1.25rem;
+	margin-bottom: 3rem;
+	position: relative;
+	}
+	
+	.statusbox.disabled {
+		box-shadow: 0 0.5em 1em -0.125em rgba(255,56,96,0.3), 0 0px 0 1px rgba(0,0,0, 0.02);
+	}
+	.statusbox.active {
+		box-shadow: 0 0.5em 1em -0.125em rgba(0,209,178,0.3), 0 0px 0 1px rgba(0,0,0, 0.02);
+	}
+	.arrow {
+		position: absolute;
+        bottom: 5px;
+		right: 15px;
+	}
+  
+	
 </style>
 
 <WebSocket/>
-<div class="box has-background-light">
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light">
 	<div class="level is-mobile">
 		<div class="level-left p-0 m-0">
 			<div class="level-item pl-0 pt-0 pb-2 is-narrow is-size-6 has-text-weight-semibold notification">Status&nbsp;
@@ -44,25 +74,25 @@
 	</div>
 
 	<div class="level is-mobile">
-		<div class="box level-item has-text-centered p-1 tiles">
+		<div class="box level-item has-text-centered py-1 px-2 tiles">
 			<div>
 				<p class="heading has-text-weight-semibold">Current</p>
-				<p class="is-size-5 has-text-weight-semibold">{$status_store.amp}A</p>
+				<p class="is-size-5 has-text-weight-semibold">{$status_store.amp} A</p>
 			</div>
 		</div>
-		<div class="box level-item has-text-centered p-1">
+		<div class="box level-item has-text-centered py-1 px-2">
 			<div>
 				<p class="heading has-text-weight-semibold">Energy</p>
-				<p class="is-size-5 has-text-weight-semibold">{($status_store.session_energy/1000).toFixed(1)}kWh</p>
+				<p class="is-size-5 has-text-weight-semibold">{($status_store.session_energy/1000).toFixed(1)} kW/h</p>
 			</div>
 		</div>
-		<div class="box level-item has-text-centered p-1">
+		<div class="box level-item has-text-centered py-1 px-2">
 			<div>
 				<p class="heading has-text-weight-semibold">Temp°</p>
-				<p class="is-size-5 has-text-weight-semibold">{$status_store.temp/10}°C</p>
+				<p class="is-size-5 has-text-weight-semibold">{$status_store.temp/10} °C</p>
 			</div>
 		</div>
-		<div class="box level-item has-text-centered p-1">
+		<div class="box level-item has-text-centered py-1 px-2">
 			<div>
 				<p class="heading has-text-weight-semibold">Elapsed</p>
 				<p class="is-size-5 has-text-weight-semibold">{elapsed}</p>
@@ -70,11 +100,45 @@
 		</div>
 	</div>
 
+	{#if expand}
+	<div class="level is-mobile">
+		<div class="box level-item has-text-centered tiles py-1 px-2">
+			<div>
+				<p class="heading has-text-weight-semibold">Pilot</p>
+				<p class="is-size-5 has-text-weight-semibold">{$status_store.pilot} A</p>
+			</div>
+		</div>
+		<div class="box level-item has-text-centered py-1 px-2">
+			<div>
+				<p class="heading has-text-weight-semibold">Voltage</p>
+				<p class="is-size-5 has-text-weight-semibold">{$status_store.voltage} V</p>
+			</div>
+		</div>
+		<div class="box level-item has-text-centered py-1 px-2">
+			<div>
+				<p class="heading has-text-weight-semibold">Total</p>
+				<p class="is-size-5 has-text-weight-semibold">{$status_store.total_energy.toFixed(1)} kW/h</p>
+			</div>
+		</div>
+	</div>
+	{/if}
+
 	<div class="container">
 		<div class="columns is-flex-direction-row is-size-6 pt-2">
 			<div class="px-2"><span class="has-text-weight-bold is-size-7 is-align-content-flex-start">Current Event: </span> <span class="tag is-white has-text-danger is-capitalized">{$plan_store.current_event.state} {$plan_store.current_event.time}</span></div>
 			<div class="px-2"><span class="has-text-weight-bold is-size-7 is-align-content-flex-end">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
 		</div>
+	</div>
+	<div class="container arrow ">
+		{#if !expand}
+		<div class="is-clickable" on:click={() => expand=true} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
+			<Fa size={size} icon={faAngleDown} />
+		</div>
+		{:else}
+		<div class="is-clickable" on:click={() => expand=false} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
+			<Fa size={size} icon={faAngleUp} />
+		</div>
+		{/if}
 	</div>
 
 </div>
