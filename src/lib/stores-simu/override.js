@@ -1,29 +1,25 @@
 import { get, writable } from 'svelte/store'
-import claim_fakedata from './claim.json'
+import claim_fakedata from './override.json'
 
-
-function createClaimStore() {
+function createOverrideStore() {
     const P  = writable()
     const { subscribe, set, update } = P
 
-	// get claim from clientid EvseClient_OpenEVSE_Manual
-	async function getClaim() {
+
+	async function getOverride() {
 		P.update(() => claim_fakedata)
 		await new Promise(resolve => setTimeout(resolve, 500));
 		return P
 }
-	// set {claim for clientid EvseClient_OpenEVSE_Manual
-    async function setClaim(data) {
+    async function setOverride(data) {
 		let store = get(P)
 		store = {...store, ...data}
-        console.log("set claim: " + store)
 		P.update(() => store)
 		await new Promise(resolve => setTimeout(resolve, 500));
         return P
     }
 
-	// remove clientid EvseClient_OpenEVSE_Manual claim 
-    async function releaseClaim() {
+    async function clearOverride() {
 		let store = {}
         P.update(() => store)
         await new Promise(resolve => setTimeout(resolve, 500));
@@ -35,10 +31,10 @@ function createClaimStore() {
 		get: (s) => get(s), // little hack to access get() method inside the object itself
         set,
         update,
-        getClaim,
-        releaseClaim,
-        setClaim: (data) => setClaim(data)
+        getOverride,
+        clearOverride,
+        setOverride: (data) => setOverride(data)
     }
 }
 
-export const claim_store = createClaimStore()
+export const override_store = createOverrideStore()
