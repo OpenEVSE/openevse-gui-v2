@@ -6,6 +6,7 @@
 	import {status_store} from "../../lib/stores/status.js"
 	import {config_store} from "../../lib/stores/config.js"
 	import {claims, override} from "../../lib/api.js"
+	import {onMount} from "svelte"
 
 	let man_data = {
 		shaper: {
@@ -23,7 +24,10 @@
 		divert_enabled: true
 	}
 
-	let max_current = $config_store.max_current_soft
+	let max_current
+
+
+
 
 	async function setMaxCurrent(val) {
 		if (val == $config_store.max_current_soft) {
@@ -37,7 +41,16 @@
 			let res = await claims.setClaim(data)
 			console.log(res)
 		}
+		max_current = val
+	}
+
+	async function getMaxCurrent(def) {
+		let res = await claims.getClaim()
 		
+		if (res.max_current)
+			max_current = res.max_current
+		else max_current = def
+		console.log(max_current)
 	}
 
 
@@ -49,7 +62,11 @@
 	<div class="is-size-4 has-text-weight-bold">Manual</div>
 	<ButtonManual mode=0/>
 	<div>
+		{#await getMaxCurrent($config_store.max_current_soft)}
+		<Slider id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 bind:value={$config_store.max_current_soft} onchange={(value) => setMaxCurrent(value)} />
+		{:then}
 		<Slider id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 bind:value={max_current} onchange={(value) => setMaxCurrent(value)} />
+		{/await}
 		<div class="columns is-mobile">
 			<div class="column is-half {!conf_data.current_shaper_enabled?"is-hidden":""}">
 				<Switch name="man-swShaper" label="Current Shaper" bind:checked={man_data.shaper.state} tooltip={man_data.shaper.state?"Disable Current Shaper":"Enable Current Shaper"} />

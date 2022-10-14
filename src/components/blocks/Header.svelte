@@ -49,9 +49,9 @@ console.log($location)
 	
 			<div class="navbar-end is-family-monospace">
 				
-				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {($location=="/")?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/" on:click={toggleMenu} use:link>Main</a>
+				<a class="navbar-item is-size-6 has-text-weight-semibold  is-hoverable {($location=="/")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/" on:click={toggleMenu} use:link>Main</a>
 				<div class="navbar-item has-dropdown {hideDropDown?"is-hoverable":""}">
-					<span class="navbar-item is-size-6 has-text-weight-semibold has-text-grey-dark navbar-link noevent">Configuration</span>
+					<span class="navbar-item is-size-6 has-text-weight-semibold navbar-link noevent {$location=="/"?"has-text-grey-dark ":"has-text-info"}">Configuration</span>
 					<div class="navbar-dropdown is-boxed " >
 						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Hardware"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Hardware" on:click={toggleMenu} use:link >Hardware</a>
 						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Settings"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Settings" on:click={toggleMenu} use:link>Settings</a>

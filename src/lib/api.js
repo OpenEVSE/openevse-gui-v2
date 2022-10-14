@@ -46,7 +46,7 @@ export async function httpAPI(method,url,body=null) {
 		data.body = body
 	}
 	const response = await fetch(url, data)
-	if(response.ok) {
+	if(response) {
 		const json_response = response.json()
 		return json_response
 	}

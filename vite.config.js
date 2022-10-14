@@ -33,8 +33,8 @@ export default defineConfig({
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/config/, '')
           },
-          '/claims': {
-            target: 'http://openevse.local/claims',
+          '/claims/': {
+            target: 'http://openevse.local/claims/',
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/claims/, '')
           },
