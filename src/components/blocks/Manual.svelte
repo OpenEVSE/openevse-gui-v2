@@ -88,6 +88,16 @@
 		}
 	}
 
+	function setTimeLimit(t) {
+		// Claim a time limit
+		
+
+	}
+
+	function setChargeLimit(c) {
+
+	}
+
 	onMount( () => {
 		$states_store.states.max_current = getMaxCurrent()
 		getMode()
