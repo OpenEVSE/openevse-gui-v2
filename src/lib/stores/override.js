@@ -12,10 +12,9 @@ function createOverrideStore() {
 		return P
 }
     async function setOverride(data) {
-        let res = await httpAPI("POST", "/override", JSON.stringify(data))
         let store = get(P)
 		store = {...store, ...data}
-
+        let res = await httpAPI("POST", "/override", JSON.stringify(store))
 		P.update(() => store)
         getOverride()
         return P
