@@ -2,7 +2,7 @@
 <script>
 
 	import TimerModal from "./TimerModal.svelte"
-	import TimerTableRow from "../ui/Timer_table_row.svelte"
+	import TimerTableRow from "../ui/TimerTableRow.svelte"
 	import {schedule_store} from "../../lib/stores/schedule.js"
 
 	let timers_modal_opened = false;

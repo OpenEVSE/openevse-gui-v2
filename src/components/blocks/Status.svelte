@@ -4,7 +4,9 @@
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
-	import Time from "../ui/Time.svelte"
+	import LevelItemTime from "../ui/LevelItemTime.svelte"
+	import LevelItemTile from "../ui/LevelItemTile.svelte"
+	import LevelItemStatus from "../ui/LevelItemStatus.svelte"
 
 	// @ts-ignore
 	import WebSocket from "../data/WebSocket.svelte"
@@ -63,94 +65,44 @@
         bottom: 5px;
 		right: 5px;
 	}
-	.tiles {
-		max-width : 200px;
-		margin: auto;
-	}
 	
 </style>
 
 
 <WebSocket/>
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5">
-	<div class="level mb-2 mx-0 is-mobile">
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5 px-3">
+	<div class="level mb-2  mx-0 is-mobile">
 		<div class="level-left">
-			<div class="level-item py-0 pb-2 px-0 is-narrow is-size-6 has-text-weight-semibold notification">
-				<span class="tag mr-2 ml-0 is-capitalized {$status_store.status == 'active'?'is-primary':'is-danger'}">{$status_store.status}</span>
-				<span class="tag mx-2 has-text-weight-semibold is-danger">EV Not connected</span>
-			</div>
-			
+			<LevelItemStatus state={$status_store.state} status={$status_store.status} vehicle={$status_store.vehicle} />		
 		</div>
 		<div class="level-right ">
-			<div class="level-item ml-2 py-0 pb-2 px-0 is-narrow is-size-6 has-text-weight-semibold notification">
-				<Time time={time}/>
-			</div>
+			<LevelItemTime time={time}/>
 		</div>	
 		
 	</div>
 
 	<div class="level is-mobile">
-		<div class="box level-item has-text-centered py-1 px-2 tiles">
-			<div>
-				<p class="heading has-text-weight-semibold">Current</p>
-				<p class="is-size-5 has-text-weight-semibold">{$status_store.amp} A</p>
-			</div>
-		</div>
-		<div class="box level-item has-text-centered py-1 px-2 tiles">
-			<div>
-				<p class="heading has-text-weight-semibold">Energy</p>
-				<p class="is-size-5 has-text-weight-semibold">{($status_store.session_energy/1000).toFixed(1)} kW/h</p>
-			</div>
-		</div>
-		<div class="box level-item has-text-centered py-1 px-2 tiles">
-			<div>
-				<p class="heading has-text-weight-semibold">Temp°</p>
-				<p class="is-size-5 has-text-weight-semibold">{$status_store.temp/10} °C</p>
-			</div>
-		</div>
-		<div class="box level-item has-text-centered py-1 px-2 tiles">
-			<div>
-				<p class="heading has-text-weight-semibold">Elapsed</p>
-				<p class="is-size-5 has-text-weight-semibold">{elapsed}</p>
-			</div>
-		</div>
+		<LevelItemTile title="Current" value={$status_store.amp} unit="A" />
+		<LevelItemTile title="Energy" value={($status_store.session_energy/1000).toFixed(1)} unit="kW/h" />
+		<LevelItemTile title="Temp°" value={$status_store.temp/10} unit="°C" />
+		<LevelItemTile title="Elapsed" value={elapsed} />
 	</div>
 
 	{#if expand}
 	<div class="level is-mobile">
-		<div class="box level-item has-text-centered tiles py-1 px-2 tiles">
-			<div>
-				<p class="heading has-text-weight-semibold">Setpoint</p>
-				<p class="is-size-5 has-text-weight-semibold">{$status_store.pilot} A</p>
-			</div>
-		</div>
-		<div class="box level-item has-text-centered py-1 px-2 tiles">
-			<div>
-				<p class="heading has-text-weight-semibold">Voltage</p>
-				<p class="is-size-5 has-text-weight-semibold">{$status_store.voltage} V</p>
-			</div>
-		</div>
-		<div class="box level-item has-text-centered py-1 px-2 tiles">
-			<div>
-				<p class="heading has-text-weight-semibold">Total</p>
-				<p class="is-size-5 has-text-weight-semibold">{$status_store.total_energy.toFixed(1)} kW/h</p>
-			</div>
-		</div>
+		<LevelItemTile title="Setpoint" value={$status_store.pilot} unit="A" />
+		<LevelItemTile title="Voltage" value={$status_store.temp/10} unit="°C" />
+		<LevelItemTile title="Total" value={$status_store.total_energy.toFixed(1)} unit="kW/h" />
 		{#if $status_store.battery_level}
-		<div class="box level-item has-text-centered py-1 px-2 tiles">
-			<div>
-				<p class="heading has-text-weight-semibold">SOC</p>
-				<p class="is-size-5 has-text-weight-semibold">{$status_store.battery_level} %</p>
-			</div>
-		</div>
+		<LevelItemTile title="SOC" value={$status_store.battery_level} unit="%" />
 		{/if}
 	</div>
 	{/if}
 
 	<div class="container">
-		<div class="columns is-flex-direction-row is-size-6 pt-2">
-			<div class="px-2"><span class="has-text-weight-bold is-size-7 is-align-content-flex-start">Current Event: </span> <span class="tag is-white has-text-danger is-capitalized">{$plan_store.current_event.state} {$plan_store.current_event.time}</span></div>
-			<div class="px-2"><span class="has-text-weight-bold is-size-7 is-align-content-flex-end">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
+		<div class="columns is-flex-direction-row is-size-6 px-0 mx-0">
+			<div class="px-0"><span class="has-text-weight-bold is-size-7 is-align-content-flex-start">Current Event: </span> <span class="tag is-white has-text-danger is-capitalized">{$plan_store.current_event.state} {$plan_store.current_event.time}</span></div>
+			<div class="px-0"><span class="has-text-weight-bold is-size-7 is-align-content-flex-end">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
 		</div>
 	</div>
 	<div class="container arrow">
