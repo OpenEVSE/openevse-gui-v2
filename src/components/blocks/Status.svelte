@@ -72,7 +72,7 @@
 
 
 <WebSocket/>
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light m-0">
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5">
 	<div class="level mb-2 mx-0 is-mobile">
 		<div class="level-left">
 			<div class="level-item py-0 pb-2 px-0 is-narrow is-size-6 has-text-weight-semibold notification">
@@ -120,7 +120,7 @@
 	<div class="level is-mobile">
 		<div class="box level-item has-text-centered tiles py-1 px-2 tiles">
 			<div>
-				<p class="heading has-text-weight-semibold">Pilot</p>
+				<p class="heading has-text-weight-semibold">Setpoint</p>
 				<p class="is-size-5 has-text-weight-semibold">{$status_store.pilot} A</p>
 			</div>
 		</div>
