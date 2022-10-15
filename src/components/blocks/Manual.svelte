@@ -112,9 +112,8 @@
 		</div>
 
 		<div class="columns is-mobile">
-				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="in minutes" />
-				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number
-				" placeholder="in kWh" />			
+				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="in minutes" disabled={$states_store.states.mode==0?true:false} />
+				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number" placeholder="in kWh" disabled={$states_store.states.mode==0?true:false}/>			
 		</div>
 	</div>
 </div>
