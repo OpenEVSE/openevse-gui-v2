@@ -4,7 +4,7 @@
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
-	import {states_store} from "../../lib/stores/states.js"
+	import Time from "../ui/Time.svelte"
 
 	// @ts-ignore
 	import WebSocket from "../data/WebSocket.svelte"
@@ -14,13 +14,19 @@
 	let expand = false
 	let size = "sm"
 
-	$: elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 19);
+	$: elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 16);
 	$: time = utc2evseLocalTime($status_store.time, $config_store.time_zone)
-	$: console.log(time)
 	
 	function utc2evseLocalTime(t,s) {
 		let date = new Date(t)
-		let lt = date.toLocaleString(navigator.language, { timeZone: getTZ(s) })
+		let lt = date.toLocaleString(navigator.language, { 
+			timeZone: getTZ(s),
+			year: '2-digit',
+			month: '2-digit',
+			day: '2-digit',
+			hour: '2-digit',
+			minute: '2-digit',
+			})
 		return lt
 	}
 	function getTZ(s) { 
@@ -66,15 +72,19 @@
 
 
 <WebSocket/>
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light">
-	<div class="level is-mobile">
-		<div class="level-left p-0 m-0">
-			<div class="level-item pl-0 pt-0 pb-2 is-narrow is-size-6 has-text-weight-semibold notification">Status&nbsp;
-				<span class="tag is-capitalized {$status_store.status == 'active'?'is-primary':'is-danger'}">{$status_store.status}</span>
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light m-0">
+	<div class="level mb-2 mx-0 is-mobile">
+		<div class="level-left">
+			<div class="level-item py-0 pb-2 px-0 is-narrow is-size-6 has-text-weight-semibold notification">
+				<span class="tag mr-2 ml-0 is-capitalized {$status_store.status == 'active'?'is-primary':'is-danger'}">{$status_store.status}</span>
+				<span class="tag mx-2 has-text-weight-semibold is-danger">EV Not connected</span>
 			</div>
+			
 		</div>
-		<div class="level-right px-0 mx-0">
-			<div class="level-item break m-0 p-0 is-size-6 has-text-weight-semibold has-text-danger notification">Waiting - EV Not connected</div>
+		<div class="level-right ">
+			<div class="level-item ml-2 py-0 pb-2 px-0 is-narrow is-size-6 has-text-weight-semibold notification">
+				<Time time={time}/>
+			</div>
 		</div>	
 		
 	</div>

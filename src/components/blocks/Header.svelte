@@ -16,9 +16,6 @@
 	setTimeout(() => hideDropDown = true, 10)
   }
 
-
-console.log($location)
-
 </script>
 <style> 
 .burger { 
@@ -34,7 +31,7 @@ console.log($location)
 <div class="container">
 	<nav class="navbar is-white is-spaced" aria-label="main navigation">
 		<div class="navbar-brand">
-			<a href="/" use:link bind:this={logoid}>>
+			<a href="/" use:link bind:this={logoid}>
 				<img src={logo} class="" alt="logo"/>
 			</a>
 				<div role="button" class="navbar-burger burger {isBurgerActive ? 'is-active' : ''}" aria-label="menu" aria-expanded="true" data-target="evsenav" on:click={toggleBurger}>

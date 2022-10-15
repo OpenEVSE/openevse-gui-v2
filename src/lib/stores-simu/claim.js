@@ -16,7 +16,6 @@ function createClaimStore() {
     async function setClaim(data) {
 		let store = get(P)
 		store = {...store, ...data}
-        console.log("set claim: " + store)
 		P.update(() => store)
 		await new Promise(resolve => setTimeout(resolve, 500));
         return P

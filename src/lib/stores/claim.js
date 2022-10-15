@@ -17,7 +17,6 @@ function createClaimStore() {
         let res = await httpAPI("POST", "/claims/" + EvseClient_OpenEVSE_Manual, JSON.stringify(data))
         let store = get(P)
 		store = {...store, ...data}
-        console.log("set claim: " + store)
 		P.update(() => store)
         getClaim()
         return P
