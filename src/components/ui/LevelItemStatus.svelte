@@ -1,6 +1,6 @@
 <script>
 	export let state
-	export let status
+	let status = "disabled"
 	export let vehicle = 0
 	let message = ""
 	let charging = false

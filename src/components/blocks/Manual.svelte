@@ -18,7 +18,6 @@
 		divert: {
 			state: false,
 		},
-		max_current: 32,
 		time_lmt: null,
 		charge_lmt: null,
 	}
@@ -32,14 +31,14 @@
 		if (val == $config_store.max_current_soft) {
 			//release claim
 			let res = await claim_store.releaseClaim()
-			$states_store.states.max_current = val
+			$states_store.max_current = val
 			return res
 		}
 		else {
 			// set claim
 			$claim_store.max_current = val
 			let res = await claim_store.setClaim($claim_store)
-			$states_store.states.max_current = val
+			$states_store.max_current = val
 			return res
 		}
 	}
@@ -55,19 +54,19 @@
 		if (typeof $override_store.state != undefined) {
 			switch ($override_store.state) {
 				case "active":
-					$states_store.states.mode = 1 // On
+					$states_store.mode = 1 // On
 					break
 				case "disabled":
-					$states_store.states.mode = 2 // Off
+					$states_store.mode = 2 // Off
 					break;
 				default: break
 			}
 		}
-		else $states_store.states.mode = 0 // Auto
+		else $states_store.mode = 0 // Auto
 	}
 
 	function setMode(m) {
-		$states_store.states.mode = m
+		$states_store.mode = m
 		let state
 		switch(m) {
 			case 0: break
@@ -90,7 +89,7 @@
 
 	function setTimeLimit(t) {
 		// Claim a time limit
-		
+
 
 	}
 
@@ -99,7 +98,7 @@
 	}
 
 	onMount( () => {
-		$states_store.states.max_current = getMaxCurrent()
+		$states_store.max_current = getMaxCurrent()
 		getMode()
 	})
 	
@@ -109,9 +108,9 @@
 
 <div class="is-unselectable">	
 	<div class="is-size-4 has-text-weight-bold ">Manual</div>
-	<ButtonManual mode={$states_store.states.mode} setmode={setMode}/>
+	<ButtonManual mode={$states_store.mode} setmode={setMode}/>
 	<div>
-		<Slider  id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 value={$states_store.states.max_current} onchange={(value) => setMaxCurrent(value)} />
+		<Slider  id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 value={$states_store.max_current} onchange={(value) => setMaxCurrent(value)} />
 			<div class="columns is-mobile">
 			<div class="column is-half {!conf_data.current_shaper_enabled?"is-hidden":""}">
 				<Switch name="man-swShaper" label="Current Shaper" bind:checked={man_data.shaper.state} tooltip={man_data.shaper.state?"Disable Current Shaper":"Enable Current Shaper"} />
@@ -122,8 +121,8 @@
 		</div>
 
 		<div class="columns is-mobile">
-				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="in minutes" disabled={$states_store.states.mode==0?true:false} />
-				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number" placeholder="in kWh" disabled={$states_store.states.mode==0?true:false}/>			
+				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="in minutes" disabled={$states_store.mode==0?true:false} />
+				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number" placeholder="in kWh" disabled={$states_store.mode==0?true:false}/>			
 		</div>
 	</div>
 </div>

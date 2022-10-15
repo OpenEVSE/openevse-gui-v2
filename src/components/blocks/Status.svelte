@@ -7,21 +7,27 @@
 	import LevelItemTime from "../ui/LevelItemTime.svelte"
 	import LevelItemTile from "../ui/LevelItemTile.svelte"
 	import LevelItemStatus from "../ui/LevelItemStatus.svelte"
+	import {onMount} from "svelte"
 
 	// @ts-ignore
 	import WebSocket from "../data/WebSocket.svelte"
 	let time
-	let tz
 	let elapsed
+	let date
 	let expand = false
 	let size = "sm"
 
+	$: date = new Date($status_store.time)
+	$: updateDate(date)
 	$: elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 16);
-	$: time = utc2evseLocalTime($status_store.time, $config_store.time_zone)
 	
-	function utc2evseLocalTime(t,s) {
-		let date = new Date(t)
-		let lt = date.toLocaleString(navigator.language, { 
+
+	function updateDate(m) {
+		time = 	utc2evseLocalTime(date, $config_store.time_zone)
+	}
+
+	function utc2evseLocalTime(d,s) {
+		let lt = d.toLocaleString(navigator.language, { 
 			timeZone: getTZ(s),
 			year: '2-digit',
 			month: '2-digit',
@@ -73,7 +79,7 @@
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5 px-3">
 	<div class="level mb-2  mx-0 is-mobile">
 		<div class="level-left">
-			<LevelItemStatus state={$status_store.state} status={$status_store.status} vehicle={$status_store.vehicle} />		
+			<LevelItemStatus state={$status_store.state} vehicle={$status_store.vehicle} />		
 		</div>
 		<div class="level-right ">
 			<LevelItemTime time={time}/>

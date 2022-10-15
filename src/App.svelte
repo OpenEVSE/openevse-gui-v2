@@ -13,7 +13,7 @@
 	
 	<Header />
 	<FetchData />
-	{#if $states_store.data.loaded}
+	{#if $states_store.data_loaded}
 	<Router {routes}/>
 	{/if}
 </main>

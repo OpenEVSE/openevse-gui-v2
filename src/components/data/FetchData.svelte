@@ -23,7 +23,7 @@
 		status = "Get Override"
 		await override_store.getOverride()
 		status = "Ok"
-		$states_store.data.loaded = true;
+		$states_store.data_loaded = true;
 	}
 	
 	loadData()
