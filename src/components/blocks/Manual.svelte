@@ -9,8 +9,6 @@
 	import {override_store} from "../../lib/stores/override.js"
 	import {onMount} from 'svelte'
 
-
-
 	let man_data = {
 		shaper: {
 			state: true,
@@ -52,7 +50,7 @@
 	}
 
 	function getMode() {
-		if (typeof $override_store.state != undefined) {
+		if ($override_store.state != undefined) {
 			switch ($override_store.state) {
 				case "active":
 					$states_store.mode = 1 // On
@@ -60,10 +58,16 @@
 				case "disabled":
 					$states_store.mode = 2 // Off
 					break;
-				default: break
+				default: 
+					break
+			}
+			if ($override_store.auto_release != undefined) {
+				$states_store.auto_release = $override_store.auto_release
 			}
 		}
-		else $states_store.mode = 0 // Auto
+		else {
+			$states_store.mode = 0 // Auto
+		}
 	}
 
 	function setMode(m,a) {

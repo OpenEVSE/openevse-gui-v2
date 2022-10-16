@@ -1,7 +1,7 @@
 <script>
 	export let mode // 0: Auto, 1: On, 2: OFF
 	export let setmode = (m,c) => {}
-	export let checked = false
+	export let checked = true
 	
 </script>
 
