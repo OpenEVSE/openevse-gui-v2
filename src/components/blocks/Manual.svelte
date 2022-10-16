@@ -6,7 +6,6 @@
 	import {config_store} from "../../lib/stores/config.js"
 	import {claim_store} from "../../lib/stores/claim.js"
 	import {states_store} from "../../lib/stores/states.js"
-	import {override_store} from "../../lib/stores/override.js"
 	import {onMount} from 'svelte'
 
 	let man_data = {
@@ -27,8 +26,18 @@
 	async function setMaxCurrent(val) {
 		
 		if (val == $config_store.max_current_soft) {
-			//release claim
-			let res = await claim_store.releaseClaim()
+			//remove maxCurrent
+			delete $claim_store.max_current
+			let res
+			// if not other properties, release claim
+			if ( 
+				$claim_store.state == undefined && 
+				$claim_store.energy_limit == undefined && 
+				$claim_store.time_limit == undefined
+			) {
+				res = await claim_store.releaseClaim()
+			}
+			else res = await claim_store.setClaim($claim_store)
 			$states_store.max_current = val
 			return res
 		}
@@ -50,8 +59,8 @@
 	}
 
 	function getMode() {
-		if ($override_store.state != undefined) {
-			switch ($override_store.state) {
+		if ($claim_store.state != undefined) {
+			switch ($claim_store.state) {
 				case "active":
 					$states_store.mode = 1 // On
 					break
@@ -61,8 +70,8 @@
 				default: 
 					break
 			}
-			if ($override_store.auto_release != undefined) {
-				$states_store.auto_release = $override_store.auto_release
+			if ($claim_store.auto_release != undefined) {
+				$states_store.auto_release = $claim_store.auto_release
 			}
 		}
 		else {
@@ -74,6 +83,15 @@
 		$states_store.mode = m
 		$states_store.auto_release = a
 		let state
+		let data = {
+				state: state,
+				auto_release: a
+			}
+		// keep max_current claim	
+		if ($claim_store.max_current != undefined) {
+				data.max_current = $claim_store.max_current
+			}
+
 		switch(m) {
 			case 0: break
 			case 1: 
@@ -84,17 +102,25 @@
 				break
 			default: break
 		}
+		
 		if(state) {
 			// Mode Manual setting override
-			const data = {
-				state: state,
-				auto_release: a
+			if ($claim_store.time_limit != undefined) {
+				data.time_limit = $claim_store.time_limit
 			}
-			override_store.setOverride(data)
+			if ($claim_store.charge_limit != undefined) {
+				data.charge_limit = $claim_store.charge_limit
+			}
+
+			claim_store.setClaim(data)
 		}
 		else {
+			// if there's no other claim property but charge_limit & time_limit ( no limit in Auto)
+			if ($claim_store.max_current) 
+				claim_store.setClaim(data)
 			// Mode Auto, clearing override
-			override_store.clearOverride()
+			else 
+				claim_store.releaseClaim()
 		}
 	}
 
@@ -115,7 +141,9 @@
 		$states_store.max_current = getMaxCurrent()
 		getMode()
 	})
-	
+
+$: $states_store.max_current = $claim_store.max_current?$claim_store.max_current:$config_store.max_current_soft
+
 
 </script>
 

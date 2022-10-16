@@ -5,7 +5,7 @@
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
 	import {claim_store} from "../../lib/stores/claim.js"
-	import {override_store} from "../../lib/stores/override.js"
+	//import {override_store} from "../../lib/stores/override.js"
 
 	let status = "Loading"
 
@@ -20,8 +20,8 @@
 		await config_store.download()
 		status = "Get Claim"
 		await claim_store.getClaim()
-		status = "Get Override"
-		await override_store.getOverride()
+		//status = "Get Override"
+		//await override_store.getOverride()
 		status = "Ok"
 		$states_store.data_loaded = true;
 	}

@@ -14,10 +14,11 @@ function createClaimStore() {
 }
 	// set {claim for clientid EvseClient_OpenEVSE_Manual
     async function setClaim(data) {
+        let claim = get(P)
+		let newclaim = {...claim, ...data}
         let res = await httpAPI("POST", "/claims/" + EvseClient_OpenEVSE_Manual, JSON.stringify(data))
-        let store = get(P)
-		store = {...store, ...data}
-		P.update(() => store)
+		newclaim = {...claim, ...data}
+		P.update(() => newclaim)
         getClaim()
         return P
     }
@@ -27,6 +28,7 @@ function createClaimStore() {
         let res = await httpAPI("DELETE", "/claims/" + EvseClient_OpenEVSE_Manual)
         let store = {}
         P.update(() => store)
+        getClaim()
         return P
     }
 

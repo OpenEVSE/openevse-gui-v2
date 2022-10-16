@@ -7,7 +7,6 @@
 	import LevelItemTime from "../ui/LevelItemTime.svelte"
 	import LevelItemTile from "../ui/LevelItemTile.svelte"
 	import LevelItemStatus from "../ui/LevelItemStatus.svelte"
-	import {onMount} from "svelte"
 
 	// @ts-ignore
 	import WebSocket from "../data/WebSocket.svelte"
