@@ -163,8 +163,8 @@ $: $states_store.max_current = $claim_store.max_current?$claim_store.max_current
 		</div>
 
 		<div class="columns is-mobile">
-				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="in minutes" disabled={$states_store.mode==0?true:false} />
-				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number" placeholder="in kWh" disabled={$states_store.mode==0?true:false}/>			
+				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="in minutes" disabled={$states_store.mode==2?true:false} />
+				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number" placeholder="in kWh" disabled={$states_store.mode==2?true:false}/>			
 		</div>
 	</div>
 </div>
