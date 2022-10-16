@@ -80,7 +80,7 @@
 	</div>
 
 	<div class="level is-mobile mx-0">
-		<StatusTile title="Current" value={$status_store.amp} unit="A" />
+		<StatusTile title="Current" value={$status_store.amp/1000} unit="A" />
 		<StatusTile title="Energy" value={($status_store.session_energy/1000).toFixed(1)} unit="kW/h" />
 		<StatusTile title="Temp°" value={$status_store.temp/10} unit="°C" />
 		<StatusTile title="Elapsed" value={elapsed} />
@@ -89,7 +89,7 @@
 	{#if expand}
 	<div class="level is-mobile mx-0">
 		<StatusTile title="Setpoint" value={$status_store.pilot} unit="A" />
-		<StatusTile title="Voltage" value={$status_store.temp/10} unit="°C" />
+		<StatusTile title="Voltage" value={$status_store.voltage} unit="°C" />
 		<StatusTile title="Total" value={$status_store.total_energy.toFixed(1)} unit="kW/h" />
 		{#if $status_store.battery_level}
 		<StatusTile title="SOC" value={$status_store.battery_level} unit="%" />
