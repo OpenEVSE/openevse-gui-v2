@@ -82,9 +82,7 @@
 	function setMode(m,a) {
 		$states_store.mode = m
 		$states_store.auto_release = a
-		let state
 		let data = {
-				state: state,
 				auto_release: a
 			}
 		// keep max_current claim	
@@ -95,15 +93,15 @@
 		switch(m) {
 			case 0: break
 			case 1: 
-				state = "active"
+				data.state = "active"
 				break
 			case 2:
-				state = "disabled"
+				data.state = "disabled"
 				break
 			default: break
 		}
 		
-		if(state) {
+		if(data.state != undefined) {
 			// Mode Manual setting override
 			if ($claim_store.time_limit != undefined) {
 				data.time_limit = $claim_store.time_limit
@@ -115,6 +113,7 @@
 			claim_store.setClaim(data)
 		}
 		else {
+			// Mode Auto
 			// if there's no other claim property but charge_limit & time_limit ( no limit in Auto)
 			if ($claim_store.max_current) 
 				claim_store.setClaim(data)

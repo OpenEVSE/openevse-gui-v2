@@ -104,7 +104,7 @@
 	</div>
 	{/if}
 
-	<div class="container">
+	<div class="container py-2">
 		<div class="columns is-flex-direction-row is-size-6 px-0 mx-0">
 			<div class="px-0"><span class="has-text-weight-bold is-size-7 is-align-content-flex-start">Current Event: </span> <span class="tag is-white has-text-danger is-capitalized">{$plan_store.current_event.state} {$plan_store.current_event.time}</span></div>
 			<div class="px-0"><span class="has-text-weight-bold is-size-7 is-align-content-flex-end">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
