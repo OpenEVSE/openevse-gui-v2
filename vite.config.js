@@ -1,10 +1,18 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import viteCompression from 'vite-plugin-compression';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip"})],
+  plugins: [
+    svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip"}),
+    VitePWA({ registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      } 
+    })
+  ],
   css: {
     preprocessorOptions: {
       scss: {
