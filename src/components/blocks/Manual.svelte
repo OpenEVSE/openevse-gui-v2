@@ -37,6 +37,7 @@
 		else {
 			// set claim
 			$claim_store.max_current = val
+			$claim_store.auto_release = $states_store.auto_release
 			let res = await claim_store.setClaim($claim_store)
 			$states_store.max_current = val
 			return res
@@ -65,8 +66,9 @@
 		else $states_store.mode = 0 // Auto
 	}
 
-	function setMode(m) {
+	function setMode(m,a) {
 		$states_store.mode = m
+		$states_store.auto_release = a
 		let state
 		switch(m) {
 			case 0: break
@@ -79,21 +81,29 @@
 			default: break
 		}
 		if(state) {
-			const data = {state: state}
+			// Mode Manual setting override
+			const data = {
+				state: state,
+				auto_release: a
+			}
 			override_store.setOverride(data)
 		}
 		else {
+			// Mode Auto, clearing override
 			override_store.clearOverride()
 		}
 	}
 
 	function setTimeLimit(t) {
 		// Claim a time limit
+		// TO DO
 
 
 	}
 
 	function setChargeLimit(c) {
+		// Claim a charge limit
+		// TO DO 
 
 	}
 
@@ -108,7 +118,7 @@
 
 <div class="is-unselectable">	
 	<div class="is-size-4 has-text-weight-bold ">Manual</div>
-	<ButtonManual mode={$states_store.mode} setmode={setMode}/>
+	<ButtonManual mode={$states_store.mode} setmode={setMode} bind:checked={$states_store.auto_release} />
 	<div>
 		<Slider  id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 value={$states_store.max_current} onchange={(value) => setMaxCurrent(value)} />
 			<div class="columns is-mobile">

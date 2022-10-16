@@ -12,9 +12,9 @@ function createOverrideStore() {
 		return P
 }
     async function setOverride(data) {
-		let store = get(P)
-		store = {...store, ...data}
-		P.update(() => store)
+		let override = get(P)
+        let newoverride = {...override, ...data}
+		P.update(() => newoverride)
 		await new Promise(resolve => setTimeout(resolve, 500));
         return P
     }
