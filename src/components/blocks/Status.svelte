@@ -6,9 +6,7 @@
 	import {config_store} from "../../lib/stores/config.js"
 	import StatusTile from "../ui/StatusTile.svelte"
 	import StatusItems from "../ui/StatusItems.svelte"
-
-	// @ts-ignore
-	import WebSocket from "../data/WebSocket.svelte"
+	
 	let time
 	let elapsed
 	let date
@@ -73,7 +71,7 @@
 </style>
 
 
-<WebSocket/>
+
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5 px-3">
 	<div class="mb-2 mx-0">
 		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={time} />	

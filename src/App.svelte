@@ -4,13 +4,13 @@
 	import { routes } from "./lib/routes.js";
 	import FetchData from './components/data/FetchData.svelte'
 	import {states_store} from './lib/stores/states.js'
-	
+	import WebSocket from "./components/data/WebSocket.svelte"
 </script>
 
 
 
 <main>
-	
+	<WebSocket/>
 	<Header />
 	<FetchData />
 	{#if $states_store.data_loaded}
