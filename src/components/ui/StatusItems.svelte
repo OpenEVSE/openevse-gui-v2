@@ -1,7 +1,8 @@
 <script>
 	export let state
-	let status = "disabled"
+	export let time
 	export let vehicle = 0
+	let status = "disabled"
 	let message = ""
 	let charging = false
 	let color = "is-danger"
@@ -18,7 +19,7 @@
 		case 2: // Connected
 			status = "active"
 			charging = false
-			message = "EV connected"
+			message = "Ready"
 			color = "is-primary"
 			break;
 		case 3: // Charging
@@ -43,7 +44,7 @@
 		case 254: // sleeping
 			status = "disabled"
 			charging = false
-			message = "Standby "
+			message = "Sleeping "
 			color = "is-danger"
 			break;
 		case 255: 
@@ -55,7 +56,9 @@
 	}
 </script>
 
-<div class="level-item py-0 pb-2 px-0 is-narrow is-size-6 has-text-weight-semibold notification">
-	<span class="tag mr-2 ml-0 is-capitalized {status=="active"?'is-primary':'is-danger'}">{status}</span>
-	<span class="tag mx-2 has-text-weight-semibold {color}">{message}</span>
+<div class="is-flex is-flex-wrap-wrap is-justify-content-center">
+	<div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow  {status=="active"?'is-primary':'is-danger'}">{status}</div>
+	<div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow  {color}">{message}</div>
+	<div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow  {vehicle?"is-primary":"is-danger"}">{vehicle?"Connected":"Disconnected"}</div>
+	<div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow is-info">{time}</div>
 </div>

@@ -4,9 +4,8 @@
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
-	import LevelItemTime from "../ui/LevelItemTime.svelte"
-	import LevelItemTile from "../ui/LevelItemTile.svelte"
-	import LevelItemStatus from "../ui/LevelItemStatus.svelte"
+	import StatusTile from "../ui/StatusTile.svelte"
+	import StatusItems from "../ui/StatusItems.svelte"
 
 	// @ts-ignore
 	import WebSocket from "../data/WebSocket.svelte"
@@ -76,30 +75,24 @@
 
 <WebSocket/>
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5 px-3">
-	<div class="level mb-2  mx-0 is-mobile">
-		<div class="level-left">
-			<LevelItemStatus state={$status_store.state} vehicle={$status_store.vehicle} />		
-		</div>
-		<div class="level-right ">
-			<LevelItemTime time={time}/>
-		</div>	
-		
+	<div class="mb-2 mx-0">
+		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={time} />	
 	</div>
 
-	<div class="level is-mobile">
-		<LevelItemTile title="Current" value={$status_store.amp} unit="A" />
-		<LevelItemTile title="Energy" value={($status_store.session_energy/1000).toFixed(1)} unit="kW/h" />
-		<LevelItemTile title="Temp°" value={$status_store.temp/10} unit="°C" />
-		<LevelItemTile title="Elapsed" value={elapsed} />
+	<div class="level is-mobile mx-0">
+		<StatusTile title="Current" value={$status_store.amp} unit="A" />
+		<StatusTile title="Energy" value={($status_store.session_energy/1000).toFixed(1)} unit="kW/h" />
+		<StatusTile title="Temp°" value={$status_store.temp/10} unit="°C" />
+		<StatusTile title="Elapsed" value={elapsed} />
 	</div>
 
 	{#if expand}
-	<div class="level is-mobile">
-		<LevelItemTile title="Setpoint" value={$status_store.pilot} unit="A" />
-		<LevelItemTile title="Voltage" value={$status_store.temp/10} unit="°C" />
-		<LevelItemTile title="Total" value={$status_store.total_energy.toFixed(1)} unit="kW/h" />
+	<div class="level is-mobile mx-0">
+		<StatusTile title="Setpoint" value={$status_store.pilot} unit="A" />
+		<StatusTile title="Voltage" value={$status_store.temp/10} unit="°C" />
+		<StatusTile title="Total" value={$status_store.total_energy.toFixed(1)} unit="kW/h" />
 		{#if $status_store.battery_level}
-		<LevelItemTile title="SOC" value={$status_store.battery_level} unit="%" />
+		<StatusTile title="SOC" value={$status_store.battery_level} unit="%" />
 		{/if}
 	</div>
 	{/if}

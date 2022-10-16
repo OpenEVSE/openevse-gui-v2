@@ -5,6 +5,6 @@
 	export let tooltip;
 </script>
 <div class="has-tooltip-arrow has-tooltip is-inline-block" data-tooltip={tooltip}>
-	<input id={name} type="checkbox" name={name} class="switch is-outlinedis-info" bind:checked={checked} />
+	<input id={name} type="checkbox" name={name} class="switch is-outlined is-info" bind:checked={checked} />
 	<label for={name} class="has-text-weight-bold">{label}</label>
 </div>
