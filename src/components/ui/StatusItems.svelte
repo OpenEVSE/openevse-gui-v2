@@ -72,20 +72,25 @@
 			break;
 	}
 </script>
+<style>
+	.no-pointer {
+		cursor: default
+	}
+</style>
 
 <div class="is-flex is-flex-wrap-wrap is-justify-content-center">
 	<!-- <div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow  {status=="active"?'is-primary':'is-danger'}">{status}</div> -->
-	<span class="tag is-large mb-1 mx-2 is-narrow has-tooltip-arrow {status=="active"?'is-primary':'is-danger'}" data-tooltip={status=="active"?"OpenEVSE Active":"OpenEVSE in Standby"}>
+	<span class="tag no-pointer is-large mb-1 mx-2 is-narrow has-tooltip-arrow {status=="active"?'is-primary':'is-danger'}" data-tooltip={status=="active"?"OpenEVSE Active":"OpenEVSE in Standby"}>
 		<StatusIcon icon={status=="active"?faCircleCheck:faCirclePause} color="has-text-white" />
 	</span>
 	<!-- <span class="tag mb-1 mx-1 has-text-weight-semibold is-capitalized {vehicle?"is-primary":"is-danger"}">{vehicle?"Connected":"Disconnected"}</span> -->
-	<span class="tag is-large mb-1 mx-2 is-narrow has-tooltip-arrow {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?"Vehicle Connected":"No Vehicle Connected"}>
+	<span class="tag no-pointer is-large mb-1 mx-2 is-narrow has-tooltip-arrow {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?"Vehicle Connected":"No Vehicle Connected"}>
 		<StatusIcon icon={vehicle?faCar:faCar} color="has-text-white" />
 	</span>
 	<!-- <div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow  {color}">{message}</div> -->
-	<span class="tag is-large mb-1 mx-2 is-narrow has-tooltip-arrow {color}" data-tooltip={message}>
+	<span class="tag no-pointer is-large mb-1 mx-2 is-narrow has-tooltip-arrow {color}" data-tooltip={message}>
 
 		<StatusIcon icon={icon} color={iconcolor} />
 	</span>
-	<div class="tag is-large mb-1 ml-auto mr-2 mt-1 is-size-6 is-capitalized is-narrow is-info has-tooltip-arrow" data-tooltip="OpenEVSE local time">{time}</div>
+	<div class="tag no-pointer is-large mb-1 ml-auto mr-2 mt-1 is-size-6 is-capitalized is-narrow is-info has-tooltip-arrow" data-tooltip="OpenEVSE local time">{time}</div>
 </div>
