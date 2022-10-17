@@ -15,6 +15,8 @@
 		}
 		if (host.includes("github.io")) {
 			s = null
+			// download states from http ( trick for demo in github page )
+			status_store.download()
 		}
 
 		else {
