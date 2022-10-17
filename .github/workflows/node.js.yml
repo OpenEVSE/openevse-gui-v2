@@ -32,7 +32,6 @@ jobs:
       with:
         source: "src/lib/stores-simu/"
         target: "src/lib/stores/"
-        strip_components: 1
     - run: npm run build --if-present
     - name: Deploy
       uses: s0/git-publish-subdir-action@develop
