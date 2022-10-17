@@ -26,10 +26,13 @@
 	pointer-events: none;
 	cursor: not-allowed;
 }
+.nav {
+
+}
 
 </style>
-<div class="container">
-	<nav class="navbar is-white is-spaced is-fixed-top" aria-label="main navigation">
+<div class="container px-3">
+	<nav class="navbar nav is-white is-spaced is-fixed-top" aria-label="main navigation">
 		<div class="navbar-brand">
 			<a href="/" use:link bind:this={logoid}>
 				<img src={logo} class="" alt="logo"/>
