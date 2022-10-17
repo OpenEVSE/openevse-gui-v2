@@ -69,36 +69,36 @@
 
 
 
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5 px-3">
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5 mt-0 px-3">
 	<div class="mb-2 mx-0">
 		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={time} />	
 	</div>
 
-	<div class="level is-mobile mx-0">
+	<div class="level is-mobile mx-0 is-flex-wrap-wrap" >
 		<StatusTile title="Current" value={$status_store.amp/1000} unit="A" />
-		<StatusTile title="Energy" value={($status_store.session_energy/1000).toFixed(1)} unit="kW/h" />
+		<StatusTile title="Energy" value={($status_store.session_energy/1000).toFixed(1)} unit="kWh" />
 		<StatusTile title="Temp°" value={$status_store.temp/10} unit="°C" />
 		<StatusTile title="Elapsed" value={elapsed} />
 	</div>
 
 	{#if expand}
-	<div class="level is-mobile mx-0">
+	<div class="level is-mobile mx-0 is-flex-wrap-wrap">
 		<StatusTile title="Setpoint" value={$status_store.pilot} unit="A" />
-		<StatusTile title="Voltage" value={$status_store.voltage} unit="°C" />
-		<StatusTile title="Total" value={$status_store.total_energy.toFixed(1)} unit="kW/h" />
+		<StatusTile title="Total" value={Math.round($status_store.total_energy)} unit="kWh" />
+		<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />
 		{#if $status_store.battery_level}
 		<StatusTile title="SOC" value={$status_store.battery_level} unit="%" />
 		{/if}
 	</div>
 	{/if}
 
-	<div class="container py-2">
-		<div class="columns is-flex-direction-row is-size-6 px-0 mx-0">
-			<div class="px-0"><span class="has-text-weight-bold is-size-7 is-align-content-flex-start">Current Event: </span> <span class="tag is-white has-text-danger is-capitalized">{$plan_store.current_event.state} {$plan_store.current_event.time}</span></div>
-			<div class="px-0"><span class="has-text-weight-bold is-size-7 is-align-content-flex-end">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
+	<div class="py-2">
+		<div class="columns is-size-6 px-0 mx-0 ">
+			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Current Event: </span> <span class="tag is-white has-text-danger is-capitalized">{$plan_store.current_event.state} {$plan_store.current_event.time}</span></div>
+			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
 		</div>
 	</div>
-	<div class="container arrow">
+	<div class="arrow">
 		{#if !expand}
 			<button class="button is-dark has-background-light is-inverted" tabindex="0" on:click={() => {expand=true; size="sm"}} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
 				<Fa size={size} icon={faAngleDown} />

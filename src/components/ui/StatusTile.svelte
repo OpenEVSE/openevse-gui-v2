@@ -9,7 +9,7 @@
 		margin: auto;
 	}
 </style>
-<div class="box level-item has-text-centered py-2 px-1 tiles">
+<div class="box level-item has-text-centered mb-2 py-2 px-1 tiles">
 	<div>
 		<p class="heading has-text-weight-semibold">{title}</p>
 		<p class="is-size-5 is-size-6-mobile has-text-weight-bold">{value} {unit}</p>
