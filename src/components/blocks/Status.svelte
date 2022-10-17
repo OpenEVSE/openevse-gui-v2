@@ -15,8 +15,10 @@
 
 	$: date = new Date($status_store.time)
 	$: updateDate(date)
-	$: elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 16);
-	
+	$: { 
+		if ($status_store.elapsed != undefined)
+			elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 16) 
+		}
 
 	function updateDate(m) {
 		time = 	utc2evseLocalTime(date, $config_store.time_zone)

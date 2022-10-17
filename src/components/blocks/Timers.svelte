@@ -35,7 +35,7 @@
 </style>
 <div>	
 	<div class="is-size-4 has-text-weight-bold mb-3">Schedule</div>
-		<div class="box timers">
+		<div class="timers">
 			<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
 			<div>
 
