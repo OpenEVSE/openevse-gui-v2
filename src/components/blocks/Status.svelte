@@ -44,10 +44,6 @@
 </script>
 
 <style>
-	.break{
-		word-break: break-all;
-	}
-
 	.statusbox {
 	border-radius: 6px;
 	color: black;
@@ -69,7 +65,6 @@
         bottom: 5px;
 		right: 5px;
 	}
-	
 </style>
 
 

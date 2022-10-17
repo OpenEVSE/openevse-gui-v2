@@ -10,8 +10,8 @@
 	let status = "Loading"
 
 	async function loadData() {
-		status = "Loading Status"
-		await status_store.download()
+		//status = "Loading Status"
+		//await status_store.download()
 		status = "Loading Schedule"
 		await schedule_store.download()
 		status = "Loading Schedule Plan"

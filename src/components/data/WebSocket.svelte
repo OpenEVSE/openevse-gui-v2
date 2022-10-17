@@ -4,24 +4,33 @@
 	let socket
 
 	onMount(() => {
+		connect2socket(socket)
+	})
+
+	function connect2socket(s) {
 		var host = window.location.host
 		// Vite Proxy crash with openevse web socket so connecting directly in dev mode
 		if (import.meta.env.DEV) { 
 			host = import.meta.env.VITE_OPENEVSEHOST
 		}
 		if (host.includes("github.io")) {
-			socket = null
+			s = null
 		}
 
 		else {
-			socket = new WebSocket("ws://" + host + "/ws")
-
-			socket.addEventListener("message", function (event) {
+			s = new WebSocket("ws://" + host + "/ws")
+			s.addEventListener("message", function (event) {
 				const jsondata = JSON.parse(event.data.toString())
 				let store = Object.assign({}, $status_store);
 				store = {...store, ...jsondata}
 				status_store.update(() => store)
-			});
+			})
+			s.addEventListener("error", function (event) {
+				// TODO
+			})
+			s.addEventListener("close", function (event) {
+				// TODO
+			})
 		}
-	})
+	}
 </script>

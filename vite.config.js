@@ -7,11 +7,40 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   plugins: [
     svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip"}),
-    VitePWA({ registerType: 'autoUpdate',
+    VitePWA({ 
+      registerType: 'autoUpdate',
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,gz}']
+      },
+      useCredentials: 'true',
       devOptions: {
         enabled: true
-      } 
-    })
+      },
+      includeAssets: ['favicon.ico', 'masked-icon.png'],
+      manifest: {
+        name: 'OpenEVSE Wifi UI',
+        short_name: 'OpenEVSE',
+        description: 'Web UI for OpenEVSE WiFi module',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          }]
+        }
+      })
   ],
   css: {
     preprocessorOptions: {
