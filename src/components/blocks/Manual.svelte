@@ -5,6 +5,7 @@
 	import ButtonManual from "../ui/ButtonManual.svelte"
 	import {config_store} from "../../lib/stores/config.js"
 	import {claim_store} from "../../lib/stores/claim.js"
+	import {override_store} from "../../lib/stores/override.js"
 	import {states_store} from "../../lib/stores/states.js"
 	import {settings_store} from "../../lib/stores/settings.js"
 	import {onMount} from 'svelte'

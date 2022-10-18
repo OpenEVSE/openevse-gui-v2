@@ -4,4 +4,4 @@
 	export let color
 </script>
 
-<Fa class="is-size-5" icon={icon} />
+<Fa class="is-size-5 {color}" icon={icon} />

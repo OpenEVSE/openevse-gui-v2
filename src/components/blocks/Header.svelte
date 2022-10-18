@@ -47,18 +47,18 @@
 		<div id="evsenav" class="navbar-menu {isBurgerActive?'is-active':''}">
 
 	
-			<div class="navbar-start is-family-code ml-5">
+			<div class="navbar-start ml-5 is-uppercase">
 				
-				<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {($location=="/")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/" on:click={toggleMenu} use:link>Main</a>
+				<a class="navbar-item is-size-6 is-hoverable {($location=="/")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/" on:click={toggleMenu} use:link>Main</a>
 				<div class="navbar-item has-dropdown {hideDropDown?"is-hoverable":""}">
-					<span class="navbar-item is-size-6 has-text-weight-semibold noevent {$location=="/"?"has-text-grey-dark ":isBurgerActive?"has-text-grey-dark":"has-text-info"}">Configuration</span>
+					<span class="navbar-item is-size-6  noevent {$location=="/"?"has-text-grey-dark ":isBurgerActive?"has-text-grey-dark":"has-text-info"}">Configuration</span>
 					<div class="navbar-dropdown is-boxed" >
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Hardware"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Hardware" on:click={toggleMenu} use:link >Hardware</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Settings"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Settings" on:click={toggleMenu} use:link>Settings</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Charge"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Charge" on:click={toggleMenu} use:link>Charge</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/MQTT"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/MQTT" on:click={toggleMenu} use:link>MQTT</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Services"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Services" on:click={toggleMenu} use:link>Services</a>
-						<a class="navbar-item is-size-6 has-text-weight-semibold is-hoverable {$location=="/Vehicle"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Vehicle" on:click={toggleMenu} use:link>Vehicle</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/Hardware"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Hardware" on:click={toggleMenu} use:link >Hardware</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/Settings"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Settings" on:click={toggleMenu} use:link>Settings</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/Charge"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Charge" on:click={toggleMenu} use:link>Charge</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/MQTT"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/MQTT" on:click={toggleMenu} use:link>MQTT</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/Services"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Services" on:click={toggleMenu} use:link>Services</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/Vehicle"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/Vehicle" on:click={toggleMenu} use:link>Vehicle</a>
 					</div>
 				</div>
 				

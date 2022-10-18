@@ -28,10 +28,6 @@
 		min-width: 300px;
 		margin: auto;
 	}
-	.loading {
-		text-align: center;
-		margin: auto;
-	}
 </style>
 <div>	
 	<div class="is-size-4 has-text-weight-bold mb-3">Schedule</div>

@@ -2,16 +2,11 @@ import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import viteCompression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
-import Icons from 'unplugin-icons/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip"}),
-    Icons({
-      // experimental
-      autoInstall: true,
-    }),
     VitePWA({ 
       registerType: 'autoUpdate',
       workbox: {

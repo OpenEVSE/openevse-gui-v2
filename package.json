@@ -28,7 +28,6 @@
     "bulma-switch": "^2.0.4",
     "svelte-fa": "^3.0.3",
     "svelte-local-storage-store": "^0.3.1",
-    "svelte-spa-router": "^3.3.0",
-    "unplugin-icons": "^0.14.12"
+    "svelte-spa-router": "^3.3.0"
   }
 }
