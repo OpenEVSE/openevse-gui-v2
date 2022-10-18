@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -25,10 +25,10 @@ jobs:
       uses: actions/setup-node@main
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        #cache: 'npm'
     - run: npm ci
     - name: Copy
-      uses: canastro/copy-file-action@master
+      uses: canastro/copy-action@master
       with:
         source: "src/lib/stores-simu/*"
         target: "src/lib/stores/"
