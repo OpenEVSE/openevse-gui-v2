@@ -26,6 +26,7 @@ jobs:
     - name: rename fake stores for github page
       run: |
         mv src/lib/stores-simu src/lib/stores
+        echo | ls -ls
 
     - name: Install and Build
       run: |
