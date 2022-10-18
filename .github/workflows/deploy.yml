@@ -21,7 +21,7 @@ jobs:
 
     - name: Copy
       run: |
-       cp -Rf /src/lib/stores-simu/ src/lib/stores/simu
+       cp -Rf src/lib/stores-simu/ src/lib/stores/simu
 
     - name: Install and Build
       run: |
