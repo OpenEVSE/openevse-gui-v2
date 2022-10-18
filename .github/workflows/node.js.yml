@@ -28,7 +28,7 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - name: Copy
-      uses: canastro/copy-file-action@main
+      uses: canastro/copy-file-action@master
       with:
         source: "src/lib/stores-simu/*"
         target: "src/lib/stores/"
