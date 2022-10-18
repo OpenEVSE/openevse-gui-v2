@@ -19,14 +19,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: delete stores for github page
+    - name: move stores for github page
       run: |
-        rm -Rf src/lib/stores/*
-    - name: copy file
-      uses: canastro/copy-file-action@master
-      with:
-        source: "src/lib/stores-simu/*"
-        target: "src/lib/stores"
+        mv src/lib/stores src/lib/_stores.bak
+
+    - name: rename fake stores for github page
+      run: |
+        mv src/lib/stores-simu src/lib/stores
 
     - name: Install and Build
       run: |
