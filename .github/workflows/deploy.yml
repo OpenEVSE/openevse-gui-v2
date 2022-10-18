@@ -19,14 +19,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: move stores for github page
+    - name: remove stores for github page
       run: |
-        mv src/lib/stores src/lib/_stores.bak
+        rm src/lib/stores 
 
-    - name: rename fake stores for github page
+    - name: moving fake stores for github page
       run: |
         mv src/lib/stores-simu src/lib/stores
-        echo | ls -ls src/lib/stores/
 
     - name: Install and Build
       run: |
