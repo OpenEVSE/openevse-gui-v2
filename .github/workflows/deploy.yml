@@ -25,7 +25,7 @@ jobs:
     - name: copy file
       uses: canastro/copy-file-action@master
       with:
-        source: "src/lib/stores-simu"
+        source: "src/lib/stores-simu/*"
         target: "src/lib/stores"
 
     - name: Install and Build
