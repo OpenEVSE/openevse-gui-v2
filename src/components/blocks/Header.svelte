@@ -26,9 +26,6 @@
 	pointer-events: none;
 	cursor: not-allowed;
 }
-.nav {
-
-}
 
 </style>
 <div class="container pb-1">
