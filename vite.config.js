@@ -16,7 +16,7 @@ export default defineConfig({
       devOptions: {
         enabled: true
       },
-      includeAssets: ['favicon.ico', 'masked-icon.png'],
+      includeAssets: ['favicon.ico', 'masked-icon.png', 'pwa-192x192.png', 'pwa-512x512.png', 'pwa-maskable.png'],
       manifest: {
         name: 'OpenEVSE Wifi UI',
         short_name: 'OpenEVSE',
