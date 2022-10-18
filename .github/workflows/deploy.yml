@@ -19,12 +19,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Remove stores for github page
+    - name: copy fake stores for github page
       run: |
         rm -Rf src/lib/stores
-    - name: Copy stores-simu to stores for github page
-      run: |
-        cp -Rf src/lib/stores-simu src/lib/stores
+        cp -R src/lib/stores-simu src/lib/stores
 
     - name: Install and Build
       run: |
