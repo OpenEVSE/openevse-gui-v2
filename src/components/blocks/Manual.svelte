@@ -3,6 +3,7 @@
 	import Switch from "../ui/SwitchForm.svelte"
 	import InputHalf from "../ui/InputHalfForm.svelte"
 	import ButtonManual from "../ui/ButtonManual.svelte"
+	import Checkbox from "../ui/Checkbox.svelte"
 	import {config_store} from "../../lib/stores/config.js"
 	import {claim_store} from "../../lib/stores/claim.js"
 	import {override_store} from "../../lib/stores/override.js"
@@ -13,21 +14,6 @@
 	import {onMount} from 'svelte'
 
 	let previous_override
-
-	let man_data = {
-		shaper: {
-			state: true,
-		},
-		divert: {
-			state: false,
-		},
-		time_lmt: null,
-		charge_lmt: null,
-	}
-	let conf_data = {
-		current_shaper_enabled: true,
-		divert_enabled: true
-	}
 
 	async function setMaxCurrent(val) {
 		
@@ -130,23 +116,11 @@
 		}
 	}
 
-	function setTimeLimit(t) {
-		// Claim a time limit
-		// TO DO
 
-
-	}
-
-	function setChargeLimit(c) {
-		// Claim a charge limit
-		// TO DO 
-
-	}
-
-	
 	async function stateButtonWatcher() {
 		if ($status_store.manual_override != undefined && $uistates_store.data_loaded == true ) {
 			if ($status_store.manual_override != previous_override)
+				// get latest claim
 				await claim_store.getClaim()
 				$uistates_store.mode = ($claim_store.state == undefined?0:($claim_store.state=="active"?1:2))
 				previous_override = $status_store.manual_override
@@ -159,9 +133,10 @@
 		getMode()
 	})
 
-
+// ## Triggers ##
 $: $uistates_store.max_current = $claim_store.max_current != undefined ? $claim_store.max_current:$config_store.max_current_soft
-$:  $status_store.manual_override,stateButtonWatcher() 
+// 
+$: $status_store.manual_override,stateButtonWatcher() 
 	
 
 </script>
@@ -175,20 +150,21 @@ $:  $status_store.manual_override,stateButtonWatcher()
 		<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} bind:checked={$uisettings_store.auto_release} />
 		{/if}
 	{/key}
+	<Checkbox bind:checked={$uisettings_store.auto_release} />
 	<div>
-		<Slider  id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
+		<Slider  label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
 			<div class="columns is-mobile">
-			<div class="column is-half {!conf_data.current_shaper_enabled?"is-hidden":""}">
-				<Switch name="man-swShaper" label="Current Shaper" bind:checked={man_data.shaper.state} tooltip={man_data.shaper.state?"Disable Current Shaper":"Enable Current Shaper"} />
+			<div class="column is-half {$config_store.current_shaper_enabled == false?"is-hidden":""}">
+				<Switch name="man-swShaper" label="Current Shaper" checked={$status_store.shaper == true ?true:false} tooltip={$status_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"} />
 			</div>
-			<div class="column is-half {!conf_data.divert_enabled?"is-hidden":""}">
-				<Switch name="man-swDivert" label="Eco/Divert" bind:checked={man_data.divert.state} tooltip={man_data.divert.state?"Disable Eco / Solar Divert mode":"Enable Eco / Solar Divert mode"} />
+			<div class="column is-half {$config_store.divert_enabled == false?"is-hidden":""}">
+				<Switch name="man-swDivert" label="Eco/Divert" checked={$status_store.divertmode == 2?true:false} tooltip={$status_store.divertmode == 2?"Disable Eco / Solar Divert mode":"Enable Eco / Solar Divert mode"} />
 			</div>
 		</div>
 
 		<div class="columns is-mobile">
-				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="min / 15" disabled={$uistates_store.mode==2?true:false} />
-				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number" placeholder="in kWh" disabled={$uistates_store.mode==2?true:false}/>			
+				<InputHalf label="Time Limit" value={$claim_store.time_lmt} type="number" placeholder="min / 15" disabled={$uistates_store.mode==2?true:false} />
+				<InputHalf label="Charge Limit" value={$claim_store.charge_lmt} type="number" placeholder="in kWh" disabled={$uistates_store.mode==2?true:false}/>			
 		</div>
 	</div>
 </div>

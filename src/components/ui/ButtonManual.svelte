@@ -25,16 +25,10 @@
 			on:click={() => { setmode(0,checked)}}>{mode0}
 	</button>
 	{:else}
-	<button class="button manual-charge is-size-6 mt-3 has-tooltip-arrow  {mode == 0 || mode == 1?"":"is-outlined"} is-primary" data-tooltip="Enable Charge"
+	<button class="button manual-charge is-size-6 mt-3 has-tooltip-arrow {mode == 0 || mode == 1?"":"is-outlined"} is-primary" data-tooltip="Enable Charge"
 			on:click={() => { setmode(0,checked)}}>{mode1}
 	</button>
 	{/if}
 	<button class="button manual-charge is-size-6 mt-3 has-tooltip-arrow  {mode == 2?"":"is-outlined"} is-danger" data-tooltip="Disable Charge"
 			on:click={() => { setmode(2,checked)}}>{mode2}</button>
-	<div class="mt-2">
-		<label class="checkradio has-text-weight-semibold">
-			<input type="checkbox" class="has-tooltip-arrow has-tooltip-right" data-tooltip="Release manual override when vehicle is disconnected" bind:checked={checked}>
-			Auto-release
-		</label>
-	</div>
 </div>

@@ -1,17 +1,15 @@
 <script>
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import { faAngleDown, faAngleUp, faAngleRight } from '@fortawesome/free-solid-svg-icons/index.js'
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
 	import StatusTile from "../ui/StatusTile.svelte"
 	import StatusItems from "../ui/StatusItems.svelte"
+	import ExpandArrow from "../ui/ExpandArrow.svelte"
 	
 	let time
 	let elapsed
 	let date
 	let expand = false
-	let size = "sm"
 
 	$: date = new Date($status_store.time)
 	$: updateDate(date)
@@ -60,11 +58,6 @@
 	.statusbox.active {
 		box-shadow: 0 0.5em 1em -0.125em rgba(0,209,178,0.3), 0 0px 0 1px rgba(0,0,0, 0.02);
 	}
-	.arrow {
-		position: absolute;
-        bottom: 5px;
-		right: 5px;
-	}
 </style>
 
 
@@ -98,16 +91,6 @@
 			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
 		</div>
 	</div>
-	<div class="arrow">
-		{#if !expand}
-			<button class="button is-dark has-background-light is-inverted" tabindex="0" on:click={() => {expand=true; size="sm"}} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
-				<Fa size={size} icon={faAngleDown} />
-			</button>
-		{:else}
-			<button class="button is-dark has-background-light is-inverted" tabindex="0" on:click={() => {expand=false; size="sm"}} on:mouseenter={() => size = "lg"} on:mouseleave={() => size = "sm"}>
-				<Fa size={size} icon={faAngleUp} />
-			</button>
-		{/if}
-	</div>
+	<ExpandArrow bind:expand={expand} />
 
 </div>

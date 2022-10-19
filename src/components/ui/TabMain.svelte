@@ -6,6 +6,10 @@
 	.tab:hover {
 		background-color: hsl(0, 0%, 96%);
 	}
+	.tab:focus {
+			outline: none;
+			background-color: hsl(0, 0%, 96%);
+	}
 </style>
 <div class="tabs is-uppercase">
 	<ul>
