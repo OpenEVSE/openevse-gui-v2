@@ -21,7 +21,7 @@ jobs:
 
     - name: remove stores for github page
       run: |
-        rm -Rf src/lib/stores/* 
+        rm -Rf src/lib/stores
 
     - name: moving fake stores for github page
       run: |
