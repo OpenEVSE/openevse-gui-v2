@@ -6,9 +6,13 @@
 	import {config_store} from "../../lib/stores/config.js"
 	import {claim_store} from "../../lib/stores/claim.js"
 	import {override_store} from "../../lib/stores/override.js"
-	import {states_store} from "../../lib/stores/states.js"
-	import {settings_store} from "../../lib/stores/settings.js"
+	import {status_store} from "../../lib/stores/status.js"
+	import {schedule_store} from "../../lib/stores/schedule.js"
+	import {uistates_store} from "../../lib/stores/uistates.js"
+	import {uisettings_store} from "../../lib/stores/uisettings.js"
 	import {onMount} from 'svelte'
+
+	let previous_override
 
 	let man_data = {
 		shaper: {
@@ -40,15 +44,15 @@
 				res = await claim_store.releaseClaim()
 			}
 			else res = await claim_store.setClaim($claim_store)
-			$states_store.max_current = val
+			$uistates_store.max_current = val
 			return res
 		}
 		else {
 			// set claim
 			$claim_store.max_current = val
-			$claim_store.auto_release = $settings_store.auto_release
+			$claim_store.auto_release = $uisettings_store.auto_release
 			let res = await claim_store.setClaim($claim_store)
-			$states_store.max_current = val
+			$uistates_store.max_current = val
 			return res
 		}
 	}
@@ -64,29 +68,30 @@
 		if ($claim_store.state != undefined) {
 			switch ($claim_store.state) {
 				case "active":
-					$states_store.mode = 1 // On
+					$uistates_store.mode = 1 // On
 					break
 				case "disabled":
-					$states_store.mode = 2 // Off
+					$uistates_store.mode = 2 // Off
 					break;
 				default: 
 					break
 			}
 			if ($claim_store.auto_release != undefined) {
-				$settings_store.auto_release = $claim_store.auto_release
+				$uisettings_store.auto_release = $claim_store.auto_release
 			}
 		}
 		else {
-			$states_store.mode = 0 // Auto
+			$uistates_store.mode = 0 // Auto
 		}
 	}
 
 	function setMode(m,a) {
-		$states_store.mode = m
-		$settings_store.auto_release = a
+		$uistates_store.mode = m
+		$uisettings_store.auto_release = a
 		let data = {
 				auto_release: a
 			}
+
 		// keep max_current claim	
 		if ($claim_store.max_current != undefined) {
 				data.max_current = $claim_store.max_current
@@ -102,7 +107,7 @@
 				break
 			default: break
 		}
-		
+
 		if(data.state != undefined) {
 			// Mode Manual setting override
 			if ($claim_store.time_limit != undefined) {
@@ -138,22 +143,40 @@
 
 	}
 
+	
+	async function stateButtonWatcher() {
+		if ($status_store.manual_override != undefined && $uistates_store.data_loaded == true ) {
+			if ($status_store.manual_override != previous_override)
+				await claim_store.getClaim()
+				$uistates_store.mode = ($claim_store.state == undefined?0:($claim_store.state=="active"?1:2))
+				previous_override = $status_store.manual_override
+		}
+		
+	}
+
 	onMount( () => {
-		$states_store.max_current = getMaxCurrent()
+		$uistates_store.max_current = getMaxCurrent()
 		getMode()
 	})
 
-$: $states_store.max_current = $claim_store.max_current?$claim_store.max_current:$config_store.max_current_soft
 
+$: $uistates_store.max_current = $claim_store.max_current != undefined ? $claim_store.max_current:$config_store.max_current_soft
+$:  $status_store.manual_override,stateButtonWatcher() 
+	
 
 </script>
 
-
 <div class="is-unselectable">	
 	<div class="is-size-4 has-text-weight-bold ">Manual</div>
-	<ButtonManual mode={$states_store.mode} setmode={setMode} bind:checked={$settings_store.auto_release} />
+	{#key $uistates_store.mode}
+		{#if $schedule_store.length}
+		<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} bind:checked={$uisettings_store.auto_release} />
+		{:else}
+		<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} bind:checked={$uisettings_store.auto_release} />
+		{/if}
+	{/key}
 	<div>
-		<Slider  id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 value={$states_store.max_current} onchange={(value) => setMaxCurrent(value)} />
+		<Slider  id="man_max_cur" label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
 			<div class="columns is-mobile">
 			<div class="column is-half {!conf_data.current_shaper_enabled?"is-hidden":""}">
 				<Switch name="man-swShaper" label="Current Shaper" bind:checked={man_data.shaper.state} tooltip={man_data.shaper.state?"Disable Current Shaper":"Enable Current Shaper"} />
@@ -164,8 +187,8 @@ $: $states_store.max_current = $claim_store.max_current?$claim_store.max_current
 		</div>
 
 		<div class="columns is-mobile">
-				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="min / 15" disabled={$states_store.mode==2?true:false} />
-				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number" placeholder="in kWh" disabled={$states_store.mode==2?true:false}/>			
+				<InputHalf label="Time Limit" value={man_data.time_lmt} type="number" placeholder="min / 15" disabled={$uistates_store.mode==2?true:false} />
+				<InputHalf label="Charge Limit" value={man_data.charge_lmt} type="number" placeholder="in kWh" disabled={$uistates_store.mode==2?true:false}/>			
 		</div>
 	</div>
 </div>

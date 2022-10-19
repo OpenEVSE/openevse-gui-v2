@@ -19,7 +19,6 @@ function createClaimStore() {
         let res = await httpAPI("POST", "/claims/" + EvseClient_OpenEVSE_Manual, JSON.stringify(data))
 		newclaim = {...claim, ...data}
 		P.update(() => newclaim)
-        getClaim()
         return P
     }
 
@@ -28,7 +27,6 @@ function createClaimStore() {
         let res = await httpAPI("DELETE", "/claims/" + EvseClient_OpenEVSE_Manual)
         let store = {}
         P.update(() => store)
-        getClaim()
         return P
     }
 
