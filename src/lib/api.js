@@ -1,24 +1,3 @@
-const EvseClient_OpenEVSE_Manual = 65537 // Openevse Manual Client ID 
-
-
-
-export const override = {
-	getOverride: async () => {
-		return await httpAPI("GET", "/override")
-	},
-	setOverride: async (data) => {
-		return await httpAPI("POST", "/override",JSON.stringify(data))
-	},
-	clearOverride: async (id) => {
-		return await httpAPI("DELETE", "/override",id)
-	},
-	toggleOverride: async () => {
-		return await httpAPI("TOGGLE", "/override")
-	}
-}
-
-
-
 export async function httpAPI(method,url,body=null) {
 	let data = {
 		method: method,
@@ -36,3 +15,4 @@ export async function httpAPI(method,url,body=null) {
 	}
 	throw Error(response.statusText)
 }
+
