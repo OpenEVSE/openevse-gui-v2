@@ -7,6 +7,9 @@
 [VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
 ## develop
+
+set VITE_OPENEVSEHOST in .env ( default to openevse.local)
+
 npm run dev
 
 ## build

@@ -24,6 +24,7 @@
 	}
 
 	function utc2evseLocalTime(d,s) {
+
 		let lt = d.toLocaleString(navigator.language, { 
 			timeZone: getTZ(s),
 			year: '2-digit',
@@ -34,9 +35,11 @@
 			})
 		return lt
 	}
-	function getTZ(s) { 
-    	let tz = s.split('|')[0]
-		return tz
+	function getTZ(s) {
+		if(s) 
+    		return s.split('|')[0]
+		else
+			return "UTC"
 	}
 
 	
@@ -68,7 +71,7 @@
 		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={time} bp={$uistates_store.breakpoint} />	
 	</div>
 
-	<div class="mx-0 is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center">
+	<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center">
 		<StatusTile title="Elapsed" value={elapsed} />
 		<StatusTile title="Delivered" value={($status_store.session_energy/1000).toFixed(1)} unit="kWh" />
 		<StatusTile title="Current" value={$status_store.amp/1000} unit="A" />

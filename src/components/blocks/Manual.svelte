@@ -71,11 +71,10 @@
 		}
 	}
 
-	function setMode(m,a) {
+	function setMode(m) {
 		$uistates_store.mode = m
-		$uisettings_store.auto_release = a
 		let data = {
-				auto_release: a
+				auto_release: $uisettings_store.auto_release
 			}
 
 		// keep max_current claim	
@@ -145,26 +144,32 @@ $: $status_store.manual_override,stateButtonWatcher()
 	<div class="is-size-4 has-text-weight-bold ">Manual</div>
 	{#key $uistates_store.mode}
 		{#if $schedule_store.length}
-		<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} bind:checked={$uisettings_store.auto_release} />
+		<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
 		{:else}
-		<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} bind:checked={$uisettings_store.auto_release} />
+		<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} />
 		{/if}
 	{/key}
-	<Checkbox bind:checked={$uisettings_store.auto_release} />
+	<Switch name="swAutoRelease" label="Auto Release" bind:checked={$uisettings_store.auto_release} 
+			tooltip="Settings will be reset to default after this charge session" />
 	<div>
-		<Slider  label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
-			<div class="columns is-mobile">
-			<div class="column is-half {$config_store.current_shaper_enabled == false?"is-hidden":""}">
-				<Switch name="man-swShaper" label="Current Shaper" checked={$status_store.shaper == true ?true:false} tooltip={$status_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"} />
-			</div>
-			<div class="column is-half {$config_store.divert_enabled == false?"is-hidden":""}">
-				<Switch name="man-swDivert" label="Eco/Divert" checked={$status_store.divertmode == 2?true:false} tooltip={$status_store.divertmode == 2?"Disable Eco / Solar Divert mode":"Enable Eco / Solar Divert mode"} />
-			</div>
+		<Slider  label="Max Current" tooltip="Override max current" unit="A" min=6 max={$config_store.max_current_soft} step=1 
+		value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
+		<div class="columns is-mobile">
+		<div class="column is-half {$config_store.current_shaper_enabled == false?"is-hidden":""}">
+			<Switch name="man-swShaper" label="Current Shaper" checked={$status_store.shaper == true ?true:false} 
+			tooltip={$status_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"} />
+		</div>
+		<div class="column is-half {$config_store.divert_enabled == false?"is-hidden":""}">
+			<Switch name="man-swDivert" label="Eco/Divert" checked={$status_store.divertmode == 2?true:false} 
+			tooltip={$status_store.divertmode == 2?"Disable Eco / Solar Divert mode":"Enable Eco / Solar Divert mode"} />
+		</div>
 		</div>
 
 		<div class="columns is-mobile">
-				<InputHalf label="Time Limit" value={$claim_store.time_lmt} type="number" placeholder="min / 15" disabled={$uistates_store.mode==2?true:false} />
-				<InputHalf label="Charge Limit" value={$claim_store.charge_lmt} type="number" placeholder="in kWh" disabled={$uistates_store.mode==2?true:false}/>			
+				<InputHalf label="Time Limit" value={$claim_store.time_lmt} type="number" placeholder="min / 15" 
+				disabled={$uistates_store.mode==2?true:false} />
+				<InputHalf label="Charge Limit" value={$claim_store.charge_lmt} type="number" placeholder="in kWh" 
+				disabled={$uistates_store.mode==2?true:false}/>			
 		</div>
 	</div>
 </div>
