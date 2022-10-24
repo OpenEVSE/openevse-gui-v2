@@ -73,8 +73,8 @@
 
 	<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center">
 		<StatusTile title="Elapsed" value={elapsed} />
-		<StatusTile title="Delivered" value={($status_store.session_energy/1000).toFixed(1)} unit="kWh" />
-		<StatusTile title="Current" value={$status_store.amp/1000} unit="A" />
+		<StatusTile title="Delivered" value={$status_store.session_energy/1000} precision={1} unit="kWh" />
+		<StatusTile title="Current" value={$status_store.amp/1000} precision={1} unit="A" />
 		{#if $uistates_store.breakpoint != "mobile"}
 		<!-- // Desktop & Tablet only -->
 		<StatusTile title="Power" value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
@@ -98,13 +98,13 @@
 		{#if $status_store.shaper}
 		<StatusTile title="Available" value={$status_store.shaper_chg_cur} unit="A" />
 		{/if}
-		<StatusTile title="Total" value={Math.round($status_store.total_energy)} unit="kWh" />
+		<StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
 		<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	
 		{#if $status_store.battery_level}
 		<StatusTile title="EV SOC" value={$status_store.battery_level} unit="%" />
 		<StatusTile title="EV Range" value={$status_store.battery_range} unit="km" />
 		{/if}
-		<StatusTile title="Internal T°" value={$status_store.temp/10} unit="°C" />
+		<StatusTile title="Internal T°" value={$status_store.temp/10} precision={1} unit="°C" />
 	</div>
 	{/if}
 

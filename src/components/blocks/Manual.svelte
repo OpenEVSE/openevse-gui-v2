@@ -13,8 +13,6 @@
 	import {uisettings_store} from "../../lib/stores/uisettings.js"
 	import {onMount} from 'svelte'
 
-	let previous_override
-
 	async function setMaxCurrent(val) {
 		
 		if (val == $config_store.max_current_soft) {
@@ -118,24 +116,30 @@
 
 	async function stateButtonWatcher() {
 		if ($status_store.manual_override != undefined && $uistates_store.data_loaded == true ) {
-			if ($status_store.manual_override != previous_override)
+			if ($status_store.manual_override != $uistates_store.manual_override && $uistates_store.manual_override != undefined) {
 				// get latest claim
 				await claim_store.getClaim()
 				$uistates_store.mode = ($claim_store.state == undefined?0:($claim_store.state=="active"?1:2))
-				previous_override = $status_store.manual_override
+				$uistates_store.manual_override = $status_store.manual_override
+			}
 		}
 		
 	}
 
-	onMount( () => {
+	function set_uistates_max_current() {
 		$uistates_store.max_current = getMaxCurrent()
+	}
+
+	onMount( () => {
+		$uistates_store.manual_override = $status_store.manual_override
+		set_uistates_max_current() 
 		getMode()
 	})
 
 // ## Triggers ##
-$: $uistates_store.max_current = $claim_store.max_current != undefined ? $claim_store.max_current:$config_store.max_current_soft
+$: $claim_store.max_current, set_uistates_max_current()
 // 
-$: $status_store.manual_override,stateButtonWatcher() 
+$: $status_store.manual_override, stateButtonWatcher() 
 	
 
 </script>

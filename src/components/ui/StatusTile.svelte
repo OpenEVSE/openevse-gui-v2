@@ -2,6 +2,13 @@
 	export let title
 	export let value
 	export let unit = ""
+	export let precision = 0
+
+	function round(value, precision) {
+		var multiplier = Math.pow(10, precision || 0);
+		return Math.round(value * multiplier) / multiplier;
+	}
+
 </script>
 <style>
 		.tiles {
@@ -13,6 +20,6 @@
 <div class="box has-text-centered mx-2 mb-2 px-1 py-2 tiles">
 	<div>
 		<p class="heading has-text-weight-semibold">{title}</p>
-		<p class="is-size-5 is-size-6-mobile has-text-weight-bold">{value} {unit}</p>
+		<p class="is-size-5 is-size-6-mobile has-text-weight-bold">{typeof(value) == "number"?round(value,precision):value} {unit}</p>
 	</div>
 </div>

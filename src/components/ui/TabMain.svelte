@@ -11,7 +11,7 @@
 			background-color: hsl(0, 0%, 96%);
 	}
 </style>
-<div class="tabs is-uppercase">
+<div class="tabs is-uppercase is-size-6 is-size-7-mobile">
 	<ul>
 	  <li use:active={{path: '/', className: 'is-active has-text-info'}}>
 		<a class="tab" href="/" use:link>
