@@ -161,10 +161,10 @@ $: $status_store.manual_override, stateButtonWatcher()
 		<div class="columns is-mobile">
 		<div class="column is-half {$config_store.current_shaper_enabled == false?"is-hidden":""}">
 			<Switch name="man-swShaper" label="Current Shaper" checked={$status_store.shaper == true ?true:false} 
-			tooltip={$status_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"} />
+			tooltip={$status_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"} onchange={(value) => setShaper(value)}/>
 		</div>
 		<div class="column is-half {$config_store.divert_enabled == false?"is-hidden":""}">
-			<Switch name="man-swDivert" label="Eco/Divert" checked={$status_store.divertmode == 2?true:false} 
+			<Switch name="man-swDivert" label="Eco (Divert)" checked={$status_store.divertmode == 2?true:false} 
 			tooltip={$status_store.divertmode == 2?"Disable Eco / Solar Divert mode":"Enable Eco / Solar Divert mode"} />
 		</div>
 		</div>

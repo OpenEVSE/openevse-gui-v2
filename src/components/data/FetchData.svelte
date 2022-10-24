@@ -20,7 +20,7 @@
 		await claim_store.getClaim()
 		// status = "Get Override"
 		// await override_store.getOverride()
-		$uistates_store.manual_override = $status_store.manual_override
+		//$uistates_store.manual_override = $status_store.manual_override
 		status = "Ok"
 		$uistates_store.data_loaded = true;
 	}
