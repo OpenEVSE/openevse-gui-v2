@@ -12,8 +12,8 @@
 		hover = !hover
 	}
 </script>
-<div class="has-tooltip-arrow has-tooltip is-inline-block" data-tooltip={tooltip} on:mouseenter={togglehover} on:mouseleave={togglehover}>
+<div class="has-tooltip-arrow has-tooltip-right is-inline-block" data-tooltip={tooltip} on:mouseenter={togglehover} on:mouseleave={togglehover}>
 	<input id={name} type="checkbox" name={name} class="switch is-info {focus||hover == true?'':'is-outlined'}" 
-	bind:checked={checked} on:focus={togglefocus} on:blur={togglefocus}   />
+	bind:checked={checked} on:focus={togglefocus} on:blur={togglefocus} />
 	<label for={name} class="has-text-weight-bold">{label}</label>
 </div>

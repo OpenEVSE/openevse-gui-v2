@@ -4,6 +4,7 @@ const model = {
 		data_loaded: false,
 		max_current: undefined,
 		manual_override: undefined,
+		shaper: undefined,
 		mode: undefined, // 0:Auto 1:On 2:Off
 		autorelease: true,
 		window_width: window.innerWidth,

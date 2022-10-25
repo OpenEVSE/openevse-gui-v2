@@ -82,11 +82,21 @@ export default defineConfig(({ command, mode }) => {
               rewrite: (path) => path.replace(/^\/claims/, '')
             },
             '/override': {
-              target: 'http' + env.VITE_OPENEVSEHOST + '/override',
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/override',
               changeOrigin: true,
               rewrite: (path) => path.replace(/^\/override/, '')
+            },
+            '/shaper': {
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/shaper',
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/shaper/, '')
+            },
+            '/divertmode': {
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/divertmode',
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/divertmode/, '')
             }
-        },
+        }
     }
   }
 

@@ -12,6 +12,7 @@
 	import {uistates_store} from "../../lib/stores/uistates.js"
 	import {uisettings_store} from "../../lib/stores/uisettings.js"
 	import {onMount} from 'svelte'
+	import {httpAPI} from '../../lib/api.js'
 
 	async function setMaxCurrent(val) {
 		
@@ -113,6 +114,15 @@
 		}
 	}
 
+	async function setShaper(state) {
+		state = state == true ? "1" : "0"
+		console.log("set shaper: " + state)
+		let param = "shaper="+state
+		if (state != $status_store.shaper && $status_store.shaper != undefined) {
+			
+			let res = await httpAPI("POST","/shaper", param, "text")
+		}
+	}
 
 	async function stateButtonWatcher() {
 		if ($status_store.manual_override != undefined && $uistates_store.data_loaded == true ) {
@@ -129,6 +139,11 @@
 	function set_uistates_max_current() {
 		$uistates_store.max_current = getMaxCurrent()
 	}
+	function set_uistates_shaper(val) {
+		val = val == 1?true:false
+		if ($uistates_store.shaper != val)
+			$uistates_store.shaper = val
+	}
 
 	onMount( () => {
 		$uistates_store.manual_override = $status_store.manual_override
@@ -140,6 +155,8 @@
 $: $claim_store.max_current, set_uistates_max_current()
 // 
 $: $status_store.manual_override, stateButtonWatcher() 
+$: set_uistates_shaper($status_store.shaper)
+$: setShaper($uistates_store.shaper)
 	
 
 </script>
@@ -160,8 +177,8 @@ $: $status_store.manual_override, stateButtonWatcher()
 		value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
 		<div class="columns is-mobile">
 		<div class="column is-half {$config_store.current_shaper_enabled == false?"is-hidden":""}">
-			<Switch name="man-swShaper" label="Current Shaper" checked={$status_store.shaper == true ?true:false} 
-			tooltip={$status_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"} onchange={(value) => setShaper(value)}/>
+			<Switch name="man-swShaper" label="Current Shaper" bind:checked={$uistates_store.shaper} 
+			tooltip={$uistates_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"}/>
 		</div>
 		<div class="column is-half {$config_store.divert_enabled == false?"is-hidden":""}">
 			<Switch name="man-swDivert" label="Eco (Divert)" checked={$status_store.divertmode == 2?true:false} 
