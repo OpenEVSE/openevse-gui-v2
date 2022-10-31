@@ -48,7 +48,7 @@
   "charge_rate": 0,
   "divert_update": 80100,
   "divert_active": true,
-  "divert_enabled": true,
+  "divertmode": 1,
   "shaper": false,
   "shaper_live_pwr": 472,
   "shaper_chg_cur": 39,
