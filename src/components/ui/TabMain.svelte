@@ -23,10 +23,5 @@
 		  <span>Schedule</span>
 		</a>
 	  </li>
-	  <li use:active={{path: '/logs', className: 'is-active has-text-info'}}>
-		<a class="tab" href="/logs" use:link>
-		  <span>Logs</span>
-		</a>
-	  </li>
 	</ul>
   </div>

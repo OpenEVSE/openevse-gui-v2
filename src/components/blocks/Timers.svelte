@@ -26,7 +26,6 @@
 	.timers {
 		max-width : 400px;
 		min-width: 300px;
-		margin: auto;
 	}
 </style>
 <div>	

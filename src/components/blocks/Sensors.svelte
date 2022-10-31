@@ -1,0 +1,52 @@
+<script>
+	import {config_store} from "../../lib/stores/config.js"
+	import {status_store} from "../../lib/stores/status.js"
+
+	function round(value, precision) {
+		var multiplier = Math.pow(10, precision || 0);
+		return Math.round(value * multiplier) / multiplier;
+	}
+</script>
+<style>
+	/* .box {
+			max-width : 310px;
+			min-width: 300px;
+		} */
+	.tags {
+		box-sizing: border-box;
+		width: 100%;
+	}
+</style>
+
+<div class="box m-4 is-flex-grow-1 is-flex-shrink-0 ">
+	<div class="has-text-weight-bold is-size-5 mb-5">Sensors</div>
+	<table class="table is-fullwidth">
+		<thead>
+			<tr class="has-background-info"	>
+				<th class="has-text-white">Sensor</th>
+				<th class="has-text-white">Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Pilot</td>
+				<td class="has-text-right"><span class="tag tags is-info">{$status_store.pilot} A</span></td>
+			</tr>
+			<tr>
+				<td>Current</td>
+				<td class="has-text-right"><span class="tag tags is-info">{$status_store.amp} A</span></td>
+			</tr>
+			<tr>
+				<td>Voltage</td>
+				<td class="has-text-right"><span class="tag tags is-info">{$status_store.voltage} V</span></td>
+			</tr>
+			<tr>
+				<td>EVSE T°</td>
+				<td class="has-text-right"><span class="tag tags is-info">{round($status_store.temp/10,1)} °C</span></td>
+			</tr>
+			<tr>
+				<td>ESP32 T°</td>
+				<td class="has-text-right"><span class="tag tags is-info">{round($status_store.temp4/10,1)} °C</span></td>
+			</tr>
+		</tbody>
+</div>

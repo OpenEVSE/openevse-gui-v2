@@ -17,7 +17,7 @@
 		focus = !focus
 	}
 </script>
-<div>
+<div class="mb-5">
 	<div class="is-inline-block has-text-weight-bold mr-3">{label}</div>
 	<div class="is-inline-block" on:mouseenter={togglecolor} on:mouseleave={togglecolor} >			
 		<input class="slider is-medium pt-5 has-tooltip-arrow has-tooltip {hover||focus?'is-info':''}" 

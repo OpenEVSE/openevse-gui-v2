@@ -5,6 +5,7 @@ const model = {
 		max_current: undefined,
 		manual_override: undefined,
 		shaper: undefined,
+		divertmode: undefined,
 		mode: undefined, // 0:Auto 1:On 2:Off
 		autorelease: true,
 		time_lmt: 0,

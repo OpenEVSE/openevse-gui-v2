@@ -11,12 +11,25 @@
 		$uistates_store.window_width = window.innerWidth;
 		$uistates_store.breakpoint = getBreakpoint()
 	}
+	document.body.classList.add('hideScroll')
 </script>
+<style>
 
-
+</style>
 <svelte:window on:load={getWindowSize} on:resize={getWindowSize}/>
-<main>
-	
+
+<svelte:head>
+<style>
+	/*Hide scrollbars*/
+	body::-webkit-scrollbar { display: none; }
+	body {
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;     /* Firefox */
+	}
+</style>
+</svelte:head>	
+
+<main>	
 	<WebSocket/>
 	<Header />
 	<FetchData />
