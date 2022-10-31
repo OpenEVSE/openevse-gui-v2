@@ -65,7 +65,7 @@
 
 
 </style>
-
+{#if $status_store.evse_connected == 1}
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5 mt-0 px-3">
 	<div class="mb-2 mx-0">
 		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={time} bp={$uistates_store.breakpoint} />	
@@ -104,16 +104,21 @@
 		<StatusTile title="EV SOC" value={$status_store.battery_level} unit="%" />
 		<StatusTile title="EV Range" value={$status_store.battery_range} unit="km" />
 		{/if}
-		<StatusTile title="Internal T°" value={$status_store.temp/10} precision={1} unit="°C" />
 	</div>
 	{/if}
 
 	<div class="pb-2 pt-5 ">
 		<div class="columns is-size-6 px-0 mx-0 ">
-			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Current Event: </span> <span class="tag is-white has-text-danger is-capitalized">{$plan_store.current_event.state} {$plan_store.current_event.time}</span></div>
-			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
+			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Current Event: </span> <span class="tag is-white is-capitalized {$plan_store.current_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.current_event.state} {$plan_store.current_event.time}</span></div>
+			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white is-capitalized {$plan_store.next_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
 		</div>
 	</div>
 	<ExpandArrow bind:expand={$uistates_store.status_expanded} />
 
 </div>
+{:else}
+<div class="statusbox disabled has-background-light mb-5 mt-0 px-3">
+	<h4 class="title">EVSE Error</h4>
+	<span>OpenEVSE not responding or not connected</span>
+</div>
+{/if}

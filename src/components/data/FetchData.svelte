@@ -5,6 +5,7 @@
 	import {config_store} from "../../lib/stores/config.js"
 	import {claim_store} from "../../lib/stores/claim.js"
 
+
 	let status = "Loading"
 
 	async function loadData() {
@@ -26,7 +27,6 @@
 	}
 	
 	loadData()
-
 </script>
 
 <div class="pageloader {status!="Ok"?"is-active":""}"><span class="title">{status}</span></div>

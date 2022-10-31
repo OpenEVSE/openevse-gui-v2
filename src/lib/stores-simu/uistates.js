@@ -11,6 +11,7 @@ const model = {
 		time_lmt: 0,
 		charge_lmt: 0,
 		status_expanded: false,
+		config_version: 0,
 		window_width: window.innerWidth,
 		breakpoint: undefined
 }

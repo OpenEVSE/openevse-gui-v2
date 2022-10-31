@@ -1,6 +1,8 @@
 <script>
 	import {onMount} from 'svelte'
 	import {status_store} from '../../lib/stores/status.js'
+	import {config_store} from "../../lib/stores/config.js"
+	import {uistates_store} from "../../lib/stores/uistates.js"
 	let socket
 
 	onMount(() => {
@@ -26,6 +28,10 @@
 				let store = Object.assign({}, $status_store);
 				store = {...store, ...jsondata}
 				status_store.update(() => store)
+				// reload config if config_version has changed
+				if(jsondata.config_version) {
+					refreshConfig(jsondata.config_version)
+				}
 			})
 			s.addEventListener("error", function (event) {
 				// TODO
@@ -35,4 +41,12 @@
 			})
 		}
 	}
+
+	function refreshConfig(version) {
+			if(version != $uistates_store.config_version) {
+				config_store.download()		
+				$uistates_store.config_version = version
+			}	
+	}
+
 </script>
