@@ -10,6 +10,7 @@ const model = {
 		autorelease: true,
 		time_lmt: 0,
 		charge_lmt: 0,
+		status_expanded: false,
 		window_width: window.innerWidth,
 		breakpoint: undefined
 }

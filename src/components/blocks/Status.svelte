@@ -85,7 +85,7 @@
 		{/if}
 	</div>
 
-	{#if expand}
+	{#if $uistates_store.status_expanded}
 	<div class="mx-0 is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center" >
 		{#if $uistates_store.breakpoint == "mobile"}
 		<!-- // Mobile only -->
@@ -114,6 +114,6 @@
 			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white has-text-primary is-capitalized">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
 		</div>
 	</div>
-	<ExpandArrow bind:expand={expand} />
+	<ExpandArrow bind:expand={$uistates_store.status_expanded} />
 
 </div>
