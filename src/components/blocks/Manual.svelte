@@ -3,10 +3,10 @@
 	import Switch from "../ui/SwitchForm.svelte"
 	import InputHalf from "../ui/InputHalfForm.svelte"
 	import ButtonManual from "../ui/ButtonManual.svelte"
-	import Checkbox from "../ui/Checkbox.svelte"
+	import SelectTimeLmt from "../ui/SelectTimeLmt.svelte"
+	import SelectChargeLmt from "../ui/SelectChargeLmt.svelte"
 	import {config_store} from "../../lib/stores/config.js"
 	import {claim_store} from "../../lib/stores/claim.js"
-	import {override_store} from "../../lib/stores/override.js"
 	import {status_store} from "../../lib/stores/status.js"
 	import {schedule_store} from "../../lib/stores/schedule.js"
 	import {uistates_store} from "../../lib/stores/uistates.js"
@@ -116,7 +116,6 @@
 
 	async function setShaper(state) {
 		state = state == true ? "1" : "0"
-		console.log("set shaper: " + state)
 		let param = "shaper="+state
 		if (state != $status_store.shaper && $status_store.shaper != undefined) {
 			
@@ -187,10 +186,12 @@ $: setShaper($uistates_store.shaper)
 		</div>
 
 		<div class="columns is-mobile">
-				<InputHalf label="Time Limit" value={$claim_store.time_lmt} type="number" placeholder="min / 15" 
-				disabled={$uistates_store.mode==2?true:false} />
-				<InputHalf label="Charge Limit" value={$claim_store.charge_lmt} type="number" placeholder="in kWh" 
-				disabled={$uistates_store.mode==2?true:false}/>			
+				<!-- <InputHalf label="Time Limit" value={$uistates_store.time_lmt} type="number" placeholder="min / 15" 
+				disabled={$status_store.vehicle==0?true:false} /> -->
+				{#key $uistates_store.time_lmt}
+				<SelectTimeLmt bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
+				{/key}
+				<SelectChargeLmt bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
 		</div>
 	</div>
 </div>

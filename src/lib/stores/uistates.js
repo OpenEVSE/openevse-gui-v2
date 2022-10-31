@@ -7,6 +7,8 @@ const model = {
 		shaper: undefined,
 		mode: undefined, // 0:Auto 1:On 2:Off
 		autorelease: true,
+		time_lmt: 0,
+		charge_lmt: 0,
 		window_width: window.innerWidth,
 		breakpoint: undefined
 }

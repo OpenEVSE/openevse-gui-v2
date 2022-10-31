@@ -1,9 +1,8 @@
 import { writable } from 'svelte/store'
-import status_model from './status.json'
 import {httpAPI} from '../api.js'
 
 function createStatusStore() {
-    const P  = writable(status_model)
+    const P  = writable()
     const { subscribe, set, update } = P
 
 	async function download() {

@@ -1,9 +1,8 @@
 import { writable } from 'svelte/store'
-import config_model from './config.json'
 import {httpAPI} from '../api.js'
 
 function createConfigStore() {
-    const P  = writable(config_model)
+    const P  = writable()
     const { subscribe, set, update } = P
 
 	async function download() {
