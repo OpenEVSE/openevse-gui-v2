@@ -100,6 +100,11 @@ export default defineConfig(({ command, mode }) => {
               target: 'http://' + env.VITE_OPENEVSEHOST + '/scan',
               changeOrigin: true,
               rewrite: (path) => path.replace(/^\/scan/, '')
+            },
+            '/savenetwork': {
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/savenetwork',
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/savenetwork/, '')
             }
         }
     }

@@ -21,4 +21,13 @@ export async function httpAPI(method,url,body=null,type = "json") {
 	throw Error(response.statusText)
 }
 
+export const removeDuplicateObjects = (array, key) => {
+    const set = new Set()
 
+    return array.filter(item => {
+        const alreadyHas = set.has(item[key])
+        set.add(item[key])
+
+        return !alreadyHas
+    })
+}

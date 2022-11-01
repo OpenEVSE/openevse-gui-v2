@@ -12,7 +12,7 @@
 	import {uistates_store} from "../../lib/stores/uistates.js"
 	import {uisettings_store} from "../../lib/stores/uisettings.js"
 	import {onMount} from 'svelte'
-	import {httpAPI} from '../../lib/api.js'
+	import {httpAPI} from '../../lib/utils.js'
 
 	async function setMaxCurrent(val) {
 		

@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import {httpAPI} from '../api.js'
+import {httpAPI} from '../utils.js'
 
 function createConfigStore() {
     const P  = writable()
