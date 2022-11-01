@@ -3,13 +3,9 @@ import {status_store} from '../../lib/stores/status.js'
 import {config_store} from "../../lib/stores/config.js"
 import InputFormMini from "../ui/InputFormMini.svelte"
 import Fa from 'svelte-fa/src/fa.svelte'
-import { faCircleCheck, faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons/index.js'
-import {httpAPI, removeDuplicateObjects} from "../../lib/utils.js"
-import wifisignal1 from '../../assets/wifi_signal_1.svg';
-import wifisignal2 from '../../assets/wifi_signal_2.svg';
-import wifisignal3 from '../../assets/wifi_signal_3.svg';
-import wifisignal4 from '../../assets/wifi_signal_4.svg';
-import wifisignal5 from '../../assets/wifi_signal_5.svg';
+import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
+import WifiDisplay from "./WifiDisplay.svelte"
+import WifiScan from "./WifiScan.svelte"
 
 function displayMode(mode) {
 	switch (mode) {
@@ -24,85 +20,25 @@ function displayMode(mode) {
 	}
 }
 
-let selectSSID = false
-let ssid = ""
-let key = ""
-let showkey = false
-let networks
+let setWifi = false
 
 function selectWifi() {
-	selectSSID = true
-}
-async function connectWifi() {
-	selectSSID = false
-	let param = "ssid=" + ssid + "&pass=" + key
-	let response = await httpAPI("POST", "/savenetwork", param, "text")
-	if (response == "saved") {
-		return true
-	}
-	else return false
-}
-
-async function scanWifi() {
-	let unfiltered_networks = await httpAPI("GET","/scan")
-	networks = removeDuplicateObjects(unfiltered_networks,"ssid")
-	return networks
-}
-
-function scanAgain() {
-	selectSSID = false
-	networks = null
-	setTimeout(() => selectSSID = true,0)
-	return "Scanning ..."
-}
-
-function inputKey(event) {
-	key = event.target.value
-}
-
-function dbm2icon(dbm) {
-	let icon
-	if (dbm <= -80) icon = wifisignal1
-	else if (dbm > -80 && dbm <= -75) icon = wifisignal2
-	else if (dbm > -75 && dbm <= -70) icon = wifisignal3
-	else if (dbm > -70 && dbm <= -65) icon = wifisignal4
-	else if (dbm > -65) icon = wifisignal5
-	return icon
+	setWifi = true
 }
 
 async function onChange(prop,val) {
 	config_store.setConfig(prop, val)
 }
 
-
-$: type = showkey ? "text" : "password"
 </script>
+
 <style>
 		.box {
 			max-width : 600px;
 			min-width: 300px;
 		}
 
-		.nopointer {
-            cursor: default;
-        }
 
-		.cellbutton {
-			background: transparent;
-			border: none !important;
-			width: 100%;
-			height: 100%;
-		}
-		.cellbutton:hover {
-			background: white;
-		}
-
-		table {
-			height:100%;
-		}
-		.field {
-			max-width: 200px;
-		}
 </style>
 
 <div class="box is-flex-grow-1 is-flex-shrink-0 mx-2">
@@ -114,79 +50,11 @@ $: type = showkey ? "text" : "password"
 
 	{#if $status_store.mode != "Wired"}
 	<div class="my-3">
-				{#if selectSSID == false}
-				<div>
-					<table class="table has-text-centered is-fullwidth is-bordered is-size-7">
-						<thead>
-							<tr class="has-background-info">
-							<th class="has-text-white has-text-centered" style="width: 70%;">SSID</th>
-							<th class="has-text-white has-text-centered">Signal</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="has-background-light">
-								<th class="has-text-centered">{$config_store.ssid}</th>
-								<td class="has-text-centered  has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={$status_store.srssi + " dBm"}>
-									<img width="24px" height="24px" alt={$status_store.srssi + " dBm"} src={dbm2icon($status_store.srssi)}/>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				{#if setWifi == false}
+				<WifiDisplay ssid={$config_store.ssid} rssi={$status_store.srssi}/>
 				<button class="button is-info is-outlined mt-2" on:click={selectWifi}>Change WiFi Network</button>
 				{:else}
-					
-					<div>
-						<table class="table is-hoverable has-text-centered is-fullwidth is-bordered is-size-7 mb-3">
-							<thead>
-								<tr class="has-background-info ">
-									<th class="has-text-white has-text-centered" style="width: 70%;">SSID</th>
-									<th class="has-text-white has-text-centered">Signal</th>
-								</tr>
-							</thead>
-							<tbody>
-								{#await scanWifi()}
-									<tr class="has-background-light">
-									<th class="has-text-centered">Scanning Networks</th>
-									<td><Fa icon={faSpinner} spin /></td>
-									</tr>
-								{:then}
-									{#if networks.length > 0}
-										{#each networks as network}
-											<tr class="has-background-light">
-												<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
-												<td class="no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
-													<img width="24px" height="24px" alt={network.rssi + " dBm"} src={dbm2icon(network.rssi)}/>
-												</td>
-											</tr>
-										{/each}
-									{:else}
-										<!-- No Network found, scan again -->
-										<tr>No network found, scan again</tr>
-									{/if}
-								{/await}
-							</tbody>
-							
-						</table>
-					</div>
-					<InputFormMini type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
-					<InputFormMini type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
-
-					<!-- <div class="block">
-						<span class="has-text-weight-bold">Password</span>
-						<input class="input is-info" {type} placeholder="WiFi Password" value={key} on:input={inputKey}/>
-						<div class="my-2">
-							<label class="checkbox">
-								<input type="checkbox" bind:checked={showkey}>
-								Show
-							</label>
-						</div>
-					</div> -->
-					
-					<button class="button is-primary is-outlined mt-2" disabled={ssid =="" || key == ""?true:false} on:click={connectWifi}>Connect</button>
-					<button class="button is-info is-outlined my-2" on:click={scanAgain}>Scan Again</button>
-					<button class="button is-danger is-outlined my-2" on:click={() => selectSSID = false}>Cancel</button>
-					
+				<WifiScan bind:active={setWifi} ssid={$config_store.ssid}/>
 				{/if}
 	</div>
 	{/if}

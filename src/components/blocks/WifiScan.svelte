@@ -1,0 +1,89 @@
+<script>
+	import {dbm2icon, removeDuplicateObjects, httpAPI} from "../../lib/utils.js"
+	import Fa from 'svelte-fa/src/fa.svelte'
+	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
+	import InputFormMini from "../ui/InputFormMini.svelte"
+	export let active = false
+	export let ssid = ""
+	let key = ""
+	let networks
+
+	async function scanWifi() {
+		let unfiltered_networks = await httpAPI("GET","/scan")
+		networks = removeDuplicateObjects(unfiltered_networks,"ssid")
+		return networks
+	}
+	async function connectWifi() {
+		let param = "ssid=" + ssid + "&pass=" + key
+		let response = await httpAPI("POST", "/savenetwork", param, "text")
+		active = false
+		return true
+	}
+
+	function scanAgain() {
+		active = false
+		networks = null
+		setTimeout(() => active = true,0)
+		return "Scanning ..."
+	}
+
+</script>
+
+<style>
+		.nopointer {
+            cursor: default;
+        }
+
+		.cellbutton {
+			background: transparent;
+			border: none !important;
+			width: 100%;
+			height: 100%;
+		}
+		.cellbutton:hover {
+			background: white;
+		}
+
+		table {
+			height:100%;
+		}
+</style>
+<div>
+	<table class="table is-hoverable has-text-centered is-fullwidth is-bordered is-size-7 mb-3">
+		<thead>
+			<tr class="has-background-info ">
+				<th class="has-text-white has-text-centered" style="width: 70%;">SSID</th>
+				<th class="has-text-white has-text-centered">Signal</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#await scanWifi()}
+				<tr class="has-background-light">
+				<th class="has-text-centered">Scanning Networks</th>
+				<td><Fa icon={faSpinner} spin /></td>
+				</tr>
+			{:then}
+				{#if networks.length > 0}
+					{#each networks as network}
+						<tr class="has-background-light">
+							<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
+							<td class="no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
+								<img width="24px" height="24px" alt={network.rssi + " dBm"} src={dbm2icon(network.rssi)}/>
+							</td>
+						</tr>
+					{/each}
+				{:else}
+					<!-- No Network found, scan again -->
+					<tr>No network found, scan again</tr>
+				{/if}
+			{/await}
+		</tbody>
+		
+	</table>
+</div>
+<InputFormMini type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
+<InputFormMini type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
+
+<button class="button is-primary is-outlined mt-2" disabled={ssid =="" || key == ""?true:false} on:click={connectWifi}>Connect</button>
+<button class="button is-info is-outlined my-2" on:click={scanAgain}>Scan Again</button>
+<button class="button is-danger is-outlined my-2" on:click={() => active = false}>Cancel</button>

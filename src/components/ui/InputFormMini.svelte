@@ -6,7 +6,6 @@
 	export let type
 	export let onChange = () => {}
 	let show = false
-	let ispwd = false
 	let typecss = "text"
 	function inputValue(event) {
 		value = event.target.value
