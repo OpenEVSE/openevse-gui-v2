@@ -95,6 +95,11 @@ export default defineConfig(({ command, mode }) => {
               target: 'http://' + env.VITE_OPENEVSEHOST + '/divertmode',
               changeOrigin: true,
               rewrite: (path) => path.replace(/^\/divertmode/, '')
+            },
+            '/scan': {
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/scan',
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/scan/, '')
             }
         }
     }

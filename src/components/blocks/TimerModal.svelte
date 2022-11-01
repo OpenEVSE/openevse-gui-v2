@@ -212,8 +212,8 @@
 
 					  </div>
 				</div>
-				<button class="button is-danger mt-3" on:click={()=>{saveTimer()}}>Save</button>
-				<button class="button is-light mt-3" on:click={()=>{ timers_modal_opened = false}}>Cancel</button>
+				<button class="button is-danger is-outlined mt-3" on:click={()=>{saveTimer()}}>Save</button>
+				<button class="button is-info is-outlined mt-3" on:click={()=>{ timers_modal_opened = false}}>Cancel</button>
 			</div>
 		</div>
 	</div>

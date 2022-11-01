@@ -52,7 +52,7 @@
 				<div class="navbar-item has-dropdown {hideDropDown?"is-hoverable":""}">
 					<span class="navbar-item is-size-6  noevent {!$location.includes("/config")?"has-text-grey-dark ":isBurgerActive?"has-text-grey-dark":"has-text-info"}">Configuration</span>
 					<div class="navbar-dropdown is-boxed" >
-						<a class="navbar-item is-size-6  is-hoverable {$location=="/config/Hardware"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/config/Hardware" on:click={toggleMenu} use:link >Hardware</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/config/System"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/config/System" on:click={toggleMenu} use:link >System</a>
 						<a class="navbar-item is-size-6  is-hoverable {$location=="/config/Settings"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/config/Settings" on:click={toggleMenu} use:link>Settings</a>
 						<a class="navbar-item is-size-6  is-hoverable {$location=="/config/Charge"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/config/Charge" on:click={toggleMenu} use:link>Charge</a>
 						<a class="navbar-item is-size-6  is-hoverable {$location=="/config/MQTT"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/config/MQTT" on:click={toggleMenu} use:link>MQTT</a>

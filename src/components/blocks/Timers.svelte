@@ -46,7 +46,7 @@
 								
 							</tfoot>
 						</table>
-					<button class="button tag is-size-6 is-info mt-3 has-tooltip-arrow has-tooltip" data-tooltip="Add a new timer"  on:click={()=>{ addTimer()}}>New</button>
+					<button class="button tag is-size-6 is-info is-outlined mt-3 has-tooltip-arrow has-tooltip" data-tooltip="Add a new timer"  on:click={()=>{ addTimer()}}>New</button>
 
 			</div>
 			<TimerModal bind:timers_modal_opened={timers_modal_opened} timer={timer}/>
