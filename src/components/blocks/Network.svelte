@@ -1,6 +1,7 @@
 <script>
 import {status_store} from '../../lib/stores/status.js'
 import {config_store} from "../../lib/stores/config.js"
+import InputFormMini from "../ui/InputFormMini.svelte"
 import Fa from 'svelte-fa/src/fa.svelte'
 import { faCircleCheck, faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons/index.js'
 import {httpAPI, removeDuplicateObjects} from "../../lib/utils.js"
@@ -69,6 +70,10 @@ function dbm2icon(dbm) {
 	return icon
 }
 
+async function onChange(prop,val) {
+	config_store.setConfig(prop, val)
+}
+
 
 $: type = showkey ? "text" : "password"
 </script>
@@ -78,16 +83,9 @@ $: type = showkey ? "text" : "password"
 			min-width: 300px;
 		}
 
-		.networks :hover {
-			background-color: white;
-		}
-		.networks :focus {
-			background-color: white;
-		}
-
-		.nohover {
-			pointer-events: none;
-		}
+		.nopointer {
+            cursor: default;
+        }
 
 		.cellbutton {
 			background: transparent;
@@ -95,17 +93,26 @@ $: type = showkey ? "text" : "password"
 			width: 100%;
 			height: 100%;
 		}
+		.cellbutton:hover {
+			background: white;
+		}
+
 		table {
 			height:100%;
 		}
+		.field {
+			max-width: 200px;
+		}
 </style>
 
-<div class="box is-flex-grow-1 is-flex-shrink-0">
-	<div class="has-text-weight-bold is-size-5 mb-5">WiFi Setup</div>
+<div class="box is-flex-grow-1 is-flex-shrink-0 mx-2">
+	<div class="has-text-weight-bold is-size-5 mb-5">Network</div>
 	<span class="is-size-6 has-text-weight-bold">
 		 	Mode: 
 	</span>
 	<span>{displayMode($status_store.mode)}</span>
+
+	{#if $status_store.mode != "Wired"}
 	<div class="my-3">
 				{#if selectSSID == false}
 				<div>
@@ -113,13 +120,15 @@ $: type = showkey ? "text" : "password"
 						<thead>
 							<tr class="has-background-info">
 							<th class="has-text-white has-text-centered" style="width: 70%;">SSID</th>
-							<th class="has-text-white has-text-centered">RSSI dBm</th>
+							<th class="has-text-white has-text-centered">Signal</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr class="has-background-light">
 								<th class="has-text-centered">{$config_store.ssid}</th>
-								<td class="has-text-centered"><img width="24px" height="24px" alt="dssdsd" src={dbm2icon($status_store.srssi)}/></td>
+								<td class="has-text-centered  has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={$status_store.srssi + " dBm"}>
+									<img width="24px" height="24px" alt={$status_store.srssi + " dBm"} src={dbm2icon($status_store.srssi)}/>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -144,10 +153,10 @@ $: type = showkey ? "text" : "password"
 								{:then}
 									{#if networks.length > 0}
 										{#each networks as network}
-											<tr class="has-background-light networks" on:click={()=> {ssid=network.ssid}}>
-												<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold">{network.ssid}</button></td>
-												<td class="nohover">
-													<img width="24px" height="24px" alt="dssdsd" src={dbm2icon(network.rssi)}/>
+											<tr class="has-background-light">
+												<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
+												<td class="no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
+													<img width="24px" height="24px" alt={network.rssi + " dBm"} src={dbm2icon(network.rssi)}/>
 												</td>
 											</tr>
 										{/each}
@@ -160,11 +169,10 @@ $: type = showkey ? "text" : "password"
 							
 						</table>
 					</div>
-					<div class="block">
-						<span class="has-text-weight-bold">SSID</span>
-						<input class="input is-info" type="text" placeholder="SSID" bind:value={ssid} />
-					</div>
-					<div class="block">
+					<InputFormMini type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
+					<InputFormMini type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
+
+					<!-- <div class="block">
 						<span class="has-text-weight-bold">Password</span>
 						<input class="input is-info" {type} placeholder="WiFi Password" value={key} on:input={inputKey}/>
 						<div class="my-2">
@@ -173,7 +181,7 @@ $: type = showkey ? "text" : "password"
 								Show
 							</label>
 						</div>
-					</div>
+					</div> -->
 					
 					<button class="button is-primary is-outlined mt-2" disabled={ssid =="" || key == ""?true:false} on:click={connectWifi}>Connect</button>
 					<button class="button is-info is-outlined my-2" on:click={scanAgain}>Scan Again</button>
@@ -181,11 +189,15 @@ $: type = showkey ? "text" : "password"
 					
 				{/if}
 	</div>
-	<div>
+	{/if}
+	<div class="my-2">
 		<span class="has-text-weight-bold is-size-6">IP adress: </span><span>{$status_store.ipaddress}</span>
 	</div>
-	<div class="is-align-items-center">
+	<div class="my-2 is-align-items-center">
 		<span class="has-text-weight-bold is-size-6">Connected: </span>
 			<Fa class="pt-1 ml-2 is-size-5 {$status_store.net_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.net_connected==1?faCircleCheck:faCircleXmark} />
 	</div>
+
+	<InputFormMini type="text" title="Host Name" placeholder="OpenEVSE host name" bind:value={$config_store.hostname} 
+		onChange={()=>onChange("hostname", $config_store.hostname)}/>
 </div>

@@ -10,13 +10,20 @@ function createConfigStore() {
         P.update(() => res)
         return P
 	}
+
+    async function setConfig(attr,val) {
+        let data = '{ "' + attr + '": "' + val + '"}'
+        let res = await httpAPI("POST", "/config", data)
+        return res
+    }
     
 
     return {
         subscribe,
         set,
         update,
-        download
+        download,
+        setConfig: (attr,val) => setConfig(attr,val)
     }
 }
 
