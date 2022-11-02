@@ -2,7 +2,7 @@
 	import {onMount} from "svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner, faCheck, faXmark} from '@fortawesome/free-solid-svg-icons/index.js'
-	import "../../../library/bulma-calendar"
+	import bulmaCalendar from "bulma-calendar"
 
 	export let title = undefined
 	export let value
