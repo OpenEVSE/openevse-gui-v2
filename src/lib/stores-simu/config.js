@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store'
 import config_fakedata from './config.json'
+import {httpAPI} from '../utils.js'
 
 function createConfigStore() {
     const P  = writable(config_fakedata)
@@ -10,11 +11,18 @@ function createConfigStore() {
 		await new Promise(resolve => setTimeout(resolve, 500));
 	}
 
+    async function setConfig(attr,val) {
+        let data = '{ "' + attr + '": "' + val + '"}'
+        let res = await httpAPI("POST", "/config", data)
+        return res
+    }
+
     return {
         subscribe,
         set,
         update,
-        download
+        download,
+        setConfig: (attr,val) => setConfig(attr,val)
     }
 }
 
