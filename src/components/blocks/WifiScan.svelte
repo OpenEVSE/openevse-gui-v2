@@ -59,15 +59,15 @@
 		<tbody>
 			{#await scanWifi()}
 				<tr class="has-background-light">
-				<th class="has-text-centered">Scanning Networks</th>
-				<td><Fa icon={faSpinner} spin /></td>
+				<th class="py-3 has-text-centered has-text-info">Scanning Networks</th>
+				<td class="py-3 has-text-info"><Fa icon={faSpinner} spin /></td>
 				</tr>
 			{:then}
 				{#if networks.length > 0}
 					{#each networks as network}
 						<tr class="has-background-light">
 							<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
-							<td class="no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
+							<td class="pt-2 no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
 								<img width="24px" height="24px" alt={network.rssi + " dBm"} src={dbm2icon(network.rssi)}/>
 							</td>
 						</tr>

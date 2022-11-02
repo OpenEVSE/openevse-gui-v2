@@ -19,8 +19,8 @@
 		</thead>
 		<tbody>
 			<tr class="has-background-light">
-				<th class="has-text-centered">{ssid}</th>
-				<td class="has-text-centered  has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={rssi + " dBm"}>
+				<th class="pt-3 has-text-centered">{ssid}</th>
+				<td class="pt-2 has-text-centered  has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={rssi + " dBm"}>
 					<img width="24px" height="24px" alt={rssi + " dBm"} src={dbm2icon(rssi)}/>
 				</td>
 			</tr>
