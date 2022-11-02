@@ -21,13 +21,20 @@ function displayMode(mode) {
 }
 
 let setWifi = false
+let input_host_status = 0
 
 function selectWifi() {
 	setWifi = true
 }
 
 async function onChange(prop,val) {
-	config_store.setConfig(prop, val)
+	input_host_status = 1
+	let res = await config_store.setConfig(prop, val)
+	if (res.msg == "done" || res.msg =="no change") {
+		input_host_status = 2 //ok
+	}
+	else input_host_status = 3 //error
+	return res
 }
 
 </script>
@@ -67,5 +74,5 @@ async function onChange(prop,val) {
 	</div>
 
 	<InputFormMini type="text" title="Host Name" placeholder="OpenEVSE host name" bind:value={$config_store.hostname} 
-		onChange={()=>onChange("hostname", $config_store.hostname)}/>
+		status={input_host_status} onChange={()=>onChange("hostname", $config_store.hostname)}/>
 </div>
