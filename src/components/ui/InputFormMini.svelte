@@ -2,16 +2,20 @@
 	import {onMount} from "svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner, faCheck, faXmark} from '@fortawesome/free-solid-svg-icons/index.js'
+	import "../../../library/bulma-calendar"
 
-	export let title
+	export let title = undefined
 	export let value
 	export let placeholder
 	export let type
 	export let onChange = () => {}
 	export let status = 0
+	export let disabled = false
+	export let isDate = false
 
 	let show = false
 	let typecss = "text"
+	let calendars
 
 	function inputValue(event) {
 		value = event.target.value
@@ -21,15 +25,41 @@
 		if (s==2||s==3) setTimeout(()=> status = 0,2000)
 	}
 
+	function mountCalendar() {
+		if (isDate == true) {
+			calendars  = bulmaCalendar.attach('.bulmaCalendar', {
+			type: 'datetime',
+			lang: navigator.language.substring(0, 2) || "en",
+			displayMode: 'dialog',
+			showTodayButton: false,
+			showClearButton: false,
+			minuteSteps: 1,
+			showHeader: false,
+
+			});
+
+				// Loop on each calendar initialized
+			calendars.forEach(calendar => {
+				// Add listener to select event
+				calendar.on('select', () => {
+				
+				});
+			});
+
+		}
+	}
+	
 
 	$: typecss = show ? "text" : "password"
 	$: resetStatus(status)
 	
 	onMount(() => {
 		typecss = type
+		mountCalendar()
 	})
 
 </script>
+
 <style>
 	.state {
         float: right;
@@ -37,14 +67,15 @@
         margin-top: -32px;
         position: relative;
         z-index: 2;
-        color: grey;
     }
 </style>
-<div class="my-2 field">
+<div class="my-2">
 	<form>
+		{#if title}
 		<span class="has-text-weight-bold">{title}</span>
-		<input class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off"
-			on:change={onChange} on:input={inputValue}>
+		{/if}
+		<input class="input is-info {isDate==true?'bulmaCalendar':''}" type={typecss} placeholder={placeholder} value={value} autocomplete="off"
+		{disabled} on:change={onChange} on:input={inputValue} >
 		<div class="state">
 			{#if status==1}
 			<Fa class="has-text-info"icon={faSpinner} spin />
@@ -54,8 +85,7 @@
 			<Fa class="has-text-danger" icon={faXmark}/>
 			{/if}
 		</div>
-		{#if type=="password"}
-		
+		{#if type=="password"}	
 		<div class="my-2">
 			<label class="checkbox">
 				<input type="checkbox" bind:checked={show}>

@@ -59,8 +59,8 @@
 		<tbody>
 			{#await scanWifi()}
 				<tr class="has-background-light">
-				<th class="py-3 has-text-centered has-text-info">Scanning Networks</th>
-				<td class="py-3 has-text-info"><Fa icon={faSpinner} spin /></td>
+				<th class="py-3 has-text-centered">Scanning Networks</th>
+				<td class="py-3 has-text-info is-size-6"><Fa icon={faSpinner} spin /></td>
 				</tr>
 			{:then}
 				{#if networks.length > 0}

@@ -49,3 +49,23 @@ export const removeDuplicateObjects = (array, key) => {
     })
 }
 
+export function utc2evseLocalTime(d,tz,y = false) {
+	let model = { 
+		timeZone: getTZ(tz),
+		year: y?'numeric':'2-digit',
+		month: '2-digit',
+		day: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		}
+
+	let lt = d.toLocaleString(navigator.language, model)
+	return lt
+}
+
+function getTZ(s) {
+	if(s) 
+		return s.split('|')[0]
+	else
+		return "UTC"
+}

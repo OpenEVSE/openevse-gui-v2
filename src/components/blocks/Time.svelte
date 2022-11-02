@@ -2,7 +2,12 @@
 import {status_store} from "../../lib/stores/status.js"
 import {config_store} from "../../lib/stores/config.js"
 import InputFormMini from "../ui/InputFormMini.svelte"
+import {utc2evseLocalTime} from "../../lib/utils.js"
+
+
 let input_ntp_status = 0
+let date
+
 
 async function onChange(prop,val) {
 	input_ntp_status = 1 //loading
@@ -13,6 +18,14 @@ async function onChange(prop,val) {
 	else input_ntp_status = 3 //error
 	return res
 }
+
+function formatDate(t,z) {
+		const utctime = new Date(t)
+		date = utc2evseLocalTime(utctime, z, true)
+	}
+
+$: formatDate($status_store.time,$config_store.time_zone)
+
 </script>
 <style>
 	.box {
@@ -23,6 +36,7 @@ async function onChange(prop,val) {
 
 <div class="box is-flex-grow-1 is-flex-shrink-0 mx-2">
 	<div class="has-text-weight-bold is-size-5 mb-5">Time</div>
+	<InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={true}/>
 	<InputFormMini type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>onChange("sntp_hostname", $config_store.sntp_hostname)}/>
 </div>

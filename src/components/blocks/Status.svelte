@@ -6,42 +6,21 @@
 	import StatusTile from "../ui/StatusTile.svelte"
 	import StatusItems from "../ui/StatusItems.svelte"
 	import ExpandArrow from "../ui/ExpandArrow.svelte"
+	import {utc2evseLocalTime} from "../../lib/utils.js"
 	
 	let time
 	let elapsed
-	let date
-	let expand = false
 
-	$: date = new Date($status_store.time)
-	$: updateDate(date)
+	function formatTime(t,z) {
+		const utctime = new Date(t)
+		time = utc2evseLocalTime(utctime, z)
+	}
+
+	$: formatTime($status_store.time,$config_store.time_zone)
 	$: { 
 		if ($status_store.elapsed != undefined)
 			elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 16) 
 		}
-
-	function updateDate(m) {
-		time = 	utc2evseLocalTime(date, $config_store.time_zone)
-	}
-
-	function utc2evseLocalTime(d,s) {
-
-		let lt = d.toLocaleString(navigator.language, { 
-			timeZone: getTZ(s),
-			year: '2-digit',
-			month: '2-digit',
-			day: '2-digit',
-			hour: '2-digit',
-			minute: '2-digit',
-			})
-		return lt
-	}
-	function getTZ(s) {
-		if(s) 
-    		return s.split('|')[0]
-		else
-			return "UTC"
-	}
-
 	
 </script>
 

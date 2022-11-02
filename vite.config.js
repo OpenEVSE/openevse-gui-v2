@@ -1,16 +1,15 @@
-import { defineConfig, loadEnv } from "vite";
-import { svelte } from "@sveltejs/vite-plugin-svelte";
-import viteCompression from 'vite-plugin-compression';
-import { VitePWA } from 'vite-plugin-pwa';
-
+import { defineConfig, loadEnv } from "vite"
+import { svelte } from "@sveltejs/vite-plugin-svelte"
+import viteCompression from 'vite-plugin-compression'
+import { VitePWA } from 'vite-plugin-pwa'
 
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd())
   console.log('mode', { env })
-
-
+  
+  
   return {
     plugins: [
       svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip"}),

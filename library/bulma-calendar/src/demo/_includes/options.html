@@ -1,0 +1,38 @@
+<div class="table-container">
+  <table class="table is-bordered {{ table_class }}">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Default value</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Default value</th>
+      </tr>
+    </tfoot>
+    <tbody>
+      {% for option in include.data %}
+        <tr>
+          <td>
+            <code style="white-space: nowrap;">{{ option.name }}</code>
+          </td>
+          <td>
+            {{ option.description }}
+          </td>
+            <td>
+                <code>{{ option.type }}</code>
+            </td>
+          <td>
+            <code>{{ option.value }}</code>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
