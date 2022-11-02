@@ -177,6 +177,7 @@ $: setDivertMode($uistates_store.divertmode)
 
 <div class="is-unselectable box is-flex-grow-1 is-flex-shrink-0 mx-2">	
 	<div class="is-size-4 has-text-weight-bold ">Manual</div>
+	<div class="">
 	{#key $uistates_store.mode}
 		{#if $schedule_store.length}
 		<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
@@ -184,6 +185,7 @@ $: setDivertMode($uistates_store.divertmode)
 		<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} />
 		{/if}
 	{/key}
+	</div>
 	<div class="is-flex is-flex-wrap-wrap ">
 		<Switch name="swAutoRelease" label="Auto Release" bind:checked={$uisettings_store.auto_release} 
 			tooltip="Settings will be reset to default after this charge session" />

@@ -77,8 +77,8 @@
 		{#if $status_store.shaper}
 		<StatusTile title="Available" value={$status_store.shaper_chg_cur} unit="A" />
 		{/if}
-		<StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
-		<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	
+		<!-- <StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
+		<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	 -->
 		{#if $status_store.battery_level}
 		<StatusTile title="EV SOC" value={$status_store.battery_level} unit="%" />
 		<StatusTile title="EV Range" value={$status_store.battery_range} unit="km" />

@@ -3,15 +3,15 @@ import {status_store} from "../../lib/stores/status.js"
 import {config_store} from "../../lib/stores/config.js"
 import InputFormMini from "../ui/InputFormMini.svelte"
 import {utc2evseLocalTime} from "../../lib/utils.js"
-
+import {httpAPI} from '../../lib/utils.js'
+import timeZone from "../../../library/posix_tz_db/zones.json"
 
 let input_ntp_status = 0
 let date
+let tz
 
 
-async function onChange(prop,val,e) {
-	//e.stopPropagation()
-	console.log(e)
+async function setConf(prop,val) {
 	input_ntp_status = 1 //loading
 	let res = await config_store.setConfig(prop, val)
 	if (res.msg == "done" || res.msg =="no change") {
@@ -26,10 +26,19 @@ function formatDate(t,z) {
 		date = utc2evseLocalTime(utctime, z, true)
 	}
 
-function setTime(d) {
+async function setTime(d) {
 	const newdate = new Date(d)
-	console.log("date: " + newdate)
-
+	//console.log(newdate)
+	const isodate = newdate.toISOString()
+	let params = {
+		time: isodate,
+		ntp: false,
+		tz: tz
+		}
+	var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+	let res = await httpAPI("POST","/settime",queryString, "text")
+	if (res.error) return false
+	else return true
 }
 
 $: formatDate($status_store.time,$config_store.time_zone)
@@ -45,7 +54,17 @@ $: formatDate($status_store.time,$config_store.time_zone)
 <div class="box is-flex-grow-1 is-flex-shrink-0 mx-2">
 	<div class="has-text-weight-bold is-size-5 mb-5">Time</div>
 	<InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={true} 
-		onChange={()=>onChange(setTime(date))}/>
+		onChange={()=>setTime(date)}/>
 	<InputFormMini type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
-		status={input_ntp_status} onChange={()=>onChange("sntp_hostname", $config_store.sntp_hostname)}/>
+		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
+	<div class="mx-2">
+		<div class="has-text-weight-bold">Time zone:</div>
+		<div class="select is-info">		
+			<select bind:value={tz} disabled={false}>
+				{#each Object.entries(timeZone) as option,i}
+				<option value={option[0]+"|"+option[1]}>{option[0]}</option>
+				{/each}	
+			</select>
+		</div>
+	</div>
 </div>

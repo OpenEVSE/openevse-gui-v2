@@ -104,6 +104,11 @@ export default defineConfig(({ command, mode }) => {
               target: 'http://' + env.VITE_OPENEVSEHOST + '/savenetwork',
               changeOrigin: true,
               rewrite: (path) => path.replace(/^\/savenetwork/, '')
+            },
+            '/settime': {
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/settime',
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/settime/, '')
             }
         }
     }

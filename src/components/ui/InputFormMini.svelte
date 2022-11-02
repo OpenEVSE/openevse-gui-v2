@@ -66,6 +66,10 @@
 
 	$: typecss = show ? "text" : "password"
 	$: resetStatus(status)
+	$: value, () => {
+		if (calendars[0] != undefined)
+			calendars[0].refresh()
+	}
 
 	onMount(() => {
 		typecss = type
@@ -88,7 +92,7 @@
 		{#if title}
 		<span class="has-text-weight-bold">{title}</span>
 		{/if}
-		<input bind:this={field} class="input is-info {isDate==true?'bulmaCalendar':''}" type={typecss} placeholder={placeholder} value={value} autocomplete="off"
+		<input bind:this={field} class="input is-info {isDate==true && disabled == false?'bulmaCalendar':''}" type={typecss} placeholder={placeholder} value={value} autocomplete="off"
 		{disabled} on:change={onChange} on:input={inputValue} >
 		<div class="state">
 			{#if status==1}
