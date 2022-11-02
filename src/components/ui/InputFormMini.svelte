@@ -16,8 +16,10 @@
 	let show = false
 	let typecss = "text"
 	let calendars
+	let field
 
 	function inputValue(event) {
+		event.preventDefault()
 		value = event.target.value
 	}
 
@@ -29,30 +31,42 @@
 		if (isDate == true) {
 			calendars  = bulmaCalendar.attach('.bulmaCalendar', {
 			type: 'datetime',
+			dateFormat: 'dd/MM/yyyy',
+			timeFormat: 'HH:mm',
 			lang: navigator.language.substring(0, 2) || "en",
 			displayMode: 'dialog',
-			showTodayButton: false,
+			showTodayButton: true,
 			showClearButton: false,
 			minuteSteps: 1,
 			showHeader: false,
+			showFooter: false,
+			color: 'info',
+			closeOnSelect: false,
+			closeOnOverlayClick: false,
+			todayLabel: 'Current Time'
 
 			});
 
 				// Loop on each calendar initialized
 			calendars.forEach(calendar => {
 				// Add listener to select event
-				calendar.on('select', () => {
-				
-				});
-			});
+				calendar.on('select', (d) => {
+					value = d.data.value()	
+				})
+				calendar.on('hide', (d) => {
+					// trigger change event
+					calendar.save()
+					field.dispatchEvent(new Event('change'));
+				})
 
+			})
 		}
 	}
 	
 
 	$: typecss = show ? "text" : "password"
 	$: resetStatus(status)
-	
+
 	onMount(() => {
 		typecss = type
 		mountCalendar()
@@ -74,7 +88,7 @@
 		{#if title}
 		<span class="has-text-weight-bold">{title}</span>
 		{/if}
-		<input class="input is-info {isDate==true?'bulmaCalendar':''}" type={typecss} placeholder={placeholder} value={value} autocomplete="off"
+		<input bind:this={field} class="input is-info {isDate==true?'bulmaCalendar':''}" type={typecss} placeholder={placeholder} value={value} autocomplete="off"
 		{disabled} on:change={onChange} on:input={inputValue} >
 		<div class="state">
 			{#if status==1}

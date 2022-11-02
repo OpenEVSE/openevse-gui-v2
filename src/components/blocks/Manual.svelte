@@ -191,7 +191,7 @@ $: setDivertMode($uistates_store.divertmode)
 			tooltip={$status_store.divertmode == 2?"Disable Eco / Solar Divert mode":"Enable Eco / Solar Divert mode"} />
 	</div>
 
-	<Slider  label="Reduce Current" tooltip="Restrain max current to this value" unit="A" min=6 max={$config_store.max_current_soft} step=1 
+	<Slider  label="Limit Current" tooltip="Restrain max current to this value" unit="A" min=6 max={$config_store.max_current_soft} step=1 
 	value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
 
 	<!-- <div class="columns is-mobile">
