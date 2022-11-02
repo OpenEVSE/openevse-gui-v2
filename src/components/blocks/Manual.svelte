@@ -175,7 +175,7 @@ $: setDivertMode($uistates_store.divertmode)
 
 </script>
 
-<div class="is-unselectable">	
+<div class="is-unselectable box is-flex-grow-1 is-flex-shrink-0 mx-2">	
 	<div class="is-size-4 has-text-weight-bold ">Manual</div>
 	{#key $uistates_store.mode}
 		{#if $schedule_store.length}

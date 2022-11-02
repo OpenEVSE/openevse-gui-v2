@@ -35,19 +35,21 @@
 	<th>{$schedule_store[timer].id}</th>
 	<th>{$schedule_store[timer].time}</th>
 	<th><span class="tag {$schedule_store[timer].state === 'active'?'is-primary':'is-danger'} py-0 is-capitalized">{$schedule_store[timer].state}</span></th>
+	<th class="is-size-5-mobile is-size-4 m0 py-1" align="right">
 	{#key $schedule_store[timer].days }
-	<th class="py-1 px-1">
-		<div class="no-pointer is-size-5 has-tooltip-arrow has-tooltip-info has-tooltip-multiline is-capitalized has-text-weight-normal has-text-centered" data-tooltip={formatDays(days)}><Fa icon={faCalendarDays} /></div>
-	</th>
+		<div class="is-inline-block mx-1 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal has-text-centered" data-tooltip={formatDays(days)}>
+			<Fa icon={faCalendarDays} />
+			</div>
 	{/key}
-	<th class="is-size-5 py-1 px-1 pr-2">
-		<a href="/schedule" use:link on:click={() => {edit($schedule_store[timer].id)}}>
-			<Fa icon={faSquarePen} />
-		</a>
-	</th>
-	<th class="is-size-5 py-1 px-0" >
-		<a href="/schedule" use:link on:click={() => {deleteTimer($schedule_store[timer].id)}} class="has-text-danger">
-			<Fa icon={faSquareMinus} />
-		</a>
+		<div class="is-inline-block mx-1 has-text-weight-normal has-text-centered">
+			<a href="/" use:link on:click={() => {edit($schedule_store[timer].id)}}>
+				<Fa icon={faSquarePen} />
+			</a>
+		</div>
+		<div class="is-inline-block mx-1 has-text-weight-normal has-text-centered">
+			<a href="/" use:link on:click={() => {deleteTimer($schedule_store[timer].id)}} class="has-text-danger">
+				<Fa icon={faSquareMinus} />
+			</a>
+		</div>
 	</th>
 </tr>

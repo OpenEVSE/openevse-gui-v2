@@ -26,29 +26,25 @@
 	.timers {
 		max-width : 400px;
 		min-width: 300px;
+		margin: auto;
 	}
 </style>
-<div>	
+<div class="is-unselectable box is-flex-grow-1 is-flex-shrink-0 mx-2">	
 	<div class="is-size-4 has-text-weight-bold mb-3">Schedule</div>
 		<div class="timers">
 			<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
-			<div>
-
-						<table class="table is-size-6 has-text-weight-normall">
-							<tfoot>
-								{#if $schedule_store.length}
-									{#each $schedule_store as schedule} 
-										<TimerTableRow t_id={schedule.id} edit={() => {editTimer(schedule.id)}}/>
-									{/each}
-								{:else}
-								<span class="content">Schedule is empty</span>
-								{/if}
-								
-							</tfoot>
-						</table>
-					<button class="button tag is-size-6 is-info is-outlined mt-3 has-tooltip-arrow has-tooltip" data-tooltip="Add a new timer"  on:click={()=>{ addTimer()}}>New</button>
-
-			</div>
+				<table class="table is-fullwidth is-size-6 has-text-weight-normall">
+					<tbody>
+						{#if $schedule_store.length}
+							{#each $schedule_store as schedule} 
+								<TimerTableRow t_id={schedule.id} edit={() => {editTimer(schedule.id)}}/>
+							{/each}
+						{:else}
+						<span class="content">Schedule is empty</span>
+						{/if}	
+					</tbody>
+				</table>
+				<button class="button tag is-size-6 is-info is-outlined mt-3 has-tooltip-arrow has-tooltip" data-tooltip="Add a new timer"  on:click={()=>{ addTimer()}}>New</button>
 			<TimerModal bind:timers_modal_opened={timers_modal_opened} timer={timer}/>
 		</div>
 </div>
