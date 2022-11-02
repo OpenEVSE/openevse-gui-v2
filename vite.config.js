@@ -75,8 +75,8 @@ export default defineConfig(({ command, mode }) => {
               changeOrigin: true,
               rewrite: (path) => path.replace(/^\/config/, '')
             },
-            '/claims/': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/claims/',
+            '/claims': {
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/claims',
               changeOrigin: true,
               rewrite: (path) => path.replace(/^\/claims/, '')
             },

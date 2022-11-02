@@ -42,7 +42,7 @@ export async function httpAPI(method,url,body=null,type = "json") {
 	  console.log(error)
 	  return error
 	});
-	
+
 	return res
 		
 }
