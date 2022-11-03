@@ -24,8 +24,8 @@
 </script>
 <style>
 	.timers {
-		/* max-width : 400px;
-		min-width: 300px; */
+		max-width : 400px;
+		min-width: 300px; 
 		margin: auto;
 	}
 </style>
