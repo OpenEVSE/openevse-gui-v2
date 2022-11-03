@@ -41,11 +41,13 @@
 	.statusbox.active {
 		box-shadow: 0 0.5em 1em -0.125em rgba(0,209,178,0.3), 0 0px 0 1px rgba(0,0,0, 0.02);
 	}
-
+	.statusbox.charging {
+		box-shadow: 0 0.5em 1em -0.125em rgba(18, 221, 225, 0.741), 0 0px 0 1px rgba(0,0,0, 0.02);
+	}
 
 </style>
 {#if $status_store.evse_connected == 1}
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":"active"} has-background-light mb-5 mt-0 px-3">
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-light mb-5 mt-0 px-3">
 	<div class="mb-2 mx-0">
 		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={time} bp={$uistates_store.breakpoint} />	
 	</div>
