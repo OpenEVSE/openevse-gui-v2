@@ -35,7 +35,7 @@
 	<th>{$schedule_store[timer].id}</th>
 	<th>{$schedule_store[timer].time}</th>
 	<th><span class="tag {$schedule_store[timer].state === 'active'?'is-primary':'is-danger'} py-0 is-capitalized">{$schedule_store[timer].state}</span></th>
-	<th class="is-size-5-mobile is-size-4 m0 py-1" align="right">
+	<th class="is-size-5-mobile is-size-5-tablet is-size-4-desktop m0 py-1" align="right">
 	{#key $schedule_store[timer].days }
 		<div class="is-inline-block mx-1 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal has-text-centered" data-tooltip={formatDays(days)}>
 			<Fa icon={faCalendarDays} />

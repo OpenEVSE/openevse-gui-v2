@@ -5,9 +5,12 @@
 </script>
 <div class="container px-3">
 	<Status />
-	<div class="is-flex is-flex-wrap-wrap is-align-items-self-start is-justify-content-center">
-		<!-- <TabMain /> -->
-		<Manual />
-		<Timers />
+	<div class="columns is-vcentered is-mobile is-multiline is-centered">
+		<div class="column is-narrow-mobile is-half-desktop">
+			<Manual />
+		</div>
+		<div class="column is-narrow-mobile is-half-desktop">
+			<Timers />
+		</div>
 	</div>
 </div>

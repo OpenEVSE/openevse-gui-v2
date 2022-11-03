@@ -34,7 +34,7 @@
 			</tr>
 			<tr>
 				<td>Current</td>
-				<td class="has-text-right"><span class="tag tags is-info">{$status_store.amp} A</span></td>
+				<td class="has-text-right"><span class="tag tags is-info">{$status_store.amp/1000} A</span></td>
 			</tr>
 			<tr>
 				<td>Voltage</td>

@@ -175,7 +175,7 @@ $: setDivertMode($uistates_store.divertmode)
 
 </script>
 
-<div class="is-unselectable box is-flex-grow-1 is-flex-shrink-0 mx-2">	
+<div class="is-unselectable box">	
 	<div class="is-size-4 has-text-weight-bold ">Manual</div>
 	<div class="">
 	{#key $uistates_store.mode}
@@ -186,7 +186,7 @@ $: setDivertMode($uistates_store.divertmode)
 		{/if}
 	{/key}
 	</div>
-	<div class="is-flex is-flex-wrap-wrap ">
+	<div class="is-flex is-flex-wrap-wrap mx-auto is-justify-content-center">
 		<Switch name="swAutoRelease" label="Auto Release" bind:checked={$uisettings_store.auto_release} 
 			tooltip="Settings will be reset to default after this charge session" />
 		<Switch name="man-swDivert" label="Eco (Divert)" bind:checked={$uistates_store.divertmode} hidden={$config_store.divert_enabled == false?true:false}
@@ -203,7 +203,7 @@ $: setDivertMode($uistates_store.divertmode)
 		</div>
 	</div> -->
 
-	<div class="columns is-mobile">
+	<div class="columns is-mobile is-justify-content-center mb-2">
 		<SelectTimeLmt bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
 		<SelectChargeLmt bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
 	</div>

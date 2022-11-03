@@ -24,12 +24,12 @@
 </script>
 <style>
 	.timers {
-		max-width : 400px;
-		min-width: 300px;
+		/* max-width : 400px;
+		min-width: 300px; */
 		margin: auto;
 	}
 </style>
-<div class="is-unselectable box is-flex-grow-1 is-flex-shrink-0 mx-2">	
+<div class="is-unselectable box">	
 	<div class="is-size-4 has-text-weight-bold mb-3">Schedule</div>
 		<div class="timers">
 			<div class="is-size-6 has-text-weight-bold mb-3">Timers</div>
