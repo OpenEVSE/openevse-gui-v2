@@ -4,8 +4,8 @@
 
 <style>
 </style>
-<div class="is-unselectable box pt-3">	
-	<div class="is-size-5 has-text-weight-bold">{title}</div>
+<div class="box is-unselectable pt-3">	
+	<div class="is-size-5 has-text-weight-bold mb-1">{title}</div>
 		<div class="container">	
 		<slot>
 		</slot>
