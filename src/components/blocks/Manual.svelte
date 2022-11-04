@@ -1,4 +1,5 @@
 <script>
+	import Box from "../ui/Box.svelte"
 	import Slider from "../ui/SliderForm.svelte"
 	import Switch from "../ui/SwitchForm.svelte"
 	import InputHalf from "../ui/InputHalfForm.svelte"
@@ -164,9 +165,8 @@
 		getMode()
 	})
 
-// ## Triggers ##
+// ## Watchers ##
 $: $claim_store.max_current, set_uistates_max_current()
-// 
 $: $status_store.manual_override, stateButtonWatcher() 
 $: set_uistates_shaper($status_store.shaper)
 $: setShaper($uistates_store.shaper)
@@ -175,9 +175,8 @@ $: setDivertMode($uistates_store.divertmode)
 
 </script>
 
-<div class="is-unselectable box">	
-	<div class="is-size-4 has-text-weight-bold ">Manual</div>
-	<div class="">
+<Box title="Manual">
+
 	{#key $uistates_store.mode}
 		{#if $schedule_store.length}
 		<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
@@ -185,7 +184,7 @@ $: setDivertMode($uistates_store.divertmode)
 		<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} />
 		{/if}
 	{/key}
-	</div>
+
 	<div class="is-flex is-flex-wrap-wrap mx-auto is-justify-content-center">
 		<Switch name="swAutoRelease" label="Auto Release" bind:checked={$uisettings_store.auto_release} 
 			tooltip="Settings will be reset to default after this charge session" />
@@ -207,4 +206,4 @@ $: setDivertMode($uistates_store.divertmode)
 		<SelectTimeLmt bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
 		<SelectChargeLmt bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
 	</div>
-</div>
+</Box>
