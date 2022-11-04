@@ -1,53 +1,43 @@
 <script>
-import {status_store} from '../../lib/stores/status.js'
-import {config_store} from "../../lib/stores/config.js"
-import InputFormMini from "../ui/InputFormMini.svelte"
-import Fa from 'svelte-fa/src/fa.svelte'
-import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
-import WifiDisplay from "./WifiDisplay.svelte"
-import WifiScan from "./WifiScan.svelte"
-import Box from "../ui/Box.svelte"
+	import {status_store} from '../../../lib/stores/status.js'
+	import {config_store} from "../../../lib/stores/config.js"
+	import InputFormMini from "../../ui/InputFormMini.svelte"
+	import Fa from 'svelte-fa/src/fa.svelte'
+	import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
+	import WifiDisplay from "./WifiDisplay.svelte"
+	import WifiScan from "./WifiScan.svelte"
+	import Box from "../../ui/Box.svelte"
 
-function displayMode(mode) {
-	switch (mode) {
-		case "AP":
-        return "Access Point (AP)";
-      case "STA":
-        return "Client (STA)";
-      case "STA+AP":
-        return "Client + Access Point (STA+AP)";
-      case "Wired":
-        return "Wired Ethernet";
-	}
-}
-
-let setWifi = false
-let input_host_status = 0
-
-function selectWifi() {
-	setWifi = true
-}
-
-async function onChange(prop,val) {
-	input_host_status = 1
-	let res = await config_store.setConfig(prop, val)
-	if (res.msg == "done" || res.msg =="no change") {
-		input_host_status = 2 //ok
-	}
-	else input_host_status = 3 //error
-	return res
-}
-
-</script>
-
-<style>
-		.box {
-			max-width : 600px;
-			min-width: 300px;
+	function displayMode(mode) {
+		switch (mode) {
+			case "AP":
+			return "Access Point (AP)";
+		case "STA":
+			return "Client (STA)";
+		case "STA+AP":
+			return "Client + Access Point (STA+AP)";
+		case "Wired":
+			return "Wired Ethernet";
 		}
+	}
 
+	let setWifi = false
+	let input_host_status = 0
 
-</style>
+	function selectWifi() {
+		setWifi = true
+	}
+
+	async function onChange(prop,val) {
+		input_host_status = 1
+		let res = await config_store.setConfig(prop, val)
+		if (res.msg == "done" || res.msg =="no change") {
+			input_host_status = 2 //ok
+		}
+		else input_host_status = 3 //error
+		return res
+	}
+</script>
 
 <Box title="Network">
 	<span class="is-size-6 has-text-weight-bold">

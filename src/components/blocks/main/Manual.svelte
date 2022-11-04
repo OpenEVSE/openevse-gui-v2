@@ -1,18 +1,18 @@
 <script>
-	import Box from "../ui/Box.svelte"
-	import Slider from "../ui/SliderForm.svelte"
-	import Switch from "../ui/SwitchForm.svelte"
-	import ButtonManual from "../ui/ButtonManual.svelte"
-	import SelectTimeLmt from "../ui/SelectTimeLmt.svelte"
-	import SelectChargeLmt from "../ui/SelectChargeLmt.svelte"
-	import {config_store} from "../../lib/stores/config.js"
-	import {claim_store} from "../../lib/stores/claim.js"
-	import {status_store} from "../../lib/stores/status.js"
-	import {schedule_store} from "../../lib/stores/schedule.js"
-	import {uistates_store} from "../../lib/stores/uistates.js"
-	import {uisettings_store} from "../../lib/stores/uisettings.js"
+	import Box from "../../ui/Box.svelte"
+	import Slider from "../../ui/SliderForm.svelte"
+	import Switch from "../../ui/SwitchForm.svelte"
+	import ButtonManual from "../../ui/ButtonManual.svelte"
+	import SelectTimeLmt from "../../ui/SelectTimeLmt.svelte"
+	import SelectChargeLmt from "../../ui/SelectChargeLmt.svelte"
+	import {config_store} from "../../../lib/stores/config.js"
+	import {claim_store} from "../../../lib/stores/claim.js"
+	import {status_store} from "../../../lib/stores/status.js"
+	import {schedule_store} from "../../../lib/stores/schedule.js"
+	import {uistates_store} from "../../../lib/stores/uistates.js"
+	import {uisettings_store} from "../../../lib/stores/uisettings.js"
 	import {onMount} from 'svelte'
-	import {httpAPI} from '../../lib/utils.js'
+	import {httpAPI} from '../../../lib/utils.js'
 
 	async function setMaxCurrent(val) {
 		

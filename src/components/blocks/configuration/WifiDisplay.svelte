@@ -1,5 +1,5 @@
 <script>
-	import {dbm2icon} from "../../lib/utils.js"
+	import {dbm2icon} from "../../../lib/utils.js"
 	export let ssid
 	export let rssi
 </script>

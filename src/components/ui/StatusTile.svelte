@@ -1,13 +1,9 @@
 <script>
+	import {round} from "../../lib/utils.js"
 	export let title
 	export let value
 	export let unit = ""
 	export let precision = 0
-
-	function round(value, precision) {
-		var multiplier = Math.pow(10, precision || 0);
-		return Math.round(value * multiplier) / multiplier;
-	}
 
 </script>
 <style>

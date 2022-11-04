@@ -1,16 +1,11 @@
 <script>
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import { faCircleCheck, faCircleXmark} from '@fortawesome/free-solid-svg-icons/index.js'
-	import {config_store} from "../../lib/stores/config.js"
-	import {status_store} from "../../lib/stores/status.js"
-	import Box from "../ui/Box.svelte"
+	import {config_store} from "../../../lib/stores/config.js"
+	import {status_store} from "../../../lib/stores/status.js"
+	import Box from "../../ui/Box.svelte"
 </script>
-<style>
-	/* .box {
-			max-width : 310px;
-			min-width: 300px;
-		} */
-</style>
+
 <Box title="Safety">
 	<table class="table is-fullwidth">
 		<thead>

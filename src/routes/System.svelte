@@ -1,6 +1,6 @@
 <script>
-	import Network from "../components/blocks/Network.svelte"
-	import Time from "../components/blocks/Time.svelte"
+	import Network from "../components/blocks/configuration/Network.svelte"
+	import Time from "../components/blocks/configuration/Time.svelte"
 	import Breadcrumb from "../components/ui/Breadcrumb.svelte"
 </script>
 

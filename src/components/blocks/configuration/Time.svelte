@@ -1,11 +1,11 @@
 <script>
-import Box from "../ui/Box.svelte"
-import {status_store} from "../../lib/stores/status.js"
-import {config_store} from "../../lib/stores/config.js"
-import InputFormMini from "../ui/InputFormMini.svelte"
-import {utc2evseLocalTime} from "../../lib/utils.js"
-import {httpAPI} from '../../lib/utils.js'
-import timeZone from "../../../library/posix_tz_db/zones.json"
+import Box from "../../ui/Box.svelte"
+import {status_store} from "../../../lib/stores/status.js"
+import {config_store} from "../../../lib/stores/config.js"
+import InputFormMini from "../../ui/InputFormMini.svelte"
+import {utc2evseLocalTime} from "../../../lib/utils.js"
+import {httpAPI} from '../../../lib/utils.js'
+import timeZone from "../../../../library/posix_tz_db/zones.json"
 import {onMount} from "svelte"
 
 let input_ntp_status = 0

@@ -1,8 +1,8 @@
 <script>
-	import {dbm2icon, removeDuplicateObjects, httpAPI} from "../../lib/utils.js"
+	import {dbm2icon, removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
-	import InputFormMini from "../ui/InputFormMini.svelte"
+	import InputFormMini from "../../ui/InputFormMini.svelte"
 	export let active = false
 	export let ssid = ""
 	let key = ""

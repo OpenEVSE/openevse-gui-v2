@@ -1,9 +1,9 @@
 
 <script>
-	import Box from "../ui/Box.svelte"
+	import Box from "../../ui/Box.svelte"
 	import TimerModal from "./TimerModal.svelte"
-	import TimerTableRow from "../ui/TimerTableRow.svelte"
-	import {schedule_store} from "../../lib/stores/schedule.js"
+	import TimerTableRow from "../../ui/TimerTableRow.svelte"
+	import {schedule_store} from "../../../lib/stores/schedule.js"
 
 	let timers_modal_opened = false;
 	let timer = null;

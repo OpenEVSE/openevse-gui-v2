@@ -1,18 +1,10 @@
 <script>
-	import {config_store} from "../../lib/stores/config.js"
-	import {status_store} from "../../lib/stores/status.js"
-	import Box from "../ui/Box.svelte"
+	import {status_store} from "../../../lib/stores/status.js"
+	import Box from "../../ui/Box.svelte"
+	import {round} from "../../../lib/utils.js"
 
-	function round(value, precision) {
-		var multiplier = Math.pow(10, precision || 0);
-		return Math.round(value * multiplier) / multiplier;
-	}
 </script>
 <style>
-	/* .box {
-			max-width : 310px;
-			min-width: 300px;
-		} */
 	.tags {
 		box-sizing: border-box;
 		width: 100%;
@@ -24,7 +16,7 @@
 		<thead>
 			<tr class="has-background-info"	>
 				<th class="has-text-white">Sensor</th>
-				<th class="has-text-white">Value</th>
+				<th class="has-text-white" style="width:40%">Value</th>
 			</tr>
 		</thead>
 		<tbody>

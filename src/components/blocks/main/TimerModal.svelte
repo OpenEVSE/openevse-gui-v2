@@ -1,8 +1,8 @@
 <script>
 	export let timers_modal_opened;
 	export let timer = null;
-	import {schedule_store} from "../../lib/stores/schedule.js"
-	import AlertBox from "../ui/AlertBox.svelte"
+	import {schedule_store} from "../../../lib/stores/schedule.js"
+	import AlertBox from "../../ui/AlertBox.svelte"
 
 	let alert_visible = false;
 	const default_timer = 	{
