@@ -184,7 +184,7 @@
 					{/if}
 				</label>
 			</div>
-			<div class="container pt-5">
+			<div class="pt-5">
 				<div class="block">
 					<label class="checkbox has-text-weight-semibold">
 						Time: &nbsp;

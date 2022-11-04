@@ -1,11 +1,9 @@
 <script>
-	import Breadcrumb from "../components/ui/Breadcrumb.svelte"
 	import { link } from "svelte-spa-router"
 </script>
 
 
 <div class="container px-3">
-	<Breadcrumb />
 	<div class="columns is-vcentered">
 		<div class="column">
 			<div><a class="button" href="/configuration/system" use:link>System</a></div>

@@ -66,7 +66,7 @@ $: formatDate($status_store.time,$config_store.time_zone)
 
 <Box title="Time">
 	{#key timemode}
-	<InputFormMini type="date" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} />
+	<InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} />
 	{/key}
 	<div class="has-text-weight-bold">Set Time from:</div>
 	<div class="select is-info">		

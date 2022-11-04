@@ -34,7 +34,7 @@
 			dateFormat: 'dd/MM/yyyy',
 			timeFormat: 'HH:mm',
 			lang: navigator.language.substring(0, 2) || "en",
-			displayMode: 'default',
+			displayMode: 'dialog',
 			showTodayButton: true,
 			showClearButton: false,
 			minuteSteps: 1,
