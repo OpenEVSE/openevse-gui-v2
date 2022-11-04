@@ -34,7 +34,7 @@
 			dateFormat: 'dd/MM/yyyy',
 			timeFormat: 'HH:mm',
 			lang: navigator.language.substring(0, 2) || "en",
-			displayMode: 'dialog',
+			displayMode: 'default',
 			showTodayButton: true,
 			showClearButton: false,
 			minuteSteps: 1,
@@ -42,7 +42,7 @@
 			showFooter: false,
 			color: 'info',
 			closeOnSelect: false,
-			closeOnOverlayClick: false,
+			closeOnOverlayClick: true,
 			todayLabel: 'Current Time'
 
 			});

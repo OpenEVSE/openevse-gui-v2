@@ -9,11 +9,11 @@
 		width: 100%;
 	}
 </style>
-<Box title="Energy">
+<Box title="Energy Delivered">
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info"	>
-				<th class="has-text-white">Energy</th>
+				<th class="has-text-white">Name</th>
 				<th class="has-text-white" style="width:40%">kWh</th>
 			</tr>
 		</thead>
