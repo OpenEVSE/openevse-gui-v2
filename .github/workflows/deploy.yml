@@ -30,7 +30,7 @@ jobs:
     - name: Install and Build
       run: |
         npm ci
-        git submodule update –remote 
+        git submodule update
         npm run build
         
 
