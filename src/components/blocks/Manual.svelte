@@ -2,7 +2,6 @@
 	import Box from "../ui/Box.svelte"
 	import Slider from "../ui/SliderForm.svelte"
 	import Switch from "../ui/SwitchForm.svelte"
-	import InputHalf from "../ui/InputHalfForm.svelte"
 	import ButtonManual from "../ui/ButtonManual.svelte"
 	import SelectTimeLmt from "../ui/SelectTimeLmt.svelte"
 	import SelectChargeLmt from "../ui/SelectChargeLmt.svelte"
