@@ -5,9 +5,11 @@ import InputFormMini from "../ui/InputFormMini.svelte"
 import {utc2evseLocalTime} from "../../lib/utils.js"
 import {httpAPI} from '../../lib/utils.js'
 import timeZone from "../../../library/posix_tz_db/zones.json"
+import {onMount} from "svelte"
 
 let input_ntp_status = 0
 let date
+let timemode = 1
 let tz
 
 
@@ -26,20 +28,30 @@ function formatDate(t,z) {
 		date = utc2evseLocalTime(utctime, z, true)
 	}
 
-async function setTime(d) {
-	const newdate = new Date(d)
-	//console.log(newdate)
-	const isodate = newdate.toISOString()
-	let params = {
-		time: isodate,
-		ntp: false,
-		tz: tz
-		}
-	var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
-	let res = await httpAPI("POST","/settime",queryString, "text")
+async function setTime() {
+	const formData = new FormData();
+
+	if (timemode == 0) {
+		
+		const newdate = new Date(date)
+		const isodate = newdate.toISOString()
+		formData.set('ntp', "false");
+		formData.set('tz', tz);
+		formData.set('time', isodate);
+	}
+	else {
+		formData.set('ntp', "true");
+		formData.set('tz', tz);
+	}
+	
+	const payload = new URLSearchParams(formData)
+	let res = await httpAPI("POST","/settime",payload, "text")
 	if (res.error) return false
 	else return true
 }
+
+onMount(() => {tz = $config_store.time_zone})
+
 
 $: formatDate($status_store.time,$config_store.time_zone)
 
@@ -53,10 +65,20 @@ $: formatDate($status_store.time,$config_store.time_zone)
 
 <div class="box is-flex-grow-1 is-flex-shrink-0 mx-2">
 	<div class="has-text-weight-bold is-size-5 mb-5">Time</div>
-	<InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={true} 
-		onChange={()=>setTime(date)}/>
+	{#key timemode}
+	<InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} />
+	{/key}
+	<div class="has-text-weight-bold">Set Time from:</div>
+	<div class="select is-info">		
+		<select bind:value={timemode}>
+			<option value={1}>NTP</option>
+			<option value={0}>Manual</option>
+		</select>
+	</div>
+	{#if timemode}
 	<InputFormMini type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
+	{/if}
 	<div class="mx-2">
 		<div class="has-text-weight-bold">Time zone:</div>
 		<div class="select is-info">		
@@ -66,5 +88,6 @@ $: formatDate($status_store.time,$config_store.time_zone)
 				{/each}	
 			</select>
 		</div>
+		<button class="button is-outlined is-info" on:click={setTime}>Set Time</button>
 	</div>
 </div>

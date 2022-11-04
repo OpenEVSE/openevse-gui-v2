@@ -16,7 +16,7 @@ export function dbm2icon(dbm) {
 }
 
 export async function httpAPI(method,url,body=null,type = "json") {
-	let content_type = type == "json"?'application/json':'text/plain'
+	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
 	let data = {
 		method: method,
 		headers: {

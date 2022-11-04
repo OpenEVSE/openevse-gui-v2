@@ -19,7 +19,7 @@
 	}
 </style>
 
-<div class="mb-2 mt-3 is-flex is-flex-wrap-nowrap buttonblock mx-auto ">
+<div class="mb-2 mt-2 mb-5  is-flex is-flex-wrap-nowrap buttonblock mx-auto ">
 	{#if isauto}
 	<button class="mr-1 button manual-charge is-size-6 has-tooltip-arrow {mode == 1?"":"is-outlined"} is-primary" data-tooltip="Enable Charge"
 			on:click={() => {setmode(1)}}>{mode1}
