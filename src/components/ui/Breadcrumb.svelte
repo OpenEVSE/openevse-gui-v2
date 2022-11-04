@@ -1,5 +1,7 @@
 <script>
 	import { link, location } from "svelte-spa-router"
+	import Fa from 'svelte-fa/src/fa.svelte'
+	import { faHome } from '@fortawesome/free-solid-svg-icons/index.js'
 	import {onMount} from 'svelte'
 	let level = 0
 	let links = []
@@ -23,14 +25,14 @@
 		
 </script>
 
-<nav class="breadcrumb has-succeeds-separator is-right" aria-label="breadcrumbs">
+<nav class="breadcrumb is-left" aria-label="breadcrumbs">
 	<ul>
-		<li class={ $location === "/" ? "is-active has-text-primary" : "" }>
-			<a href="/" use:link>main</a>
+		<li class={ $location === "/" ? "is-active" : "" }>
+			<a href="/" use:link><Fa class="mt-1" icon={faHome} /></a>
 		</li>
 	 
 	  	{#each links as link, i }
-			<li class={ i == level - 1 ? "is-active is-primary":"is-info"}>
+			<li class={ i == level - 1 ? "is-active":""}>
 				<a href={"/#" + sumlink(link)}> {link} </a>
 			</li>
 	  {/each}
