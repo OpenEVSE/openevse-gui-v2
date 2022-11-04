@@ -1,4 +1,5 @@
 <script>
+import Box from "../ui/Box.svelte"
 import {status_store} from "../../lib/stores/status.js"
 import {config_store} from "../../lib/stores/config.js"
 import InputFormMini from "../ui/InputFormMini.svelte"
@@ -63,8 +64,7 @@ $: formatDate($status_store.time,$config_store.time_zone)
 	}
 </style>
 
-<div class="box is-flex-grow-1 is-flex-shrink-0 mx-2">
-	<div class="has-text-weight-bold is-size-5 mb-5">Time</div>
+<Box title="Time">
 	{#key timemode}
 	<InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} />
 	{/key}
@@ -90,4 +90,4 @@ $: formatDate($status_store.time,$config_store.time_zone)
 		</div>
 		<div class="mt-4"><button class="button is-outlined is-info" on:click={setTime}>Set Time</button></div>
 	</div>
-</div>
+</Box>

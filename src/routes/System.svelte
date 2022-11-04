@@ -2,10 +2,16 @@
 	import Network from "../components/blocks/Network.svelte"
 	import Time from "../components/blocks/Time.svelte"
 </script>
-<div class="container is-fluid">
-	<div class="title mx-5 ">System</div>
-	<div class="is-flex is-flex-wrap-wrap is-justify-content-space-evenly is-align-items-flex-start ">
-		<Network />
-		<Time />
+
+
+<div class="container px-3">
+	<div class="container title mx-5 ">System</div>
+	<div class="columns">
+		<div class="column">
+			<Network />
+		</div>
+		<div class="column">
+			<Time />
+		</div>
 	</div>
 </div>

@@ -6,6 +6,7 @@ import Fa from 'svelte-fa/src/fa.svelte'
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 import WifiDisplay from "./WifiDisplay.svelte"
 import WifiScan from "./WifiScan.svelte"
+import Box from "../ui/Box.svelte"
 
 function displayMode(mode) {
 	switch (mode) {
@@ -48,8 +49,7 @@ async function onChange(prop,val) {
 
 </style>
 
-<div class="box is-flex-grow-1 is-flex-shrink-0 mx-2">
-	<div class="has-text-weight-bold is-size-5 mb-5">Network</div>
+<Box title="Network">
 	<span class="is-size-6 has-text-weight-bold">
 		 	Mode: 
 	</span>
@@ -75,4 +75,4 @@ async function onChange(prop,val) {
 
 	<InputFormMini type="text" title="Host Name" placeholder="OpenEVSE host name" bind:value={$config_store.hostname} 
 		status={input_host_status} onChange={()=>onChange("hostname", $config_store.hostname)}/>
-</div>
+</Box>

@@ -3,6 +3,7 @@
 	import { faCircleCheck, faCircleXmark} from '@fortawesome/free-solid-svg-icons/index.js'
 	import {config_store} from "../../lib/stores/config.js"
 	import {status_store} from "../../lib/stores/status.js"
+	import Box from "../ui/Box.svelte"
 </script>
 <style>
 	/* .box {
@@ -10,8 +11,7 @@
 			min-width: 300px;
 		} */
 </style>
-<div class="box m-4 is-flex-grow-2 is-flex-shrink-0 ">
-	<div class="has-text-weight-bold is-size-5 mb-3">Safety</div>
+<Box title="Safety">
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info"	>
@@ -65,4 +65,4 @@
 				<td><span class="tag {$status_store.stuckcount==0?'is-primary':'is-danger'}">{$status_store.stuckcount}</span></td>
 			</tr>
 		</tbody>
-</div>
+	</Box>

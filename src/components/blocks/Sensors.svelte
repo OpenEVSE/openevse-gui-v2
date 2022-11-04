@@ -1,6 +1,7 @@
 <script>
 	import {config_store} from "../../lib/stores/config.js"
 	import {status_store} from "../../lib/stores/status.js"
+	import Box from "../ui/Box.svelte"
 
 	function round(value, precision) {
 		var multiplier = Math.pow(10, precision || 0);
@@ -18,8 +19,7 @@
 	}
 </style>
 
-<div class="box m-4 is-flex-grow-1 is-flex-shrink-0 ">
-	<div class="has-text-weight-bold is-size-5 mb-5">Sensors</div>
+<Box title="Sensors">
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info"	>
@@ -49,4 +49,4 @@
 				<td class="has-text-right"><span class="tag tags is-info">{round($status_store.temp4/10,1)} °C</span></td>
 			</tr>
 		</tbody>
-</div>
+	</Box>
