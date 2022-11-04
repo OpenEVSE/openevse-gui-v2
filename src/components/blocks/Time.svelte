@@ -79,7 +79,7 @@ $: formatDate($status_store.time,$config_store.time_zone)
 	<InputFormMini type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
 	{/if}
-	<div class="mx-2">
+	<div class="">
 		<div class="has-text-weight-bold">Time zone:</div>
 		<div class="select is-info">		
 			<select bind:value={tz} disabled={false}>
@@ -88,6 +88,6 @@ $: formatDate($status_store.time,$config_store.time_zone)
 				{/each}	
 			</select>
 		</div>
-		<button class="button is-outlined is-info" on:click={setTime}>Set Time</button>
+		<div class="mt-4"><button class="button is-outlined is-info" on:click={setTime}>Set Time</button></div>
 	</div>
 </div>
