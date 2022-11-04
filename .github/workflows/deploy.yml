@@ -30,7 +30,7 @@ jobs:
     - name: Install and Build
       run: |
         npm ci
-        echo | ls -ls src/lib/stores/
+        git submodule update –remote 
         npm run build
         
 
