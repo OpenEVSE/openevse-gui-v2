@@ -22,7 +22,7 @@
 
 	function scanAgain() {
 		active = false
-		networks = null
+		networks = []
 		setTimeout(() => active = true,0)
 		return "Scanning ..."
 	}
