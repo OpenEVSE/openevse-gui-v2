@@ -28,7 +28,7 @@
 }
 
 </style>
-<div class="container pb-1">
+<div class="pb-1">
 	<nav class="navbar nav is-white is-spaced is-fixed-top" aria-label="main navigation">
 		<div class="navbar-brand">
 			<a href="/" use:link bind:this={logoid}>
