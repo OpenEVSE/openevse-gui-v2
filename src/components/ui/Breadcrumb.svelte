@@ -20,12 +20,11 @@
 	}
 	onMount(()=>{ 
 		buildBreadCrumb($location)
-		console.log($location)
 	})
 		
 </script>
 
-<nav class="breadcrumb is-left" aria-label="breadcrumbs">
+<nav class="breadcrumb is-left my-2" aria-label="breadcrumbs">
 	<ul>
 		<li class={ $location === "/" ? "is-active" : "" }>
 			<a href="/" use:link><Fa class="mt-1" icon={faHome} /></a>

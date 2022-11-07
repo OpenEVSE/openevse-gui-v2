@@ -7,12 +7,13 @@ import {utc2evseLocalTime} from "../../../lib/utils.js"
 import {httpAPI} from '../../../lib/utils.js'
 import timeZone from "../../../../library/posix_tz_db/zones.json"
 import {onMount} from "svelte"
+import ButtonFetch from "../../ui/ButtonFetch.svelte"
 
 let input_ntp_status = 0
 let date
 let timemode = 1
 let tz
-
+let setTimeButnState = ""
 
 async function setConf(prop,val) {
 	input_ntp_status = 1 //loading
@@ -31,7 +32,7 @@ function formatDate(t,z) {
 
 async function setTime() {
 	const formData = new FormData();
-
+	setTimeButnState = "loading"
 	if (timemode == 0) {
 		
 		const newdate = new Date(date)
@@ -47,8 +48,25 @@ async function setTime() {
 	
 	const payload = new URLSearchParams(formData)
 	let res = await httpAPI("POST","/settime",payload, "text")
-	if (res.error) return false
-	else return true
+
+	if (res.error) {
+		setTimeButnState = "error"
+		setTimeout(() => {
+			setTimeButnState = ""
+				}, 1000);
+		return false
+	}
+	else {
+		setTimeButnState = "ok"
+		setTimeout(() => {
+			setTimeButnState = ""
+				}, 1000);
+		return true
+	}
+}
+
+function timeNow() {
+	// To Do: set to browser local time
 }
 
 onMount(() => {tz = $config_store.time_zone})
@@ -57,12 +75,6 @@ onMount(() => {tz = $config_store.time_zone})
 $: formatDate($status_store.time,$config_store.time_zone)
 
 </script>
-<style>
-	.box {
-		max-width : 600px;
-		min-width: 300px;
-	}
-</style>
 
 <Box title="Time">
 	{#key timemode}
@@ -75,6 +87,7 @@ $: formatDate($status_store.time,$config_store.time_zone)
 			<option value={0}>Manual</option>
 		</select>
 	</div>
+	<button class="button is-info is-outlined mx-2" on:click={timeNow}>Use Current Time</button>
 	{#if timemode}
 	<InputFormMini type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
@@ -88,6 +101,6 @@ $: formatDate($status_store.time,$config_store.time_zone)
 				{/each}	
 			</select>
 		</div>
-		<div class="mt-4"><button class="button is-outlined is-info" on:click={setTime}>Set Time</button></div>
+		<div class="mt-4"><ButtonFetch name="Set Time" butn_submit={setTime} state={setTimeButnState}/></div>
 	</div>
 </Box>

@@ -105,7 +105,7 @@
 		}
 		else {
 			// Mode Auto
-			// if there's no other claim property but charge_limit & time_limit ( no limit in Auto)
+			// if there's no other claim property but charge_limit & time_limit
 			if ($claim_store.max_current) 
 				claim_store.setClaim(data)
 			// Mode Auto, clearing override
