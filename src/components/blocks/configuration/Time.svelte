@@ -46,22 +46,22 @@ async function setTime() {
 		formData.set('tz', tz);
 	}
 	
-	const payload = new URLSearchParams(formData)
+	// @ts-ignore
+	const payload = new URLSearchParams(formData).toString()
 	let res = await httpAPI("POST","/settime",payload, "text")
-
-	if (res.error) {
-		setTimeButnState = "error"
-		setTimeout(() => {
-			setTimeButnState = ""
-				}, 1000);
-		return false
-	}
-	else {
+	if (res == "set" )  {
 		setTimeButnState = "ok"
 		setTimeout(() => {
 			setTimeButnState = ""
 				}, 1000);
 		return true
+	}
+	else {
+		setTimeButnState = "error"
+		setTimeout(() => {
+			setTimeButnState = ""
+				}, 1000);
+		return false
 	}
 }
 

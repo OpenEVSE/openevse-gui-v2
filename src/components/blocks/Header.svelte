@@ -50,14 +50,12 @@
 				<a class="navbar-item is-size-6 is-hoverable {($location=="/supervision")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/supervision" on:click={toggleMenu} use:link>Supervision</a>
 				<a class="navbar-item is-size-6 is-hoverable {($location=="/logs")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/logs" on:click={toggleMenu} use:link>Logs</a>
 				<div class="navbar-item has-dropdown {hideDropDown?"is-hoverable":""}">
-					<span class="navbar-item is-size-6  noevent {!$location.includes("/configuration")?"has-text-grey-dark ":isBurgerActive?"has-text-grey-dark":"has-text-info"}">Configuration</span>
+					<a class="navbar-item is-size-6 {!$location.includes("/configuration")?"has-text-grey-dark ":isBurgerActive?"has-text-grey-dark":"has-text-info"}" href="/configuration" on:click={toggleMenu} use:link>Configuration</a>
 					<div class="navbar-dropdown is-boxed" >
-						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/System"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/system" on:click={toggleMenu} use:link >System</a>
-						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/Settings"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/settings" on:click={toggleMenu} use:link>Settings</a>
-						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/Charge"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/charge" on:click={toggleMenu} use:link>Charge</a>
-						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/MQTT"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/mqtt" on:click={toggleMenu} use:link>MQTT</a>
-						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/Services"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/services" on:click={toggleMenu} use:link>Services</a>
-						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/Vehicle"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/vehicle" on:click={toggleMenu} use:link>Vehicle</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/system"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/system" on:click={toggleMenu} use:link >System</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/settings"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/settings" on:click={toggleMenu} use:link>Settings</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/charge"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/charge" on:click={toggleMenu} use:link>Charge</a>
+						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/mqtt"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/mqtt" on:click={toggleMenu} use:link>MQTT</a>
 					</div>
 				</div>
 				
