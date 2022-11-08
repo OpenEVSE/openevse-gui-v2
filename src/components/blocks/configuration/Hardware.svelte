@@ -5,6 +5,8 @@
 	import FirmwareUpdateModal from "./FirmwareUpdateModal.svelte"
 	import {httpAPI} from "../../../lib/utils.js"
 
+	let modal
+	
 	async function restartOpenEvse() {
 		restartOpenEvseState = "loading"
 		const payload = "json=1&rapi=$FR"
@@ -44,12 +46,13 @@
 			return false
 		}
 	}
+
 	let restartOpenEvseState = ""
 	let restartEspState = ""
 	let fw_modal_opened = false
 </script>
 
-<FirmwareUpdateModal bind:is_opened={fw_modal_opened} />
+
 <Box title="Hardware">
 	<table class="table is-fullwidth is-vcentered">
 		<thead>
@@ -71,12 +74,13 @@
 				<td>
 					<div class="has-text-centered">
 						<ButtonFetch width="80px" size="is-small" name="Restart" butn_submit={restartESP} state={restartEspState}/>
-						<ButtonFetch width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} />
+						<ButtonFetch bind:this={modal} width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} />
 					</div>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	
-
 </Box>
+{#if fw_modal_opened}
+<FirmwareUpdateModal bind:is_opened={fw_modal_opened} />
+{/if}

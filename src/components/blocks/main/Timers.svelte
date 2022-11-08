@@ -5,13 +5,12 @@
 	import TimerTableRow from "../../ui/TimerTableRow.svelte"
 	import {schedule_store} from "../../../lib/stores/schedule.js"
 
-	let timers_modal_opened = false;
-	let timer = null;
-	let fetchedSched;
+	let timers_modal_opened = false
+	let timer = null
 
 	function editTimer(t) {
-		timer = $schedule_store.findIndex(item => item.id === t);
-		timers_modal_opened = true;
+		timer = $schedule_store.findIndex(item => item.id === t)
+		timers_modal_opened = true
 	}
 
 	function addTimer() {
@@ -43,4 +42,6 @@
 			</table>
 			<button class="button tag is-size-6 is-info is-outlined mt-3 has-tooltip-arrow has-tooltip" data-tooltip="Add a new timer"  on:click={()=>{ addTimer()}}>New</button>
 </Box>
-<TimerModal bind:timers_modal_opened={timers_modal_opened} timer={timer}/>
+{#if timers_modal_opened}
+<TimerModal bind:is_opened={timers_modal_opened} timer={timer}/>
+{/if}
