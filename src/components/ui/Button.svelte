@@ -13,12 +13,8 @@
 
 	const displaystate = (state) => { 
 		if (state != "") {
-			const actual_width = getWidth()
-			//butn.style.width = actual_width
 			butn.blur()
 		}
-
-		//else //butn.style.width = width
 	} 
 	
 
@@ -32,7 +28,6 @@
 	onMount(()=> {
 		if (width == "") {
 			width = name.length + 2 + "ch"
-			console.log(width)
 		}
 	})
 

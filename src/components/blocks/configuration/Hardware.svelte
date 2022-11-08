@@ -1,17 +1,13 @@
 <script>
 	import Box from "../../ui/Box.svelte"
 	import {config_store} from "../../../lib/stores/config.js"
-	import ButtonFetch from "../../ui/ButtonFetch.svelte"
-	import FirmwareUpdate from "./FirmwareUpdate.svelte"
+	import ButtonFetch from "../../ui/Button.svelte"
+	import FirmwareUpdateModal from "./FirmwareUpdateModal.svelte"
 	import {httpAPI} from "../../../lib/utils.js"
 
 	async function restartOpenEvse() {
 		restartOpenEvseState = "loading"
-		const formData = new FormData();
-		formData.set('json','1')
-		formData.set('rapi','$FR')
-		// @ts-ignore
-		const payload = new URLSearchParams(formData).toString()
+		const payload = "json=1&rapi=$FR"
 		let res = await httpAPI("POST","/r",payload, "text")
 		if (res == "set" )  {
 			restartOpenEvseState = "ok"
@@ -53,6 +49,7 @@
 	let fw_modal_opened = false
 </script>
 
+<FirmwareUpdateModal bind:is_opened={fw_modal_opened} />
 <Box title="Hardware">
 	<table class="table is-fullwidth is-vcentered">
 		<thead>
@@ -83,4 +80,3 @@
 	
 
 </Box>
-<FirmwareUpdate bind:is_opened={fw_modal_opened}/>

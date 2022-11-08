@@ -7,7 +7,7 @@ import {utc2evseLocalTime} from "../../../lib/utils.js"
 import {httpAPI} from '../../../lib/utils.js'
 import timeZone from "../../../../library/posix_tz_db/zones.json"
 import {onMount} from "svelte"
-import ButtonFetch from "../../ui/ButtonFetch.svelte"
+import ButtonFetch from "../../ui/Button.svelte"
 
 let input_ntp_status = 0
 let date

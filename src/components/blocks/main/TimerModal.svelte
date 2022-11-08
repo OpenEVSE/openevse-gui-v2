@@ -1,6 +1,7 @@
 <script>
 	export let timers_modal_opened;
 	export let timer = null;
+	import Portal from "svelte-portal";
 	import {schedule_store} from "../../../lib/stores/schedule.js"
 	import AlertBox from "../../ui/AlertBox.svelte"
 
@@ -131,90 +132,91 @@
 
 </script>	
 
+<Portal target="body">
+	<div class="modal" class:is-active={timers_modal_opened}>
+		<div class="modal-background" on:click={()=>timers_modal_opened = false}></div>
+		<div class="modal-content p-3">
 
-<div class="modal" class:is-active={timers_modal_opened}>
-	<div class="modal-background"></div>
-	<div class="modal-content p-3">
+			<AlertBox body="You must select at least one day" bind:visible={alert_visible} />
 
-		<AlertBox body="You must select at least one day" bind:visible={alert_visible} />
-
-		<div class="box">
-			<div class="is-size-4 has-text-weight-bold">
-				{#if timer == null}
-				New Timer
-				{:else}
-				Timer {$schedule_store[timer].id}
-				{/if}
-			</div>
-			<div class="is-size-6">				
-				<label class="checkbox">
-					<input id="d_mon" type="checkbox" bind:checked={selected_days[0]} on:change={checkDays} >
-					Mon
-				</label>
-				<label class="checkbox">
-					<input id="d_tue" type="checkbox" bind:checked={selected_days[1]} on:change={checkDays}>
-					Tue
-				</label>
-				<label class="checkbox">
-					<input id="d_wed" type="checkbox" bind:checked={selected_days[2]} on:change={checkDays}>
-					Wed
-				</label>
-				<label class="checkbox">
-					<input id="d_thu" type="checkbox" bind:checked={selected_days[3]} on:change={checkDays}>
-					Thu
-				</label>
-				<label class="checkbox">
-					<input id="d_fri" type="checkbox" bind:checked={selected_days[4]} on:change={checkDays}>
-					Fri
-				</label>
-				<label class="checkbox">
-					<input id="d_sat" type="checkbox"bind:checked={selected_days[5]} on:change={checkDays}>
-					Sat
-				</label>
-				<label class="checkbox">
-					<input id="d_sun" type="checkbox" bind:checked={selected_days[6]} on:change={checkDays}>
-					Sun
-				</label>
-				<label class="checkbox has-text-weight-semibold">
-					<input id="d_all" type="checkbox" bind:checked={selected_days[7]} on:change={() => {checkAll(selected_days[7])}}>
-					{#if !selected_days[7]}
-					Check All
+			<div class="box">
+				<div class="is-size-4 has-text-weight-bold">
+					{#if timer == null}
+					New Timer
 					{:else}
-					Uncheck All
+					Timer {$schedule_store[timer].id}
 					{/if}
-				</label>
-			</div>
-			<div class="pt-5">
-				<div class="block">
+				</div>
+				<div class="is-size-6">				
+					<label class="checkbox">
+						<input id="d_mon" type="checkbox" bind:checked={selected_days[0]} on:change={checkDays} >
+						Mon
+					</label>
+					<label class="checkbox">
+						<input id="d_tue" type="checkbox" bind:checked={selected_days[1]} on:change={checkDays}>
+						Tue
+					</label>
+					<label class="checkbox">
+						<input id="d_wed" type="checkbox" bind:checked={selected_days[2]} on:change={checkDays}>
+						Wed
+					</label>
+					<label class="checkbox">
+						<input id="d_thu" type="checkbox" bind:checked={selected_days[3]} on:change={checkDays}>
+						Thu
+					</label>
+					<label class="checkbox">
+						<input id="d_fri" type="checkbox" bind:checked={selected_days[4]} on:change={checkDays}>
+						Fri
+					</label>
+					<label class="checkbox">
+						<input id="d_sat" type="checkbox"bind:checked={selected_days[5]} on:change={checkDays}>
+						Sat
+					</label>
+					<label class="checkbox">
+						<input id="d_sun" type="checkbox" bind:checked={selected_days[6]} on:change={checkDays}>
+						Sun
+					</label>
 					<label class="checkbox has-text-weight-semibold">
-						Time: &nbsp;
-						{#if timer == null}
-						<input id="t_start" type="time" bind:value={default_timer.time}>
+						<input id="d_all" type="checkbox" bind:checked={selected_days[7]} on:change={() => {checkAll(selected_days[7])}}>
+						{#if !selected_days[7]}
+						Check All
 						{:else}
-						<input id="t_start" type="time" bind:value={$schedule_store[timer].time}>
+						Uncheck All
 						{/if}
-						
 					</label>
 				</div>
-				<div class="block">
-					<div class="select is-info">
-						{#if timer == null}
-						<select bind:value={default_timer.state}>
-							<option value="active" selected>Active</option>
-							<option value="disabled">Disabled</option>
-						  </select>
-						{:else}
-						<select bind:value={$schedule_store[timer].state}>
-							<option value="active" selected>Active</option>
-							<option value="disabled">Disabled</option>
-						  </select>
-						{/if}
+				<div class="pt-5">
+					<div class="block">
+						<label class="checkbox has-text-weight-semibold">
+							Time: &nbsp;
+							{#if timer == null}
+							<input id="t_start" type="time" bind:value={default_timer.time}>
+							{:else}
+							<input id="t_start" type="time" bind:value={$schedule_store[timer].time}>
+							{/if}
+							
+						</label>
+					</div>
+					<div class="block">
+						<div class="select is-info">
+							{#if timer == null}
+							<select bind:value={default_timer.state}>
+								<option value="active" selected>Active</option>
+								<option value="disabled">Disabled</option>
+							</select>
+							{:else}
+							<select bind:value={$schedule_store[timer].state}>
+								<option value="active" selected>Active</option>
+								<option value="disabled">Disabled</option>
+							</select>
+							{/if}
 
-					  </div>
+						</div>
+					</div>
+					<button class="button is-danger is-outlined mt-3" on:click={()=>{saveTimer()}}>Save</button>
+					<button class="button is-info is-outlined mt-3" on:click={()=>{ timers_modal_opened = false}}>Cancel</button>
 				</div>
-				<button class="button is-danger is-outlined mt-3" on:click={()=>{saveTimer()}}>Save</button>
-				<button class="button is-info is-outlined mt-3" on:click={()=>{ timers_modal_opened = false}}>Cancel</button>
 			</div>
 		</div>
 	</div>
-</div>
+</Portal>
