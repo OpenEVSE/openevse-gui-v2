@@ -16,14 +16,6 @@
 			butn.blur()
 		}
 	} 
-	
-
-
-	function getWidth() {
-		const _width = butn.clientWidth
-		return _width
-
-	}
 
 	onMount(()=> {
 		if (width == "") {
