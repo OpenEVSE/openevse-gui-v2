@@ -132,7 +132,7 @@
 </script>	
 
 
-<div id="t_modal" class="modal" class:is-active={timers_modal_opened}>
+<div class="modal" class:is-active={timers_modal_opened}>
 	<div class="modal-background"></div>
 	<div class="modal-content p-3">
 

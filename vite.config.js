@@ -108,7 +108,17 @@ export default defineConfig(({ command, mode }) => {
             '/settime': {
               target: 'http://' + env.VITE_OPENEVSEHOST + '/settime',
               changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/settime/, '')
+              rewrite: (path) => path.replace(/^\/settime/, ''),
+            },
+            '/restart': {
+                target: 'http://' + env.VITE_OPENEVSEHOST + '/restart',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/restart/, '')
+            },
+            '/r': {
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/r',
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/r/, '')
             }
         }
     }

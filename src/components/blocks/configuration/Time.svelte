@@ -11,7 +11,7 @@ import ButtonFetch from "../../ui/ButtonFetch.svelte"
 
 let input_ntp_status = 0
 let date
-let timemode = 1
+let timemode = 1 // 0: manual 1: NTP
 let tz
 let setTimeButnState = ""
 
@@ -67,6 +67,11 @@ async function setTime() {
 
 function timeNow() {
 	// To Do: set to browser local time
+	const localdate = new Date()
+	date = utc2evseLocalTime(localdate, tz, true)
+	console.log(date)
+	return true
+
 }
 
 onMount(() => {tz = $config_store.time_zone})
@@ -81,16 +86,19 @@ $: formatDate($status_store.time,$config_store.time_zone)
 	<InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} />
 	{/key}
 	<div class="has-text-weight-bold">Set Time from:</div>
-	<div class="select is-info">		
+	<div class="select is-info">
 		<select bind:value={timemode}>
 			<option value={1}>NTP</option>
 			<option value={0}>Manual</option>
 		</select>
 	</div>
-	<button class="button is-info is-outlined mx-2" on:click={timeNow}>Use Current Time</button>
+
+	
 	{#if timemode}
 	<InputFormMini type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
+	{:else}
+	<button class="button is-info is-outlined mx-2" on:click={timeNow}>Use Current Time</button>
 	{/if}
 	<div class="">
 		<div class="has-text-weight-bold">Time zone:</div>
