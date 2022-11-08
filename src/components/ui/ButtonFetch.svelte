@@ -1,7 +1,7 @@
 <script>
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {onMount} from 'svelte'
-	import {faCircleCheck, faCircleXmark} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {faCheck, faXmark} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let butn_submit = () => {}
 	export let state = ""
 	export let name = "Submit"
@@ -13,23 +13,20 @@
 
 	const displaystate = (state) => { 
 		if (state != "") {
+			const actual_width = getWidth()
+			//butn.style.width = actual_width
 			butn.blur()
 		}
+
+		//else //butn.style.width = width
 	} 
 	
-	function cssVariables(node, variables) {
-		setCssVariables(node, variables);
-		
-		return {
-			update(variables) {
-				setCssVariables(node, variables);
-			}
-		}
-	}
-	function setCssVariables(node, variables) {
-		for (const name in variables) {
-			node.style.setProperty(`--${name}`, variables[name]);
-		}
+
+
+	function getWidth() {
+		const _width = butn.clientWidth
+		return _width
+
 	}
 
 	onMount(()=> {
@@ -38,6 +35,8 @@
 			console.log(width)
 		}
 	})
+
+
 	$: displaystate(state)
 	
 
@@ -46,13 +45,12 @@
 
 <div class="is-inline-block">
 	<button style="width:{width};" bind:this={butn} class="my-1 is-justify-content-center button is-outlined {color} {state=="loading"?"is-loading":""} {size}" on:click|preventDefault={butn_submit}>
-		{name}
+		{#if state == "" || state == "loading"}
+			{name}
+		{:else if state == "ok"}
+			<Fa class=" has-text-primary" icon={faCheck}/>
+		{:else if state == "error"}
+			<Fa class=" has-text-danger" icon={faXmark}/>
+		{/if}
 	</button>
-	<span class="is-size-5">
-			{#if state == "ok"}
-			<Fa class="mx-2 mt-2 has-text-primary" icon={faCircleCheck}/>
-			{:else if state == "error"}
-			<Fa class="mx-2 mt-2 has-text-danger" icon={faCircleXmark}/>
-			{/if}
-	</span>
 </div>
