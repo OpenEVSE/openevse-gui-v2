@@ -12,8 +12,9 @@
 		timer = $schedule_store.findIndex(item => item.id === t);
 		if (timer > -1) {
 			$schedule_store.splice(timer,1);
-			$schedule_store = $schedule_store;
+			
 			schedule_store.remove(t);
+			$schedule_store = $schedule_store;
 		}
 		
 	}
@@ -23,7 +24,12 @@
     	return d
     }
 
-	$: days = $schedule_store[timer].days;
+	function getDays() {
+		if ($schedule_store[timer].days) {
+			days = $schedule_store[timer].days;
+		}
+	}
+	$: days, getDays()
 </script>
 <style>
 	.no-pointer {
@@ -31,6 +37,7 @@
 	}
 </style>
 
+{#if $schedule_store[timer] != undefined}
 <tr>
 	<th>{$schedule_store[timer].id}</th>
 	<th>{$schedule_store[timer].time}</th>
@@ -55,3 +62,4 @@
 		</div>
 	</th>
 </tr>
+{/if}

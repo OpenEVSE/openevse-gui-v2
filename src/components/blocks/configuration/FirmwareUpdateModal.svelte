@@ -1,16 +1,17 @@
 <script>
-	import { config_store } from "../../../lib/stores/config.js";
+	import { config_store } from "../../../lib/stores/config.js"
+	import { link } from "svelte-spa-router"
 	import Box from "../../ui/Box.svelte"
-	import ButtonFetch from "../../ui/Button.svelte"
+	import Button from "../../ui/Button.svelte"
 	import Modal from "../../ui/Modal.svelte"
 	import SelectFile from "../../ui/SelectFile.svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faFileCircleCheck, faFileCircleXmark} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {faFileCircleCheck, faFileCircleXmark, faSquareMinus} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let is_opened = false
 	let file
 
 	function uploadFw() {
-		
+
 	}
 
 	$: file, console.log(file)
@@ -51,17 +52,22 @@
 		</div>
 		{#if file}
 		<div class="has-text-primary my-2">
-			<Fa class="is-size-5" icon={faFileCircleCheck}/> {file.name}
+			<Fa class="is-size-5 mx-2" icon={faFileCircleCheck}/>{file.name}
+			<a href="#" on:click={()=> {file = null; console.log("resetfile")}}>
+				<div class="has-text-danger is-inline-block">
+					<Fa class="is-size-5 mx-1" icon={faSquareMinus} />
+				</div>
+			</a>
 		</div>
-		<ButtonFetch name="Upload" butn_submit={uploadFw} />
+		<Button name="Upload" butn_submit={uploadFw} />
 		{:else}
-		<div class="has-text-danger">
-			<Fa class="is-size-5 my-2" icon={faFileCircleXmark}/> No file selected
+		<div class="has-text-danger my-2">
+			<Fa class="is-size-5 mx-2" icon={faFileCircleXmark} />No file selected
 		</div>
 		<SelectFile bind:file={file}/>
 		{/if}
 		
-		<ButtonFetch name="Cancel" butn_submit={()=>is_opened=false} />
+		<Button name="Cancel" butn_submit={()=>is_opened=false} />
 		
 	</Box>
 </Modal>

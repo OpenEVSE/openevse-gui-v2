@@ -16,8 +16,9 @@ function createScheduleStore() {
 
     async function upload(data) {
         let res = await httpAPI("POST", "/schedule",JSON.stringify(data))
-        const json_response = await res.json()
-        return P
+        if (res.msg == "done")
+            return P
+        else return res
     }
 
     async function remove(id) {
