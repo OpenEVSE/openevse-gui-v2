@@ -66,15 +66,15 @@
 			<tr>
 				<td>OpenEVSE</td>
 				<td>{$config_store.firmware}</td>
-				<td><div class="has-text-centered"><ButtonFetch width=80 size="is-small" name="Restart" butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
+				<td><div class="has-text-centered"><ButtonFetch width="80px" size="is-small" name="Restart" butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
 			</tr>
 			<tr>
 				<td>OpenEVSE Wifi</td>
 				<td>{$config_store.version}</td>
 				<td>
 					<div class="has-text-centered">
-						<ButtonFetch width=80 size="is-small" name="Restart" butn_submit={restartESP} state={restartEspState}/>
-						<ButtonFetch width=80 size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} />
+						<ButtonFetch width="80px" size="is-small" name="Restart" butn_submit={restartESP} state={restartEspState}/>
+						<ButtonFetch width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} />
 					</div>
 				</td>
 			</tr>
