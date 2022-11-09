@@ -34,10 +34,19 @@
 				}
 			})
 			s.addEventListener("error", function (event) {
-				// TODO
+				console.log("socket error")
+				setTimeout(() => {
+					connect2socket(s)
+				}, 100);
+				s.close()
 			})
 			s.addEventListener("close", function (event) {
-				// TODO
+				console.log("socket close")
+				setTimeout(() => {
+					connect2socket(s)
+				}, 100);
+				s.close()
+
 			})
 		}
 	}
