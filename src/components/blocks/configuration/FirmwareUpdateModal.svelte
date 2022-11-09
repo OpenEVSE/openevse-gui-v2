@@ -1,20 +1,57 @@
 <script>
+	import { preprocess } from "svelte-preprocess";
 	import { config_store } from "../../../lib/stores/config.js"
 	import { link } from "svelte-spa-router"
 	import Box from "../../ui/Box.svelte"
 	import Button from "../../ui/Button.svelte"
+	import IconButton from "../../ui/IconButton.svelte"
 	import Modal from "../../ui/Modal.svelte"
 	import SelectFile from "../../ui/SelectFile.svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faFileCircleCheck, faFileCircleXmark, faSquareMinus} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let is_opened = false
 	let file
+	let uploadButtonState
+	let fileSent = "no"
+	let percentDone = 0
 
-	function uploadFw() {
+	const uploadFiles = (url, file, onProgress) =>
+		new Promise((resolve, reject) => {
+			const xhr = new XMLHttpRequest();
+			xhr.upload.addEventListener('progress', e => onProgress(e.loaded / e.total));
+			xhr.addEventListener('load', () => resolve({ status: xhr.status, body: xhr.responseText }));
+			xhr.addEventListener('error', () => reject(new Error('File upload failed')));
+			xhr.addEventListener('abort', () => reject(new Error('File upload aborted')));
+			xhr.open('POST', url, true);
+			const formData = new FormData();
+			formData.set("update", file);
+			xhr.send(formData);
+  		});
 
+	async function uploadFw() {
+		uploadButtonState = "loading"
+		const onProgress = progress => {
+			percentDone = Math.round(progress * 100)
+			console.log('Progress:', `${percentDone}%`)
+		}
+		const response = await uploadFiles('/update', file, onProgress)
+		if (response.status >= 400) {
+			console.log("Upload Error (HTTP" + response.status + ")")
+			uploadButtonState = "error"
+			fileSent = "ko"
+		}
+		else {
+			uploadButtonState = "ok"
+			fileSent = "ok"
+		}
+		
+		console.log('Response:', response.body);
 	}
 
-	$: file, console.log(file)
+	$: file, () => {
+		fileSent = "no"
+		console.log("file changed file:" + file.name)
+	}
 
 </script>
 
@@ -51,23 +88,39 @@
 			</div>
 		</div>
 		{#if file}
-		<div class="has-text-primary my-2">
-			<Fa class="is-size-5 mx-2" icon={faFileCircleCheck}/>{file.name}
-			<a href="#" on:click={()=> {file = null; console.log("resetfile")}}>
-				<div class="has-text-danger is-inline-block">
-					<Fa class="is-size-5 mx-1" icon={faSquareMinus} />
+		<div>
+			<div class="is-inline-block my-2">
+		
+			{#if uploadButtonState == "loading"}
+				Uploading <span class="is-italic">{file.name}</span>, {percentDone}%, please wait...
+			{:else if (fileSent) == "ko" }
+				Upload Failed
+			{:else if (fileSent) == "ok" }
+				<span class="is-italic">{file.name}</span> uploaded successfully, page will reload in few sec
+			{:else}
+			<div class="is-flex is-align-items-center">
+				<Fa class="is-size-6 mx-2 has-text-primary" icon={faFileCircleCheck}/>
+				<span class="my-2 is-family-code is-italic">
+					{file.name}
+				</span>
+				<div class="ml-2 is-size-5 is-inline-block">
+					<IconButton icon={faSquareMinus} color="has-text-danger" butn_submit={()=>{file = null}} tooltip="Remove file" />
 				</div>
-			</a>
+			</div>
+			{/if}
+			</div>
 		</div>
-		<Button name="Upload" butn_submit={uploadFw} />
+
+			<Button name="Upload" butn_submit={uploadFw} state={uploadButtonState}/>
+		
 		{:else}
-		<div class="has-text-danger my-2">
-			<Fa class="is-size-5 mx-2" icon={faFileCircleXmark} />No file selected
+		<div class="has-text-danger my-2 is-family-code is-italic">
+			<Fa class="is-size-6 mx-2" icon={faFileCircleXmark} />No file selected
 		</div>
 		<SelectFile bind:file={file}/>
 		{/if}
 		
-		<Button name="Cancel" butn_submit={()=>is_opened=false} />
+		<Button name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
 		
 	</Box>
 </Modal>

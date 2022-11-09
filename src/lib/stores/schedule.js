@@ -17,13 +17,15 @@ function createScheduleStore() {
     async function upload(data) {
         let res = await httpAPI("POST", "/schedule",JSON.stringify(data))
         if (res.msg == "done")
-            return P
-        else return res
+            return true
+        else return false
     }
 
     async function remove(id) {
         let res = await httpAPI("DELETE", "/schedule/" + id)
-        return P
+        if (res.msg == "done")
+            return true
+        else return false
     }
 
     return {

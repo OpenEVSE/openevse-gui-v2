@@ -1,7 +1,7 @@
 <script>
 	import Box from "../../ui/Box.svelte"
 	import {config_store} from "../../../lib/stores/config.js"
-	import ButtonFetch from "../../ui/Button.svelte"
+	import Button from "../../ui/Button.svelte"
 	import FirmwareUpdateModal from "./FirmwareUpdateModal.svelte"
 	import {httpAPI} from "../../../lib/utils.js"
 
@@ -66,15 +66,15 @@
 			<tr>
 				<td>OpenEVSE</td>
 				<td>{$config_store.firmware}</td>
-				<td><div class="has-text-centered"><ButtonFetch width="80px" size="is-small" name="Restart" butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
+				<td><div class="has-text-centered"><Button width="80px" size="is-small" name="Restart" butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
 			</tr>
 			<tr>
 				<td>OpenEVSE Wifi</td>
 				<td>{$config_store.version}</td>
 				<td>
 					<div class="has-text-centered">
-						<ButtonFetch width="80px" size="is-small" name="Restart" butn_submit={restartESP} state={restartEspState}/>
-						<ButtonFetch bind:this={modal} width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} />
+						<Button width="80px" size="is-small" name="Restart" butn_submit={restartESP} state={restartEspState}/>
+						<Button bind:this={modal} width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} />
 					</div>
 				</td>
 			</tr>

@@ -3,11 +3,12 @@
 	import {schedule_store} from "../../../lib/stores/schedule.js"
 	import AlertBox from "../../ui/AlertBox.svelte"
 	import Modal from "../../ui/Modal.svelte"
+	import Button from "../../ui/Button.svelte"
 
 	export let is_opened;
 	export let timer = null;
-
-
+	
+	let saveTimerState = ""
 	let alert_visible = false
 	let select
 	let title
@@ -24,7 +25,7 @@
 		"saturday",
 		"sunday"
 	  ]
-	};
+	}
 
 	let selected_days = [true,true,true,true,true,true,true,true];
 	
@@ -97,32 +98,34 @@
 		$schedule_store = $schedule_store; 
 	}
 
-	function saveTimer() {
-		
+	async function saveTimer() {
 		if (selected_days.every(element => element === false)) {
 			alert_visible = true;
 		}
 		else {
+			saveTimerState = "loading"
 			let schedule;
 			if (timer == null) schedule = {...default_timer};
 			else 			   schedule = $schedule_store[timer];
 			table2days(schedule);
-			if (timer != null) {
-				//to do save edited timer
-				is_opened = false;
-			}
-			else {
-				//to do save new timer
+
+			if (timer == null) {
 				if ($schedule_store.length) {
 					schedule.id = $schedule_store[$schedule_store.length-1].id + 1;
 				}
 				else schedule.id = 1;
-				$schedule_store.push(schedule);
-				is_opened = false;
 			}
-			schedule_store.upload(schedule);
-			$schedule_store = $schedule_store; // force redraw
 
+			if (await schedule_store.upload(schedule)) 
+				{
+					saveTimerState = "ok"
+					$schedule_store.push(schedule);
+				}
+			else {
+				saveTimerState = "error"
+			}
+			$schedule_store = $schedule_store; // force redraw
+			setTimeout(()=>{is_opened = false}, 1000)
 		}
 		
 	}
@@ -195,35 +198,38 @@
 			</label>
 		</div>
 		<div class="pt-5">
-			<div class="block">
-				<label class="has-text-weight-semibold">
-					<div>Time</div>
-					{#if timer == null}
-					<input class="input is-info" style="width: 100px" id="t_start" type="time" bind:value={default_timer.time}>
-					{:else}
-					<input class="input is-info" style="width: 100px" id="t_start" type="time" bind:value={$schedule_store[timer].time}>
-					{/if}
-				</label>
-			</div>
-			<div class="block">
-				<div class="select is-info">
-					<div class="has-text-weight-semibold">State</div>
-					{#if timer == null}
-					<select bind:this={select} bind:value={default_timer.state}>
-						<option value="active" selected class="is-primary">Active</option>
-						<option value="disabled">Disabled</option>
-					</select>
-					{:else}
-					<select bind:value={$schedule_store[timer].state}>
-						<option value="active" selected>Active</option>
-						<option value="disabled">Disabled</option>
-					</select>
-					{/if}
-
+			<div class="is-flex is-justify-content-space-around">
+				<div class="is-inline-block">
+					<label class="has-text-weight-semibold">
+						<div>Time</div>
+						{#if timer == null}
+						<input class="input is-info" style="width: 100px" id="t_start" type="time" bind:value={default_timer.time}>
+						{:else}
+						<input class="input is-info" style="width: 100px" id="t_start" type="time" bind:value={$schedule_store[timer].time}>
+						{/if}
+					</label>
 				</div>
-			</div>
-			<button class="button is-danger is-outlined mt-3" on:click={()=>{saveTimer()}}>Save</button>
-			<button class="button is-info is-outlined mt-3" on:click={()=>{ is_opened = false}}>Cancel</button>
+				<div class="is-inline-block">
+					<div class="has-text-weight-semibold">State</div>
+					<div class="select is-info">
+						{#if timer == null}
+						<select bind:this={select} bind:value={default_timer.state}>
+							<option value="active" selected class="is-primary">Active</option>
+							<option value="disabled">Disabled</option>
+						</select>
+						{:else}
+						<select bind:value={$schedule_store[timer].state}>
+							<option value="active" selected>Active</option>
+							<option value="disabled">Disabled</option>
+						</select>
+						{/if}
+
+					</div>
+				</div>
+		</div>
+		<div class="mt-4">
+			<Button name="Save" color="is-primary" butn_submit={saveTimer} state={saveTimerState}/>
+			<Button name="Cancel" color="is-info" butn_submit={()=>is_opened = false} />
 		</div>
 	</Box>
 </Modal>

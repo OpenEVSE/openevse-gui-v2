@@ -115,6 +115,11 @@ export default defineConfig(({ command, mode }) => {
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/restart/, '')
             },
+            '/update': {
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/update',
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/update/, '')
+            },
             '/r': {
               target: 'http://' + env.VITE_OPENEVSEHOST + '/r',
               changeOrigin: true,

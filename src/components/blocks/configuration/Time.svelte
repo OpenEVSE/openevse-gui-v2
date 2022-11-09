@@ -69,7 +69,6 @@ function timeNow() {
 	// To Do: set to browser local time
 	const localdate = new Date()
 	date = utc2evseLocalTime(localdate, tz, true)
-	console.log(date)
 	return true
 
 }
