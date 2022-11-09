@@ -1,6 +1,6 @@
 <script>
 	import { config_store } from "../../../lib/stores/config.js"
-	import { link } from "svelte-spa-router"
+	import { status_store } from "../../../lib/stores/status.js"
 	import Box from "../../ui/Box.svelte"
 	import Button from "../../ui/Button.svelte"
 	import IconButton from "../../ui/IconButton.svelte"
@@ -28,6 +28,7 @@
   		});
 
 	async function uploadFw() {
+		$status_store.upload_progress = 0
 		uploadButtonState = "loading"
 		const onProgress = progress => {
 			percentDone = Math.round(progress * 100)
@@ -42,7 +43,7 @@
 		else {
 			uploadButtonState = "ok"
 			fileSent = "ok"
-			location.reload()
+			setTimeout(()=> location.reload(),3000)
 		}
 		
 		console.log('Response:', response.body);
@@ -52,6 +53,8 @@
 		fileSent = "no"
 		console.log("file changed file:" + file.name)
 	}
+
+	$: console.log($status_store.upload_progress)
 
 </script>
 
@@ -92,7 +95,8 @@
 			<div class="is-inline-block my-2">
 		
 			{#if uploadButtonState == "loading"}
-				Uploading <span class="is-italic">{file.name}</span>, {percentDone}%, please wait...
+				Uploading <span class="is-italic">{file.name}</span>, please wait...
+				<progress class="progress is-primary" value={$status_store.upload_progress} max="100">{percentDone}%</progress>
 			{:else if (fileSent) == "ko" }
 				Upload Failed
 			{:else if (fileSent) == "ok" }

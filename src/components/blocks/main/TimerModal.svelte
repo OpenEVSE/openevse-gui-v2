@@ -119,7 +119,10 @@
 			if (await schedule_store.upload(schedule)) 
 				{
 					saveTimerState = "ok"
-					$schedule_store.push(schedule);
+					if (timer == null) {
+						$schedule_store.push(schedule)
+					}
+
 				}
 			else {
 				saveTimerState = "error"

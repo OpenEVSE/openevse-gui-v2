@@ -1,5 +1,6 @@
 <script>
 	import {uistates_store} from "../../lib/stores/uistates.js"
+	import {status_store} from "../../lib/stores/status.js"
 	import {schedule_store} from "../../lib/stores/schedule.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
@@ -9,8 +10,8 @@
 	let status = "Loading"
 
 	async function loadData() {
-		//status = "Loading Status"
-		//await status_store.download()
+		status = "Loading Status"
+		await status_store.download()
 		status = "Loading Schedule"
 		await schedule_store.download()
 		status = "Loading Schedule Plan"
