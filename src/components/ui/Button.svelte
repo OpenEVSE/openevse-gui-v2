@@ -40,7 +40,7 @@
 
 <div class="is-inline-block">
 	<button style="width:{width}" bind:this={butn} 
-		class="button my-1 is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}" {disabled}
+		class="button is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}" {disabled}
 		on:click|preventDefault={butn_submit} data-tooltip={tooltip}>
 
 		{#if state == ""}

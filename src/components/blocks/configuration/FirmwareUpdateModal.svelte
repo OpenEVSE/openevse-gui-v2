@@ -115,7 +115,7 @@
 			</div>
 		</div>
 
-			<Button name="Upload" butn_submit={uploadFw} state={uploadButtonState}/>
+			<Button name="Upload" color="is-primary" butn_submit={uploadFw} state={uploadButtonState}/>
 		
 		{:else}
 		<div class="has-text-danger my-2 is-family-code is-italic">

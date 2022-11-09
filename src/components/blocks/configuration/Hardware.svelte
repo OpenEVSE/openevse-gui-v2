@@ -72,9 +72,13 @@
 				<td>OpenEVSE Wifi</td>
 				<td>{$config_store.version}</td>
 				<td>
-					<div class="has-text-centered">
-						<Button width="80px" size="is-small" name="Restart" butn_submit={restartESP} state={restartEspState}/>
-						<Button bind:this={modal} width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} />
+					<div class="has-text-centered ">
+						<div class="mb-2">
+							<Button width="80px" size="is-small" name="Restart" butn_submit={restartESP} state={restartEspState}/>
+						</div>
+						<div class="mb-2">
+							<Button bind:this={modal} width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} />
+						</div>
 					</div>
 				</td>
 			</tr>

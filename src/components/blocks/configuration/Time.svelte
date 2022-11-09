@@ -1,5 +1,6 @@
 <script>
 import Box from "../../ui/Box.svelte"
+import TimeModal from "./TimeModal.svelte"
 import {status_store} from "../../../lib/stores/status.js"
 import {config_store} from "../../../lib/stores/config.js"
 import InputFormMini from "../../ui/InputFormMini.svelte"
@@ -7,13 +8,14 @@ import {utc2evseLocalTime} from "../../../lib/utils.js"
 import {httpAPI} from '../../../lib/utils.js'
 import timeZone from "../../../../library/posix_tz_db/zones.json"
 import {onMount} from "svelte"
-import ButtonFetch from "../../ui/Button.svelte"
+import Button from "../../ui/Button.svelte"
 
 let input_ntp_status = 0
 let date
 let timemode = 1 // 0: manual 1: NTP
 let tz
 let setTimeButnState = ""
+let time_modal_opened = false
 
 async function setConf(prop,val) {
 	input_ntp_status = 1 //loading
@@ -35,7 +37,9 @@ async function setTime() {
 	setTimeButnState = "loading"
 	if (timemode == 0) {
 		
-		const newdate = new Date(date)
+		var dateSplit = date.split(" ")
+		var dateParts = dateSplit[0].split("/");
+		const newdate = new Date(dateParts[1] + "/" + dateParts[0] + "/" + dateParts[2] + " " + dateSplit[1] )
 		const isodate = newdate.toISOString()
 		formData.set('ntp', "false");
 		formData.set('tz', tz);
@@ -82,7 +86,8 @@ $: formatDate($status_store.time,$config_store.time_zone)
 
 <Box title="Time">
 	{#key timemode}
-	<InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} />
+	<!-- <InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} /> -->
+	<InputFormMini type="text" title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} onFocus={()=> time_modal_opened = true }  />
 	{/key}
 	<div class="has-text-weight-bold">Set Time from:</div>
 	<div class="select is-info">
@@ -97,7 +102,7 @@ $: formatDate($status_store.time,$config_store.time_zone)
 	<InputFormMini type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
 	{:else}
-	<button class="button is-info is-outlined mx-2" on:click={timeNow}>Use Current Time</button>
+	<Button name="Use Current Time" butn_submit={timeNow}/>
 	{/if}
 	<div class="">
 		<div class="has-text-weight-bold">Time zone:</div>
@@ -108,6 +113,9 @@ $: formatDate($status_store.time,$config_store.time_zone)
 				{/each}	
 			</select>
 		</div>
-		<div class="mt-4"><ButtonFetch name="Set Time" butn_submit={setTime} state={setTimeButnState}/></div>
+		<div class="mt-4"><Button name="Set Time" butn_submit={setTime} state={setTimeButnState}/></div>
 	</div>
 </Box>
+{#if time_modal_opened}
+<TimeModal bind:is_opened={time_modal_opened} bind:value={date}/>
+{/if}
