@@ -25,7 +25,8 @@
 		else {
 			s = new WebSocket("ws://" + host + "/ws")
 			s.addEventListener("open", function (event) {
-				console.log("ws open")
+				console.log("connected to websocket")
+				keepAlive(s)
 			} )
 			s.addEventListener("message", function (event) {
 				const jsondata = JSON.parse(event.data.toString())
@@ -38,22 +39,38 @@
 				}
 			})
 			s.addEventListener("error", function (event) {
-				console.log("socket error")
+				console.log("socket error, reconnecting in 1sec")
 				setTimeout(() => {
 					connect2socket(s)
-				}, 100);
+				}, 1000);
 				s.close()
 			})
 			s.addEventListener("close", function (event) {
-				console.log("socket close")
+				console.log("socket closed, reconnecting in 1sec")
+				cancelKeepAlive(s)
 				setTimeout(() => {
 					connect2socket(s)
-				}, 100);
+				}, 1000);
 				s.close()
 
 			})
 		}
 	}
+
+	function keepAlive(socket) { 
+		
+		var timeout = 2000;  
+		if (socket && socket.readyState == socket.OPEN) {  
+			socket.send("{\"ping\":1}");  
+		}  
+		timerId = setTimeout(()=>keepAlive(socket), timeout);  
+	}
+	
+	function cancelKeepAlive() {  
+		if (timerId) {  
+			clearTimeout(timerId);  
+    }  
+}
 
 	function refreshConfig(version) {
 			if(version != $uistates_store.config_version) {
