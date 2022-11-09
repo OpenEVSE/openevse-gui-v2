@@ -68,7 +68,6 @@ function timeNow() {
 	const localdate = new Date()
 	date = utc2evseLocalTime(localdate, tz, true)
 	return true
-
 }
 
 onMount(() => {tz = $config_store.time_zone})

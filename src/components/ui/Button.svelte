@@ -51,7 +51,7 @@
 <div class="is-inline-block">
 	<button style="width:{width}" bind:this={butn} 
 		class="button is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}" {disabled}
-		on:click|preventDefault={butn_submit} data-tooltip={tooltip}>
+		on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} data-tooltip={tooltip}>
 		<Fa icon={state=="default"?icon:state == "loading"?faSpinner:state == "ok"?faCheck:faXmark} spin={state=="loading"}
 			class="{state == "loading"?"has-text-info":state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}"
 		/>
