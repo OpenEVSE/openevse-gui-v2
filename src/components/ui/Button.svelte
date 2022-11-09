@@ -1,10 +1,10 @@
 <script>
 	import Fa from 'svelte-fa/src/fa.svelte'
-	import {onMount} from 'svelte'
+	import {onMount, onDestroy} from 'svelte'
 	import {faCheck, faXmark, faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let butn_submit = () => {}
-	export let state = ""
-	export let name = ""
+	export let state = "default"
+	export let name = null
 	export let size = ""
 	export let width = ""
 	export let color = "is-info"
@@ -12,9 +12,10 @@
 	export let icon = null
 	export let disabled = false
 	let butn
+	let timeout
 
 	const displaystate = (state) => { 
-		if (state != "") {
+		if (state != "default") {
 			butn.blur()
 		}
 	} 
@@ -25,13 +26,22 @@
 		}
 	})
 
-	function changeState(state) {
-		if (state!="") disabled = true
+	onDestroy(()=> {
+		if (timeout)
+			clearTimeout(timeout)
+	})
+
+	function changeState() {
+		if (state!="default") disabled = true
+		if (state=="ok" || state=="error") {
+			setTimeout(() => {
+				state = "default"
+			}, 1500);
+		}
 		else disabled = false
 	}
 	
-	$: displaystate(state)
-	$: changeState(state)
+	$: displaystate(state), changeState()
 
 		
 
@@ -42,18 +52,13 @@
 	<button style="width:{width}" bind:this={butn} 
 		class="button is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}" {disabled}
 		on:click|preventDefault={butn_submit} data-tooltip={tooltip}>
-
-		{#if state == ""}
-			<Fa icon={icon}/>
-			{#if name}
-			{name}
+		<Fa icon={state=="default"?icon:state == "loading"?faSpinner:state == "ok"?faCheck:faXmark} spin={state=="loading"}
+			class="{state == "loading"?"has-text-info":state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}"
+		/>
+		{#if name}
+			{#if state == "default"}
+				{name}
 			{/if}
-		{:else if state == "loading"}
-			<Fa class="has-text-info" icon={faSpinner} spin/>
-		{:else if state == "ok"}
-			<Fa class=" has-text-primary" icon={faCheck}/>
-		{:else if state == "error"}
-			<Fa class=" has-text-danger" icon={faXmark}/>
 		{/if}
 	</button>
 </div>

@@ -14,7 +14,7 @@ let input_ntp_status = 0
 let date
 let timemode = 1 // 0: manual 1: NTP
 let tz
-let setTimeButnState = ""
+let setTimeButnState = "default"
 let time_modal_opened = false
 
 async function setConf(prop,val) {
@@ -55,16 +55,10 @@ async function setTime() {
 	let res = await httpAPI("POST","/settime",payload, "text")
 	if (res == "set" )  {
 		setTimeButnState = "ok"
-		setTimeout(() => {
-			setTimeButnState = ""
-				}, 1000);
 		return true
 	}
 	else {
 		setTimeButnState = "error"
-		setTimeout(() => {
-			setTimeButnState = ""
-				}, 1000);
 		return false
 	}
 }
@@ -113,7 +107,9 @@ $: formatDate($status_store.time,$config_store.time_zone)
 				{/each}	
 			</select>
 		</div>
-		<div class="mt-4"><Button name="Set Time" butn_submit={setTime} state={setTimeButnState}/></div>
+		<div class="mt-4">
+			<Button name="Set Time" butn_submit={setTime} bind:state={setTimeButnState}/>
+		</div>
 	</div>
 </Box>
 {#if time_modal_opened}

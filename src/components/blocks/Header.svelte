@@ -13,10 +13,11 @@
 	isBurgerActive = false;
 	hideDropDown = false;
 	logoid.focus()
-	setTimeout(() => hideDropDown = true, 10)
+	setTimeout(() => hideDropDown = true, 100)
   }
 
 </script>
+
 <style> 
 .burger { 
 	margin-left: auto;
@@ -28,6 +29,7 @@
 }
 
 </style>
+
 <div class="pb-1">
 	<nav class="navbar nav is-white is-spaced is-fixed-top" aria-label="main navigation">
 		<div class="navbar-brand">

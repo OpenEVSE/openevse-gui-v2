@@ -5,6 +5,9 @@
 	import FirmwareUpdateModal from "./FirmwareUpdateModal.svelte"
 	import {httpAPI} from "../../../lib/utils.js"
 
+	let restartOpenEvseState = "default"
+	let restartEspState = "default"
+	let fw_modal_opened = false
 	let modal
 	
 	async function restartOpenEvse() {
@@ -13,17 +16,11 @@
 		let res = await httpAPI("POST","/r",payload, "text")
 		if (res == "set" )  {
 			restartOpenEvseState = "ok"
-			setTimeout(() => {
-				restartOpenEvseState = ""
-					}, 1000);
 			return true
 		}
 		else {
 			// cheating as openEVSE api always answer HTTP 500 on reboot command
 			restartOpenEvseState = "ok"
-			setTimeout(() => {
-				restartOpenEvseState = ""
-					}, 1000);
 			return false
 		}
 	}
@@ -33,23 +30,15 @@
 		let res = await httpAPI("POST","/restart",null,"text")
 		if (res == "1" )  {
 			restartEspState = "ok"
-			setTimeout(() => {
-				restartEspState = ""
-					}, 1000);
 			return true
 		}
 		else {
 			restartEspState = "error"
-			setTimeout(() => {
-				restartEspState = ""
-					}, 1000);
 			return false
 		}
 	}
 
-	let restartOpenEvseState = ""
-	let restartEspState = ""
-	let fw_modal_opened = false
+
 </script>
 
 

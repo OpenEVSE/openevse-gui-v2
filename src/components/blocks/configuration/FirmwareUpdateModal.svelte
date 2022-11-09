@@ -10,7 +10,7 @@
 	import {faFileCircleCheck, faFileCircleXmark, faSquareMinus} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let is_opened = false
 	let file
-	let uploadButtonState
+	let uploadButtonState = "default"
 	let fileSent = "no"
 	let percentDone = 0
 
@@ -45,16 +45,11 @@
 			fileSent = "ok"
 			setTimeout(()=> location.reload(),3000)
 		}
-		
-		console.log('Response:', response.body);
 	}
 
 	$: file, () => {
 		fileSent = "no"
-		console.log("file changed file:" + file.name)
 	}
-
-	$: console.log($status_store.upload_progress)
 
 </script>
 

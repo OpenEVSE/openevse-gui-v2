@@ -8,7 +8,7 @@
 	export let is_opened;
 	export let timer = null;
 	
-	let saveTimerState = ""
+	let saveTimerState = "default"
 	let alert_visible = false
 	let select
 	let title
@@ -128,7 +128,7 @@
 				saveTimerState = "error"
 			}
 			$schedule_store = $schedule_store; // force redraw
-			setTimeout(()=>{is_opened = false}, 1000)
+			//setTimeout(()=>{is_opened = false}, 1000)
 		}
 		
 	}
@@ -232,7 +232,7 @@
 		</div>
 		<div class="mt-4">
 			<Button name="Save" color="is-primary" butn_submit={saveTimer} state={saveTimerState}/>
-			<Button name="Cancel" color="is-info" butn_submit={()=>is_opened = false} />
+			<Button name="Cancel" color="is-danger" butn_submit={()=>is_opened = false} />
 		</div>
 	</Box>
 </Modal>

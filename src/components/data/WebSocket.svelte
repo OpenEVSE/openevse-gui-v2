@@ -43,14 +43,14 @@
 				}
 			})
 			s.addEventListener("error", function (event) {
-				console.log("socket error, reconnecting in 1sec")
+				console.log("socket error, reconnecting")
 				setTimeout(() => {
 					connect2socket(s)
 				}, 1000);
 				s.close()
 			})
 			s.addEventListener("close", function (event) {
-				console.log("socket closed, reconnecting in 1sec")
+				console.log("socket closed, reconnecting")
 				cancelKeepAlive()
 				setTimeout(() => {
 					connect2socket(s)
@@ -63,7 +63,7 @@
 
 	function keepAlive(socket) { 
 		
-		var timeout = 2000;  
+		var timeout = 5000;  
 		if (socket && socket.readyState == socket.OPEN) {  
 			socket.send("{\"ping\":1}");  
 		}  
