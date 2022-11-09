@@ -42,6 +42,7 @@
 		else {
 			uploadButtonState = "ok"
 			fileSent = "ok"
+			location.reload()
 		}
 		
 		console.log('Response:', response.body);

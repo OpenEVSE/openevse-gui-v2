@@ -47,7 +47,7 @@
 			})
 			s.addEventListener("close", function (event) {
 				console.log("socket closed, reconnecting in 1sec")
-				cancelKeepAlive(s)
+				cancelKeepAlive()
 				setTimeout(() => {
 					connect2socket(s)
 				}, 1000);
