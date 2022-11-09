@@ -56,7 +56,6 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     base: './',
-
     server: {
         host: "0.0.0.0",
         proxy: {

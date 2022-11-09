@@ -34,7 +34,7 @@
 			<a href="/" use:link bind:this={logoid}>
 				<img src={logo} class="" alt="logo"/>
 			</a>
-				<div role="button" class="navbar-burger burger {isBurgerActive ? 'is-active' : ''}" aria-label="menu" aria-expanded="true" data-target="evsenav" on:click={toggleBurger}>
+				<div role="button" class="navbar-burger burger {isBurgerActive ? 'is-active' : ''}" aria-label="menu" aria-expanded="true" data-target="evsenav" on:click={toggleBurger} on:keypress={toggleBurger}>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>

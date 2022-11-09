@@ -1,5 +1,4 @@
 <script>
-	import { preprocess } from "svelte-preprocess";
 	import { config_store } from "../../../lib/stores/config.js"
 	import { link } from "svelte-spa-router"
 	import Box from "../../ui/Box.svelte"

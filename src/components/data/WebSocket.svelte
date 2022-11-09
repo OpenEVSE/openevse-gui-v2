@@ -4,6 +4,7 @@
 	import {config_store} from "../../lib/stores/config.js"
 	import {uistates_store} from "../../lib/stores/uistates.js"
 	let socket
+	let timerId
 
 	onMount(() => {
 		connect2socket(socket)
@@ -23,6 +24,9 @@
 
 		else {
 			s = new WebSocket("ws://" + host + "/ws")
+			s.addEventListener("open", function (event) {
+				console.log("ws open")
+			} )
 			s.addEventListener("message", function (event) {
 				const jsondata = JSON.parse(event.data.toString())
 				let store = Object.assign({}, $status_store);
