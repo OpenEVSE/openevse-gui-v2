@@ -1,13 +1,19 @@
 <script>
-	import {onMount} from 'svelte'
+	import {onMount, onDestroy} from 'svelte'
 	import {status_store} from '../../lib/stores/status.js'
 	import {config_store} from "../../lib/stores/config.js"
 	import {uistates_store} from "../../lib/stores/uistates.js"
 	let socket
 	let timerId
+	let timeout
 
 	onMount(() => {
 		connect2socket(socket)
+	})
+
+	onDestroy(()=> {
+		socket.close()
+		clearTimeout(timeout)
 	})
 
 	function connect2socket(s) {
@@ -43,20 +49,20 @@
 				}
 			})
 			s.addEventListener("error", function (event) {
-				console.log("socket error, reconnecting")
-				setTimeout(() => {
-					connect2socket(s)
-				}, 1000);
-				s.close()
+				console.log("socket error, reconnecting in 5s")
+				if (!timeout)
+					timeout = setTimeout(() => {
+						connect2socket(s)
+					}, 5000);
+				
 			})
 			s.addEventListener("close", function (event) {
-				console.log("socket closed, reconnecting")
+				console.log("socket closed, reconnecting in 2s")
 				cancelKeepAlive()
-				setTimeout(() => {
-					connect2socket(s)
-				}, 1000);
-				s.close()
-
+				if (!timeout)
+					timeout = setTimeout(() => {
+						connect2socket(s)
+					}, 2000);
 			})
 		}
 	}
