@@ -118,8 +118,8 @@
 			<Button name="Upload" color="is-primary" butn_submit={uploadFw} state={uploadButtonState}/>
 		
 		{:else}
-		<div class="has-text-danger my-2 is-family-code is-italic">
-			<Fa class="is-size-6 mx-2" icon={faFileCircleXmark} />No file selected
+		<div class="my-2 is-family-code is-italic">
+			<Fa class="is-size-6 has-text-danger mx-2" icon={faFileCircleXmark} />No file selected
 		</div>
 		<SelectFile bind:file={file}/>
 		{/if}
