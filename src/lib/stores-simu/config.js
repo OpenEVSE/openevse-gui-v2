@@ -17,11 +17,16 @@ function createConfigStore() {
         return res
     }
 
+    async function upload(data) {
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
     return {
         subscribe,
         set,
         update,
         download,
+        upload: (data) => upload(data),
         setConfig: (attr,val) => setConfig(attr,val)
     }
 }
