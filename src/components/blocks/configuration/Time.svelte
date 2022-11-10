@@ -27,9 +27,8 @@ async function setConf(prop,val) {
 	return res
 }
 
-function formatDate(t,z) {
+function getDate(t) {
 		const utctime = new Date(t)
-		//date = utc2evseLocalTime(utctime, z, true)
 		date = utctime
 	}
 
@@ -38,10 +37,11 @@ async function setTime() {
 	setTimeButnState = "loading"
 	if (timemode == 0) {
 		
-		var dateSplit = date.split(" ")
-		var dateParts = dateSplit[0].split("/");
-		const newdate = new Date(dateParts[1] + "/" + dateParts[0] + "/" + dateParts[2] + " " + dateSplit[1] )
-		const isodate = newdate.toISOString()
+		// var dateSplit = date.split(" ")
+		// var dateParts = dateSplit[0].split("/");
+		// const newdate = new Date(dateParts[1] + "/" + dateParts[0] + "/" + dateParts[2] + " " + dateSplit[1] )
+		// const isodate = newdate.toISOString()
+		const isodate = date.toISOString()
 		formData.set('ntp', "false");
 		formData.set('tz', tz);
 		formData.set('time', isodate);
@@ -73,7 +73,7 @@ function timeNow() {
 
 onMount(() => {
 	tz = $config_store.time_zone
-	formatDate($status_store.time,tz)
+	getDate($status_store.time)
 	})
 
 
