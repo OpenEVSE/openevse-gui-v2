@@ -2,7 +2,6 @@
 	import {onMount, onDestroy} from "svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner, faCheck, faXmark} from '@fortawesome/free-solid-svg-icons/index.js'
-	import bulmaCalendar from "bulma-calendar"
 
 	export let title = undefined
 	export let value
@@ -12,17 +11,14 @@
 	export let onFocus = () => {}
 	export let status = 0
 	export let disabled = false
-	export let isDate = false
 
 	let show = false
 	let typecss = "text"
-	let calendars
 	let field
 	let timeout
 
 	onMount(() => {
 		typecss = type
-		mountCalendar()
 	})
 
 	onDestroy(() => {
@@ -38,50 +34,10 @@
 		if (s==2||s==3) timeout = setTimeout(()=> status = 0,2000)
 	}
 
-	function mountCalendar() {
-		if (isDate == true) {
-			calendars  = bulmaCalendar.attach('.bulmaCalendar', {
-			type: 'datetime',
-			dateFormat: 'dd/MM/yyyy',
-			timeFormat: 'HH:mm',
-			lang: navigator.language.substring(0, 2) || "en",
-			displayMode: 'dialog',
-			showButtons: false,
-			showTodayButton: true,
-			showClearButton: false,
-			minuteSteps: 1,
-			showHeader: false,
-			showFooter: false,
-			color: 'info',
-			closeOnSelect: false,
-			closeOnOverlayClick: true,
-			todayLabel: 'Current Time'
-
-			});
-
-				// Loop on each calendar initialized
-			calendars.forEach(calendar => {
-				// Add listener to select event
-				calendar.on('select', (d) => {
-					value = d.data.value()	
-				})
-				calendar.on('hide', (d) => {
-					// trigger change event
-					calendar.save()
-					field.dispatchEvent(new Event('change'));
-				})
-
-			})
-		}
-	}
 	
 
 	$: typecss = show ? "text" : "password"
 	$: resetStatus(status)
-	$: value, () => {
-		if (calendars[0] != undefined)
-			calendars[0].refresh()
-	}
 
 
 
@@ -101,7 +57,7 @@
 		{#if title}
 		<span class="has-text-weight-bold">{title}</span>
 		{/if}
-		<input bind:this={field} class="input is-info {isDate==true && disabled == false?'bulmaCalendar':''}" type={typecss} placeholder={placeholder} value={value} autocomplete="off"
+		<input bind:this={field} class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off"
 		{disabled} on:change|preventDefault={onChange} on:focus|preventDefault={onFocus} on:input|preventDefault={inputValue} on:submit|preventDefault >
 		<div class="state">
 			{#if status==1}

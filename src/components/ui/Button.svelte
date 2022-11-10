@@ -2,6 +2,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {onMount, onDestroy} from 'svelte'
 	import {faCheck, faXmark, faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
+	
 	export let butn_submit = () => {}
 	export let state = "default"
 	export let name = null

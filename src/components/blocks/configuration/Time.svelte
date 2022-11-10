@@ -3,7 +3,7 @@ import Box from "../../ui/Box.svelte"
 import TimeModal from "./TimeModal.svelte"
 import {status_store} from "../../../lib/stores/status.js"
 import {config_store} from "../../../lib/stores/config.js"
-import InputFormMini from "../../ui/InputFormMini.svelte"
+import InputForm from "../../ui/InputForm.svelte"
 import {utc2evseLocalTime} from "../../../lib/utils.js"
 import {httpAPI} from '../../../lib/utils.js'
 import timeZone from "../../../../library/posix_tz_db/zones.json"
@@ -79,8 +79,7 @@ $: formatDate($status_store.time,$config_store.time_zone)
 
 <Box title="Time">
 	{#key timemode}
-	<!-- <InputFormMini type="text" isDate={true} title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} /> -->
-	<InputFormMini type="text" title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} onFocus={()=> time_modal_opened = true }  />
+	<InputForm type="text" title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} onFocus={()=> time_modal_opened = true }  />
 	{/key}
 	<div class="has-text-weight-bold">Set Time from:</div>
 	<div class="select is-info">
@@ -92,7 +91,7 @@ $: formatDate($status_store.time,$config_store.time_zone)
 
 	
 	{#if timemode}
-	<InputFormMini type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
+	<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
 	{:else}
 	<Button name="Use Current Time" butn_submit={timeNow}/>

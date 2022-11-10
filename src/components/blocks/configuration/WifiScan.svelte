@@ -2,7 +2,7 @@
 	import {dbm2icon, removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
-	import InputFormMini from "../../ui/InputFormMini.svelte"
+	import InputForm from "../../ui/InputForm.svelte"
 	import {onDestroy} from "svelte"
 	export let active = false
 	export let ssid = ""
@@ -87,8 +87,8 @@
 		
 	</table>
 </div>
-<InputFormMini type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
-<InputFormMini type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
+<InputForm type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
+<InputForm type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
 
 <button class="button is-primary is-outlined mt-2" disabled={ssid =="" || key == ""?true:false} on:click={connectWifi}>Connect</button>
 <button class="button is-info is-outlined my-2" on:click={scanAgain}>Scan Again</button>

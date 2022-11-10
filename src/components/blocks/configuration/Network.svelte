@@ -1,7 +1,7 @@
 <script>
 	import {status_store} from '../../../lib/stores/status.js'
 	import {config_store} from "../../../lib/stores/config.js"
-	import InputFormMini from "../../ui/InputFormMini.svelte"
+	import InputForm from "../../ui/InputForm.svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import WifiDisplay from "./WifiDisplay.svelte"
@@ -63,6 +63,6 @@
 			<Fa class="pt-1 ml-2 is-size-5 {$status_store.net_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.net_connected==1?faCircleCheck:faCircleXmark} />
 	</div>
 
-	<InputFormMini type="text" title="Host Name" placeholder="OpenEVSE host name" bind:value={$config_store.hostname} 
+	<InputForm type="text" title="Host Name" placeholder="OpenEVSE host name" bind:value={$config_store.hostname} 
 		status={input_host_status} onChange={()=>onChange("hostname", $config_store.hostname)}/>
 </Box>
