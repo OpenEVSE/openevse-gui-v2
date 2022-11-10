@@ -1,6 +1,6 @@
 <script>
 	import AlertBox from "./../../ui/AlertBox.svelte";
-	import SwitchForm from "../../ui/SwitchForm.svelte";
+	import Switch from "../../ui/Switch.svelte";
 	import { config_store } from "../../../lib/stores/config.js";
 	import InputForm from "../../ui/InputForm.svelte";
 	import Box from "../../ui/Box.svelte"
@@ -43,7 +43,7 @@
 
 </script>
 <Box title="Authentification">
-	<SwitchForm name="auth_enabled" label="Enable" tooltip="Enable authenfication for Web Interface & HTTP API " tooltip_pos="right" {checked} />
+	<Switch name="auth_enabled" label="Enable" tooltip="Enable authenfication for Web Interface & HTTP API " tooltip_pos="right" {checked} />
 	<InputForm title="Username" bind:value={$config_store.www_username} placeholder="Admin" type="text"  />
 	<InputForm title="Password" bind:value={$config_store.www_password} placeholder="15 characters max" type="password" maxlength=15  />
 	<Button name="Save" color="is-info" state={submitState} butn_submit={submit} />
