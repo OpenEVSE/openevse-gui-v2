@@ -1,5 +1,5 @@
 <script>
-	import {onMount} from "svelte"
+	import {onMount, onDestroy} from "svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner, faCheck, faXmark} from '@fortawesome/free-solid-svg-icons/index.js'
 	import bulmaCalendar from "bulma-calendar"
@@ -18,6 +18,16 @@
 	let typecss = "text"
 	let calendars
 	let field
+	let timeout
+
+	onMount(() => {
+		typecss = type
+		mountCalendar()
+	})
+
+	onDestroy(() => {
+		clearTimeout(timeout)
+	})
 
 	function inputValue(event) {
 		event.preventDefault()
@@ -25,7 +35,7 @@
 	}
 
 	function resetStatus(s) {
-		if (s==2||s==3) setTimeout(()=> status = 0,2000)
+		if (s==2||s==3) timeout = setTimeout(()=> status = 0,2000)
 	}
 
 	function mountCalendar() {
@@ -73,10 +83,7 @@
 			calendars[0].refresh()
 	}
 
-	onMount(() => {
-		typecss = type
-		mountCalendar()
-	})
+
 
 </script>
 

@@ -34,7 +34,7 @@
 	function changeState() {
 		if (state!="default") disabled = true
 		if (state=="ok" || state=="error") {
-			setTimeout(() => {
+			timeout = setTimeout(() => {
 				state = "default"
 			}, 1500);
 		}

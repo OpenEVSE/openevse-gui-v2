@@ -1,6 +1,7 @@
 <script>
 	import { config_store } from "../../../lib/stores/config.js"
 	import { status_store } from "../../../lib/stores/status.js"
+	import {onDestroy} from "svelte"
 	import Box from "../../ui/Box.svelte"
 	import Button from "../../ui/Button.svelte"
 	import IconButton from "../../ui/IconButton.svelte"
@@ -13,7 +14,11 @@
 	let uploadButtonState = "default"
 	let fileSent = "no"
 	let percentDone = 0
+	let timeout
 
+		onDestroy(() => {
+			clearTimeout(timeout)
+		})
 	const uploadFiles = (url, file, onProgress) =>
 		new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
@@ -43,7 +48,7 @@
 		else {
 			uploadButtonState = "ok"
 			fileSent = "ok"
-			setTimeout(()=> location.reload(),3000)
+			timeout = setTimeout(()=> location.reload(),3000)
 		}
 	}
 

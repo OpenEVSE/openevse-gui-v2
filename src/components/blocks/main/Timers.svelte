@@ -1,5 +1,6 @@
 
 <script>
+	import { onDestroy } from "svelte";
 	import Box from "../../ui/Box.svelte"
 	// @ts-ignore
 	import TimerModal from "./TimerModal.svelte"
@@ -11,6 +12,13 @@
 	let timer = null
 	let timers = []
 	let timersState = []
+	let timeouts = []
+
+	onDestroy(() => {
+		for ( let timeout in timeouts) {
+			clearTimeout(timeout)
+		}	
+	})
 
 	function editTimer(t) {
 		timer = $schedule_store.findIndex(item => item.id === t)
@@ -37,7 +45,7 @@
 			else {
 				timersState[timer] = "error"
 			}
-			setTimeout(()=>{timersState[timer] = null} ,1000)
+			timeouts[timer] = setTimeout(()=>{timersState[timer] = null} ,1000)
 		}
 	}
 

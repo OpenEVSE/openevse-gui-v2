@@ -3,10 +3,16 @@
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
 	import InputFormMini from "../../ui/InputFormMini.svelte"
+	import {onDestroy} from "svelte"
 	export let active = false
 	export let ssid = ""
 	let key = ""
 	let networks
+	let timeout
+
+	onDestroy(() => {
+		clearTimeout(timeout)
+	})
 
 	async function scanWifi() {
 		let unfiltered_networks = await httpAPI("GET","/scan")

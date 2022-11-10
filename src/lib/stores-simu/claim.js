@@ -1,6 +1,11 @@
+import { onDestroy } from 'svelte'
 import { get, writable } from 'svelte/store'
 import claim_fakedata from './claim.json'
+let timeout
 
+onDestroy(() => {
+    clearTimeout(timeout)
+})
 
 function createClaimStore() {
     const P  = writable()
@@ -9,7 +14,7 @@ function createClaimStore() {
 	// get claim from clientid EvseClient_OpenEVSE_Manual
 	async function getClaim() {
 		P.update(() => claim_fakedata)
-		await new Promise(resolve => setTimeout(resolve, 500));
+		await new Promise(resolve => timeout = setTimeout(resolve, 500));
 		return P
 }
 	// set {claim for clientid EvseClient_OpenEVSE_Manual
@@ -17,7 +22,7 @@ function createClaimStore() {
 		let store = get(P)
 		store = {...store, ...data}
 		P.update(() => store)
-		await new Promise(resolve => setTimeout(resolve, 500));
+		await new Promise(resolve => timeout = setTimeout(resolve, 500));
         return P
     }
 
@@ -25,7 +30,7 @@ function createClaimStore() {
     async function releaseClaim() {
 		let store = {}
         P.update(() => store)
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => timeout = setTimeout(resolve, 500));
         return P
     }
 

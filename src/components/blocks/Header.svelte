@@ -1,20 +1,24 @@
 <script>
-  import logo from '../../assets/logo.png'
-  import { link, location } from "svelte-spa-router"
+	import logo from "../../assets/logo.png"
+	import {onDestroy} from "svelte"
+	import { link, location } from "svelte-spa-router"
 
-  let logoid
-  let hideDropDown = true
-  let isBurgerActive = false
-
-  function toggleBurger() {
+	let logoid
+	let hideDropDown = true
+	let isBurgerActive = false
+	let timeout
+	onDestroy(()=>{
+		clearTimeout(timeout)
+	})
+	function toggleBurger() {
 	isBurgerActive = !isBurgerActive
-  }
-  function toggleMenu() {
+	}
+	function toggleMenu() {
 	isBurgerActive = false;
 	hideDropDown = false;
 	logoid.focus()
-	setTimeout(() => hideDropDown = true, 100)
-  }
+	timeout = setTimeout(() => hideDropDown = true, 100)
+	}
 
 </script>
 
