@@ -12,8 +12,6 @@
 	function mountCalendar() {
 			calendars  = bulmaCalendar.attach('.bulmaCalendar', {
 			type: 'datetime',
-			dateFormat: 'dd/MM/yyyy',
-			timeFormat: 'HH:mm',
 			lang: navigator.language.substring(0, 2) || "en",
 			displayMode: 'inline',
 			showButtons: false,

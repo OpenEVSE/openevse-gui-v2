@@ -29,7 +29,8 @@ async function setConf(prop,val) {
 
 function formatDate(t,z) {
 		const utctime = new Date(t)
-		date = utc2evseLocalTime(utctime, z, true)
+		//date = utc2evseLocalTime(utctime, z, true)
+		date = utctime
 	}
 
 async function setTime() {
@@ -64,22 +65,29 @@ async function setTime() {
 }
 
 function timeNow() {
-	// To Do: set to browser local time
 	const localdate = new Date()
-	date = utc2evseLocalTime(localdate, tz, true)
+	//date = utc2evseLocalTime(localdate, tz, true)
+	date = localdate
 	return true
 }
 
-onMount(() => {tz = $config_store.time_zone})
+onMount(() => {
+	tz = $config_store.time_zone
+	formatDate($status_store.time,tz)
+	})
 
 
-$: formatDate($status_store.time,$config_store.time_zone)
+function displayDate(date) {
+	if(date)
+		return utc2evseLocalTime(date,tz,true)
+	else return 0
+}
 
 </script>
 
 <Box title="Time">
 	{#key timemode}
-	<InputForm type="text" title="Local Time" placeholder="date" bind:value={date} disabled={timemode==0?false:true} onFocus={()=> time_modal_opened = true }  />
+	<InputForm type="text" title="Local Time" placeholder="date" value={displayDate(date)} disabled={timemode==0?false:true} onFocus={()=> time_modal_opened = true }  />
 	{/key}
 	<div class="has-text-weight-bold">Set Time from:</div>
 	<div class="select is-info">
