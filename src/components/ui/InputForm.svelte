@@ -56,7 +56,7 @@
 <div class="my-2">
 	<form>
 		{#if title}
-		<span class="has-text-weight-bold">{title}</span>
+		<span class="has-text-weight-semibold {disabled?"has-text-grey-light":""}">{title}</span>
 		{/if}
 		<input bind:this={field} class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off" {maxlength}
 		{disabled} on:change|preventDefault={onChange} on:focus|preventDefault={onFocus} on:input|preventDefault={inputValue} on:submit|preventDefault >
@@ -70,7 +70,7 @@
 			{/if}
 		</div>
 		{#if type=="password"}	
-		<div class="my-2">
+		<div class="my-2 {disabled?"has-text-grey-light":""}">
 			<label class="checkbox">
 				<input type="checkbox" bind:checked={show} {disabled}>
 				Show

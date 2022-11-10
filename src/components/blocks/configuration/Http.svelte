@@ -1,4 +1,5 @@
 <script>
+	import Tabs from "./../../ui/Tabs.svelte";
 	import AlertBox from "./../../ui/AlertBox.svelte";
 	import Switch from "../../ui/Switch.svelte";
 	import { config_store } from "../../../lib/stores/config.js";
@@ -11,9 +12,18 @@
 	let alert_visible = false
 	let usr
 	let pwd
+	let activetab = 0
 
+	let clickTab = (i) => {
+		activetab = i
+	}
+
+	let tabs = [
+		{name: "Authentication", url:"/configuration/services"},
+		{name: "Settings", url:"/configuration/services"}
+	]
+	
 	let submit = async () => {
-		console.log("save user/pass")
 		submitState = "loading"
 		if ( checked && (!usr || !pwd || pwd=='_DUMMY_PASSWORD')) {
 			alert_visible = true
@@ -38,7 +48,6 @@
 	}
 
 	let getAuthData = (u,p) => {
-		console.log("getAuthData user: " + u + "pwd: " + p)
 		usr = u
 		pwd = p
 
@@ -56,11 +65,19 @@
 	$: getAuthData($config_store.www_username,$config_store.www_password)
 
 </script>
-<Box title="Authentification">
-	<Switch name="auth_enabled" label="Enable" tooltip="Enable authenfication for Web Interface & HTTP API " tooltip_pos="right" bind:checked />
-	<InputForm title="Username" bind:value={usr} placeholder="Admin" type="text" disabled={!checked} />
-	<InputForm title="Password" bind:value={pwd} placeholder="15 characters max" type="password" maxlength=15 disabled={!checked} />
-	<Button name="Save" color="is-info" state={submitState} butn_submit={submit} />
-	
+<Box title="HTTP Server">
+	<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
+	{#if activetab == 0}
+	<!-- Authentification -->
+	<div class="my-2">
+		<Switch name="auth_enabled" label="Enable" tooltip="Enable HTTP authentication with login/password" tooltip_pos="right" bind:checked />
+		<InputForm  title="Username" bind:value={usr} placeholder="Admin" type="text" disabled={!checked} />
+		<InputForm title="Password" bind:value={pwd} placeholder="15 characters max" type="password" maxlength=15 disabled={!checked} />
+		<Button name="Save" color="is-info" state={submitState} butn_submit={submit} />
+	</div>
+	{:else if activetab == 1}
+	<!-- Settings -->
+
+	{/if}
 </Box>
 <AlertBox title="Error" body="Please set a username & password first" bind:visible={alert_visible}/>
