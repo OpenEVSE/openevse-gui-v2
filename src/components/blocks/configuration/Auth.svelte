@@ -41,7 +41,7 @@
 		console.log("getAuthData user: " + u + "pwd: " + p)
 		usr = u
 		pwd = p
-		
+
 		if (u || p)  {
 			checked = true
 			return true
@@ -63,4 +63,4 @@
 	<Button name="Save" color="is-info" state={submitState} butn_submit={submit} />
 	
 </Box>
-<AlertBox title="Error" body="Please set a username & password first" visible={alert_visible}/>
+<AlertBox title="Error" body="Please set a username & password first" bind:visible={alert_visible}/>
