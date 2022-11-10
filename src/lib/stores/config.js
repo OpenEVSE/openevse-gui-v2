@@ -16,6 +16,13 @@ function createConfigStore() {
         let res = await httpAPI("POST", "/config", data)
         return res
     }
+
+    async function upload(data) {
+        let res = await httpAPI("POST", "/config", JSON.stringify(data))
+        if (res.msg == "done" || res.msg == "no change")
+            return true
+        else return false
+    }
     
 
     return {
@@ -23,6 +30,7 @@ function createConfigStore() {
         set,
         update,
         download,
+        upload: (data) => upload(data),
         setConfig: (attr,val) => setConfig(attr,val)
     }
 }

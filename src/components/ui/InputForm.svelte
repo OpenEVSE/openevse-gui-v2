@@ -7,6 +7,7 @@
 	export let value
 	export let placeholder
 	export let type
+	export let maxlength = null
 	export let onChange = () => {}
 	export let onFocus = () => {}
 	export let status = 0
@@ -57,7 +58,7 @@
 		{#if title}
 		<span class="has-text-weight-bold">{title}</span>
 		{/if}
-		<input bind:this={field} class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off"
+		<input bind:this={field} class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off" {maxlength}
 		{disabled} on:change|preventDefault={onChange} on:focus|preventDefault={onFocus} on:input|preventDefault={inputValue} on:submit|preventDefault >
 		<div class="state">
 			{#if status==1}
