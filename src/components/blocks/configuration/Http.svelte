@@ -1,21 +1,32 @@
 <script>
+	import { config_store } from "./../../../lib/stores/config.js";
 	import Tabs from "./../../ui/Tabs.svelte";
 	import AlertBox from "./../../ui/AlertBox.svelte";
 	import Switch from "../../ui/Switch.svelte";
-	import { config_store } from "../../../lib/stores/config.js";
 	import {onMount} from "svelte"
 	import InputForm from "../../ui/InputForm.svelte";
 	import Box from "../../ui/Box.svelte"
 	import Button from "../../ui/Button.svelte"
 
-	let auth_checked = false
-	let https_checked = false
-	let submitState = "default"
 	let alert_visible = false
-	let usr
-	let pwd
 	let activetab = 0
-	let has_https
+
+	//Auth
+	let auth_checked = false
+	let auth_https_checked = false
+	let auth_submit_state = "default"
+	let auth_usr
+	let auth_pwd
+
+	//Settings
+	let stg_submit_state
+	let stg_has_https
+	let stg_language = 'en'
+
+	const stg_langs = [
+		{name: "English", code: "en"},
+		{name: "French",  code: "fr"}
+	]
 
 	let clickTab = (i) => {
 		activetab = i
@@ -25,34 +36,52 @@
 		{name: "Authentication", url:"/configuration/services"},
 		{name: "Settings", url:"/configuration/services"}
 	]
+
+	let stg_submit = async () => {
+		stg_submit_state = "loading"
 	
-	let submit = async () => {
-		submitState = "loading"
-		if ( auth_checked && (!usr || !pwd || pwd=='_DUMMY_PASSWORD')) {
+		const data = {
+		lang: stg_language
+		}
+		if (await config_store.upload(data)) 
+			{
+				stg_submit_state = "ok"
+				return true
+			}
+		else {
+			stg_submit_state = "error"
+			return false
+		}
+	
+	}
+	
+	let auth_submit = async () => {
+		auth_submit_state = "loading"
+		if ( auth_checked && (!auth_usr || !auth_pwd || auth_pwd=='_DUMMY_PASSWORD')) {
 			alert_visible = true
-			submitState = "default"
+			auth_submit_state = "default"
 			return false
 		}
 		else {
 			const data = {
-			www_username: auth_checked?usr:"",
-			www_password: auth_checked?pwd:""
+			www_username: auth_checked?auth_usr:"",
+			www_password: auth_checked?auth_pwd:""
 			}
 			if (await config_store.upload(data)) 
 				{
-					submitState = "ok"
+					auth_submit_state = "ok"
 					return true
 				}
 			else {
-				submitState = "error"
+				auth_submit_state = "error"
 				return false
 			}
 		}
 	}
 
 	let getAuthData = (u,p) => {
-		usr = u
-		pwd = p
+		auth_usr = u
+		auth_pwd = p
 
 		if (u || p)  {
 			auth_checked = true
@@ -69,15 +98,17 @@
 	onMount(() => {
 		if ($config_store.http_supported_protocols) {
 			$config_store.http_supported_protocols.forEach(p => { 
-				if (p === "https") has_https = true
-				else has_https = false
+				if (p === "https") stg_has_https = true
+				else stg_has_https = false
 			})
 		}
+		stg_language = $config_store.lang
 	})
 
 
 	$: getAuthData($config_store.www_username,$config_store.www_password)
-
+	$: $config_store.lang, () => {stg_language = $config_store.lang}
+	
 </script>
 <Box title="HTTP Server">
 	<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
@@ -85,18 +116,34 @@
 	<!-- Authentification -->
 	<div class="my-2">
 		<Switch name="auth_enabled" label="Enable" tooltip="Enable HTTP authentication with login/password" tooltip_pos="right" bind:checked={auth_checked} />
-		<InputForm  title="Username" bind:value={usr} placeholder="Admin" type="text" disabled={!auth_checked} />
-		<InputForm title="Password" bind:value={pwd} placeholder="15 characters max" type="password" maxlength=15 disabled={!auth_checked} />
-		<Button name="Save" color="is-info" state={submitState} butn_submit={submit} />
+		<InputForm  title="Username" bind:value={auth_usr} placeholder="Admin" type="text" disabled={!auth_checked} />
+		<InputForm title="Password" bind:value={auth_pwd} placeholder="15 characters max" type="password" maxlength=15 disabled={!auth_checked} />
+		<Button name="Save" color="is-info" state={auth_submit_state} butn_submit={auth_submit} />
 	</div>
 	{:else if activetab == 1}
 	<!-- Settings -->
 	<div class="my-2">
-		<div class="has-text-weight-semibold">HTTPS</div>
-		<Switch name="https_enabled" label="Enable HTTPS" bind:checked={https_checked} disabled={!has_https} />
-		{#if !has_https}
-		<span class="mx-3 is-size-7 is-italic">HTTPS not supported on current firmware</span>
-		{/if}
+		<div class="block">
+			<Switch name="https_enabled" label="Enable HTTPS" bind:checked={auth_https_checked} disabled={!stg_has_https} />
+			{#if !stg_has_https}
+			<div class=" is-size-7 is-italic">HTTPS not supported on current firmware</div>
+			{/if}
+		</div>
+		<div class="block">
+			<div class="has-text-weight-semibold mb-1">Default Language</div>
+			<div class="select is-info">		
+				<select bind:value={stg_language}>
+					{#each stg_langs as lang}
+					<option value={lang.code}>{lang.name}</option>
+					{/each}	
+				</select>
+			</div>
+		</div>
+		<div class="block">
+			<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+		</div>
+			
+		
 	</div>
 	{/if}
 </Box>

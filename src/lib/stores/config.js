@@ -36,3 +36,20 @@ function createConfigStore() {
 }
 
 export const config_store = createConfigStore()
+
+// export const submitConfigData = async (data,obj=null) => {
+//     if (obj)
+//     {
+//         obj.state = "loading"
+
+//         if (await config_store.upload(data)) 
+//             {
+//                 obj.state = "ok"
+//                 return true
+//             }
+//         else {
+//             obj.state = "error"
+//             return false
+//         }
+//     }
+// }
