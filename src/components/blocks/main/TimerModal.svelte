@@ -4,10 +4,12 @@
 	import AlertBox from "../../ui/AlertBox.svelte"
 	import Modal from "../../ui/Modal.svelte"
 	import Button from "../../ui/Button.svelte"
+	import {onDestroy} from "svelte"
 
 	export let is_opened;
 	export let timer = null;
-	
+	let timeout
+
 	let saveTimerState = "default"
 	let alert_visible = false
 	let select
@@ -33,6 +35,11 @@
 		populate_checkboxes();
 		}
 	
+	onDestroy(() => {
+		if (timeout)
+			clearTimeout(timeout)
+	})
+
 	function populate_checkboxes() {
 		
 	        if (timer == null) {
@@ -122,13 +129,15 @@
 					if (timer == null) {
 						$schedule_store.push(schedule)
 					}
+					timeout = setTimeout(() => {
+						is_opened = false
+					}, 1000);
 
 				}
 			else {
 				saveTimerState = "error"
 			}
 			$schedule_store = $schedule_store; // force redraw
-			//setTimeout(()=>{is_opened = false}, 1000)
 		}
 		
 	}
@@ -231,8 +240,8 @@
 				</div>
 		</div>
 		<div class="mt-4">
-			<Button name="Save" color="is-primary" butn_submit={saveTimer} state={saveTimerState}/>
-			<Button name="Cancel" color="is-danger" butn_submit={()=>is_opened = false} />
+			<Button name="Save" color="is-info" butn_submit={saveTimer} state={saveTimerState}/>
+			<Button name="Close" color="is-danger" butn_submit={()=>is_opened = false} />
 		</div>
 	</Box>
 </Modal>
