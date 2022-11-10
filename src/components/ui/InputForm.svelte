@@ -72,7 +72,7 @@
 		{#if type=="password"}	
 		<div class="my-2">
 			<label class="checkbox">
-				<input type="checkbox" bind:checked={show}>
+				<input type="checkbox" bind:checked={show} {disabled}>
 				Show
 			</label>
 		</div>
