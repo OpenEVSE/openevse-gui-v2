@@ -1,5 +1,5 @@
 <script>
-	import { faCar, faCircleCheck, faCirclePause, faThumbsUp, faFlagCheckered, faChargingStation, 
+	import { faCar, faCircleCheck, faCirclePause,faHourglassHalf, faThumbsUp, faChargingStation, 
 			faTriangleExclamation, faMoon,faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import StatusIcon from "./StatusIcon.svelte"
 	export let state
@@ -22,7 +22,7 @@
 			message = "Waiting for EV"
 			color = "is-info"
 			iconcolor = "has-text-white"
-			icon = faThumbsUp
+			icon = faHourglassHalf
 			break
 		case 2: // Connected
 			status = "active"
@@ -30,7 +30,7 @@
 			message = "Ready to charge"
 			color = "is-primary"
 			iconcolor = "has-text-white"
-			icon = faFlagCheckered
+			icon = faThumbsUp
 			break;
 		case 3: // Charging
 			status = "active"
