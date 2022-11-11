@@ -94,8 +94,12 @@
 
 	<div class="pb-2 pt-5 ">
 		<div class="columns is-size-6 px-0 mx-0 ">
+			{#if $status_store.manual_override == 1}
+			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Manual mode: </span> <span class="tag is-white is-capitalized {$status_store.status == "active" ?"has-text-primary":"has-text-danger"}">{$status_store.status=="active"?"Charge ON":"Charge OFF"}</span></div>
+			{:else}
 			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Current Event: </span> <span class="tag is-white is-capitalized {$plan_store.current_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.current_event.state} {formatTimerTime($plan_store.current_event.time)}</span></div>
 			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white is-capitalized {$plan_store.next_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.next_event.state} {formatTimerTime($plan_store.next_event.time)}</span></div>
+			{/if}
 		</div>
 	</div>
 	<ExpandArrow bind:expand={$uistates_store.status_expanded} />
