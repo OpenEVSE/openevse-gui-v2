@@ -47,7 +47,7 @@
 
 </style>
 {#if $status_store.evse_connected == 1}
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-light mb-5 mt-0 px-3">
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} p-3 has-background-light mb-3 mt-0 px-3">
 	<div class="mb-2 mx-0">
 		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={time} bp={$uistates_store.breakpoint} />	
 	</div>
