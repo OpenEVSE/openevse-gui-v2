@@ -1,6 +1,5 @@
 <script>
 	import Box from "../../ui/Box.svelte"
-	import TimeModal from "./TimeModal.svelte"
 	import {status_store} from "../../../lib/stores/status.js"
 	import {config_store} from "../../../lib/stores/config.js"
 	import InputForm from "../../ui/InputForm.svelte"
@@ -36,23 +35,19 @@
 	}
 
 	function getDate(t) {
-			const utctime = new Date(t)
-			date = utctime
+			const evsedate = new Date(t)
+			date = new Date(evsedate.getTime() - evsedate.getTimezoneOffset() * 60000).toISOString().slice(0, -8);
+			console.log("get date: " + date)
 		}
 
 	async function setTime() {
 		const formData = new FormData();
 		setTimeButnState = "loading"
 		if (timemode == 0) {
-			
-			// var dateSplit = date.split(" ")
-			// var dateParts = dateSplit[0].split("/");
-			// const newdate = new Date(dateParts[1] + "/" + dateParts[0] + "/" + dateParts[2] + " " + dateSplit[1] )
-			// const isodate = newdate.toISOString()
-			const isodate = date.toISOString()
+			var newdate = new Date(date)		
 			formData.set('ntp', 'false');
 			formData.set('tz', tz);
-			formData.set('time', isodate);
+			formData.set('time', newdate.toISOString());
 		}
 		else {
 			formData.set('ntp', "true");
@@ -93,14 +88,6 @@
 		else timemode = 0
 	}
 
-	function timeNow() {
-		const localdate = new Date()
-		//date = utc2evseLocalTime(localdate, tz, true)
-		date = localdate
-		time_modal_opened = false
-		return true
-	}
-
 	function setTimeZone() {
 
 	}
@@ -111,21 +98,14 @@
 		getTimeMode($config_store.sntp_enabled) 
 		})
 
-
-	function displayDate(date) {
-		if(date)
-			return utc2evseLocalTime(date,tz,true)
-		else return 0
-	}
-
 	$: getTimeMode($config_store.sntp_enabled) 
 
 </script>
 
 <Box title="Time">
-	{#key timemode}
-	<InputForm type="text" readonly={true} title="Local Time" placeholder="date" value={displayDate(date)} disabled={timemode==0?false:true} onFocus={()=> time_modal_opened = true }  />
-	{/key}
+
+	<!-- <InputForm type="text" readonly={true} title="Local Time" placeholder="date" value={displayDate(date)} disabled={timemode==0?false:true} onFocus={()=> time_modal_opened = true }  /> -->
+	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} />
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 	
 	{#if timemode}
@@ -150,6 +130,3 @@
 		</div>
 	</div>
 </Box>
-{#if time_modal_opened}
-<TimeModal bind:is_opened={time_modal_opened} bind:value={date} timeNow={timeNow}/>
-{/if}
