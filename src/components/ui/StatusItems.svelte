@@ -19,7 +19,7 @@
 		case 1: // Not connected
 			status = "active"
 			charging = false
-			message = "Waiting for Vehicle"
+			message = "Waiting for EV"
 			color = "is-info"
 			iconcolor = "has-text-white"
 			icon = faThumbsUp

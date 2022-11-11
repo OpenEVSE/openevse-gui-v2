@@ -68,10 +68,11 @@
 	}
 
 	async function setTimeMode() {
-		console.log("Set timemode")
 		selectTimeModeState = "loading"
 
-		const data = {sntp_enabled: timemode==0?false:true}
+		const data = {
+			sntp_enabled: timemode==0?false:true,
+		}
 			if (await config_store.upload(data)) 
 				{
 					selectTimeModeState = "ok"
@@ -88,8 +89,29 @@
 		else timemode = 0
 	}
 
-	function setTimeZone() {
+	async function setTimeZone() {
+		selectTimeZoneState = "loading"
 
+		const data = {time_zone: tz}
+		if (await config_store.upload(data)) 
+			{
+				selectTimeZoneState = "ok"
+				return true
+			}
+		else {
+			selectTimeZoneState = "error"
+			return false
+		}
+	}
+
+	function create_tz_obj(tz) {
+		if (tz) {
+			var tzobj = []
+			Object.entries(tz).forEach((element,index,array) => {
+				tzobj[index] = {name: element[0], value: element[0] + "|" + element[1]}
+			})
+			return tzobj
+		}
 	}
 
 	onMount(() => {
@@ -104,7 +126,6 @@
 
 <Box title="Time">
 
-	<!-- <InputForm type="text" readonly={true} title="Local Time" placeholder="date" value={displayDate(date)} disabled={timemode==0?false:true} onFocus={()=> time_modal_opened = true }  /> -->
 	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} />
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 	
@@ -115,16 +136,7 @@
 	<!-- <Button name="Use Current Time" butn_submit={timeNow}/> -->
 	{/if}
 	<div class="">
-		<!-- <Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={Object.entries(timeZone)} onChange={setTimeZone} /> -->
-		<div class="has-text-weight-bold">Time zone:</div>
-		<div class="select is-info">		
-			<select bind:value={tz} disabled={false}>
-				{#each Object.entries(timeZone) as option,i}
-				<option value={option[0]+"|"+option[1]}>{option[0]}</option>
-				{/each}	
-			</select>
-		</div>
-
+		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={create_tz_obj(timeZone)} onChange={setTimeZone} />
 		<div class="mt-4">
 			<Button name="Set Time" butn_submit={setTime} bind:state={setTimeButnState}/>
 		</div>
