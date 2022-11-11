@@ -28,6 +28,7 @@
     "bulma-slider": "^2.0.5",
     "bulma-switch": "^2.0.4",
     "svelte-fa": "^3.0.3",
+    "svelte-inline-svg": "^1.2.0",
     "svelte-local-storage-store": "^0.3.1",
     "svelte-spa-router": "^3.3.0"
   }

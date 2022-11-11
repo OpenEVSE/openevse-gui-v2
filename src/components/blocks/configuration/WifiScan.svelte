@@ -1,5 +1,6 @@
 <script>
 	import {dbm2icon, removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"
+	import InlineSVG from 'svelte-inline-svg'
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
 	import InputForm from "../../ui/InputForm.svelte"
@@ -70,18 +71,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<!-- {#await scanWifi()}
-				<tr class="has-background-light">
-				<th class="py-3 has-text-centered">Scanning Networks</th>
-				<td class="py-3 has-text-info is-size-6"><Fa icon={faSpinner} spin /></td>
-				</tr>
-			{:then} -->
 				{#if networks && networks.length > 0}
 					{#each networks as network}
 						<tr class="has-background-light">
 							<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
 							<td class="pt-2 no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
-								<img width="24px" height="24px" alt={network.rssi + " dBm"} src={dbm2icon(network.rssi)}/>
+								<InlineSVG src={dbm2icon(network.rssi)} />
 							</td>
 						</tr>
 					{/each}
@@ -91,10 +86,8 @@
 					<td class="py-3 has-text-info is-size-6"><Fa icon={faSpinner} spin /></td>
 				</tr>
 				{:else}
-					<!-- No Network found, scan again -->
 					<tr>No network found, scan again</tr>
 				{/if}
-			<!-- {/await} -->
 		</tbody>
 		
 	</table>
