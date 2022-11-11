@@ -16,7 +16,7 @@
 	let setTimeButnState = "default"
 	let selectTimeModeState = "default"
 	let selectTimeZoneState = "default"
-	let time_modal_opened = false
+	let allow_time_update = true
 
 	let timemodes = [
 		{name: "Manual", value: 0},
@@ -36,8 +36,13 @@
 	function getDate(t) {
 			const evsedate = new Date(t)
 			date = new Date(evsedate.getTime() - evsedate.getTimezoneOffset() * 60000).toISOString().slice(0, -8);
-			console.log("get date: " + date)
 		}
+	function updateDateField(t) {
+		console.log("update time: allow_time_update=" + allow_time_update + " date:" + t)
+		if (allow_time_update) {
+			getDate(t)
+		}	
+	}
 
 	async function setTime() {
 		const formData = new FormData();
@@ -59,6 +64,7 @@
 		if (res == "set" )  {
 			setTimeButnState = "ok"
 			getDate($status_store.time)
+			allow_time_update = true
 			return true
 		}
 		else {
@@ -76,8 +82,9 @@
 			if (await config_store.upload(data)) 
 				{
 					selectTimeModeState = "ok"
-					console.log("timemode=" +timemode)
-					if (timemode==1) { setTime() }
+					if (timemode==1) await setTime()
+					getDate($status_store.time)  // update time field
+					allow_time_update = true
 					return true
 				}
 			else {
@@ -122,13 +129,13 @@
 		getTimeMode($config_store.sntp_enabled) 
 		})
 
-	$: getTimeMode($config_store.sntp_enabled) 
-
+	$: getTimeMode($config_store.sntp_enabled)
+	$: updateDateField($status_store.time)
 </script>
 
 <Box title="Time">
 
-	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} />
+	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 	
 	{#if timemode}
