@@ -16,6 +16,10 @@
 		time = utc2evseLocalTime(utctime, z)
 	}
 
+	function formatTimerTime(t) {
+		return new Date('1970-01-01T' + t + 'Z').toLocaleTimeString()
+	}
+
 	$: formatTime($status_store.time,$config_store.time_zone)
 	$: { 
 		if ($status_store.elapsed != undefined)
@@ -90,8 +94,8 @@
 
 	<div class="pb-2 pt-5 ">
 		<div class="columns is-size-6 px-0 mx-0 ">
-			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Current Event: </span> <span class="tag is-white is-capitalized {$plan_store.current_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.current_event.state} {$plan_store.current_event.time}</span></div>
-			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white is-capitalized {$plan_store.next_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.next_event.state} {$plan_store.next_event.time}</span></div>
+			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Current Event: </span> <span class="tag is-white is-capitalized {$plan_store.current_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.current_event.state} {formatTimerTime($plan_store.current_event.time)}</span></div>
+			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white is-capitalized {$plan_store.next_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.next_event.state} {formatTimerTime($plan_store.next_event.time)}</span></div>
 		</div>
 	</div>
 	<ExpandArrow bind:expand={$uistates_store.status_expanded} />
