@@ -21,6 +21,7 @@
 
 	async function scanWifi() {
 		state = "scan"
+		networks = []
 		let unfiltered_networks = await httpAPI("GET","/scan")
 		networks = removeDuplicateObjects(unfiltered_networks,"ssid")
 		state = ""
@@ -34,8 +35,9 @@
 	}
 
 	function scanAgain() {
-		networks = []
 		scanWifi()
+		// networks = []
+		
 		return "Scanning ..."
 	}
 
@@ -74,7 +76,7 @@
 						<tr class="has-background-light">
 							<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
 							<td class="pt-2 no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
-								<InlineSVG src={dbm2icon(network.rssi)} />
+								<InlineSVG src={dbm2icon(network.rssi)} {...{width: 24, height: 24}} />
 							</td>
 						</tr>
 					{/each}
@@ -84,7 +86,10 @@
 					<td class="py-3 has-text-info is-size-6"><Fa icon={faSpinner} spin /></td>
 				</tr>
 				{:else}
-					<tr>No network found, scan again</tr>
+					<tr class="has-background-light">
+						<th class="py-3 has-text-centered">No network found, scan again</th>
+						<td class="py-3 has-text-info is-size-6"></td>
+					</tr>
 				{/if}
 		</tbody>
 		
