@@ -27,12 +27,12 @@
 <nav class="breadcrumb is-left my-2" aria-label="breadcrumbs">
 	<ul>
 		<li class={ $location === "/" ? "is-active" : "" }>
-			<a href="/" use:link class:has-text-info={$location === "/"}><Fa class="mt-1" icon={faHome} /></a>
+			<a href="/" use:link><Fa class="mt-1" icon={faHome} /></a>
 		</li>
 	 
 	  	{#each links as link, i }
 			<li class={ i == level - 1 ? "is-active":""}>
-				<a href={"/#" + sumlink(link)} class:has-text-info={ i == level - 1}> {link} </a>
+				<a href={"/#" + sumlink(link)}> {link} </a>
 			</li>
 	  {/each}
 	</ul>
