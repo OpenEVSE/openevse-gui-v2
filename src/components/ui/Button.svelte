@@ -14,10 +14,10 @@
 	export let disabled = false
 	let butn
 	let timeout
+	let is_overed = false
 
 	const displaystate = (state) => { 
 		if (state != "default") {
-			butn.blur()
 		}
 	} 
 
@@ -32,11 +32,13 @@
 			clearTimeout(timeout)
 	})
 
+
 	function changeState() {
 		if (state!="default") disabled = true
 		if (state=="ok" || state=="error") {
 			timeout = setTimeout(() => {
 				state = "default"
+				if (butn) butn.blur()
 			}, 1500);
 		}
 		else disabled = false
@@ -47,14 +49,21 @@
 		
 
 </script>
+<style>
+
+</style>
 
 
-<div class="is-inline-block">
+<div class="is-inline-block p0">
 	<button style="width:{width}" bind:this={butn} 
-		class="button is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}" {disabled}
-		on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} data-tooltip={tooltip}>
+		class="button is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}"
+		{disabled} data-tooltip={tooltip}
+		on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} 
+		on:mouseenter={() => {is_overed = true}} 
+		on:mouseleave={() => {is_overed = false}} 
+		>
 		<Fa icon={state=="default"?icon:state == "loading"?faSpinner:state == "ok"?faCheck:faXmark} spin={state=="loading"}
-			class="{state == "loading"?"has-text-info":state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}"
+			class="{state == "loading"?is_overed?"has-text-white":"has-text-info":state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}"
 		/>
 		{#if name}
 			{#if state == "default"}

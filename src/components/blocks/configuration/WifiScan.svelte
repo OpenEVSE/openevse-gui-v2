@@ -3,20 +3,26 @@
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
 	import InputForm from "../../ui/InputForm.svelte"
-	import {onDestroy} from "svelte"
+	import {onMount, onDestroy} from "svelte"
 	export let active = false
 	export let ssid = ""
 	let key = ""
 	let networks
 	let timeout
+	let state = ""
 
+	onMount(() => {
+		scanWifi()
+	})
 	onDestroy(() => {
 		clearTimeout(timeout)
 	})
 
 	async function scanWifi() {
+		state = "scan"
 		let unfiltered_networks = await httpAPI("GET","/scan")
 		networks = removeDuplicateObjects(unfiltered_networks,"ssid")
+		state = ""
 		return networks
 	}
 	async function connectWifi() {
@@ -27,9 +33,10 @@
 	}
 
 	function scanAgain() {
-		active = false
+		//active = false
 		networks = []
-		setTimeout(() => active = true,500)
+		scanWifi()
+		//setTimeout(() => active = true,500)
 		return "Scanning ..."
 	}
 
@@ -63,13 +70,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#await scanWifi()}
+			<!-- {#await scanWifi()}
 				<tr class="has-background-light">
 				<th class="py-3 has-text-centered">Scanning Networks</th>
 				<td class="py-3 has-text-info is-size-6"><Fa icon={faSpinner} spin /></td>
 				</tr>
-			{:then}
-				{#if networks.length > 0}
+			{:then} -->
+				{#if networks && networks.length > 0}
 					{#each networks as network}
 						<tr class="has-background-light">
 							<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
@@ -78,11 +85,16 @@
 							</td>
 						</tr>
 					{/each}
+				{:else if state == "scan"}
+				<tr class="has-background-light">
+					<th class="py-3 has-text-centered">Scanning Networks</th>
+					<td class="py-3 has-text-info is-size-6"><Fa icon={faSpinner} spin /></td>
+				</tr>
 				{:else}
 					<!-- No Network found, scan again -->
 					<tr>No network found, scan again</tr>
 				{/if}
-			{/await}
+			<!-- {/await} -->
 		</tbody>
 		
 	</table>
