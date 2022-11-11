@@ -1,0 +1,43 @@
+<script>
+	import Fa from 'svelte-fa/src/fa.svelte'
+	import {faSpinner, faCheck, faXmark} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {onDestroy} from "svelte"
+
+	export let value
+	export let title
+	export let status 
+	export let disabled = false
+	export let items = [] // [{name: "name", value: "value"}, ...]
+	export let onChange = () => {}
+	let timeout
+
+	function resetStatus(s) {
+		if (s==2||s==3) timeout = setTimeout(()=> status = 0,2000)
+	}
+
+	onDestroy(() => {
+		clearTimeout(timeout)
+	})
+
+	$: resetStatus(status)
+
+</script>
+<div class="is-inline-block">
+	<div class="has-text-weight-bold">{title}</div>
+	<div class="select is-info">
+		<select bind:value={value} on:change={onChange} {disabled}>
+			{#each items as item }
+			<option value={item.value}>{item.name}</option>
+			{/each}
+		</select>
+	</div>
+	<div class="is-inline-block mx-2">
+		{#if status==1}
+		<Fa class="has-text-info"icon={faSpinner} spin />
+		{:else if status==2}
+		<Fa class="has-text-primary" icon={faCheck}/>
+		{:else if status==3}
+		<Fa class="has-text-danger" icon={faXmark}/>
+		{/if}
+	</div>
+</div>
