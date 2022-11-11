@@ -71,11 +71,12 @@
 		selectTimeModeState = "loading"
 
 		const data = {
-			sntp_enabled: timemode==0?false:true,
+			sntp_enabled: timemode==1?true:false,
 		}
 			if (await config_store.upload(data)) 
 				{
 					selectTimeModeState = "ok"
+					if (timemode==1) setTime()
 					return true
 				}
 			else {
