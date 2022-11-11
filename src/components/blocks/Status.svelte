@@ -6,7 +6,7 @@
 	import StatusTile from "../ui/StatusTile.svelte"
 	import StatusItems from "../ui/StatusItems.svelte"
 	import ExpandArrow from "../ui/ExpandArrow.svelte"
-	import {utc2evseLocalTime} from "../../lib/utils.js"
+	import {utc2evseLocalTime, displayTime} from "../../lib/utils.js"
 	
 	let time
 	let elapsed
@@ -14,13 +14,6 @@
 	function formatTime(t,z) {
 		const utctime = new Date(t)
 		time = utc2evseLocalTime(utctime, z)
-	}
-
-	function formatTimerTime(t) {
-		var _t = new Date('1970-01-01T' + t + 'Z').toLocaleTimeString()
-		const is12 = _t.toString().match(/AM|PM/i)
-		var formattedTime = _t.slice(0,5) + is12?_t.slice(0,-3):""
-		return formattedTime
 	}
 
 	$: formatTime($status_store.time,$config_store.time_zone)
@@ -100,8 +93,8 @@
 			{#if $status_store.manual_override == 1}
 			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Manual mode: </span> <span class="tag is-white is-capitalized {$status_store.status == "active" ?"has-text-primary":"has-text-danger"}">{$status_store.status=="active"?"Charge ON":"Charge OFF"}</span></div>
 			{:else}
-			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Current Event: </span> <span class="tag is-white is-capitalized {$plan_store.current_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.current_event.state} {formatTimerTime($plan_store.current_event.time)}</span></div>
-			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white is-capitalized {$plan_store.next_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.next_event.state} {formatTimerTime($plan_store.next_event.time)}</span></div>
+			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Current Event: </span> <span class="tag is-white is-capitalized {$plan_store.current_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.current_event.state} {displayTime($plan_store.current_event.time)}</span></div>
+			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white is-capitalized {$plan_store.next_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.next_event.state} {displayTime($plan_store.next_event.time)}</span></div>
 			{/if}
 		</div>
 	</div>

@@ -72,6 +72,13 @@ export function utc2evseLocalTime(d,tz,y = false) {
 	return lt
 }
 
+export function displayTime(t) {
+	var _t = new Date('1970-01-01T' + t + 'Z').toLocaleTimeString()
+	const is12 = _t.toString().match(/AM|PM/i)
+	var formattedTime = _t.slice(0,5) + is12?_t.slice(0,-3):""
+	return formattedTime
+}
+
 function getTZ(s) {
 	if(s) 
 		return s.split('|')[0]

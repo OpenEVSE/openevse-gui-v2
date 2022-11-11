@@ -3,6 +3,7 @@
 	import IconButton from "./IconButton.svelte"
 	import { faSquarePen, faSquareMinus, faMinus, faCalendarDays } from '@fortawesome/free-solid-svg-icons/index.js'
 	import { link, location } from "svelte-spa-router"
+	import {displayTime} from "../../lib/utils.js"
 	export let t_id
 	export let t_time
 	export let t_state
@@ -25,7 +26,7 @@
 
 <tr>
 	<th>{t_id}</th>
-	<th>{t_time}</th>
+	<th>{displayTime(t_time)}</th>
 	<th><span class="tag {t_state === 'active'?'is-primary':'is-danger'} py-0 is-capitalized">{t_state}</span></th>
 	<th style="width:40%" class="is-size-5-mobile is-size-5-tablet is-size-4-desktop m0 py-1 " align="right">
 		<div class="is-flex">
