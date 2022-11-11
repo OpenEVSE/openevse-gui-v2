@@ -215,9 +215,9 @@
 					<label class="has-text-weight-semibold">
 						<div>Time</div>
 						{#if timer == null}
-						<input class="input is-info" style="width: 100px" id="t_start" type="time" bind:value={default_timer.time}>
+						<input class="input is-info" id="t_start" type="time" bind:value={default_timer.time}>
 						{:else}
-						<input class="input is-info" style="width: 100px" id="t_start" type="time" bind:value={$schedule_store[timer].time}>
+						<input class="input is-info" id="t_start" type="time" bind:value={$schedule_store[timer].time}>
 						{/if}
 					</label>
 				</div>
