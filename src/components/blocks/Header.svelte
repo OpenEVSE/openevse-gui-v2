@@ -59,7 +59,7 @@
 				<a class="navbar-item is-size-6 is-hoverable {($location=="/supervision")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/supervision" on:click={toggleMenu} use:link>Supervision</a>
 				<a class="navbar-item is-size-6 is-hoverable {($location=="/logs")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/logs" on:click={toggleMenu} use:link>Logs</a>
 				<div class="navbar-item has-dropdown {hideDropDown?"is-hoverable":""}">
-					<a class="navbar-item is-size-6 {!$location.includes("/configuration")?"has-text-grey-dark ":isBurgerActive?"has-text-grey-dark":"has-text-info"}" href="/configuration" on:click={toggleMenu} use:link>Configuration</a>
+					<a class="navbar-item is-size-6 is-hoverable {$location=="/configuration"?"has-text-info":"has-text-grey-dark"}" href="/configuration" on:click={toggleMenu} use:link>Configuration</a>
 					<div class="navbar-dropdown is-boxed" >
 						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/system"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/system" on:click={toggleMenu} use:link >System</a>
 						<a class="navbar-item is-size-6  is-hoverable {$location=="/configuration/services"?"has-text-info noevent is-active":"has-text-grey-dark"}" href="/configuration/services" on:click={toggleMenu} use:link>Services</a>
