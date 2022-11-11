@@ -34,10 +34,8 @@
 	}
 
 	function scanAgain() {
-		//active = false
 		networks = []
 		scanWifi()
-		//setTimeout(() => active = true,500)
 		return "Scanning ..."
 	}
 

@@ -17,6 +17,7 @@
 	let tz
 	let setTimeButnState = "default"
 	let selectTimeModeState = "default"
+	let selectTimeZoneState = "default"
 	let time_modal_opened = false
 
 	let timemodes = [
@@ -100,6 +101,10 @@
 		return true
 	}
 
+	function setTimeZone() {
+
+	}
+
 	onMount(() => {
 		tz = $config_store.time_zone
 		getDate($status_store.time)
@@ -130,6 +135,7 @@
 	<!-- <Button name="Use Current Time" butn_submit={timeNow}/> -->
 	{/if}
 	<div class="">
+		<!-- <Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={Object.entries(timeZone)} onChange={setTimeZone} /> -->
 		<div class="has-text-weight-bold">Time zone:</div>
 		<div class="select is-info">		
 			<select bind:value={tz} disabled={false}>
@@ -138,6 +144,7 @@
 				{/each}	
 			</select>
 		</div>
+
 		<div class="mt-4">
 			<Button name="Set Time" butn_submit={setTime} bind:state={setTimeButnState}/>
 		</div>
