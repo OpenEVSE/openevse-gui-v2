@@ -49,7 +49,7 @@
 				}
 			})
 			s.addEventListener("error", function (event) {
-				console.log("socket error, reconnecting in 5s")
+				console.log("socket error")
 				if (!timeout)
 					timeout = setTimeout(() => {
 						connect2socket(s)

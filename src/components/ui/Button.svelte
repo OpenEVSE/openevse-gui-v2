@@ -15,6 +15,7 @@
 	let butn
 	let timeout
 	let is_overed = false
+	let nopointer = false
 
 	const displaystate = (state) => { 
 		if (state != "default") {
@@ -35,14 +36,14 @@
 
 
 	function changeState() {
-		if (state!="default") disabled = true
+		if (state!="default") nopointer = true
 		if (state=="ok" || state=="error") {
 			timeout = setTimeout(() => {
 				state = "default"
 				if (butn) butn.blur()
 			}, 1500);
 		}
-		else disabled = false
+		else if (state == "default") nopointer = false
 	}
 	
 	$: displaystate(state), changeState()
@@ -51,15 +52,18 @@
 
 </script>
 <style>
-
+	.no-pointer {
+		cursor: default;
+		pointer-events: none;
+	}
 </style>
 
 
 <div class="is-inline-block p0">
-	<button style="width:{width}" bind:this={butn} 
+	<button type="button" style="width:{width}" bind:this={butn} 
 		class="button is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}"
-		{disabled} data-tooltip={tooltip}
-		on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} 
+		class:no-pointer={nopointer} {disabled} data-tooltip={tooltip}
+		on:click={()=>{ butn_submit(), butn.blur() }} 
 		on:mouseenter={() => {is_overed = true}} 
 		on:mouseleave={() => {is_overed = false}} 
 		>

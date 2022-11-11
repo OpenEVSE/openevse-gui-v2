@@ -6,7 +6,7 @@
 	export let title = undefined
 	export let value
 	export let placeholder
-	export let type
+	export let type = "text"
 	export let maxlength = null
 	export let onChange = () => {}
 	export let onFocus = () => {}
@@ -55,12 +55,11 @@
     }
 </style>
 <div class="my-2">
-	<form>
 		{#if title}
 		<span class="has-text-weight-semibold {disabled?"has-text-grey-light":""}">{title}</span>
 		{/if}
 		<input bind:this={field} {readonly} class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off" {maxlength}
-		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input|preventDefault={inputValue} on:submit|preventDefault >
+		{disabled} on:change={onChange} on:focus={onFocus} on:input={inputValue}	>
 		<div class="state">
 			{#if status==1}
 			<Fa class="has-text-info"icon={faSpinner} spin />
@@ -78,6 +77,5 @@
 			</label>
 		</div>
 		{/if}
-	</form>	
 </div>
 

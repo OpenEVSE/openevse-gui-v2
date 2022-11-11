@@ -38,7 +38,6 @@
 			date = new Date(evsedate.getTime() - evsedate.getTimezoneOffset() * 60000).toISOString().slice(0, -8);
 		}
 	function updateDateField(t) {
-		console.log("update time: allow_time_update=" + allow_time_update + " date:" + t)
 		if (allow_time_update) {
 			getDate(t)
 		}	
@@ -82,8 +81,6 @@
 			if (await config_store.upload(data)) 
 				{
 					selectTimeModeState = "ok"
-					if (timemode==1) await setTime()
-					getDate($status_store.time)  // update time field
 					allow_time_update = true
 					return true
 				}
@@ -137,16 +134,17 @@
 
 	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
-	
+	<div class="mt-4">
+		<Button name="Set Time" butn_submit={setTime} bind:state={setTimeButnState}/>
+	</div>
 	{#if timemode}
 	<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
 	{:else}
 	<!-- <Button name="Use Current Time" butn_submit={timeNow}/> -->
-	<div class="mt-4">
-		<Button name="Set Time" butn_submit={setTime} bind:state={setTimeButnState}/>
-	</div>
+	
 	{/if}
+
 	<div class="">
 		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={create_tz_obj(timeZone)} onChange={setTimeZone} />
 
