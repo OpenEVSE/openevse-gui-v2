@@ -22,6 +22,7 @@
 	} 
 
 	onMount(()=> {
+		state = "default"
 		if (width == "") {
 			width = name.length + 4 + "ch"
 		}

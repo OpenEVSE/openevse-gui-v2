@@ -3,7 +3,6 @@
 	import {status_store} from "../../../lib/stores/status.js"
 	import {config_store} from "../../../lib/stores/config.js"
 	import InputForm from "../../ui/InputForm.svelte"
-	import {utc2evseLocalTime} from "../../../lib/utils.js"
 	import {httpAPI} from '../../../lib/utils.js'
 	import timeZone from "../../../../library/posix_tz_db/zones.json"
 	import {onMount} from "svelte"
@@ -59,6 +58,7 @@
 		let res = await httpAPI("POST","/settime",payload, "text")
 		if (res == "set" )  {
 			setTimeButnState = "ok"
+			getDate($status_store.time)
 			return true
 		}
 		else {
@@ -76,7 +76,8 @@
 			if (await config_store.upload(data)) 
 				{
 					selectTimeModeState = "ok"
-					if (timemode==1) setTime()
+					console.log("timemode=" +timemode)
+					if (timemode==1) { setTime() }
 					return true
 				}
 			else {
@@ -135,11 +136,12 @@
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
 	{:else}
 	<!-- <Button name="Use Current Time" butn_submit={timeNow}/> -->
+	<div class="mt-4">
+		<Button name="Set Time" butn_submit={setTime} bind:state={setTimeButnState}/>
+	</div>
 	{/if}
 	<div class="">
 		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={create_tz_obj(timeZone)} onChange={setTimeZone} />
-		<div class="mt-4">
-			<Button name="Set Time" butn_submit={setTime} bind:state={setTimeButnState}/>
-		</div>
+
 	</div>
 </Box>
