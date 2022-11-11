@@ -12,7 +12,7 @@
 	let timeout
 
 	function resetStatus(s) {
-		if (s==2||s==3) timeout = setTimeout(()=> status = 0,2000)
+		if (s=="ok"||s=="error") timeout = setTimeout(()=> status = 0,2000)
 	}
 
 	onDestroy(() => {
@@ -31,12 +31,12 @@
 			{/each}
 		</select>
 	</div>
-	<div class="is-inline-block mx-2">
-		{#if status==1}
+	<div class="is-inline-block mx-2 my-2">
+		{#if status=="loading"}
 		<Fa class="has-text-info"icon={faSpinner} spin />
-		{:else if status==2}
+		{:else if status=="ok"}
 		<Fa class="has-text-primary" icon={faCheck}/>
-		{:else if status==3}
+		{:else if status=="error"}
 		<Fa class="has-text-danger" icon={faXmark}/>
 		{/if}
 	</div>

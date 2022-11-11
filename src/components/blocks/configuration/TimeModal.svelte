@@ -1,10 +1,12 @@
 <script>
 	import Modal from "../../ui/Modal.svelte"
 	import Box from "../../ui/Box.svelte"
+	import Button from "../../ui/Button.svelte"
 	import {onMount} from "svelte"
 	import bulmaCalendar from "bulma-calendar"
 	export let is_opened = false
 	export let value
+	export let timeNow = () => {}
 	//export let linked_field
 
 	let calendars = []
@@ -54,7 +56,9 @@
 			<div class="input is-info bulmaCalendar"></div>	
 		</div>
 		<div class="is-flex is-justify-content-center mt-4">
-			<button class="button is-info is_outlined" on:click={()=>is_opened=false}>Close</button>
+			<div class="mx-2"><Button name="Set Browser Time" butn_submit={timeNow}/></div>
+			
+			<div class="mx-2"><Button name="Close" color="is-danger" butn_submit={()=>{is_opened = false}}/></div>
 		</div>
 	</Box>
 </Modal>

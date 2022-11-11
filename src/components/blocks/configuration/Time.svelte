@@ -16,9 +16,9 @@
 	let timemode = 1 // 0: manual 1: NTP
 	let tz
 	let setTimeButnState = "default"
+	let selectTimeModeState = "default"
 	let time_modal_opened = false
 
-	let select_timemode_status = 0
 	let timemodes = [
 		{name: "Manual", value: 0},
 		{name: "NTP",    value: 1}
@@ -71,8 +71,20 @@
 		}
 	}
 
-	function setTimeMode() {
+	async function setTimeMode() {
 		console.log("Set timemode")
+		selectTimeModeState = "loading"
+
+		const data = {sntp_enabled: timemode==0?false:true}
+			if (await config_store.upload(data)) 
+				{
+					selectTimeModeState = "ok"
+					return true
+				}
+			else {
+				selectTimeModeState = "error"
+				return false
+			}
 	}
 
 	function getTimeMode(val) {
@@ -84,6 +96,7 @@
 		const localdate = new Date()
 		//date = utc2evseLocalTime(localdate, tz, true)
 		date = localdate
+		time_modal_opened = false
 		return true
 	}
 
@@ -108,21 +121,13 @@
 	{#key timemode}
 	<InputForm type="text" title="Local Time" placeholder="date" value={displayDate(date)} disabled={timemode==0?false:true} onFocus={()=> time_modal_opened = true }  />
 	{/key}
-	<Select title="Set time from:" status={select_timemode_status} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
-	<!-- <div class="has-text-weight-bold">Set Time from:</div>
-	<div class="select is-info">
-		<select bind:value={timemode} on:change={setTimeMode}>
-			<option value={1}>NTP</option>
-			<option value={0}>Manual</option>
-		</select>
-	</div> -->
-
+	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 	
 	{#if timemode}
 	<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
 	{:else}
-	<Button name="Use Current Time" butn_submit={timeNow}/>
+	<!-- <Button name="Use Current Time" butn_submit={timeNow}/> -->
 	{/if}
 	<div class="">
 		<div class="has-text-weight-bold">Time zone:</div>
@@ -139,5 +144,5 @@
 	</div>
 </Box>
 {#if time_modal_opened}
-<TimeModal bind:is_opened={time_modal_opened} bind:value={date}/>
+<TimeModal bind:is_opened={time_modal_opened} bind:value={date} timeNow={timeNow}/>
 {/if}
