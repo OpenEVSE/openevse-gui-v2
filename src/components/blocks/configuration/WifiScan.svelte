@@ -4,6 +4,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
 	import InputForm from "../../ui/InputForm.svelte"
+	import Button from "../../ui/Button.svelte"
 	import {onMount, onDestroy} from "svelte"
 	export let active = false
 	export let ssid = ""
@@ -11,6 +12,8 @@
 	let networks
 	let timeout
 	let state = ""
+	let scanButnState = "default"
+
 	onMount(() => {
 		scanWifi()
 	})
@@ -20,15 +23,20 @@
 
 	async function scanWifi() {
 		state = "scan"
+		scanButnState = "loading"
 		networks = []
 		let unfiltered_networks = await httpAPI("GET","/scan")
 		if (unfiltered_networks.length < 1) {
 			// scan again one time
 			unfiltered_networks = await httpAPI("GET","/scan")
 		}
+		if (unfiltered_networks.length > 0) {
+			scanButnState = "ok"
+		}
+		else scanButnState = "error"
 		networks = removeDuplicateObjects(unfiltered_networks,"ssid")
 		state = ""
-		
+
 		return networks
 	}
 	async function connectWifi() {
@@ -41,7 +49,7 @@
 	function scanAgain() {
 		scanWifi()
 		// networks = []
-		
+
 		return "Scanning ..."
 	}
 
@@ -96,13 +104,14 @@
 					</tr>
 				{/if}
 		</tbody>
-		
+
 	</table>
 </div>
 <form>
 <InputForm type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
 <InputForm type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
-<button type="button" class="button is-primary is-outlined mt-2" disabled={ssid =="" || key == ""?true:false} on:click|preventDefault={connectWifi}>Connect</button>
-<button type="button" class="button is-info is-outlined my-2" on:click={scanAgain}>Scan Again</button>
-<button type="button" class="button is-danger is-outlined my-2" on:click={() => active = false}>Cancel</button>
+<Button name="Connect" color="is-primary" butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
+<Button name="Scan Again" butn_submit={scanAgain} bind:state={scanButnState}/>
+<Button name="Cancel" color="is-danger" butn_submit={() => active = false}/>
+
 </form>

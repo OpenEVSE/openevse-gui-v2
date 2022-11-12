@@ -63,7 +63,7 @@
 	<button type="button" style="width:{width}" bind:this={butn} 
 		class="button is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}"
 		class:no-pointer={nopointer} {disabled} data-tooltip={tooltip}
-		on:click={()=>{ butn_submit(), butn.blur() }} 
+		on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} 
 		on:mouseenter={() => {is_overed = true}} 
 		on:mouseleave={() => {is_overed = false}} 
 		>
