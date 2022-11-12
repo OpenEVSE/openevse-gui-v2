@@ -132,20 +132,19 @@
 		}
 	}
 
-	async function stateButtonWatcher() {
-		if ($status_store.manual_override != undefined && $uistates_store.data_loaded == true ) {
+	async function stateButtonWatcher(val) {
+		if (val != undefined && $uistates_store.data_loaded == true ) {
 			if ($status_store.manual_override != $uistates_store.manual_override && $uistates_store.manual_override != undefined) {
-				// get latest claim
-				await claim_store.getClaim()
 				$uistates_store.mode = ($claim_store.state == undefined?0:($claim_store.state=="active"?1:2))
-				$uistates_store.manual_override = $status_store.manual_override
+				$uistates_store.manual_override = val
 			}
 		}
 		
 	}
 
-	function set_uistates_max_current() {
-		$uistates_store.max_current = getMaxCurrent()
+	function set_uistates_max_current(val) {
+		if (val)
+			$uistates_store.max_current = getMaxCurrent()
 	}
 	function set_uistates_shaper(val) {
 		val = val == 1?true:false
@@ -164,9 +163,9 @@
 		getMode()
 	})
 
-// ## Watchers ##
-$: $claim_store.max_current, set_uistates_max_current()
-$: $status_store.manual_override, stateButtonWatcher() 
+// ## Reactive functions ##
+$: set_uistates_max_current($claim_store.max_current)
+$: stateButtonWatcher($status_store.manual_override) 
 $: set_uistates_shaper($status_store.shaper)
 $: setShaper($uistates_store.shaper)
 $: set_uistates_divertmode($status_store.divertmode)

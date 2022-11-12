@@ -8,6 +8,7 @@
 	let socket
 	let timerId
 	let timeout
+	let isgettingclaim = false
 
 	onMount(() => {
 		connect2socket(socket)
@@ -95,10 +96,15 @@
 	}
 
 	async function updateClaimStore(ver) {
-		if (ver != $uistates_store.claims_version) {
-			await claim_store.getClaim()
-			return true
+		if (!isgettingclaim) {
+			isgettingclaim = true
+			if (ver != $uistates_store.claims_version) {
+				await claim_store.getClaim()
+				isgettingclaim = false
+				return true
+			}
 		}
+
 
 	}
 	// Reactive callbacks to update stores
