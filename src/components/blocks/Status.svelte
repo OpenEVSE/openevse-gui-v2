@@ -1,6 +1,7 @@
 <script>
 	import SchedulePlan from "./../ui/SchedulePlan.svelte";
 	import {status_store} from "../../lib/stores/status.js"
+	import {claim_store} from "../../lib/stores/claim.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
 	import {uistates_store} from "../../lib/stores/uistates.js"
@@ -8,8 +9,6 @@
 	import StatusItems from "../ui/StatusItems.svelte"
 	import ExpandArrow from "../ui/ExpandArrow.svelte"
 	import {utc2evseLocalTime, displayTime} from "../../lib/utils.js"
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faCalendarDays, faHand} from '@fortawesome/free-solid-svg-icons/index.js'
 	
 	let time
 	let elapsed
@@ -100,7 +99,7 @@
 		</div> -->
 		<div class="column is-narrow pl-0 pb-0">
 			<div class="columns is-size-6 pt-2 m-0">
-				{#if $status_store.manual_override == 1}
+				{#if $status_store.manual_override == 1 && $claim_store.state != undefined}
 				<SchedulePlan title="Manual mode" state={$status_store.status} />
 				{:else}
 				<SchedulePlan title="Current" state={$plan_store.current_event.state} time={$plan_store.current_event.time} tz={$config_store.time_zone} />
