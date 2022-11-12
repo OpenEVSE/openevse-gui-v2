@@ -29,11 +29,11 @@
 </style>
 </svelte:head>	
 
-<main>	
-	<WebSocket/>
+<main>		
 	<Header />
 	<FetchData />
 	{#if $uistates_store.data_loaded}
+	<WebSocket/>
 	<Router {routes}/>
 	{/if}
 </main>

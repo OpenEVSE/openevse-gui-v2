@@ -3,6 +3,8 @@
 	import {status_store} from '../../lib/stores/status.js'
 	import {config_store} from "../../lib/stores/config.js"
 	import {uistates_store} from "../../lib/stores/uistates.js"
+	import { claim_store } from "../../lib/stores/claim.js";
+
 	let socket
 	let timerId
 	let timeout
@@ -12,8 +14,10 @@
 	})
 
 	onDestroy(()=> {
-		socket.close()
-		clearTimeout(timeout)
+		if (socket)
+			socket.close()
+		if (timeout)
+			clearTimeout(timeout)
 	})
 
 	function connect2socket(s) {
@@ -89,5 +93,15 @@
 				$uistates_store.config_version = version
 			}	
 	}
+
+	async function updateClaimStore(ver) {
+		if (ver != $uistates_store.claims_version) {
+			await claim_store.getClaim()
+			return true
+		}
+
+	}
+	// Reactive callbacks to update stores
+	$: updateClaimStore($status_store.claims_version)
 
 </script>

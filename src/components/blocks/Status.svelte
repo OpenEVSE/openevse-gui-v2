@@ -90,16 +90,9 @@
 	</div>
 	{/if}
 	<div class="pl-2 columns is-mobile pb-0 mb-1">
-		<!-- <div class="mt-2 mb-0 pb-0 column is-flex is-narrow is-align-items-center">
-			{#if $status_store.manual_override == 1}
-			<Fa icon={faHand} class="has-text-info " />
-			{:else}
-			<Fa icon={faCalendarDays} class="has-text-info " />
-			{/if}
-		</div> -->
 		<div class="column is-narrow pl-0 pb-0">
 			<div class="columns is-size-6 pt-2 m-0">
-				{#if $status_store.manual_override == 1 && $claim_store.state != undefined}
+				{#if ($uistates_store.mode != 0) }
 				<SchedulePlan title="Manual mode" state={$status_store.status} />
 				{:else}
 				<SchedulePlan title="Current" state={$plan_store.current_event.state} time={$plan_store.current_event.time} tz={$config_store.time_zone} />
