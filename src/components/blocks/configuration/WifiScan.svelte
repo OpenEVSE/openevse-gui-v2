@@ -11,7 +11,6 @@
 	let networks
 	let timeout
 	let state = ""
-
 	onMount(() => {
 		scanWifi()
 	})
@@ -23,8 +22,13 @@
 		state = "scan"
 		networks = []
 		let unfiltered_networks = await httpAPI("GET","/scan")
+		if (unfiltered_networks.length < 1) {
+			// scan again one time
+			unfiltered_networks = await httpAPI("GET","/scan")
+		}
 		networks = removeDuplicateObjects(unfiltered_networks,"ssid")
 		state = ""
+		
 		return networks
 	}
 	async function connectWifi() {
@@ -98,8 +102,7 @@
 <form>
 <InputForm type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
 <InputForm type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
-<button class="button is-primary is-outlined mt-2" disabled={ssid =="" || key == ""?true:false} on:click|preventDefault={connectWifi}>Connect</button>
+<button type="button" class="button is-primary is-outlined mt-2" disabled={ssid =="" || key == ""?true:false} on:click|preventDefault={connectWifi}>Connect</button>
+<button type="button" class="button is-info is-outlined my-2" on:click={scanAgain}>Scan Again</button>
+<button type="button" class="button is-danger is-outlined my-2" on:click={() => active = false}>Cancel</button>
 </form>
-
-<button class="button is-info is-outlined my-2" on:click={scanAgain}>Scan Again</button>
-<button class="button is-danger is-outlined my-2" on:click={() => active = false}>Cancel</button>

@@ -140,7 +140,7 @@
 
 	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
 	{#if !timemode}
-	<div><Button name="Use Current Time" butn_submit={timeNow}/></div>
+	<div><Button name="Use Browser Time" butn_submit={timeNow}/></div>
 	{:else}
 	<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
 		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
