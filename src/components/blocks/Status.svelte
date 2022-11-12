@@ -1,4 +1,5 @@
 <script>
+	import SchedulePlan from "./../ui/SchedulePlan.svelte";
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
@@ -7,6 +8,8 @@
 	import StatusItems from "../ui/StatusItems.svelte"
 	import ExpandArrow from "../ui/ExpandArrow.svelte"
 	import {utc2evseLocalTime, displayTime} from "../../lib/utils.js"
+	import Fa from 'svelte-fa/src/fa.svelte'
+	import {faCalendarDays, faHand} from '@fortawesome/free-solid-svg-icons/index.js'
 	
 	let time
 	let elapsed
@@ -87,19 +90,26 @@
 		{/if}
 	</div>
 	{/if}
-
-	<div class="pb-2 pt-5 ">
-		<div class="columns is-size-6 px-0 mx-0 ">
+	<div class="pl-2 columns is-mobile pb-0 mb-1">
+		<div class="mt-2 mb-0 pb-0 column is-flex is-narrow is-align-items-center">
 			{#if $status_store.manual_override == 1}
-			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Manual mode: </span> <span class="tag is-white is-capitalized {$status_store.status == "active" ?"has-text-primary":"has-text-danger"}">{$status_store.status=="active"?"Charge ON":"Charge OFF"}</span></div>
+			<Fa icon={faHand} class="has-text-info " />
 			{:else}
-			<div class="pl-0 pr-3"><span class="has-text-weight-bold is-size-7 ">Current Event: </span> <span class="tag is-white is-capitalized {$plan_store.current_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.current_event.state} {displayTime($plan_store.current_event.time,$config_store.time_zone)}</span></div>
-			<div class="px-0"><span class="has-text-weight-bold is-size-7">Next Event: </span> <span class="tag is-white is-capitalized {$plan_store.next_event.state=="active"?"has-text-primary":"has-text-danger"}">{$plan_store.next_event.state} {displayTime($plan_store.next_event.time,$config_store.time_zone)}</span></div>
+			<Fa icon={faCalendarDays} class="has-text-info " />
 			{/if}
+		</div>
+		<div class="column is-narrow pl-0 pb-0">
+			<div class="columns is-size-6 pt-2 m-0">
+				{#if $status_store.manual_override == 1}
+				<SchedulePlan title="Manual mode" state={$status_store.status} />
+				{:else}
+				<SchedulePlan title="Current" state={$plan_store.current_event.state} time={$plan_store.current_event.time} tz={$config_store.time_zone} />
+				<SchedulePlan title="Next" state={$plan_store.next_event.state} time={$plan_store.next_event.time} tz={$config_store.time_zone} />
+				{/if}
+			</div>
 		</div>
 	</div>
 	<ExpandArrow bind:expand={$uistates_store.status_expanded} />
-
 </div>
 {:else}
 <div class="statusbox disabled has-background-light mb-5 mt-0 px-3">

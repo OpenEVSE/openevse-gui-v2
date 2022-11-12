@@ -50,10 +50,11 @@
 			})
 			s.addEventListener("error", function (event) {
 				console.log("socket error")
+				cancelKeepAlive()
 				if (!timeout)
 					timeout = setTimeout(() => {
 						connect2socket(s)
-					}, 5000);
+					}, 2000);
 				
 			})
 			s.addEventListener("close", function (event) {

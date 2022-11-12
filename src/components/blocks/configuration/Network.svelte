@@ -5,6 +5,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import WifiDisplay from "./WifiDisplay.svelte"
+	import Button from "../../ui/Button.svelte"
 	import WifiScan from "./WifiScan.svelte"
 	import Box from "../../ui/Box.svelte"
 
@@ -49,7 +50,9 @@
 	<div class="my-3">
 				{#if setWifi == false}
 				<WifiDisplay ssid={$config_store.ssid} rssi={$status_store.srssi}/>
-				<button class="button is-info is-outlined mt-2" on:click={selectWifi}>Change WiFi Network</button>
+				<div class="mt-3" >
+					<Button name="Change WiFi Network" butn_submit={selectWifi}/>
+				</div>
 				{:else}
 				<WifiScan bind:active={setWifi} ssid={$config_store.ssid}/>
 				{/if}
