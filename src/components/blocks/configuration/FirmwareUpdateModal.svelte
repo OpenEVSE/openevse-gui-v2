@@ -33,7 +33,7 @@
   		});
 
 	async function uploadFw() {
-		$status_store.upload_progress = 0
+		$status_store.ota_progress = 0
 		uploadButtonState = "loading"
 		const onProgress = progress => {
 			percentDone = Math.round(progress * 100)
@@ -96,7 +96,7 @@
 		
 			{#if uploadButtonState == "loading"}
 				Uploading <span class="is-italic">{file.name}</span>, please wait...
-				<progress class="progress is-primary" value={$status_store.upload_progress} max="100">{percentDone}%</progress>
+				<progress class="progress is-primary" value={$status_store.ota_progress} max="100">{percentDone}%</progress>
 			{:else if (fileSent) == "ko" }
 				Upload Failed
 			{:else if (fileSent) == "ok" }
