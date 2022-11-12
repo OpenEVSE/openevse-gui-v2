@@ -110,6 +110,12 @@
 		}
 	}
 
+	function timeNow() {
+		const localdate = new Date()
+		getDate(localdate)
+		return true
+	}
+
 	function create_tz_obj(tz) {
 		if (tz) {
 			var tzobj = []
@@ -133,18 +139,16 @@
 <Box title="Time">
 
 	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
+	{#if !timemode}
+	<div><Button name="Use Current Time" butn_submit={timeNow}/></div>
+	{:else}
+	<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
+		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
+	{/if}
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 	<div class="mt-4">
 		<Button name="Set Time" butn_submit={setTime} bind:state={setTimeButnState}/>
 	</div>
-	{#if timemode}
-	<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
-		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
-	{:else}
-	<!-- <Button name="Use Current Time" butn_submit={timeNow}/> -->
-	
-	{/if}
-
 	<div class="">
 		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={create_tz_obj(timeZone)} onChange={setTimeZone} />
 
