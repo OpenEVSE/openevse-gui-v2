@@ -1,5 +1,6 @@
 
 <script>
+	import { config_store } from "./../../../lib/stores-simu/config.js";
 	import { onDestroy } from "svelte";
 	import Box from "../../ui/Box.svelte"
 	// @ts-ignore
@@ -69,6 +70,7 @@
 						t_time={schedule.time}
 						t_state={schedule.state}
 						t_days={schedule.days}
+						tz ={$config_store.time_zone}
 						edit={() => {editTimer(schedule.id)}}
 						remove={() => {removeTimer(schedule.id)}}
 						removeState={timersState[id]}

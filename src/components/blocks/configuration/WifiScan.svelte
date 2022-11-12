@@ -95,9 +95,11 @@
 		
 	</table>
 </div>
+<form>
 <InputForm type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
 <InputForm type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
+<button class="button is-primary is-outlined mt-2" disabled={ssid =="" || key == ""?true:false} on:click|preventDefault={connectWifi}>Connect</button>
+</form>
 
-<button class="button is-primary is-outlined mt-2" disabled={ssid =="" || key == ""?true:false} on:click={connectWifi}>Connect</button>
 <button class="button is-info is-outlined my-2" on:click={scanAgain}>Scan Again</button>
 <button class="button is-danger is-outlined my-2" on:click={() => active = false}>Cancel</button>

@@ -10,7 +10,7 @@
 
 {#if visible == true}
 <div id="t_modal" class="modal is-active">
-	<div class="modal-background" on:click={close}></div>
+	<div class="modal-background" on:click={close} on:keydown={close}></div>
 	<div class="modal-content p-3">
 		<article class="message is-danger">
 			<div class="message-header">

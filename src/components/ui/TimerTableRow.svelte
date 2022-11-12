@@ -8,6 +8,7 @@
 	export let t_time
 	export let t_state
 	export let t_days
+	export let tz = "UTC"
 	export let edit = (id) => {}
 	export let remove = (id) => {}
 	export let removeState = ""
@@ -26,7 +27,7 @@
 
 <tr>
 	<th>{t_id}</th>
-	<th>{displayTime(t_time)}</th>
+	<th>{displayTime(t_time,tz)}</th>
 	<th><span class="tag {t_state === 'active'?'is-primary':'is-danger'} py-0 is-capitalized">{t_state}</span></th>
 	<th style="width:40%" class="is-size-5-mobile is-size-5-tablet is-size-4-desktop m0 py-1 " align="right">
 		<div class="is-flex">
