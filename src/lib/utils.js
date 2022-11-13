@@ -94,7 +94,30 @@ function getTZ(s) {
 		return "UTC"
 }
 
+export function createTzObj(tz) {
+	if (tz) {
+		var tzobj = []
+		Object.entries(tz).forEach((element,index,array) => {
+			tzobj[index] = {name: element[0], value: element[0] + "|" + element[1]}
+		})
+		return tzobj
+	}
+}
+
 export function round(value, precision) {
 	var multiplier = Math.pow(10, precision || 0);
 	return Math.round(value * multiplier) / multiplier;
 }
+
+export let getBreakpoint = function () {
+    const mobile = 768;
+    const tablet = 1280;
+    //const desktop = 1440;
+    var bp
+    if (window.innerWidth <= mobile) bp = "mobile"
+    else if (window.innerWidth > mobile && window.innerWidth <= tablet) bp = "tablet"
+    else if (window.innerWidth > tablet) bp="desktop"
+    else bp="unknown"
+   
+    return bp;
+};

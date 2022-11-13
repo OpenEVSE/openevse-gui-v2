@@ -5,18 +5,22 @@
 	onMount (disablescroll)
 	onDestroy (enablescroll)
 
-	function disablescroll() {
-		// To get the scroll position of current webpage
-		let TopScroll = window.pageYOffset || document.documentElement.scrollTop
-		let LeftScroll = window.pageXOffset || document.documentElement.scrollLeft
-
+	function scrollEventListener() {
 		// if scroll happens, set it to the previous value
-		window.onscroll = function() {
-		window.scrollTo(LeftScroll, TopScroll);
-				};
+		const TopScroll = window.pageYOffset || document.documentElement.scrollTop
+		const LeftScroll = window.pageXOffset || document.documentElement.scrollLeft
+		window.scrollTo(LeftScroll, TopScroll)
+	}
+	function disablescroll() {
+		document.addEventListener(
+			'scroll',
+			scrollEventListener, 
+			{ passive: true }
+		);
 	}
 
 	function enablescroll() {
+		document.removeEventListener('scroll', scrollEventListener, true )
 		window.onscroll = function() {};
 	}
 

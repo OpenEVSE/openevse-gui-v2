@@ -5,7 +5,7 @@
 	import FetchData from './components/data/FetchData.svelte'
 	import {uistates_store} from './lib/stores/uistates.js'
 	import WebSocket from "./components/data/WebSocket.svelte"
-	import {getBreakpoint} from "./lib/breakpoints.js"
+	import {getBreakpoint} from "./lib/utils.js"
 
 	function getWindowSize() {
 		$uistates_store.window_width = window.innerWidth;

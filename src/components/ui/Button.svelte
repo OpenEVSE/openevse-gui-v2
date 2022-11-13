@@ -58,7 +58,7 @@
 	}
 </style>
 
-
+<svelte:options accessors/>
 <div class="is-inline-block p0">
 	<button type="button" style="width:{width}" bind:this={butn} 
 		class="button is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}"

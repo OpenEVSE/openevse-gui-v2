@@ -3,7 +3,7 @@
 	import {status_store} from "../../../lib/stores/status.js"
 	import {config_store} from "../../../lib/stores/config.js"
 	import InputForm from "../../ui/InputForm.svelte"
-	import {httpAPI} from '../../../lib/utils.js'
+	import {httpAPI, createTzObj} from '../../../lib/utils.js'
 	import timeZone from "../../../../library/posix_tz_db/zones.json"
 	import {onMount} from "svelte"
 	import Button from "../../ui/Button.svelte"
@@ -17,21 +17,11 @@
 	let selectTimeModeState = "default"
 	let selectTimeZoneState = "default"
 	let allow_time_update = true
-
+	let butn_settime
 	let timemodes = [
 		{name: "Manual", value: 0},
 		{name: "NTP",    value: 1}
 	]
-
-	// async function setConf(prop,val) {
-	// 	input_ntp_status = 1 //loading
-	// 	let res = await config_store.setConfig(prop, val)
-	// 	if (res.msg == "done" || res.msg =="no change") {
-	// 		input_ntp_status = 2 //ok
-	// 	}
-	// 	else input_ntp_status = 3 //error
-	// 	return res
-	// }
 
 	function getDate(t) {
 			const evsedate = new Date(t)
@@ -74,7 +64,7 @@
 
 	async function setTimeMode() {
 		selectTimeModeState = "loading"
-
+		butn_settime.disabled = true
 		const data = {
 			sntp_enabled: timemode==1?true:false,
 		}
@@ -82,10 +72,12 @@
 				{
 					selectTimeModeState = "ok"
 					allow_time_update = true
+					butn_settime.disabled = false
 					return true
 				}
 			else {
 				selectTimeModeState = "error"
+				butn_settime.disabled = false
 				return false
 			}
 	}
@@ -116,15 +108,6 @@
 		return true
 	}
 
-	function create_tz_obj(tz) {
-		if (tz) {
-			var tzobj = []
-			Object.entries(tz).forEach((element,index,array) => {
-				tzobj[index] = {name: element[0], value: element[0] + "|" + element[1]}
-			})
-			return tzobj
-		}
-	}
 
 	onMount(() => {
 		tz = $config_store.time_zone
@@ -147,10 +130,10 @@
 	{/if}
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 	<div class="mt-4">
-		<Button name="Set Time" butn_submit={setTime} bind:state={setTimeButnState}/>
+		<Button name="Set Time" butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
 	</div>
 	<div class="">
-		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={create_tz_obj(timeZone)} onChange={setTimeZone} />
+		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={createTzObj(timeZone)} onChange={setTimeZone} />
 
 	</div>
 </Box>
