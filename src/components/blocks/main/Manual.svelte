@@ -43,7 +43,7 @@
 	}
 
 	function getMaxCurrent() {
-		if ($claim_store.max_current)
+		if ($claim_store.max_current!=undefined)
 			return $claim_store.max_current
 		else if ($config_store.max_current_soft)
 			return $config_store.max_current_soft
@@ -122,8 +122,7 @@
 	}
 
 	function set_uistates_max_current(val) {
-		if (val)
-			$uistates_store.max_current = getMaxCurrent()
+		$uistates_store.max_current = getMaxCurrent()
 	}
 	function set_uistates_shaper(val) {
 		val = val == 1?true:false
@@ -138,7 +137,7 @@
 
 	onMount( () => {
 		$uistates_store.manual_override = $status_store.manual_override
-		set_uistates_max_current() 
+		set_uistates_max_current($claim_store.max_current)
 	})
 
 // ## Reactive functions ##

@@ -110,7 +110,6 @@
 	}
 
 	function getMode(state) {
-		console.log("getMode: state=" + state)
 		if (state != undefined) {
 			switch (state) {
 				case "active":
@@ -120,7 +119,6 @@
 					$uistates_store.mode = 2 // Off
 					break;
 				default: 
-					console.log("getMode: state unknown")
 					break
 			}
 			if ($claim_store.auto_release != undefined) {
@@ -130,7 +128,6 @@
 		else {
 			$uistates_store.mode = 0 // Auto
 		}
-		console.log("$uistates_store.mode="+$uistates_store.mode)
 	}
 	// Reactive callbacks to update stores
 	$: updateClaimStore($status_store.claims_version)
