@@ -115,10 +115,12 @@
 	{#if activetab == 0}
 	<!-- Authentification -->
 	<div class="my-2">
-		<Switch name="auth_enabled" label="Enable" tooltip="Enable HTTP authentication with login/password" tooltip_pos="right" bind:checked={auth_checked} />
-		<InputForm  title="Username" bind:value={auth_usr} placeholder="Admin" type="text" disabled={!auth_checked} />
-		<InputForm title="Password" bind:value={auth_pwd} placeholder="15 characters max" type="password" maxlength=15 disabled={!auth_checked} />
-		<Button name="Save" color="is-info" state={auth_submit_state} butn_submit={auth_submit} />
+		<form>
+			<Switch name="auth_enabled" label="Enable" tooltip="Enable HTTP authentication with login/password" tooltip_pos="right" bind:checked={auth_checked} />
+			<InputForm  title="Username" bind:value={auth_usr} placeholder="Admin" type="text" disabled={!auth_checked} />
+			<InputForm title="Password" bind:value={auth_pwd} placeholder="15 characters max" type="password" maxlength=15 disabled={!auth_checked} />
+			<Button name="Save" color="is-info" state={auth_submit_state} butn_submit={auth_submit} />
+		</form>
 	</div>
 	{:else if activetab == 1}
 	<!-- Settings -->

@@ -1,11 +1,11 @@
 <script>
-	import Icon from 'svelte-icon'
-	import Signal1 from '../../assets/wifi_signal_1.svg';
-	import Signal2 from '../../assets/wifi_signal_2.svg';
-	import Signal3 from '../../assets/wifi_signal_3.svg';
-	import Signal4 from '../../assets/wifi_signal_4.svg';
-	import Signal5 from '../../assets/wifi_signal_5.svg';
-	export let dbm = 0
+	import Signal1 from './svg/wifi_signal_1.svelte';
+	import Signal2 from './svg/wifi_signal_2.svelte';
+	import Signal3 from './svg/wifi_signal_3.svelte';
+	import Signal4 from './svg/wifi_signal_4.svelte';
+	import Signal5 from './svg/wifi_signal_5.svelte';
+	export let dbm
+	let icon
 
 	function getIcon(id) {
 		let i
@@ -29,7 +29,7 @@
 	return i
 	}
 
-	export function dbm2signal(dbm) {
+	export function dbm2icon(dbm) {
 		let signal
 		if (dbm <= -80) signal = 1
 		else if (dbm > -80 && dbm <= -75) signal = 2
@@ -37,9 +37,10 @@
 		else if (dbm > -70 && dbm <= -65) signal = 4
 		else if (dbm > -65) signal = 5
 
-	return getIcon(signal)
+	    icon = getIcon(signal)
 	}
+
+$: dbm2icon(dbm)
 </script>
 
-<!-- <Icon data={dbm2signal(dbm)} /> -->
-<Icon data={Signal5} />
+<svelte:component this={icon}/>

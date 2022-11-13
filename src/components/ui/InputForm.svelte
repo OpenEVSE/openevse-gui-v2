@@ -59,7 +59,7 @@
 		<span class="has-text-weight-semibold {disabled?"has-text-grey-light":""}">{title}</span>
 		{/if}
 		<input bind:this={field} {readonly} class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off" {maxlength}
-		{disabled} on:change={onChange} on:focus={onFocus} on:input={inputValue}	>
+		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	>
 		<div class="state">
 			{#if status==1}
 			<Fa class="has-text-info"icon={faSpinner} spin />

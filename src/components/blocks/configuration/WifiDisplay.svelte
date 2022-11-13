@@ -1,6 +1,5 @@
 <script>
-	import {dbm2icon} from "../../../lib/utils.js"
-	import InlineSVG from 'svelte-inline-svg'
+	import WifiIcon from "./../../ui/WifiIcon.svelte";
 	export let ssid
 	export let rssi
 </script>
@@ -22,7 +21,7 @@
 			<tr class="has-background-light">
 				<th class="pt-3 has-text-centered">{ssid}</th>
 				<td class="pt-2 has-text-centered  has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={rssi + " dBm"}>
-					<InlineSVG src={dbm2icon(rssi)} {...{width: 24, height: 24}}/>
+					<WifiIcon dbm={rssi}/>
 				</td>
 			</tr>
 		</tbody>

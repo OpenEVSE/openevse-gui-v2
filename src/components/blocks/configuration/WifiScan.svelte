@@ -1,6 +1,6 @@
 <script>
-	import {dbm2icon, removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"
-	import InlineSVG from 'svelte-inline-svg'
+	import WifiIcon from "./../../ui/WifiIcon.svelte";
+	import {removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
 	import InputForm from "../../ui/InputForm.svelte"
@@ -88,7 +88,7 @@
 						<tr class="has-background-light">
 							<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
 							<td class="pt-2 no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
-								<InlineSVG src={dbm2icon(network.rssi)} {...{width: 24, height: 24}} />
+								<WifiIcon dbm={network.rssi}/>
 							</td>
 						</tr>
 					{/each}
