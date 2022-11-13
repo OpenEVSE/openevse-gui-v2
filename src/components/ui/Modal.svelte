@@ -20,7 +20,8 @@
 	}
 
 	function enablescroll() {
-		document.removeEventListener('scroll', scrollEventListener, true )
+		// @ts-ignore
+		document.removeEventListener('scroll', scrollEventListener, { passive: true } )
 		window.onscroll = function() {};
 	}
 

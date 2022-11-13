@@ -6,7 +6,6 @@
 
 	export let editable = false
 
-	$: console.log("$config_store.gfci_check=" + $config_store.gfci_check)
 </script>
 
 <Box title="Safety">
