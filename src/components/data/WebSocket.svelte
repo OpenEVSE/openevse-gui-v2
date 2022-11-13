@@ -1,9 +1,10 @@
 <script>
-	import {onMount, onDestroy} from 'svelte'
-	import {status_store} from '../../lib/stores/status.js'
-	import {config_store} from "../../lib/stores/config.js"
-	import {uistates_store} from "../../lib/stores/uistates.js"
-	import { claim_store } from "../../lib/stores/claim.js";
+	import { claim_store } from "./../../lib/stores/claim.js";
+	import { uisettings_store } from "./../../lib/stores-simu/uisettings.js";
+	import { onMount, onDestroy } from 'svelte'
+	import { status_store } from '../../lib/stores/status.js'
+	import { config_store } from "../../lib/stores/config.js"
+	import { uistates_store } from "../../lib/stores/uistates.js"
 
 	let socket
 	let timerId
@@ -97,15 +98,39 @@
 
 	async function updateClaimStore(ver) {
 		if (!isgettingclaim) {
-			isgettingclaim = true
 			if (ver != $uistates_store.claims_version) {
+				$uistates_store.claims_version = ver
+				isgettingclaim = true
 				await claim_store.getClaim()
+				getMode($claim_store.state)
 				isgettingclaim = false
 				return true
 			}
 		}
+	}
 
-
+	function getMode(state) {
+		console.log("getMode: state=" + state)
+		if (state != undefined) {
+			switch (state) {
+				case "active":
+					$uistates_store.mode = 1 // On
+					break
+				case "disabled":
+					$uistates_store.mode = 2 // Off
+					break;
+				default: 
+					console.log("getMode: state unknown")
+					break
+			}
+			if ($claim_store.auto_release != undefined) {
+				$uisettings_store.auto_release = $claim_store.auto_release
+			}
+		}
+		else {
+			$uistates_store.mode = 0 // Auto
+		}
+		console.log("$uistates_store.mode="+$uistates_store.mode)
 	}
 	// Reactive callbacks to update stores
 	$: updateClaimStore($status_store.claims_version)

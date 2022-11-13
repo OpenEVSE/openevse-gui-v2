@@ -49,26 +49,6 @@
 			return $config_store.max_current_soft
 	}
 
-	function getMode() {
-		if ($claim_store.state != undefined) {
-			switch ($claim_store.state) {
-				case "active":
-					$uistates_store.mode = 1 // On
-					break
-				case "disabled":
-					$uistates_store.mode = 2 // Off
-					break;
-				default: 
-					break
-			}
-			if ($claim_store.auto_release != undefined) {
-				$uisettings_store.auto_release = $claim_store.auto_release
-			}
-		}
-		else {
-			$uistates_store.mode = 0 // Auto
-		}
-	}
 
 	function setMode(m) {
 		$uistates_store.mode = m
@@ -135,7 +115,6 @@
 	async function stateButtonWatcher(val) {
 		if (val != undefined && $uistates_store.data_loaded == true ) {
 			if ($status_store.manual_override != $uistates_store.manual_override && $uistates_store.manual_override != undefined) {
-				$uistates_store.mode = ($claim_store.state == undefined?0:($claim_store.state=="active"?1:2))
 				$uistates_store.manual_override = val
 			}
 		}
@@ -160,7 +139,6 @@
 	onMount( () => {
 		$uistates_store.manual_override = $status_store.manual_override
 		set_uistates_max_current() 
-		getMode()
 	})
 
 // ## Reactive functions ##
