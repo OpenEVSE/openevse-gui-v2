@@ -31,8 +31,8 @@
 
 	async function onChange(prop,val) {
 		input_host_status = 1
-		let res = await config_store.setConfig(prop, val)
-		if (res.msg == "done" || res.msg =="no change") {
+		let res = await config_store.saveParam(prop, val)
+		if (res) {
 			input_host_status = 2 //ok
 		}
 		else input_host_status = 3 //error

@@ -31,8 +31,8 @@
 		</li>
 	 
 	  	{#each links as link, i }
-			<li class={ i == level - 1 ? "is-active":""}>
-				<a href={"/#" + sumlink(link)}> {link} </a>
+			<li class="is-capitalized { i == level - 1 ? "is-active":""}">
+				<a class="" href={"/#" + sumlink(link)}> {link} </a>
 			</li>
 	  {/each}
 	</ul>

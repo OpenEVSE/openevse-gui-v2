@@ -14,7 +14,7 @@
 		<thead>
 			<tr class="has-background-info"	>
 				<th class="has-text-white">Name</th>
-				<th class="has-text-white" style="width:40%">kWh</th>
+				<th class="has-text-white has-text-centered" style="width:40%">kWh</th>
 			</tr>
 		</thead>
 		<tbody>

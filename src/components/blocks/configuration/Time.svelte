@@ -23,15 +23,15 @@
 		{name: "NTP",    value: 1}
 	]
 
-	async function setConf(prop,val) {
-		input_ntp_status = 1 //loading
-		let res = await config_store.setConfig(prop, val)
-		if (res.msg == "done" || res.msg =="no change") {
-			input_ntp_status = 2 //ok
-		}
-		else input_ntp_status = 3 //error
-		return res
-	}
+	// async function setConf(prop,val) {
+	// 	input_ntp_status = 1 //loading
+	// 	let res = await config_store.setConfig(prop, val)
+	// 	if (res.msg == "done" || res.msg =="no change") {
+	// 		input_ntp_status = 2 //ok
+	// 	}
+	// 	else input_ntp_status = 3 //error
+	// 	return res
+	// }
 
 	function getDate(t) {
 			const evsedate = new Date(t)
@@ -143,7 +143,7 @@
 	<div><Button name="Use Browser Time" butn_submit={timeNow}/></div>
 	{:else}
 	<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
-		status={input_ntp_status} onChange={()=>setConf("sntp_hostname", $config_store.sntp_hostname)}/>
+		status={input_ntp_status} onChange={()=>config_store.saveParam("sntp_hostname", $config_store.sntp_hostname)}/>
 	{/if}
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 	<div class="mt-4">

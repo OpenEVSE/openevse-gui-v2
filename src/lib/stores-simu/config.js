@@ -11,10 +11,8 @@ function createConfigStore() {
 		await new Promise(resolve => setTimeout(resolve, 500));
 	}
 
-    async function setConfig(attr,val) {
-        let data = '{ "' + attr + '": "' + val + '"}'
-        let res = await httpAPI("POST", "/config", data)
-        return res
+    async function saveParam(attr,val) {
+        return true
     }
 
     async function upload(data) {
@@ -27,7 +25,7 @@ function createConfigStore() {
         update,
         download,
         upload: (data) => upload(data),
-        setConfig: (attr,val) => setConfig(attr,val)
+        saveParam: (attr,val) => saveParam(attr,val)
     }
 }
 

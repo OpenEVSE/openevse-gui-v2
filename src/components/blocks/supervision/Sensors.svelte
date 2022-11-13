@@ -16,7 +16,7 @@
 		<thead>
 			<tr class="has-background-info"	>
 				<th class="has-text-white">Sensor</th>
-				<th class="has-text-white" style="width:40%">Value</th>
+				<th class="has-text-white has-text-centered" style="width:40%">Value</th>
 			</tr>
 		</thead>
 		<tbody>

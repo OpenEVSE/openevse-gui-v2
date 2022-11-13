@@ -11,11 +11,24 @@ function createConfigStore() {
         return P
 	}
 
-    async function setConfig(attr,val) {
-        let data = '{ "' + attr + '": "' + val + '"}'
-        let res = await httpAPI("POST", "/config", data)
-        return res
-    }
+    // async function setConfig(attr,val) {
+    //     let data = '{ "' + attr + '": "' + val + '"}'
+    //     let res = await httpAPI("POST", "/config", data)
+    //     return res
+    // }
+
+    async function saveParam(name,val) {
+		let data = {
+			}
+			data[name] = val
+			if (await config_store.upload(data)) 
+				{
+					return true
+				}
+			else {
+				return false
+			}
+	}
 
     async function upload(data) {
         let res = await httpAPI("POST", "/config", JSON.stringify(data))
@@ -31,7 +44,7 @@ function createConfigStore() {
         update,
         download,
         upload: (data) => upload(data),
-        setConfig: (attr,val) => setConfig(attr,val)
+        saveParam: (attr,val) => saveParam(attr,val)
     }
 }
 
