@@ -223,20 +223,22 @@
 				</div>
 				<div class="is-inline-block">
 					<div class="has-text-weight-semibold">State</div>
-					<div class="select is-info">
+					
 						{#if timer == null}
-						<select bind:this={select} bind:value={default_timer.state}>
-							<option value="active" selected class="is-primary">Active</option>
-							<option value="disabled">Disabled</option>
-						</select>
+						<div class="select {default_timer.state=="active"?"is-primary":"is-danger"}" >
+							<select bind:this={select} bind:value={default_timer.state}>
+								<option value="active" selected><span class="">Active</span></option>
+								<option value="disabled">Disabled</option>
+							</select>
+							</div>
 						{:else}
-						<select bind:value={$schedule_store[timer].state}>
-							<option value="active" selected>Active</option>
-							<option value="disabled">Disabled</option>
-						</select>
+						<div class="select {$schedule_store[timer].state=="active"?"is-primary":"is-danger"}" >
+							<select bind:value={$schedule_store[timer].state}>
+								<option value="active" selected>Active</option>
+								<option value="disabled">Disabled</option>
+							</select>
+						</div>
 						{/if}
-
-					</div>
 				</div>
 		</div>
 		<div class="mt-4">

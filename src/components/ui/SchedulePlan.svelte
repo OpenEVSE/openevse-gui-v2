@@ -6,7 +6,6 @@
 	export let title
 	export let state 
 	export let time = ""
-	export let tz = ""
 	let icon
 
 	onMount(

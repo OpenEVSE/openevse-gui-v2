@@ -8,7 +8,6 @@
 	export let t_time
 	export let t_state
 	export let t_days
-	export let tz = "UTC"
 	export let edit = (id) => {}
 	export let remove = (id) => {}
 	export let removeState = ""
