@@ -1,5 +1,5 @@
 <script>
-	import { faCar, faCircleCheck, faCirclePause,faHourglassHalf, faThumbsUp, faChargingStation, 
+	import { faCar, faCircleCheck, faCirclePause,faHourglassHalf, faThumbsUp, faChargingStation, faBolt,
 			faTriangleExclamation, faMoon,faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import StatusIcon from "./StatusIcon.svelte"
 	export let state
@@ -36,9 +36,9 @@
 			status = "active"
 			charging = true
 			message = "Charging..."
-			color = "is-warning"
-			iconcolor = "has-text-dark"
-			icon = faChargingStation
+			color = "is-primary"
+			iconcolor = "has-text-warning"
+			icon = faBolt
 			break;
 		case 4: // Error
 		case 5:
