@@ -30,7 +30,8 @@
 			if ($config_store.time_zone)
 				zone = $config_store.time_zone.split("|")[0]
 			const dt = DateTime.fromISO(t).setZone(zone)
-			date = dt.toFormat("yyyy-MM-dd'T'HHmm")
+			date = dt.toFormat("yyyy-MM-dd'T'HH:mm")
+			console.log(date)
 		}	
 	}
 
