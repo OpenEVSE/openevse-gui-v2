@@ -17,7 +17,7 @@
 		focus = !focus
 	}
 </script>
-<div class="mb-5 is-flex is-align-items-flex-start is-justify-content-center">
+<div class="is-flex is-align-items-flex-start is-justify-content-center">
 	<div class="has-text-weight-bold pt-4 mr-2 is-flex-shrink-0">{label}</div>
 	<div class="" on:mouseenter={togglecolor} on:mouseleave={togglecolor} >			
 		<input class="slider is-fullwidth is-medium has-tooltip-arrow has-tooltip {hover||focus?'is-info':''}" 

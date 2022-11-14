@@ -86,19 +86,18 @@
 		{/if}
 	</div>
 	{/if}
-	<div class="pl-2 columns is-mobile pb-0 mb-1">
-		<div class="column is-narrow pl-0 pb-0">
-			<div class="columns  is-size-6 pt-2 m-0">
-				{#if ($uistates_store.mode != 0) }
-				<SchedulePlan title="Manual mode" state={$status_store.status} />
-				{:else}
-				<SchedulePlan title="Current" state={$plan_store.current_event.state} time={$plan_store.current_event.time} tz={$config_store.time_zone} />
-				<SchedulePlan title="Next" state={$plan_store.next_event.state} time={$plan_store.next_event.time} tz={$config_store.time_zone} />
+			<div class="is-flex mt-3 mt-4 mb-1 ml-4 ">
+				<div class="columns">
 
+				{#if ($uistates_store.mode != 0) }
+				<SchedulePlan mode="Manual" state={$status_store.status} />
+				{:else}
+					<SchedulePlan mode="Timer" msg={$plan_store.current_event.state=="active"?"Activated since":"Disabled since"} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
+					<SchedulePlan mode="Timer" msg={$plan_store.next_event.state=="active"?"Activate at":"Disable at"} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
+				
 				{/if}
+				</div>
 			</div>
-		</div>
-	</div>
 	<ExpandArrow bind:expand={$uistates_store.status_expanded} />
 </div>
 {:else}
