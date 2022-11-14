@@ -1,3 +1,5 @@
+import { DateTime } from "luxon";
+
 export async function httpAPI(method,url,body=null,type = "json") {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
 	let data = {
@@ -41,37 +43,16 @@ export const removeDuplicateObjects = (array, key) => {
     })
 }
 
-export function utc2evseLocalTime(d,tz,y = false) {
-	let model = { 
-		timeZone: getTZ(tz),
-		year: y?'numeric':'2-digit',
-		month: '2-digit',
-		day: '2-digit',
-		hour: '2-digit',
-		minute: '2-digit',
-		}
-	let lt = d.toLocaleString(navigator.language, model)
-	return lt
-}
-
-export function formatDate(t,z,y = false) {
-	const utctime = new Date(t)
-	return utc2evseLocalTime(utctime, z, y)
+export function formatDate(t,z) {
+	const d = DateTime.fromISO(t)
+	d.setZone(z)
+	return d.toLocaleString(DateTime. DATETIME_SHORT)
 }
 
 export function displayTime(t,tz) {
-	const _d = new Date('1970-01-01T' + t )
-	const  _dl = utc2evseLocalTime(_d, tz).split(" ")
-	var is12 = false
-	var ampm = ""
-	if (_dl[2]) {
-		is12=true
-	}
-	if (is12) {
-		ampm = " " + _dl[2]
-	}
-	var formattedTime = _dl[1] + ampm
-	return formattedTime
+
+	const d = DateTime.fromISO(t).toLocaleString(DateTime.TIME_SIMPLE) 
+	return d
 }
 
 export function getTZ(s) {
