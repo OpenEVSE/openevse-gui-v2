@@ -3,16 +3,17 @@
 	import {status_store} from "../../../lib/stores/status.js"
 	import {config_store} from "../../../lib/stores/config.js"
 	import InputForm from "../../ui/InputForm.svelte"
-	import {httpAPI, createTzObj} from '../../../lib/utils.js'
+	import {httpAPI, createTzObj, formatDate, getTZ} from '../../../lib/utils.js'
 	import timeZone from "../../../../library/posix_tz_db/zones.json"
 	import {onMount} from "svelte"
 	import Button from "../../ui/Button.svelte"
 	import Select from "../../ui/Select.svelte"
+	import { DateTime } from "luxon";
 
 	let input_ntp_status = 0
 	let date
 	let timemode = 1 // 0: manual 1: NTP
-	let tz
+	let tz = "UTC"
 	let setTimeButnState = "default"
 	let selectTimeModeState = "default"
 	let selectTimeZoneState = "default"
@@ -23,13 +24,13 @@
 		{name: "NTP",    value: 1}
 	]
 
-	function getDate(t) {
-			const evsedate = new Date(t)
-			date = new Date(evsedate.getTime() - evsedate.getTimezoneOffset() * 60000).toISOString().slice(0, -8);
-		}
 	function updateDateField(t) {
-		if (allow_time_update) {
-			getDate(t)
+		if (allow_time_update && t != undefined) {
+			let zone = "UTC"
+			if ($config_store.time_zone)
+				zone = $config_store.time_zone.split("|")[0]
+			const dt = DateTime.fromISO(t).setZone(zone);
+			date = dt.toISO().slice(0, -8)
 		}	
 	}
 
@@ -52,7 +53,6 @@
 		let res = await httpAPI("POST","/settime",payload, "text")
 		if (res == "set" )  {
 			setTimeButnState = "ok"
-			getDate($status_store.time)
 			allow_time_update = true
 			return true
 		}
@@ -104,19 +104,19 @@
 
 	function timeNow() {
 		const localdate = new Date()
-		getDate(localdate)
+		updateDateField(localdate)
 		return true
 	}
 
 
 	onMount(() => {
 		tz = $config_store.time_zone
-		getDate($status_store.time)
 		getTimeMode($config_store.sntp_enabled) 
 		})
 
 	$: getTimeMode($config_store.sntp_enabled)
 	$: updateDateField($status_store.time)
+	$: $config_store.time_zone, ()=> {tz = $config_store.time_zone }
 </script>
 
 <Box title="Time">

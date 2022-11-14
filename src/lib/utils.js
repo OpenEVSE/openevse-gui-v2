@@ -50,9 +50,13 @@ export function utc2evseLocalTime(d,tz,y = false) {
 		hour: '2-digit',
 		minute: '2-digit',
 		}
-
 	let lt = d.toLocaleString(navigator.language, model)
 	return lt
+}
+
+export function formatDate(t,z,y = false) {
+	const utctime = new Date(t)
+	return utc2evseLocalTime(utctime, z, y)
 }
 
 export function displayTime(t,tz) {
@@ -70,7 +74,7 @@ export function displayTime(t,tz) {
 	return formattedTime
 }
 
-function getTZ(s) {
+export function getTZ(s) {
 	if(s) 
 		return s.split('|')[0]
 	else

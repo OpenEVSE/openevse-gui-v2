@@ -8,17 +8,14 @@
 	import StatusTile from "../ui/StatusTile.svelte"
 	import StatusItems from "../ui/StatusItems.svelte"
 	import ExpandArrow from "../ui/ExpandArrow.svelte"
-	import {utc2evseLocalTime, displayTime} from "../../lib/utils.js"
+	import {formatDate} from "../../lib/utils.js"
 	
 	let time
 	let elapsed
 
-	function formatTime(t,z) {
-		const utctime = new Date(t)
-		time = utc2evseLocalTime(utctime, z)
-	}
 
-	$: formatTime($status_store.time,$config_store.time_zone)
+
+	// $: formatTime($status_store.time,$config_store.time_zone)
 	$: { 
 		if ($status_store.elapsed != undefined)
 			elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 16) 
@@ -51,7 +48,7 @@
 {#if $status_store.evse_connected == 1}
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} p-3 has-background-light mb-3 mt-0 px-3">
 	<div class="mb-2 mx-0">
-		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={time} bp={$uistates_store.breakpoint} />	
+		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={formatDate($status_store.time,$config_store.time_zone)} bp={$uistates_store.breakpoint} />	
 	</div>
 
 	<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center">
