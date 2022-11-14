@@ -29,8 +29,8 @@
 			let zone = "UTC"
 			if ($config_store.time_zone)
 				zone = $config_store.time_zone.split("|")[0]
-			const dt = DateTime.fromISO(t).setZone(zone);
-			date = dt.toISO().slice(0, -8)
+			const dt = DateTime.fromISO(t).setZone(zone)
+			date = dt.toFormat("yyyy-MM-dd'T't")
 		}	
 	}
 

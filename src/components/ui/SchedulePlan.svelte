@@ -34,7 +34,7 @@
 		<span class="is-justify-content-left tag tag-title is-white  has-text-weight-semibold is-size-7"><Fa icon={icon} class="has-text-info mx-2" /> {title}</span>
 		<span class="tag tag-val is-capitalized has-text-weight-semibold {state=="active"?"is-primary":"is-danger"}">
 			{#if time != ""}
-			{state} {displayTime(time,tz)}
+			{state} {displayTime(time)}
 			{:else}
 			{state}
 			{/if}

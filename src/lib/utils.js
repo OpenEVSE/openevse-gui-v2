@@ -46,10 +46,10 @@ export const removeDuplicateObjects = (array, key) => {
 export function formatDate(t,z) {
 	const d = DateTime.fromISO(t)
 	d.setZone(z)
-	return d.toLocaleString(DateTime. DATETIME_SHORT)
+	return d.toLocaleString(DateTime.DATETIME_SHORT)
 }
 
-export function displayTime(t,tz) {
+export function displayTime(t) {
 
 	const d = DateTime.fromISO(t).toLocaleString(DateTime.TIME_SIMPLE) 
 	return d
