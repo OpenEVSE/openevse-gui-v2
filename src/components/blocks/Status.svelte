@@ -92,6 +92,7 @@
 				{#if ($uistates_store.mode != 0) }
 				<SchedulePlan mode="Manual" state={$status_store.status} />
 				{:else}
+	
 					<SchedulePlan mode="Timer" msg={$plan_store.current_event.state=="active"?"Activated since":"Disabled since"} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
 					<SchedulePlan mode="Timer" msg={$plan_store.next_event.state=="active"?"Activate at":"Disable at"} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
 				

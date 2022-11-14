@@ -1,4 +1,6 @@
 <script>
+	import {EvseClients} from  "./../../../lib/vars.js"
+	import { claims_target_store } from "./../../../lib/stores/claims_target.js";
 	import Box from "../../ui/Box.svelte"
 	import Slider from "../../ui/SliderForm.svelte"
 	import Switch from "../../ui/Switch.svelte"
@@ -57,8 +59,8 @@
 			}
 
 		// keep max_current claim	
-		if ($claim_store.max_current != undefined) {
-				data.max_current = $claim_store.max_current
+		if ($claims_target_store.claims.max_current == EvseClients["manual"]) {
+				data.max_current = $claims_target_store.properties.max_current
 			}
 
 		switch(m) {
@@ -72,7 +74,7 @@
 			default: break
 		}
 
-		if(data.state != undefined) {
+		if(data.state != undefined ) {
 			// Mode Manual setting override
 			if ($claim_store.time_limit != undefined) {
 				data.time_limit = $claim_store.time_limit
@@ -84,12 +86,12 @@
 			claim_store.setClaim(data)
 		}
 		else {
-			// Mode Auto
-			// if there's no other claim property but charge_limit & time_limit
-			if ($claim_store.max_current) 
+			// if there's no other claim property ( only chanrge_current for now )
+			if (data.max_current) 
 				claim_store.setClaim(data)
 			// Mode Auto, clearing override
 			else 
+			if ($claims_target_store.claims.state == EvseClients["manual"] )
 				claim_store.releaseClaim()
 		}
 	}
@@ -152,13 +154,11 @@ $: setDivertMode($uistates_store.divertmode)
 
 <Box title="Manual">
 
-	{#key $uistates_store.mode}
-		{#if $schedule_store.length}
-		<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
-		{:else}
-		<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} />
-		{/if}
-	{/key}
+	{#if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
+	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
+	{:else}
+	<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} />
+	{/if}
 
 	<div class="is-flex is-justify-content-center">
 		<div class="is-flex mx-auto is-inline-block">

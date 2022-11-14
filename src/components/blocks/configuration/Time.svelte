@@ -30,7 +30,7 @@
 			if ($config_store.time_zone)
 				zone = $config_store.time_zone.split("|")[0]
 			const dt = DateTime.fromISO(t).setZone(zone)
-			date = dt.toFormat("yyyy-MM-dd'T't")
+			date = dt.toFormat("yyyy-MM-dd'T'HHmm")
 		}	
 	}
 
@@ -111,7 +111,6 @@
 
 	onMount(() => {
 		tz = $config_store.time_zone
-		getTimeMode($config_store.sntp_enabled) 
 		})
 
 	$: getTimeMode($config_store.sntp_enabled)

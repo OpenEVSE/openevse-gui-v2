@@ -1,6 +1,6 @@
+import {EvseClients} from "../vars.js"
 import { get, writable } from 'svelte/store'
 import {httpAPI} from '../utils.js'
-const EvseClient_OpenEVSE_Manual = 65537 //Client ID we use for claims
 
 function createClaimStore() {
     const P  = writable()
@@ -10,9 +10,8 @@ function createClaimStore() {
 	async function getClaim() {
 		//let res = await httpAPI("GET", "/claims/" + EvseClient_OpenEVSE_Manual)
         let claims = await httpAPI("GET", "/claims");
-        
         for (let i in claims) {
-            if (claims[i].client == EvseClient_OpenEVSE_Manual ) {
+            if (claims[i].client == EvseClients["manual"] ) {
                 P.update(() => claims[i])
                 return P
             }
@@ -26,7 +25,7 @@ function createClaimStore() {
     async function setClaim(data) {
         let claim = get(P)
 		let newclaim = {...claim, ...data}
-        let res = await httpAPI("POST", "/claims/" + EvseClient_OpenEVSE_Manual, JSON.stringify(data))
+        let res = await httpAPI("POST", "/claims/" + EvseClients["manual"], JSON.stringify(data))
 		newclaim = {...claim, ...data}
 		P.update(() => newclaim)
         return P
@@ -34,7 +33,7 @@ function createClaimStore() {
 
 	// remove clientid EvseClient_OpenEVSE_Manual claim 
     async function releaseClaim() {
-        let res = await httpAPI("DELETE", "/claims/" + EvseClient_OpenEVSE_Manual)
+        let res = await httpAPI("DELETE", "/claims/" + EvseClients["manual"])
         let store = {}
         P.update(() => store)
         return P

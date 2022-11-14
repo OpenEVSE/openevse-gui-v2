@@ -1,18 +1,24 @@
 <script>
-	import { claim_store } from "./../../lib/stores/claim.js";
-	import { uisettings_store } from "./../../lib/stores-simu/uisettings.js";
+	import { plan_store } from "./../../lib/stores-simu/plan.js"
+	import {EvseClients} from  "./../../lib/vars.js"
+	import { status_store } from './../../lib/stores/status.js'
+	import { config_store } from "./../../lib/stores/config.js"
+	import { schedule_store } from "./../../lib/stores/schedule.js"
+	import { uistates_store } from "./../../lib/stores/uistates.js"
+	import { claims_target_store } from "./../../lib/stores/claims_target.js"
 	import { onMount, onDestroy } from 'svelte'
-	import { status_store } from '../../lib/stores/status.js'
-	import { config_store } from "../../lib/stores/config.js"
-	import { uistates_store } from "../../lib/stores/uistates.js"
+	
 
 	let socket
 	let timerId
 	let timeout
 	let isgettingclaim = false
+	let isgettingschedule = false
+	let isgettingplan = false
 
 	onMount(() => {
 		connect2socket(socket)
+		getMode($claims_target_store.properties.state)
 	})
 
 	onDestroy(()=> {
@@ -101,16 +107,44 @@
 			if (ver != $uistates_store.claims_version) {
 				$uistates_store.claims_version = ver
 				isgettingclaim = true
-				await claim_store.getClaim()
-				getMode($claim_store.state)
+				//await claim_store.getClaim()
+				await claims_target_store.download()
+				getMode($claims_target_store.properties.state)
 				isgettingclaim = false
 				return true
 			}
 		}
 	}
 
+	async function updateScheduleStore(ver) {
+		if (!isgettingschedule) {
+			if (ver != $uistates_store.schedule_version) {
+				$uistates_store.schedule_version = ver
+				isgettingschedule = true
+				//await claim_store.getClaim()
+				await schedule_store.download()
+				isgettingschedule = false
+				timeout = setTimeout(updateSchedulePlanStore,200)
+				return true
+			}
+		}
+	}
+
+	async function updateSchedulePlanStore(ver) {
+		if (!isgettingplan) {
+			if (ver != $uistates_store.schedule_version) {
+				$uistates_store.schedule_version = ver
+				isgettingplan = true
+				//await claim_store.getClaim()
+				await plan_store.download()
+				isgettingplan = false
+				return true
+			}
+		}
+	}
+
 	function getMode(state) {
-		if (state != undefined) {
+		if ($claims_target_store.claims.state == EvseClients["manual"] || $claims_target_store.claims.state == undefined) {
 			switch (state) {
 				case "active":
 					$uistates_store.mode = 1 // On
@@ -121,15 +155,11 @@
 				default: 
 					break
 			}
-			if ($claim_store.auto_release != undefined) {
-				$uisettings_store.auto_release = $claim_store.auto_release
-			}
 		}
-		else {
-			$uistates_store.mode = 0 // Auto
-		}
+		else $uistates_store.mode = 0
 	}
 	// Reactive callbacks to update stores
 	$: updateClaimStore($status_store.claims_version)
+	$: updateScheduleStore($status_store.schedule_version)
 
 </script>
