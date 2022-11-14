@@ -24,8 +24,10 @@ export async function httpAPI(method,url,body=null,type = "json") {
 		}
 		else return response.text()
 	}).catch((error) => {
-	  console.log(error)
-	  return error
+		console.log(error)
+		if(type == "json")
+		return {msg: "error"}
+		else return "error"
 	});
 
 	return res

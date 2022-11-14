@@ -1,4 +1,5 @@
 <script>
+	import { claims_target_store } from "./../../lib/stores/claims_target.js";
 	import {uistates_store} from "../../lib/stores/uistates.js"
 	import {status_store} from "../../lib/stores/status.js"
 	import {schedule_store} from "../../lib/stores/schedule.js"
@@ -20,9 +21,8 @@
 		await config_store.download()
 		status = "Get Claim"
 		await claim_store.getClaim()
-		// status = "Get Override"
-		// await override_store.getOverride()
-		//$uistates_store.manual_override = $status_store.manual_override
+		status = "Get Claims Target"
+		await claims_target_store.download()
 		status = "Ok"
 		$uistates_store.data_loaded = true;
 	}
