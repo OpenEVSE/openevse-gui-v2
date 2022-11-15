@@ -25,7 +25,7 @@
 </script>
 
 <div class="tags has-addons m-0 mr-2">
-	<span class="tag is-info is-flex-grow-0 has-text-weight-semibold is-size-7"><Fa icon={displayIcon(mode)} class="has-text-white" />&nbsp; {mode}</span>
+	<span class="tag is-info is-flex-grow-0 has-text-weight-semibold is-size-7 is-capitalized"><Fa icon={displayIcon(mode)} class="has-text-white" />&nbsp; {mode}</span>
 	<span class="tag is-flex-grow-1 is-flex-shrink-1 is-capitalized has-text-weight-semibold {state=="active"?"is-primary":"is-danger"}">
 		{#if time != ""}
 		{msg} {displayTime(time)}
