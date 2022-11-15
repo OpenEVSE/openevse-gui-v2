@@ -57,7 +57,7 @@
 	
 	let auth_submit = async () => {
 		auth_submit_state = "loading"
-		if ( auth_checked && (!auth_usr || !auth_pwd || auth_pwd=='_DUMMY_PASSWORD')) {
+		if ( auth_checked && (!auth_usr || !auth_pwd )) {
 			alert_visible = true
 			auth_submit_state = "default"
 			return false
@@ -82,7 +82,8 @@
 	let getAuthData = (u,p) => {
 		auth_usr = u
 		auth_pwd = p
-
+		if (auth_pwd == "_DUMMY_PASSWORD")
+			auth_pwd = ""
 		if (u || p)  {
 			auth_checked = true
 			return true

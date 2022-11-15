@@ -5,8 +5,8 @@
 	import { routes } from "./lib/routes.js";
 	import FetchData from './components/data/FetchData.svelte'
 	import {uistates_store} from './lib/stores/uistates.js'
-	import WebSocket from "./components/data/WebSocket.svelte"
 	import {getBreakpoint} from "./lib/utils.js"
+
 
 	function getWindowSize() {
 		$uistates_store.window_width = window.innerWidth;
@@ -35,7 +35,7 @@
 	<FetchData />
 	{#if $uistates_store.data_loaded}
 	<DataManager />
-	<Router {routes}/>
+	<Router {routes} />
 	{/if}
 </main>
 

@@ -55,6 +55,7 @@
 			s.addEventListener("error", function (event) {
 				console.log("socket error")
 				lastmsg = DateTime.now().toUnixInteger()
+				s.destroy()
 				cancelKeepAlive()
 				if (!timeout)
 					timeout = setTimeout(() => {
@@ -65,6 +66,7 @@
 			s.addEventListener("close", function (event) {
 				console.log("socket closed, reconnecting in 2s")
 				lastmsg = DateTime.now().toUnixInteger()
+				s.destroy()
 				cancelKeepAlive()
 				if (!timeout)
 					timeout = setTimeout(() => {
@@ -77,10 +79,10 @@
 	function keepAlive(s) { 
 		let newmsg = DateTime.now().toUnixInteger()
 		let timing = newmsg - lastmsg
-		if (timing >= 60) {
+		if (timing >= 40) {
 			// Roger we have a problem, try to reconnect the websocket
 			console.log("No msg over websocket for " + timing + " sec, restart websocket")
-			s.close()
+			s.destroy()
 			cancelKeepAlive()  
 			if (!timeout)
 				timeout = setTimeout(() => {

@@ -14,7 +14,6 @@
 	let time
 	let elapsed
 
-	// $: formatTime($status_store.time,$config_store.time_zone)
 	$: { 
 		if ($status_store.elapsed != undefined)
 			elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 16) 
@@ -74,8 +73,11 @@
 		<!-- // Tablet & Mobile only -->
 		<StatusTile title="Setpoint" value={$status_store.pilot} unit="A" />
 		{/if}
-		{#if $status_store.shaper == 1  || $status_store.divertmode == 2}
-		<StatusTile title="Available" value={$uistates_store.divertmode?$status_store.available_current:$status_store.shaper_chg_cur} unit="A" />
+		{#if $status_store.divertmode == 2}
+		<StatusTile title="Available" value={$status_store.charge_rate!=undefined?$status_store.charge_rate:0} unit="A" />
+		{:else if $status_store.shaper == 1}
+		<StatusTile title="Available" value={$status_store.shaper_chg_cur} unit="A" />
+
 		{/if}
 		<!-- <StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
 		<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	 -->
