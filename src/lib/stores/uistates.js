@@ -1,18 +1,27 @@
 import { writable } from 'svelte/store'
 
 const model = {
-		data_loaded: false,
+		// copy from other stores
 		max_current: undefined,
 		manual_override: undefined,
 		shaper: undefined,
 		divertmode: undefined,
-		mode: undefined, // 0:Auto 1:On 2:Off
+		
 		autorelease: true,
 		time_lmt: 0,
 		charge_lmt: 0,
-		status_expanded: false,
 		config_version: 0,
 		claims_version: 0,
+		schedule_version: 0,
+		schedule_plan_version: 0,
+		// (todo) derived from other stores
+		mode: undefined, // 0:Auto 1:On 2:Off
+		stateclaimfrom: null, // "manual", "timer", "divert", "shaper", "ocpp", "mqtt", "rfid"
+		time_localestring: null,
+		time_isostring: null,
+		// local states
+		data_loaded: false,
+		status_expanded: false,
 		window_width: window.innerWidth,
 		breakpoint: undefined
 }

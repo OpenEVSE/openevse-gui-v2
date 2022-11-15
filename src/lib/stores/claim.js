@@ -7,7 +7,7 @@ function createClaimStore() {
     const { subscribe, set, update } = P
 
 	// get claim from clientid EvseClient_OpenEVSE_Manual
-	async function getClaim() {
+	async function download() {
 		//let res = await httpAPI("GET", "/claims/" + EvseClient_OpenEVSE_Manual)
         let claims = await httpAPI("GET", "/claims");
         for (let i in claims) {
@@ -22,7 +22,7 @@ function createClaimStore() {
 		return P
 }
 	// set {claim for clientid EvseClient_OpenEVSE_Manual
-    async function setClaim(data) {
+    async function upload(data) {
         let claim = get(P)
 		let newclaim = {...claim, ...data}
         let res = await httpAPI("POST", "/claims/" + EvseClients["manual"], JSON.stringify(data))
@@ -32,7 +32,7 @@ function createClaimStore() {
     }
 
 	// remove clientid EvseClient_OpenEVSE_Manual claim 
-    async function releaseClaim() {
+    async function release() {
         let res = await httpAPI("DELETE", "/claims/" + EvseClients["manual"])
         let store = {}
         P.update(() => store)
@@ -44,9 +44,10 @@ function createClaimStore() {
 		get: (s) => get(s), // little hack to access get() method inside the object itself
         set,
         update,
-        getClaim,
-        releaseClaim,
-        setClaim: (data) => setClaim(data)
+        download,
+        upload: (data) => upload(data),
+        release
+
     }
 }
 

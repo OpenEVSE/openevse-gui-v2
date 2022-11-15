@@ -1,4 +1,5 @@
 <script>
+	import DataManager from "./components/data/DataManager.svelte";
 	import Header from './components/blocks/Header.svelte';
 	import Router from 'svelte-spa-router';
 	import { routes } from "./lib/routes.js";
@@ -33,7 +34,7 @@
 	<Header />
 	<FetchData />
 	{#if $uistates_store.data_loaded}
-	<WebSocket/>
+	<DataManager />
 	<Router {routes}/>
 	{/if}
 </main>

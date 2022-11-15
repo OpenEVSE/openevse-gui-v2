@@ -1,7 +1,8 @@
 <script>
+	import { claims_target_store } from "./../../lib/stores/claims_target.js";
+	import {EvseClients} from "./../../lib/vars.js"
 	import SchedulePlan from "./../ui/SchedulePlan.svelte";
 	import {status_store} from "../../lib/stores/status.js"
-	import {claim_store} from "../../lib/stores/claim.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
 	import {uistates_store} from "../../lib/stores/uistates.js"
@@ -13,7 +14,37 @@
 	let time
 	let elapsed
 
+	function clientid2name(id) {
+		let name
+		switch (id) {
+			case EvseClients["manual"]:
+				 name =  "manual"
+				 break;
+			case EvseClients["divert"]:
+				 name = "divert"
+				 break;
+			case EvseClients["timer"]:
+				  name = "timer"
+				  break;
+			case EvseClients["ohm"]:
+				 	name = "ohm"
+					 break;
+			case EvseClients["ocpp"]:
+					name = "ocpp"
+					break;
+			case EvseClients["rfid"]:
+				   name = "rfid"
+				   break;
+			case EvseClients["mqtt"]:
+				 	name = "mqtt"
+					 break;
+		}
 
+		console.log("id: " + id + " name: " + name)
+		return name
+
+
+	}
 
 	// $: formatTime($status_store.time,$config_store.time_zone)
 	$: { 
@@ -92,8 +123,13 @@
 				{#if ($uistates_store.mode != 0) }
 				<SchedulePlan mode="Manual" state={$status_store.status} />
 				{:else}
-	
+					{#key $uistates_store.stateclaimfrom}
+					{#if $uistates_store.stateclaimfrom != EvseClients["timer"]}
+					<SchedulePlan mode={clientid2name($uistates_store.stateclaimfrom)} state={$claims_target_store.properties.state} />
+					{:else}
 					<SchedulePlan mode="Timer" msg={$plan_store.current_event.state=="active"?"Activated since":"Disabled since"} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
+					{/if}
+					{/key}
 					<SchedulePlan mode="Timer" msg={$plan_store.next_event.state=="active"?"Activate at":"Disable at"} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
 				
 				{/if}

@@ -28,9 +28,9 @@
 				$claim_store.energy_limit == undefined && 
 				$claim_store.time_limit == undefined
 			) {
-				res = await claim_store.releaseClaim()
+				res = await claim_store.release()
 			}
-			else res = await claim_store.setClaim($claim_store)
+			else res = await claim_store.upload($claim_store)
 			$uistates_store.max_current = val
 			return res
 		}
@@ -38,7 +38,7 @@
 			// set claim
 			$claim_store.max_current = val
 			$claim_store.auto_release = $uisettings_store.auto_release
-			let res = await claim_store.setClaim($claim_store)
+			let res = await claim_store.upload($claim_store)
 			$uistates_store.max_current = val
 			return res
 		}
@@ -52,7 +52,7 @@
 	}
 
 
-	function setMode(m) {
+	async function setMode(m) {
 		$uistates_store.mode = m
 		let data = {
 				auto_release: $uisettings_store.auto_release
@@ -83,16 +83,16 @@
 				data.charge_limit = $claim_store.charge_limit
 			}
 
-			claim_store.setClaim(data)
+			claim_store.upload(data)
 		}
 		else {
 			// if there's no other claim property ( only chanrge_current for now )
 			if (data.max_current) 
-				claim_store.setClaim(data)
+				await claim_store.upload(data)
 			// Mode Auto, clearing override
 			else 
 			if ($claims_target_store.claims.state == EvseClients["manual"] )
-				claim_store.releaseClaim()
+				await claim_store.release()
 		}
 	}
 

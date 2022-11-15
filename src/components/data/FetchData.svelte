@@ -1,11 +1,12 @@
 <script>
-	import { claims_target_store } from "./../../lib/stores/claims_target.js";
-	import {uistates_store} from "../../lib/stores/uistates.js"
-	import {status_store} from "../../lib/stores/status.js"
-	import {schedule_store} from "../../lib/stores/schedule.js"
-	import {plan_store} from "../../lib/stores/plan.js"
-	import {config_store} from "../../lib/stores/config.js"
-	import {claim_store} from "../../lib/stores/claim.js"
+	import { onMount } from "svelte";
+	import { uistates_store }		from "./../../lib/stores/uistates.js"
+	import { status_store }			from "./../../lib/stores/status.js"
+	import { schedule_store } 		from "./../../lib/stores/schedule.js"
+	import { plan_store } 			from "./../../lib/stores/plan.js"
+	import { config_store } 		from "./../../lib/stores/config.js"
+	import { claims_target_store } 	from "./../../lib/stores/claims_target.js";
+	import { claim_store } 			from "./../../lib/stores/claim.js"
 
 
 	let status = "Loading"
@@ -15,19 +16,25 @@
 		await status_store.download()
 		status = "Loading Schedule"
 		await schedule_store.download()
+		$uistates_store.schedule_version = $status_store.schedule_version
 		status = "Loading Schedule Plan"
 		await plan_store.download()
+		$uistates_store.schedule_plan_version = $status_store.schedule_plan_version
 		status = "Loading Configuration"
 		await config_store.download()
+		$uistates_store.config_version = $status_store.config_version
 		status = "Get Claim"
-		await claim_store.getClaim()
+		await claim_store.download()
 		status = "Get Claims Target"
 		await claims_target_store.download()
 		status = "Ok"
+		$uistates_store.claims_version = $status_store.claims_version
 		$uistates_store.data_loaded = true;
 	}
-	
-	loadData()
+	onMount(() => {
+		loadData()
+	})
+
 </script>
 
 <div class="pageloader {status!="Ok"?"is-active":""}"><span class="title">{status}</span></div>

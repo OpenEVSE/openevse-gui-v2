@@ -12,13 +12,13 @@ function createClaimStore() {
     const { subscribe, set, update } = P
 
 	// get claim from clientid EvseClient_OpenEVSE_Manual
-	async function getClaim() {
+	async function download() {
 		P.update(() => claim_fakedata)
 		await new Promise(resolve => timeout = setTimeout(resolve, 500));
 		return P
 }
 	// set {claim for clientid EvseClient_OpenEVSE_Manual
-    async function setClaim(data) {
+    async function upload(data) {
 		let store = get(P)
 		store = {...store, ...data}
 		P.update(() => store)
@@ -27,7 +27,7 @@ function createClaimStore() {
     }
 
 	// remove clientid EvseClient_OpenEVSE_Manual claim 
-    async function releaseClaim() {
+    async function release() {
 		let store = {}
         P.update(() => store)
         await new Promise(resolve => timeout = setTimeout(resolve, 500));
@@ -39,9 +39,10 @@ function createClaimStore() {
 		get: (s) => get(s), // little hack to access get() method inside the object itself
         set,
         update,
-        getClaim,
-        releaseClaim,
-        setClaim: (data) => setClaim(data)
+        download,
+        upload: (data) => upload(data),
+        release
+
     }
 }
 
