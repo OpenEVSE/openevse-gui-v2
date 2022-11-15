@@ -3,22 +3,22 @@ import {httpAPI} from '../utils.js'
 
 
 function createOverrideStore() {
-    const P  = writable()
+    const P  = writable({})
     const { subscribe, set, update } = P
 
-	async function getOverride() {
+	async function download() {
 		let res = await httpAPI("GET", "/override")
 		P.update(() => res)
 		return P
 }
-    async function setOverride(data) {
+    async function upload(data) {
         let override = get(P)
 		let newoverridestore = {...override, ...data}
         let res = await httpAPI("POST", "/override", JSON.stringify(newoverridestore))
 		P.update(() => newoverridestore)
         return P
     }
-    async function clearOverride() {
+    async function clear() {
         let res = await httpAPI("DELETE", "/override")
         let store = {}
         P.update(() => store)
@@ -30,9 +30,9 @@ function createOverrideStore() {
 		get: (s) => get(s), // little hack to access get() method inside the object itself
         set,
         update,
-        getOverride,
-        clearOverride,
-        setOverride: (data) => setOverride(data)
+        download,
+        clear,
+        upload: (data) => upload(data)
     }
 }
 

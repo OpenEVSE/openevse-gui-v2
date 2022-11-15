@@ -1,4 +1,5 @@
 <script>
+
 	import { onMount } from "svelte";
 	import { uistates_store }		from "./../../lib/stores/uistates.js"
 	import { status_store }			from "./../../lib/stores/status.js"
@@ -6,7 +7,8 @@
 	import { plan_store } 			from "./../../lib/stores/plan.js"
 	import { config_store } 		from "./../../lib/stores/config.js"
 	import { claims_target_store } 	from "./../../lib/stores/claims_target.js";
-	import { claim_store } 			from "./../../lib/stores/claim.js"
+	// import { claim_store } 			from "./../../lib/stores/claim.js"
+	import { override_store } from "./../../lib/stores/override.js";
 
 
 	let status = "Loading"
@@ -23,8 +25,11 @@
 		status = "Loading Configuration"
 		await config_store.download()
 		$uistates_store.config_version = $status_store.config_version
-		status = "Get Claim"
-		await claim_store.download()
+		status = "Get Override"
+		if($status_store.manual_override)
+			await override_store.download()
+		// status = "Get Claim"
+		// await claim_store.download()
 		status = "Get Claims Target"
 		await claims_target_store.download()
 		status = "Ok"

@@ -1,4 +1,5 @@
 <script>
+	
 	import WebSocket from "./WebSocket.svelte";
 	import { onMount } 				from "svelte"
 	import {EvseClients} 			from  "./../../lib/vars.js"
@@ -8,7 +9,8 @@
 	import { plan_store } 			from "./../../lib/stores/plan.js"
 	import { config_store } 		from "./../../lib/stores/config.js"
 	import { claims_target_store } 	from "./../../lib/stores/claims_target.js"
-	import { claim_store } 			from "./../../lib/stores/claim.js"
+	// import { claim_store } 			from "./../../lib/stores/claim.js"
+	import { override_store } 		from "./../../lib/stores/override.js";
 	import { fetchQueue }			from "./../../lib/fetchQueue.js"
 	import {clientid2name}			from "./../../lib/utils.js"
 	// onMount(()=>fetchQueue.start())
@@ -34,14 +36,19 @@
 		}
 	}
 
-	function refreshClaimStore(ver) {
+	function refreshClaimsTargetStore(ver) {
 		if (ver != $uistates_store.claims_version) {
 			console.log("add refreshClaimsTargetStore")
 			fetchQueue.add(claims_target_store.download().then($uistates_store.claims_version=ver))
-			console.log("add refreshClaimsStore")
-			fetchQueue.add(claim_store.download())
+			// console.log("add refreshClaimsStore")
+			// fetchQueue.add(claim_store.download())
+			if ($status_store.manual_override) {
+				console.log("add refreshOverrideStore")
+				fetchQueue.add(override_store.download())
+			}
 		}
 	}
+
 
 	function getMode(state,clientid) {
 		$uistates_store.stateclaimfrom = clientid2name(clientid)
@@ -73,7 +80,7 @@
 	$: refreshConfigStore($status_store.config_version)
 	$: refreshSchedulestore($status_store.schedule_version)
 	$: refreshPlanStore($status_store.schedule_plan_version)
-	$: refreshClaimStore($status_store.claims_version)
+	$: refreshClaimsTargetStore($status_store.claims_version)
 	$: getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
 
 </script>

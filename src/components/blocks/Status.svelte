@@ -95,8 +95,9 @@
 					<SchedulePlan mode={$uistates_store.stateclaimfrom} state={$claims_target_store.properties.state} />
 					{:else}
 					<SchedulePlan mode="Timer" msg={$plan_store.current_event.state=="active"?"Activated since":"Disabled since"} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
-					{/if}
 					<SchedulePlan mode="Timer" msg={$plan_store.next_event.state=="active"?"Activate at":"Disable at"} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
+					{/if}
+					
 				
 				{/if}
 				</div>

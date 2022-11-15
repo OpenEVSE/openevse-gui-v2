@@ -1,52 +1,53 @@
 <script>
-	import {EvseClients} from  "./../../../lib/vars.js"
-	import { claims_target_store } from "./../../../lib/stores/claims_target.js";
-	import Box from "../../ui/Box.svelte"
-	import Slider from "../../ui/SliderForm.svelte"
-	import Switch from "../../ui/Switch.svelte"
-	import ButtonManual from "../../ui/ButtonManual.svelte"
-	import SelectTimeLmt from "../../ui/SelectTimeLmt.svelte"
-	import SelectChargeLmt from "../../ui/SelectChargeLmt.svelte"
-	import {config_store} from "../../../lib/stores/config.js"
-	import {claim_store} from "../../../lib/stores/claim.js"
-	import {status_store} from "../../../lib/stores/status.js"
-	import {schedule_store} from "../../../lib/stores/schedule.js"
-	import {uistates_store} from "../../../lib/stores/uistates.js"
-	import {uisettings_store} from "../../../lib/stores/uisettings.js"
-	import {onMount} from 'svelte'
-	import {httpAPI} from '../../../lib/utils.js'
+	import {EvseClients} 			from  "./../../../lib/vars.js"
+	import { claims_target_store }	from "./../../../lib/stores/claims_target.js";
+	import Box 						from "../../ui/Box.svelte"
+	import Slider 					from "../../ui/SliderForm.svelte"
+	import Switch 					from "../../ui/Switch.svelte"
+	import ButtonManual 			from "../../ui/ButtonManual.svelte"
+	import SelectTimeLmt 			from "../../ui/SelectTimeLmt.svelte"
+	import SelectChargeLmt			from "../../ui/SelectChargeLmt.svelte"
+	import {config_store}			from "../../../lib/stores/config.js"
+	// import {claim_store} 		from "../../../lib/stores/claim.js"
+	import { override_store } 		from "./../../../lib/stores/override.js";
+	import {status_store} 			from "../../../lib/stores/status.js"
+	import {schedule_store} 		from "../../../lib/stores/schedule.js"
+	import {uistates_store} 		from "../../../lib/stores/uistates.js"
+	import {uisettings_store} 		from "../../../lib/stores/uisettings.js"
+	import {onMount} 				from 'svelte'
+	import {httpAPI} 				from '../../../lib/utils.js'
 
 	async function setMaxCurrent(val) {
 		
 		if (val == $config_store.max_current_soft) {
 			//remove maxCurrent
-			delete $claim_store.max_current
+			delete $override_store.max_current
 			let res
 			// if not other properties, release claim
 			if ( 
-				$claim_store.state == undefined && 
-				$claim_store.energy_limit == undefined && 
-				$claim_store.time_limit == undefined
+				$override_store.state == undefined && 
+				$override_store.energy_limit == undefined && 
+				$override_store.time_limit == undefined
 			) {
-				res = await claim_store.release()
+				res = await override_store.clear()
 			}
-			else res = await claim_store.upload($claim_store)
+			else res = await override_store.upload($override_store)
 			$uistates_store.max_current = val
 			return res
 		}
 		else {
 			// set claim
-			$claim_store.max_current = val
-			$claim_store.auto_release = $uisettings_store.auto_release
-			let res = await claim_store.upload($claim_store)
+			$override_store.max_current = val
+			$override_store.auto_release = $uisettings_store.auto_release
+			let res = await override_store.upload($override_store)
 			$uistates_store.max_current = val
 			return res
 		}
 	}
 
 	function getMaxCurrent() {
-		if ($claim_store.max_current!=undefined)
-			return $claim_store.max_current
+		if ($override_store.max_current!=undefined)
+			return $override_store.max_current
 		else if ($config_store.max_current_soft)
 			return $config_store.max_current_soft
 	}
@@ -76,23 +77,23 @@
 
 		if(data.state != undefined ) {
 			// Mode Manual setting override
-			if ($claim_store.time_limit != undefined) {
-				data.time_limit = $claim_store.time_limit
+			if ($override_store.time_limit != undefined) {
+				data.time_limit = $override_store.time_limit
 			}
-			if ($claim_store.charge_limit != undefined) {
-				data.charge_limit = $claim_store.charge_limit
+			if ($override_store.charge_limit != undefined) {
+				data.charge_limit = $override_store.charge_limit
 			}
 
-			claim_store.upload(data)
+			override_store.upload(data)
 		}
 		else {
 			// if there's no other claim property ( only chanrge_current for now )
 			if (data.max_current) 
-				await claim_store.upload(data)
+				await override_store.upload(data)
 			// Mode Auto, clearing override
 			else 
 			if ($claims_target_store.claims.state == EvseClients["manual"] )
-				await claim_store.release()
+				await override_store.clear()
 		}
 	}
 
@@ -125,7 +126,7 @@
 
 	function set_uistates_max_current(val) {
 		$uistates_store.max_current = getMaxCurrent()
-	}
+	}	
 	function set_uistates_shaper(val) {
 		val = val == 1?true:false
 		if ($uistates_store.shaper != val)
@@ -139,11 +140,11 @@
 
 	onMount( () => {
 		$uistates_store.manual_override = $status_store.manual_override
-		set_uistates_max_current($claim_store.max_current)
+		set_uistates_max_current($override_store.max_current)
 	})
 
 // ## Reactive functions ##
-$: set_uistates_max_current($claim_store.max_current)
+$: set_uistates_max_current($override_store.max_current)
 $: stateButtonWatcher($status_store.manual_override) 
 $: set_uistates_shaper($status_store.shaper)
 $: setShaper($uistates_store.shaper)
