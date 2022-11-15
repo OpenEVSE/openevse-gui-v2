@@ -1,9 +1,17 @@
 import { get, writable } from 'svelte/store'
 import {httpAPI} from '../utils.js'
 
+const model = {
+	state: undefined,
+    max_current: undefined,
+    charge_current: undefined,
+    energy_limit: undefined,
+    time_limit: undefined,
+	auto_release: undefined
+  }
 
 function createOverrideStore() {
-    const P  = writable({})
+    const P  = writable(model)
     const { subscribe, set, update } = P
 
 	async function download() {
@@ -20,8 +28,9 @@ function createOverrideStore() {
     }
     async function clear() {
         let res = await httpAPI("DELETE", "/override")
-        let store = {}
-        P.update(() => store)
+        //let store = {}
+
+        P.update((s) => {return model})
         return P
     }
 
