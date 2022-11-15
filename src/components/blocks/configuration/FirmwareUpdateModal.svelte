@@ -1,4 +1,5 @@
 <script>
+	import { fetchQueue } from "./../../../lib/fetchQueue.js";
 	import { config_store } from "../../../lib/stores/config.js"
 	import { status_store } from "../../../lib/stores/status.js"
 	import {onDestroy} from "svelte"
@@ -10,6 +11,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faFileCircleCheck, faFileCircleXmark, faSquareMinus} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let is_opened = false
+
 	let file
 	let uploadButtonState = "default"
 	let fileSent = "no"
@@ -33,6 +35,8 @@
   		});
 
 	async function uploadFw() {
+		// Prevent UI to send any request while OTA is in progress
+		fetchQueue.pause()
 		$status_store.ota_progress = 0
 		uploadButtonState = "loading"
 		const onProgress = progress => {
@@ -50,6 +54,7 @@
 			fileSent = "ok"
 			timeout = setTimeout(()=> location.reload(),3000)
 		}
+		fetchQueue.start()
 	}
 
 	$: file, () => {

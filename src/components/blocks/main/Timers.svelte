@@ -1,5 +1,6 @@
 
 <script>
+	import { fetchQueue } from "./../../../lib/fetchQueue.js";
 	import { onDestroy } 	from "svelte";
 	import Box 				from "../../ui/Box.svelte"
 	// @ts-ignore
@@ -35,7 +36,7 @@
 		timer = $schedule_store.findIndex(item => item.id === t)
 		timersState[timer] = "loading"
 		if (timer > -1) {
-			if (await schedule_store.remove(t)) {
+			if (await fetchQueue.add(schedule_store.remove(t))) {
 				//success
 				timersState[timer] = "" // no need to display ok here as the timer disappear at this time
 				$schedule_store.splice(timer,1)

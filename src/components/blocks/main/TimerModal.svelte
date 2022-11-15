@@ -1,4 +1,5 @@
 <script>
+	import { fetchQueue } from "./../../../lib/fetchQueue.js";
 	import Box from "./../../ui/Box.svelte";
 	import {schedule_store} from "../../../lib/stores/schedule.js"
 	import AlertBox from "../../ui/AlertBox.svelte"
@@ -122,8 +123,8 @@
 				}
 				else schedule.id = 1;
 			}
-
-			if (await schedule_store.upload(schedule)) 
+			let res = await fetchQueue.add(schedule_store.upload(schedule))
+			if (res) 
 				{
 					saveTimerState = "ok"
 					if (timer == null) {
