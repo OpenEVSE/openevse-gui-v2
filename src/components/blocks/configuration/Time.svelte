@@ -31,7 +31,6 @@
 				zone = $config_store.time_zone.split("|")[0]
 			const dt = DateTime.fromISO(t).setZone(zone)
 			date = dt.toFormat("yyyy-MM-dd'T'HH:mm")
-			console.log(date)
 		}	
 	}
 
@@ -51,10 +50,10 @@
 		
 		// @ts-ignore
 		const payload = new URLSearchParams(formData).toString()
+		allow_time_update = true
 		let res = await httpAPI("POST","/settime",payload, "text")
 		if (res == "set" )  {
 			setTimeButnState = "ok"
-			allow_time_update = true
 			return true
 		}
 		else {
@@ -104,8 +103,10 @@
 	}
 
 	function timeNow() {
-		const localdate = new Date()
-		updateDateField(localdate)
+		//const localdate = DateTime().now()
+		allow_time_update = false
+		const localdate = DateTime.now()
+		date = localdate.toFormat("yyyy-MM-dd'T'HH:mm")
 		return true
 	}
 

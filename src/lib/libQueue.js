@@ -28,7 +28,6 @@ export default class Queue {
 	}
 
 	dequeue(value) {
-		console.log("dequeue started:")
 		this.running = this.queue.shift();
 
 		if (this.running) {
