@@ -15,32 +15,32 @@
 
 	// onMount(()=>fetchQueue.start())
 
-	function refreshDateTime(t,tz) { // params: time (isostring) , timezone
+	export function refreshDateTime(t,tz) { // params: time (isostring) , timezone
 		$uistates_store.time_isostring = t
 		$uistates_store.time_localestring = formatDate(t,tz)
 	}
-	function refreshConfigStore(ver) {
+	export function refreshConfigStore(ver) {
 		if (ver != $uistates_store.config_version) {
 			console.log("refreshConfigStore")
 			fetchQueue.add(config_store.download().then($uistates_store.config_version=ver))
 		}
 	}
 
-	function refreshSchedulestore(ver) {
+	export function refreshSchedulestore(ver) {
 		if (ver != $uistates_store.schedule_version) {
 			console.log("add refreshSchedulestore")
 			fetchQueue.add(schedule_store.download().then($uistates_store.schedule_version=ver))
 		}
 	}
 
-	function refreshPlanStore(ver) {
+	export function refreshPlanStore(ver) {
 		if (ver != $uistates_store.schedule_plan_version) {
 			console.log("add refreshPlanstore")
 			fetchQueue.add(plan_store.download().then($uistates_store.schedule_plan_version=ver))
 		}
 	}
 
-	function refreshClaimsTargetStore(ver) {
+	export function refreshClaimsTargetStore(ver) {
 		if (ver != $uistates_store.claims_version) {
 			console.log("add refreshClaimsTargetStore")
 			fetchQueue.add(claims_target_store.download().then($uistates_store.claims_version=ver))
@@ -53,7 +53,7 @@
 		}
 	}
 
-	function refreshStatusStore() {
+	export function refreshStatusStore() {
 		console.log("add refreshStatusStore")
 		fetchQueue.add(status_store.download())
 	}
