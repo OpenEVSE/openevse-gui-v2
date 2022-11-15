@@ -1,7 +1,7 @@
 <script>
 	export let value = 0
 	export let disabled=false
-
+    export let title
 	let options = [
     { name: "none", value: 0 },
     { name: "1 kWh", value: 1 },
@@ -30,7 +30,7 @@
 </script>
 
 <div class="mx-2">
-	<div class="has-text-weight-bold">Charge Limit:</div>
+	<div class="has-text-weight-bold has-text-centered">{title}</div>
 	<div class="select is-info">		
 		<select bind:value disabled={disabled}>
 			{#each options as option}

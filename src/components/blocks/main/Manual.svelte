@@ -153,7 +153,7 @@ $: setDivertMode($uistates_store.divertmode)
 
 </script>
 
-<Box title="Manual">
+<Box title="Mode">
 
 	{#if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
 	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
@@ -174,7 +174,7 @@ $: setDivertMode($uistates_store.divertmode)
 		</div>
 	</div>
 
-	<Slider  label="Limit Current" tooltip="Restrain max current to this value" unit="A" min=6 max={$config_store.max_current_soft} step=1 
+	<Slider  label="Set Amp" tooltip="Restrain max current to this value" unit="A" min=6 max={$config_store.max_current_soft} step=1 
 	value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
 	
 
@@ -186,7 +186,7 @@ $: setDivertMode($uistates_store.divertmode)
 	</div> -->
 
 	<div class="columns is-mobile is-justify-content-center m-2">
-		<SelectTimeLmt bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
-		<SelectChargeLmt bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
+		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
+		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
 	</div>
 </Box>
