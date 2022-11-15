@@ -1,4 +1,5 @@
 import { DateTime } from "luxon";
+import {EvseClients} from "./vars.js"
 
 export async function httpAPI(method,url,body=null,type = "json") {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
@@ -91,3 +92,33 @@ export let getBreakpoint = function () {
    
     return bp;
 };
+
+export function clientid2name(id) {
+	let name
+	switch (id) {
+		case EvseClients["manual"]:
+			 name =  "manual"
+			 break;
+		case EvseClients["divert"]:
+			 name = "divert"
+			 break;
+		case EvseClients["timer"]:
+			  name = "timer"
+			  break;
+		case EvseClients["ohm"]:
+				 name = "ohm"
+				 break;
+		case EvseClients["ocpp"]:
+				name = "ocpp"
+				break;
+		case EvseClients["rfid"]:
+			   name = "rfid"
+			   break;
+		case EvseClients["mqtt"]:
+				 name = "mqtt"
+				 break;
+	}
+	return name
+
+
+}

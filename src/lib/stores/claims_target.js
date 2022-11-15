@@ -18,7 +18,7 @@ function createClaimsTargetStore() {
 			P.update(() => target)
             return P
 		}
-}
+    }
 
     return {
         subscribe,

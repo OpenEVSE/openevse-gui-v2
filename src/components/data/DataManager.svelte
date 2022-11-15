@@ -9,8 +9,8 @@
 	import { config_store } 		from "./../../lib/stores/config.js"
 	import { claims_target_store } 	from "./../../lib/stores/claims_target.js"
 	import { claim_store } 			from "./../../lib/stores/claim.js"
-	import {fetchQueue}				from "./../../lib/fetchQueue.js"
-
+	import { fetchQueue }			from "./../../lib/fetchQueue.js"
+	import {clientid2name}			from "./../../lib/utils.js"
 	// onMount(()=>fetchQueue.start())
 
 	function refreshConfigStore(ver) {
@@ -44,7 +44,7 @@
 	}
 
 	function getMode(state,clientid) {
-		$uistates_store.stateclaimfrom = state
+		$uistates_store.stateclaimfrom = clientid2name(clientid)
 		if (clientid == EvseClients["manual"] || clientid == undefined) {
 			// Mode Manual		
 			switch (state) {
