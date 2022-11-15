@@ -74,8 +74,8 @@
 		<!-- // Tablet & Mobile only -->
 		<StatusTile title="Setpoint" value={$status_store.pilot} unit="A" />
 		{/if}
-		{#if $status_store.shaper}
-		<StatusTile title="Available" value={$status_store.shaper_chg_cur} unit="A" />
+		{#if $status_store.shaper || $status_store.divert_active}
+		<StatusTile title="Available" value={$uistates_store.divertmode?$status_store.available_current:$status_store.shaper_chg_cur} unit="A" />
 		{/if}
 		<!-- <StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
 		<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	 -->
