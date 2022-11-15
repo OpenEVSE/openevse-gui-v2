@@ -110,7 +110,6 @@
 		state = state == true ? "2" : "1"
 		let param = "divertmode="+state
 		if (state != $status_store.divertmode && $status_store.divertmode != undefined) {
-			
 			let res = await httpAPI("POST","/divertmode", param, "text")
 		}
 	}

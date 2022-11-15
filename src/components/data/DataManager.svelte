@@ -1,7 +1,6 @@
 <script>
 	
 	import WebSocket from "./WebSocket.svelte";
-	import { onMount } 				from "svelte"
 	import {EvseClients} 			from  "./../../lib/vars.js"
 	import { uistates_store }		from "./../../lib/stores/uistates.js"
 	import { status_store }			from "./../../lib/stores/status.js"
@@ -9,12 +8,17 @@
 	import { plan_store } 			from "./../../lib/stores/plan.js"
 	import { config_store } 		from "./../../lib/stores/config.js"
 	import { claims_target_store } 	from "./../../lib/stores/claims_target.js"
-	// import { claim_store } 			from "./../../lib/stores/claim.js"
 	import { override_store } 		from "./../../lib/stores/override.js";
 	import { fetchQueue }			from "./../../lib/fetchQueue.js"
-	import {clientid2name}			from "./../../lib/utils.js"
+	import {clientid2name, formatDate}			from "./../../lib/utils.js"
+
+
 	// onMount(()=>fetchQueue.start())
 
+	function refreshDateTime(t,tz) { // params: time (isostring) , timezone
+		$uistates_store.time_isostring = t
+		$uistates_store.time_localestring = formatDate(t,tz)
+	}
 	function refreshConfigStore(ver) {
 		if (ver != $uistates_store.config_version) {
 			console.log("refreshConfigStore")
@@ -49,6 +53,11 @@
 		}
 	}
 
+	function refreshStatusStore() {
+		console.log("add refreshStatusStore")
+		fetchQueue.add(status_store.download())
+	}
+
 
 	function getMode(state,clientid) {
 		$uistates_store.stateclaimfrom = clientid2name(clientid)
@@ -71,17 +80,15 @@
 		}
 	}
 
-	// function refreshStatusStore() {
-	// 	console.log("add refreshStatusStore")
-	// 	fetchQueue.add(status_store.download())
-	// }
+
 
 	// Refresh stores when new version is published over websocket
-	$: refreshConfigStore($status_store.config_version)
-	$: refreshSchedulestore($status_store.schedule_version)
-	$: refreshPlanStore($status_store.schedule_plan_version)
-	$: refreshClaimsTargetStore($status_store.claims_version)
-	$: getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
+	$: refreshConfigStore		($status_store.config_version)
+	$: refreshSchedulestore		($status_store.schedule_version)
+	$: refreshPlanStore			($status_store.schedule_plan_version)
+	$: refreshClaimsTargetStore	($status_store.claims_version)
+	$: refreshDateTime			($status_store.time, $config_store.time_zone)
+	$: getMode					($claims_target_store.properties.state,$claims_target_store.claims.state)
 
 </script>
 

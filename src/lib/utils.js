@@ -47,13 +47,12 @@ export const removeDuplicateObjects = (array, key) => {
 }
 
 export function formatDate(t,z) {
-	const d = DateTime.fromISO(t)
-	d.setZone(z)
+	let tz = z.split("|")[0]
+	const d = DateTime.fromISO(t).setZone(tz)
 	return d.toLocaleString(DateTime.DATETIME_SHORT)
 }
 
 export function displayTime(t) {
-
 	const d = DateTime.fromISO(t).toLocaleString(DateTime.TIME_SIMPLE) 
 	return d
 }
