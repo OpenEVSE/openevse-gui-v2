@@ -37,7 +37,7 @@
 		if (timer > -1) {
 			if (await schedule_store.remove(t)) {
 				//success
-				timersState[timer] = "ok"
+				timersState[timer] = "" // no need to display ok here as the timer disappear at this time
 				$schedule_store.splice(timer,1)
 				$schedule_store = $schedule_store
 				

@@ -1,4 +1,6 @@
 <script>
+	import Fa from 'svelte-fa/src/fa.svelte'
+	import {faRobot} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let mode // 0: Auto, 1: On, 2: OFF
 	export let setmode = (m,c) => {}
 	export let mode0 = "Auto"
@@ -24,8 +26,8 @@
 	on:click={() => {setmode(1)}}>{mode1}
 </button>
 	{#if isauto}
-	<button class="mr-1 button manual-charge is-size-6 has-tooltip-arrow  {mode == 0?"":"is-outlined"} is-info" data-tooltip="Scheduled Charge"
-			on:click={() => { setmode(0)}}>{mode0}
+	<button class="mr-1 button manual-charge is-size-6 has-tooltip-arrow  {mode == 0?"":"is-outlined"} is-info" data-tooltip="Let OpenEVSE decide"
+			on:click={() => { setmode(0)}}>&nbsp;&nbsp;&nbsp;<Fa icon={faRobot} />&nbsp;&nbsp;&nbsp;
 	</button>
 	{/if}
 	<button class="button manual-charge is-size-6 has-tooltip-arrow  {mode == 2?"":"is-outlined"} is-danger" data-tooltip="Disable Charge"

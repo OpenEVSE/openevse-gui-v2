@@ -74,7 +74,7 @@
 		<!-- // Tablet & Mobile only -->
 		<StatusTile title="Setpoint" value={$status_store.pilot} unit="A" />
 		{/if}
-		{#if $status_store.shaper || $status_store.divert_active}
+		{#if $status_store.shaper == 1  || $status_store.divertmode == 2}
 		<StatusTile title="Available" value={$uistates_store.divertmode?$status_store.available_current:$status_store.shaper_chg_cur} unit="A" />
 		{/if}
 		<!-- <StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
@@ -102,7 +102,7 @@
 				{/if}
 				</div>
 			</div>
-	<ExpandArrow bind:expand={$uistates_store.status_expanded} />
+	<div class="mt-1"><ExpandArrow bind:expand={$uistates_store.status_expanded} /></div>
 </div>
 {:else}
 <div class="statusbox disabled has-background-light mb-5 mt-0 px-3">

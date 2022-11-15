@@ -1,10 +1,12 @@
 <script>
+	import { DateTime } from "luxon";
 	import { status_store } from './../../lib/stores/status.js'
 	import { onMount, onDestroy } from 'svelte'
 	
 
 	let socket
 	let timerId
+	let lastmsg
 	let timeout
 	// let isgettingclaim = false
 	// let isgettingschedule = false
@@ -44,6 +46,7 @@
 				keepAlive(s)
 			} )
 			s.addEventListener("message", function (event) {
+				lastmsg = DateTime.now().toUnixInteger()
 				const jsondata = JSON.parse(event.data.toString())
 				let store = Object.assign({}, $status_store);
 				store = {...store, ...jsondata}
@@ -51,6 +54,7 @@
 			})
 			s.addEventListener("error", function (event) {
 				console.log("socket error")
+				lastmsg = DateTime.now().toUnixInteger()
 				cancelKeepAlive()
 				if (!timeout)
 					timeout = setTimeout(() => {
@@ -60,6 +64,7 @@
 			})
 			s.addEventListener("close", function (event) {
 				console.log("socket closed, reconnecting in 2s")
+				lastmsg = DateTime.now().toUnixInteger()
 				cancelKeepAlive()
 				if (!timeout)
 					timeout = setTimeout(() => {
@@ -69,59 +74,32 @@
 		}
 	}
 
-	function keepAlive(socket) { 
+	function keepAlive(s) { 
+		let newmsg = DateTime.now().toUnixInteger()
+		let timing = newmsg - lastmsg
+		if (timing >= 60) {
+			// Roger we have a problem, try to reconnect the websocket
+			console.log("No msg over websocket for " + timing + " sec, restart websocket")
+			s.close()
+			cancelKeepAlive()  
+			if (!timeout)
+				timeout = setTimeout(() => {
+					lastmsg = DateTime.now().toUnixInteger()
+					connect2socket(s)
+				}, 200);
+			return
+		}
 		
-		var timeout = 5000;  
-		if (socket && socket.readyState == socket.OPEN) {  
-			socket.send("{\"ping\":1}");  
+		if (s && s.readyState == s.OPEN) {  
+			s.send("{\"ping\":1}");  
 		}  
-		timerId = setTimeout(()=>keepAlive(socket), timeout);  
+		timerId = setTimeout(()=>keepAlive(s), 5000);  
+		return
 	}
 	
 	function cancelKeepAlive() {  
 		if (timerId) {  
 			clearTimeout(timerId);  
+		}
     }  
-}
-	// async function updateClaimStore(ver) {
-	// 	if (!isgettingclaim) {
-	// 		if (ver != $uistates_store.claims_version) {
-	// 			$uistates_store.claims_version = ver
-	// 			isgettingclaim = true
-	// 			//await claim_store.getClaim()
-	// 			await claims_target_store.download()
-	// 			getMode()
-				
-	// 			isgettingclaim = false
-	// 			return true
-	// 		}
-	// 	}
-	// }
-
-	// async function updateScheduleStore(ver) {
-	// 	if (!isgettingschedule) {
-	// 		if (ver != $uistates_store.schedule_version) {
-	// 			$uistates_store.schedule_version = ver
-	// 			isgettingschedule = true
-	// 			//await claim_store.getClaim()
-	// 			await schedule_store.download()
-	// 			isgettingschedule = false
-	// 			timeout = setTimeout(updateSchedulePlanStore,200)
-	// 			return true
-	// 		}
-	// 	}
-	// }
-
-	// async function updateSchedulePlanStore(ver) {
-	// 	if (!isgettingplan) {
-	// 		if (ver != $uistates_store.schedule_plan_version) {
-	// 			$uistates_store.schedule_plan_version = ver
-	// 			isgettingplan = true
-	// 			//await claim_store.getClaim()
-	// 			await plan_store.download()
-	// 			isgettingplan = false
-	// 			return true
-	// 		}
-	// 	}
-	// }
 </script>

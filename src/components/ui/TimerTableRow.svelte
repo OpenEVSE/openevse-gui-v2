@@ -1,7 +1,7 @@
 <script>
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import IconButton from "./IconButton.svelte"
-	import { faSquarePen, faSquareMinus, faMinus, faCalendarDays } from '@fortawesome/free-solid-svg-icons/index.js'
+	import { faSquarePen, faSquareMinus, faCalendarDays } from '@fortawesome/free-solid-svg-icons/index.js'
 	import { link, location } from "svelte-spa-router"
 	import {displayTime} from "../../lib/utils.js"
 	export let t_id

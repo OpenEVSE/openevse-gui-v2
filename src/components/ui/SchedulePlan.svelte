@@ -1,7 +1,7 @@
 <script>
 	import {displayTime} from "../../lib/utils.js"
 	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faCalendarDays, faHand, faRobot} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {faHand, faRobot} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let state 
 	export let time = ""
 	export let mode
@@ -11,9 +11,7 @@
 
 	function displayIcon(mode) {
 		switch (mode) {
-			case "Timer": 
-				return faCalendarDays
-			case "Manual":
+			case "manual":
 				return faHand
 			default:
 				return faRobot

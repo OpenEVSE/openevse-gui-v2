@@ -131,7 +131,7 @@
 					}
 					timeout = setTimeout(() => {
 						is_opened = false
-					}, 1000);
+					}, 500);
 
 				}
 			else {

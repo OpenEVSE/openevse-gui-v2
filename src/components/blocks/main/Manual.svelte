@@ -168,6 +168,10 @@ $: setDivertMode($uistates_store.divertmode)
 				tooltip={$status_store.divertmode == 2?"Disable Eco / Solar Divert mode":"Enable Eco / Solar Divert mode"} />
 			</div>
 			<div>
+				<Switch name="man-swShaper" label="Current Shaper" bind:checked={$uistates_store.shaper} hidden={$config_store.current_shaper_enabled == false?true:false} 
+				tooltip={$uistates_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"}/>
+			</div>
+			<div>
 				<Switch name="swAutoRelease" label="Auto Release" bind:checked={$uisettings_store.auto_release} 
 				tooltip="Settings will be reset to default after this charge session" />
 			</div>
@@ -176,14 +180,6 @@ $: setDivertMode($uistates_store.divertmode)
 
 	<Slider  label="Set Amp" tooltip="Restrain max current to this value" unit="A" min=6 max={$config_store.max_current_soft} step=1 
 	value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
-	
-
-	<!-- <div class="columns is-mobile">
-		<div class="column is-half {$config_store.current_shaper_enabled == false?"is-hidden":""}">
-			<Switch name="man-swShaper" label="Current Shaper" bind:checked={$uistates_store.shaper} 
-			tooltip={$uistates_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"}/>
-		</div>
-	</div> -->
 
 	<div class="columns is-mobile is-justify-content-center m-2">
 		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
