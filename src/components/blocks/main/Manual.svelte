@@ -86,12 +86,12 @@
 			if ($override_store.charge_limit != undefined) {
 				data.charge_limit = $override_store.charge_limit
 			}
-			await serialQueue.add((data) => override_store.upload(data))
+			await serialQueue.add(() => override_store.upload(data))
 		}
 		else {
 			// if there's no other claim property ( only chanrge_current for now )
 			if (data.max_current) 
-				await serialQueue.add((data) => override_store.upload(data))
+				await serialQueue.add(() => override_store.upload(data))
 			// Mode Auto, clearing override
 			else 
 			if ($claims_target_store.claims.state == EvseClients["manual"] )
@@ -155,7 +155,7 @@ $: setDivertMode($uistates_store.divertmode)
 </script>
 
 
-<Box title="Mode">
+<Box title="Charge">
 
 	{#if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
 	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
