@@ -1,4 +1,5 @@
 <script>
+	import { fetchQueue } from "./../../../lib/fetchQueue.js";
 	import Box from "../../ui/Box.svelte"
 	import {status_store} from "../../../lib/stores/status.js"
 	import {config_store} from "../../../lib/stores/config.js"
@@ -10,7 +11,7 @@
 	import Select from "../../ui/Select.svelte"
 	import { DateTime } from "luxon";
 
-	let input_ntp_status = 0
+	let inputSntpState = 0
 	let date
 	let timemode = 1 // 0: manual 1: NTP
 	let tz = "UTC"
@@ -32,6 +33,15 @@
 			const dt = DateTime.fromISO(t).setZone(zone)
 			date = dt.toFormat("yyyy-MM-dd'T'HH:mm")
 		}	
+	}
+
+	async function setNTP(server) {
+		inputSntpState = 1
+		let res = fetchQueue.add(config_store.saveParam("sntp_hostname", server))
+		if (res) 
+			inputSntpState = 2
+		else 
+			inputSntpState = 3
 	}
 
 	async function setTime() {
@@ -127,7 +137,7 @@
 	<div><Button name="Use Browser Time" butn_submit={timeNow}/></div>
 	{:else}
 	<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
-		status={input_ntp_status} onChange={()=>config_store.saveParam("sntp_hostname", $config_store.sntp_hostname)}/>
+		status={inputSntpState} onChange={() => {setNTP($config_store.sntp_hostname)}}/>
 	{/if}
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 	<div class="mt-4">
