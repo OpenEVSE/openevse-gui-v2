@@ -53,7 +53,9 @@
 				$uistates_store.claims_version=ver
 			if ($status_store.manual_override) {
 				console.log("add refreshOverrideStore")
-				const res = await serialQueue.add(override_store.download)
+				let res
+				if($status_store.manual_override)
+					res = await serialQueue.add(override_store.download)
 				return res
 			}
 			return res

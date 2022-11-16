@@ -57,6 +57,7 @@
 
 
 	async function setMode(m) {
+		
 		$uistates_store.mode = m
 		let data = {
 				auto_release: $uisettings_store.auto_release
@@ -119,6 +120,11 @@
 		}
 	}
 
+	async function setAutoRelease(state) {
+		let data = {auto_release: state}
+
+	}
+
 	async function stateButtonWatcher(val) {
 		if (val != undefined && $uistates_store.data_loaded == true ) {
 			if ($status_store.manual_override != $uistates_store.manual_override && $uistates_store.manual_override != undefined) {
@@ -128,7 +134,7 @@
 		
 	}
 
-	function set_uistates_max_current(val) {
+	function set_uistates_max_current() {
 		$uistates_store.max_current = getMaxCurrent()
 	}	
 	function set_uistates_shaper(val) {
@@ -144,11 +150,11 @@
 
 	onMount( () => {
 		$uistates_store.manual_override = $status_store.manual_override
-		set_uistates_max_current($override_store.max_current)
+		set_uistates_max_current()
 	})
 
 // ## Reactive functions ##
-$: set_uistates_max_current($override_store.max_current)
+$: $override_store.max_current, set_uistates_max_current()
 $: stateButtonWatcher($status_store.manual_override) 
 $: set_uistates_shaper($status_store.shaper)
 $: setShaper($uistates_store.shaper)

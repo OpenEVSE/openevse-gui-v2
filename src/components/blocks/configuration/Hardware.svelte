@@ -14,7 +14,7 @@
 	async function restartOpenEvse() {
 		restartOpenEvseState = "loading"
 		const payload = "json=1&rapi=$FR"
-		let res = await serialQueue.add(httpAPI("POST","/r",payload, "text"))
+		let res = await serialQueue.add(()=>httpAPI("POST","/r",payload, "text"))
 		if (res == "set" )  {
 			restartOpenEvseState = "ok"
 			return true
@@ -28,7 +28,7 @@
 
 	async function restartESP() {
 		restartEspState = "loading"
-		let res = await serialQueue.add(httpAPI("POST","/restart",null,"text"))
+		let res = await serialQueue.add(()=>httpAPI("POST","/restart",null,"text"))
 		if (res == "1" )  {
 			restartEspState = "ok"
 			return true
