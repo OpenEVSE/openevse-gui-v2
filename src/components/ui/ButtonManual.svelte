@@ -3,10 +3,9 @@
 	import {faRobot} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let mode // 0: Auto, 1: On, 2: OFF
 	export let setmode = (m,c) => {}
-	export let mode0 = "Auto"
-	export let mode1 = "Charge ON"
-	export let mode2 = "Charge OFF"
 	export let isauto = false
+	let mode1 = "Charge ON"
+	let mode2 = "Charge OFF"
 	
 </script>
 

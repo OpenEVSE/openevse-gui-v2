@@ -8,19 +8,23 @@ function createClaimStore() {
 
 	// get claim from clientid EvseClient_OpenEVSE_Manual
 	async function download() {
-		//let res = await httpAPI("GET", "/claims/" + EvseClient_OpenEVSE_Manual)
         let claims = await httpAPI("GET", "/claims");
-        for (let i in claims) {
-            if (claims[i].client == EvseClients["manual"] ) {
-                P.update(() => claims[i])
-                return P
+        if (claims && claims.msg != "error") {
+            for (let i in claims) {
+                if (claims[i].client == EvseClients["manual"] ) {
+                    P.update(() => claims[i])
+                    
+                }
             }
+            return true
         }
-        //else
-        let claim = {}
-        P.update(() => claim)
-		return P
-}
+        else if (claims.length) {
+            let claim = {}
+            P.update(() => claim)
+            return true
+        }
+        else return false
+    }
 	// set {claim for clientid EvseClient_OpenEVSE_Manual
     async function upload(data) {
         let claim = get(P)

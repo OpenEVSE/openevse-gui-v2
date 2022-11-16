@@ -8,10 +8,9 @@
 	import { plan_store } 			from "./../../lib/stores/plan.js"
 	import { config_store } 		from "./../../lib/stores/config.js"
 	import { claims_target_store } 	from "./../../lib/stores/claims_target.js"
-	import { override_store } 		from "./../../lib/stores/override.js";
-	import { fetchQueue }			from "./../../lib/fetchQueue.js"
-	import {clientid2name, formatDate}			from "./../../lib/utils.js"
-
+	import { override_store } 		from "./../../lib/stores/override.js"
+	import { clientid2name, formatDate} from "./../../lib/utils.js"
+	import { serialQueue } from "./../../lib/queue.js";
 
 	// onMount(()=>fetchQueue.start())
 
@@ -19,43 +18,52 @@
 		$uistates_store.time_isostring = t
 		$uistates_store.time_localestring = formatDate(t,tz)
 	}
-	export function refreshConfigStore(ver) {
+	export async function refreshConfigStore(ver) {
 		if (ver != $uistates_store.config_version) {
 			console.log("refreshConfigStore")
-			fetchQueue.add(config_store.download().then($uistates_store.config_version=ver))
+			const res = await serialQueue.add(config_store.download())
+			if (res) $uistates_store.config_version=ver
+			return res
 		}
 	}
 
-	export function refreshSchedulestore(ver) {
+	export async function refreshSchedulestore(ver) {
 		if (ver != $uistates_store.schedule_version) {
 			console.log("add refreshSchedulestore")
-			fetchQueue.add(schedule_store.download().then($uistates_store.schedule_version=ver))
+			const res = await serialQueue.add(schedule_store.download)
+			if (res) $uistates_store.schedule_version=ver
+			return res
 		}
 	}
 
-	export function refreshPlanStore(ver) {
+	export async function refreshPlanStore(ver) {
 		if (ver != $uistates_store.schedule_plan_version) {
 			console.log("add refreshPlanstore")
-			fetchQueue.add(plan_store.download().then($uistates_store.schedule_plan_version=ver))
+			const res = await serialQueue.add(plan_store.download)
+			if (res) $uistates_store.schedule_plan_version=ver
+			return res
 		}
 	}
 
-	export function refreshClaimsTargetStore(ver) {
+	export async function refreshClaimsTargetStore(ver) {
 		if (ver != $uistates_store.claims_version) {
 			console.log("add refreshClaimsTargetStore")
-			fetchQueue.add(claims_target_store.download().then($uistates_store.claims_version=ver))
-			// console.log("add refreshClaimsStore")
-			// fetchQueue.add(claim_store.download())
+			const res = await serialQueue.add(claims_target_store.download)
+			if (res)
+				$uistates_store.claims_version=ver
 			if ($status_store.manual_override) {
 				console.log("add refreshOverrideStore")
-				fetchQueue.add(override_store.download())
+				const res = await serialQueue.add(override_store.download)
+				return res
 			}
+			return res
 		}
 	}
 
-	export function refreshStatusStore() {
+	export async function refreshStatusStore() {
 		console.log("add refreshStatusStore")
-		fetchQueue.add(status_store.download())
+		const res = await serialQueue.add(status_store.download())
+		return res
 	}
 
 

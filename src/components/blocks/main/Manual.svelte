@@ -16,7 +16,7 @@
 	import {uisettings_store} 		from "../../../lib/stores/uisettings.js"
 	import {onMount} 				from 'svelte'
 	import {httpAPI} 				from '../../../lib/utils.js'
-	import {fetchQueue} 			from "../../../lib/fetchQueue.js"
+	import { serialQueue }			from "./../../../lib/queue.js";
 
 	async function setMaxCurrent(val) {
 		
@@ -33,7 +33,7 @@
 				res = await override_store.clear()
 			}
 			//else res = await override_store.upload($override_store)
-			else res = await fetchQueue.add(override_store.upload($override_store))
+			else res = await serialQueue.add(($override_store) => override_store.upload($override_store))
 			$uistates_store.max_current = val
 			return res
 		}
@@ -42,7 +42,7 @@
 			$override_store.max_current = val
 			$override_store.auto_release = $uisettings_store.auto_release
 			//let res = await override_store.upload($override_store)
-			let res = await fetchQueue.add(override_store.upload($override_store))
+			let res = await serialQueue.add(($override_store) => override_store.upload($override_store))
 			$uistates_store.max_current = val
 			return res
 		}
@@ -86,16 +86,16 @@
 			if ($override_store.charge_limit != undefined) {
 				data.charge_limit = $override_store.charge_limit
 			}
-			fetchQueue.add(override_store.upload(data))
+			await serialQueue.add((data) => override_store.upload(data))
 		}
 		else {
 			// if there's no other claim property ( only chanrge_current for now )
 			if (data.max_current) 
-				await fetchQueue.add(override_store.upload(data))
+				await serialQueue.add((data) => override_store.upload(data))
 			// Mode Auto, clearing override
 			else 
 			if ($claims_target_store.claims.state == EvseClients["manual"] )
-				await fetchQueue.add(override_store.clear())
+				await serialQueue.add(override_store.clear)
 		}
 	}
 
@@ -104,7 +104,7 @@
 		let param = "shaper="+state
 		if (state != $status_store.shaper && $status_store.shaper != undefined) {
 			
-			let res = await fetchQueue.add(httpAPI("POST","/shaper", param, "text"))
+			let res = await serialQueue.add(() => httpAPI("POST","/shaper", param, "text"))
 		}
 	}
 
@@ -112,7 +112,7 @@
 		state = state == true ? "2" : "1"
 		let param = "divertmode="+state
 		if (state != $status_store.divertmode && $status_store.divertmode != undefined) {
-			let res = await fetchQueue.add(httpAPI("POST","/divertmode", param, "text"))
+			let res = await serialQueue.add(() => httpAPI("POST","/divertmode", param, "text"))
 		}
 	}
 

@@ -12,11 +12,11 @@ function createClaimsTargetStore() {
         if (target.msg == "error") {
 			target = {}
 			P.update(() => target)
-			return P
+			return false
 		}
 		else {
 			P.update(() => target)
-            return P
+            return true
 		}
     }
 

@@ -1,5 +1,5 @@
 <script>
-	import { fetchQueue } from "./../../../lib/fetchQueue.js";
+	import { serialQueue } from "./../../../lib/queue.js";
 	import { config_store } from "../../../lib/stores/config.js"
 	import { status_store } from "../../../lib/stores/status.js"
 	import {onDestroy} from "svelte"
@@ -36,7 +36,7 @@
 
 	async function uploadFw() {
 		// Prevent UI to send any request while OTA is in progress
-		fetchQueue.pause()
+		serialQueue.pause()
 		$status_store.ota_progress = 0
 		uploadButtonState = "loading"
 		const onProgress = progress => {
@@ -54,7 +54,8 @@
 			fileSent = "ok"
 			timeout = setTimeout(()=> location.reload(),3000)
 		}
-		fetchQueue.start()
+		serialQueue.resume()
+
 	}
 
 	$: file, () => {

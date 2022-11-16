@@ -12,7 +12,7 @@ export async function httpAPI(method,url,body=null,type = "json") {
 	if (body) {
 		data.body = body
 	}
-	//const response = await fetch(url, data)
+	
 	const res = await fetch(url, data).then((response) => {
 		if (response.status >= 400 && response.status < 600) {
 		  throw new Error("Bad response from server: " + response.status);

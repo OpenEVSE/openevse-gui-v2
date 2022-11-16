@@ -28,6 +28,7 @@
     "bulma-switch": "^2.0.4",
     "full-icu": "^1.5.0",
     "luxon": "^3.1.0",
+    "promise-batching-queue": "^0.0.5",
     "svelte-fa": "^3.0.3",
     "svelte-inline-svg": "^1.2.0",
     "svelte-local-storage-store": "^0.3.1",

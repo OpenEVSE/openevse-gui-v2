@@ -1,5 +1,5 @@
 <script>
-	import { fetchQueue } from "./../../../lib/fetchQueue.js";
+	import { serialQueue } from "./../../../lib/queue.js";
 	import Box from "../../ui/Box.svelte"
 	import {status_store} from "../../../lib/stores/status.js"
 	import {config_store} from "../../../lib/stores/config.js"
@@ -37,7 +37,7 @@
 
 	async function setNTP(server) {
 		inputSntpState = 1
-		let res = fetchQueue.add(config_store.saveParam("sntp_hostname", server))
+		let res = await serialQueue.add(() => config_store.saveParam("sntp_hostname", server))
 		if (res) 
 			inputSntpState = 2
 		else 
@@ -61,7 +61,7 @@
 		// @ts-ignore
 		const payload = new URLSearchParams(formData).toString()
 		allow_time_update = true
-		let res = await httpAPI("POST","/settime",payload, "text")
+		let res = await serialQueue.add(() => httpAPI("POST","/settime",payload, "text"))
 		if (res == "set" )  {
 			setTimeButnState = "ok"
 			return true

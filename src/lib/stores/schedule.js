@@ -8,11 +8,14 @@ function createScheduleStore() {
 
 	async function download() {
             let res = await httpAPI("GET", "/schedule")
-            for ( let t = 0; t < res.length ; t++) {
-                res[t].time = res[t].time.slice(0,5) // remove useless seconds
+            if (res && res.msg != "error") {
+                for ( let t = 0; t < res.length ; t++) {
+                    res[t].time = res[t].time.slice(0,5) // remove useless seconds
+                }
+                P.update(() => res)
+                return true
             }
-            P.update(() => res)
-            return P
+            else return false
 	}
 
     async function upload(data) {

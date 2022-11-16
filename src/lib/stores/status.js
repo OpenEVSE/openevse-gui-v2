@@ -7,7 +7,12 @@ function createStatusStore() {
 
 	async function download() {
 		let res = await httpAPI("GET", "/status")
-        P.update(() => res)
+        if (res && res.msg != "error") {
+            P.update(() => res)
+            return true
+        } else {
+            return false
+        }
     }
     return {
         subscribe,

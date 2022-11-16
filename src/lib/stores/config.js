@@ -7,8 +7,11 @@ function createConfigStore() {
 
 	async function download() {
         let res = await httpAPI("GET", "/config")
-        P.update(() => res)
-        return P
+        if (res && res.msg != "error") {
+            P.update(() => res)
+            return true
+        }
+        else return false
 	}
 
     // async function setConfig(attr,val) {
