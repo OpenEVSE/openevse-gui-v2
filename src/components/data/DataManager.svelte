@@ -21,7 +21,7 @@
 	export async function refreshConfigStore(ver) {
 		if (ver != $uistates_store.config_version) {
 			console.log("refreshConfigStore")
-			const res = await serialQueue.add(config_store.download())
+			const res = await serialQueue.add(config_store.download)
 			if (res) $uistates_store.config_version=ver
 			return res
 		}
@@ -62,7 +62,7 @@
 
 	export async function refreshStatusStore() {
 		console.log("add refreshStatusStore")
-		const res = await serialQueue.add(status_store.download())
+		const res = await serialQueue.add(status_store.download)
 		return res
 	}
 
