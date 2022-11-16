@@ -33,7 +33,7 @@
 				res = await override_store.clear()
 			}
 			//else res = await override_store.upload($override_store)
-			else res = await serialQueue.add(($override_store) => override_store.upload($override_store))
+			else res = await serialQueue.add(() => override_store.upload($override_store))
 			$uistates_store.max_current = val
 			return res
 		}
@@ -42,7 +42,7 @@
 			$override_store.max_current = val
 			$override_store.auto_release = $uisettings_store.auto_release
 			//let res = await override_store.upload($override_store)
-			let res = await serialQueue.add(($override_store) => override_store.upload($override_store))
+			let res = await serialQueue.add(() => override_store.upload($override_store))
 			$uistates_store.max_current = val
 			return res
 		}
