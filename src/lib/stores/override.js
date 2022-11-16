@@ -28,10 +28,10 @@ function createOverrideStore() {
     }
     async function clear() {
         let res = await httpAPI("DELETE", "/override")
-        //let store = {}
-
-        P.update((s) => {return model})
-        return P
+        if (res) {
+            P.update((s) => {return model})
+            return true
+        } else return false
     }
 
     return {

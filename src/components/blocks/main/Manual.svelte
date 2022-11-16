@@ -66,7 +66,6 @@
 		if ($claims_target_store.claims.max_current == EvseClients["manual"]) {
 				data.max_current = $claims_target_store.properties.max_current
 			}
-
 		switch(m) {
 			case 0: break
 			case 1: 
@@ -93,9 +92,13 @@
 			if (data.max_current) 
 				await serialQueue.add(() => override_store.upload(data))
 			// Mode Auto, clearing override
-			else 
-			if ($claims_target_store.claims.state == EvseClients["manual"] )
-				await serialQueue.add(override_store.clear)
+			
+	
+			if ($claims_target_store.claims.state == EvseClients["manual"] ) {
+				let res = await serialQueue.add(override_store.clear)
+				if (res) console.log("setmode step2: " + res)
+				else console.log("setmode step1 error")
+			}
 		}
 	}
 
