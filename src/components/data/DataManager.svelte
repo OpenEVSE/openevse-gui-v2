@@ -1,5 +1,4 @@
 <script>
-	
 	import WebSocket from "./WebSocket.svelte";
 	import {EvseClients} 			from  "./../../lib/vars.js"
 	import { uistates_store }		from "./../../lib/stores/uistates.js"
@@ -11,8 +10,9 @@
 	import { override_store } 		from "./../../lib/stores/override.js"
 	import { clientid2name, formatDate} from "./../../lib/utils.js"
 	import { serialQueue } from "./../../lib/queue.js";
+	import {onMount} from "svelte"
 
-	// onMount(()=>fetchQueue.start())
+	onMount(()=>getMode($claims_target_store.properties.state,$claims_target_store.claims.state))
 
 	export function refreshDateTime(t,tz) { // params: time (isostring) , timezone
 		$uistates_store.time_isostring = t
@@ -49,18 +49,30 @@
 		if (ver != $uistates_store.claims_version) {
 			console.log("add refreshClaimsTargetStore")
 			const res = await serialQueue.add(claims_target_store.download)
-			if (res)
+			if (res) {
 				$uistates_store.claims_version=ver
-			if ($status_store.manual_override) {
-				console.log("add refreshOverrideStore")
-				let res
-				if($status_store.manual_override)
-					res = await serialQueue.add(override_store.download)
-				return res
+				getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
+				if ($status_store.manual_override) {
+					setTimeout(() => {
+						refreshOverrideStore()
+					}, 100);
+					return res
+				}
 			}
 			return res
 		}
 	}
+
+	export async function refreshOverrideStore() {
+		if ($status_store.manual_override) {
+			console.log("add refreshOverrideStore")
+			const res = await serialQueue.add(override_store.download)
+			return res
+		}
+		else return true
+	
+	}
+
 
 	export async function refreshStatusStore() {
 		console.log("add refreshStatusStore")
@@ -70,6 +82,7 @@
 
 
 	function getMode(state,clientid) {
+		console.log("getMolde state:" + state + " clientid: " + clientid)
 		$uistates_store.stateclaimfrom = clientid2name(clientid)
 		if (clientid == EvseClients["manual"] || clientid == undefined) {
 			// Mode Manual		
@@ -98,7 +111,7 @@
 	$: refreshPlanStore			($status_store.schedule_plan_version)
 	$: refreshClaimsTargetStore	($status_store.claims_version)
 	$: refreshDateTime			($status_store.time, $config_store.time_zone)
-	$: getMode					($claims_target_store.properties.state,$claims_target_store.claims.state)
+	//$: getMode					($claims_target_store.properties.state,$claims_target_store.claims.state)
 
 </script>
 

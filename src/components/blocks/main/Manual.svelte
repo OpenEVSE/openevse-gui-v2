@@ -30,7 +30,9 @@
 				$override_store.energy_limit == undefined && 
 				$override_store.time_limit == undefined
 			) {
-				res = await override_store.clear()
+				if ($status_store.manual_override) {
+					res = await override_store.clear()
+				}
 			}
 			//else res = await override_store.upload($override_store)
 			else res = await serialQueue.add(() => override_store.upload($override_store))
@@ -57,7 +59,7 @@
 
 
 	async function setMode(m) {
-		
+		console.log("setMode mode = " + m)
 		$uistates_store.mode = m
 		let data = {
 				auto_release: $uisettings_store.auto_release
@@ -89,16 +91,14 @@
 			await serialQueue.add(() => override_store.upload(data))
 		}
 		else {
-			// if there's no other claim property ( only chanrge_current for now )
+			// if there's no other claim property ( only charge_current for now )
 			if (data.max_current) 
 				await serialQueue.add(() => override_store.upload(data))
 			// Mode Auto, clearing override
-			
-	
 			if ($claims_target_store.claims.state == EvseClients["manual"] ) {
-				let res = await serialQueue.add(override_store.clear)
-				if (res) console.log("setmode step2: " + res)
-				else console.log("setmode step1 error")
+				if ($status_store.manual_override) { 
+					let res = await serialQueue.add(override_store.clear)
+				}
 			}
 		}
 	}
