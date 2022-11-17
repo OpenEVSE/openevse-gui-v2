@@ -34,9 +34,9 @@
 	<th style="width:40%" class="is-size-5-mobile is-size-5-tablet is-size-4-desktop m0 py-1 " align="right">
 		<div class="is-flex">
 		{#key t_days }
-			<div class="mx-1 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal has-text-centered" data-tooltip={formatDays(t_days)}>
+			<div class="mx-1 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal has-text-centered is-capitalized" data-tooltip={formatDays(t_days)}>
 				<Fa icon={faCalendarDays} />
-				</div>
+			</div>
 		{/key}
 			<div class="mx-1 has-text-weight-normal has-text-centered ">
 				<a class="has-text-info" href={$location} use:link on:click={() => {edit(t_id)}}>

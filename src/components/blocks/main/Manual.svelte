@@ -59,7 +59,6 @@
 
 
 	async function setMode(m) {
-		console.log("setMode mode = " + m)
 		$uistates_store.mode = m
 		let data = {
 				auto_release: $uisettings_store.auto_release

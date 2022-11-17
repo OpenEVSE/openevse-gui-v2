@@ -52,6 +52,7 @@
 		else {
 			uploadButtonState = "ok"
 			fileSent = "ok"
+			file = null
 			timeout = setTimeout(()=> location.reload(),3000)
 		}
 		serialQueue.resume()

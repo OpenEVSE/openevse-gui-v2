@@ -56,6 +56,9 @@
 				console.log("socket error")
 				lastmsg = DateTime.now().toUnixInteger()
 				if (s) s.close()
+				
+				// TODO: Display Alertbox mesg
+
 				cancelKeepAlive()
 				if (!timeout)
 					timeout = setTimeout(() => {

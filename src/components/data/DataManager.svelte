@@ -20,7 +20,6 @@
 	}
 	export async function refreshConfigStore(ver) {
 		if (ver != $uistates_store.config_version) {
-			console.log("refreshConfigStore")
 			const res = await serialQueue.add(config_store.download)
 			if (res) $uistates_store.config_version=ver
 			return res
@@ -29,7 +28,6 @@
 
 	export async function refreshSchedulestore(ver) {
 		if (ver != $uistates_store.schedule_version) {
-			console.log("add refreshSchedulestore")
 			const res = await serialQueue.add(schedule_store.download)
 			if (res) $uistates_store.schedule_version=ver
 			return res
@@ -38,7 +36,6 @@
 
 	export async function refreshPlanStore(ver) {
 		if (ver != $uistates_store.schedule_plan_version) {
-			console.log("add refreshPlanstore")
 			const res = await serialQueue.add(plan_store.download)
 			if (res) $uistates_store.schedule_plan_version=ver
 			return res
@@ -47,7 +44,6 @@
 
 	export async function refreshClaimsTargetStore(ver) {
 		if (ver != $uistates_store.claims_version) {
-			console.log("add refreshClaimsTargetStore")
 			const res = await serialQueue.add(claims_target_store.download)
 			if (res) {
 				$uistates_store.claims_version=ver
@@ -65,7 +61,6 @@
 
 	export async function refreshOverrideStore() {
 		if ($status_store.manual_override) {
-			console.log("add refreshOverrideStore")
 			const res = await serialQueue.add(override_store.download)
 			return res
 		}
@@ -75,14 +70,12 @@
 
 
 	export async function refreshStatusStore() {
-		console.log("add refreshStatusStore")
 		const res = await serialQueue.add(status_store.download)
 		return res
 	}
 
 
 	function getMode(state,clientid) {
-		console.log("getMolde state:" + state + " clientid: " + clientid)
 		$uistates_store.stateclaimfrom = clientid2name(clientid)
 		if (clientid == EvseClients["manual"] || clientid == undefined) {
 			// Mode Manual		
