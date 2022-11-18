@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store'
 import {httpAPI} from '../utils.js'
+import {status_store} from './status.js'
 
 const model = {
 	state: undefined,
@@ -27,11 +28,15 @@ function createOverrideStore() {
         return P
     }
     async function clear() {
-        let res = await httpAPI("DELETE", "/override")
-        if (res) {
-            P.update((s) => {return model})
-            return true
-        } else return false
+        if (get(status_store).manual_override == 1) {
+            let res = await httpAPI("DELETE", "/override")
+            if (res) {
+                P.update((s) => {return model})
+                return true
+            } else return false
+        }
+        else return false
+        
     }
 
     return {

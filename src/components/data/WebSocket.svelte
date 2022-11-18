@@ -39,7 +39,7 @@
 			status_store.download()
 		}
 
-		else {
+		else if (!s) {
 			s = new WebSocket("ws://" + host + "/ws")
 			s.addEventListener("open", function (event) {
 				console.log("connected to websocket")
