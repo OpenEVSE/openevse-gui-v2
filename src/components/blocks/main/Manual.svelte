@@ -1,4 +1,5 @@
 <script>
+	import ButtonRfidMode from "./../../ui/ButtonRfidMode.svelte";
 	import {EvseClients} 			from  "./../../../lib/vars.js"
 	import { claims_target_store }	from "./../../../lib/stores/claims_target.js";
 	import Box 						from "../../ui/Box.svelte"
@@ -165,7 +166,9 @@ $: setDivertMode($uistates_store.divertmode)
 
 <Box title="Charge">
 
-	{#if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
+	{#if $config_store.rfid_enabled}
+	<ButtonRfidMode mode={!$uistates_store.rfid_auth?0:$status_store.state!=3?1:2} />
+	{:else if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
 	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
 	{:else}
 	<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} />

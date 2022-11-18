@@ -1,7 +1,7 @@
 <script>
 	import { claims_target_store } from "./../../lib/stores/claims_target.js";
 	import {EvseClients} from "./../../lib/vars.js"
-	import SchedulePlan from "./../ui/SchedulePlan.svelte";
+	import TaskDisplay from "../ui/TaskDisplay.svelte";
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
 	import {config_store} from "../../lib/stores/config.js"
@@ -89,18 +89,15 @@
 	{/if}
 			<div class="is-flex mt-3 mt-4 mb-1 ml-4 ">
 				<div class="columns">
-
-				{#if ($uistates_store.mode != 0) }
-				<SchedulePlan mode="manual" state={$status_store.status} />
-				{:else}
-					{#if $uistates_store.stateclaimfrom != "timer"}
-					<SchedulePlan mode={$uistates_store.stateclaimfrom} state={$claims_target_store.properties.state} />
-					{:else}
-					<SchedulePlan mode="timer" msg={$plan_store.current_event.state=="active"?"Activated since":"Disabled since"} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
-					<SchedulePlan mode="timer" msg={$plan_store.next_event.state=="active"?"Activate at":"Disable at"} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
-					{/if}
-					
-				
+				{#if $uistates_store.stateclaimfrom == "manual"}
+				<TaskDisplay mode="manual" state={$status_store.status} />
+				{:else if $uistates_store.stateclaimfrom == "rfid"}
+				<TaskDisplay mode={$uistates_store.stateclaimfrom} msg={!$status_store.rfid_auth?"Waiting for RFID badge":$status_store.rfid_auth} state={$claims_target_store.properties.state} />
+				{:else if $uistates_store.stateclaimfrom != "timer"}
+				<TaskDisplay mode={$uistates_store.stateclaimfrom} state={$claims_target_store.properties.state} />
+				{:else if $uistates_store.stateclaimfrom == "timer"}
+				<TaskDisplay mode="timer" msg={$plan_store.current_event.state=="active"?"Activated since":"Disabled since"} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
+				<TaskDisplay mode="timer" msg={$plan_store.next_event.state=="active"?"Activate at":"Disable at"} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
 				{/if}
 				</div>
 			</div>

@@ -29,6 +29,9 @@
 		{msg} {displayTime(time)}
 		{:else}
 		{state}
+			{#if msg}
+			&nbsp;{msg}
+			{/if}
 		{/if}
 	</span>
 </div>

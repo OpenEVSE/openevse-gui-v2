@@ -10,10 +10,12 @@
   },
   "devDependencies": {
     "@creativebulma/bulma-tooltip": "^1.2.0",
+    "@iconify/svelte": "^3.0.0",
     "@sveltejs/vite-plugin-svelte": "^1.0.2",
     "bulma": "^0.9.4",
     "sass": "^1.53.0",
     "svelte": "^3.49.0",
+    "svelte-fa": "^3.0.3",
     "svelte-loading-spinners": "^0.1.7",
     "svelte-preprocess": "^4.10.7",
     "vite": "^3.2.3",
@@ -29,7 +31,6 @@
     "full-icu": "^1.5.0",
     "luxon": "^3.1.0",
     "promise-batching-queue": "^0.0.5",
-    "svelte-fa": "^3.0.3",
     "svelte-inline-svg": "^1.2.0",
     "svelte-local-storage-store": "^0.3.1",
     "svelte-spa-router": "^3.3.0"
