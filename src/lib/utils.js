@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import {EvseClients} from "./vars.js"
+import {faHand, faRobot} from '@fortawesome/free-solid-svg-icons/index.js'
 
 export async function httpAPI(method,url,body=null,type = "json") {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
@@ -119,5 +120,13 @@ export function clientid2name(id) {
 	}
 	return name
 
+}
 
+export function displayIcon(mode) {
+	switch (mode) {
+		case "manual":
+			return faHand
+		default:
+			return faRobot
+	}
 }

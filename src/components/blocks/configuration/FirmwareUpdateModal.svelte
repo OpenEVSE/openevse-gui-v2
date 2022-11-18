@@ -52,7 +52,6 @@
 		else {
 			uploadButtonState = "ok"
 			fileSent = "ok"
-			file = null
 			timeout = setTimeout(()=> location.reload(),3000)
 		}
 		serialQueue.resume()
@@ -104,9 +103,9 @@
 			{#if uploadButtonState == "loading"}
 				Uploading <span class="is-italic">{file.name}</span>, please wait...
 				<progress class="progress is-primary" value={$status_store.ota_progress} max="100">{percentDone}%</progress>
-			{:else if (fileSent) == "ko" }
+			{:else if fileSent == "ko" }
 				Upload Failed
-			{:else if (fileSent) == "ok" }
+			{:else if fileSent == "ok" }
 				<span class="is-italic">{file.name}</span> uploaded successfully, page will reload in few sec
 			{:else}
 			<div class="is-flex is-align-items-center">
@@ -122,7 +121,7 @@
 			</div>
 		</div>
 
-			<Button name="Upload" color="is-primary" butn_submit={uploadFw} state={uploadButtonState}/>
+			<Button disabled={fileSent == "ok"?true:false} name="Upload" color="is-primary" butn_submit={uploadFw} state={uploadButtonState}/>
 		
 		{:else}
 		<div class="my-2 is-family-code is-italic">

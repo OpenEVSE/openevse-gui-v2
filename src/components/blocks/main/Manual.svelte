@@ -1,5 +1,6 @@
 <script>
-	import ButtonRfidMode from "./../../ui/ButtonRfidMode.svelte";
+	import ButtonRfidMode 			from "./../../ui/ButtonRfidMode.svelte";
+	import Fa 						from 'svelte-fa/src/fa.svelte'
 	import {EvseClients} 			from  "./../../../lib/vars.js"
 	import { claims_target_store }	from "./../../../lib/stores/claims_target.js";
 	import Box 						from "../../ui/Box.svelte"
@@ -16,7 +17,7 @@
 	import {uistates_store} 		from "../../../lib/stores/uistates.js"
 	import {uisettings_store} 		from "../../../lib/stores/uisettings.js"
 	import {onMount} 				from 'svelte'
-	import {httpAPI} 				from '../../../lib/utils.js'
+	import {httpAPI, clientid2name, displayIcon} 				from '../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
 
 	async function setMaxCurrent(val) {
@@ -50,10 +51,15 @@
 	}
 
 	function getMaxCurrent() {
-		if ($override_store.max_current!=undefined)
-			return $override_store.max_current
+		// if ($override_store.max_current!=undefined)
+		// 	return $override_store.max_current
+		// else if ($config_store.max_current_soft)
+		// 	return $config_store.max_current_soft
+		if ($claims_target_store.properties.max_current)
+			return ($claims_target_store.properties.max_current)
 		else if ($config_store.max_current_soft)
 			return $config_store.max_current_soft
+		else return 0
 	}
 
 
@@ -151,8 +157,9 @@
 		set_uistates_max_current()
 	})
 
+
 // ## Reactive functions ##
-$: $override_store.max_current, set_uistates_max_current()
+$: $claims_target_store.properties.max_current, set_uistates_max_current()
 $: stateButtonWatcher($status_store.manual_override) 
 $: set_uistates_shaper($status_store.shaper)
 $: setShaper($uistates_store.shaper)
@@ -160,11 +167,17 @@ $: set_uistates_divertmode($status_store.divertmode)
 $: setDivertMode($uistates_store.divertmode)
 
 </script>
-
+<style>
+	.item {
+    position:relative;
+    top:-15px;
+}
+</style>
 
 <Box title="Charge">
 
 	{#if $config_store.rfid_enabled}
+
 	<ButtonRfidMode mode={!$uistates_store.rfid_auth?0:$status_store.state!=3?1:2} />
 	{:else if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
 	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
@@ -191,8 +204,18 @@ $: setDivertMode($uistates_store.divertmode)
 
 	<Slider  label="Set Amp" tooltip="Restrain max current to this value" unit="A" min=6 max={$config_store.max_current_soft} step=1 
 	value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
+	{#if $claims_target_store.claims.max_current}
+	<div class="is-flex is-justify-content-center">
+		<div class="item ml-2 my-0 tag is-info has-text-weight-semibold">
+			<Fa icon={displayIcon(clientid2name($claims_target_store.claims.max_current))} class="has-text-white mr-2 is-capitalized" />
+			{clientid2name($claims_target_store.claims.max_current)}
+			<button class="delete is-small"></button>
+		</div>
+	</div>
+	{/if}
 
-	<div class="columns is-mobile is-justify-content-center m-2">
+
+	<div class="columns is-mobile is-justify-content-center mt-4">
 		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
 		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
 	</div>

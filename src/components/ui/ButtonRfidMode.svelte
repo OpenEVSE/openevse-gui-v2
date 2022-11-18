@@ -23,19 +23,14 @@
 	.buttonblock {
 		width: fit-content; 	
 	}
-
-	.no-pointer {
-		cursor: default;
-		pointer-events: none;
-	}
 </style>
 
 
 <div class="mb-2 mt-2 mb-5  is-flex is-flex-wrap-nowrap buttonblock mx-auto buttons field is-grouped">
 	<button disabled 
-		class="button manual-charge is-size-6 has-tooltip-arrow {mode==0?"is-info":mode==1?"is-primary":"is-danger"}" 
+		class="button is-large manual-charge has-tooltip-arrow {mode==0?"is-info":mode==1?"is-primary":"is-danger"}" 
 		data-tooltip={mode==0?"Waiting for RFID badge":mode==1?"Start charge session":"Stop charge session"}
 		on:click={() => { setmode(mode)}}>
-		&nbsp;&nbsp;&nbsp;<Fa icon={mode==1?faBolt:mode==2?faStop:faHourglassHalf} />&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;<Fa size=2x icon={mode==1?faBolt:mode==2?faStop:faHourglassHalf} />&nbsp;&nbsp;&nbsp;
 	</button>
 </div>
