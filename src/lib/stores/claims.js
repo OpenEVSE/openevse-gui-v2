@@ -18,8 +18,6 @@ function createClaimStore() {
     
 	// set {claim for clientid EvseClient_OpenEVSE_Manual
     async function upload(data,clientid) {
-        
-        let claims = get(P)
         let res = await httpAPI("POST", "/claims/" + clientid , JSON.stringify(data))
         if (res.msg && res.msg == "done")
             return true
@@ -44,19 +42,25 @@ function createClaimStore() {
         }
     }
 
-    function removeClaimProp(clientid,prop) {
-        console.log(" clientid: " + clientid + " prop: " + prop)
-        let res = serialQueue.add(claims_store.download)
+    async function removeClaimProp(clientid,prop) {
+        // get lat"est claims
+        let res = await serialQueue.add(claims_store.download)
         if (res) {
             let claims = get(P)
+            console.log("claims: " + claims)
             for (let i in claims) {
                 if (claims[i].client == clientid ) {
-                    if (claims[i][prop])
+                    // found clientid claim
+                    if (claims[i][prop]) {
+                         // claim has prop
                         delete claims[i][prop]
-                    serialQueue.add(claims_store.upload(claims[i],clientid) )             
+                        await serialQueue.add(() => claims_store.upload(claims[i],clientid))
+                        return res
+                    }             
                 }
             }     
         }
+        return false
     }
 
     return {

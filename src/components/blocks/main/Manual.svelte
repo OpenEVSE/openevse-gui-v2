@@ -1,5 +1,4 @@
 <script>
-	import ButtonRfidMode 			from "./../../ui/ButtonRfidMode.svelte";
 	import Fa 						from 'svelte-fa/src/fa.svelte'
 	import {EvseClients} 			from  "./../../../lib/vars.js"
 	import { claims_target_store }	from "./../../../lib/stores/claims_target.js";
@@ -19,6 +18,9 @@
 	import {onMount} 				from 'svelte'
 	import {httpAPI, clientid2name, displayIcon} 				from '../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
+	import ClaimPropTag 			from "../../ui/ClaimPropTag.svelte"
+
+	let setamp_tag
 
 	async function setMaxCurrent(val) {
 		
@@ -152,6 +154,14 @@
 			$uistates_store.divertmode = val
 	}
 
+	async function removeClaimProp(prop,tag) {
+		console.log("remove prop: " + prop + " tag: " + tag)
+		tag.state = "loading"
+		let res = await claims_store.removeClaimProp($claims_target_store.claims[prop],prop)
+		if (res) tag.state = "ok"
+		else tag.state = "error"
+	}
+
 	onMount( () => {
 		$uistates_store.manual_override = $status_store.manual_override
 		set_uistates_max_current()
@@ -178,12 +188,11 @@ $: setDivertMode($uistates_store.divertmode)
 
 	{#if $config_store.rfid_enabled}
 	<!-- {#if true} -->
-	<!-- <ButtonRfidMode mode={!$uistates_store.rfid_auth?0:$status_store.state!=3?1:2} auth={$uistates_store.rfid_auth} /> -->
-	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth}/>
+	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint}/>
 	{:else if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
-	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
+	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint}/>
 	{:else}
-	<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} />
+	<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint}/>
 	{/if}
 
 	<div class="is-flex is-justify-content-center">
@@ -205,15 +214,17 @@ $: setDivertMode($uistates_store.divertmode)
 
 	<Slider  label="Set Amp" tooltip="Restrain max current to this value" unit="A" min=6 max={$config_store.max_current_soft} step=1 
 	value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
-	{#if $claims_target_store.claims.max_current}
-	<div class="is-flex is-justify-content-center">
-		<div class="item ml-2 my-0 tag is-info has-text-weight-semibold">
-			<Fa icon={displayIcon(clientid2name($claims_target_store.claims.max_current))} class="has-text-white mr-2 is-capitalized" />
-			{clientid2name($claims_target_store.claims.max_current)}
-			<button class="delete is-small" on:click={() => {claims_store.removeClaimProp($claims_target_store.claims.max_current,"max_current")}}></button>
+	{#key $claims_target_store.claims.max_current}
+		{#if $claims_target_store.claims.max_current}
+		<div class="is-flex is-justify-content-center">
+			<div class="item ml-2 my-0 tag is-info has-text-weight-semibold">
+				<Fa icon={displayIcon(clientid2name($claims_target_store.claims.max_current))} class="has-text-white mr-2 is-capitalized" />
+				{clientid2name($claims_target_store.claims.max_current)}
+				<ClaimPropTag bind:this={setamp_tag} action={()=>removeClaimProp("max_current",setamp_tag)} />
+			</div>
 		</div>
-	</div>
-	{/if}
+		{/if}
+		{/key}
 
 
 	<div class="columns is-mobile is-justify-content-center mt-4">

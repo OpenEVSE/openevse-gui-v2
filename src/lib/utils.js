@@ -81,11 +81,13 @@ export function round(value, precision) {
 }
 
 export let getBreakpoint = function () {
-    const mobile = 768;
-    const tablet = 1280;
-    //const desktop = 1440;
+	const mobilemini = 380 
+    const mobile = 640
+    const tablet = 1280
+    //const desktop = 1440
     var bp
-    if (window.innerWidth <= mobile) bp = "mobile"
+    if (window.innerWidth <= mobilemini) bp = "mobilemini"
+	else if (window.innerWidth > mobilemini && window.innerWidth <= mobile) bp = "mobile"
     else if (window.innerWidth > mobile && window.innerWidth <= tablet) bp = "tablet"
     else if (window.innerWidth > tablet) bp="desktop"
     else bp="unknown"

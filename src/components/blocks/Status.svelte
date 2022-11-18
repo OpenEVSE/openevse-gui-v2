@@ -53,7 +53,7 @@
 		<StatusTile title="Elapsed" value={elapsed} />
 		<StatusTile title="Delivered" value={$status_store.session_energy/1000} precision={1} unit="kWh" />
 		<StatusTile title="Current" value={$status_store.amp/1000} precision={1} unit="A" />
-		{#if $uistates_store.breakpoint != "mobile"}
+		{#if $uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini"}
 		<!-- // Desktop & Tablet only -->
 		<StatusTile title="Power" value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
 		{/if}
@@ -65,7 +65,7 @@
 
 	{#if $uistates_store.status_expanded}
 	<div class="mx-0 is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center" >
-		{#if $uistates_store.breakpoint == "mobile"}
+		{#if $uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini"}
 		<!-- // Mobile only -->
 		<StatusTile title="Power" value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
 		{/if}
