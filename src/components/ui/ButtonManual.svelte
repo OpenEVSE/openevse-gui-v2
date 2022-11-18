@@ -33,7 +33,7 @@
 		mr-1 button  manual-charge has-tooltip-arrow is-primary {ischarging?"has-text-warning":""}"
 		data-tooltip={disabled?null:"Enable Charge"}
 		on:click={() => {setmode(1)}}>
-		&nbsp;&nbsp;&nbsp;<Fa size=2x icon={faCircleCheck} />&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faBolt} />&nbsp;&nbsp;&nbsp;
 	</button>
 	{#if isauto}
 	<button {disabled} class="{mode==0 || disabled?"no-pointer":""} {mode == 0?"is-active":"is-outlined"}
@@ -49,6 +49,6 @@
 		button manual-charge has-tooltip-arrow is-danger" 
 		 data-tooltip={disabled?null:"Disable Charge"}
 		on:click={() => { setmode(2)}}>
-		&nbsp;&nbsp;&nbsp;<Fa size=2x icon={faBan} />&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faBan} />&nbsp;&nbsp;&nbsp;
 	</button>
 </div>

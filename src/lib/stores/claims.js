@@ -47,7 +47,6 @@ function createClaimStore() {
         let res = await serialQueue.add(claims_store.download)
         if (res) {
             let claims = get(P)
-            console.log("claims: " + claims)
             for (let i in claims) {
                 if (claims[i].client == clientid ) {
                     // found clientid claim

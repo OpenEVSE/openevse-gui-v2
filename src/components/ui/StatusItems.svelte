@@ -1,10 +1,10 @@
 <script>
-	import { faCar, faCircleCheck, faCirclePause,faHourglassHalf, faThumbsUp, faBan, faChargingStation, faBolt,
+	import { faCar, faCircleCheck, faCirclePause, faHourglassHalf, faThumbsUp, faBan, faChargingStation, faBolt,
 			faTriangleExclamation, faMoon,faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import StatusIcon from "./StatusIcon.svelte"
 	export let state
 	export let time
-	export let vehicle = 0
+	export let vehicle
 	export let bp
 	let status = "disabled"
 	let message = ""
@@ -20,7 +20,7 @@
 			status = "active"
 			charging = false
 			message = "Waiting for EV"
-			color = "is-info"
+			color = "is-primary"
 			iconcolor = "has-text-white"
 			icon = faHourglassHalf
 			break
@@ -58,10 +58,10 @@
 		case 254: // sleeping
 			status = "disabled"
 			charging = false
-			message = "Sleeping"
-			color = "is-info"
+			message = "Disabled"
+			color = "is-danger"
 			iconcolor = "has-text-white"
-			icon = faMoon
+			icon = faBan
 			break;
 		case 255: 
 			status = "disabled"
@@ -84,17 +84,18 @@
 
 <div class="is-flex is-justify-content-center">
 	<!-- <div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow  {status=="active"?'is-primary':'is-danger'}">{status}</div> -->
-	<div class="tag  no-pointer {bp != "mobilemini"?"is-large":"is-normal"} mb-1 mx-1 has-tooltip-right-mobile has-tooltip-arrow {status=="active"?'is-primary':'is-danger'}" data-tooltip={status=="active"?"OpenEVSE Active":"OpenEVSE in Standby"}>
+	<!-- <div class="tag  no-pointer {bp != "mobilemini"?"is-large":"is-normal"} mb-1 mx-1 has-tooltip-right-mobile has-tooltip-arrow {status=="active"?'is-primary':'is-danger'}" data-tooltip={status=="active"?"OpenEVSE Active":"OpenEVSE in Standby"}>
 		<StatusIcon icon={status=="active"?faCircleCheck:faBan} color="has-text-white" />
+	</div> -->
+	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-normal"} mb-1 mx-1 has-tooltip-arrow {color}" data-tooltip={message}>
+
+		<StatusIcon icon={icon} color={iconcolor} />
 	</div>
 	<!-- <span class="tag mb-1 mx-1 has-text-weight-semibold is-capitalized {vehicle?"is-primary":"is-danger"}">{vehicle?"Connected":"Disconnected"}</span> -->
 	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-normal"} mb-1 mx-1 has-tooltip-arrow {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?"Vehicle Connected":"No Vehicle Connected"}>
 		<StatusIcon icon={vehicle?faCar:faCar} color="has-text-white" />
 	</div>
 	<!-- <div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow  {color}">{message}</div> -->
-	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-normal"} mb-1 mx-1 has-tooltip-arrow {color}" data-tooltip={message}>
 
-		<StatusIcon icon={icon} color={iconcolor} />
-	</div>
 	<div class="tag no-pointer {bp != "mobilemini"?"mt-2 ":"mt-0"} mb-1 ml-auto mr-2 is-capitalized  is-info has-tooltip-arrow" data-tooltip="OpenEVSE local time">{time}</div>
 </div>

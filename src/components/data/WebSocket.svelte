@@ -45,36 +45,29 @@
 				console.log("connected to websocket")
 				keepAlive(s)
 			} )
-			s.addEventListener("message", function (event) {
+			s.addEventListener("message", function (e) {
 				lastmsg = DateTime.now().toUnixInteger()
-				const jsondata = JSON.parse(event.data.toString())
+				const jsondata = JSON.parse(e.data.toString())
 				let store = Object.assign({}, $status_store);
 				store = {...store, ...jsondata}
 				status_store.update(() => store)
 			})
-			s.addEventListener("error", function (event) {
-				console.log("socket error")
+			s.addEventListener("error", function (e) {
+				console.error('Socket encountered error: ', e.message, 'Closing socket');
 				lastmsg = DateTime.now().toUnixInteger()
-				if (s) s.close()
-				
-				// TODO: Display Alertbox mesg
-
 				cancelKeepAlive()
-				if (!timeout)
-					timeout = setTimeout(() => {
-						connect2socket(s)
-					}, 2000);
+				if (s) s.close()	
+				else setTimeout(()=>s.connect(), 1000)			
+				// TODO: Display Alertbox mesg
+				
 				
 			})
-			s.addEventListener("close", function (event) {
-				console.log("socket closed, reconnecting in 2s")
+			s.addEventListener("close", function (e) {
+				console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
 				lastmsg = DateTime.now().toUnixInteger()
-				if (s) s.close()
 				cancelKeepAlive()
-				if (!timeout)
-					timeout = setTimeout(() => {
-						connect2socket(s)
-					}, 2000);
+				setTimeout(()=>connect2socket(), 1000)
+				
 			})
 		}
 	}
@@ -82,16 +75,12 @@
 	function keepAlive(s) { 
 		let newmsg = DateTime.now().toUnixInteger()
 		let timing = newmsg - lastmsg
-		if (timing >= 40) {
+		if (timing >= 31) {
 			// Roger we have a problem, try to reconnect the websocket
 			console.log("No msg over websocket for " + timing + " sec, restart websocket")
 			s.close()
+			lastmsg = DateTime.now().toUnixInteger()
 			cancelKeepAlive()  
-			if (!timeout)
-				timeout = setTimeout(() => {
-					lastmsg = DateTime.now().toUnixInteger()
-					connect2socket(s)
-				}, 200);
 			return
 		}
 		

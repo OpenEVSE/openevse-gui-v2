@@ -126,11 +126,6 @@
 		}
 	}
 
-	async function setAutoRelease(state) {
-		let data = {auto_release: state}
-
-	}
-
 	async function stateButtonWatcher(val) {
 		if (val != undefined && $uistates_store.data_loaded == true ) {
 			if (val != $uistates_store.manual_override) {
@@ -155,7 +150,6 @@
 	}
 
 	async function removeClaimProp(prop,tag) {
-		console.log("remove prop: " + prop + " tag: " + tag)
 		tag.state = "loading"
 		let res = await claims_store.removeClaimProp($claims_target_store.claims[prop],prop)
 		if (res) tag.state = "ok"
