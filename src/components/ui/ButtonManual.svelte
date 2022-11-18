@@ -1,6 +1,6 @@
 <script>
 	import Fa from 'svelte-fa'
-	import {faRobot, faBolt, faCircleCheck, faBan} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {faRobot, faBolt, faBan} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let mode // 0: Auto, 1: On, 2: OFF
 	export let ischarging = false
 	export let setmode = (m,c) => {}
@@ -27,6 +27,7 @@
 	}
 </style>
 
+<svelte:options accessors/>
 <div class="mt-2 is-flex is-flex-wrap-nowrap buttonblock mx-auto buttons field is-grouped">
 	<button {disabled} class="{mode==1 || disabled?"no-pointer":""} {mode == 1?"is-active":"is-outlined"} 
 		{breakpoint=="mobilemini"?"":breakpoint=="desktop"?"is-large":"is-medium"} 

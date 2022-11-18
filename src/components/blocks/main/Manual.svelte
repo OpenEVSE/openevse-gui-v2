@@ -21,7 +21,7 @@
 	import ClaimPropTag 			from "../../ui/ClaimPropTag.svelte"
 
 	let setamp_tag
-
+	let buttons_manual
 	async function setMaxCurrent(val) {
 		
 		if (val == $config_store.max_current_soft) {
@@ -67,6 +67,8 @@
 
 	async function setMode(m) {
 		$uistates_store.mode = m
+		// disabling buttons to prevent crossing orders
+		buttons_manual.disabled = true
 		let data = {
 				auto_release: $uisettings_store.auto_release
 			}
@@ -107,6 +109,7 @@
 				}
 			}
 		}
+		buttons_manual.disabled = false
 	}
 
 	async function setShaper(state) {
@@ -182,11 +185,11 @@ $: setDivertMode($uistates_store.divertmode)
 
 	{#if $config_store.rfid_enabled}
 	<!-- {#if true} -->
-	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint}/>
+	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint}/>
 	{:else if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
-	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint}/>
+	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint}/>
 	{:else}
-	<ButtonManual isauto={false} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint}/>
+	<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint}/>
 	{/if}
 
 	<div class="is-flex is-justify-content-center">

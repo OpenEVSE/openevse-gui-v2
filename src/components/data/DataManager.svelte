@@ -52,7 +52,7 @@
 				if ($status_store.manual_override) {
 					setTimeout(() => {
 						refreshOverrideStore()
-					}, 10);
+					}, 200);
 				}
 			}
 			return res
