@@ -44,19 +44,21 @@
 
 	export async function refreshClaimsTargetStore(ver) {
 		if (ver != $uistates_store.claims_version) {
+			$uistates_store.claims_version = ver
+			console.log("refreshClaimsTarget ver:" + ver + " oldver:" +$uistates_store.claims_version)
 			const res = await serialQueue.add(claims_target_store.download)
 			if (res) {
-				$uistates_store.claims_version=ver
+				
 				getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
 				if ($status_store.manual_override) {
 					setTimeout(() => {
 						refreshOverrideStore()
-					}, 100);
-					return res
+					}, 10);
 				}
 			}
 			return res
 		}
+		return false
 	}
 
 	export async function refreshOverrideStore() {
@@ -104,7 +106,7 @@
 	$: refreshPlanStore			($status_store.schedule_plan_version)
 	$: refreshClaimsTargetStore	($status_store.claims_version)
 	$: refreshDateTime			($status_store.time, $config_store.time_zone)
-	//$: getMode					($claims_target_store.properties.state,$claims_target_store.claims.state)
+
 
 </script>
 

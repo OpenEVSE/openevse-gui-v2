@@ -5,7 +5,7 @@
 </script>
 <div class="container px-3">
 	<Status />
-	<Breadcrumb />
+	<!-- <Breadcrumb /> -->
 	<Box title="Logs">
 	</Box>
 </div>

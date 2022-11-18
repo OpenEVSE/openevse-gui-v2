@@ -1,6 +1,7 @@
 <script>
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faHourglassHalf, faBolt, faStop} from '@fortawesome/free-solid-svg-icons/index.js'
+	
 	export let setmode = (m,c) => {}
 	export let mode = 0 // 0: rfid waiting 1: rfid authenticated 2: charging
 

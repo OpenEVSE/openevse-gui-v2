@@ -1,6 +1,6 @@
 <script>
 	import Fa from 'svelte-fa'
-	import {faRobot, faBolt, faBan, faCircleStop} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {faRobot, faBolt, faBan} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let mode // 0: Auto, 1: On, 2: OFF
 	export let ischarging = false
 	export let setmode = (m,c) => {}

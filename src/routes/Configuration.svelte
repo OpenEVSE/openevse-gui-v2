@@ -13,7 +13,7 @@
 
 <div class="container px-3">
 	<Status />
-	<Breadcrumb />
+	<!-- <Breadcrumb /> -->
 	<div class="columns is-centered">
 		<div class="column">
 			<Box title = "Configuration">

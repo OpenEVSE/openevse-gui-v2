@@ -6,7 +6,7 @@
 
 <div class="container px-3">
 	<Status />
-	<Breadcrumb />
+	<!-- <Breadcrumb /> -->
 	<div class="columns">
 		<div class="column">
 			<Http />
