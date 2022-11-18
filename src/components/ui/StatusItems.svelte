@@ -1,5 +1,5 @@
 <script>
-	import { faCar, faCircleCheck, faCirclePause,faHourglassHalf, faThumbsUp, faChargingStation, faBolt,
+	import { faCar, faCircleCheck, faCirclePause,faHourglassHalf, faThumbsUp, faBan, faChargingStation, faBolt,
 			faTriangleExclamation, faMoon,faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import StatusIcon from "./StatusIcon.svelte"
 	export let state
@@ -85,7 +85,7 @@
 <div class="is-flex is-justify-content-center">
 	<!-- <div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow  {status=="active"?'is-primary':'is-danger'}">{status}</div> -->
 	<div class="tag  no-pointer {bp != "mobilemini"?"is-large":"is-normal"} mb-1 mx-1 has-tooltip-right-mobile has-tooltip-arrow {status=="active"?'is-primary':'is-danger'}" data-tooltip={status=="active"?"OpenEVSE Active":"OpenEVSE in Standby"}>
-		<StatusIcon icon={status=="active"?faCircleCheck:faCirclePause} color="has-text-white" />
+		<StatusIcon icon={status=="active"?faCircleCheck:faBan} color="has-text-white" />
 	</div>
 	<!-- <span class="tag mb-1 mx-1 has-text-weight-semibold is-capitalized {vehicle?"is-primary":"is-danger"}">{vehicle?"Connected":"Disconnected"}</span> -->
 	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-normal"} mb-1 mx-1 has-tooltip-arrow {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?"Vehicle Connected":"No Vehicle Connected"}>
