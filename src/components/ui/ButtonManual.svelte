@@ -1,6 +1,6 @@
 <script>
 	import Fa from 'svelte-fa'
-	import {faRobot, faBolt, faBan} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {faRobot, faBolt, faCircleCheck, faBan} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let mode // 0: Auto, 1: On, 2: OFF
 	export let ischarging = false
 	export let setmode = (m,c) => {}
@@ -33,7 +33,7 @@
 		mr-1 button  manual-charge has-tooltip-arrow is-primary {ischarging?"has-text-warning":""}"
 		data-tooltip={disabled?null:"Enable Charge"}
 		on:click={() => {setmode(1)}}>
-		&nbsp;&nbsp;&nbsp;<Fa size=2x icon={faBolt} />&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;<Fa size=2x icon={faCircleCheck} />&nbsp;&nbsp;&nbsp;
 	</button>
 	{#if isauto}
 	<button {disabled} class="{mode==0 || disabled?"no-pointer":""} {mode == 0?"is-active":"is-outlined"}
