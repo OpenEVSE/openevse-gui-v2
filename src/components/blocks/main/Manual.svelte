@@ -10,7 +10,7 @@
 	import SelectTimeLmt 			from "../../ui/SelectTimeLmt.svelte"
 	import SelectChargeLmt			from "../../ui/SelectChargeLmt.svelte"
 	import {config_store}			from "../../../lib/stores/config.js"
-	// import {claim_store} 		from "../../../lib/stores/claim.js"
+	import {claims_store} 			from "../../../lib/stores/claims.js"
 	import { override_store } 		from "./../../../lib/stores/override.js";
 	import {status_store} 			from "../../../lib/stores/status.js"
 	import {schedule_store} 		from "../../../lib/stores/schedule.js"
@@ -177,8 +177,9 @@ $: setDivertMode($uistates_store.divertmode)
 <Box title="Charge">
 
 	{#if $config_store.rfid_enabled}
-
-	<ButtonRfidMode mode={!$uistates_store.rfid_auth?0:$status_store.state!=3?1:2} />
+	<!-- {#if true} -->
+	<!-- <ButtonRfidMode mode={!$uistates_store.rfid_auth?0:$status_store.state!=3?1:2} auth={$uistates_store.rfid_auth} /> -->
+	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth}/>
 	{:else if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
 	<ButtonManual isauto={true} mode={$uistates_store.mode} setmode={setMode} />
 	{:else}
@@ -209,7 +210,7 @@ $: setDivertMode($uistates_store.divertmode)
 		<div class="item ml-2 my-0 tag is-info has-text-weight-semibold">
 			<Fa icon={displayIcon(clientid2name($claims_target_store.claims.max_current))} class="has-text-white mr-2 is-capitalized" />
 			{clientid2name($claims_target_store.claims.max_current)}
-			<button class="delete is-small"></button>
+			<button class="delete is-small" on:click={() => {claims_store.removeClaimProp($claims_target_store.claims.max_current,"max_current")}}></button>
 		</div>
 	</div>
 	{/if}

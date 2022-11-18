@@ -4,7 +4,9 @@
 	
 	export let setmode = (m,c) => {}
 	export let mode = 0 // 0: rfid waiting 1: rfid authenticated 2: charging
-
+	export let auth = ""
+	export let charging = false
+	
 	let mode1 = "START"
 	let mode2 = "STOP"
 	let disabled = false
@@ -28,7 +30,7 @@
 
 <div class="mb-2 mt-2 mb-5  is-flex is-flex-wrap-nowrap buttonblock mx-auto buttons field is-grouped">
 	<button disabled 
-		class="button is-large manual-charge has-tooltip-arrow {mode==0?"is-info":mode==1?"is-primary":"is-danger"}" 
+		class="button is-large manual-charge has-tooltip-arrow is-outlined {mode==0?"is-info":mode==1?"is-primary":"is-danger"}" 
 		data-tooltip={mode==0?"Waiting for RFID badge":mode==1?"Start charge session":"Stop charge session"}
 		on:click={() => { setmode(mode)}}>
 		&nbsp;&nbsp;&nbsp;<Fa size=2x icon={mode==1?faBolt:mode==2?faStop:faHourglassHalf} />&nbsp;&nbsp;&nbsp;
