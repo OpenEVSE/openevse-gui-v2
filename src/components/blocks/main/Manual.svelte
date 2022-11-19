@@ -1,7 +1,11 @@
 <script>
+	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
 	import Fa 						from 'svelte-fa/src/fa.svelte'
+	import {faSolarPanel,
+			faGaugeHigh,
+			faBuildingShield} 		from '@fortawesome/free-solid-svg-icons/index.js'
 	import {EvseClients} 			from  "./../../../lib/vars.js"
-	import { claims_target_store }	from "./../../../lib/stores/claims_target.js";
+	import { claims_target_store }	from "./../../../lib/stores/claims_target.js"
 	import Box 						from "../../ui/Box.svelte"
 	import Slider 					from "../../ui/SliderForm.svelte"
 	import Switch 					from "../../ui/Switch.svelte"
@@ -16,12 +20,17 @@
 	import {uistates_store} 		from "../../../lib/stores/uistates.js"
 	import {uisettings_store} 		from "../../../lib/stores/uisettings.js"
 	import {onMount} 				from 'svelte'
-	import {httpAPI, clientid2name, displayIcon} 				from '../../../lib/utils.js'
+	import {httpAPI,
+			clientid2name,
+			displayIcon} 			from '../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
 	import ClaimPropTag 			from "../../ui/ClaimPropTag.svelte"
 
 	let setamp_tag
 	let buttons_manual
+	let button_divert
+	let button_shaper
+
 	async function setMaxCurrent(val) {
 		
 		if (val == $config_store.max_current_soft) {
@@ -119,6 +128,8 @@
 			
 			let res = await serialQueue.add(() => httpAPI("POST","/shaper", param, "text"))
 		}
+		if (button_shaper)
+			button_shaper.blur()
 	}
 
 	async function setDivertMode(state) {
@@ -127,6 +138,8 @@
 		if (state != $status_store.divertmode && $status_store.divertmode != undefined) {
 			let res = await serialQueue.add(() => httpAPI("POST","/divertmode", param, "text"))
 		}
+		if (button_divert)
+			button_divert.blur()
 	}
 
 	async function stateButtonWatcher(val) {
@@ -182,9 +195,8 @@ $: setDivertMode($uistates_store.divertmode)
 </style>
 
 <Box title="Charge">
-
+	<div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div>
 	{#if $config_store.rfid_enabled}
-	<!-- {#if true} -->
 	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint}/>
 	{:else if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
 	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint}/>
@@ -193,39 +205,32 @@ $: setDivertMode($uistates_store.divertmode)
 	{/if}
 
 	<div class="is-flex is-justify-content-center">
-		<div class="is-flex mx-auto is-inline-block">
-			<div>
-				<Switch name="man-swDivert" label="ECO Mode" bind:checked={$uistates_store.divertmode} hidden={$config_store.divert_enabled == false?true:false}
-				tooltip={$status_store.divertmode == 2?"Disable Eco / Solar Divert mode":"Enable Eco / Solar Divert mode"} />
-			</div>
-			<div>
-				<Switch name="man-swShaper" label="Current Shaper" bind:checked={$uistates_store.shaper} hidden={$config_store.current_shaper_enabled == false?true:false} 
-				tooltip={$uistates_store.shaper == true?"Disable Current Shaper":"Enable Current Shaper"}/>
-			</div>
-			<div>
-				<Switch name="swAutoRelease" label="Auto Release" bind:checked={$uisettings_store.auto_release} 
-				tooltip="Settings will be reset to default after this charge session" />
-			</div>
+		<ToggleButtonIcon bind:button={button_divert} state={$uistates_store.divertmode} name="ECO" color="is-primary" 
+			tooltip={$uistates_store.divertmode?"Disable Eco Divert mode":"Enable Eco Divert mode"} icon={faSolarPanel} breakpoint={$uistates_store.breakpoint}
+			action={() => setDivertMode(!$uistates_store.divertmode)} />
+		<ToggleButtonIcon bind:button={button_shaper} state={$uistates_store.shaper} name="Shaper" color="is-info" 
+			tooltip={ $uistates_store.shaper?"Disable Adaptive Power":"Enable Adaptive Power"} icon={faBuildingShield} breakpoint={$uistates_store.breakpoint}
+			action={() => setShaper(!$uistates_store.shaper)} />
 		</div>
-	</div>
 
-	<Slider  label="Set Amp" tooltip="Restrain max current to this value" unit="A" min=6 max={$config_store.max_current_soft} step=1 
+	<Slider  icon={faGaugeHigh} tooltip="Set Charge Current" unit="A" min=6 max={$config_store.max_current_soft} step=1 
 	value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
 	{#key $claims_target_store.claims.max_current}
 		{#if $claims_target_store.claims.max_current}
-		<div class="is-flex is-justify-content-center">
-			<div class="item ml-2 my-0 tag is-info has-text-weight-semibold">
-				<Fa icon={displayIcon(clientid2name($claims_target_store.claims.max_current))} class="has-text-white mr-2 is-capitalized" />
-				{clientid2name($claims_target_store.claims.max_current)}
-				<ClaimPropTag bind:this={setamp_tag} action={()=>removeClaimProp("max_current",setamp_tag)} />
-			</div>
+		<div class="is-flex is-justify-content-center is-align-content is-vcentered">
+	
+			<ClaimPropTag bind:this={setamp_tag} client={$claims_target_store.claims.max_current} action={()=>removeClaimProp("max_current",setamp_tag)} />
 		</div>
 		{/if}
 		{/key}
 
 
-	<div class="columns is-mobile is-justify-content-center mt-4">
+	<div class="columns is-mobile is-justify-content-center is-align-content pt-2">
 		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
 		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
+	</div>
+	<div class="is-flex is-justify-content-left mt-2">
+		<Switch name="swAutoRelease" label="Auto Release" bind:checked={$uisettings_store.auto_release} 
+		tooltip={"Release settings when vehicle is plugued off"}  />
 	</div>
 </Box>

@@ -75,7 +75,7 @@
 	function keepAlive(s) { 
 		let newmsg = DateTime.now().toUnixInteger()
 		let timing = newmsg - lastmsg
-		if (timing >= 31) {
+		if (timing >= 40) {
 			// Roger we have a problem, try to reconnect the websocket
 			console.log("No msg over websocket for " + timing + " sec, restart websocket")
 			s.close()

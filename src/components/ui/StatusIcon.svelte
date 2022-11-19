@@ -2,6 +2,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte'
 	export let icon
 	export let color
+	export let bp
 </script>
 
-<Fa class="is-size-5 {color}" icon={icon} />
+<Fa size={bp == "mobilemini"?"1.3x":"1x"} class={color} icon={icon}/>

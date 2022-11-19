@@ -29,27 +29,27 @@
 
 <svelte:options accessors/>
 <div class="mt-2 is-flex is-flex-wrap-nowrap buttonblock mx-auto buttons field is-grouped">
-	<button {disabled} class="{mode==1 || disabled?"no-pointer":""} {mode == 1?"is-active":"is-outlined"} 
+	<button {disabled} class="{mode==1 || disabled?"no-pointer":""} {mode == 1?"":"is-outlined"} 
 		{breakpoint=="mobilemini"?"":breakpoint=="desktop"?"is-large":"is-medium"} 
 		mr-1 button  manual-charge has-tooltip-arrow is-primary {ischarging?"has-text-warning":""}"
 		data-tooltip={disabled?null:"Enable Charge"}
-		on:click={() => {setmode(1)}}>
+		on:click|preventDefault={() => {setmode(1)}}>
 		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faBolt} />&nbsp;&nbsp;&nbsp;
 	</button>
 	{#if isauto}
-	<button {disabled} class="{mode==0 || disabled?"no-pointer":""} {mode == 0?"is-active":"is-outlined"}
+	<button {disabled} class="{mode==0 || disabled?"no-pointer":""} {mode == 0?"":"is-outlined"}
 		{breakpoint=="mobilemini"?"":breakpoint=="desktop"?"is-large":"is-medium"} 
 		mr-1 button manual-charge has-tooltip-arrow is-info" 
 		data-tooltip={disabled?null:"Let OpenEVSE decide"}
-		on:click={() => { setmode(0)}}>
+		on:click|preventDefault={() => { setmode(0)}}>
 		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faRobot} class=""/>&nbsp;&nbsp;&nbsp;
 	</button>
 	{/if}
-	<button {disabled} class="{mode==2 || disabled?"no-pointer":""} {mode == 2?"is-active":"is-outlined "} 
+	<button {disabled} class="{mode==2 || disabled?"no-pointer":""} {mode == 2?"":"is-outlined "} 
 		{breakpoint=="mobilemini"?"":breakpoint=="desktop"?"is-large":"is-medium"} 
 		button manual-charge has-tooltip-arrow is-danger" 
 		 data-tooltip={disabled?null:"Disable Charge"}
-		on:click={() => { setmode(2)}}>
+		on:click|preventDefault={() => { setmode(2)}}>
 		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faBan} />&nbsp;&nbsp;&nbsp;
 	</button>
 </div>

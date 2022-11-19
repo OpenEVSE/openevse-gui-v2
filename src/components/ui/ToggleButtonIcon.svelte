@@ -1,0 +1,26 @@
+<script>
+	import { getBreakpoint } from "./../../lib/utils.js";
+	import { uistates_store } from "./../../lib/stores-simu/states.js";
+	import Fa from 'svelte-fa/src/fa.svelte'
+	export let name = ""
+	export let state = false
+	export let color = "is-info"
+	export let tooltip = ""
+	export let icon = null
+	export let action = () => {}
+	export let button
+	export let breakpoint = "mobile"
+</script>
+
+<div class="mx-1 mb-0" >
+	<button bind:this={button} class="button has-tooltip-arrow has-tooltip px-5 {color} {state?"":"is-outlined"} {breakpoint=="mobilemini"?"is-small":breakpoint=="dekstop"?"is-medium":""}"
+	data-tooltip={tooltip} on:click={action}
+	>
+		<span class="icon">
+			<Fa icon={icon} size="1.5x" />
+		</span>
+	</button>
+	{#if name}
+	<div class="has-text-centered has-text-weight-bold">{name}</div>
+	{/if}
+</div>

@@ -17,10 +17,6 @@
 	let is_overed = false
 	let nopointer = false
 
-	const displaystate = (state) => { 
-		if (state != "default") {
-		}
-	} 
 
 	onMount(()=> {
 		state = "default"
@@ -46,7 +42,7 @@
 		else if (state == "default") nopointer = false
 	}
 	
-	$: displaystate(state), changeState()
+	$: state, changeState()
 
 		
 
@@ -61,7 +57,7 @@
 <svelte:options accessors/>
 <div class="is-inline-block p0">
 	<button type="button" style="width:{width}" bind:this={butn} 
-		class="button is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}"
+		class="button is-flex is-flex-direction-column is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size}"
 		class:no-pointer={nopointer} {disabled} data-tooltip={tooltip}
 		on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} 
 		on:mouseenter={() => {is_overed = true}} 
@@ -72,7 +68,7 @@
 		/>
 		{#if name}
 			{#if state == "default"}
-				{name}
+			<div>{name}</div>
 			{/if}
 		{/if}
 	</button>

@@ -24,6 +24,7 @@
     "workbox-window": "^6.5.4"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "bulma-pageloader": "^0.3.0",
     "bulma-slider": "^2.0.5",
