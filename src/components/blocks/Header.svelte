@@ -56,7 +56,7 @@
 			<div class="navbar-start ml-5 is-uppercase">
 				
 				<a class="navbar-item is-size-6 is-hoverable {($location=="/")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/" on:click={toggleMenu} use:link>Main</a>
-				<a class="navbar-item is-size-6 is-hoverable {($location=="/supervision")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/supervision" on:click={toggleMenu} use:link>Supervision</a>
+				<a class="navbar-item is-size-6 is-hoverable {($location=="/monitoring")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/monitoring" on:click={toggleMenu} use:link>Monitoring</a>
 				<a class="navbar-item is-size-6 is-hoverable {($location=="/logs")?"has-text-info noevent is-active has-background-white":"has-text-grey-dark"}" href="/logs" on:click={toggleMenu} use:link>Logs</a>
 				<div class="navbar-item has-dropdown {hideDropDown?"is-hoverable":""}">
 					<a class="navbar-item is-size-6 is-hoverable {$location=="/configuration"?"has-text-info":"has-text-grey-dark"}" href="/configuration" on:click={toggleMenu} use:link>Configuration</a>

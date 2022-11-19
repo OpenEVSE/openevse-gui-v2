@@ -213,19 +213,20 @@ $: setDivertMode($uistates_store.divertmode)
 			action={() => setShaper(!$uistates_store.shaper)} />
 		</div>
 
-	<Slider  icon={faGaugeHigh} tooltip="Set Charge Current" unit="A" min=6 max={$config_store.max_current_soft} step=1 
-	value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
-	{#key $claims_target_store.claims.max_current}
+	<div class="container ">
+		<Slider  icon={faGaugeHigh} tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step=1 
+		value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
+		{#key $claims_target_store.claims.max_current}
 		{#if $claims_target_store.claims.max_current}
 		<div class="is-flex is-justify-content-center is-align-content is-vcentered">
-	
 			<ClaimPropTag bind:this={setamp_tag} client={$claims_target_store.claims.max_current} action={()=>removeClaimProp("max_current",setamp_tag)} />
 		</div>
 		{/if}
 		{/key}
+	</div>
 
 
-	<div class="columns is-mobile is-justify-content-center is-align-content pt-2">
+	<div class="columns is-mobile is-justify-content-center is-align-content pt-2 mt-4">
 		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
 		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
 	</div>

@@ -69,31 +69,28 @@
 		<div class="pt-2">
 			
 			<div class="">
-				<div class="">
-					<table class="table table is-striped is-vcentered is-size-7">
-						<thead>
-							
-							<tr class="has-background-info has-text-white py-1"	>
-								<th colspan=2 class="has-text-white py-1">Current Firmware</th>
-
-							</tr>
-						</thead>
-						<tbody class="is-size-6">
-							<tr>
-								<td>ESP info</td>
-								<td>{$config_store.espinfo}</td>
-							</tr>
-							<tr>
-								<td>Build</td>
-								<td>{$config_store.buildenv}</td>
-							</tr>
-							<tr>
-								<td>Version</td>
-								<td>{$config_store.version}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<table class="table is-fullwidth is-vcentered">
+					<thead>
+						
+						<tr class="has-background-info has-text-white py-1"	>
+							<th colspan=2 class="has-text-white py-1">Current Firmware</th>
+						</tr>
+					</thead>
+					<tbody class="is-size-6">
+						<tr>
+							<td>ESP info</td>
+							<td class="has-text-weight-semibold">{$config_store.espinfo}</td>
+						</tr>
+						<tr>
+							<td>Build</td>
+							<td class="has-text-weight-semibold">{$config_store.buildenv}</td>
+						</tr>
+						<tr>
+							<td>Version</td>
+							<td class="has-text-weight-semibold">{$config_store.version}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		{#if file}
@@ -121,7 +118,7 @@
 			</div>
 		</div>
 
-			<Button disabled={fileSent == "ok"?true:false} name="Upload" color="is-primary" butn_submit={uploadFw} state={uploadButtonState}/>
+			<Button disabled={fileSent == "ok"} name="Upload" color="is-primary" butn_submit={uploadFw} state={uploadButtonState}/>
 		
 		{:else}
 		<div class="my-2 is-family-code is-italic">
@@ -130,7 +127,7 @@
 		<SelectFile bind:file={file}/>
 		{/if}
 		
-		<Button name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
+		<Button disabled={fileSent == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
 		
 	</Box>
 </Modal>

@@ -1,5 +1,5 @@
 <script>
-	import SafetyTableRow from "./../../ui/SafetyTableRow.svelte";
+	import SafetyTableRow from "../../ui/SafetyTableRow.svelte";
 	import {config_store} from "../../../lib/stores/config.js"
 	import {status_store} from "../../../lib/stores/status.js"
 	import Box from "../../ui/Box.svelte"

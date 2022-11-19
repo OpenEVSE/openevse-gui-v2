@@ -13,9 +13,9 @@
 </script>
 <style>
 	.item {
-		position: relative;
-		top: 0; left: 0;
-		transform: translateY(-70%);
+		position: absolute;
+		overflow:visible;
+		top: 45px;;
 	}
 </style>
 <svelte:options accessors />

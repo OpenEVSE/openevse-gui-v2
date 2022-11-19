@@ -1,5 +1,5 @@
 import Main from '../routes/Main.svelte'
-import Supervision from '../routes/Supervision.svelte'
+import Monitoring from '../routes/Monitoring.svelte'
 import System from '../routes/System.svelte'
 import Services from '../routes/Services.svelte'
 import Configuration from '../routes/Configuration.svelte'
@@ -9,7 +9,7 @@ import Logs from '../routes/Logs.svelte'
 export const routes = {
     // Exact path
     '/': Main,
-    '/supervision': Supervision,
+    '/monitoring': Monitoring,
     '/logs': Logs,
     '/configuration': Configuration,
     '/configuration/system': System,
