@@ -205,10 +205,10 @@ $: setDivertMode($uistates_store.divertmode)
 	{/if}
 
 	<div class="is-flex is-justify-content-center">
-		<ToggleButtonIcon bind:button={button_divert} state={$uistates_store.divertmode} name="ECO" color="is-primary" 
+		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$uistates_store.divertmode} name="ECO" color="is-primary" 
 			tooltip={$uistates_store.divertmode?"Disable Eco Divert mode":"Enable Eco Divert mode"} icon={faSolarPanel} breakpoint={$uistates_store.breakpoint}
 			action={() => setDivertMode(!$uistates_store.divertmode)} />
-		<ToggleButtonIcon bind:button={button_shaper} state={$uistates_store.shaper} name="Shaper" color="is-info" 
+		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="Shaper" color="is-info" 
 			tooltip={ $uistates_store.shaper?"Disable Adaptive Power":"Enable Adaptive Power"} icon={faBuildingShield} breakpoint={$uistates_store.breakpoint}
 			action={() => setShaper(!$uistates_store.shaper)} />
 		</div>

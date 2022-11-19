@@ -10,8 +10,10 @@
 	export let action = () => {}
 	export let button
 	export let breakpoint = "mobile"
+	export let visible = true
 </script>
 
+{#if visible}
 <div class="mx-1 mb-0" >
 	<button bind:this={button} class="button has-tooltip-arrow has-tooltip px-5 {color} {state?"":"is-outlined"} {breakpoint=="mobilemini"?"is-small":breakpoint=="dekstop"?"is-medium":""}"
 	data-tooltip={tooltip} on:click={action}
@@ -24,3 +26,4 @@
 	<div class="has-text-centered has-text-weight-bold">{name}</div>
 	{/if}
 </div>
+{/if}

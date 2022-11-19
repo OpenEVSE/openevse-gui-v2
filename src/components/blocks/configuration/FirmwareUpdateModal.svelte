@@ -118,7 +118,7 @@
 			</div>
 		</div>
 
-			<Button disabled={fileSent == "ok"} name="Upload" color="is-primary" butn_submit={uploadFw} state={uploadButtonState}/>
+			<Button disabled={uploadButtonState == "loading"} name="Upload" color="is-primary" butn_submit={uploadFw} state={uploadButtonState}/>
 		
 		{:else}
 		<div class="my-2 is-family-code is-italic">

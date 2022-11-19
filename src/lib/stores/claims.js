@@ -25,8 +25,8 @@ function createClaimStore() {
     }
 
 	// remove clientid EvseClient_OpenEVSE_Manual claim 
-    async function release() {
-        let res = await httpAPI("DELETE", "/claims/" + EvseClients["manual"])
+    async function release(clientid=EvseClients["manual"]) {
+        let res = await httpAPI("DELETE", "/claims/" +clientid)
         let store = {}
         P.update(() => store)
         return P
@@ -53,8 +53,18 @@ function createClaimStore() {
                     if (claims[i][prop]) {
                          // claim has prop
                         delete claims[i][prop]
-                        await serialQueue.add(() => claims_store.upload(claims[i],clientid))
-                        return res
+                        if (Object.keys(claims[i]).length  <= 3 && claims[i].auto_release != undefined) {
+                            // there's only one key check if it's auto_release 
+                            console.log("delete claim")   
+                            delete claims[i]
+                        }
+                        if (claims[i]) {
+                            await serialQueue.add(() => claims_store.upload(claims[i],clientid))
+                            return res
+                        } else {
+                            await serialQueue.add(() => claims_store.release(clientid))
+                            return res
+                        }
                     }             
                 }
             }     
