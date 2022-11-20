@@ -59,10 +59,10 @@ function createClaimStore() {
                             delete claims[i]
                         }
                         if (claims[i]) {
-                            await serialQueue.add(() => claims_store.upload(claims[i],clientid))
+                            await claims_store.upload(claims[i],clientid)
                             return res
                         } else {
-                            await serialQueue.add(() => claims_store.release(clientid))
+                            await claims_store.release(clientid)
                             return res
                         }
                     }             

@@ -46,27 +46,23 @@
 		if (ver != $uistates_store.claims_version) {
 			$uistates_store.claims_version = ver
 			const res = await serialQueue.add(claims_target_store.download)
-			if (res) {
-				
+			if (res) {		
 				getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
-				if ($status_store.manual_override) {
-					setTimeout(() => {
-						refreshOverrideStore()
-					}, 200);
-				}
 			}
 			return res
 		}
 		return false
 	}
 
-	export async function refreshOverrideStore() {
+	export async function refreshOverrideStore(version) {
 		if ($status_store.manual_override) {
-			const res = await serialQueue.add(override_store.download)
-			return res
+			if ($uistates_store.override_version != $status_store.override_version) {
+				const res = await serialQueue.add(override_store.download)
+				$uistates_store.override_version = $status_store.override_version
+				return res
+			}
+			else return true
 		}
-		else return true
-	
 	}
 
 
@@ -104,6 +100,7 @@
 	$: refreshSchedulestore		($status_store.schedule_version)
 	$: refreshPlanStore			($status_store.schedule_plan_version)
 	$: refreshClaimsTargetStore	($status_store.claims_version)
+	$: refreshOverrideStore     ($status_store.override_version)
 	$: refreshDateTime			($status_store.time, $config_store.time_zone)
 
 

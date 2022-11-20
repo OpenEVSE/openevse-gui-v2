@@ -37,7 +37,7 @@
 			//remove maxCurrent
 			delete $override_store.max_current
 			let res
-			// if not other properties, release claim
+			// if no other properties, release claim
 			if ( 
 				$override_store.state == undefined && 
 				$override_store.energy_limit == undefined && 
@@ -52,7 +52,7 @@
 			return res
 		}
 		else {
-			// set claim
+			// set override
 			$override_store.max_current = val
 			$override_store.auto_release = $uisettings_store.auto_release
 			let res = await serialQueue.add(() => override_store.upload($override_store))
@@ -112,7 +112,7 @@
 			if (data.max_current) 
 				await serialQueue.add(() => override_store.upload(data))
 			// Mode Auto, clearing override
-			if ($claims_target_store.claims.state == EvseClients["manual"] ) {
+			else if ($claims_target_store.claims.state == EvseClients["manual"] ) {
 				if ($status_store.manual_override) { 
 					let res = await serialQueue.add(override_store.clear)
 				}
@@ -165,15 +165,15 @@
 			$uistates_store.divertmode = val
 	}
 
-	async function removeClaimProp(prop,tag) {
+	async function removeProp(prop,tag) {
 		tag.state = "loading"
 		let client = $claims_target_store.claims[prop]
 		let res
 		if (client == EvseClients["manual"]) {
 			// remove props using /override else use /claims
-			res = await override_store.removeProp(prop)
+			res = await serialQueue.add(() =>override_store.removeProp(prop))
 		}
-		res = await claims_store.removeClaimProp($claims_target_store.claims[prop],prop)
+		res = await serialQueue.add(() =>claims_store.removeClaimProp($claims_target_store.claims[prop],prop))
 		if (res) tag.state = "ok"
 		else tag.state = "error"
 	}
@@ -225,7 +225,7 @@ $: setDivertMode($uistates_store.divertmode)
 		{#key $claims_target_store.claims.max_current}
 		{#if $claims_target_store.claims.max_current}
 		<div class="is-flex is-justify-content-center is-align-content is-vcentered">
-			<ClaimPropTag bind:this={setamp_tag} client={$claims_target_store.claims.max_current} action={()=>removeClaimProp("max_current",setamp_tag)} />
+			<ClaimPropTag bind:this={setamp_tag} client={$claims_target_store.claims.max_current} action={()=>removeProp("max_current",setamp_tag)} />
 		</div>
 		{/if}
 		{/key}

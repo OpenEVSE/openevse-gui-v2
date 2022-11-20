@@ -12,6 +12,7 @@ const model = {
 		charge_lmt: 0,
 		config_version: 0,
 		claims_version: 0,
+		override_version: 0,
 		schedule_version: 0,
 		schedule_plan_version: 0,
 		// (todo) derived from other stores
