@@ -30,6 +30,7 @@
 		status = "Get Override"
 		if($status_store.manual_override)
 			await override_store.download()
+			$uistates_store.override_version = $status_store.override_version
 		// status = "Get Claim"
 		// await claim_store.download()
 		status = "Get Claims Target"
