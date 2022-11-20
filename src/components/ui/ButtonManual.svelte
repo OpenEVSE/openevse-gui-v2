@@ -28,10 +28,10 @@
 </style>
 
 <svelte:options accessors/>
-<div class="mt-2 is-flex is-flex-wrap-nowrap buttonblock mx-auto buttons field is-grouped">
+<div class="mt-2 is-flex is-flex-wrap-nowrap buttonblock mx-auto buttons field is-grouped has-addons">
 	<button {disabled} class="{mode==1 || disabled?"no-pointer":""} {mode == 1?"":"is-outlined"} 
 		{breakpoint=="mobilemini"?"":breakpoint=="desktop"?"is-large":"is-medium"} 
-		mr-1 button  manual-charge has-tooltip-arrow is-primary {ischarging?"has-text-warning":""}"
+		button  manual-charge has-tooltip-arrow is-primary {ischarging?"has-text-warning":""}"
 		data-tooltip={disabled?null:"Enable Charge"}
 		on:click|preventDefault={() => {setmode(1)}}>
 		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faBolt} />&nbsp;&nbsp;&nbsp;
@@ -39,7 +39,7 @@
 	{#if isauto}
 	<button {disabled} class="{mode==0 || disabled?"no-pointer":""} {mode == 0?"":"is-outlined"}
 		{breakpoint=="mobilemini"?"":breakpoint=="desktop"?"is-large":"is-medium"} 
-		mr-1 button manual-charge has-tooltip-arrow is-info" 
+		button manual-charge has-tooltip-arrow is-info" 
 		data-tooltip={disabled?null:"Let OpenEVSE decide"}
 		on:click|preventDefault={() => { setmode(0)}}>
 		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faRobot} class=""/>&nbsp;&nbsp;&nbsp;
