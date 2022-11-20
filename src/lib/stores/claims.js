@@ -27,9 +27,13 @@ function createClaimStore() {
 	// remove clientid EvseClient_OpenEVSE_Manual claim 
     async function release(clientid=EvseClients["manual"]) {
         let res = await httpAPI("DELETE", "/claims/" +clientid)
-        let store = {}
-        P.update(() => store)
-        return P
+        if (res) {
+            let store = {}
+            P.update(() => store)
+            return true
+        }
+        else return false
+
     }
 
     function getClaim(clientid) {
@@ -43,33 +47,37 @@ function createClaimStore() {
     }
 
     async function removeClaimProp(clientid,prop) {
-        // get lat"est claims
-        let res = await serialQueue.add(claims_store.download)
+        // download latest claims
+        let res = await claims_store.download()
+        console.log("res = " + res)
         if (res) {
             let claims = get(P)
             for (let i in claims) {
                 if (claims[i].client == clientid ) {
                     // found clientid claim
                     if (claims[i][prop]) {
-                         // claim has prop
+                            // claim has prop
+                        
                         delete claims[i][prop]
                         if (Object.keys(claims[i]).length  <= 3 && claims[i].auto_release != undefined) {
                             // there's only one key check if it's auto_release 
-                            console.log("delete claim")   
                             delete claims[i]
                         }
                         if (claims[i]) {
-                            await claims_store.upload(claims[i],clientid)
+                            res = await claims_store.upload(claims[i],clientid)
                             return res
                         } else {
-                            await claims_store.release(clientid)
+                            res = await claims_store.release(clientid)
                             return res
                         }
-                    }             
+                    }    
+                    else console.log("error: No such prop in claim, can't remove")         
                 }
+                else console.log("error: No claims from client id, can't remove")
             }     
         }
-        return false
+        
+        else return false
     }
 
     return {
