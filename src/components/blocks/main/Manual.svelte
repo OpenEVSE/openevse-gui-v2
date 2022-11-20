@@ -167,7 +167,13 @@
 
 	async function removeClaimProp(prop,tag) {
 		tag.state = "loading"
-		let res = await claims_store.removeClaimProp($claims_target_store.claims[prop],prop)
+		let client = $claims_target_store.claims[prop]
+		let res
+		if (client == EvseClients["manual"]) {
+			// remove props using /override else use /claims
+			res = await override_store.removeProp(prop)
+		}
+		res = await claims_store.removeClaimProp($claims_target_store.claims[prop],prop)
 		if (res) tag.state = "ok"
 		else tag.state = "error"
 	}

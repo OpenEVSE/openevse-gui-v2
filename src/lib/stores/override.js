@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store'
+import serialQueue from '../queue.js'
 import {httpAPI} from '../utils.js'
 import {status_store} from './status.js'
 
@@ -19,7 +20,7 @@ function createOverrideStore() {
 		let res = await httpAPI("GET", "/override")
 		P.update(() => res)
 		return P
-}
+    }
     async function upload(data) {
         let override = get(P)
 		let newoverridestore = {...override, ...data}
@@ -36,8 +37,31 @@ function createOverrideStore() {
             } else return false
         }
         else return false
-        
     }
+
+    async function removeProp(prop) {
+        let res = await serialQueue.add(override_store.download)
+        if (res) {
+            let override = get(P)
+            if (override[prop]) {
+                // override has prop
+                delete override[prop]
+                if (Object.keys(override).length  == 1 && override.auto_release != undefined) {
+                    // there's only one key check if it's auto_release 
+                    console.log("release manual override")                      
+                }
+                if (override) {
+                    await serialQueue.add(() => override_store.upload(override))
+                    return res
+                } else {
+                    await serialQueue.add(() => override_store.clear())
+                    return res
+                }
+            }                          
+        }
+        return false
+    }
+
 
     return {
         subscribe,
@@ -46,7 +70,8 @@ function createOverrideStore() {
         update,
         download,
         clear,
-        upload: (data) => upload(data)
+        upload: (data) => upload(data),
+        removeProp: (prop) => removeProp(prop)
     }
 }
 
