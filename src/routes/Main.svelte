@@ -4,7 +4,7 @@
 	import Timers from "../components/blocks/main/Timers.svelte"
 	import Breadcrumb from "../components/ui/Breadcrumb.svelte"
 </script>
-<div class="container px-3">
+<div class="container px-3 py-3 is-fullheight">
 	<Status />
 	<!-- <Breadcrumb /> -->
 	<div class="columns">

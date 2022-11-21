@@ -9,14 +9,14 @@
 	import StatusTile from "../ui/StatusTile.svelte"
 	import StatusItems from "../ui/StatusItems.svelte"
 	import ExpandArrow from "../ui/ExpandArrow.svelte"
-	import {formatDate} from "../../lib/utils.js"
+	import {formatDate, sec2time} from "../../lib/utils.js"
 	
 	let time
 	let elapsed
 
 	$: { 
 		if ($status_store.elapsed != undefined)
-			elapsed = new Date($status_store.elapsed * 1000).toISOString().slice(11, 16) 
+		    elapsed = sec2time($status_store.elapsed)
 		}
 	
 </script>
@@ -27,7 +27,6 @@
 	color: black;
 	background-color: hsl(0, 0%, 96%);
 	display: block;
-	padding: 1.25rem;
 	margin-bottom: 3rem;
 	position: relative;
 	}
@@ -74,7 +73,7 @@
 		<StatusTile title="Setpoint" value={$status_store.pilot} unit="A" />
 		{/if}
 		{#if $status_store.divertmode == 2}
-		<StatusTile title="Available" value={$status_store.charge_rate!=undefined?$status_store.charge_rate:0} unit="A" />
+		<StatusTile title="Available" value={$status_store.charge_rate} unit="A" />
 		{:else if $status_store.shaper == 1}
 		<StatusTile title="Available" value={$status_store.shaper_chg_cur} unit="A" />
 
@@ -82,6 +81,7 @@
 		<!-- <StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
 		<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	 -->
 		{#if $status_store.battery_level}
+		<StatusTile title="100% in" value={sec2time($status_store.time_to_full_charge)} />
 		<StatusTile title="EV SOC" value={$status_store.battery_level} unit="%" />
 		<StatusTile title="EV Range" value={$status_store.battery_range} unit="km" />
 		{/if}

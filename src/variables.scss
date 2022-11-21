@@ -1,17 +1,4 @@
 /* Variables and mixins declared here will be available in all other SCSS files */ /* https://github.com/jgthms/bulma/issues/1293 */
-@import "bulma/sass/utilities/_all";
-
-$body-overflow-y: auto;
-$pageloader-opacity: 1;
-$link: $info;
-
-$breadcrumb-item-color: $text;
-$breadcrumb-item-hover-color: $grey-light;
-$breadcrumb-item-active-color: $info;
-
-$navbar-padding-vertical: 0rem;
-$tabs-link-active-color: $info;
-$tabs-link-active-border-bottom-color: $info;
-$tabs-toggle-link-active-color: $info;
-$tabs-toggle-link-active-border-color: $info;
-$tabs-toggle-link-active-background-color: $grey-light;
+// @import "bulma/sass/utilities/initial-variables";
+// @import "bulma/sass/utilities/functions";
+// @import "bulma/sass/utilities/derived-variables.sass";

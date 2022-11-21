@@ -111,7 +111,7 @@
 <InputForm type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
 <InputForm type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
 <Button name="Connect" color="is-primary" butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
-<Button name="Scan Again" butn_submit={scanAgain} bind:state={scanButnState}/>
+<Button name="Scan" butn_submit={scanAgain} bind:state={scanButnState}/>
 <Button name="Cancel" color="is-danger" butn_submit={() => active = false}/>
 
 </form>

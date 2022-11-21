@@ -31,20 +31,20 @@
 	<!-- <th>{t_id}</th> -->
 	<th>{displayTime(t_time)}</th>
 	<th><span class="tag {t_state === 'active'?'is-primary':'is-danger'} tags py-0 is-capitalized">{t_state}</span></th>
-	<th style="width:40%" class="is-size-5-mobile is-size-5-tablet is-size-4-desktop m0 py-1 " align="right">
-		<div class="is-flex">
+	<th style="width:40%" class="is-size-5-mobile is-size-5-tablet is-size-4-desktop m0 py-1">
+		<div class="is-flex is-justify-content-center">
 		{#key t_days }
 			<div class="mx-1 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal has-text-centered is-capitalized" data-tooltip={formatDays(t_days)}>
-				<Fa icon={faCalendarDays} />
+				<Fa icon={faCalendarDays} size=1.1x />
 			</div>
 		{/key}
-			<div class="mx-1 has-text-weight-normal has-text-centered ">
+			<div class="mx-1 has-text-weight-normal">
 				<a class="has-text-info" href={$location} use:link on:click={() => {edit(t_id)}}>
-					<Fa icon={faSquarePen} />
+					<Fa icon={faSquarePen} size=1.1x />
 				</a>
 			</div>
-			<div class="mx-1 has-text-weight-normal has-text-centered">
-				<IconButton icon={faSquareMinus} state={removeState} color="has-text-danger" butn_submit={()=>{remove(t_id)}} />
+			<div class="mx-1 has-text-weight-normal">
+				<IconButton icon={faSquareMinus} size=1.1x state={removeState} color="has-text-danger" butn_submit={()=>{remove(t_id)}} />
 			</div>
 		</div>
 	</th>

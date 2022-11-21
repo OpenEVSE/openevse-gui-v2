@@ -47,6 +47,10 @@ export const removeDuplicateObjects = (array, key) => {
     })
 }
 
+export function sec2time(sec) {
+	return new Date(sec * 1000).toISOString().slice(11, 16)
+}
+
 export function formatDate(t,z) {
 	let tz = z.split("|")[0]
 	const d = DateTime.fromISO(t).setZone(tz)
@@ -81,7 +85,7 @@ export function round(value, precision) {
 }
 
 export let getBreakpoint = function () {
-	const mobilemini = 380 
+	const mobilemini = 350 
     const mobile = 640
     const tablet = 1280
     //const desktop = 1440

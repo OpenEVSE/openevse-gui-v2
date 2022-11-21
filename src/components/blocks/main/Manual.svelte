@@ -203,7 +203,7 @@ $: setDivertMode($uistates_store.divertmode)
 }
 </style>
 
-<Box title="Charge">
+<Box title="Charge Session">
 	<div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div>
 	{#if $config_store.rfid_enabled}
 	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint}/>
@@ -234,13 +234,12 @@ $: setDivertMode($uistates_store.divertmode)
 		{/key}
 	</div>
 
-
 	<div class="columns is-mobile is-justify-content-center is-align-content pt-2 mt-4">
 		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
 		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
 	</div>
 	<div class="is-flex is-justify-content-left mt-2">
 		<Switch name="swAutoRelease" label="Auto Release" bind:checked={$uisettings_store.auto_release} 
-		tooltip={"Release settings when vehicle is plugued off"}  />
+		tooltip={"Release charge session settings when vehicle is plugued off"}  />
 	</div>
 </Box>

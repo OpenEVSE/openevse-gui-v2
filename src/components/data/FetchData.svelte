@@ -1,4 +1,5 @@
 <script>
+	import CircularBolt from "./../ui/svg/circular_bolt.svelte";
 
 
 	import { onMount } from "svelte";
@@ -45,4 +46,11 @@
 
 </script>
 
-<div class="pageloader {status!="Ok"?"is-active":""}"><span class="title">{status}</span></div>
+<div class="pageloader is-info {status!="Ok"?"is-active":""}">
+	<div class="title">
+		<div class="is-flex is-justify-content-center is-align-items-center my-3 is-size-4">
+			<CircularBolt />penEVSE
+		</div>
+		{status}
+	</div>
+</div>

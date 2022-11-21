@@ -55,13 +55,13 @@
 <style>
 	.timers {
 		max-width : 400px;
-		min-width: 300px; 
+		/* min-width: 300px;  */
 		margin: auto;
 	}
 </style>
 <Box title="Schedule">
 	<div class="mb-2">
-		<table class="table is-fullwidth is-size-6 has-text-weight-normall timers">
+		<table class="table is-size-6 has-text-weight-normall timers">
 			<tbody>
 				{#if $schedule_store.length}
 					{#each $schedule_store as schedule,id} 

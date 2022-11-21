@@ -15,7 +15,7 @@
 
 {#if visible}
 <div class="mx-1 mb-0" >
-	<button bind:this={button} class="button has-tooltip-arrow has-tooltip px-5 {color} {state?"":"is-outlined"} {breakpoint=="mobilemini"?"is-small":breakpoint=="dekstop"?"is-medium":""}"
+	<button bind:this={button} class="button has-tooltip-arrow has-tooltip px-5 {color} {state?"":"is-outlined"} {breakpoint=="mobilemini"?"is-is-normal":breakpoint=="dekstop"?"is-medium":""}"
 	data-tooltip={tooltip} on:click={action}
 	>
 		<span class="icon">

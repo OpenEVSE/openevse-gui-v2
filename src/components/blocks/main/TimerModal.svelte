@@ -160,7 +160,11 @@
 
 
 </script>	
-
+<style>
+	.checkbox {
+		accent-color: #38a4b6;
+	}
+</style>
 
 <Modal bind:is_opened>
 
