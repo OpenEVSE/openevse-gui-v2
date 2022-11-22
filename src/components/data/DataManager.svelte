@@ -75,7 +75,7 @@
 	}
 
 	export function refreshUIState(store) {
-		$uistates_store.charging = $status_store.state == 3
+		$uistates_store.charging = store.state == 3
 	}
 
 
