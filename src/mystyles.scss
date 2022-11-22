@@ -57,12 +57,13 @@ body {
 	overflow: auto;
 }
 
-html {
+body {
 	background: linear-gradient(hsl(195, 78%, 30%), hsl(189, 53%, 47%));
+	background-repeat: no-repeat;
+	height: 100%;
 }
 
 .content {
 	overflow-y:auto;
 	padding-bottom: 30px;
 }
-
