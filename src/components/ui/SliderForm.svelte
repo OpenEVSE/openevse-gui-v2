@@ -39,6 +39,6 @@
 				type="range" bind:value={value} on:change={()=>onchange(value)}
 				on:focus={togglefocus} on:blur={togglefocus} />	
 		</div>
-		<div class="ml-2 mt-3 tag is-medium is-info">{value}{unit}</div>
+		<div class="ml-2 mt-3 tag is-medium has-text-weight-semibold is-info">{value}{unit}</div>
 	</div>
 </div>

@@ -4,7 +4,7 @@
 	export const params = {}; 
 </script>
 
-<div class="container px-3">
+<div class="container px-3 mb-3">
 	<Status />
 	<div class="box">
 		<div class="is-size-3 has-text-weight-bold">404 error</div>

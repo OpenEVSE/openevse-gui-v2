@@ -1,14 +1,12 @@
 <script>
 	import Status from "../components/blocks/Status.svelte"
-	import Breadcrumb from "../components/ui/Breadcrumb.svelte"
-	import Box from "../components/ui/Box.svelte"
+	import Timers from "../components/blocks/main/Timers.svelte"
 </script>
-<div class="container px-3 mb-3">
+<div class="container px-3 mb-3 is-fullheight">
 	<Status />
 	<div class="columns is-centered is-vcentered">
 		<div class="column is-half">
-			<Box title="Logs">
-			</Box>
+			<Timers />
 		</div>
 	</div>
 </div>

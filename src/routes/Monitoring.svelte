@@ -4,12 +4,10 @@
 	import Energy from "../components/blocks/monitoring/Energy.svelte"
 	import Sensors from "../components/blocks/monitoring/Sensors.svelte"
 	import Current from "../components/blocks/monitoring/Current.svelte"
-	import Breadcrumb from "../components/ui/Breadcrumb.svelte"
 </script>
 
-<div class="container px-3">
+<div class="container px-3  mb-3">
 	<Status />
-	<!-- <Breadcrumb /> -->
 	<div class="columns">
 		<div class="column">
 			<Safety />			

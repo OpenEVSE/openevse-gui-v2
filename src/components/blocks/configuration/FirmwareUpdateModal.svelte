@@ -117,17 +117,17 @@
 			{/if}
 			</div>
 		</div>
-
-			<Button disabled={uploadButtonState == "loading"} name="Upload" color="is-primary" butn_submit={uploadFw} state={uploadButtonState}/>
-		
+		<Button disabled={uploadButtonState == "loading"} name="Upload" color="is-info" butn_submit={uploadFw} state={uploadButtonState}/>
+		<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
 		{:else}
 		<div class="my-2 is-family-code is-italic">
 			<Fa class="is-size-6 has-text-danger mx-2" icon={faFileCircleXmark} />No file selected
 		</div>
 		<SelectFile bind:file={file}/>
+		<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
 		{/if}
 		
-		<Button disabled={fileSent == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
+		
 		
 	</Box>
 </Modal>

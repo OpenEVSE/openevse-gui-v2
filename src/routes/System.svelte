@@ -3,11 +3,10 @@
 	import Network from "../components/blocks/configuration/Network.svelte"
 	import Time from "../components/blocks/configuration/Time.svelte"
 	import Hardware from "../components/blocks/configuration/Hardware.svelte"
-	import Breadcrumb from "../components/ui/Breadcrumb.svelte"
 </script>
 
 
-<div class="container px-3">
+<div class="container px-3 mb-3">
 	<Status />
 	<!-- <Breadcrumb /> -->
 	<div class="columns">

@@ -49,7 +49,7 @@
 <div class="pageloader is-info {status!="Ok"?"is-active":""}">
 	<div class="title">
 		<div class="is-flex is-justify-content-center is-align-items-center my-3 is-size-4">
-			<CircularBolt />penEVSE
+			Hold on...
 		</div>
 		{status}
 	</div>

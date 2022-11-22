@@ -29,21 +29,31 @@
 	display: block;
 	margin-bottom: 3rem;
 	position: relative;
+	transition:all 3s ease-in-out;;
 	}
 	
 	.statusbox.disabled {
-		box-shadow: 0 0.5em 1em -0.125em rgba(255,56,96,0.3), 0 0px 0 1px rgba(0,0,0, 0.02);
+		box-shadow: 0 0.5em 1em -0.125em rgba(255, 56, 96, 0.524), 0 0px 0 1px rgb(255, 255, 255);
+		border: dashed 0.2em;
+		border-color: hsl(348, 100%, 61%);
+		transition: opacity 0.5s ease-in-out;
 	}
 	.statusbox.active {
-		box-shadow: 0 0.5em 1em -0.125em rgba(0,209,178,0.3), 0 0px 0 1px rgba(0,0,0, 0.02);
+		box-shadow: 0 0.5em 1em -0.125em rgba(0, 209, 178, 0.663), 0 0px 0 1px rgb(255, 255, 255);
+		border: dashed 0.2em;
+		border-color:hsl(153, 62%, 54%);
+		transition: opacity 0.5s ease-in-out;
 	}
 	.statusbox.charging {
-		box-shadow: 0 0.5em 1em -0.125em rgba(18, 221, 225, 0.741), 0 0px 0 1px rgba(0,0,0, 0.02);
+		box-shadow: 0 0.5em 1em -0.125em hsl(57, 93%, 48%), 0 0px 0 1px rgb(255, 255, 255);
+		border: dashed 0.2em;
+		border-color:hsl(57, 93%, 48%);
+		transition: opacity 0.5s ease-in-out;
 	}
 
 </style>
 {#if $status_store.evse_connected == 1}
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} p-3 has-background-light mb-3 mt-0 px-3">
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-3 mt-0 px-3">
 	<div class="mb-2 mx-0">
 		<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />
 	</div>
@@ -75,13 +85,13 @@
 		{#if $status_store.divertmode == 2}
 		<StatusTile title="Available" value={$status_store.charge_rate} unit="A" />
 		{:else if $status_store.shaper == 1}
-		<StatusTile title="Available" value={$status_store.shaper_chg_cur} unit="A" />
+		<StatusTile title="Available" value={$status_store.shaper_cur} unit="A" />
 
 		{/if}
 		<!-- <StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
 		<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	 -->
 		{#if $status_store.battery_level}
-		<StatusTile title="100% in" value={sec2time($status_store.time_to_full_charge)} />
+		<StatusTile title="Remaining" value={sec2time($status_store.time_to_full_charge)} />
 		<StatusTile title="EV SOC" value={$status_store.battery_level} unit="%" />
 		<StatusTile title="EV Range" value={$status_store.battery_range} unit="km" />
 		{/if}

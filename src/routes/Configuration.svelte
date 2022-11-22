@@ -11,11 +11,11 @@
 	}
 </style>
 
-<div class="container px-3">
+<div class="container px-3 mb-3">
 	<Status />
 	<!-- <Breadcrumb /> -->
-	<div class="columns is-centered">
-		<div class="column">
+	<div class="columns is-centered is-vcentered">
+		<div class="column is-half">
 			<Box title = "Configuration">
 				<div class="is-flex is-flex-direction-column is-align-items-center">
 					<a href="/configuration/system" use:link><div class="my-1 is-inline-block button is-info is-outlined">System</div></a>

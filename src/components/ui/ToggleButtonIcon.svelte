@@ -18,12 +18,12 @@
 	<button bind:this={button} class="button has-tooltip-arrow has-tooltip px-5 {color} {state?"":"is-outlined"} {breakpoint=="mobilemini"?"is-is-normal":breakpoint=="dekstop"?"is-medium":""}"
 	data-tooltip={tooltip} on:click={action}
 	>
-		<span class="icon">
+		<div class="icon">
 			<Fa icon={icon} size="1.5x" />
-		</span>
+		</div>
+		{#if name}
+		<div class="ml-2 has-text-centered has-text-weight-bold is-size-7">{name}</div>
+		{/if}
 	</button>
-	{#if name}
-	<div class="has-text-centered has-text-weight-bold">{name}</div>
-	{/if}
 </div>
 {/if}
