@@ -1,6 +1,4 @@
 <script>
-	import { getBreakpoint } from "./../../lib/utils.js";
-	import { uistates_store } from "./../../lib/stores-simu/states.js";
 	import Fa from 'svelte-fa/src/fa.svelte'
 	export let name = ""
 	export let state = false
