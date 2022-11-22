@@ -3,7 +3,7 @@
 	import Status from "../components/blocks/Status.svelte"
 </script>
 
-<div class="container py-3 px-3 mb-3">
+<div class="container py-3 px-3">
 	<Status />
 	<div class="columns">
 		<div class="column">
