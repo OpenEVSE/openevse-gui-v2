@@ -36,16 +36,17 @@
 
 <div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2">
 		
-		<div>
-			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"} >
-				<Fa icon={faCalendarDays} size="2x"/>
-			</a>
-		</div>
+
 		<div>		
 			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"} >
 				<Fa icon={faChartSimple} size="2x" />
 			</a>
 
+		</div>
+		<div>
+			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"} >
+				<Fa icon={faCalendarDays} size="2x"/>
+			</a>
 		</div>
 		<div>
 			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}" >
