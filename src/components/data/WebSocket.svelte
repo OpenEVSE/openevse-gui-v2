@@ -24,7 +24,6 @@
 	})
 
 	function connect2socket(s) {
-		console.log("Starting websocket instance")
 		var host
 		if (import.meta.env.VITE_REMOTEHOST == "true")
 			host = import.meta.env.VITE_OPENEVSEHOST
@@ -53,8 +52,6 @@
 				console.error('Socket encountered error: ', e.message, 'Closing socket');
 				lastmsg = DateTime.now().toUnixInteger()
 				cancelKeepAlive()
-				if (s) s.close()	
-				else setTimeout(()=>s.connect(), 1000)			
 				// TODO: Display Alertbox mesg
 				
 				
