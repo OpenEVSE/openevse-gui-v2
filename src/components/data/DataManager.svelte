@@ -74,6 +74,10 @@
 		return res
 	}
 
+	export function refreshUIState(store) {
+		$uistates_store.charging = $status_store == 3
+	}
+
 
 	function getMode(state,clientid) {
 		$uistates_store.stateclaimfrom = clientid2name(clientid)
@@ -105,6 +109,7 @@
 	$: refreshClaimsTargetStore	($status_store.claims_version)
 	$: refreshOverrideStore     ($status_store.override_version)
 	$: refreshDateTime			($status_store.time, $config_store.time_zone)
+	$: refreshUIState			($status_store)
 
 
 </script>

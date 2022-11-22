@@ -17,6 +17,7 @@ const model = {
 		schedule_plan_version: 0,
 		// (todo) derived from other stores
 		mode: undefined, // 0:Auto 1:On 2:Off
+		charging: false,
 		stateclaimfrom: null, // "manual", "timer", "divert", "shaper", "ocpp", "mqtt", "rfid"
 		time_localestring: null,
 		time_isostring: null,

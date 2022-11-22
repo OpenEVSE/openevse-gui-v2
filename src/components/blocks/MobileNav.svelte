@@ -1,10 +1,9 @@
 <script>
-	import {Fa, FaLayers} from 'svelte-fa/src/index.js';
-	import IconButton from "./../ui/IconButton.svelte"
-	import {onMount, onDestroy} from 'svelte'
-	import {faHome, faChartSimple, faTimeline, faCalendarDays, faGear, faBolt, faChargingStation} from '@fortawesome/free-solid-svg-icons/index.js'
-	import {faCircle} from '@fortawesome/free-regular-svg-icons/index.js'
-	import {push, pop, replace,location, link} from 'svelte-spa-router'
+	import {Fa} from 'svelte-fa/src/index.js';
+	import {faChartSimple, faTimeline, faCalendarDays, faGear, faBolt} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {push, link} from 'svelte-spa-router'
+	
+	export let charging
 	export let selected
 </script>
 
@@ -27,6 +26,10 @@
 		color: white;
 		scale: 1.2;
 	}
+	.nav-item.charging {
+		color: hsl(57, 93%, 48%);;
+		scale: 1.2;
+	}
 	
 
 </style>
@@ -45,7 +48,7 @@
 
 		</div>
 		<div>
-			<a class="nav-item" href="/" use:link class:active={selected=="/"} >
+			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}" >
 				<Fa icon={faBolt} size="2.5x" />
 			</a>
 		</div>

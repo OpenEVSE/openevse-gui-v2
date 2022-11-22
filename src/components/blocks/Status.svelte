@@ -31,18 +31,18 @@
 	
 	.statusbox.disabled {
 		box-shadow: 0 0.5em 1em -0.125em hsl(348, 100%, 61%), 0 0px 0 1px rgb(255, 255, 255);
-		border: dashed 0.2em;
+		// border: dashed 0.2em;
 		border-color: hsl(348, 100%, 61%);
 	}
 	.statusbox.active {
 		box-shadow: 0 0.5em 1em -0.125em hsl(153, 62%,54%), 0 0px 0 1px rgb(255, 255, 255);
-		border: dashed 0.2em;
+		// border: dashed 0.2em;
 		border-color:hsl(153, 62%, 54%);
 		transition: opacity 0.5s ease-in-out;
 	}
 	.statusbox.charging {
 		 box-shadow: 0 0.5em 1em -0.125em hsl(57, 93%, 30%), 0 0px 0 1px rgb(255, 255, 255);
-		border: dashed 0.2em;
+		// border: dashed 0.2em;
 		border-color:hsl(57, 93%, 48%);
 		animation: charge 3s infinite ;
 	}
