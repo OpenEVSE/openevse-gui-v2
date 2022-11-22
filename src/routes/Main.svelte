@@ -7,7 +7,7 @@
 </style>
 
 
-<div class="columns section is-centered is-vcentered is-full-width">
+<div class="columns is-centered is-vcentered is-full-width">
 	<div class="column is-half">
 		<Manual />
 	</div>

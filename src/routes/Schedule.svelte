@@ -4,7 +4,7 @@
 </script>
 
 
-<div class="columns section is-centered is-vcentered">
+<div class="columns is-centered is-vcentered">
 	<div class="column is-half">
 		<Timers />
 	</div>

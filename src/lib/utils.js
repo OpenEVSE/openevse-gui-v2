@@ -85,7 +85,7 @@ export function round(value, precision) {
 }
 
 export let getBreakpoint = function () {
-	const mobilemini = 350 
+	const mobilemini = 410 
     const mobile = 640
     const tablet = 1280
     //const desktop = 1440
