@@ -5,14 +5,14 @@ import System           from '../routes/System.svelte'
 import Services         from '../routes/Services.svelte'
 import Configuration    from '../routes/Configuration.svelte'
 import NotFound         from '../routes/NotFound.svelte'
-import Logs             from '../routes/Logs.svelte'
+import History             from '../routes/History.svelte'
 
 export const routes = {
     // Exact path
     '/': Main,
     '/schedule': Schedule,
     '/monitoring': Monitoring,
-    '/logs': Logs,
+    '/history': History,
     '/configuration': Configuration,
     '/configuration/system': System,
     '/configuration/services': Services,

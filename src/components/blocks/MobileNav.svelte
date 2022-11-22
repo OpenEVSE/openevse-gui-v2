@@ -4,7 +4,7 @@
 	import {onMount, onDestroy} from 'svelte'
 	import {faHome, faChartSimple, faTimeline, faCalendarDays, faGear, faBolt, faChargingStation} from '@fortawesome/free-solid-svg-icons/index.js'
 	import {faCircle} from '@fortawesome/free-regular-svg-icons/index.js'
-	import {push, pop, replace,location} from 'svelte-spa-router'
+	import {push, pop, replace,location, link} from 'svelte-spa-router'
 	export let selected
 </script>
 
@@ -16,7 +16,7 @@
 		width: 100%;
 	}
 	.nav-item {
-		color: rgb(202, 202, 202);
+		/* color: rgb(202, 202, 202); */
 		margin-top: 3px;
 	}
 	.nav-item:hover {
@@ -31,22 +31,32 @@
 
 </style>
 
-<div class="mobnav is-flex is-justify-content-space-evenly is-flex-direction-row has-background-dark py-2">
+<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2">
 		
-		<div class="nav-item" class:active={selected=="/schedule"} on:click={() => { push("/schedule")}}>
-			<Fa icon={faCalendarDays} size="2x"/>
+		<div>
+			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"} >
+				<Fa icon={faCalendarDays} size="2x"/>
+			</a>
 		</div>
-		<div class="nav-item" class:active={selected=="/monitoring"} on:click={() => { push("/monitoring")}}>
-			<Fa icon={faChartSimple} size="2x" />
-		</div>
-		<div class="nav-item" class:active={selected=="/"} on:click={() => { push("/")}}>
-			<Fa icon={faHome} size="2x" />
-		</div>
+		<div>		
+			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"} >
+				<Fa icon={faChartSimple} size="2x" />
+			</a>
 
-		<div class="nav-item" class:active={selected=="/logs"} on:click={() => { push("/logs")}}>
-			<Fa icon={faTimeline} size="2x"/>
 		</div>
-		<div class="nav-item" class:active={selected.includes("/configuration")} on:click={() => { push("/configuration")}}>
-			<Fa icon={faGear} size="2x"/>
+		<div>
+			<a class="nav-item" href="/" use:link class:active={selected=="/"} >
+				<Fa icon={faBolt} size="2.5x" />
+			</a>
+		</div>
+		<div>
+			<a class="nav-item" href="/history" use:link class:active={selected=="/history"} >
+				<Fa icon={faTimeline} size="2x"/>
+			</a>
+		</div>
+		<div>
+			<a class="nav-item" href="/configuration" use:link class:active={selected.includes("/configuration")} >
+				<Fa icon={faGear} size="2x"/>
+			</a>
 		</div>
 </div>

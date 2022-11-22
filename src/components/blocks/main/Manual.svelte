@@ -199,7 +199,7 @@ $: setDivertMode($uistates_store.divertmode)
 
 </script>
 
-<Box title="Charge Session">
+<Box title="Charge">
 	<div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div>
 	{#if $config_store.rfid_enabled}
 	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint}/>

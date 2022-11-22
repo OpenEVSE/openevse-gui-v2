@@ -7,7 +7,7 @@
 	<Status />
 	<div class="columns is-centered is-vcentered">
 		<div class="column is-half">
-			<Box title="Logs">
+			<Box title="History">
 			</Box>
 		</div>
 	</div>
