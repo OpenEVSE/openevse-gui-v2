@@ -34,6 +34,10 @@ function createClaimStore() {
         return P
     }
 
+    async function removeClaimProp(clientid,prop) {
+        return true
+        }
+
     return {
         subscribe,
 		get: (s) => get(s), // little hack to access get() method inside the object itself
