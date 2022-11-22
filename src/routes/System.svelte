@@ -6,7 +6,7 @@
 </script>
 
 
-<div class="container px-3 mb-3">
+<div class="container py-3 px-3 mb-3">
 	<Status />
 	<!-- <Breadcrumb /> -->
 	<div class="columns">

@@ -25,15 +25,15 @@
 <svelte:head>
 	<style src="./mystyles.scss"></style>
 </svelte:head>
-<svelte:body class="has-background-dark" />
+
 <main>		
 	<!-- <Header /> -->
 	{#if $uistates_store.data_loaded}
-	<DataManager />
 	<div class="content">
 		<Router {routes} />
 	</div>
 	<MobileNav charging={$uistates_store.charging} selected={$location} />
+	<DataManager />
 	{:else}
 	<FetchData />
 	{/if}

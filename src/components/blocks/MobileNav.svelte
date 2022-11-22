@@ -1,5 +1,5 @@
 <script>
-	import {Fa} from 'svelte-fa/src/index.js';
+	import Fa from 'svelte-fa/src/index.js';
 	import {faChartSimple, faTimeline, faCalendarDays, faGear, faBolt} from '@fortawesome/free-solid-svg-icons/index.js'
 	import {push, link} from 'svelte-spa-router'
 	

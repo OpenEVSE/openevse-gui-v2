@@ -2,7 +2,7 @@
 // brand colors
 
 $beige: #fbf9ed;
-$blue: #38a4b6;
+$blue: hsl(189, 53%, 47%);
 $turquoise: #1ecaad;
 $green: #3fd290;
 $green-lighter: #7af79d;
@@ -32,7 +32,6 @@ $warning: $yellow;
 
 
 // Update some of Bulma's component variables
-$body-background-color: $beige;
 $body-overflow-y: auto;
 $pageloader-opacity: 1;
 $breadcrumb-item-active-color: $info;
@@ -59,10 +58,11 @@ body {
 }
 
 html {
-	background-color: #38a4b6;
+	background: linear-gradient(hsl(195, 78%, 30%), hsl(189, 53%, 47%));
 }
 
 .content {
 	overflow-y:auto;
 	padding-bottom: 30px;
 }
+
