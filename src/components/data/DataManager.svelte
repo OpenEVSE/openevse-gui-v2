@@ -12,7 +12,10 @@
 	import { serialQueue } from "./../../lib/queue.js";
 	import {onMount} from "svelte"
 
-	onMount(()=>getMode($claims_target_store.properties.state,$claims_target_store.claims.state))
+	onMount(()=> {
+		console.log("Datamanager mounted")
+		getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
+	})
 
 	export function refreshDateTime(t,tz) { // params: time (isostring) , timezone
 		$uistates_store.time_isostring = t

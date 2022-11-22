@@ -97,5 +97,5 @@
 	</div>
 	<!-- <div class="tag mx-1 mb-1 has-text-weight-semibold is-capitalized is-narrow  {color}">{message}</div> -->
 
-	<div class="tag no-pointer {bp != "mobilemini"?"mt-1 is-medium":"mt-0 is-medium"} mb-1 ml-auto mr-2 is-capitalized  has-text-weight-smibold is-dark has-tooltip-arrow has-tooltip-bottom" data-tooltip="OpenEVSE local time">{time}</div>
+	<div class="no-pointer {bp != "mobilemini"?"mt-1 is-medium":"mt-0 is-medium"} mb-1 ml-auto mr-2 is-capitalized  has-text-weight-semibold has-text-dark is-dark has-tooltip-arrow has-tooltip-bottom" data-tooltip="OpenEVSE local time">{time}</div>
 </div>

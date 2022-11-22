@@ -48,11 +48,11 @@
 <main>		
 	<!-- <Header /> -->
 	{#if $uistates_store.data_loaded}
+	<DataManager />
 	<div class="content">
 		<Router {routes} />
 	</div>
 	<MobileNav selected={$location}/>
-	<DataManager />
 	{:else}
 	<FetchData />
 	{/if}

@@ -24,6 +24,7 @@
 	})
 
 	function connect2socket(s) {
+		console.log("Starting websocket instance")
 		var host
 		if (import.meta.env.VITE_REMOTEHOST == "true")
 			host = import.meta.env.VITE_OPENEVSEHOST

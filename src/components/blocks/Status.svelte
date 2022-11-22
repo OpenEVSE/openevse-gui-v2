@@ -1,17 +1,14 @@
 <script>
 	import { claims_target_store } from "./../../lib/stores/claims_target.js";
-	import {EvseClients} from "./../../lib/vars.js"
 	import TaskDisplay from "../ui/TaskDisplay.svelte";
 	import {status_store} from "../../lib/stores/status.js"
 	import {plan_store} from "../../lib/stores/plan.js"
-	import {config_store} from "../../lib/stores/config.js"
 	import {uistates_store} from "../../lib/stores/uistates.js"
 	import StatusTile from "../ui/StatusTile.svelte"
 	import StatusItems from "../ui/StatusItems.svelte"
 	import ExpandArrow from "../ui/ExpandArrow.svelte"
-	import {formatDate, sec2time} from "../../lib/utils.js"
+	import {sec2time} from "../../lib/utils.js"
 	
-	let time
 	let elapsed
 
 	$: { 
@@ -21,7 +18,7 @@
 	
 </script>
 
-<style>
+<style type="text/scss">
 	.statusbox {
 	border-radius: 6px;
 	color: black;
@@ -29,29 +26,34 @@
 	display: block;
 	margin-bottom: 3rem;
 	position: relative;
-	transition:all 3s ease-in-out;;
+	// transition:all 3s ease-in-out;
 	}
 	
 	.statusbox.disabled {
-		box-shadow: 0 0.5em 1em -0.125em rgba(255, 56, 96, 0.524), 0 0px 0 1px rgb(255, 255, 255);
+		box-shadow: 0 0.5em 1em -0.125em hsl(348, 100%, 61%), 0 0px 0 1px rgb(255, 255, 255);
 		border: dashed 0.2em;
 		border-color: hsl(348, 100%, 61%);
-		transition: opacity 0.5s ease-in-out;
 	}
 	.statusbox.active {
-		box-shadow: 0 0.5em 1em -0.125em rgba(0, 209, 178, 0.663), 0 0px 0 1px rgb(255, 255, 255);
+		box-shadow: 0 0.5em 1em -0.125em hsl(153, 62%,54%), 0 0px 0 1px rgb(255, 255, 255);
 		border: dashed 0.2em;
 		border-color:hsl(153, 62%, 54%);
 		transition: opacity 0.5s ease-in-out;
 	}
 	.statusbox.charging {
-		box-shadow: 0 0.5em 1em -0.125em hsl(57, 93%, 48%), 0 0px 0 1px rgb(255, 255, 255);
+		 box-shadow: 0 0.5em 1em -0.125em hsl(57, 93%, 30%), 0 0px 0 1px rgb(255, 255, 255);
 		border: dashed 0.2em;
 		border-color:hsl(57, 93%, 48%);
-		transition: opacity 0.5s ease-in-out;
+		animation: charge 3s infinite ;
 	}
+	@keyframes charge {
+            50% {
+               box-shadow: 0 0.5em 1em -0.125em hsl(57, 93%, 48%), 0 0px 0 1px rgb(255, 255, 255);
+            }
+		}
 
 </style>
+
 {#if $status_store.evse_connected == 1}
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-3 mt-0 px-3">
 	<div class="mb-2 mx-0">
