@@ -11,17 +11,13 @@
 	}
 </style>
 
-<div class="container py-3 px-3">
-	<Status />
-	<!-- <Breadcrumb /> -->
-	<div class="columns is-centered is-vcentered">
-		<div class="column is-half">
-			<Box title = "Configuration">
-				<div class="is-flex is-flex-direction-column is-align-items-center">
-					<a href="/configuration/system" use:link><div class="my-1 is-inline-block button is-info is-outlined">System</div></a>
-					<a href="/configuration/services" use:link><div class="my-1 is-inline-block button is-info is-outlined">Services</div></a>
-					</div>
-			</Box>
-		</div>
+<div class="columns is-centered is-vcentered">
+	<div class="column is-half">
+		<Box title = "Configuration">
+			<div class="is-flex is-flex-direction-column is-align-items-center">
+				<a href="/configuration/system" use:link><div class="my-1 is-inline-block button is-info is-outlined">System</div></a>
+				<a href="/configuration/services" use:link><div class="my-1 is-inline-block button is-info is-outlined">Services</div></a>
+				</div>
+		</Box>
 	</div>
 </div>

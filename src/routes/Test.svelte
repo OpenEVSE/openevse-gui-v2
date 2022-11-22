@@ -3,8 +3,9 @@
 	import Manual from "../components/blocks/main/Manual.svelte"
 	import Timers from "../components/blocks/main/Timers.svelte"
 </script>
-<div class="container py-3 px-3">
-	<Status />
+<style>
+</style>
+
 	<div class="columns">
 		<div class="column">
 			<Manual />
@@ -13,4 +14,3 @@
 			<Timers />
 		</div>
 	</div>
-</div>

@@ -1,4 +1,5 @@
 <script>
+	import Status from "./components/blocks/Status.svelte";
 	import {location} from 'svelte-spa-router'
 		// @ts-ignore
 	import MobileNav from "./components/blocks/MobileNav.svelte"
@@ -16,21 +17,33 @@
 		$uistates_store.window_width = window.innerWidth
 		$uistates_store.breakpoint = getBreakpoint()
 	}
-	
-	document.body.classList.add('hideScroll')
 
 
 </script>
+<style>
+	.container {
+		height: 100%;
+	}
+	main {
+		height: 100%;
+	}
+
+</style>
 <svelte:window on:load={getWindowSize} on:resize={getWindowSize} />
 <svelte:head>
-	<style src="./mystyles.scss"></style>
+	<!-- <style src="./mystyles.scss"></style> -->
 </svelte:head>
 
 <main>		
-	<!-- <Header /> -->
 	{#if $uistates_store.data_loaded}
 	<div class="content">
-		<Router {routes} />
+		<div class="container px-3 py-3">
+			<Status />
+			<div>
+				<Router {routes} />
+			</div>
+				
+		</div>
 	</div>
 	<MobileNav charging={$uistates_store.charging} selected={$location} />
 	<DataManager />

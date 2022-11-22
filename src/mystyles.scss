@@ -51,13 +51,11 @@ $breadcrumb-item-color: $text;
 
 body::-webkit-scrollbar { display: none; }
 
+
 body {
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;     /* Firefox */
 	overflow: auto;
-}
-
-body {
 	background: linear-gradient(hsl(195, 78%, 30%), hsl(189, 53%, 47%));
 	background-repeat: no-repeat;
 	height: 100%;
@@ -66,4 +64,10 @@ body {
 .content {
 	overflow-y:auto;
 	padding-bottom: 30px;
+	height: 100%;
+}
+
+
+.section {
+	height: 100%;
 }

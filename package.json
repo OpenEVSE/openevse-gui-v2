@@ -7,8 +7,6 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
-    "css-build": "node-sass --omit-source-map-url src/mystyles.scss src/mystyles.css",
-    "css-watch": "npm run css-build -- --watch",
     "start": "npm run css-watch"
   },
   "devDependencies": {

@@ -6,16 +6,12 @@
 </script>
 
 
-<div class="container py-3 px-3">
-	<Status />
-	<!-- <Breadcrumb /> -->
-	<div class="columns">
-		<div class="column">
-			<Network />
-			<Hardware />
-		</div>
-		<div class="column">
-			<Time />
-		</div>
+<div class="columns">
+	<div class="column">
+		<Network />
+		<Hardware />
+	</div>
+	<div class="column">
+		<Time />
 	</div>
 </div>
