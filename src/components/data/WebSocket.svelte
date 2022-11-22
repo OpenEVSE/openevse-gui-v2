@@ -33,11 +33,11 @@
 		if (import.meta.env.DEV) { 
 			host = import.meta.env.VITE_OPENEVSEHOST
 		}
-		if (host.includes("github.io")) {
-			s = null
-			// download states from http ( trick for demo in github page )
-			status_store.download()
-		}
+		// if (host.includes("github.io")) {
+		// 	s = null
+		// 	// download states from http ( trick for demo in github page )
+		// 	status_store.download()
+		// }
 
 		else if (!s) {
 			s = new WebSocket("ws://" + host + "/ws")
