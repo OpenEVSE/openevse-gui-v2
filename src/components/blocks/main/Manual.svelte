@@ -37,7 +37,9 @@
 			//remove maxCurrent
 			delete $override_store.max_current
 			let res
-			// if no other properties, release claim
+			// if no other properties, release override
+			console.log("setMAxCurrent: manual_override= " + $status_store.manual_override )
+			console.log("override_store.state: " + $override_store.state + " override_store.energy_limit: " + $override_store.energy_limit + " override_store.timlelimlit: " + $override_store.time)
 			if ( 
 				$override_store.state == undefined && 
 				$override_store.energy_limit == undefined && 

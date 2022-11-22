@@ -42,19 +42,17 @@ function createOverrideStore() {
 
     async function removeProp(prop) {
         let override = get(P)
+        let res
         if (override[prop]) {
             // override has prop
-            delete override[prop]
+            delete override[prop]      
             if (Object.keys(override).length  == 1 && override.auto_release != undefined) {
                 // there's only one key check if it's auto_release 
-                console.log("release manual override")                      
-            }
-            let res
-            if (override) {
-                res = await override_store.upload(override)
-                return res
-            } else {
+                console.log("release manual override")             
                 res = await override_store.clear()
+                return res            
+            } else { 
+                res = await override_store.upload(override)
                 return res
             }
         }                          
