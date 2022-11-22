@@ -34,13 +34,9 @@
 		if (import.meta.env.DEV) { 
 			host = import.meta.env.VITE_OPENEVSEHOST
 		}
-		// if (host.includes("github.io")) {
-		// 	s = null
-		// 	// download states from http ( trick for demo in github page )
-		// 	status_store.download()
-		// }
 
-		else if (!s) {
+		if (!s) {
+			console.log("opening socket")
 			s = new WebSocket("ws://" + host + "/ws")
 			s.addEventListener("open", function (event) {
 				console.log("connected to websocket")

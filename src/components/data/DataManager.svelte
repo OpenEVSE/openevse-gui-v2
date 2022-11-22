@@ -13,7 +13,6 @@
 	import {onMount} from "svelte"
 
 	onMount(()=> {
-		console.log("Datamanager mounted")
 		getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
 	})
 

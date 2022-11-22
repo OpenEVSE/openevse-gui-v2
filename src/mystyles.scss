@@ -48,3 +48,20 @@ $breadcrumb-item-color: $text;
 @import "../node_modules/bulma-switch/src/sass/index";
 @import "../node_modules/bulma-pageloader/src/sass/index";
 @import "../node_modules/@creativebulma/bulma-tooltip/src/sass/index";
+
+body::-webkit-scrollbar { display: none; }
+
+body {
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;     /* Firefox */
+	overflow: auto;
+}
+
+html {
+	background-color: #38a4b6;
+}
+
+.content {
+	overflow-y:auto;
+	padding-bottom: 30px;
+}

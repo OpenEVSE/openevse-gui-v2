@@ -1,6 +1,7 @@
 <script>
-	// @ts-ignore
+
 	import {location} from 'svelte-spa-router'
+		// @ts-ignore
 	import MobileNav from "./components/blocks/MobileNav.svelte"
 	import {onMount, onDestroy} from "svelte"
 	import DataManager from "./components/data/DataManager.svelte"
@@ -23,26 +24,6 @@
 <svelte:window on:load={getWindowSize} on:resize={getWindowSize} />
 <svelte:head>
 	<style src="./mystyles.scss"></style>
-	<style>
-		/*Hide scrollbars*/
-		body::-webkit-scrollbar { display: none; }
-
-		body {
-			-ms-overflow-style: none;  /* IE and Edge */
-			scrollbar-width: none;     /* Firefox */
-			overflow: auto;
-		}
-
-		html {
-			background-color: #38a4b6;
-		}
-
-		.content {
-			overflow-y:auto;
-			padding-bottom: 30px;
-		}
-
-	</style>
 </svelte:head>
 <svelte:body class="has-background-dark" />
 <main>		
