@@ -8,10 +8,17 @@
 	export let selected
 	let submenu_visible = false
 
+	function hideSubMenu() {
+		submenu_visible = false
+	}
+	
+	function showSubMenu() {
+		submenu_visible = true
+	}
+
 	function toggleSubMenu() {
 		submenu_visible = !submenu_visible
 	}
-
 </script>
 
 <style>
@@ -31,54 +38,48 @@
 	}
 	.nav-item.active {
 		color: white;
-		scale: 1.2;
+		pointer-events: none;
+  		cursor: default;
+  		text-decoration: none;
 	}
 	.nav-item.charging {
 		color: hsl(57, 93%, 48%);;
-		scale: 1.2;
 	}
 
 	.nav-conf {
-		color: white;
+		color: hsl(189, 53%, 47%);
 		border: 0;
+		background-color: hsl(195, 78%, 30%);
 	}
 	.nav-conf:hover {
 		color: white;
 		scale: 1.2;
+	}
+	.nav-conf.active {
+		color: white;
 	}
 
 	
 
 </style>
 
-<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2">
-		
-
-		<div>		
+<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2">	
 			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"} >
 				<Fa icon={faChartSimple} size="2x" />
 			</a>
-
-		</div>
-		<div>
 			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"} >
 				<Fa icon={faCalendarDays} size="2x"/>
 			</a>
-		</div>
-		<div>
 			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}" >
 				<Fa icon={faBolt} size="2.5x" />
 			</a>
-		</div>
-		<div>
 			<a class="nav-item" href="/history" use:link class:active={selected=="/history"} >
 				<Fa icon={faTimeline} size="2x"/>
 			</a>
-		</div>
 		<div class="is-flex is-justify-content-end">
-			<button class="nav-conf has-background-dark" on:click|preventDefault={toggleSubMenu} class:active={selected.includes("/configuration")} >
-				<Fa icon={faGear} size="2x"/>
-			</button>
+				<a href="/configuration" class="nav-conf" class:active={selected.includes("/configuration")} on:click|preventDefault={toggleSubMenu}>
+					<Fa icon={faGear} size="2x" />
+				</a>
 			<NavSubmenu bind:isvisible={submenu_visible} />
 		</div>
 </div>
