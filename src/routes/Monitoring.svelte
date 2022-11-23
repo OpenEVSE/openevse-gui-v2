@@ -5,12 +5,13 @@
 	import Sensors from "../components/blocks/monitoring/Sensors.svelte"
 	import Current from "../components/blocks/monitoring/Current.svelte"
 </script>
-<div class="columns is-centered">
-	<div class="column">
-		<Safety />			
+<div class="columns  mb-0 is-centered">
+	<div class="column my-0">
+		<Safety />
+		<Sensors />		
 	</div>
-	<div class="column">
-		<Sensors />
+	<div class="column my-0">
+
 		<Energy />
 		<Current />
 	</div>

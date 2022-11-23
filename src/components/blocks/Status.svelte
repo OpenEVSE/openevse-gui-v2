@@ -8,12 +8,12 @@
 	import StatusItems from "../ui/StatusItems.svelte"
 	import ExpandArrow from "../ui/ExpandArrow.svelte"
 	import {sec2time} from "../../lib/utils.js"
-	import { scale, fade} from 'svelte/transition';
-	import { expoOut, expoInOut } from 'svelte/easing';
-
+	import { scale } from 'svelte/transition';
+	import { expoInOut } from 'svelte/easing';
+	import { expand } from "../../lib/expand.js"
 
 	let elapsed
-
+	$uistates_store.status_expanded
 	$: { 
 		if ($status_store.elapsed != undefined)
 		    elapsed = sec2time($status_store.elapsed)
@@ -59,7 +59,7 @@
 
 {#if $status_store.evse_connected == 1}
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-3 mt-0 px-3" 
-in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}"  >
+in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 	<div>
 		<div class="mb-2 mx-0">
 			<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />
@@ -80,7 +80,7 @@ in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}"  >
 		</div>
 
 		{#if $uistates_store.status_expanded}
-		<div class="mx-0 is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center" >
+		<div class="mx-0 is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center">
 			{#if $uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini"}
 			<!-- // Mobile only -->
 			<StatusTile title="Power" value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
