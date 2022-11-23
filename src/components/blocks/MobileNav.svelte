@@ -1,10 +1,17 @@
 <script>
+	import NavSubmenu from "./../ui/NavSubmenu.svelte";
 	import Fa from 'svelte-fa/src/index.js';
 	import {faChartSimple, faTimeline, faCalendarDays, faGear, faBolt} from '@fortawesome/free-solid-svg-icons/index.js'
 	import {push, link} from 'svelte-spa-router'
 	
 	export let charging
 	export let selected
+	let submenu_visible = false
+
+	function toggleSubMenu() {
+		submenu_visible = !submenu_visible
+	}
+
 </script>
 
 <style>
@@ -30,6 +37,16 @@
 		color: hsl(57, 93%, 48%);;
 		scale: 1.2;
 	}
+
+	.nav-conf {
+		color: white;
+		border: 0;
+	}
+	.nav-conf:hover {
+		color: white;
+		scale: 1.2;
+	}
+
 	
 
 </style>
@@ -58,9 +75,10 @@
 				<Fa icon={faTimeline} size="2x"/>
 			</a>
 		</div>
-		<div>
-			<a class="nav-item" href="/configuration" use:link class:active={selected.includes("/configuration")} >
+		<div class="is-flex is-justify-content-end">
+			<button class="nav-conf has-background-dark" on:click|preventDefault={toggleSubMenu} class:active={selected.includes("/configuration")} >
 				<Fa icon={faGear} size="2x"/>
-			</a>
+			</button>
+			<NavSubmenu bind:isvisible={submenu_visible} />
 		</div>
 </div>
