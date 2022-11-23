@@ -8,7 +8,7 @@
 
 
 <div class="columns is-centered is-vcentered is-full-width">
-	<div class="column is-half">
+	<div class="column is-two-third">
 		<Manual />
 	</div>
 </div>

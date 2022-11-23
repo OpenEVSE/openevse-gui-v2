@@ -37,7 +37,7 @@
 <main>		
 	{#if $uistates_store.data_loaded}
 	<div class="content">
-		<div class="container px-3 py-3">
+		<div class="container px-3 pt-2 pb-6">
 			<Status />
 			<div>
 				<Router {routes} />

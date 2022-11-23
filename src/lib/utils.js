@@ -54,7 +54,7 @@ export function sec2time(sec) {
 export function formatDate(t,z) {
 	let tz = z.split("|")[0]
 	const d = DateTime.fromISO(t).setZone(tz)
-	return d.toLocaleString(DateTime.DATETIME_SHORT)
+	return d.toLocaleString(DateTime.DATETIME_MED	)
 }
 
 export function displayTime(t) {

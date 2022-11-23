@@ -1,7 +1,6 @@
 <script>
-	import { scale, fade,slide } from 'svelte/transition';
-	import { elasticIn, elasticOut, elasticInOut, backInOut, backIn, backOut, expoIn, expoOut, expoInOut } from 'svelte/easing';
-	import {onMount,onDestroy} from "svelte"
+	import { scale, fade} from 'svelte/transition';
+	import { expoOut, expoInOut } from 'svelte/easing';
 	export let title = "title"
 </script>
 

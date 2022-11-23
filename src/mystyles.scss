@@ -1,4 +1,9 @@
 
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+$family-serif: "Roboto", serif;
+$family-primary: $family-serif;
+
 // brand colors
 
 $beige: #fbf9ed;
@@ -22,8 +27,6 @@ $primary-invert: white;
 $dark-invert: white;
 $success: $green-lighter;
 $warning: $yellow;
-
-
 
 
 
@@ -62,12 +65,7 @@ body {
 }
 
 .content {
-	overflow-y:auto;
-	padding-bottom: 30px;
+	// overflow-y:auto;
 	height: 100%;
 }
 
-
-// .section {
-// 	height: 100%;
-// }

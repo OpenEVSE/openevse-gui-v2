@@ -1,5 +1,5 @@
 <script>
-	import { serialQueue } from "./../../../lib/queue.js";
+	import { serialQueue } from "../../../lib/queue.js";
 	import Box from "../../ui/Box.svelte"
 	import {config_store} from "../../../lib/stores/config.js"
 	import Button from "../../ui/Button.svelte"
@@ -43,7 +43,7 @@
 </script>
 
 
-<Box title="Hardware">
+<Box title="Firmware">
 	<table class="table is-fullwidth is-vcentered">
 		<thead>
 			<tr class="has-background-info"	>

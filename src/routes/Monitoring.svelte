@@ -5,7 +5,7 @@
 	import Sensors from "../components/blocks/monitoring/Sensors.svelte"
 	import Current from "../components/blocks/monitoring/Current.svelte"
 </script>
-<div class="columns is-centered is-vcentered">
+<div class="columns is-centered">
 	<div class="column">
 		<Safety />			
 	</div>

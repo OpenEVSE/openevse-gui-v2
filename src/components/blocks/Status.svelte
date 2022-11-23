@@ -8,23 +8,11 @@
 	import StatusItems from "../ui/StatusItems.svelte"
 	import ExpandArrow from "../ui/ExpandArrow.svelte"
 	import {sec2time} from "../../lib/utils.js"
-	import { elasticInOut } from "svelte/easing";
+	import { scale, fade} from 'svelte/transition';
+	import { expoOut, expoInOut } from 'svelte/easing';
 
 
 	let elapsed
-	
-	const statusTransition = (e) => {
-		console.log("transition"	)
-			return {
-				css: (t) => {
-					return `
-					transform: scale(${t});
-					`;
-				},
-				easing: elasticInOut,
-				duration: 1000
-			}
- 	}
 
 	$: { 
 		if ($status_store.elapsed != undefined)
@@ -70,7 +58,8 @@
 </style>
 
 {#if $status_store.evse_connected == 1}
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-3 mt-0 px-3">
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-3 mt-0 px-3" 
+in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}"  >
 	<div>
 		<div class="mb-2 mx-0">
 			<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />

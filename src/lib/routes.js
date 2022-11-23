@@ -7,6 +7,7 @@ import Services         from '../routes/Services.svelte'
 import Configuration    from '../routes/Configuration.svelte'
 import NotFound         from '../routes/NotFound.svelte'
 import History             from '../routes/History.svelte'
+import Hardware             from '../routes/Hardware.svelte'
 
 export const routes = {
     // Exact path
@@ -17,6 +18,7 @@ export const routes = {
     '/configuration': wrap({ component: Configuration}),
     '/configuration/system': wrap({ component: System}),
     '/configuration/services': wrap({ component: Services}),
+    '/configuration/hardware': wrap({ component: Hardware}),
     // Catch-all
     // This is optional, but if present it must be the last
     '*': NotFound,

@@ -16,7 +16,9 @@
 		<Box title = "Configuration">
 			<div class="is-flex is-flex-direction-column is-align-items-center">
 				<a href="/configuration/system" use:link><div class="my-1 is-inline-block button is-info is-outlined">System</div></a>
+				<a href="/configuration/hardware" use:link><div class="my-1 is-inline-block button is-info is-outlined">Hardware</div></a>
 				<a href="/configuration/services" use:link><div class="my-1 is-inline-block button is-info is-outlined">Services</div></a>
+				
 				</div>
 		</Box>
 	</div>
