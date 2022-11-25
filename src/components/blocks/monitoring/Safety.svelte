@@ -10,6 +10,12 @@
 
 <Box title="Safety">
 	<table class="table is-fullwidth">
+		<thead>
+			<tr class="has-background-info">
+				<th class="has-text-white">Error</th>
+				<th class="has-text-white has-text-centered">Count</th>
+			</tr>
+		</thead>
 		<tbody>
 			<tr>
 				<td>GFCI</td>

@@ -19,6 +19,9 @@
 	function toggleSubMenu() {
 		submenu_visible = !submenu_visible
 	}
+	function closeSubMenu() {
+		submenu_visible = false;
+	}
 </script>
 
 <style>
@@ -63,23 +66,23 @@
 
 </style>
 
-<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2">	
-			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"} >
+<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2" on:mouseleave={closeSubMenu}>	
+			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"} on:mouseenter={closeSubMenu}>
 				<Fa icon={faChartSimple} size="2x" />
 			</a>
-			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"} >
+			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"} on:mouseenter={closeSubMenu}>
 				<Fa icon={faCalendarDays} size="2x"/>
 			</a>
-			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}" >
+			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}" on:mouseenter={closeSubMenu} >
 				<Fa icon={faBolt} size="2.5x" />
 			</a>
-			<a class="nav-item" href="/history" use:link class:active={selected=="/history"} >
+			<a class="nav-item" href="/history" use:link class:active={selected=="/history"} on:mouseenter={closeSubMenu}>
 				<Fa icon={faTimeline} size="2x"/>
 			</a>
-		<div class="is-flex is-justify-content-end">
-				<a href="/configuration" class="nav-conf" class:active={selected.includes("/configuration")} on:click|preventDefault={toggleSubMenu}>
+		<div class="is-flex is-justify-content-center" on:mouseover={showSubMenu} on:focus={showSubMenu} >
+				<a href="/configuration" class="nav-conf" class:active={selected.includes("/configuration")} on:click|preventDefault={toggleSubMenu}  >
 					<Fa icon={faGear} size="2x" />
 				</a>
-			<NavSubmenu bind:isvisible={submenu_visible} />
+			<NavSubmenu bind:isvisible={submenu_visible} selected={selected} />
 		</div>
 </div>
