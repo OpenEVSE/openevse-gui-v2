@@ -1,4 +1,5 @@
 <script>
+	import { uistates_store } from "./../../lib/stores/uistates.js";
 	import NavSubmenu from "./../ui/NavSubmenu.svelte";
 	import Fa from 'svelte-fa/src/index.js';
 	import {faChartSimple, faTimeline, faCalendarDays, faGear, faBolt} from '@fortawesome/free-solid-svg-icons/index.js'
@@ -79,7 +80,7 @@
 			<a class="nav-item" href="/history" use:link class:active={selected=="/history"} on:mouseenter={closeSubMenu}>
 				<Fa icon={faTimeline} size="2x"/>
 			</a>
-		<div class="is-flex is-justify-content-center" on:mouseover={showSubMenu} on:focus={showSubMenu} >
+		<div class="is-flex {$uistates_store.breakpoint == "mobilemini"?"is-justify-content-right":"is-justify-content-center"}" on:mouseover={showSubMenu} on:focus={showSubMenu} >
 				<a href="/configuration" class="nav-conf" class:active={selected.includes("/configuration")} on:click|preventDefault={toggleSubMenu}  >
 					<Fa icon={faGear} size="2x" />
 				</a>
