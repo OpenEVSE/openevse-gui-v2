@@ -58,7 +58,6 @@
 
 	export async function refreshOverrideStore(version) {
 		if ($uistates_store.override_version != version) {
-			console.log("override: old version: " + $uistates_store.override_version + " new version: " + version)
 			$uistates_store.override_version = version
 			const res = await serialQueue.add(override_store.download)
 			if (res)

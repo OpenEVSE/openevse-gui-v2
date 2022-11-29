@@ -38,8 +38,6 @@
 			delete $override_store.max_current
 			let res
 			// if no other properties, release override
-			console.log("setMAxCurrent: manual_override= " + $status_store.manual_override )
-			console.log("override_store.state: " + $override_store.state + " override_store.energy_limit: " + $override_store.energy_limit + " override_store.timlelimlit: " + $override_store.time)
 			if ( 
 				$override_store.state == undefined && 
 				$override_store.energy_limit == undefined && 
@@ -64,10 +62,6 @@
 	}
 
 	function getMaxCurrent() {
-		// if ($override_store.max_current!=undefined)
-		// 	return $override_store.max_current
-		// else if ($config_store.max_current_soft)
-		// 	return $config_store.max_current_soft
 		if ($claims_target_store.properties.max_current)
 			return ($claims_target_store.properties.max_current)
 		else if ($config_store.max_current_soft)
@@ -78,7 +72,7 @@
 
 	async function setMode(m) {
 		$uistates_store.mode = m
-		// disabling buttons to prevent crossing orders
+		// disabling buttons to prevent overlapping orders
 		buttons_manual.disabled = true
 		let data = {
 				auto_release: $uisettings_store.auto_release
@@ -235,7 +229,7 @@ $: setDivertMode($uistates_store.divertmode)
 		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
 	</div>
 	<div class="is-flex is-justify-content-left mt-2">
-		<Switch name="swAutoRelease" label={$uisettings_store.auto_release?"Clear on disconnect":"Keep on disconnect"} bind:checked={$uisettings_store.auto_release} 
-		tooltip={$uisettings_store.auto_release?"Clear charge session settings when vehicle is unplugged":"Keep charge session settings when vehicle is unplugged"}  />
+		<Switch name="swAutoRelease" label="Clear on disconnect" bind:checked={$uisettings_store.auto_release} 
+		tooltip="Clear charge session settings when vehicle is unplugged"  />
 	</div>
 </Box>

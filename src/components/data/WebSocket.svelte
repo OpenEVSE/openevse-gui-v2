@@ -57,7 +57,7 @@
 				
 			})
 			s.addEventListener("close", function (e) {
-				console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+				console.log('Socket is closed. Reconnect attempt in 1 second.', e.reason);
 				lastmsg = DateTime.now().toUnixInteger()
 				cancelKeepAlive()
 				setTimeout(()=>connect2socket(), 1000)

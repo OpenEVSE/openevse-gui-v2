@@ -2,6 +2,9 @@
 	export let title = "Error";
 	export let body;
 	export let visible = false;
+	export let button = false
+	export let label = ""
+	export let action = () => {}
 
 	function close() {
 		visible = false;
@@ -20,6 +23,11 @@
 			<div class="message-body">
 				{body}
 			</div>
+			{#if button}
+			<div class="is-flex is-justify-content-center">
+				<button class="button is-danger is-outlined my-3" on:click={action}>{label}</button>
+			</div>
+			{/if}
 		</article>
 	</div>
 </div>

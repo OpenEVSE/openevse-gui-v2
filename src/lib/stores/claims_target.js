@@ -1,6 +1,6 @@
-import  "./../../lib/vars.js"
-import { get, writable } from 'svelte/store'
-import {httpAPI} from '../utils.js'
+import                      "./../../lib/vars.js"
+import { get, writable }    from 'svelte/store'
+import {httpAPI}            from '../utils.js'
 
 function createClaimsTargetStore() {
     const P  = writable()
@@ -8,14 +8,14 @@ function createClaimsTargetStore() {
 
 	// get claims/target
 	async function download() {
-        let target = await httpAPI("GET", "/claims/target");
-        if (target.msg == "error") {
-			target = {}
-			P.update(() => target)
+        let res = await httpAPI("GET", "/claims/target");
+        if (res.msg == "error" || res == "error") {
+			res = {}
+			P.update(() => res)
 			return false
 		}
 		else {
-			P.update(() => target)
+			P.update(() => res)
             return true
 		}
     }

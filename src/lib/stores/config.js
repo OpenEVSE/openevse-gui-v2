@@ -7,22 +7,22 @@ function createConfigStore() {
 
 	async function download() {
         let res = await httpAPI("GET", "/config")
-        if (res && res.msg != "error") {
+        if (res && (res.msg != "error" && res != "error")) {
             P.update(() => res)
             return true
         }
         else return false
 	}
-
-    // async function setConfig(attr,val) {
-    //     let data = '{ "' + attr + '": "' + val + '"}'
-    //     let res = await httpAPI("POST", "/config", data)
-    //     return res
-    // }
+   
+    async function upload(data) {
+        let res = await httpAPI("POST", "/config", JSON.stringify(data))
+        if (res.msg == "done" || res.msg == "no change")
+            return true
+        else return false
+    }
 
     async function saveParam(name,val) {
-		let data = {
-			}
+		let data = {}
 			data[name] = val
 			if (await config_store.upload(data)) 
 				{
@@ -32,14 +32,6 @@ function createConfigStore() {
 				return false
 			}
 	}
-
-    async function upload(data) {
-        let res = await httpAPI("POST", "/config", JSON.stringify(data))
-        if (res.msg == "done" || res.msg == "no change")
-            return true
-        else return false
-    }
-    
 
     return {
         subscribe,
@@ -52,20 +44,3 @@ function createConfigStore() {
 }
 
 export const config_store = createConfigStore()
-
-// export const submitConfigData = async (data,obj=null) => {
-//     if (obj)
-//     {
-//         obj.state = "loading"
-
-//         if (await config_store.upload(data)) 
-//             {
-//                 obj.state = "ok"
-//                 return true
-//             }
-//         else {
-//             obj.state = "error"
-//             return false
-//         }
-//     }
-// }

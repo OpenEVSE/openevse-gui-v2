@@ -1,10 +1,10 @@
 <script>
-	import { serialQueue } from "../../../lib/queue.js";
-	import Box from "../../ui/Box.svelte"
-	import {config_store} from "../../../lib/stores/config.js"
-	import Button from "../../ui/Button.svelte"
-	import FirmwareUpdateModal from "./FirmwareUpdateModal.svelte"
-	import {httpAPI} from "../../../lib/utils.js"
+	import { serialQueue } 		from "../../../lib/queue.js";
+	import Box 					from "../../ui/Box.svelte"
+	import {config_store} 		from "../../../lib/stores/config.js"
+	import Button 				from "../../ui/Button.svelte"
+	import FirmwareUpdateModal 	from "./FirmwareUpdateModal.svelte"
+	import {httpAPI} 			from "../../../lib/utils.js"
 
 	let restartOpenEvseState = "default"
 	let restartEspState = "default"

@@ -1,22 +1,21 @@
-import {EvseClients} from "../vars.js"
-import { get, writable } from 'svelte/store'
-import {httpAPI} from '../utils.js'
-import { serialQueue }			from "./../queue.js";
+import {EvseClients}        from "../vars.js"
+import { get, writable }    from 'svelte/store'
+import {httpAPI}            from '../utils.js'
+import { serialQueue }		from "./../queue.js";
 
 function createClaimStore() {
     const P  = writable()
     const { subscribe, set, update } = P
 
 	async function download() {
-        let claims = await httpAPI("GET", "/claims");
-        if (claims) {
-            P.update(() => claims)
+        let res = await httpAPI("GET", "/claims");
+        if (res && (res.msg != "error" && res != "error")) {
+            P.update(() => res)
             return true
         }
         else return false
     }
     
-	// set {claim for clientid EvseClient_OpenEVSE_Manual
     async function upload(data,clientid) {
         let res = await httpAPI("POST", "/claims/" + clientid , JSON.stringify(data))
         if (res.msg && res.msg == "done")
@@ -24,7 +23,6 @@ function createClaimStore() {
         else return false
     }
 
-	// remove clientid EvseClient_OpenEVSE_Manual claim 
     async function release(clientid=EvseClients["manual"]) {
         let res = await httpAPI("DELETE", "/claims/" +clientid)
         if (res) {

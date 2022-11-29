@@ -57,7 +57,7 @@
 
 </style>
 
-{#if $status_store.evse_connected == 1}
+{#if $status_store.evse_connected == 1 && $uistates_store.data_loaded}
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-3 mt-0 px-3" 
 in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 	<div>
@@ -93,7 +93,6 @@ in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 			<StatusTile title="Available" value={$status_store.charge_rate} unit="A" />
 			{:else if $status_store.shaper == 1}
 			<StatusTile title="Available" value={$status_store.shaper_cur} unit="A" />
-
 			{/if}
 			<!-- <StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
 			<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	 -->
@@ -127,5 +126,6 @@ in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 <div class="statusbox disabled has-background-light mb-5 mt-0 px-3">
 	<h4 class="title">EVSE Error</h4>
 	<span>OpenEVSE not responding or not connected</span>
+	<button class="button is-primary is-outlined" on:click={()=>location.reload()} />
 </div>
 {/if}

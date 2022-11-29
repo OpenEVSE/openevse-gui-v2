@@ -4,8 +4,10 @@ import {faHand, faRobot} from '@fortawesome/free-solid-svg-icons/index.js'
 
 export async function httpAPI(method,url,body=null,type = "json") {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
+	const controller = new AbortController();
 	let data = {
 		method: method,
+		signal: controller.signal,
 		headers: {
 			'Content-Type': content_type
 		}
@@ -14,11 +16,13 @@ export async function httpAPI(method,url,body=null,type = "json") {
 		data.body = body
 	}
 	
+	setTimeout(() => controller.abort(), 5000);
 	const res = await fetch(url, data).then((response) => {
 		if (response.status >= 400 && response.status < 600) {
-		  throw new Error("Bad response from server: " + response.status);
+		//   throw new Error("Bad response from server: " + response.status);
+		  return "error"
 		}
-		return response;
+		return response
 	}).then((response) => {
 	   if(type == "json") {
 		const json_response = response.json()
@@ -27,9 +31,7 @@ export async function httpAPI(method,url,body=null,type = "json") {
 		else return response.text()
 	}).catch((error) => {
 		console.log(error)
-		if(type == "json")
-		return {msg: "error"}
-		else return "error"
+		return "error"
 	});
 
 	return res

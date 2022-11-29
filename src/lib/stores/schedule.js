@@ -8,7 +8,7 @@ function createScheduleStore() {
 
 	async function download() {
             let res = await httpAPI("GET", "/schedule")
-            if (res && res.msg != "error") {
+            if (res && (res.msg != "error" && res != "error")) {
                 for ( let t = 0; t < res.length ; t++) {
                     res[t].time = res[t].time.slice(0,5) // remove useless seconds
                 }

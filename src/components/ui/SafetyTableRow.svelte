@@ -1,7 +1,7 @@
 <script>
-import Fa from 'svelte-fa/src/fa.svelte'
-import { faCircleCheck, faCircleXmark} from '@fortawesome/free-solid-svg-icons/index.js'
-import Switch from "./Switch.svelte"
+import Fa 								from 'svelte-fa/src/fa.svelte'
+import { faCircleCheck, faCircleXmark} 	from '@fortawesome/free-solid-svg-icons/index.js'
+import Switch 							from "./Switch.svelte"
 
 export let title
 export let name
