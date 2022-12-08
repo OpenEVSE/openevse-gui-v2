@@ -123,6 +123,11 @@ export default defineConfig(({ command, mode }) => {
               target: 'http://' + env.VITE_OPENEVSEHOST + '/r',
               changeOrigin: true,
               rewrite: (path) => path.replace(/^\/r/, '')
+            },
+            '/logs': {
+              target: 'http://' + env.VITE_OPENEVSEHOST + '/logs',
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/logs/, '')
             }
         }
     }

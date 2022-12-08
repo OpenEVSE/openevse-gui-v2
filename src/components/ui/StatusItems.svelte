@@ -1,6 +1,5 @@
 <script>
-	import { faCar, faCircleCheck, faCirclePause, faHourglassHalf, faThumbsUp, faBan, faChargingStation, faBolt,
-			faTriangleExclamation, faMoon,faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
+	import { faCar, faHourglassHalf, faThumbsUp, faBan, faBolt, faTriangleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import StatusIcon from "./StatusIcon.svelte"
 	export let state
 	export let time

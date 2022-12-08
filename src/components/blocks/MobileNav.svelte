@@ -1,6 +1,5 @@
 <script>
 	import { uistates_store } from "./../../lib/stores/uistates.js";
-	import NavSubmenu from "./../ui/NavSubmenu.svelte";
 	import Fa from 'svelte-fa/src/index.js';
 	import {faChartSimple, faTimeline, faCalendarDays, faGear, faBolt} from '@fortawesome/free-solid-svg-icons/index.js'
 	import {push, link} from 'svelte-spa-router'
@@ -84,6 +83,5 @@
 				<a href="/configuration" class="nav-conf" use:link class:active={selected.includes("/configuration")}>
 					<Fa icon={faGear} size="2x" />
 				</a>
-			<!-- <NavSubmenu bind:isvisible={submenu_visible} selected={selected} /> -->
 		</div>
 </div>

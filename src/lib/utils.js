@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import {EvseClients} from "./vars.js"
-import {faHand, faRobot} from '@fortawesome/free-solid-svg-icons/index.js'
+import {faHand, faRobot, faCar, faHourglassHalf, faThumbsUp, faBan, faBolt, faTriangleExclamation, faCircleXmark, faCircleInfo, faBell} from '@fortawesome/free-solid-svg-icons/index.js'
 
 export async function httpAPI(method,url,body=null,type = "json") {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
@@ -140,4 +140,62 @@ export function displayIcon(mode) {
 		default:
 			return faRobot
 	}
+}
+
+export function state2icon(state) {
+	let icon = { 
+		type: undefined,
+		color: undefined
+	}
+	let iconcolor
+	switch (state) {
+		case 1: 
+			icon.type = faCar
+			icon.color = "has-text-danger"
+			break
+		case 2:
+			icon.type = faCar
+			icon.color = "has-text-primary"
+			break
+		case 3:
+			icon.type = faBolt
+			icon.color = "has-text-warning"
+			break
+		case 4: // Error
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+			icon.type = faTriangleExclamation
+			icon.color = "has-text-danger"
+			break;
+		case 254: // sleeping
+			icon.color = "has-text-danger"
+			icon.type = faBan
+			break;
+		case 255: 
+			icon.color = "has-text-danger"
+			icon.type = faCircleXmark
+			break;
+	}
+	return icon
+}
+
+export function type2icon(type) {
+	let icon
+	switch (type) {
+		case "information":
+			icon = faCircleInfo
+			break
+		case "notification":
+			icon = faBell
+			break
+		case "warning":
+			icon = faTriangleExclamation
+			break
+	}
+	return icon
 }
