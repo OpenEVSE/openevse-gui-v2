@@ -20,7 +20,6 @@
 		let res
 		status = "Loading step 1"
 		res = await status_store.download()
-		console.log(res)
 		if (!res) { 
 			status = "error"
 			return false
@@ -28,7 +27,6 @@
 		progress = 20
 		status = "Loading step 2"
 		res = await schedule_store.download()
-		console.log(res)
 		if (!res) {
 			 status = "error"
 			return false
@@ -37,7 +35,6 @@
 		$uistates_store.schedule_version = $status_store.schedule_version
 		status = "Loading step 3"
 		res = await plan_store.download()
-		console.log(res)
 		if (!res) {
 			 status = "error"
 			 return false
@@ -46,7 +43,6 @@
 		$uistates_store.schedule_plan_version = $status_store.schedule_plan_version
 		status = "Loading step 4"
 		res = await config_store.download()
-		console.log(res)
 		if (!res) { 
 			status = "error"
 			return false
@@ -58,7 +54,6 @@
 		if($status_store.manual_override) {
 			status = "Loading step 6"
 			res = await override_store.download()
-			console.log(res)
 			if (!res) {
 				status = "error"
 				return false
@@ -70,7 +65,6 @@
 		// await claim_store.download()
 		status = "Loading step 7"
 		res = await claims_target_store.download()
-		console.log(res)
 		if (!res) {
 			 status = "error"
 			 return false
@@ -80,7 +74,6 @@
 			status = "Loading ok"
 			$uistates_store.claims_version = $status_store.claims_version
 			$uistates_store.data_loaded = true;
-			console.log("data loaded")
 		}
 		
 	}

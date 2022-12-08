@@ -16,7 +16,7 @@ export async function httpAPI(method,url,body=null,type = "json") {
 		data.body = body
 	}
 	
-	setTimeout(() => controller.abort(), 5000);
+	setTimeout(() => controller.abort(), 10000);
 	const res = await fetch(url, data).then((response) => {
 		if (response.status >= 400 && response.status < 600) {
 		//   throw new Error("Bad response from server: " + response.status);

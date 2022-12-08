@@ -51,8 +51,7 @@ function createOverrideStore() {
             // override has prop
             delete override[prop]      
             if (Object.keys(override).length  == 1 && override.auto_release != undefined) {
-                // there's only one key check if it's auto_release 
-                console.log("release manual override")             
+                // there's only one key check if it's auto_release           
                 res = await override_store.clear()
                 return res            
             } else { 

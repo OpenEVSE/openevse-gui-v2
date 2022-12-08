@@ -170,7 +170,6 @@
 			res = await serialQueue.add(() =>override_store.removeProp(prop))
 		}
 		else {
-			console.log("removeclaimsprop")
 			res = await serialQueue.add(() =>claims_store.removeClaimProp($claims_target_store.claims[prop],prop))
 		}
 		if (res) tag.state = "ok"

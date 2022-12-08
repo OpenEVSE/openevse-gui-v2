@@ -47,7 +47,6 @@ function createClaimStore() {
     async function removeClaimProp(clientid,prop) {
         // download latest claims
         let res = await claims_store.download()
-        console.log("res = " + res)
         if (res) {
             let claims = get(P)
             for (let i in claims) {
