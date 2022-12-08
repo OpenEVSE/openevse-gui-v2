@@ -152,14 +152,17 @@ export function state2icon(state) {
 		case 1: 
 			icon.type = faCar
 			icon.color = "has-text-danger"
+			icon.tooltip = "Active - Car not connected"
 			break
 		case 2:
 			icon.type = faCar
 			icon.color = "has-text-primary"
+			icon.tooltip = "Active - Car connected"
 			break
 		case 3:
 			icon.type = faBolt
 			icon.color = "has-text-warning"
+			icon.tooltip = "Charging"
 			break
 		case 4: // Error
 		case 5:
@@ -171,14 +174,17 @@ export function state2icon(state) {
 		case 11:
 			icon.type = faTriangleExclamation
 			icon.color = "has-text-danger"
+			icon.tooltip = "Error"
 			break;
 		case 254: // sleeping
 			icon.color = "has-text-danger"
 			icon.type = faBan
+			icon.tooltip = "Disabled - Sleeping"
 			break;
 		case 255: 
 			icon.color = "has-text-danger"
 			icon.type = faCircleXmark
+			icon.tooltip = "Disabled"
 			break;
 	}
 	return icon

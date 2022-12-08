@@ -52,8 +52,12 @@
 					{#each $history_store as item}
 					<tr>
 						<th>{formatDate(item.time,$config_store.time_zone)}</th>
-						<td class="has-tooltip" data-tooltip={item.type}><Fa size={"1x"} icon={type2icon(item.type)}/></td>
-						<td><Fa size={"1x"} class={state2icon(item.evseState).color} icon={state2icon(item.evseState).type}/></td>
+						<td class="has-tooltip" data-tooltip={item.type}>
+							<Fa size={"1x"} class={item.type=="warning"?"has-text-danger":"has-text-info"} icon={type2icon(item.type)}/>
+						</td>
+						<td class="has-tooltip" data-tooltip={state2icon(item.evseState).tooltip}>
+							<Fa size={"1x"} class={state2icon(item.evseState).color} icon={state2icon(item.evseState).type}/>
+						</td>
 						<td>{item.pilot}</td>
 						<td>{round(item.energy/1000,1)}</td>
 						<td>{item.temperature}</td>
