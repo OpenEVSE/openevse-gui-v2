@@ -68,22 +68,22 @@
 </style>
 
 <div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2" on:mouseleave={closeSubMenu}>	
-			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"} on:mouseenter={closeSubMenu}>
+			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"}>
 				<Fa icon={faChartSimple} size="2x" />
 			</a>
-			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"} on:mouseenter={closeSubMenu}>
+			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"}>
 				<Fa icon={faCalendarDays} size="2x"/>
 			</a>
-			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}" on:mouseenter={closeSubMenu} >
+			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}">
 				<Fa icon={faBolt} size="2.5x" />
 			</a>
-			<a class="nav-item" href="/history" use:link class:active={selected=="/history"} on:mouseenter={closeSubMenu}>
+			<a class="nav-item" href="/history" use:link class:active={selected=="/history"}>
 				<Fa icon={faTimeline} size="2x"/>
 			</a>
-		<div class="is-flex {$uistates_store.breakpoint == "mobilemini"?"is-justify-content-right":"is-justify-content-center"}" on:mouseover={showSubMenu} on:focus={showSubMenu} >
-				<a href="/configuration" class="nav-conf" class:active={selected.includes("/configuration")} on:click|preventDefault={toggleSubMenu}  >
+		<div class="is-flex {$uistates_store.breakpoint == "mobilemini"?"is-justify-content-right":"is-justify-content-center"}">
+				<a href="/configuration" class="nav-conf" use:link class:active={selected.includes("/configuration")}>
 					<Fa icon={faGear} size="2x" />
 				</a>
-			<NavSubmenu bind:isvisible={submenu_visible} selected={selected} />
+			<!-- <NavSubmenu bind:isvisible={submenu_visible} selected={selected} /> -->
 		</div>
 </div>

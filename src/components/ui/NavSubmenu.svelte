@@ -6,7 +6,6 @@
 		isvisible = false;
 	}
 
-	$: selected, console.log("selected: " + selected)
 </script>
 <style>
 	.nav-submenu {
@@ -27,7 +26,7 @@
 	
 </style>
 <div class="nav-submenu">
-	<div class="is-flex is-flex-direction-column-reverse" class:is-hidden={!isvisible} on:mouseout={close} on:blur={close}>
+	<div class="is-flex is-flex-direction-column-reverse" class:is-hidden={!isvisible}>
 		<a href="/configuration/services" on:click={close} use:link><div class="my-1 pr-5 is-inline-block button is-dark"  class:active={selected=="/configuration/services"}>Services</div></a>
 		<a href="/configuration/hardware" on:click={close} use:link><div class="mt-1 is-inline-block button is-dark" class:active={selected=="/configuration/hardware"}>Hardware</div></a>
 		<a href="/configuration/system" on:click={close} use:link><div class="mt-1 is-inline-block button is-dark" class:active={selected=="/configuration/system"}>System</div></a>		

@@ -25,9 +25,11 @@ export async function httpAPI(method,url,body=null,type = "json") {
 		return response
 	}).then((response) => {
 	   if(type == "json") {
+		// @ts-ignore
 		const json_response = response.json()
 		return json_response
 		}
+		// @ts-ignore
 		else return response.text()
 	}).catch((error) => {
 		console.log(error)
@@ -74,6 +76,7 @@ export function getTZ(s) {
 export function createTzObj(tz) {
 	if (tz) {
 		var tzobj = []
+		// @ts-ignore
 		Object.entries(tz).forEach((element,index,array) => {
 			tzobj[index] = {name: element[0], value: element[0] + "|" + element[1]}
 		})
