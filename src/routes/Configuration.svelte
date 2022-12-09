@@ -12,7 +12,7 @@
 </style>
 
 <div class="columns is-centered is-vcentered">
-	<div class="column is-half">
+	<div class="column is-two-thirds">
 		<Box title = "Configuration">
 			<div class="is-flex is-flex-direction-column is-align-items-center">
 				<a href="/configuration/system" use:link><div class="my-1 is-inline-block button is-info is-outlined">System</div></a>

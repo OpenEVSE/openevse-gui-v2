@@ -7,7 +7,7 @@
 </style>
 
 <div class="columns is-centered is-vcentered">
-	<div class="column is-two-third">
+	<div class="column is-two-thirds">
 		<Logs />
 	</div>
 </div>
