@@ -1,4 +1,5 @@
 <script>
+	import { uistates_store } from "./../../lib/stores/uistates.js";
 	import { DateTime } from "luxon";
 	import { status_store } from './../../lib/stores/status.js'
 	import { onMount, onDestroy } from 'svelte'
@@ -39,6 +40,7 @@
 			s = new WebSocket("ws://" + host + "/ws")
 			s.addEventListener("open", function (event) {
 				console.log("connected to websocket")
+				$uistates_store.ws_connected = true
 				keepAlive(s)
 			} )
 			s.addEventListener("message", function (e) {
@@ -51,6 +53,7 @@
 			s.addEventListener("error", function (e) {
 				console.error('Socket encountered error: ', e.message, 'Closing socket');
 				lastmsg = DateTime.now().toUnixInteger()
+				$uistates_store.ws_connected = false
 				cancelKeepAlive()
 				// TODO: Display Alertbox mesg
 				
@@ -59,6 +62,7 @@
 			s.addEventListener("close", function (e) {
 				console.log('Socket is closed. Reconnect attempt in 1 second.', e.reason);
 				lastmsg = DateTime.now().toUnixInteger()
+				$uistates_store.ws_connected = false
 				cancelKeepAlive()
 				setTimeout(()=>connect2socket(), 1000)
 				

@@ -29,7 +29,7 @@
 		init()
 
 	})
-	$: console.log($history_store)
+
 </script>
 
 <Box title="History">

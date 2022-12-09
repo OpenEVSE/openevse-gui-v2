@@ -25,6 +25,7 @@ const model = {
 		time_isostring: null,
 		// local states
 		data_loaded: false,
+		ws_connected: false,
 		status_expanded: false,
 		window_width: window.innerWidth,
 		breakpoint: undefined

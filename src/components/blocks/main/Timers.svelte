@@ -81,7 +81,7 @@
 			</tbody>
 		</table>
 	</div>
-	<Button name="New" butn_submit={addTimer} tooltip="Add a new timer"/>
+	<Button name="New" butn_submit={addTimer}/>
 </Box>
 {#if timers_modal_opened}
 <TimerModal bind:is_opened={timers_modal_opened} timer={timer}/>

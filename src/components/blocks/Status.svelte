@@ -57,7 +57,7 @@
 
 </style>
 
-{#if $status_store.evse_connected == 1 && $uistates_store.data_loaded}
+{#if $status_store.evse_connected == 1 && $uistates_store.data_loaded && $uistates_store.ws_connected}
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-3 mt-0 px-3" 
 in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 	<div>
@@ -123,9 +123,9 @@ in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 	</div>
 </div>
 {:else}
-<div class="statusbox disabled has-background-light mb-5 mt-0 px-3">
+<div class="statusbox disabled has-background-light mb-5 mt-0 px-3 has-text-centered">
 	<h4 class="title">EVSE Error</h4>
-	<span>OpenEVSE not responding or not connected</span>
-	<button class="button is-primary is-outlined" on:click={()=>location.reload()} />
+	<div>OpenEVSE not responding or not connected</div>
+	<button class="button is-info is-outlined my-3" on:click={()=>location.reload()}>Force Reload</button>
 </div>
 {/if}

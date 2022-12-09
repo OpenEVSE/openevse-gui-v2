@@ -14,7 +14,6 @@
 	let saveTimerState = "default"
 	let alert_visible = false
 	let select
-	let title
 	const default_timer = 	{
 	  id: null,
 	  state: "active",
@@ -169,13 +168,8 @@
 <Modal bind:is_opened>
 
 	<AlertBox body="You must select at least one day" bind:visible={alert_visible} />
-		{#if timer == null}
-			{title = "New Timer"}
-		{:else}
-			{title = "Timer " + $schedule_store[timer].id}
-		{/if}
 	
-	<Box title={title}>
+	<Box title={timer == null?"New Timer":"Timer" + $schedule_store[timer].id} >
 		<div class="mt-2 is-size-6">				
 			<label class="checkbox">
 				<input id="d_mon" type="checkbox" bind:checked={selected_days[0]} on:change={checkDays} >
