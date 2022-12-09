@@ -31,11 +31,11 @@
 	let button_divert
 	let button_shaper
 
-	async function setMaxCurrent(val) {
+	async function setChgCurrent(val) {
 		
 		if (val == $config_store.max_current_soft) {
-			//remove maxCurrent
-			delete $override_store.max_current
+			//remove claim
+			delete $override_store.charge_current
 			let res
 			// if no other properties, release override
 			if ( 
@@ -48,22 +48,22 @@
 				}
 			}
 			else res = await serialQueue.add(() => override_store.upload($override_store))
-			$uistates_store.max_current = val
+			$uistates_store.charge_current = val
 			return res
 		}
 		else {
 			// set override
-			$override_store.max_current = val
+			$override_store.charge_current = val
 			$override_store.auto_release = $uisettings_store.auto_release
 			let res = await serialQueue.add(() => override_store.upload($override_store))
-			$uistates_store.max_current = val
+			$uistates_store.charge_current = val
 			return res
 		}
 	}
 
-	function getMaxCurrent() {
-		if ($claims_target_store.properties.max_current)
-			return ($claims_target_store.properties.max_current)
+	function getChgCurrent() {
+		if ($claims_target_store.properties.charge_current)
+			return ($claims_target_store.properties.charge_current)
 		else if ($config_store.max_current_soft)
 			return $config_store.max_current_soft
 		else return 0
@@ -78,9 +78,9 @@
 				auto_release: $uisettings_store.auto_release
 			}
 
-		// keep max_current claim	
-		if ($claims_target_store.claims.max_current == EvseClients["manual"]) {
-				data.max_current = $claims_target_store.properties.max_current
+		// keep charge_current claim	
+		if ($claims_target_store.claims.charge_current == EvseClients["manual"]) {
+				data.charge_current = $claims_target_store.properties.charge_current
 			}
 		switch(m) {
 			case 0: break
@@ -105,7 +105,7 @@
 		}
 		else {
 			// if there's no other claim property ( only charge_current for now )
-			if (data.max_current) 
+			if (data.charge_current) 
 				await serialQueue.add(() => override_store.upload(data))
 			// Mode Auto, clearing override
 			else if ($claims_target_store.claims.state == EvseClients["manual"] ) {
@@ -147,8 +147,8 @@
 		
 	}
 
-	function set_uistates_max_current() {
-		$uistates_store.max_current = getMaxCurrent()
+	function set_uistates_charge_current() {
+		$uistates_store.charge_current = getChgCurrent()
 	}	
 	function set_uistates_shaper(val) {
 		val = val == 1?true:false
@@ -178,12 +178,12 @@
 
 	onMount( () => {
 		$uistates_store.manual_override = $status_store.manual_override
-		set_uistates_max_current()
+		set_uistates_charge_current()
 	})
 
 
 // ## Reactive functions ##
-$: $claims_target_store.properties.max_current, set_uistates_max_current()
+$: $claims_target_store.properties.charge_current, set_uistates_charge_current()
 $: stateButtonWatcher($status_store.manual_override) 
 $: set_uistates_shaper($status_store.shaper)
 $: setShaper($uistates_store.shaper)
@@ -213,11 +213,11 @@ $: setDivertMode($uistates_store.divertmode)
 
 	<div class="container ">
 		<Slider  icon={faGaugeHigh} tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step=1 
-		value={$uistates_store.max_current} onchange={(value) => setMaxCurrent(value)} />
-		{#key $claims_target_store.claims.max_current}
-		{#if $claims_target_store.claims.max_current}
+		value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
+		{#key $claims_target_store.claims.charge_current}
+		{#if $claims_target_store.claims.charge_current}
 		<div class="is-flex is-justify-content-center is-align-content is-vcentered">
-			<ClaimPropTag bind:this={setamp_tag} client={$claims_target_store.claims.max_current} action={()=>removeProp("max_current",setamp_tag)} />
+			<ClaimPropTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
 		</div>
 		{/if}
 		{/key}

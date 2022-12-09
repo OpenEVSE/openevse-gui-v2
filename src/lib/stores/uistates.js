@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 
 const model = {
 		// copy from other stores
-		max_current: undefined,
+		charge_current: undefined,
 		manual_override: undefined,
 		shaper: undefined,
 		divertmode: undefined,

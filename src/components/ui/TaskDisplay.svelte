@@ -1,7 +1,6 @@
 <script>
 	import {displayTime, displayIcon} from "../../lib/utils.js"
 	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faHand, faRobot} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let state 
 	export let time = ""
 	export let mode

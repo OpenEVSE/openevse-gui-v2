@@ -105,26 +105,30 @@
 			{:else if fileSent == "ok" }
 				<span class="is-italic">{file.name}</span> uploaded successfully, page will reload in few sec
 			{:else}
-			<div class="is-flex is-align-items-center">
-				<Fa class="is-size-6 mx-2 has-text-primary" icon={faFileCircleCheck}/>
-				<span class="my-2 is-family-code is-italic">
-					{file.name}
-				</span>
-				<div class="ml-2 is-size-5 is-inline-block">
-					<IconButton icon={faSquareMinus} color="has-text-danger" butn_submit={()=>{file = null}} tooltip="Remove file" />
+				<div class="is-flex is-align-items-center">
+					<Fa class="is-size-6 mx-2 has-text-primary" icon={faFileCircleCheck}/>
+					<span class="my-2 is-family-code is-italic">
+						{file.name}
+					</span>
+					<div class="ml-2 is-size-5 is-inline-block">
+						<IconButton icon={faSquareMinus} color="has-text-danger" butn_submit={()=>{file = null}} tooltip="Remove file" />
+					</div>
 				</div>
-			</div>
 			{/if}
 			</div>
 		</div>
-		<Button disabled={uploadButtonState == "loading"} name="Upload" color="is-info" butn_submit={uploadFw} state={uploadButtonState}/>
-		<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
+		<div class="is-flex is-align-items-center is-justify-content-start">
+			<Button disabled={uploadButtonState == "loading"} name="Upload" color="is-info" butn_submit={uploadFw} state={uploadButtonState}/>&nbsp;
+			<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
+		</div>
 		{:else}
 		<div class="my-2 is-family-code is-italic">
 			<Fa class="is-size-6 has-text-danger mx-2" icon={faFileCircleXmark} />No file selected
 		</div>
-		<SelectFile bind:file={file}/>
-		<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
+		<div class="is-flex is-align-items-center is-justify-content-start">
+			<SelectFile bind:file={file}/>&nbsp;
+			<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
+		</div>
 		{/if}
 		
 		

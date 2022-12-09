@@ -108,26 +108,29 @@ export function clientid2name(id) {
 	let name
 	switch (id) {
 		case EvseClients["manual"]:
-			 name =  "manual"
-			 break;
+			name =  "manual"
+			break;
 		case EvseClients["divert"]:
-			 name = "divert"
-			 break;
+			name = "divert"
+			break;
 		case EvseClients["timer"]:
-			  name = "timer"
-			  break;
+			name = "timer"
+			break;
 		case EvseClients["ohm"]:
-				 name = "ohm"
-				 break;
+			name = "ohm"
+			break;
 		case EvseClients["ocpp"]:
-				name = "ocpp"
-				break;
+			name = "ocpp"
+			break;
 		case EvseClients["rfid"]:
-			   name = "rfid"
-			   break;
+			name = "rfid"
+			break;
 		case EvseClients["mqtt"]:
-				 name = "mqtt"
-				 break;
+			name = "mqtt"
+			break;
+		case EvseClients["shaper"]:
+			name = "shaper"
+			break;
 	}
 	return name
 
