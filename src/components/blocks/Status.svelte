@@ -1,4 +1,5 @@
 <script>
+	import AlertBox from "./../ui/AlertBox.svelte";
 	import { claims_target_store } from "./../../lib/stores/claims_target.js";
 	import TaskDisplay from "../ui/TaskDisplay.svelte";
 	import {status_store} from "../../lib/stores/status.js"
@@ -57,7 +58,7 @@
 
 </style>
 
-{#if $status_store.evse_connected == 1 && $uistates_store.data_loaded && $uistates_store.ws_connected}
+{#if $status_store.evse_connected == 1 && $uistates_store.data_loaded}
 <div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-3 mt-0 px-3" 
 in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 	<div>
@@ -128,4 +129,7 @@ in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 	<div>OpenEVSE not responding or not connected</div>
 	<button class="button is-info is-outlined my-3" on:click={()=>location.reload()}>Force Reload</button>
 </div>
+{/if}
+{#if $uistates_store.ws_connected == false}
+<AlertBox title="Connection error" body="Websocket has been disconnected, waiting for reconnection" visible={true}/>
 {/if}
