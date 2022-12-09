@@ -1,5 +1,5 @@
 import { writable, get } from 'svelte/store'
-import {httpAPI} from '../utils.js'
+import {httpAPI, dedup} from '../utils.js'
 
 function createHistoryStore() {
     const P  = writable()
@@ -10,8 +10,9 @@ function createHistoryStore() {
         if (res && (res.msg != "error" && res != "error")) {
 			let prevData = get(P)
 			if (prevData) {
-				let newData = res.concat(prevData)
-            	P.update(() => newData)
+                let newData = [...prevData, ...res]
+                let cleanData = dedup(newData)
+            	P.update(() => cleanData)
 			}
 			else P.update(() => res)
             return true

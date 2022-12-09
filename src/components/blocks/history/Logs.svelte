@@ -21,13 +21,16 @@
 			$uistates_store.logidx_max = index.max
 			//reset history
 			$history_store = ""
-			for (let i = index.max; i >= index.min; i--) {
+			for (let i = index.min; i <= index.max; i++) {
 				await serialQueue.add(() => history_store.download(i))
 			}
 			$history_store.reverse()
 			loaded = true
 		}
-		else loaded = true
+		else {
+			await serialQueue.add(() => history_store.download(index.max))
+			loaded = true
+		}
 		
 	}
 

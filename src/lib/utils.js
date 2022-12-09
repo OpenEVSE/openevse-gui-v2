@@ -208,3 +208,14 @@ export function type2icon(type) {
 	}
 	return icon
 }
+
+export function dedup(arr) {
+	var hashTable = {};
+
+	return arr.filter(function (el) {
+		var key = JSON.stringify(el);
+		var match = Boolean(hashTable[key]);
+
+		return (match ? false : hashTable[key] = true);
+	});
+}

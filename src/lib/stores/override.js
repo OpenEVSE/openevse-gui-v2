@@ -27,10 +27,10 @@ function createOverrideStore() {
         }  
 }
     async function upload(data) {
-        let override = get(P)
-		let newoverridestore = {...override, ...data}
-        let res = await httpAPI("POST", "/override", JSON.stringify(newoverridestore))
-		P.update(() => newoverridestore)
+        // let override = get(P)
+		// let newoverridestore = {...override, ...data}
+        let res = await httpAPI("POST", "/override", JSON.stringify(data))
+		P.update(() => data)
         return P
     }
     async function clear() {
