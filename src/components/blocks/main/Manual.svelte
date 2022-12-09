@@ -227,8 +227,8 @@ $: setDivertMode($uistates_store.divertmode)
 		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
 		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
 	</div>
-	<div class="is-flex is-justify-content-left mt-2">
+	<!-- <div class="is-flex is-justify-content-left mt-2">
 		<Switch name="swAutoRelease" label="Clear on disconnect" bind:checked={$uisettings_store.auto_release} 
 		tooltip="Clear charge session settings when vehicle is unplugged"  />
-	</div>
+	</div> -->
 </Box>
