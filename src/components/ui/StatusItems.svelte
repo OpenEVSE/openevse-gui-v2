@@ -1,6 +1,8 @@
 <script>
+	import { uistates_store } from "./../../lib/stores/uistates.js";
 	import { faCar, faHourglassHalf, faThumbsUp, faBan, faBolt, faTriangleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import StatusIcon from "./StatusIcon.svelte"
+	import Logo from "./../../assets/logo-mini.png"
 	export let state
 	export let time
 	export let vehicle
@@ -78,6 +80,7 @@
 	.no-pointer {
 		cursor: default
 	}
+
 </style>
 
 
@@ -88,5 +91,6 @@
 	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-bottom {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?"Vehicle Connected":"No Vehicle Connected"}>
 		<StatusIcon icon={vehicle?faCar:faCar} color="has-text-white" bp={bp}/>
 	</div>
+	<div class="is-flex-grow-1 has-text-centered {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini" ?"is-hidden":""}" ><img src={Logo} alt="logo" /></div>
 	<div class="no-pointer {bp != "mobilemini"?"mt-1 is-medium":"mt-0 is-medium"} mb-1 ml-auto mr-2 is-capitalized  has-text-weight-semibold has-text-dark is-dark has-tooltip-arrow has-tooltip-bottom" data-tooltip="OpenEVSE local time">{time}</div>
 </div>

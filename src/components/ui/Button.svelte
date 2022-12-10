@@ -59,7 +59,7 @@
 <svelte:options accessors/>
 <div class="is-inline-block p0">
 	<button type="button" style="width:{width}" bind:this={butn} 
-		class="button is-flex is-flex-direction-column is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size} {margin}"
+		class="button is-normal is-flex is-flex-direction-column is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size} {margin}"
 		class:no-pointer={nopointer} {disabled} data-tooltip={tooltip}
 		on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} 
 		on:mouseenter={() => {is_overed = true}} 
