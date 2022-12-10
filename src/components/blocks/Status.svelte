@@ -11,7 +11,6 @@
 	import {sec2time} from "../../lib/utils.js"
 	import { scale } from 'svelte/transition';
 	import { expoInOut } from 'svelte/easing';
-	import { expand } from "../../lib/expand.js"
 
 	let elapsed
 	$uistates_store.status_expanded

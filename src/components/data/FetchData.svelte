@@ -9,6 +9,7 @@
 	import { claims_target_store } 	from "./../../lib/stores/claims_target.js";
 	// import { claim_store } 			from "./../../lib/stores/claim.js"
 	import { override_store } from "./../../lib/stores/override.js";
+	import Logo from "./../../assets/logo-mini.png"
 
 	 
 
@@ -83,16 +84,27 @@
 
 </script>
 <style>
-	.pageloader{
+	.fetchloader{
 		background: linear-gradient(hsl(195, 78%, 30%), hsl(189, 53%, 47%));
+		position: fixed;
+		width: 100%;
+		height: 120%;
+		z-index: 1;
+	}
+	.loadercontent {
+		width: 200px;
+		height: 300px;
 	}
 </style>
-<div class="pageloader is-info {status!="Ok" && status !="error"?"is-active":""}">
-	<div class="title">
-		<div class="is-flex is-justify-content-center my-6 is-size-1">
-			<span class="has-text-white is-size-3 pt-1">OPEN</span><span class="has-text-primary">EVSE</span>
+<div class="fetchloader is-info is-flex is-justify-content-center is-align-items-center {status!="Ok" && status !="error"?"is-active":""}">
+	<div class="loadercontent">
+		<div class="is-flex is-justify-content-center is-align-items-center">
+			<!-- <span class="has-text-white is-size-3 pt-1">OPEN</span><span class="has-text-primary">EVSE</span> -->
+			<div class=" is-flex is-align-items-center" ><img src={Logo} alt="logo" /></div>
+			
 		</div>
-		<progress class="progress is-primary" value={progress} max="100"></progress>
+		<div class="mt-5"><progress class="progress is-small is-primary" value={progress} max="100"></progress></div>
+		
 	</div>
 </div>
 {#if status == "error"}
