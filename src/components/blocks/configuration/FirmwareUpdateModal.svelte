@@ -23,6 +23,9 @@
 		})
 	const uploadFiles = (url, file, onProgress) =>
 		new Promise((resolve, reject) => {
+			if (import.meta.env.DEV) { 
+				url = "/api" + url
+			}
 			const xhr = new XMLHttpRequest();
 			xhr.upload.addEventListener('progress', e => onProgress(e.loaded / e.total));
 			xhr.addEventListener('load', () => resolve({ status: xhr.status, body: xhr.responseText }));
@@ -64,7 +67,7 @@
 
 </script>
 
-<Modal bind:is_opened>
+<Modal bind:is_opened canClose={false}>
 	<Box title="Firmware Update">
 		<div class="pt-2">
 			
@@ -127,7 +130,7 @@
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-start">
 			<SelectFile bind:file={file}/>&nbsp;
-			<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
+			<Button disabled={uploadButtonState == "loading" || fileSent == "ok"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{/if}
 		

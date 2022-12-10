@@ -8,7 +8,9 @@
 
 	export let action = () => {};
 	export let state = ""
-	export let client
+	export let client = ""
+	export let name = ""
+	export let color = "is-info"
 	let icon
 </script>
 <style>
@@ -19,15 +21,20 @@
 	}
 </style>
 <svelte:options accessors />
-<div class="item my-0 my-0 tag is-info has-text-weight-semibold">
+<div class="{client?"item":""} my-0 my-0 tag {color} has-text-weight-semibold">
+	{#if client}
 	<Fa
 		icon={displayIcon(clientid2name(client))}
 		class="has-text-white mr-2 is-capitalized"
 	/>
 	{clientid2name(client)}
-
+	{:else if name}
+	{name}
+	{/if}
 	{#if state == ""}
-		{#if clientid2name(client) == "manual" || clientid2name(client) == "mqtt" }
+		{#if name}
+		<button class="button delete is-small" on:click={action} />
+		{:else if client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt")}
 		<!-- only display delete button for manual and mqtt claims -->
 		<button class="button delete is-small" on:click={action} />
 		{/if}

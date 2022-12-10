@@ -64,7 +64,7 @@
 		on:mouseleave={() => {is_overed = false}} 
 		>
 		<Fa icon={state=="default"?icon:state == "loading"?faSpinner:state == "ok"?faCheck:faXmark} spin={state=="loading"}
-			class="{state == "loading"?is_overed?"has-text-white":"has-text-info":state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}"
+			class="{state == "loading"?"has-text-info":state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}"
 		/>
 		{#if name}
 			{#if state == "default"}

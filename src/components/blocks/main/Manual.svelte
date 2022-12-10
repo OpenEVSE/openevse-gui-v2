@@ -24,7 +24,7 @@
 			clientid2name,
 			displayIcon} 			from '../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
-	import ClaimPropTag 			from "../../ui/ClaimPropTag.svelte"
+	import RemovableTag 			from "../../ui/RemovableTag.svelte"
 
 	let setamp_tag
 	let buttons_manual
@@ -217,7 +217,7 @@ $: setDivertMode($uistates_store.divertmode)
 		{#key $claims_target_store.claims.charge_current}
 		{#if $claims_target_store.claims.charge_current}
 		<div class="is-flex is-justify-content-center is-align-content is-vcentered">
-			<ClaimPropTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
+			<RemovableTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
 		</div>
 		{/if}
 		{/key}

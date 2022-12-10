@@ -17,6 +17,9 @@ export async function httpAPI(method,url,body=null,type = "json") {
 	}
 	
 	setTimeout(() => controller.abort(), 10000);
+	if (import.meta.env.DEV) { 
+		url = "/api" + url
+	}
 	const res = await fetch(url, data).then((response) => {
 		if (response.status >= 400 && response.status < 600) {
 		//   throw new Error("Bad response from server: " + response.status);
@@ -55,10 +58,13 @@ export function sec2time(sec) {
 	return new Date(sec * 1000).toISOString().slice(11, 16)
 }
 
-export function formatDate(t,z) {
+export function formatDate(t,z,format="") {
 	let tz = z.split("|")[0]
 	const d = DateTime.fromISO(t).setZone(tz)
-	return d.toLocaleString(DateTime.DATETIME_SHORT)
+	const arr = d.toLocaleString(DateTime.DATETIME_SHORT).split(" ")
+	if (format=="short")
+		arr[0] = arr[0].slice(0,5)
+	return arr[0] + " " + arr[1]
 }
 
 export function displayTime(t) {

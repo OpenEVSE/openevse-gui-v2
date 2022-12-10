@@ -1,5 +1,6 @@
 <script>
 	import Safety from "../components/blocks/configuration/Safety.svelte"
+	import Rfid from "../components/blocks/configuration/Rfid.svelte"
 </script>
 
 
@@ -8,5 +9,6 @@
 		<Safety />
 	</div>
 	<div class="column">
+		<Rfid />
 	</div>
 </div>

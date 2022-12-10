@@ -15,6 +15,8 @@ export default defineConfig(({ command, mode }) => {
       svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip"}),
       VitePWA({ 
         registerType: 'autoUpdate',
+        injectRegister: null,
+        selfDestroying: true,
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,gz}']
         },
@@ -57,80 +59,14 @@ export default defineConfig(({ command, mode }) => {
     },
     base: './',
     server: {
-        host: "0.0.0.0",
-        proxy: {
-            '/schedule': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/schedule',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/schedule/, '')
-            },
-            '/status': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/status',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/status/, '')
-            },
-            '/config': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/config',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/config/, '')
-            },
-            '/claims': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/claims',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/claims/, '')
-            },
-            '/override': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/override',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/override/, '')
-            },
-            '/shaper': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/shaper',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/shaper/, '')
-            },
-            '/divertmode': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/divertmode',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/divertmode/, '')
-            },
-            '/scan': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/scan',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/scan/, '')
-            },
-            '/savenetwork': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/savenetwork',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/savenetwork/, '')
-            },
-            '/settime': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/settime',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/settime/, ''),
-            },
-            '/restart': {
-                target: 'http://' + env.VITE_OPENEVSEHOST + '/restart',
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/restart/, '')
-            },
-            '/update': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/update',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/update/, '')
-            },
-            '/r': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/r',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/r/, '')
-            },
-            '/logs': {
-              target: 'http://' + env.VITE_OPENEVSEHOST + '/logs',
-              changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/logs/, '')
-            }
+      host: "0.0.0.0",
+      proxy: {
+        '/api': {
+          target: 'http://' + env.VITE_OPENEVSEHOST,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '')
         }
+      }
     }
   }
-
 });

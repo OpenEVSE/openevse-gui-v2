@@ -1,6 +1,7 @@
 <script>
 	import {onMount, onDestroy} from "svelte"
 	export let is_opened = false
+	export let canClose = true
 
 	onMount (disablescroll)
 	onDestroy (enablescroll)
@@ -25,6 +26,12 @@
 		window.onscroll = function() {};
 	}
 
+	function closeModal() {
+		if (canClose) {
+			is_opened = false
+		}
+	}
+
 
 </script>
 <style>
@@ -40,7 +47,7 @@
 </style>
 
 	<div class="modal" class:is-active={is_opened}>
-		<div class="modal-background" on:click={()=>is_opened = false} on:keypress={()=>is_opened = false}></div>
+		<div class="modal-background" on:click={closeModal} on:keypress={closeModal}></div>
 		<div class="modal-content p-3">
 			<slot>
 			</slot>
