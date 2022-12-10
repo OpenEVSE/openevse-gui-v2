@@ -71,7 +71,7 @@
 				{/if}
 			</table>
 			{#if !loaded}
-			<div class="has-text-centered is-size-7 has-text-weight-bold">Loading Data &nbsp;<Fa class="has-text-info" icon={faSpinner} spin /> </div>
+			<div class="has-text-centered mt-4 is-size-7 has-text-weight-bold">Loading Data &nbsp;<Fa class="has-text-info" icon={faSpinner} spin /> </div>
 			{/if}
 		</div>
 	
