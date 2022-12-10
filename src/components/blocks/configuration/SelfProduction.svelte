@@ -1,4 +1,5 @@
 <script>
+	import SelfProductionHelp from "./../../help/SelfProductionHelp.svelte";
 	import Select from "./../../ui/Select.svelte";
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import { status_store } from "./../../../lib/stores/status.js";
@@ -9,6 +10,7 @@
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Switch from "./../../ui/Switch.svelte";
 	import {s2mns} from "../../../lib/utils.js"
+	
 	let stg_submit_state
 	let mode
 	let modes = [{name: "Production", value: 0}, {name:"Excess Power", value: 1}]
@@ -21,8 +23,17 @@
 		stg_submit_state = "loading"
 	
 		const data = {
-
-				}
+			divert_attack_smoothing_factor: $config_store.divert_attack_smoothing_factor,
+			divert_decay_smoothing_factor: $config_store.divert_decay_smoothing_factor,
+			divert_min_charge_time: $config_store.divert_min_charge_time
+				
+		}
+		if (mode == 0)
+				data.mqtt_solar = $config_store.mqtt_solar
+		else if (mode == 1) {
+				data.mqtt_grid_ie = $config_store.mqtt_grid_ie
+				data.divert_PV_ratio = $config_store.divert_PV_ratio
+		}
 
 		if (await config_store.upload(data)) 
 			{
@@ -49,7 +60,8 @@
 
 </script>
 
-<Box title="Self Production">
+<Box title="Self Production" has_help={true}>
+	<div slot="help"><SelfProductionHelp  /> </div>
 	<Switch name="divertswitch" label="Handle Self Production" onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>
 	<div class="is-size-7">Dynamically adjust charge rate based on self production or excess power (grid export).</div>
 	<div class="my-3">

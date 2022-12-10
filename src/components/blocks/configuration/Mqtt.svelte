@@ -1,4 +1,5 @@
 <script>
+	import MQTThelp from "./../../help/MQTThelp.svelte";
 	import InputForm from "./../../ui/InputForm.svelte";
 	import Box from "../../ui/Box.svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
@@ -44,7 +45,8 @@
 	}
 </script>
 
-<Box title="MQTT">
+<Box title="MQTT" has_help={true}>
+	<div slot="help"><MQTThelp /> </div>
 	<Switch name="mqttswitch" label="Enable MQTT" onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled} is_rtl={true}/>
 	<InputForm title="Host*" bind:value={$config_store.mqtt_server} placeholder="server IP / Hostname" />
 	<InputForm title="Port*" bind:value={$config_store.mqtt_port} placeholder="server Port" type="number" />
