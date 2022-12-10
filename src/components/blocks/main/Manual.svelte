@@ -193,6 +193,7 @@ $: setDivertMode($uistates_store.divertmode)
 </script>
 
 <Box title="Charge">
+	<div class="has-text-centered mt-5 mb-0 pb-0 has-text-weight-bold has-text-info">EVSE State</div>
 	<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 	{#if $config_store.rfid_enabled}
 	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
@@ -202,11 +203,11 @@ $: setDivertMode($uistates_store.divertmode)
 	<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
 	{/if}
 
-	<div class="is-flex is-justify-content-center">
-		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$uistates_store.divertmode} name="" color="is-primary" 
+	<div class="is-flex is-justify-content-center my-5">
+		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$uistates_store.divertmode} name={$uistates_store.divertmode == 1?"ECO":"Normal"} color="is-primary" 
 			tooltip={$uistates_store.divertmode?"Disable Eco mode":"Enable Eco mode"} icon={faSolarPanel} breakpoint={$uistates_store.breakpoint}
 			action={() => setDivertMode(!$uistates_store.divertmode)} />
-		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="" color="is-info" 
+		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="Shaper" color="is-info" 
 			tooltip={ $uistates_store.shaper?"Disable Unballasting":"Enable Unballasting"} icon={faBuildingShield} breakpoint={$uistates_store.breakpoint}
 			action={() => setShaper(!$uistates_store.shaper)} />
 		</div>
@@ -223,9 +224,11 @@ $: setDivertMode($uistates_store.divertmode)
 		{/key}
 	</div>
 
-	<div class="columns is-mobile is-justify-content-center is-align-content pt-2 mt-4 is-hidden">
-		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
-		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	
+	<div class="columns is-mobile is-justify-content-center is-align-content pt-2 my-4">
+		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={true}/>
+		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={true}/>
+		<!-- <SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
+		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	 -->
 	</div>
 	<!-- <div class="is-flex is-justify-content-left mt-2">
 		<Switch name="swAutoRelease" label="Clear on disconnect" bind:checked={$uisettings_store.auto_release} 

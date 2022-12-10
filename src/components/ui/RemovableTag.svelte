@@ -11,7 +11,6 @@
 	export let client = ""
 	export let name = ""
 	export let color = "is-info"
-	export let width = ""
 	let icon
 </script>
 <style>
@@ -40,12 +39,11 @@
 		{:else if name}
 		{name}
 		{/if}
-		
-		
+
 	</div>
 	{#if state == "" && (name || (client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt") ))}
-	<button class="tag is-delete is-danger" on:click|preventDefault={()=>action()}></button>
+	<button class="tag is-delete is-danger" on:click|preventDefault={()=>action()}><Fa icon={faXmark} /></button>
 	{:else if state == "loading"}
-	<button class="tag is-danger"><Fa icon={faSpinner} spin={state == "loading"} /></button>
+	<button class="tag is-danger"><Fa icon={faSpinner} size="1x" spin={state == "loading"} /></button>
 	{/if}
 </div>

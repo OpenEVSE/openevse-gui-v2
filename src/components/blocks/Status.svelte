@@ -12,6 +12,7 @@
 	import { scale } from 'svelte/transition';
 	import { expoInOut } from 'svelte/easing';
 
+
 	let elapsed
 	$uistates_store.status_expanded
 	$: { 

@@ -28,7 +28,7 @@
 </style>
 
 <svelte:options accessors/>
-<div class="mt-5 is-flex is-flex-wrap-nowrap buttonblock mx-auto buttons field is-grouped has-addons">
+<div class="is-flex is-flex-wrap-nowrap buttonblock mx-auto buttons field is-grouped has-addons">
 	<button {disabled} class="{mode==1 || disabled?"no-pointer":""} {mode == 1?"":"is-outlined"} 
 		{breakpoint=="mobilemini"?"":breakpoint=="desktop"?"is-large":"is-medium"} 
 		button  manual-charge has-tooltip-arrow is-primary {mode == 1 && ischarging?"has-text-warning":""}"

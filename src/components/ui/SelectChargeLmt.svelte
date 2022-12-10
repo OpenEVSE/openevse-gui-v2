@@ -30,7 +30,7 @@
 </script>
 
 <div class="mx-2">
-	<div class="has-text-weight-bold has-text-centered">{title}</div>
+	<div class="has-text-weight-bold has-text-centered has-text-info">{title}</div>
 	<div class="select is-info">		
 		<select bind:value disabled={disabled}>
 			{#each options as option}
