@@ -43,9 +43,11 @@
        		return value != tag;
     	}).join(",");
 		let jsontags = {rfid_storage: str_tags}
-		let res = await serialQueue.add(config_store.upload(jsontags))
-		if (res)
-			inst.state="ok"
+		let res = await serialQueue.add(() => config_store.upload(jsontags))
+		if (res) {
+			$config_store.rfid_store = str_tags
+			inst.state=""
+		}
 		else inst.state="error"
 	}
 
@@ -62,6 +64,7 @@
 		/* width: 200px;
 		height: 150px; */
 		padding: 10px;
+		max-width: 350px;
 		max-height: 800px;
 		overflow:auto; 
 	}
@@ -88,15 +91,13 @@
 		{/if}
 	{/if}
 	{#if tags[0] != "" }
-	<div class="borders my-4">
-		<div class="has-text-weight-bold is-size-6">Registered Tags</div>
-		<ul>
-			{#each tags as tag,i}
-			<li>
-				<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
-			</li>
-			{/each}
-		</ul>
+	<div class="is-flex is-justify-content-center">
+		<div class="borders my-4 is-flex-grow-1">
+			<div class="has-text-weight-bold is-size-6 is-flex mb-4">Registered Tags</div>
+				{#each tags as tag,i}
+					<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
+				{/each}
+		</div>
 	</div>
 	{/if}
 </Box>
