@@ -33,8 +33,8 @@
 	}
 
 	let tabs = [
-		{name: "Authentication", url:"/configuration/services"},
-		{name: "Settings", url:"/configuration/services"}
+		{name: "Authentication", url:"/configuration/http"},
+		{name: "Settings", url:"/configuration/http"}
 	]
 
 	let stg_submit = async () => {

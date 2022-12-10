@@ -86,17 +86,17 @@
 			<Button bind:this={button_inst} width="80px" size="is-small" name="Register" color="is-primary" butn_submit={()=>registerTag($status_store.rfid_input,button_inst)} />
 			{/if}
 		{/if}
-		{#if tags[0] != "" }
-		<div class="borders my-4">
-			<div class="has-text-weight-bold is-size-6">Registered Tags</div>
-			<ul>
-				{#each tags as tag,i}
-				<li>
-					<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
-				</li>
-				{/each}
-			</ul>
-		</div>
-		{/if}
+	{/if}
+	{#if tags[0] != "" }
+	<div class="borders my-4">
+		<div class="has-text-weight-bold is-size-6">Registered Tags</div>
+		<ul>
+			{#each tags as tag,i}
+			<li>
+				<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
+			</li>
+			{/each}
+		</ul>
+	</div>
 	{/if}
 </Box>

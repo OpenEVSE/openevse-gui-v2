@@ -15,8 +15,14 @@
 	<div class="column is-two-thirds">
 		<Box title = "Configuration">
 			<div class="is-flex is-flex-direction-column is-align-items-center">
-				<a href="/configuration/system" use:link><div class="my-1 is-inline-block button is-info is-outlined">System</div></a>
-				<a href="/configuration/hardware" use:link><div class="my-1 is-inline-block button is-info is-outlined">Hardware</div></a>
+				<!-- <a href="/configuration/system" use:link><div class="my-1 is-inline-block button is-info is-outlined">System</div></a> -->
+				<a href="/configuration/network" use:link><div class="my-1 is-inline-block button is-info is-outlined">Network</div></a>
+				<a href="/configuration/firmware" use:link><div class="my-1 is-inline-block button is-info is-outlined">Firmware</div></a>
+				<a href="/configuration/time" use:link><div class="my-1 is-inline-block button is-info is-outlined">Time</div></a>
+				<a href="/configuration/safety" use:link><div class="my-1 is-inline-block button is-info is-outlined">Safety</div></a>
+				<a href="/configuration/http" use:link><div class="my-1 is-inline-block button is-info is-outlined">HTTP</div></a>
+				<a href="/configuration/mqtt" use:link><div class="my-1 is-inline-block button is-info is-outlined">MQTT</div></a>
+				<a href="/configuration/rfid" use:link><div class="my-1 is-inline-block button is-info is-outlined">RFID</div></a>
 				<a href="/configuration/services" use:link><div class="my-1 is-inline-block button is-info is-outlined">Services</div></a>
 				
 				</div>

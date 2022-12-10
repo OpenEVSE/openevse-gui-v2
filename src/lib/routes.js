@@ -1,4 +1,4 @@
-import { wrap } from 'svelte-spa-router/wrap'
+import { wrap }         from 'svelte-spa-router/wrap'
 import Main             from '../routes/Main.svelte'
 import Schedule         from '../routes/Schedule.svelte'
 import Monitoring       from '../routes/Monitoring.svelte'
@@ -6,8 +6,14 @@ import System           from '../routes/System.svelte'
 import Services         from '../routes/Services.svelte'
 import Configuration    from '../routes/Configuration.svelte'
 import NotFound         from '../routes/NotFound.svelte'
-import History             from '../routes/History.svelte'
-import Hardware             from '../routes/Hardware.svelte'
+import History          from '../routes/History.svelte'
+import RFID             from '../routes/RFID.svelte'
+import Safety           from '../routes/Safety.svelte'
+import MQTT             from '../routes/MQTT.svelte'
+import HTTP             from '../routes/HTTP.svelte'
+import Network          from '../routes/Network.svelte'
+import Firmware         from '../routes/Firmware.svelte'
+import Time             from '../routes/Time.svelte'
 
 export const routes = {
     // Exact path
@@ -16,9 +22,14 @@ export const routes = {
     '/monitoring': wrap({ component: Monitoring}),
     '/history': wrap({ component: History}),
     '/configuration': wrap({ component: Configuration}),
-    '/configuration/system': wrap({ component: System}),
     '/configuration/services': wrap({ component: Services}),
-    '/configuration/hardware': wrap({ component: Hardware}),
+    '/configuration/rfid': wrap({ component: RFID}),
+    '/configuration/safety': wrap({ component: Safety}),
+    '/configuration/mqtt': wrap({ component: MQTT}),
+    '/configuration/http': wrap({ component: HTTP}),
+    '/configuration/network': wrap({ component: Network}),
+    '/configuration/firmware': wrap({ component: Firmware}),
+    '/configuration/time': wrap({ component: Time}),
     // Catch-all
     // This is optional, but if present it must be the last
     '*': NotFound,

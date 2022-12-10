@@ -240,7 +240,7 @@
 						{/if}
 				</div>
 		</div>
-		<div class="mt-4">
+		<div class="mt-4 is-flex is-justify-content-center">
 			<Button name="Save" color="is-info" butn_submit={saveTimer} state={saveTimerState}/>
 			<Button name="Close" color="is-danger" butn_submit={()=>is_opened = false} />
 		</div>

@@ -36,14 +36,14 @@
 		<button class="button delete is-small" on:click={action} />
 		{:else if client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt")}
 		<!-- only display delete button for manual and mqtt claims -->
-		<button class="button delete is-small" on:click={action} />
+		<button class="button delete is-small " on:click={action} />
 		{/if}
 	{:else if state == "loading"}
 		<Fa class="ml-1" icon={faSpinner} spin={state == "loading"} />
 	{:else if state == "ok"}
-		<Fa class="ml-1" icon={faCheck} />
+		<Fa class="ml-1 has-text-primary" icon={faCheck} />
 	{:else}
-		<Fa class="ml-1" icon={faXmark} />
+		<Fa class="ml-1 has-text-danger" icon={faXmark} />
 	{/if}
 	
 </div>
