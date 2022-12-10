@@ -23,6 +23,8 @@
 				<a href="/configuration/http" use:link><div class="my-1 is-inline-block button is-info is-outlined">HTTP</div></a>
 				<a href="/configuration/mqtt" use:link><div class="my-1 is-inline-block button is-info is-outlined">MQTT</div></a>
 				<a href="/configuration/rfid" use:link><div class="my-1 is-inline-block button is-info is-outlined">RFID</div></a>
+				<a href="/configuration/unballasting" use:link><div class="my-1 is-inline-block button is-info is-outlined">Unballasting</div></a>
+				<a href="/configuration/production" use:link><div class="my-1 is-inline-block button is-info is-outlined">Energy Production</div></a>
 				<a href="/configuration/services" use:link><div class="my-1 is-inline-block button is-info is-outlined">Services</div></a>
 				
 				</div>

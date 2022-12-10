@@ -204,10 +204,10 @@ $: setDivertMode($uistates_store.divertmode)
 
 	<div class="is-flex is-justify-content-center">
 		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$uistates_store.divertmode} name="" color="is-primary" 
-			tooltip={$uistates_store.divertmode?"Disable Eco Divert mode":"Enable Eco Divert mode"} icon={faSolarPanel} breakpoint={$uistates_store.breakpoint}
+			tooltip={$uistates_store.divertmode?"Disable Eco mode":"Enable Eco mode"} icon={faSolarPanel} breakpoint={$uistates_store.breakpoint}
 			action={() => setDivertMode(!$uistates_store.divertmode)} />
 		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="" color="is-info" 
-			tooltip={ $uistates_store.shaper?"Disable power overflow protection":"Enable power overflow protection"} icon={faBuildingShield} breakpoint={$uistates_store.breakpoint}
+			tooltip={ $uistates_store.shaper?"Disable Unballasting":"Enable Unballasting"} icon={faBuildingShield} breakpoint={$uistates_store.breakpoint}
 			action={() => setShaper(!$uistates_store.shaper)} />
 		</div>
 

@@ -24,7 +24,6 @@
 			for (let i = index.min; i <= index.max; i++) {
 				await serialQueue.add(() => history_store.download(i))
 			}
-			$history_store.reverse()
 			loaded = true
 		}
 		else {

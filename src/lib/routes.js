@@ -2,7 +2,6 @@ import { wrap }         from 'svelte-spa-router/wrap'
 import Main             from '../routes/Main.svelte'
 import Schedule         from '../routes/Schedule.svelte'
 import Monitoring       from '../routes/Monitoring.svelte'
-import System           from '../routes/System.svelte'
 import Services         from '../routes/Services.svelte'
 import Configuration    from '../routes/Configuration.svelte'
 import NotFound         from '../routes/NotFound.svelte'
@@ -14,6 +13,8 @@ import HTTP             from '../routes/HTTP.svelte'
 import Network          from '../routes/Network.svelte'
 import Firmware         from '../routes/Firmware.svelte'
 import Time             from '../routes/Time.svelte'
+// import Unballasting     from '../routes/Unballasting.svelte'
+// import SelfProduction   from '../routes/SelfProduction.svelte'
 
 export const routes = {
     // Exact path
@@ -30,6 +31,8 @@ export const routes = {
     '/configuration/network': wrap({ component: Network}),
     '/configuration/firmware': wrap({ component: Firmware}),
     '/configuration/time': wrap({ component: Time}),
+    // '/configuration/unballasting': wrap({ component: Unballasting}),
+    // '/configuration/selfproduction': wrap({ component: SelfProduction}),
     // Catch-all
     // This is optional, but if present it must be the last
     '*': NotFound,
