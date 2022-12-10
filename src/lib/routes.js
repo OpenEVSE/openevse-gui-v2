@@ -14,7 +14,7 @@ import Network          from '../routes/Network.svelte'
 import Firmware         from '../routes/Firmware.svelte'
 import Time             from '../routes/Time.svelte'
 import Unballaster     from '../routes/Unballaster.svelte'
-// import SelfProduction   from '../routes/SelfProduction.svelte'
+import SelfProduction   from '../routes/SelfProduction.svelte'
 
 export const routes = {
     // Exact path
@@ -32,7 +32,7 @@ export const routes = {
     '/configuration/firmware': wrap({ component: Firmware}),
     '/configuration/time': wrap({ component: Time}),
     '/configuration/unballaster': wrap({ component: Unballaster}),
-    // '/configuration/selfproduction': wrap({ component: SelfProduction}),
+    '/configuration/selfproduction': wrap({ component: SelfProduction}),
     // '/configuration/vehicle': wrap({ component: Vehicle}),
     // '/configuration/ohmconnect': wrap({ component: OhmConnect}),
     // '/configuration/dev': wrap({ component: Developper}),

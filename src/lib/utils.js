@@ -225,3 +225,5 @@ export function dedup(arr) {
 		return (match ? false : hashTable[key] = true);
 	});
 }
+
+export function s2mns(s){return(s-(s%=60))/60+(9<s?'mn ':':0')+s+'s'}

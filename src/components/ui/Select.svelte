@@ -5,7 +5,7 @@
 
 	export let value
 	export let title
-	export let status 
+	export let status = ""
 	export let disabled = false
 	export let items = [] // [{name: "name", value: "value"}, ...]
 	export let onChange = () => {}

@@ -24,7 +24,7 @@
 				<a href="/configuration/mqtt" use:link><div class="my-1 is-inline-block button is-info is-outlined">MQTT</div></a>
 				<a href="/configuration/rfid" use:link><div class="my-1 is-inline-block button is-info is-outlined">RFID</div></a>
 				<a href="/configuration/unballaster" use:link><div class="my-1 is-inline-block button is-info is-outlined">Unballaster</div></a>
-				<a href="/configuration/production" use:link><div class="my-1 is-inline-block button is-info is-outlined">Self Production</div></a>
+				<a href="/configuration/selfproduction" use:link><div class="my-1 is-inline-block button is-info is-outlined">Self Production</div></a>
 				<a href="/configuration/vehicle" use:link><div class="my-1 is-inline-block button is-info is-outlined">Vehicle</div></a>
 				<a href="/configuration/emoncms" use:link><div class="my-1 is-inline-block button is-info is-outlined">EmonCMS</div></a>
 				<a href="/configuration/ohm" use:link><div class="my-1 is-inline-block button is-info is-outlined">Ohm Connect</div></a>

@@ -12,6 +12,8 @@
 	import { serialQueue } from "./../../lib/queue.js";
 	import {onMount} from "svelte"
 
+	let counter_divert_update
+
 	onMount(()=> {
 		getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
 	})
@@ -99,6 +101,14 @@
 		}
 	}
 
+	function countDivertUpdate(time) {
+		clearInterval(counter_divert_update);
+		$uistates_store.divert_update = time
+		counter_divert_update = setInterval(() => {
+			$uistates_store.divert_update += 1
+		}, 1000);
+	}
+
 
 
 	// Refresh stores when new version is published over websocket
@@ -109,7 +119,7 @@
 	$: refreshOverrideStore     ($status_store.override_version)
 	$: refreshDateTime			($status_store.time, $config_store.time_zone)
 	$: refreshUIState			($status_store)
-
+	$: countDivertUpdate		($status_store.divert_update)
 
 </script>
 
