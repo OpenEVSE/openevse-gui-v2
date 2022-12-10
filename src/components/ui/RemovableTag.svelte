@@ -21,6 +21,7 @@
 	}
 	.tag {
 		border: 0;
+		min-width: 30px;
 	}
 	.spin {
 		position: absolute;
@@ -42,8 +43,12 @@
 
 	</div>
 	{#if state == "" && (name || (client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt") ))}
-	<button class="tag is-delete is-danger" on:click|preventDefault={()=>action()}><Fa icon={faXmark} /></button>
+	<button class="tag is-danger is-clickable" on:click|preventDefault={()=>action()}><Fa icon={faXmark} /></button>
 	{:else if state == "loading"}
-	<button class="tag is-danger"><Fa icon={faSpinner} size="1x" spin={state == "loading"} /></button>
+	<span class="tag is-danger"><Fa icon={faSpinner} size="1x" spin={state == "loading"} /></span>
+	{:else if state == "ok"}
+	<span class="tag is-primary"><Fa icon={faCheck} size="1x" /></span>
+	{:else if state == "ok"}
+	<span class="tag is-danger"><Fa icon={faXmark} size="1x" /></span>
 	{/if}
 </div>

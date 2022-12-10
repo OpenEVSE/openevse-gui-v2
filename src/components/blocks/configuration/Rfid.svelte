@@ -19,8 +19,9 @@
 	onMount(() => {
 		updateTags($config_store.rfid_storage)
 	})
-
+	$: $config_store.rfid_storage, resetStates()
 	$: updateTags($config_store.rfid_storage)
+
 
 	function updateTags(store) {
 		tags = store.split(",")
@@ -45,8 +46,8 @@
 		let jsontags = {rfid_storage: str_tags}
 		let res = await serialQueue.add(() => config_store.upload(jsontags))
 		if (res) {
-			$config_store.rfid_store = str_tags
-			inst.state=""
+			//$config_store.rfid_store = str_tags
+			inst.state="ok"
 		}
 		else inst.state="error"
 	}
@@ -54,6 +55,15 @@
 	async function registerTag(tag,inst) {
 		inst.state="loading"
 	}
+
+	function resetStates() {
+		for (let i = 0; i < tags_inst.length; i++ ) {
+			if (tags_inst[i])
+				tags_inst[i].state = ""
+		}
+	}
+
+	
 </script>
 
 <style>

@@ -12,7 +12,7 @@
 	let timeout
 
 	function resetStatus(s) {
-		if (s=="ok"||s=="error") timeout = setTimeout(()=> status = 0,2000)
+		if (s=="ok"||s=="error") timeout = setTimeout(()=> status = "",2000)
 	}
 
 	onDestroy(() => {
