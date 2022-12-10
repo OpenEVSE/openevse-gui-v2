@@ -21,15 +21,19 @@
 </script>
 
 <style>
-
+	.label {
+		position: absolute;
+		top: -5px;
+	}
 </style>
 
 <div class="is-flex is-align-items-center is-flex-direction-column">
+	{#if label}
+	<div class="label has-text-weight-bold mb-0 mr-2 is-flex-shrink-0 has-text-info">{label}</div>
+	{/if}
 	<div class="is-flex has-text-info is-flex-direction-row my-0 mx-0 py-0">
 		{#if icon}
 		<Fa class="mt-4 mr-3" size="1.6x" icon={icon} />
-		{:else}
-		<div class="has-text-weight-bold pt-4 mr-2 is-flex-shrink-0">{label}</div>
 		{/if}
 		<div class="" on:mouseenter={togglecolor} on:mouseleave={togglecolor} >			
 			<input class="slider is-fullwidth is-medium has-tooltip-arrow has-tooltip {hover||focus?'is-info':''}" 

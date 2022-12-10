@@ -1,4 +1,5 @@
 <script>
+	import Checkbox from "./../../ui/Checkbox.svelte";
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
 	import Fa 						from 'svelte-fa/src/fa.svelte'
 	import {faSolarPanel,
@@ -193,7 +194,7 @@ $: setDivertMode($uistates_store.divertmode)
 </script>
 
 <Box title="Charge">
-	<div class="has-text-centered mt-5 mb-0 pb-0 has-text-weight-bold has-text-info">EVSE State</div>
+	<div class="has-text-centered mt-5 mb-0 pb-0 has-text-weight-bold has-text-info">EVSE STATE</div>
 	<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 	{#if $config_store.rfid_enabled}
 	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
@@ -207,13 +208,13 @@ $: setDivertMode($uistates_store.divertmode)
 		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$uistates_store.divertmode} name={$uistates_store.divertmode == 1?"ECO":"Normal"} color="is-primary" 
 			tooltip={$uistates_store.divertmode?"Disable Eco mode":"Enable Eco mode"} icon={faSolarPanel} breakpoint={$uistates_store.breakpoint}
 			action={() => setDivertMode(!$uistates_store.divertmode)} />
-		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="Shaper" color="is-info" 
+		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="SHAPER" color="is-info" 
 			tooltip={ $uistates_store.shaper?"Disable Unballasting":"Enable Unballasting"} icon={faBuildingShield} breakpoint={$uistates_store.breakpoint}
 			action={() => setShaper(!$uistates_store.shaper)} />
 		</div>
 
 	<div class="container ">
-		<Slider  icon={faGaugeHigh} tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step=1 
+		<Slider  icon={faGaugeHigh} tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step=1 label="CHARGE RATE"
 		value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 		{#key $claims_target_store.claims.charge_current}
 		{#if $claims_target_store.claims.charge_current}
@@ -225,8 +226,8 @@ $: setDivertMode($uistates_store.divertmode)
 	</div>
 
 	<div class="columns is-mobile is-justify-content-center is-align-content pt-2 my-4">
-		<SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={true}/>
-		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={true}/>
+		<SelectTimeLmt title="TIME LIMIT" bind:value={$uistates_store.time_lmt} disabled={true}/>
+		<SelectChargeLmt title="ENERGY LIMIT" bind:value={$uistates_store.charge_lmt} disabled={true}/>
 		<!-- <SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
 		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	 -->
 	</div>

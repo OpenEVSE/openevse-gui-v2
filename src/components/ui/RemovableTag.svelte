@@ -17,7 +17,7 @@
 	.item {
 		position: absolute;
 		overflow:visible;
-		top: 45px;;
+		top: 45px;
 	}
 	.tag {
 		border: 0;
