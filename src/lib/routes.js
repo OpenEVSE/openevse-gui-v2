@@ -13,7 +13,7 @@ import HTTP             from '../routes/HTTP.svelte'
 import Network          from '../routes/Network.svelte'
 import Firmware         from '../routes/Firmware.svelte'
 import Time             from '../routes/Time.svelte'
-// import Unballasting     from '../routes/Unballasting.svelte'
+import Unballaster     from '../routes/Unballaster.svelte'
 // import SelfProduction   from '../routes/SelfProduction.svelte'
 
 export const routes = {
@@ -31,8 +31,11 @@ export const routes = {
     '/configuration/network': wrap({ component: Network}),
     '/configuration/firmware': wrap({ component: Firmware}),
     '/configuration/time': wrap({ component: Time}),
-    // '/configuration/unballasting': wrap({ component: Unballasting}),
+    '/configuration/unballaster': wrap({ component: Unballaster}),
     // '/configuration/selfproduction': wrap({ component: SelfProduction}),
+    // '/configuration/vehicle': wrap({ component: Vehicle}),
+    // '/configuration/ohmconnect': wrap({ component: OhmConnect}),
+    // '/configuration/dev': wrap({ component: Developper}),
     // Catch-all
     // This is optional, but if present it must be the last
     '*': NotFound,
