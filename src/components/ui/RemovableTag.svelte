@@ -46,6 +46,6 @@
 	{#if state == "" && (name || (client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt") ))}
 	<button class="tag is-delete is-danger" on:click|preventDefault={()=>action()}></button>
 	{:else if state == "loading"}
-	<button class="tag is-danger "><Fa  icon={faSpinner} spin={state == "loading"} /></button>
+	<button class="tag is-danger"><Fa icon={faSpinner} spin={state == "loading"} /></button>
 	{/if}
 </div>
