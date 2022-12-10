@@ -10,7 +10,7 @@
 <Box title="404 error">
 	<span class="is-size-6">The link you are looking for do not exist.</span>
 	<a href="/" on:click|preventDefault={()=>history.back()}>
-		<h5>Take me home →</h5>
+		<u>Get back</u>
 	</a>
 </Box>
 
