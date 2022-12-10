@@ -12,7 +12,7 @@
 	}
 </style>
 
-<div class="box is-unselectable mt-2 mb-4 pt-3"  in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" out:fade="{{ delay: 0, duration: 400, easing: expoOut}}">	
+<div class="box is-unselectable mt-2 mb-0 pt-3"  in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" out:fade="{{ delay: 0, duration: 400, easing: expoOut}}">	
 	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold">{title}</div>
 	<div style="width: 40%;"><hr></div>
 	<slot>

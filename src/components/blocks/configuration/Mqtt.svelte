@@ -1,8 +1,63 @@
 <script>
+	import InputForm from "./../../ui/InputForm.svelte";
 	import Box from "../../ui/Box.svelte";
+	import { config_store } from "./../../../lib/stores/config.js";
+	import Button from "./../../ui/Button.svelte";
+	import { serialQueue } from "./../../../lib/queue.js";
+	import Switch from "./../../ui/Switch.svelte";
+	let mqtt_pass = ""
+	let stg_submit_state
 
+	async function toggleMQTT() {	
+		let res = await serialQueue.add(() => config_store.saveParam("mqtt_enabled", $config_store.mqtt_enabled))
+	}
+
+	let stg_submit = async () => {
+		stg_submit_state = "loading"
+	
+		const data = {
+			mqtt_server: $config_store.mqtt_server,
+			mqtt_port: $config_store.mqtt_port,
+			mqtt_reject_unauthorized: $config_store.mqtt_reject_unauthorized,
+			mqtt_topic:	$config_store.mqtt_topic,
+			mqtt_retained: $config_store.mqtt_retained,
+			mqtt_vrms: $config_store.mqtt_vrms
+		}
+		if ($config_store.mqtt_user) {
+			data.mqtt_user = $config_store.mqtt_user
+		}
+
+		if ( $config_store.mqtt_pass && $config_store.mqtt_pass != "_DUMMY_PASSWORD") {
+			data.mqtt_pass = $config_store.mqtt_pass
+		}
+
+		if (await config_store.upload(data)) 
+			{
+				stg_submit_state = "ok"
+				return true
+			}
+		else {
+			stg_submit_state = "error"
+			return false
+		}
+	
+	}
 </script>
 
 <Box title="MQTT">
-	
+	<Switch name="mqttswitch" label="Enable MQTT" onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled} is_rtl={true}/>
+	<InputForm title="Host*" bind:value={$config_store.mqtt_server} placeholder="server IP / Hostname" />
+	<InputForm title="Port*" bind:value={$config_store.mqtt_port} placeholder="server Port" type="number" />
+	<Switch name="mqttselfcert" label="Reject self-signed certificates" bind:checked={$config_store.mqtt_reject_unauthorized} is_rtl={true}/>
+	<InputForm title="Username" bind:value={$config_store.mqtt_user} placeholder="Username" />
+	<form>
+		<InputForm title="Password" bind:value={$config_store.mqtt_pass} placeholder="Password" type="password" />
+	</form>
+	<InputForm title="Base Topic*" bind:value={$config_store.mqtt_topic} placeholder="openevse" />
+	<Switch name="mqttretain" label="Retain published data" bind:checked={$config_store.mqtt_retained} is_rtl={true}/>
+	<InputForm title="Voltage Topic" bind:value={$config_store.mqtt_vrms} placeholder="topic/voltage" />
+	<div class="is-size-7">Voltage MQTT topic to improve power calculations</div>
+	<div class="block mt-5">
+		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+	</div>
 </Box>
