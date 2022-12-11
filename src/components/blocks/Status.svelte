@@ -1,4 +1,5 @@
 <script>
+	import DivertShaperStatus from "./../ui/DivertShaperStatus.svelte";
 	import AlertBox from "./../ui/AlertBox.svelte";
 	import { claims_target_store } from "./../../lib/stores/claims_target.js";
 	import TaskDisplay from "../ui/TaskDisplay.svelte";
@@ -59,7 +60,7 @@
 </style>
 
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded}
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-5 mt-0 px-3" 
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light px-1 pt-2 pb-1 has-background-light mb-5 mt-0" 
 in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 	<div>
 		<div class="mb-2 mx-0">
@@ -107,19 +108,20 @@ in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 				<div class="is-flex mt-3 mt-4 mb-1 ml-4 ">
 					<div class="columns">
 					{#if $uistates_store.stateclaimfrom == "manual" || !$claims_target_store.claims.state}
-					<TaskDisplay mode="manual" state={$status_store.status} />
-					{:else if $uistates_store.stateclaimfrom == "rfid"}
-					<TaskDisplay mode={$uistates_store.stateclaimfrom} msg={!$status_store.rfid_auth?"Waiting for RFID badge":$status_store.rfid_auth} state={$claims_target_store.properties.state} />
-					{:else if $uistates_store.stateclaimfrom != "timer"}
-					<TaskDisplay mode={$uistates_store.stateclaimfrom} state={$claims_target_store.properties.state} />
-					{:else if $uistates_store.stateclaimfrom == "timer"}
-					<TaskDisplay mode="timer" msg={$plan_store.current_event.state=="active"?"Activated since":"Disabled since"} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
+						<TaskDisplay mode="manual" state={$status_store.status} />
+						{:else if $uistates_store.stateclaimfrom == "rfid"}
+						<TaskDisplay mode={$uistates_store.stateclaimfrom} msg={!$status_store.rfid_auth?"Waiting for RFID badge":$status_store.rfid_auth} state={$claims_target_store.properties.state} />
+						{:else if $uistates_store.stateclaimfrom != "timer"}
+						<TaskDisplay mode={$uistates_store.stateclaimfrom} state={$claims_target_store.properties.state} />
+						{:else if $uistates_store.stateclaimfrom == "timer"}
+						<TaskDisplay mode="timer" msg={$plan_store.current_event.state=="active"?"Activated since":"Disabled since"} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
 						{#if $plan_store.current_event.state != $plan_store.next_event.state}
 						<TaskDisplay mode="timer" msg={$plan_store.next_event.state=="active"?"Activate at":"Disable at"} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
 						{/if}
 					{/if}
 					</div>
 				</div>
+				<DivertShaperStatus />
 		<div class="mt-1"><ExpandArrow bind:expand={$uistates_store.status_expanded} /></div>
 	</div>
 </div>

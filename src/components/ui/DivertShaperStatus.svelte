@@ -1,0 +1,45 @@
+<script>
+	import { status_store }   from "./../../lib/stores/status.js";
+	import { uistates_store } from "./../../lib/stores/uistates.js";
+	import {s2mns} 			  from "../../lib/utils.js"
+	import Fa 					from 'svelte-fa/src/fa.svelte'
+	import {faBuildingShield, faSolarPanel} 	from '@fortawesome/free-solid-svg-icons/index.js'
+</script>
+<style>
+	.has-text-orange {
+		color: orange;
+	}
+</style>
+{#if $status_store.divert_active}
+<div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
+	<Fa icon={faSolarPanel} class="has-text-primary mr-1 "/>
+	{#if $uistates_store.divert_type == 0}
+	<div class="mr-2">
+		<span>Production:</span>
+		<span class="has-text-primary">{$status_store.solar}W</span>
+	</div>
+
+	{:else}
+	<div class="mr-2">
+		<span>Grid +Import/-Export:</span>
+		<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
+	</div>
+	{/if}
+	<div class="mr-2">
+		<span>Charge rate:</span>
+		<span class="has-text-info">{$status_store.charge_rate}A</span>
+	</div>
+	<div class="mr-2">
+		<span class="has-text-weight-bold  is-size-7">Last updated:</span>
+		<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{s2mns($uistates_store.divert_update)}</span>
+	</div>
+
+</div>
+{:else if $status_store.shaper}
+<div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
+	<Fa icon={faBuildingShield} class="has-text-info mr-1 "/>
+	<span class="is-size-7 mr-2 has-text-weight-bold">House Load: <span class="has-text-info">{$status_store.shaper_live_pwr} W</span></span>
+	<span class="is-size-7 mr-2 has-text-weight-bold">Current Available: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} A</span></span>
+</div>
+<div class="is-size-7 mr-2 has-text-danger">{$status_store.shaper_updated?"":"Shaper: Live Power Load data has not been updated in time, EVSE has been disabled"}</div>
+{/if}

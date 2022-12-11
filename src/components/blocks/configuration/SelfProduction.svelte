@@ -14,7 +14,6 @@
 	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 	
 	let stg_submit_state
-	let mode
 	let modes = [{name: "Production", value: 0}, {name:"Excess Power", value: 1}]
 	let alert_body
 	let alert_visible = false
@@ -58,12 +57,12 @@
 			divert_min_charge_time: $config_store.divert_min_charge_time
 				
 		}
-		if (mode == 0) {
+		if ($uistates_store.divert_type == 0) {
 				data.mqtt_solar = $config_store.mqtt_solar
 				data.mqtt_grid_ie = ""
 		}
 				
-		else if (mode == 1) {
+		else if ($uistates_store.divert_type == 1) {
 				data.mqtt_grid_ie = $config_store.mqtt_grid_ie
 				data.mqtt_solar = ""
 				data.divert_PV_ratio = $config_store.divert_PV_ratio
@@ -83,10 +82,10 @@
 
 	function setMode(grid = "") {
 		if (grid) {
-			mode = 1
+			$uistates_store.divert_type = 1
 		}
 		else {
-			mode = 0
+			$uistates_store.divert_type = 0
 		}
 	}
 
@@ -104,7 +103,7 @@
 	<Switch name="divertswitch" label="Handle Self Production" onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>
 	<div class="is-size-7">Dynamically adjust charge rate based on self production or excess power (grid export).</div>
 	<div class="my-3 is-size-7 has-text-weight-bold">
-		{#if mode == 0}
+		{#if $uistates_store.divert_type == 0}
 		<span>Production:</span>
 		<span class="has-text-primary">{$status_store.solar}W</span>
 		{:else}
@@ -112,14 +111,14 @@
 		<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
 		{/if}
 		<span>Charge rate:</span>
-		<span class="has-text-primary">{$status_store.charge_rate}A
+		<span class="has-text-info">{$status_store.charge_rate}A
 		</span>
 		<span class="has-text-weight-bold  is-size-7">Last updated:</span>
 		<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 10?"has-text-primary":"has-text-orange"}">{s2mns($uistates_store.divert_update)}</span>
 	</div>
 	
-	<Select title="Mode" bind:value={mode} items={modes} />
-	{#if mode==0}
+	<Select title="Mode" bind:value={$uistates_store.divert_type} items={modes} />
+	{#if $uistates_store.divert_type==0}
 	<div><InputForm title="Feed:" bind:value={$config_store.mqtt_solar} placeholder="/topic/energy_production" /></div>
 	<div class="is-size-7">Self Production MQTT topic (in W) to modulate charge rate based on production</div>
 	{:else}
@@ -128,7 +127,7 @@
 	<div class="is-size-7">Grid (+I/-E) MQTT topic to modulate charge rate based on excess power</div>
 	{/if}
 
-	{#if mode==1}
+	{#if $uistates_store.divert_type==1}
 	<div><InputForm title="Required PV power ratio:" type="number" bind:value={$config_store.divert_PV_ratio} placeholder="1.1" /></div>
 	<div class="is-size-7">The fraction of PV current that suffices to start charging or increment current</div>
 	{/if}

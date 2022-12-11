@@ -7,7 +7,6 @@
 	import { serialQueue } 		from "../../../lib/queue.js";
 	import Switch 				from "../../ui/Switch.svelte";
 	import AlertBox 			from "../../ui/AlertBox.svelte"
-	import Fa 					from 'svelte-fa/src/fa.svelte'
 	import {faBuildingShield} 	from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let stg_submit_state
@@ -53,7 +52,7 @@
 	<div class="my-3">
 		<div class="is-size-7 {$status_store.shaper_updated?"has-text-primary":"has-text-danger"}">{$status_store.shaper_updated?"Live Power Load data up to date, throttling current...":"Live Power Load data has not been updated in time, EVSE has been disabled"}</div>
 		<span class="is-size-7 has-text-weight-bold">Load: <span class="has-text-info">{$status_store.shaper_live_pwr} W</span></span>
-		<span class="is-size-7 has-text-weight-bold">Current Available: <span class="has-text-info">{$status_store.shaper_cur} A</span></span>
+		<span class="is-size-7 has-text-weight-bold">Current Available: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} A</span></span>
 	</div>
 	<Switch name="shaperswitch" label="Enable Shaper" onChange={toggleShaper} bind:checked={$config_store.current_shaper_enabled}/>
 	<div class="is-size-7">Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.</div>
