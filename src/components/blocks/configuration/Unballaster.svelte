@@ -15,8 +15,9 @@
 		stg_submit_state = "loading"
 	
 		const data = {
-
-				}
+			current_shaper_max_pwr: $config_store.current_shaper_max_pwr,
+			mqtt_live_pwr: $config_store.mqtt_live_pwr
+		}
 
 		if (await config_store.upload(data)) 
 			{
@@ -34,7 +35,7 @@
 <Box title="Unballaster">
 	<Switch name="shaperswitch" label="Enable Unballaster" onChange={toggleShaper} bind:checked={$config_store.current_shaper_enabled} is_rtl={true}/>
 	<div class="is-size-7">Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.</div>
-	<InputForm title="Max power allowed (in W):" bind:value={$config_store.current_shaper_max_pwr} placeholder="9000" />
+	<InputForm title="Max power allowed (in W):" type="number" bind:value={$config_store.current_shaper_max_pwr} placeholder="9000" />
 	<InputForm title="Live power load MQTT Topic (in W):" bind:value={$config_store.mqtt_live_pwr} placeholder="/topic/powerload" />
 	<div class="block mt-5">
 		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />

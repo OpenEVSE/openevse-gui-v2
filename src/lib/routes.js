@@ -13,8 +13,9 @@ import HTTP             from '../routes/HTTP.svelte'
 import Network          from '../routes/Network.svelte'
 import Firmware         from '../routes/Firmware.svelte'
 import Time             from '../routes/Time.svelte'
-import Unballaster     from '../routes/Unballaster.svelte'
+import Unballaster      from '../routes/Unballaster.svelte'
 import SelfProduction   from '../routes/SelfProduction.svelte'
+import EmonCMS          from '../routes/EmonCMS.svelte'
 
 export const routes = {
     // Exact path
@@ -34,6 +35,7 @@ export const routes = {
     '/configuration/unballaster': wrap({ component: Unballaster}),
     '/configuration/selfproduction': wrap({ component: SelfProduction}),
     // '/configuration/vehicle': wrap({ component: Vehicle}),
+    '/configuration/emoncms': wrap({ component: EmonCMS}),
     // '/configuration/ohmconnect': wrap({ component: OhmConnect}),
     // '/configuration/dev': wrap({ component: Developper}),
     // Catch-all

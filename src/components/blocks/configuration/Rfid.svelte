@@ -83,22 +83,26 @@
 <Box title="RFID">
 	<Switch name="rfidswitch" label="Enable RFID" bind:checked={$config_store.rfid_enabled} onChange={toggleRFID} is_rtl={true} />
 	{#if $config_store.rfid_enabled}
-		<div class="has-text-weight-bold my-2">Manage scanned tags</div>
-		<Button name="Scan" butn_submit={scanTag} disabled={$status_store.rfid_waiting > 0}/>
-		{#if $status_store.rfid_waiting > 0}
-			<div class="mt-2 has-text-weight-bold">Place your RFID tag on the scanner...</div>
-		{/if}
-		{#if $status_store.rfid_input}
-			<div class="mt-2 has-text-weight-bold">Tag scanned successfully!</div>
-			<div class="has-text-weight-bold my-2 has-text-info">UID: {$status_store.rfid_input}</div>
-			{#if tags.find($status_store.rfid_input)}
-			<div>Badge already registered</div>
-			<Button bind:this={button_inst} width="80px" size="is-small" name="Remove" color="is-danger" butn_submit={()=>removeTag($status_store.rfid_input,button_inst)} />
-			{:else}
-			<div>New badge detected</div>
-			<Button bind:this={button_inst} width="80px" size="is-small" name="Register" color="is-primary" butn_submit={()=>registerTag($status_store.rfid_input,button_inst)} />
+	<div class="is-flex is-justify-content-center">
+		<div class="borders has-text-centered">
+			<div class="has-text-weight-bold my-2">Manage scanned tags</div>
+			<Button name="Scan" butn_submit={scanTag} disabled={$status_store.rfid_waiting > 0}/>
+			{#if $status_store.rfid_waiting > 0}
+				<div class="mt-2 has-text-weight-bold">Place your RFID tag on the scanner...</div>
 			{/if}
-		{/if}
+			{#if $status_store.rfid_input}
+				<div class="mt-2 has-text-weight-bold">Tag scanned successfully!</div>
+				<div class="has-text-weight-bold my-2 has-text-info">UID: {$status_store.rfid_input}</div>
+				{#if tags.find($status_store.rfid_input)}
+				<div>Badge already registered</div>
+				<Button bind:this={button_inst} width="80px" size="is-small" name="Remove" color="is-danger" butn_submit={()=>removeTag($status_store.rfid_input,button_inst)} />
+				{:else}
+				<div>New badge detected</div>
+				<Button bind:this={button_inst} width="80px" size="is-small" name="Register" color="is-primary" butn_submit={()=>registerTag($status_store.rfid_input,button_inst)} />
+				{/if}
+			{/if}
+		</div>
+	</div>
 	{/if}
 	{#if tags[0] != "" }
 	<div class="is-flex is-justify-content-center">

@@ -81,15 +81,15 @@
 	{/if}
 
 	{#if mode==1}
-	<InputForm title="Required PV power ratio:" bind:value={$config_store.divert_PV_ratio} placeholder="1.1" />
+	<InputForm title="Required PV power ratio:" type="number" bind:value={$config_store.divert_PV_ratio} placeholder="1.1" />
 	<div class="is-size-7">The fraction of PV current that suffices to start charging or increment current</div>
 	{/if}
 
-	<InputForm title="Divert smoothing attack:" bind:value={$config_store.divert_attack_smoothing_factor} placeholder="0.4" />
+	<InputForm title="Divert smoothing attack:" type="number" bind:value={$config_store.divert_attack_smoothing_factor} placeholder="0.4" />
 	<div class="is-size-7">The amount of the new feed value to add to the divert available power rolling average</div>
-	<InputForm title="Divert smoothing decay:" bind:value={$config_store.divert_decay_smoothing_factor} placeholder="0.005" />
+	<InputForm title="Divert smoothing decay:" type="number" bind:value={$config_store.divert_decay_smoothing_factor} placeholder="0.005" />
 	<div class="is-size-7">The amount of the new feed value to remove to the divert available power rolling average</div>
-	<InputForm title="Minimum Charge Time:" bind:value={$config_store.divert_min_charge_time} placeholder="600" />
+	<InputForm title="Minimum Charge Time:" type="number" bind:value={$config_store.divert_min_charge_time} placeholder="600" />
 	<div class="is-size-7">The minimum amount of time (seconds) to charge the car once enabled via the self production divert. This can help minimise wear and tear on the EVSE.</div>
 
 	<div class="block mt-5">

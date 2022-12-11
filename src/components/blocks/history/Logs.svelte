@@ -1,4 +1,5 @@
 <script>
+	import DataManager from "./../../data/DataManager.svelte";
 	import Loader from "./../../ui/Loader.svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
@@ -41,7 +42,7 @@
 </script>
 
 <Box title="History">
-		<div>
+		<div class="has-text-centered">
 			<table class="table is-size-7">
 				<thead>
 					<tr>
@@ -71,7 +72,11 @@
 				{/if}
 			</table>
 			{#if !loaded}
-			<div class="has-text-centered mt-4 is-size-7 has-text-weight-bold">Loading Data &nbsp;<Fa class="has-text-info" icon={faSpinner} spin /> </div>
+			<div class="box is-inline-block has-text-centered mt-4 is-size-6 has-text-weight-bold">
+				<div class="mb-4">Loading Data</div>
+				<Fa class="has-text-info is-size-4" icon={faSpinner} spin />
+			</div>
+				
 			{/if}
 		</div>
 	

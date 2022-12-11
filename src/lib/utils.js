@@ -226,4 +226,4 @@ export function dedup(arr) {
 	});
 }
 
-export function s2mns(s){return(s-(s%=60))/60+(9<s?'mn ':':0')+s+'s'}
+export function s2mns(s){return(s-(s%=60))/60+(9<s?'mn ':'mn 0')+s+'s'}
