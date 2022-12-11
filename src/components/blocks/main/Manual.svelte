@@ -1,15 +1,13 @@
 <script>
-	import Checkbox from "./../../ui/Checkbox.svelte";
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
-	import Fa 						from 'svelte-fa/src/fa.svelte'
 	import {faSolarPanel,
 			faGaugeHigh,
-			faBuildingShield} 		from '@fortawesome/free-solid-svg-icons/index.js'
+			faBuildingShield,
+			faBolt} 		from '@fortawesome/free-solid-svg-icons/index.js'
 	import {EvseClients} 			from  "./../../../lib/vars.js"
 	import { claims_target_store }	from "./../../../lib/stores/claims_target.js"
 	import Box 						from "../../ui/Box.svelte"
 	import Slider 					from "../../ui/SliderForm.svelte"
-	import Switch 					from "../../ui/Switch.svelte"
 	import ButtonManual 			from "../../ui/ButtonManual.svelte"
 	import SelectTimeLmt 			from "../../ui/SelectTimeLmt.svelte"
 	import SelectChargeLmt			from "../../ui/SelectChargeLmt.svelte"
@@ -21,9 +19,7 @@
 	import {uistates_store} 		from "../../../lib/stores/uistates.js"
 	import {uisettings_store} 		from "../../../lib/stores/uisettings.js"
 	import {onMount} 				from 'svelte'
-	import {httpAPI,
-			clientid2name,
-			displayIcon} 			from '../../../lib/utils.js'
+	import {httpAPI}	 			from '../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
 	import RemovableTag 			from "../../ui/RemovableTag.svelte"
 
@@ -193,7 +189,7 @@ $: setDivertMode($uistates_store.divertmode)
 
 </script>
 
-<Box title="Charge">
+<Box title="Charge" icon={faBolt}>
 	<div class="has-text-centered mt-5 mb-0 pb-0 has-text-weight-bold has-text-info">EVSE STATE</div>
 	<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 	{#if $config_store.rfid_enabled}

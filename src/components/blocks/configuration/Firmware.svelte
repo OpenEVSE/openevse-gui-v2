@@ -5,6 +5,7 @@
 	import Button 				from "../../ui/Button.svelte"
 	import FirmwareUpdateModal 	from "./FirmwareUpdateModal.svelte"
 	import {httpAPI} 			from "../../../lib/utils.js"
+	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let restartOpenEvseState = "default"
 	let restartEspState = "default"
@@ -43,7 +44,7 @@
 </script>
 
 
-<Box title="Firmware">
+<Box title="Firmware" icon={faGear}>
 	<table class="table is-fullwidth is-vcentered">
 		<thead>
 			<tr class="has-background-info"	>

@@ -11,6 +11,7 @@
 	import Switch from "./../../ui/Switch.svelte";
 	import {s2mns} from "../../../lib/utils.js"
 	import AlertBox from "../../ui/AlertBox.svelte"
+	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 	
 	let stg_submit_state
 	let mode
@@ -94,7 +95,7 @@
 		color: orange;
 	}
 </style>
-<Box title="Self Production" has_help={true}>
+<Box title="Self Production" has_help={true} icon={faGear}>
 	<div slot="help"><SelfProductionHelp  /> </div>
 	<Switch name="divertswitch" label="Handle Self Production" onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>
 	<div class="is-size-7">Dynamically adjust charge rate based on self production or excess power (grid export).</div>

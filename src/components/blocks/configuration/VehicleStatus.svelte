@@ -4,6 +4,7 @@
 	import {status_store} from "../../../lib/stores/status.js"
 	import Box from "../../ui/Box.svelte"
 	import {sec2time, s2mns} from "../../../lib/utils.js"
+	import {faCar} from '@fortawesome/free-solid-svg-icons/index.js'
 
 </script>
 <style>
@@ -16,7 +17,7 @@
 	}
 </style>
 
-<Box title="Status">
+<Box title="Status" icon={faCar}>
 	<div class="my-3">
 		<span class="has-text-weight-bold  is-size-7">Last updated:</span>
 		<span class="is-size-7 {$uistates_store.vehicle_update > 3600?"has-text-danger":$uistates_store.vehicle_update < 300?"has-text-primary":"has-text-orange"} ">{s2mns($uistates_store.vehicle_update)}</span>

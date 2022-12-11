@@ -6,6 +6,7 @@
 	import { config_store } from "./../../../lib/stores/config.js";
 	import Select from "./../../ui/Select.svelte";
 	import VehicleTeslaHelp from "./../../help/VehicleTeslaHelp.svelte";
+	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 
 	
@@ -24,7 +25,7 @@
 	})
 </script>
 
-<Box title="Vehicle" has_help={mode==1?true:false}>
+<Box title="Vehicle" has_help={mode==1?true:false} icon={faGear}>
 	<div slot="help"><VehicleTeslaHelp /> </div>
 	<Select title="Connection Type" bind:value={mode} items={modes} />
 	{#if mode == 2}

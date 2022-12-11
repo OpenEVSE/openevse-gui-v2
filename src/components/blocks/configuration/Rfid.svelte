@@ -8,6 +8,7 @@
 	import Switch from "./../../ui/Switch.svelte";
 	import Box from "../../ui/Box.svelte"
 	import {httpAPI} from "../../../lib/utils.js"
+	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let scanning = false
 	let state = "default"
@@ -80,7 +81,7 @@
 	}
 </style>
 
-<Box title="RFID">
+<Box title="RFID" icon={faGear}>
 	<Switch name="rfidswitch" label="Enable RFID" bind:checked={$config_store.rfid_enabled} onChange={toggleRFID}/>
 	{#if $config_store.rfid_enabled}
 	<div class="is-flex is-justify-content-center mt-3 mb-3">

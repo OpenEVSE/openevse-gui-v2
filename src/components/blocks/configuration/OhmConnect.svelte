@@ -7,6 +7,7 @@
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Switch from "./../../ui/Switch.svelte";
 	import AlertBox from "../../ui/AlertBox.svelte"
+	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let stg_submit_state
 	let alert_body
@@ -41,7 +42,7 @@
 	}
 </script>
 
-<Box title="OhmConnect">
+<Box title="OhmConnect" icon={faGear}>
 	<Switch name="emoncmsswitch" label="Enable OhmConnect" onChange={toggleOhmConnect} bind:checked={$config_store.ohm_enabled} is_rtl={true}/>
 	<div class="is-size-7">OhmConnect monitors real-time conditions on the electricity grid. When dirty and unsustainable power plants turn on, our users receive a notification to save energy.</div>
 	{#if $config_store.ohm_enabled}

@@ -7,6 +7,7 @@
 	import InputForm from "../../ui/InputForm.svelte";
 	import Box from "../../ui/Box.svelte"
 	import Button from "../../ui/Button.svelte"
+	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let alert_visible = false
 	let activetab = 0
@@ -112,7 +113,7 @@
 	
 </script>
 
-<Box title="HTTP Server">
+<Box title="HTTP Server" icon={faGear}>
 	<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
 	{#if activetab == 0}
 	<!-- Authentification -->

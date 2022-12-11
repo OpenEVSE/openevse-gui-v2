@@ -8,20 +8,6 @@
 	export let selected
 	let submenu_visible = false
 
-	function hideSubMenu() {
-		submenu_visible = false
-	}
-	
-	function showSubMenu() {
-		submenu_visible = true
-	}
-
-	function toggleSubMenu() {
-		submenu_visible = !submenu_visible
-	}
-	function closeSubMenu() {
-		submenu_visible = false;
-	}
 </script>
 
 <style>
@@ -66,7 +52,7 @@
 
 </style>
 
-<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2" on:mouseleave={closeSubMenu}>	
+<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2">	
 			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"}>
 				<Fa icon={faChartSimple} size="2x" />
 			</a>

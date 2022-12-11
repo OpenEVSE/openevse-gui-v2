@@ -1,6 +1,4 @@
 <script>
-	import DataManager from "./../../data/DataManager.svelte";
-	import Loader from "./../../ui/Loader.svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import Box from "./../../ui/Box.svelte"
@@ -9,7 +7,7 @@
 	import {httpAPI, formatDate, round, state2icon, type2icon} from "../../../lib/utils.js"
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {faSpinner, faTimeline} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let index
 	let loaded = false
@@ -41,7 +39,7 @@
 
 </script>
 
-<Box title="History">
+<Box title="History" icon={faTimeline}>
 		<div class="has-text-centered">
 			{#if !loaded}
 			<div class="box is-inline-block has-text-centered mt-4 mb-5 is-size-6 has-text-weight-bold">

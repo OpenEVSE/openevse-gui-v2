@@ -3,12 +3,13 @@
 	import {config_store} from "../../../lib/stores/config.js"
 	import {status_store} from "../../../lib/stores/status.js"
 	import Box from "../../ui/Box.svelte"
+	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	export let editable = true
 
 </script>
 
-<Box title="Safety">
+<Box title="Safety" icon={faGear}>
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info"	>

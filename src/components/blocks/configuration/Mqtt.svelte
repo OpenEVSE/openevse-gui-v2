@@ -7,6 +7,7 @@
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Switch from "./../../ui/Switch.svelte";
 	import AlertBox from "../../ui/AlertBox.svelte"
+	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let mqtt_pass = ""
 	let stg_submit_state
@@ -64,7 +65,7 @@
 	}
 </script>
 
-<Box title="MQTT" has_help={true}>
+<Box title="MQTT" has_help={true} icon={faGear}>
 	<div slot="help"><MQTThelp /> </div>
 	<Switch name="mqttswitch" label="Enable MQTT" onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled}/>
 	<div><InputForm title="Host*" bind:value={$config_store.mqtt_server} placeholder="server IP / Hostname" /></div>

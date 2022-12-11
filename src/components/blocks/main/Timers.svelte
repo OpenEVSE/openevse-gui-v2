@@ -8,6 +8,7 @@
 	import TimerTableRow 	from "../../ui/TimerTableRow.svelte"
 	import Button 			from "../../ui/Button.svelte"
 	import {schedule_store} from "../../../lib/stores/schedule.js"
+	import {faCalendarDays} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let timers_modal_opened = false
 	let timer = null
@@ -59,7 +60,7 @@
 		margin: auto;
 	}
 </style>
-<Box title="Schedule">
+<Box title="Schedule" icon={faCalendarDays}>
 	<div class="mb-2">
 		<table class="table is-size-6 has-text-weight-normall timers">
 			<tbody>

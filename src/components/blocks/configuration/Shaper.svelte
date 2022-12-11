@@ -1,13 +1,14 @@
 <script>
-	import { status_store } from "./../../../lib/stores/status.js";
-	import { uistates_store } from "../../../lib/stores/uistates.js";
-	import InputForm from "../../ui/InputForm.svelte";
-	import Box from "../../ui/Box.svelte";
-	import { config_store } from "../../../lib/stores/config.js";
-	import Button from "../../ui/Button.svelte";
-	import { serialQueue } from "../../../lib/queue.js";
-	import Switch from "../../ui/Switch.svelte";
-	import AlertBox from "../../ui/AlertBox.svelte"
+	import { status_store } 	from "./../../../lib/stores/status.js";
+	import InputForm 			from "../../ui/InputForm.svelte";
+	import Box 					from "../../ui/Box.svelte";
+	import { config_store } 	from "../../../lib/stores/config.js";
+	import Button				from "../../ui/Button.svelte";
+	import { serialQueue } 		from "../../../lib/queue.js";
+	import Switch 				from "../../ui/Switch.svelte";
+	import AlertBox 			from "../../ui/AlertBox.svelte"
+	import Fa 					from 'svelte-fa/src/fa.svelte'
+	import {faBuildingShield} 	from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let stg_submit_state
 	let alert_body
@@ -48,7 +49,7 @@
 	}
 </script>
 
-<Box title="Shaper">
+<Box title="Shaper" icon={faBuildingShield}>
 	<div class="my-3">
 		<div class="is-size-7 {$status_store.shaper_updated?"has-text-primary":"has-text-danger"}">{$status_store.shaper_updated?"Live Power Load data up to date, throttling current...":"Live Power Load data has not been updated in time, EVSE has been disabled"}</div>
 		<span class="is-size-7 has-text-weight-bold">Load: <span class="has-text-info">{$status_store.shaper_live_pwr} W</span></span>
