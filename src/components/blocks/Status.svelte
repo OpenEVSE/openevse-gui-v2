@@ -59,7 +59,7 @@
 </style>
 
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded}
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-3 mt-0 px-3" 
+<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light p-3 has-background-light mb-5 mt-0 px-3" 
 in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 	<div>
 		<div class="mb-2 mx-0">

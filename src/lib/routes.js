@@ -17,6 +17,7 @@ import Unballaster      from '../routes/Unballaster.svelte'
 import SelfProduction   from '../routes/SelfProduction.svelte'
 import EmonCMS          from '../routes/EmonCMS.svelte'
 import OhmConnect       from '../routes/OhmConnect.svelte'
+import Vehicle          from '../routes/Vehicle.svelte'
 
 export const routes = {
     // Exact path
@@ -35,7 +36,7 @@ export const routes = {
     '/configuration/time': wrap({ component: Time}),
     '/configuration/unballaster': wrap({ component: Unballaster}),
     '/configuration/selfproduction': wrap({ component: SelfProduction}),
-    // '/configuration/vehicle': wrap({ component: Vehicle}),
+    '/configuration/vehicle': wrap({ component: Vehicle}),
     '/configuration/emoncms': wrap({ component: EmonCMS}),
     '/configuration/ohmconnect': wrap({ component: OhmConnect}),
     // '/configuration/dev': wrap({ component: Developper}),

@@ -15,7 +15,7 @@
 	}
 </style>
 
-<div class="box mt-2 mb-0 pt-3"  in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" out:fade="{{ delay: 0, duration: 400, easing: expoOut}}">
+<div class="box mb-5 pt-3"  in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" out:fade="{{ delay: 0, duration: 400, easing: expoOut}}">
 	{#if has_help}
 	<Help>
 	<slot name="help"></slot>

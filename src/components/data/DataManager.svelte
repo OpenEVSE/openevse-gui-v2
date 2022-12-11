@@ -13,6 +13,7 @@
 	import {onMount} from "svelte"
 
 	let counter_divert_update
+	let last_divert_update
 
 	onMount(()=> {
 		getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
@@ -102,11 +103,15 @@
 	}
 
 	function countDivertUpdate(time) {
-		clearInterval(counter_divert_update);
-		$uistates_store.divert_update = time
-		counter_divert_update = setInterval(() => {
-			$uistates_store.divert_update += 1
-		}, 1000);
+		if (last_divert_update != time) {
+			last_divert_update = time
+			clearInterval(counter_divert_update);
+			$uistates_store.divert_update = time
+			counter_divert_update = setInterval(() => {
+				$uistates_store.divert_update += 1
+			}, 1000);
+		}
+
 	}
 
 
