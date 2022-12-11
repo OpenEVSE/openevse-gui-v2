@@ -1,6 +1,6 @@
 <script>
-	import { serialQueue } from "./../../../lib/queue.js";
-	import Box from "./../../ui/Box.svelte";
+	import { serialQueue } from "../../../lib/queue.js";
+	import Box from "../../ui/Box.svelte";
 	import {schedule_store} from "../../../lib/stores/schedule.js"
 	import AlertBox from "../../ui/AlertBox.svelte"
 	import Modal from "../../ui/Modal.svelte"

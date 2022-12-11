@@ -27,7 +27,7 @@
 				<a href="/configuration/selfproduction" use:link><div class="my-1 is-inline-block button is-info is-outlined">Self Production</div></a>
 				<a href="/configuration/vehicle" use:link><div class="my-1 is-inline-block button is-info is-outlined">Vehicle</div></a>
 				<a href="/configuration/emoncms" use:link><div class="my-1 is-inline-block button is-info is-outlined">Energy Monitoring</div></a>
-				<a href="/configuration/ohm" use:link><div class="my-1 is-inline-block button is-info is-outlined">Ohm Connect</div></a>
+				<a href="/configuration/ohmconnect" use:link><div class="my-1 is-inline-block button is-info is-outlined">Ohm Connect</div></a>
 				<a href="/configuration/dev" use:link><div class="my-1 is-inline-block button is-info is-outlined">Developper</div></a>
 				</div>
 		</Box>

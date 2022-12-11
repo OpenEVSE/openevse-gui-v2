@@ -16,6 +16,7 @@ import Time             from '../routes/Time.svelte'
 import Unballaster      from '../routes/Unballaster.svelte'
 import SelfProduction   from '../routes/SelfProduction.svelte'
 import EmonCMS          from '../routes/EmonCMS.svelte'
+import OhmConnect       from '../routes/OhmConnect.svelte'
 
 export const routes = {
     // Exact path
@@ -36,7 +37,7 @@ export const routes = {
     '/configuration/selfproduction': wrap({ component: SelfProduction}),
     // '/configuration/vehicle': wrap({ component: Vehicle}),
     '/configuration/emoncms': wrap({ component: EmonCMS}),
-    // '/configuration/ohmconnect': wrap({ component: OhmConnect}),
+    '/configuration/ohmconnect': wrap({ component: OhmConnect}),
     // '/configuration/dev': wrap({ component: Developper}),
     // Catch-all
     // This is optional, but if present it must be the last

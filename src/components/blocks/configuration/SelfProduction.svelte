@@ -10,16 +10,45 @@
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Switch from "./../../ui/Switch.svelte";
 	import {s2mns} from "../../../lib/utils.js"
+	import AlertBox from "../../ui/AlertBox.svelte"
 	
 	let stg_submit_state
 	let mode
 	let modes = [{name: "Production", value: 0}, {name:"Excess Power", value: 1}]
+	let alert_body
+	let alert_visible = false
 
 	async function toggleDivert() {	
 		let res = await serialQueue.add(() => config_store.saveParam("divert_enabled", $config_store.divert_enabled))
 	}
 
 	let stg_submit = async () => {
+		if (!$config_store.mqtt_solar && !$config_store.mqtt_grid_ie) {
+			alert_body = "MQTT topic is missing"
+			alert_visible=true
+			return
+		}
+		else if (!$config_store.divert_PV_ratio) {
+			alert_body = "Required PV power ratio is missing"
+			alert_visible=true
+			return
+		}
+		else if (!$config_store.divert_attack_smoothing_factor) {
+			alert_body = "Divert smoothing attack is missing"
+			alert_visible=true
+			return
+		}
+		else if (!$config_store.divert_decay_smoothing_factor) {
+			alert_body = "Divert smoothing decay is missing"
+			alert_visible=true
+			return
+		}
+		else if (!$config_store.divert_min_charge_time) {
+			alert_body = "Minimum Charge Time is missing"
+			alert_visible=true
+			return
+		}
+
 		stg_submit_state = "loading"
 	
 		const data = {
@@ -95,4 +124,5 @@
 	<div class="block mt-5">
 		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>
+	<AlertBox body={alert_body} bind:visible={alert_visible} />
 </Box>

@@ -6,13 +6,33 @@
 	import Button from "./../../ui/Button.svelte";
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Switch from "./../../ui/Switch.svelte";
+	import AlertBox from "../../ui/AlertBox.svelte"
+
 	let stg_submit_state
+	let alert_body
+	let alert_visible = false
 
 	async function toggleEmonCMS() {	
 		let res = await serialQueue.add(() => config_store.saveParam("emoncms_enabled", $config_store.emoncms_enabled))
 	}
 
 	let stg_submit = async () => {
+		if (!$config_store.emoncms_server) {
+			alert_body = "Emoncms Server is missing"
+			alert_visible=true
+			return
+		}
+		else if (!$config_store.emoncms_node) {
+			alert_body = "Emoncms Node is missing"
+			alert_visible=true
+			return
+		}
+		else if (!$config_store.emoncms_apikey) {
+			alert_body = "API Key is missing"
+			alert_visible=true
+			return
+		}
+
 		stg_submit_state = "loading"
 	
 		const data = {
@@ -55,5 +75,5 @@
 	<div class="block mt-5">
 		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>
-
+	<AlertBox body={alert_body} bind:visible={alert_visible} />
 </Box>
