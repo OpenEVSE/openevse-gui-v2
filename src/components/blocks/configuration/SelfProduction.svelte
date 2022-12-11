@@ -58,10 +58,14 @@
 			divert_min_charge_time: $config_store.divert_min_charge_time
 				
 		}
-		if (mode == 0)
+		if (mode == 0) {
 				data.mqtt_solar = $config_store.mqtt_solar
+				data.mqtt_grid_ie = ""
+		}
+				
 		else if (mode == 1) {
 				data.mqtt_grid_ie = $config_store.mqtt_grid_ie
+				data.mqtt_solar = ""
 				data.divert_PV_ratio = $config_store.divert_PV_ratio
 		}
 
@@ -99,9 +103,17 @@
 	<div slot="help"><SelfProductionHelp  /> </div>
 	<Switch name="divertswitch" label="Handle Self Production" onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>
 	<div class="is-size-7">Dynamically adjust charge rate based on self production or excess power (grid export).</div>
-	<div class="my-3">
-		<span class="has-text-weight-bold is-size-7">Production:</span>
-		<span class="is-size-7 has-text-primary has-text-weight-bold">{$status_store.solar}W</span>
+	<div class="my-3 is-size-7 has-text-weight-bold">
+		{#if mode == 0}
+		<span>Production:</span>
+		<span class="has-text-primary">{$status_store.solar}W</span>
+		{:else}
+		<span>Grid +Import/-Export:</span>
+		<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
+		{/if}
+		<span>Charge rate:</span>
+		<span class="has-text-primary">{$status_store.charge_rate}A
+		</span>
 		<span class="has-text-weight-bold  is-size-7">Last updated:</span>
 		<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 10?"has-text-primary":"has-text-orange"}">{s2mns($uistates_store.divert_update)}</span>
 	</div>
