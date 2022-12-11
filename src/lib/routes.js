@@ -13,7 +13,7 @@ import HTTP             from '../routes/HTTP.svelte'
 import Network          from '../routes/Network.svelte'
 import Firmware         from '../routes/Firmware.svelte'
 import Time             from '../routes/Time.svelte'
-import Unballaster      from '../routes/Unballaster.svelte'
+import Shaper           from '../routes/Shaper.svelte'
 import SelfProduction   from '../routes/SelfProduction.svelte'
 import EmonCMS          from '../routes/EmonCMS.svelte'
 import OhmConnect       from '../routes/OhmConnect.svelte'
@@ -34,7 +34,7 @@ export const routes = {
     '/configuration/network': wrap({ component: Network}),
     '/configuration/firmware': wrap({ component: Firmware}),
     '/configuration/time': wrap({ component: Time}),
-    '/configuration/unballaster': wrap({ component: Unballaster}),
+    '/configuration/shaper': wrap({ component: Shaper}),
     '/configuration/selfproduction': wrap({ component: SelfProduction}),
     '/configuration/vehicle': wrap({ component: Vehicle}),
     '/configuration/emoncms': wrap({ component: EmonCMS}),

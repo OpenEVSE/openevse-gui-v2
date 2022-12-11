@@ -23,7 +23,7 @@
 				<a href="/configuration/http" use:link><div class="my-1 is-inline-block button is-info is-outlined">HTTP</div></a>
 				<a href="/configuration/mqtt" use:link><div class="my-1 is-inline-block button is-info is-outlined">MQTT</div></a>
 				<a href="/configuration/rfid" use:link><div class="my-1 is-inline-block button is-info is-outlined">RFID</div></a>
-				<a href="/configuration/unballaster" use:link><div class="my-1 is-inline-block button is-info is-outlined">Unballaster</div></a>
+				<a href="/configuration/shaper" use:link><div class="my-1 is-inline-block button is-info is-outlined">Shaper</div></a>
 				<a href="/configuration/selfproduction" use:link><div class="my-1 is-inline-block button is-info is-outlined">Self Production</div></a>
 				<a href="/configuration/vehicle" use:link><div class="my-1 is-inline-block button is-info is-outlined">Vehicle</div></a>
 				<a href="/configuration/emoncms" use:link><div class="my-1 is-inline-block button is-info is-outlined">Energy Monitoring</div></a>

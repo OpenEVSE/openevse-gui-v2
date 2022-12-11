@@ -1,10 +1,12 @@
 <script>
-	import InputForm from "./../../ui/InputForm.svelte";
+	import { status_store } from "./../../../lib/stores/status.js";
+	import { uistates_store } from "../../../lib/stores/uistates.js";
+	import InputForm from "../../ui/InputForm.svelte";
 	import Box from "../../ui/Box.svelte";
-	import { config_store } from "./../../../lib/stores/config.js";
-	import Button from "./../../ui/Button.svelte";
-	import { serialQueue } from "./../../../lib/queue.js";
-	import Switch from "./../../ui/Switch.svelte";
+	import { config_store } from "../../../lib/stores/config.js";
+	import Button from "../../ui/Button.svelte";
+	import { serialQueue } from "../../../lib/queue.js";
+	import Switch from "../../ui/Switch.svelte";
 	import AlertBox from "../../ui/AlertBox.svelte"
 
 	let stg_submit_state
@@ -46,8 +48,13 @@
 	}
 </script>
 
-<Box title="Unballaster">
-	<Switch name="shaperswitch" label="Enable Unballaster" onChange={toggleShaper} bind:checked={$config_store.current_shaper_enabled}/>
+<Box title="Shaper">
+	<div class="my-3">
+		<div class="is-size-7 {$status_store.shaper_updated?"has-text-primary":"has-text-danger"}">{$status_store.shaper_updated?"Live Power Load data up to date, throttling current...":"Live Power Load data has not been updated in time, EVSE has been disabled"}</div>
+		<span class="is-size-7 has-text-weight-bold">Load: <span class="has-text-info">{$status_store.shaper_live_pwr} W</span></span>
+		<span class="is-size-7 has-text-weight-bold">Current Available: <span class="has-text-info">{$status_store.shaper_cur} A</span></span>
+	</div>
+	<Switch name="shaperswitch" label="Enable Shaper" onChange={toggleShaper} bind:checked={$config_store.current_shaper_enabled}/>
 	<div class="is-size-7">Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.</div>
 	<div><InputForm title="Max power allowed (in W):" type="number" bind:value={$config_store.current_shaper_max_pwr} placeholder="9000" /></div>
 	<div><InputForm title="Live power load MQTT Topic (in W):" bind:value={$config_store.mqtt_live_pwr} placeholder="/topic/powerload" /></div>
