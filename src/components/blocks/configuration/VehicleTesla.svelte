@@ -1,4 +1,8 @@
 <script>
+	import Test from "./../../../routes/Test.svelte";
+	import Select from "./../../ui/Select.svelte";
+	import { tesla_store } from "./../../../lib/stores/tesla.js";
+	import { onMount } from "svelte";
 	import Help from "./../../ui/Help.svelte";
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Button from "./../../ui/Button.svelte";
@@ -14,8 +18,56 @@
 	let password = ""
 	let mode = 0 // 0: normal , 1: advanced
 	let loggedin = false
+	let status = ""
+	let select_status = ""
+	let vehicles = []
 
 	const teslaLogin = "https://auth.openevse.com/login"
+
+	onMount(() => {
+		loggedin = have_credentials()
+		getVehicles()
+	})
+
+	async function getVehicles() {
+		if (loggedin) {
+			status = "loading"
+			// fetch vehicle list
+			let res = await serialQueue.add(()=>tesla_store.download())
+			if (res) {
+				if ($tesla_store.count)
+					status = "ok"
+				else status = ""
+
+			}
+			else status = "error"
+		}
+		if ($tesla_store.count) {
+			for (let [i, ve] of  $tesla_store.vehicles.entries()) {
+				vehicles[i] = {name: ve.name, value: ve.id}
+			}
+		}
+	}
+
+	async function selectVehicle(id) {
+		select_status = "loading"
+
+		const data = {
+			tesla_vehicle_id: id
+		}
+
+		let res = await config_store.upload(data)
+
+		if (await res) {
+			select_status = "ok"
+			return true
+			}
+		else {
+			select_status = "error"
+			return false
+		}
+	}
+
 
 	let login = async () => {
 
@@ -26,7 +78,7 @@
 			password: password
 		}
 
-		let res = await httpAPI("POST", teslaLogin, data)
+		let res = await serialQueue.add(() => httpAPI("POST", teslaLogin, data))
 
 		if (await res.ok) {
 				const data = {
@@ -109,33 +161,42 @@
 	}
 
 	$: $config_store, loggedin = have_credentials()
+	$: loggedin, getVehicles()
 
 </script>
 <div class="mt-5">
 	<h5>Tesla</h5>
 	{#if loggedin}
-	<div>Fetching vehicle info ...</div>
-	<div class="block mt-5">
-		<Button name="Logout" color="is-info" state={stg_submit_state} butn_submit={logout} />
-	</div>
-	{:else if mode == 0}
-	<div>
-		<InputForm title="Username:" bind:value={username} placeholder="Tesla username" />
-		<InputForm title="Password:" bind:value={password} type="password" placeholder="Tesla password" />
+		{#if status == "loading"}
+		<div>Fetching vehicle info ...</div>
+		{:else if $tesla_store.count}
+		<Select title="Select Vehicle:" bind:value={$config_store.tesla_vehicle_id} status={select_status} items={vehicles} onChange={()=>selectVehicle($config_store.tesla_vehicle_id)}/>
+		{:else if status == "error"}
+		<div>Error fetching vehicles</div>
+		{:else}
+		<div>No vehicle found</div>
+		{/if}
 		<div class="block mt-5">
-			<Button name="Login" color="is-info" state={stg_submit_state} butn_submit={login} />
-			<Button name="Advanced" color="is-info" butn_submit={()=>mode=1} />
+			<Button name="Logout" color="is-info" state={stg_submit_state} butn_submit={logout} />
 		</div>
-	</div>
-	{:else if mode == 1}
-	<div>
-		<InputForm title="Access Token:" bind:value={$config_store.tesla_access_token} type="password" placeholder="" />
-		<InputForm title="Refresh Token:" bind:value={$config_store.tesla_refresh_token} type="password" placeholder="" />
-		<div class="block mt-5">
-			<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
-			<Button name="Normal" color="is-info" butn_submit={()=>mode=0} />
+		{:else if mode == 0}
+		<div>
+			<InputForm title="Username:" bind:value={username} placeholder="Tesla username" />
+			<InputForm title="Password:" bind:value={password} type="password" placeholder="Tesla password" />
+			<div class="block mt-5">
+				<Button name="Login" color="is-info" state={stg_submit_state} butn_submit={login} />
+				<Button name="Advanced" color="is-info" butn_submit={()=>mode=1} />
+			</div>
 		</div>
-	</div>
+		{:else if mode == 1}
+		<div>
+			<InputForm title="Access Token:" bind:value={$config_store.tesla_access_token} type="password" placeholder="" />
+			<InputForm title="Refresh Token:" bind:value={$config_store.tesla_refresh_token} type="password" placeholder="" />
+			<div class="block mt-5">
+				<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+				<Button name="Normal" color="is-info" butn_submit={()=>mode=0} />
+			</div>
+		</div>
 	{/if}
 	<AlertBox body={alert_body} bind:visible={alert_visible} />
 </div>

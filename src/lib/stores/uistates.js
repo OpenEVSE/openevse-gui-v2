@@ -18,6 +18,7 @@ const model = {
 		logidx_min: 0,
 		logidx_max: 0,
 		divert_update: 0,
+		vehicle_update: 0,
 		// (todo) derived from other stores
 		mode: undefined, // 0:Auto 1:On 2:Off
 		charging: false,

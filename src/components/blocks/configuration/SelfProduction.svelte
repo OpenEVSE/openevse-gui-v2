@@ -89,6 +89,11 @@
 
 </script>
 
+<style>
+	.has-text-orange {
+		color: orange;
+	}
+</style>
 <Box title="Self Production" has_help={true}>
 	<div slot="help"><SelfProductionHelp  /> </div>
 	<Switch name="divertswitch" label="Handle Self Production" onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>
@@ -97,7 +102,7 @@
 		<span class="has-text-weight-bold is-size-7">Production:</span>
 		<span class="is-size-7 has-text-primary has-text-weight-bold">{$status_store.solar}W</span>
 		<span class="has-text-weight-bold  is-size-7">Last updated:</span>
-		<span class="is-size-7 has-text-danger">{s2mns($uistates_store.divert_update)}</span>
+		<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 10?"has-text-primary":"has-text-orange"}">{s2mns($uistates_store.divert_update)}</span>
 	</div>
 	
 	<Select title="Mode" bind:value={mode} items={modes} />

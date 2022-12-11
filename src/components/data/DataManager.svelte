@@ -14,6 +14,8 @@
 
 	let counter_divert_update
 	let last_divert_update
+	let counter_vehicle_update
+	let last_vehicle_update
 
 	onMount(()=> {
 		getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
@@ -114,6 +116,18 @@
 
 	}
 
+	function countVehicleUpdate(time) {
+		if (last_vehicle_update != time) {
+			last_vehicle_update = time
+			clearInterval(counter_vehicle_update);
+			$uistates_store.vehicle_update = time
+			counter_vehicle_update = setInterval(() => {
+				$uistates_store.vehicle_update += 1
+			}, 1000);
+		}
+
+	}
+
 
 
 	// Refresh stores when new version is published over websocket
@@ -125,6 +139,8 @@
 	$: refreshDateTime			($status_store.time, $config_store.time_zone)
 	$: refreshUIState			($status_store)
 	$: countDivertUpdate		($status_store.divert_update)
+	$: countVehicleUpdate		($status_store.vehicle_state_update)
+	
 
 </script>
 

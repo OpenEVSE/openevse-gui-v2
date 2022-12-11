@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import VehicleTesla from "./VehicleTesla.svelte";
 	import VechicleMQTT from "./VechicleMQTT.svelte";
 	import Box from "../../ui/Box.svelte";
@@ -10,8 +11,17 @@
 	
 	let mode = 0 // 0: none, 1: Tesla, 2: MQTT
 	let modes = [{name: "None/HTTP", value: 0}, {name:"Tesla", value: 1}, {name: "MQTT", value: 2}]
+	function getMode() {
+		if ($config_store.tesla_enabled)
+			mode = 1
+		else if ($config_store.mqtt_vehicle_soc)
+			mode = 2
+		else mode = 0
+	}
 
-	
+	onMount(() => {
+		getMode()
+	})
 </script>
 
 <Box title="Vehicle" has_help={mode==1?true:false}>
