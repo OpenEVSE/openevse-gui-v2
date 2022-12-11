@@ -81,9 +81,9 @@
 </style>
 
 <Box title="RFID">
-	<Switch name="rfidswitch" label="Enable RFID" bind:checked={$config_store.rfid_enabled} onChange={toggleRFID} is_rtl={true} />
+	<Switch name="rfidswitch" label="Enable RFID" bind:checked={$config_store.rfid_enabled} onChange={toggleRFID}/>
 	{#if $config_store.rfid_enabled}
-	<div class="is-flex is-justify-content-center">
+	<div class="is-flex is-justify-content-center mt-3 mb-3">
 		<div class="borders has-text-centered">
 			<div class="has-text-weight-bold my-2">Manage scanned tags</div>
 			<Button name="Scan" butn_submit={scanTag} disabled={$status_store.rfid_waiting > 0}/>

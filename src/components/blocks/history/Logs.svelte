@@ -43,6 +43,13 @@
 
 <Box title="History">
 		<div class="has-text-centered">
+			{#if !loaded}
+			<div class="box is-inline-block has-text-centered mt-4 mb-5 is-size-6 has-text-weight-bold">
+				<div class="mb-4">Loading Data</div>
+				<Fa class="has-text-info is-size-4" icon={faSpinner} spin />
+			</div>
+				
+			{:else}
 			<table class="table is-size-7">
 				<thead>
 					<tr>
@@ -53,7 +60,6 @@
 						<th><abbr title="Temperature">T°</abbr></th>
 					</tr>
 				</thead>
-				{#if loaded}
 				<tbody>
 					{#each $history_store as item}
 					<tr>
@@ -69,14 +75,7 @@
 					</tr>
 					{/each}
 				</tbody>
-				{/if}
 			</table>
-			{#if !loaded}
-			<div class="box is-inline-block has-text-centered mt-4 is-size-6 has-text-weight-bold">
-				<div class="mb-4">Loading Data</div>
-				<Fa class="has-text-info is-size-4" icon={faSpinner} spin />
-			</div>
-				
 			{/if}
 		</div>
 	

@@ -17,8 +17,9 @@ export async function httpAPI(method,url,body=null,type = "json") {
 	}
 	
 	setTimeout(() => controller.abort(), 10000);
-	if (import.meta.env.DEV) { 
-		url = "/api" + url
+	if (import.meta.env.DEV) {
+		if (!url.includes("http",0))
+			url = "/api" + url
 	}
 	const res = await fetch(url, data).then((response) => {
 		if (response.status >= 400 && response.status < 600) {

@@ -119,8 +119,8 @@
 	<div >
 		<form>
 			<Switch name="auth_enabled" label="Enable" tooltip="Enable HTTP authentication" tooltip_pos="top" bind:checked={auth_checked} />
-			<InputForm  title="Username" bind:value={auth_usr} placeholder="Admin" type="text" disabled={!auth_checked} />
-			<InputForm title="Password" bind:value={auth_pwd} placeholder="15 characters max" type="password" maxlength=15 disabled={!auth_checked} />
+			<div><InputForm  title="Username" bind:value={auth_usr} placeholder="Admin" type="text" disabled={!auth_checked} /></div>
+			<div><InputForm title="Password" bind:value={auth_pwd} placeholder="15 characters max" type="password" maxlength=15 disabled={!auth_checked} /></div>
 			<Button name="Save" color="is-info" state={auth_submit_state} butn_submit={auth_submit} />
 		</form>
 	</div>

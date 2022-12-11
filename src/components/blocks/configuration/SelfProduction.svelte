@@ -102,25 +102,25 @@
 	
 	<Select title="Mode" bind:value={mode} items={modes} />
 	{#if mode==0}
-	<InputForm title="Feed:" bind:value={$config_store.mqtt_solar} placeholder="/topic/energy_production" />
+	<div><InputForm title="Feed:" bind:value={$config_store.mqtt_solar} placeholder="/topic/energy_production" /></div>
 	<div class="is-size-7">Self Production MQTT topic (in W) to modulate charge rate based on production</div>
 	{:else}
-	<InputForm title="Feed:" bind:value={$config_store.mqtt_grid_ie} placeholder="/topic/grid" />
+	<div><InputForm title="Feed:" bind:value={$config_store.mqtt_grid_ie} placeholder="/topic/grid" /></div>
+	
 	<div class="is-size-7">Grid (+I/-E) MQTT topic to modulate charge rate based on excess power</div>
 	{/if}
 
 	{#if mode==1}
-	<InputForm title="Required PV power ratio:" type="number" bind:value={$config_store.divert_PV_ratio} placeholder="1.1" />
+	<div><InputForm title="Required PV power ratio:" type="number" bind:value={$config_store.divert_PV_ratio} placeholder="1.1" /></div>
 	<div class="is-size-7">The fraction of PV current that suffices to start charging or increment current</div>
 	{/if}
-
-	<InputForm title="Divert smoothing attack:" type="number" bind:value={$config_store.divert_attack_smoothing_factor} placeholder="0.4" />
+	<div><InputForm title="Divert smoothing attack:" type="number" bind:value={$config_store.divert_attack_smoothing_factor} placeholder="0.4" /></div>
 	<div class="is-size-7">The amount of the new feed value to add to the divert available power rolling average</div>
-	<InputForm title="Divert smoothing decay:" type="number" bind:value={$config_store.divert_decay_smoothing_factor} placeholder="0.005" />
-	<div class="is-size-7">The amount of the new feed value to remove to the divert available power rolling average</div>
-	<InputForm title="Minimum Charge Time:" type="number" bind:value={$config_store.divert_min_charge_time} placeholder="600" />
-	<div class="is-size-7">The minimum amount of time (seconds) to charge the car once enabled via the self production divert. This can help minimise wear and tear on the EVSE.</div>
+	<div><InputForm title="Divert smoothing decay:" type="number" bind:value={$config_store.divert_decay_smoothing_factor} placeholder="0.005" /></div>
 
+	<div class="is-size-7">The amount of the new feed value to remove to the divert available power rolling average</div>
+	<div><InputForm title="Minimum Charge Time:" type="number" bind:value={$config_store.divert_min_charge_time} placeholder="600" /></div>
+	<div class="is-size-7">The minimum amount of time (seconds) to charge the car once enabled via the self production divert. This can help minimise wear and tear on the EVSE.</div>
 	<div class="block mt-5">
 		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>

@@ -13,12 +13,13 @@
 	export let status = 0
 	export let disabled = false
 	export let readonly = false
+	export let is_inline = false
+
 
 	let show = false
 	let typecss = "text"
 	let field
 	let timeout
-
 	onMount(() => {
 		typecss = type
 	})
@@ -54,7 +55,7 @@
         z-index: 2;
     }
 </style>
-<div class="my-2">
+<div class="my-2 {is_inline?"is-inline-block":""}">
 		{#if title}
 		<span class="has-text-weight-semibold {disabled?"has-text-grey-light":""}">{title}</span>
 		{/if}

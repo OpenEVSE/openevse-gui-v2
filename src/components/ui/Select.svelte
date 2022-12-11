@@ -4,7 +4,7 @@
 	import {onDestroy} from "svelte"
 
 	export let value
-	export let title
+	export let title = ""
 	export let status = ""
 	export let disabled = false
 	export let items = [] // [{name: "name", value: "value"}, ...]
@@ -22,8 +22,10 @@
 	$: resetStatus(status)
 
 </script>
-<div class="is-inline-block">
+<div class="is-inline-block my-2">
+	{#if title}
 	<div class="has-text-weight-bold">{title}</div>
+	{/if}
 	<div class="select is-info">
 		<select bind:value={value} on:change={onChange} {disabled}>
 			{#each items as item }

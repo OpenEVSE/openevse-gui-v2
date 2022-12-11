@@ -66,17 +66,19 @@
 
 <Box title="MQTT" has_help={true}>
 	<div slot="help"><MQTThelp /> </div>
-	<Switch name="mqttswitch" label="Enable MQTT" onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled} is_rtl={true}/>
-	<InputForm title="Host*" bind:value={$config_store.mqtt_server} placeholder="server IP / Hostname" />
-	<InputForm title="Port*" bind:value={$config_store.mqtt_port} placeholder="1883" type="number" />
-	<Switch name="mqttselfcert" label="Reject self-signed certificates" bind:checked={$config_store.mqtt_reject_unauthorized} is_rtl={true}/>
-	<InputForm title="Username" bind:value={$config_store.mqtt_user} placeholder="Username" />
-	<form>
-		<InputForm title="Password" bind:value={$config_store.mqtt_pass} placeholder="Password" type="password" />
-	</form>
-	<InputForm title="Base Topic*" bind:value={$config_store.mqtt_topic} placeholder="openevse" />
-	<Switch name="mqttretain" label="Retain published data" bind:checked={$config_store.mqtt_retained} is_rtl={true}/>
-	<InputForm title="Voltage Topic" bind:value={$config_store.mqtt_vrms} placeholder="topic/voltage" />
+	<Switch name="mqttswitch" label="Enable MQTT" onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled}/>
+	<div><InputForm title="Host*" bind:value={$config_store.mqtt_server} placeholder="server IP / Hostname" /></div>
+	<div><InputForm title="Port*" bind:value={$config_store.mqtt_port} placeholder="1883" type="number" /></div>
+	<Switch name="mqttselfcert" label="Reject self-signed certificates" bind:checked={$config_store.mqtt_reject_unauthorized}/>
+	<div><InputForm title="Username" bind:value={$config_store.mqtt_user} placeholder="Username" /></div>
+	<div>
+		<form>
+			<InputForm title="Password" bind:value={$config_store.mqtt_pass} placeholder="Password" type="password" />
+		</form>
+	</div>
+	<div><InputForm title="Base Topic*" bind:value={$config_store.mqtt_topic} placeholder="openevse" /></div>
+	<Switch name="mqttretain" label="Retain published data" bind:checked={$config_store.mqtt_retained}/>
+	<div><InputForm title="Voltage Topic" bind:value={$config_store.mqtt_vrms} placeholder="topic/voltage" /></div>
 	<div class="is-size-7">Voltage MQTT topic to improve power calculations</div>
 	<div class="block mt-5">
 		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />

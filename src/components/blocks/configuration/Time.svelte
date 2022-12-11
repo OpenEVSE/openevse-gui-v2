@@ -136,15 +136,18 @@
 	{#if !timemode}
 	<div><Button name="Use Browser Time" butn_submit={timeNow}/></div>
 	{:else}
-	<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
-		status={inputSntpState} onChange={() => {setNTP($config_store.sntp_hostname)}}/>
+	<div>
+		<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
+			status={inputSntpState} onChange={() => {setNTP($config_store.sntp_hostname)}}/>
+	</div>
 	{/if}
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
-	<div class="mt-4">
-		<Button name="Set Time" butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
-	</div>
+
 	<div class="">
 		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={createTzObj(timeZone)} onChange={setTimeZone} />
 
+	</div>
+	<div class="mt-4">
+		<Button name="Set Time" butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
 	</div>
 </Box>
