@@ -81,16 +81,16 @@
 					</thead>
 					<tbody class="is-size-6">
 						<tr>
-							<td>ESP info</td>
-							<td class="has-text-weight-semibold">{$config_store.espinfo}</td>
+							<td class="has-text-weight-semibold">ESP info</td>
+							<td class="">{$config_store.espinfo}</td>
 						</tr>
 						<tr>
-							<td>Build</td>
-							<td class="has-text-weight-semibold">{$config_store.buildenv}</td>
+							<td class="has-text-weight-semibold">Build</td>
+							<td class="">{$config_store.buildenv}</td>
 						</tr>
 						<tr>
-							<td>Version</td>
-							<td class="has-text-weight-semibold">{$config_store.version}</td>
+							<td class="has-text-weight-semibold">Version</td>
+							<td class="">{$config_store.version}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -101,16 +101,16 @@
 			<div class="is-inline-block my-2">
 		
 			{#if uploadButtonState == "loading"}
-				Uploading <span class="is-italic">{file.name}</span>, please wait...
+				Uploading <span class="">{file.name}</span>, please wait...
 				<progress class="progress is-primary" value={$status_store.ota_progress} max="100">{percentDone}%</progress>
 			{:else if fileSent == "ko" }
 				Upload Failed
 			{:else if fileSent == "ok" }
-				<span class="is-italic">{file.name}</span> uploaded successfully, page will reload in few sec
+				<span class="">{file.name}</span> uploaded successfully, page will reload in few sec
 			{:else}
 				<div class="is-flex is-align-items-center">
 					<Fa class="is-size-6 mx-2 has-text-primary" icon={faFileCircleCheck}/>
-					<span class="my-2 is-family-code is-italic">
+					<span class="my-2">
 						{file.name}
 					</span>
 					<div class="ml-2 is-size-5 is-inline-block">
@@ -125,7 +125,7 @@
 			<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{:else}
-		<div class="my-2 is-family-code is-italic">
+		<div class="my-2">
 			<Fa class="is-size-6 has-text-danger mx-2" icon={faFileCircleXmark} />No file selected
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-start">

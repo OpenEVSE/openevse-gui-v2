@@ -54,12 +54,12 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>OpenEVSE</td>
+				<td class="has-text-weight-bold">OpenEVSE</td>
 				<td>{$config_store.firmware}</td>
 				<td><div class="has-text-centered"><Button width="80px" size="is-small" name="Restart" butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
 			</tr>
 			<tr>
-				<td>OpenEVSE Wifi</td>
+				<td class="has-text-weight-bold">OpenEVSE Wifi</td>
 				<td>{$config_store.version}</td>
 				<td>
 					<div class="has-text-centered ">

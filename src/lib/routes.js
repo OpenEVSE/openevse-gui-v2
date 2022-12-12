@@ -18,6 +18,7 @@ import SelfProduction   from '../routes/SelfProduction.svelte'
 import EmonCMS          from '../routes/EmonCMS.svelte'
 import OhmConnect       from '../routes/OhmConnect.svelte'
 import Vehicle          from '../routes/Vehicle.svelte'
+import Dev          from '../routes/Dev.svelte'
 
 export const routes = {
     // Exact path
@@ -39,7 +40,7 @@ export const routes = {
     '/configuration/vehicle': wrap({ component: Vehicle}),
     '/configuration/emoncms': wrap({ component: EmonCMS}),
     '/configuration/ohmconnect': wrap({ component: OhmConnect}),
-    // '/configuration/dev': wrap({ component: Developper}),
+    '/configuration/dev': wrap({ component: Dev}),
     // Catch-all
     // This is optional, but if present it must be the last
     '*': NotFound,
