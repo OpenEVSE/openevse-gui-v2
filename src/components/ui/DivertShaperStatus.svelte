@@ -1,7 +1,7 @@
 <script>
 	import { status_store }   from "./../../lib/stores/status.js";
 	import { uistates_store } from "./../../lib/stores/uistates.js";
-	import {s2mns} 			  from "../../lib/utils.js"
+	import {s2mns,round} 			  from "../../lib/utils.js"
 	import Fa 					from 'svelte-fa/src/fa.svelte'
 	import {faBuildingShield, faSolarPanel} 	from '@fortawesome/free-solid-svg-icons/index.js'
 </script>
@@ -14,7 +14,7 @@
 <div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
 	<Fa icon={faSolarPanel} class="has-text-primary mr-1 "/>
 	{#if $uistates_store.divert_type == 0}
-	<div class="mr-2">
+	<div class="mr-2 is-inline-block">
 		<span>Production:</span>
 		<span class="has-text-primary">{$status_store.solar}W</span>
 	</div>
@@ -26,14 +26,13 @@
 	</div>
 	{/if}
 	<div class="mr-2">
-		<span>Charge rate:</span>
-		<span class="has-text-info">{$status_store.charge_rate}A</span>
+		<span>Available Current:</span>
+		<span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
 	</div>
-	<div class="mr-2">
-		<span class="has-text-weight-bold  is-size-7">Last updated:</span>
-		<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{s2mns($uistates_store.divert_update)}</span>
+	<div class="mr-2" class:is-hidden={!$status_store.smoothed_available_current}>
+		<span>Smoothed Current:</span>
+		<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
 	</div>
-
 </div>
 {:else if $status_store.shaper}
 <div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
