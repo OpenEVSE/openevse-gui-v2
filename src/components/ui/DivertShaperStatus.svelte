@@ -41,5 +41,7 @@
 	<span class="is-size-7 mr-2 has-text-weight-bold">House Load: <span class="has-text-info">{$status_store.shaper_live_pwr} W</span></span>
 	<span class="is-size-7 mr-2 has-text-weight-bold">Current Available: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} A</span></span>
 </div>
-<div class="is-size-7 mr-2 has-text-danger">{$status_store.shaper_updated?"":"Shaper: Live Power Load data has not been updated in time, EVSE has been disabled"}</div>
+	{#if $status_store.shaper_updated == false}
+	<div class="is-size-7 mr-2 has-text-danger">Shaper: Live Power Load data has not been updated in time, EVSE has been disabled"</div>
+	{/if}
 {/if}
