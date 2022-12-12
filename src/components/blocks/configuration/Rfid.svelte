@@ -14,7 +14,9 @@
 	let state = "default"
 	let tags = []
 	let tags_inst = []
+	let but_scan_state
 	let button_inst
+	let button2_inst
 
 	
 	onMount(() => {
@@ -22,29 +24,49 @@
 	})
 	$: $config_store.rfid_storage, resetStates()
 	$: updateTags($config_store.rfid_storage)
+	$: scanState($status_store.rfid_waiting)
 
+	function scanState(count) {
+		if (count != undefined) {
+			if (!count) 
+				but_scan_state = "default"
+			else {
+				but_scan_state = "loading"
+			}
+		}	
+	}
 
 	function updateTags(store) {
 		tags = store.split(",")
 	}
 
 	async function toggleRFID() {
-		
 		let res = await serialQueue.add(() => config_store.saveParam("rfid_enabled", $config_store.rfid_enabled))
 	}
 
 	async function scanTag() {
 		scanning = true
-		let res  = await serialQueue.add(() => httpAPI("GET", "/rfid/add",null,"txt")  )
+		but_scan_state = "loading"
+		serialQueue.add(() => httpAPI("GET", "/rfid/add",null,"txt")  )
 
 	}
 
 	async function removeTag(tag,inst) {
 		inst.state="loading"
-		let str_tags =  tags.filter(function(value, index, arr){ 
-       		return value != tag;
-    	}).join(",");
-		let jsontags = {rfid_storage: str_tags}
+		let jsontags = {
+			rfid_storage: ""
+		}
+
+		if (tag!="all") {
+			let str_tags =  tags.filter(function(value, index, arr){ 
+				return value != tag;
+			}).join(",");
+			jsontags.rfid_storage = str_tags
+		} else {
+			jsontags.rfid_enabled = false
+		}
+
+		
 		let res = await serialQueue.add(() => config_store.upload(jsontags))
 		if (res) {
 			//$config_store.rfid_store = str_tags
@@ -87,7 +109,7 @@
 	<div class="is-flex is-justify-content-center mt-3 mb-3">
 		<div class="borders has-text-centered">
 			<div class="has-text-weight-bold my-2">Manage scanned tags</div>
-			<Button name="Scan" butn_submit={scanTag} disabled={$status_store.rfid_waiting > 0}/>
+			<Button name="Scan" butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
 			{#if $status_store.rfid_waiting > 0}
 				<div class="mt-2 has-text-weight-bold">Place your RFID tag on the scanner...</div>
 			{/if}
@@ -108,10 +130,12 @@
 	{#if tags[0] != "" }
 	<div class="is-flex is-justify-content-center">
 		<div class="borders my-4 is-flex-grow-1">
-			<div class="has-text-weight-bold is-size-6 is-flex mb-4">Registered Tags</div>
-				{#each tags as tag,i}
-					<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
-				{/each}
+			<div class="has-text-weight-bold is-size-6  has-text-centered">Registered Tags</div>
+			{#each tags as tag,i}
+				<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
+			{/each}
+			<div class="has-text-centered"><Button bind:this={button2_inst} name="Remove All" size="is-small" color="is-danger" butn_submit={()=>removeTag("all",button2_inst)} /></div>
+			
 		</div>
 	</div>
 	{/if}
