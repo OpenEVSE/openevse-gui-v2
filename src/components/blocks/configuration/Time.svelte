@@ -126,7 +126,7 @@
 		})
 
 	$: getTimeMode($config_store.sntp_enabled)
-	$: updateDateField($status_store.time)
+	$: $status_store.time, updateDateField($status_store.time)
 	$: $config_store.time_zone, ()=> {tz = $config_store.time_zone }
 </script>
 

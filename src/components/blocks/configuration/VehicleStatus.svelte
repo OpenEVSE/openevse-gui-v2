@@ -44,7 +44,7 @@
 			<tr>
 				<td>Battery Range</td>
 				<td class="has-text-right"><span class="tag tags is-info">
-					{#if !$config_store.tesla_enabled || $config_store.tesla_enabled && $config_store.mqtt_vehicle_range_miles}}
+					{#if !$config_store.tesla_enabled || $config_store.tesla_enabled && $config_store.mqtt_vehicle_range_miles}
 						{$status_store.battery_range}
 					{:else if !$config_store.mqtt_vehicle_range_miles}
 						{miles2km($status_store.battery_range)}

@@ -17,8 +17,6 @@
 		$uistates_store.window_width = window.innerWidth
 		$uistates_store.breakpoint = getBreakpoint()
 	}
-
-	onMount(()=>console.log("import.meta.env.MODE: " + import.meta.env.MODE))
 </script>
 <style>
 	.container {
