@@ -56,7 +56,7 @@
 			tesla_vehicle_id: id
 		}
 
-		let res = await config_store.upload(data)
+		let res = await serialQueue.add(()=>config_store.upload(data))
 
 		if (await res) {
 			select_status = "ok"

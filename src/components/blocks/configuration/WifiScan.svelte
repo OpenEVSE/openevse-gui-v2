@@ -1,4 +1,5 @@
 <script>
+	import { serialQueue } from "./../../../lib/queue.js";
 	import WifiIcon from "./../../ui/WifiIcon.svelte";
 	import {removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"
 	import Fa from 'svelte-fa/src/fa.svelte'
@@ -25,10 +26,10 @@
 		state = "scan"
 		scanButnState = "loading"
 		networks = []
-		let unfiltered_networks = await httpAPI("GET","/scan")
+		let unfiltered_networks = await serialQueue.add(()=>httpAPI("GET","/scan"))
 		if (unfiltered_networks.length < 1) {
 			// scan again one time
-			unfiltered_networks = await httpAPI("GET","/scan")
+			unfiltered_networks = await serialQueue.add(()=>httpAPI("GET","/scan"))
 		}
 		if (unfiltered_networks.length > 0) {
 			scanButnState = "ok"
@@ -41,7 +42,7 @@
 	}
 	async function connectWifi() {
 		let param = "ssid=" + ssid + "&pass=" + key
-		let response = await httpAPI("POST", "/savenetwork", param, "text")
+		let response = await serialQueue.add(()=>httpAPI("POST", "/savenetwork", param, "text"))
 		active = false
 		return true
 	}

@@ -1,4 +1,5 @@
 <script>
+	import { serialQueue } from "./../../../lib/queue.js";
 	import {status_store} from '../../../lib/stores/status.js'
 	import {config_store} from "../../../lib/stores/config.js"
 	import InputForm from "../../ui/InputForm.svelte"
@@ -31,7 +32,7 @@
 
 	async function onChange(prop,val) {
 		input_host_status = 1
-		let res = await config_store.saveParam(prop, val)
+		let res = await serialQueue.add(()=>config_store.saveParam(prop, val))
 		if (res) {
 			input_host_status = 2 //ok
 		}

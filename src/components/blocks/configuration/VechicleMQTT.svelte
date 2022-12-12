@@ -1,4 +1,5 @@
 <script>
+	import { serialQueue } from "./../../../lib/queue.js";
 	import Button from "./../../ui/Button.svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import InputForm from "./../../ui/InputForm.svelte";
@@ -21,7 +22,7 @@
 		mqtt_vehicle_range_miles: $config_store.mqtt_vehicle_range_miles
 	}
 
-	if (await config_store.upload(data)) 
+	if (await serialQueue.add(()=>config_store.upload(data))) 
 		{
 			stg_submit_state = "ok"
 			return true

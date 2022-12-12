@@ -1,4 +1,5 @@
 <script>
+	import Select from "./../../ui/Select.svelte";
 	import Help from "./../../ui/Help.svelte";
 	import Switch from "./../../ui/Switch.svelte";
 	import { serialQueue } from "./../../../lib/queue.js";
@@ -10,11 +11,13 @@
 
 	// let input_random_start = {value: 0}
 	let input_random_start = 0
+	let select_service_level = ""
+	const service_items = [{name: "Auto", value: 0},{name: "Level 1", value: 1},{name: "Level 2", value: 2}]
 
 	async function onChange(prop,val) {
 		input_random_start = 1
-		let res = await config_store.saveParam(prop, val)
-		if (res) {
+		let res = await serialQueue.add(()=>config_store.saveParam(prop, val))
+		if (await res) {
 			input_random_start= 2 //ok
 		}
 		else input_random_start = 3 //error
@@ -22,11 +25,19 @@
 	}
 
 	async function setLed() {
-		let res = serialQueue.add(()=>config_store.saveParam("led_brightness",$config_store.led_brigthness))
+		let res = await serialQueue.add(()=>config_store.saveParam("led_brightness",$config_store.led_brigthness))
 	}
 
 	async function togglePauseMode() {
-		let res = serialQueue.add(()=>config_store.saveParam("pause_uses_disabled",$config_store.pause_uses_disabled))
+		let res = await serialQueue.add(()=>config_store.saveParam("pause_uses_disabled",$config_store.pause_uses_disabled))
+	}
+
+	async function setServiceLevel() {
+		select_service_level = "loading"
+		let res = await serialQueue.add(()=>config_store.saveParam("service",$config_store.service))
+		if (res)
+			select_service_level = "ok"
+		else select_service_level = "error"
 	}
 </script>
 <style>
@@ -58,6 +69,10 @@
 			<div class="borders mb-4">
 				<div class="has-text-weight-bold is-size-6">Led Brightness</div>
 				<SliderForm bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
+			</div>
+			<div class="borders mb-4">
+				<div class="has-text-weight-bold is-size-6">Service Level</div>
+				<Select bind:value={$config_store.service} bind:status={select_service_level} items={service_items} onChange={setServiceLevel}/>
 			</div>
 			<div class="borders">
 				<Help>Some vehicles will shutdown if left in sleep mode (pilot signal enable) and then can not be woken up by timers/PV divert. 

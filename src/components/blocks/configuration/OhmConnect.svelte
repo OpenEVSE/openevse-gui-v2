@@ -29,7 +29,7 @@
 			ohm: $config_store.ohm
 		}
 
-		if (await config_store.upload(data)) 
+		if (await serialQueue.add(()=>config_store.upload(data))) 
 			{
 				stg_submit_state = "ok"
 				return true
