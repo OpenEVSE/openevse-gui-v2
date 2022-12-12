@@ -2,12 +2,12 @@
 	import Help from "./Help.svelte";
 	import { scale, fade} from 'svelte/transition';
 	import { expoOut, expoInOut } from 'svelte/easing';
-	import Fa  from 'svelte-fa/src/fa.svelte'
+	import Icon from '@iconify/svelte';
 
 	export let title = "title"
 	export let has_help = false
 	export let visible = true
-	export let icon = null
+	export let icon = ""
 
 </script>
 <style>
@@ -25,11 +25,13 @@
 		<slot name="help"></slot>
 		</Help>
 	</div>
-	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold">
+	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center">
 		{#if icon}
-		<Fa icon={icon} class="mr-1"/>
+		<div class="mr-1 mt-1">
+			<Icon icon={icon} class="pt-1" width="26" />
+		</div>
 		{/if}
-		{title}
+		<span>{title}</span>
 	</div>
 	<div style="width: 40%;"><hr></div>
 	<slot>

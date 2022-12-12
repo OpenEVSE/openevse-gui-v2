@@ -25,7 +25,7 @@
 	})
 </script>
 
-<Box title="Vehicle" has_help={mode==1?true:false} icon={faGear}>
+<Box title="Vehicle" has_help={mode==1?true:false} icon="bi:ev-front">
 	<div slot="help"><VehicleTeslaHelp /> </div>
 	<Select title="Connection Type" bind:value={mode} items={modes} />
 	{#if mode == 2}

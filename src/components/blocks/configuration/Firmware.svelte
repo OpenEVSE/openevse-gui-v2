@@ -5,7 +5,6 @@
 	import Button 				from "../../ui/Button.svelte"
 	import FirmwareUpdateModal 	from "./FirmwareUpdateModal.svelte"
 	import {httpAPI} 			from "../../../lib/utils.js"
-	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let restartOpenEvseState = "default"
 	let restartEspState = "default"
@@ -44,7 +43,7 @@
 </script>
 
 
-<Box title="Firmware" icon={faGear}>
+<Box title="Firmware" icon="fa6-solid:microchip">
 	<table class="table is-fullwidth is-vcentered">
 		<thead>
 			<tr class="has-background-info"	>

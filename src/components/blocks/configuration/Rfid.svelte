@@ -81,7 +81,7 @@
 	}
 </style>
 
-<Box title="RFID" icon={faGear}>
+<Box title="RFID" icon="bx:rfid">
 	<Switch name="rfidswitch" label="Enable RFID" bind:checked={$config_store.rfid_enabled} onChange={toggleRFID}/>
 	{#if $config_store.rfid_enabled}
 	<div class="is-flex is-justify-content-center mt-3 mb-3">

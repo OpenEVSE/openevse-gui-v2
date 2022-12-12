@@ -9,7 +9,7 @@
 	import Modal from "../../ui/Modal.svelte"
 	import SelectFile from "../../ui/SelectFile.svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faFileCircleCheck, faFileCircleXmark, faSquareMinus, faGear} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {faFileCircleCheck, faFileCircleXmark, faSquareMinus, faMicrochip} from '@fortawesome/free-solid-svg-icons/index.js'
 	export let is_opened = false
 
 	let file
@@ -68,7 +68,7 @@
 </script>
 
 <Modal bind:is_opened canClose={false}>
-	<Box title="Firmware Update" icon={faGear}>
+	<Box title="Firmware Update" icon="fa6-solid:microchip">
 		<div class="pt-2">
 			
 			<div class="">

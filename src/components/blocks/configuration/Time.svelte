@@ -10,7 +10,6 @@
 	import Button from "../../ui/Button.svelte"
 	import Select from "../../ui/Select.svelte"
 	import { DateTime } from "luxon";
-	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let inputSntpState = 0
 	let date
@@ -131,7 +130,7 @@
 	$: $config_store.time_zone, ()=> {tz = $config_store.time_zone }
 </script>
 
-<Box title="Time" icon={faGear}>
+<Box title="Time" icon="fa6-regular:clock">
 
 	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
 	{#if !timemode}

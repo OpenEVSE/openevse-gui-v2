@@ -3,7 +3,7 @@
 	import {config_store} from "../../../lib/stores/config.js"
 	import InputForm from "../../ui/InputForm.svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
-	import { faCircleCheck, faCircleXmark, faGear } from '@fortawesome/free-solid-svg-icons/index.js'
+	import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import WifiDisplay from "./WifiDisplay.svelte"
 	import Button from "../../ui/Button.svelte"
 	import WifiScan from "./WifiScan.svelte"
@@ -40,7 +40,7 @@
 	}
 </script>
 
-<Box title="Network" icon={faGear}>
+<Box title="Network" icon="mdi:local-area-network">
 	<span class="is-size-6 has-text-weight-bold">
 		 	Mode: 
 	</span>

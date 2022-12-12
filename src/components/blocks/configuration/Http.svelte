@@ -113,7 +113,7 @@
 	
 </script>
 
-<Box title="HTTP Server" icon={faGear}>
+<Box title="HTTP Server" icon="mdi:web">
 	<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
 	{#if activetab == 0}
 	<!-- Authentification -->

@@ -7,7 +7,7 @@
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Switch from "./../../ui/Switch.svelte";
 	import AlertBox from "../../ui/AlertBox.svelte"
-	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
+	import Icon from '@iconify/svelte';
 
 	
 
@@ -57,7 +57,7 @@
 	}
 </script>
 
-<Box title="Energy Monitoring" icon={faGear}>
+<Box title="Energy Monitoring" icon="fa-solid:chart-bar">
 	<Switch name="emoncmsswitch" label="Enable Emoncms" onChange={toggleEmonCMS} bind:checked={$config_store.emoncms_enabled} is_rtl={true}/>
 	{#if $config_store.emoncms_enabled}
 	<div class="is-size-7">

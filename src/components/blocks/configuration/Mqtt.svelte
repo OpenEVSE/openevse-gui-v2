@@ -65,7 +65,7 @@
 	}
 </script>
 
-<Box title="MQTT" has_help={true} icon={faGear}>
+<Box title="MQTT" has_help={true} icon="simple-icons:mqtt">
 	<div slot="help"><MQTThelp /> </div>
 	<Switch name="mqttswitch" label="Enable MQTT" onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled}/>
 	<div><InputForm title="Host*" bind:value={$config_store.mqtt_server} placeholder="server IP / Hostname" /></div>
