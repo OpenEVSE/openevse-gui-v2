@@ -24,6 +24,9 @@
 		return res
 	}
 
+	async function setMaxCurrent() {
+		let res = await serialQueue.add(()=>config_store.saveParam("max_current_soft",$config_store.max_current_soft))
+	}
 	async function setLed() {
 		let res = await serialQueue.add(()=>config_store.saveParam("led_brightness",$config_store.led_brigthness))
 	}
@@ -55,33 +58,37 @@
 </style>
 <Box title="EVSE" icon="mdi:evse">
 	<div class="is-flex is-flex-direction-column is-align-items-center mt-4 ">
-			<div class="borders mb-4">
-				<div class="has-text-weight-bold is-size-6">Scheduler Random start adjust</div>
-				<div class="is-flex is-align-items-center">	
-					<div class="inputbox ">	
-					<InputForm  type="number" title="" placeholder="OpenEVSE host name" bind:value={$config_store.scheduler_start_window} 
-					status={input_random_start} onChange={()=>onChange("scheduler_start_window", $config_store.scheduler_start_window)}/>
-					</div>
-					<div class="ml-2"> seconds</div>
+
+		<div class="borders mb-4">
+			<div class="has-text-weight-bold is-size-6">Max Current</div>
+			<SliderForm bind:value={$config_store.max_current_soft} unit="A" min={$config_store.min_current_hard}} max={$config_store.max_current_hard} onchange={setMaxCurrent} />
+		</div>
+		<div class="borders mb-4">
+			<div class="has-text-weight-bold is-size-6">Scheduler Random start adjust</div>
+			<div class="is-flex is-align-items-center">	
+				<div class="inputbox ">	
+				<InputForm  type="number" title="" placeholder="OpenEVSE host name" bind:value={$config_store.scheduler_start_window} 
+				status={input_random_start} onChange={()=>onChange("scheduler_start_window", $config_store.scheduler_start_window)}/>
 				</div>
+				<div class="ml-2"> seconds</div>
 			</div>
-			
-			<div class="borders mb-4">
-				<div class="has-text-weight-bold is-size-6">Led Brightness</div>
-				<SliderForm bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
-			</div>
-			<div class="borders mb-4">
-				<div class="has-text-weight-bold is-size-6">Service Level</div>
-				<Select bind:value={$config_store.service} bind:status={select_service_level} items={service_items} onChange={setServiceLevel}/>
-			</div>
-			<div class="borders">
-				<Help>Some vehicles will shutdown if left in sleep mode (pilot signal enable) and then can not be woken up by timers/PV divert. 
-					Changing the pause state to disable should resolve this issue, however this removes the ability for the charger to detect
-					 if a vehicle is connected when paused.
-				</Help>
-				<div class="has-text-weight-bold is-size-6">Pause Status</div>
-				<Switch name="pausemode" label="{$config_store.pause_uses_disabled?"Disable":"Sleep"}" bind:checked={$config_store.pause_uses_disabled} onChange={togglePauseMode}  />
-			</div>
+		</div>
+		<div class="borders mb-4">
+			<div class="has-text-weight-bold is-size-6">Service Level</div>
+			<Select bind:value={$config_store.service} bind:status={select_service_level} items={service_items} onChange={setServiceLevel}/>
+		</div>
+		<div class="borders mb-4">
+			<Help>Some vehicles will shutdown if left in sleep mode (pilot signal enable) and then can not be woken up by timers/PV divert. 
+				Changing the pause state to disable should resolve this issue, however this removes the ability for the charger to detect
+					if a vehicle is connected when paused.
+			</Help>
+			<div class="has-text-weight-bold is-size-6">Pause Status</div>
+			<Switch name="pausemode" label="{$config_store.pause_uses_disabled?"Disable":"Sleep"}" bind:checked={$config_store.pause_uses_disabled} onChange={togglePauseMode}  />
+		</div>
+		<div class="borders">
+			<div class="has-text-weight-bold is-size-6">Led Brightness</div>
+			<SliderForm bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
+		</div>
 	</div>
 
 </Box>
