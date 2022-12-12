@@ -167,7 +167,7 @@
 	$: loggedin, getVehicles()
 
 </script>
-<div class="mt-5">
+<div class="mt-1">
 	<Select title="Range Unit" bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
 	{#if loggedin}
 		{#if status == "loading"}
