@@ -1,8 +1,10 @@
 import { DateTime } from "luxon";
 import {EvseClients} from "./vars.js"
 import {faHand, faRobot, faCar, faHourglassHalf, faThumbsUp, faBan, faBolt, faTriangleExclamation, faCircleXmark, faCircleInfo, faBell} from '@fortawesome/free-solid-svg-icons/index.js'
+import { uistates_store } from "./stores/uistates.js";
+import {get} from 'svelte/store'
 
-export async function httpAPI(method,url,body=null,type = "json") {
+export async function httpAPI(method,url,body=null,type = "json",timeout = 10000) {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
 	const controller = new AbortController();
 	let data = {
@@ -15,8 +17,9 @@ export async function httpAPI(method,url,body=null,type = "json") {
 	if (body) {
 		data.body = body
 	}
-	
-	setTimeout(() => controller.abort(), 10000);
+	// do not timeout on first request in case there's authentication
+	if (get(uistates_store).has_fetched)
+		setTimeout(() => controller.abort(), timeout);
 	if (import.meta.env.DEV) {
 		if (!url.includes("http",0))
 			url = "/api" + url
@@ -39,6 +42,11 @@ export async function httpAPI(method,url,body=null,type = "json") {
 		console.log(error)
 		return "error"
 	});
+
+	uistates_store.update(x => {
+		x.has_fetched = true;
+		return x;
+   });
 
 	return res
 		

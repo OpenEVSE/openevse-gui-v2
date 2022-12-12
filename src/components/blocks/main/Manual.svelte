@@ -189,7 +189,7 @@ $: setDivertMode($uistates_store.divertmode)
 
 </script>
 
-<Box title="Charge" icon={faBolt}>
+<Box title="Charge" icon="fa6-solid:bolt">
 	<div class="has-text-centered mt-5 mb-0 pb-0 has-text-weight-bold has-text-info">EVSE STATE</div>
 	<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 	{#if $config_store.rfid_enabled}

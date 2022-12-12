@@ -4,8 +4,6 @@
 	import {status_store} from "../../../lib/stores/status.js"
 	import Box from "../../ui/Box.svelte"
 
-	export let editable = false
-
 </script>
 
 <Box title="Safety">

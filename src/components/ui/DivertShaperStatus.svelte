@@ -5,11 +5,7 @@
 	import Fa 					from 'svelte-fa/src/fa.svelte'
 	import {faBuildingShield, faSolarPanel} 	from '@fortawesome/free-solid-svg-icons/index.js'
 </script>
-<style>
-	.has-text-orange {
-		color: orange;
-	}
-</style>
+
 {#if $status_store.divert_active}
 <div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
 	<Fa icon={faSolarPanel} class="has-text-primary mr-1 "/>

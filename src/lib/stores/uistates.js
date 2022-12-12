@@ -31,6 +31,20 @@ const model = {
 		ws_connected: undefined,
 		status_expanded: false,
 		window_width: window.innerWidth,
-		breakpoint: undefined
+		breakpoint: undefined,
+		has_fetched: false
 }
-export const uistates_store = writable(model)
+
+function createUIStatesStore() {
+    const P  = writable(model)
+    const { subscribe, set, update } = P
+
+	
+    return {
+        subscribe,
+        set,
+        update
+    }
+}
+
+export const uistates_store = createUIStatesStore()

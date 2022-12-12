@@ -47,7 +47,7 @@
 	async function scanTag() {
 		scanning = true
 		but_scan_state = "loading"
-		serialQueue.add(() => httpAPI("GET", "/rfid/add",null,"txt")  )
+		serialQueue.add(() => httpAPI("GET", "/rfid/add",null,"txt",5)  )
 
 	}
 

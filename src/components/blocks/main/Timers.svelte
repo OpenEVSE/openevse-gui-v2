@@ -60,7 +60,7 @@
 		margin: auto;
 	}
 </style>
-<Box title="Schedule" icon={faCalendarDays}>
+<Box title="Schedule" icon="fa6-solid:calendar-days">
 	<div class="mb-2">
 		<table class="table is-size-6 has-text-weight-normall timers">
 			<tbody>

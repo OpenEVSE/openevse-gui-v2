@@ -17,7 +17,7 @@
 	let elapsed
 	$uistates_store.status_expanded
 	$: { 
-		if ($status_store.elapsed != undefined)
+		if ($status_store && $status_store.elapsed != undefined)
 		    elapsed = sec2time($status_store.elapsed)
 		}
 	

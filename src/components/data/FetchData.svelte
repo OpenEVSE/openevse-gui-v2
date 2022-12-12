@@ -18,6 +18,7 @@
 	
 
 	async function loadData() {
+		
 		let res
 		status = "Loading step 1"
 		res = await status_store.download()

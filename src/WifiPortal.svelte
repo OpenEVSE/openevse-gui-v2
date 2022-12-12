@@ -1,17 +1,13 @@
 <script>
-	import Status from "./components/blocks/Status.svelte";
-	import {location} from 'svelte-spa-router'
-		// @ts-ignore
-	import MobileNav from "./components/blocks/MobileNav.svelte"
-	import {onMount, onDestroy} from "svelte"
-	import DataManager from "./components/data/DataManager.svelte"
-	// import Header from './components/blocks/Header.svelte';
-	import Router from 'svelte-spa-router'
-	import { routes } from "./lib/routes.js"
-	import FetchData from './components/data/FetchData.svelte'
+	import Status			  from "./components/blocks/Status.svelte";
+	import MobileNav		  from "./components/blocks/MobileNav.svelte"
+	import DataManager		  from "./components/data/DataManager.svelte"
+	import Router			  from 'svelte-spa-router'
+	import FetchData		  from './components/data/FetchData.svelte'
+	import {location}		  from 'svelte-spa-router'
+	import { routes }		  from "./lib/routes.js"
 	import { uistates_store } from './lib/stores/uistates.js'
-	import { status_store } from "./lib/stores/status.js";
-	import {getBreakpoint} from "./lib/utils.js"
+	import {getBreakpoint} 	  from "./lib/utils.js"
 
 	function getWindowSize() {
 		$uistates_store.window_width = window.innerWidth
