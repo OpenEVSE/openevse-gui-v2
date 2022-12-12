@@ -29,7 +29,7 @@
 	let button_shaper
 
 	async function setChgCurrent(val) {
-		
+		$uistates_store.charge_current = val
 		if (val == $config_store.max_current_soft) {
 			//remove claim
 			delete $override_store.charge_current
