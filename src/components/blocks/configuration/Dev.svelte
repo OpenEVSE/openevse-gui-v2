@@ -13,7 +13,7 @@
 		}
 		window.open(url, '_blank')
 	}
-	function showOpenEVSE() {}
+
 </script>
 
 <Box title="Developer" icon="mdi:console">

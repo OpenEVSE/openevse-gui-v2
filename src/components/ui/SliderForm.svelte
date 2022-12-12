@@ -3,10 +3,10 @@
 	export let value;
 	export let min;
 	export let max;
-	export let step;
+	export let step = 1;
 	export let label = "";
-	export let tooltip;
-	export let unit;
+	export let tooltip = "";
+	export let unit = "";
 	export let icon = null
 	export let onchange = (val) => {};
 	let hover = false
@@ -23,7 +23,7 @@
 <style>
 	.label {
 		position: absolute;
-		top: -5px;
+		margin-top: -10px;
 	}
 </style>
 
@@ -36,8 +36,8 @@
 		<Fa class="mt-4 mr-3" size="1.6x" icon={icon} />
 		{/if}
 		<div class="" on:mouseenter={togglecolor} on:mouseleave={togglecolor} >			
-			<input class="slider is-fullwidth is-medium has-tooltip-arrow has-tooltip {hover||focus?'is-info':''}" 
-				data-tooltip={tooltip} 
+			<input class="slider is-fullwidth is-medium has-tooltip-arrow {hover||focus?'is-info':''}" 
+				data-tooltip={tooltip==""?null:tooltip} 
 				step={step?step:1} 
 				min={min} max={max} 
 				type="range" bind:value={value} on:change={()=>onchange(value)}

@@ -54,6 +54,13 @@
         position: relative;
         z-index: 2;
     }
+	.state-num {
+        float: right;
+        margin-right: 40px;
+        margin-top: -32px;
+        position: relative;
+        z-index: 2;
+    }
 </style>
 <div class="my-2 {is_inline?"is-inline-block":""}">
 		{#if title}
@@ -61,7 +68,7 @@
 		{/if}
 		<input bind:this={field} {readonly} class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off" {maxlength}
 		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	>
-		<div class="state">
+		<div class="{type == "number"?"state-num":"state"}">
 			{#if status==1}
 			<Fa class="has-text-info"icon={faSpinner} spin />
 			{:else if status==2}

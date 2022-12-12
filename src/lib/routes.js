@@ -8,6 +8,7 @@ import NotFound         from '../routes/NotFound.svelte'
 import History          from '../routes/History.svelte'
 import RFID             from '../routes/RFID.svelte'
 import Safety           from '../routes/Safety.svelte'
+import Evse             from '../routes/Evse.svelte'
 import MQTT             from '../routes/MQTT.svelte'
 import HTTP             from '../routes/HTTP.svelte'
 import Network          from '../routes/Network.svelte'
@@ -18,7 +19,7 @@ import SelfProduction   from '../routes/SelfProduction.svelte'
 import EmonCMS          from '../routes/EmonCMS.svelte'
 import OhmConnect       from '../routes/OhmConnect.svelte'
 import Vehicle          from '../routes/Vehicle.svelte'
-import Dev          from '../routes/Dev.svelte'
+import Dev              from '../routes/Dev.svelte'
 
 export const routes = {
     // Exact path
@@ -30,6 +31,7 @@ export const routes = {
     '/configuration/services': wrap({ component: Services}),
     '/configuration/rfid': wrap({ component: RFID}),
     '/configuration/safety': wrap({ component: Safety}),
+    '/configuration/evse': wrap({ component: Evse}),
     '/configuration/mqtt': wrap({ component: MQTT}),
     '/configuration/http': wrap({ component: HTTP}),
     '/configuration/network': wrap({ component: Network}),
