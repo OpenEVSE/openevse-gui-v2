@@ -98,9 +98,13 @@ in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 			{/if}
 			<!-- <StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
 			<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	 -->
-			{#if $status_store.battery_level}
+			{#if $status_store.time_to_full_charge}
 			<StatusTile title="Remaining" value={sec2time($status_store.time_to_full_charge)} />
+			{/if}
+			{#if $status_store.battery_level != undefined}
 			<StatusTile title="EV SOC" value={$status_store.battery_level} unit="%" />
+			{/if}
+			{#if $status_store.battery_range != undefined}
 			<StatusTile title="EV Range" value={$status_store.battery_range} unit="km" />
 			{/if}
 		</div>
