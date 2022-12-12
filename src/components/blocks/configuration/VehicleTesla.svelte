@@ -23,6 +23,7 @@
 	let vehicles = []
 
 	const teslaLogin = "https://auth.openevse.com/login"
+	let range_unit = [{name: "km", value: false}, {name: "miles", value: true}]
 
 	onMount(() => {
 		loggedin = have_credentials()
@@ -86,7 +87,7 @@
 					tesla_access_token: res.access_token,
 					tesla_refresh_token: res.refresh_token,
 					tesla_created_at: res.created_at,
-					tesla_expires_in: res.expires_in
+					tesla_expires_in: res.expires_in,
 				}
 				//Save auth data
 				if (await serialQueue.add(()=>config_store.upload(data))) 
@@ -133,7 +134,9 @@
 				tesla_access_token: $config_store.tesla_access_token,
 				tesla_refresh_token: $config_store.tesla_refresh_token,
 				tesla_created_at: Date.now()/1000,
-				tesla_expires_in: 3888000
+				tesla_expires_in: 3888000,
+				//using mqtt_vehicles_range_miles to store range unit
+				mqtt_vehicle_range_miles: $config_store.mqtt_vehicle_range_miles
 			}
 
 		if (await config_store.upload(data)) 
@@ -165,7 +168,7 @@
 
 </script>
 <div class="mt-5">
-	<h5>Tesla</h5>
+	<Select title="Range Unit" bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
 	{#if loggedin}
 		{#if status == "loading"}
 		<div>Fetching vehicle info ...</div>

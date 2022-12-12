@@ -3,8 +3,7 @@
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import {status_store} from "../../../lib/stores/status.js"
 	import Box from "../../ui/Box.svelte"
-	import {sec2time, s2mns} from "../../../lib/utils.js"
-	import {faCar} from '@fortawesome/free-solid-svg-icons/index.js'
+	import {sec2time, s2mns, miles2km} from "../../../lib/utils.js"
 
 </script>
 <style>
@@ -44,11 +43,22 @@
 			</tr>
 			<tr>
 				<td>Battery Range</td>
-				<td class="has-text-right"><span class="tag tags is-info">{$status_store.battery_range} </span></td>
+				<td class="has-text-right"><span class="tag tags is-info">
+					{#if !$config_store.tesla_enabled || $config_store.tesla_enabled && $config_store.mqtt_vehicle_range_miles}}
+						{$status_store.battery_range}
+					{:else if !$config_store.mqtt_vehicle_range_miles}
+						{miles2km($status_store.battery_range)}
+					{/if}
+					{#if $config_store.mqtt_vehicle_range_miles}
+					miles
+					{:else}
+					km
+					{/if}
+				</span></td>
 			</tr>
 			<tr>
 				<td>Time to full charge</td>
-				<td class="has-text-right"><span class="tag tags is-info">{sec2time($status_store.time_to_full_charge)} V</span></td>
+				<td class="has-text-right"><span class="tag tags is-info">{sec2time($status_store.time_to_full_charge)}</span></td>
 			</tr>
 		</tbody>
 		{/if}

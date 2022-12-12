@@ -12,6 +12,8 @@
 	
 	let mode = 0 // 0: none, 1: Tesla, 2: MQTT
 	let modes = [{name: "None/HTTP", value: 0}, {name:"Tesla", value: 1}, {name: "MQTT", value: 2}]
+	let range_unit = [{name: "km", value: false}, {name: "miles", value: true}]
+
 	function getMode() {
 		if ($config_store.tesla_enabled)
 			mode = 1
