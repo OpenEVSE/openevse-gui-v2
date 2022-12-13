@@ -1,4 +1,5 @@
 <script>
+	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import RemovableTag from "./../../ui/RemovableTag.svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import { onMount } from "svelte";
@@ -11,7 +12,6 @@
 	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let scanning = false
-	let state = "default"
 	let tags = []
 	let tags_inst = []
 	let but_scan_state
@@ -28,11 +28,7 @@
 
 	function scanState(count) {
 		if (count != undefined) {
-			if (!count) 
-				but_scan_state = "default"
-			else {
-				but_scan_state = "loading"
-			}
+			but_scan_state = "default"
 		}	
 	}
 
@@ -47,7 +43,7 @@
 	async function scanTag() {
 		scanning = true
 		but_scan_state = "loading"
-		serialQueue.add(() => httpAPI("GET", "/rfid/add",null,"txt",5)  )
+		serialQueue.add(() => httpAPI("GET", "/rfid/add",null,"txt",5000)  )
 
 	}
 
@@ -109,9 +105,11 @@
 	<div class="is-flex is-justify-content-center mt-3 mb-3">
 		<div class="borders has-text-centered">
 			<div class="has-text-weight-bold my-2">Manage scanned tags</div>
-			<Button name="Scan" butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
+			<Button name={$uistates_store.rfidscan_update>0?$uistates_store.rfidscan_update:"Scan"} butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
+				<!-- <div class="tag is-info {$uistates_store.rfidscan_update>0?"":"is-hidden"}">{$uistates_store.rfidscan_update}</div> -->
 			{#if $status_store.rfid_waiting > 0}
-				<div class="mt-2 has-text-weight-bold">Place your RFID tag on the scanner...</div>
+				<div class="mt-2 has-text-weight-bold">Place your RFID tag on the scanner... 
+				</div>
 			{/if}
 			{#if $status_store.rfid_input}
 				<div class="mt-2 has-text-weight-bold">Tag scanned successfully!</div>

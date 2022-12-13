@@ -17,6 +17,8 @@
 	let last_divert_update
 	let counter_vehicle_update
 	let last_vehicle_update
+	let counter_rfid_scan
+	let last_RFIDScan_update
 
 	onMount(()=> {
 		getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
@@ -129,6 +131,21 @@
 
 	}
 
+	function countRFIDScan(time) {
+		if (last_RFIDScan_update != time) {
+			last_RFIDScan_update = time
+			clearInterval(counter_rfid_scan)
+			$uistates_store.rfidscan_update = time
+			counter_rfid_scan = setInterval(() => {
+				$uistates_store.rfidscan_update -= 1
+				if ($uistates_store.rfidscan_update <= 0) {
+					clearInterval(counter_rfid_scan)
+					$uistates_store.rfidscan_update = 0
+				}
+			}, 1000);
+		}
+	}
+
 
 
 	// Refresh stores when new version is published over websocket
@@ -141,6 +158,7 @@
 	$: refreshUIState			($status_store)
 	$: countDivertUpdate		($status_store.divert_update)
 	$: countVehicleUpdate		($status_store.vehicle_state_update)
+	$: countRFIDScan			($status_store.rfid_waiting)
 	
 
 </script>
