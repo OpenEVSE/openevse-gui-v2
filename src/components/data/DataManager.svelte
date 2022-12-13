@@ -1,4 +1,5 @@
 <script>
+	import "hacktimer/HackTimer.js"
 	import WebSocket from "./WebSocket.svelte";
 	import {EvseClients} 			from  "./../../lib/vars.js"
 	import { uistates_store }		from "./../../lib/stores/uistates.js"

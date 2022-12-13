@@ -31,6 +31,7 @@
     "bulma-slider": "^2.0.5",
     "bulma-switch": "^2.0.4",
     "full-icu": "^1.5.0",
+    "hacktimer": "^1.1.3",
     "luxon": "^3.1.0",
     "node-sass": "^8.0.0",
     "promise-batching-queue": "^0.0.5",

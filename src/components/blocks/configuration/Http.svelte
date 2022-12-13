@@ -7,7 +7,6 @@
 	import InputForm from "../../ui/InputForm.svelte";
 	import Box from "../../ui/Box.svelte"
 	import Button from "../../ui/Button.svelte"
-	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let alert_visible = false
 	let activetab = 0

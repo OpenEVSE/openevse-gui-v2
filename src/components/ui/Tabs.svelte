@@ -15,13 +15,17 @@
 		outline: none;
 		background-color: hsl(0, 0%, 96%);
 	}
+
+	.tabs {
+		margin-top:-20px;
+	}
 </style>
 <div class="tabs is-size-6">
 	<ul>
 		{#each tabs as tab,i}
 		<li class:is-active={activetab==i}>
 			<a bind:this={linkid[i]} class="tab" href={tab.url} use:link on:click|preventDefault={() => {onClick(i); linkid[i].blur()}}>
-			<span>{tab.name}</span>
+			<span class="has-text-weight-bold">{tab.name}</span>
 			</a>
 		</li>
 		{/each}
