@@ -6,9 +6,10 @@
 
 <div class="columns is-centered">
 	<div class="column">
-		<Vehicle />
+		<VehicleStatus />
 	</div>
 	<div class="column">
-		<VehicleStatus />
+		<Vehicle />
+	
 	</div>
 </div>
