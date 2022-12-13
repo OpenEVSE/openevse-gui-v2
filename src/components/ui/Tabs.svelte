@@ -20,7 +20,7 @@
 		margin-top:-20px;
 	}
 </style>
-<div class="tabs is-size-6">
+<div class="tabs is-size-6 is-size-7-mobile">
 	<ul>
 		{#each tabs as tab,i}
 		<li class:is-active={activetab==i}>
