@@ -64,7 +64,7 @@
 				<Icon class="mt-1 mb-0" icon="fa6-solid:bolt" width=35/>
 			</a>
 			<a class="nav-item" href="/history" use:link class:active={selected=="/istory"}>
-				<Icon class="" icon="icon-park-outline:history-query" width=38/>
+				<Icon class="mt-1" icon="icon-park-outline:history-query" width=40/>
 			</a>
 		<div class="is-flex {$uistates_store.breakpoint == "mobilemini"?"is-justify-content-right":"is-justify-content-center"}">
 				<a href="/configuration" class="nav-conf" use:link class:active={selected.includes("/configuration")}>

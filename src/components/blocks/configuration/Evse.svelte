@@ -6,7 +6,6 @@
 	import SliderForm from "./../../ui/SliderForm.svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import InputForm from "./../../ui/InputForm.svelte";
-	import Button from "./../../ui/Button.svelte";
 	import Box from "./../../ui/Box.svelte";
 
 	// let input_random_start = {value: 0}

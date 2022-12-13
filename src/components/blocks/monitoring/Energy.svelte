@@ -1,6 +1,5 @@
 <script>
 	import {status_store} from "../../../lib/stores/status.js"
-	import Box from "../../ui/Box.svelte"
 	import {round} from "../../../lib/utils.js"
 </script>
 <style>

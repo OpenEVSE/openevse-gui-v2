@@ -1,4 +1,5 @@
 <script>
+	import Loader from "./Loader.svelte";
 	import Fa from "svelte-fa/src/fa.svelte";
 	import {
 		faSpinner,
@@ -45,7 +46,7 @@
 	{#if state == "" && (name || (client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt") ))}
 	<button class="tag is-danger is-clickable" on:click|preventDefault={()=>action()}><Fa icon={faXmark} /></button>
 	{:else if state == "loading"}
-	<span class="tag is-danger"><Fa icon={faSpinner} size="1x" spin={state == "loading"} /></span>
+	<span class="tag is-danger"><Loader width="12" /></span>
 	{:else if state == "ok"}
 	<span class="tag is-primary"><Fa icon={faCheck} size="1x" /></span>
 	{:else if state == "ok"}

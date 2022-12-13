@@ -9,7 +9,6 @@
 	import Switch from "./../../ui/Switch.svelte";
 	import Box from "../../ui/Box.svelte"
 	import {httpAPI} from "../../../lib/utils.js"
-	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
 
 	let scanning = false
 	let tags = []

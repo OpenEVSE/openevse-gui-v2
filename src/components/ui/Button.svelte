@@ -1,7 +1,7 @@
 <script>
-	import Fa from 'svelte-fa/src/fa.svelte'
+	import 'iconify-icon';
+	import Loader from "./Loader.svelte";
 	import {onMount, onDestroy} from 'svelte'
-	import {faCheck, faXmark, faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
 	
 	export let butn_submit = () => {}
 	export let state = "default"
@@ -65,9 +65,12 @@
 		on:mouseenter={() => {is_overed = true}} 
 		on:mouseleave={() => {is_overed = false}} 
 		>
-		<Fa icon={state=="default"?icon:state == "loading"?faSpinner:state == "ok"?faCheck:faXmark} spin={state=="loading"}
-			class="{state == "loading"?"has-text-info":state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}"
-		/>
+		{#if state == "loading"}
+		<Loader width="20" />
+		{:else if icon || state != "default"}
+		<iconify-icon icon="{state=="default"?icon:state == "ok"?"fa:check":"fa6-solid:xmark"}"  class="{state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}"></iconify-icon>
+		{/if}
+
 		{#if name}
 			{#if state == "default"}
 			<div>{name}</div>

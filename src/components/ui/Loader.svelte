@@ -1,14 +1,28 @@
 <script>
-import { Stretch } from 'svelte-loading-spinners'
+	import 'iconify-icon';
+	export let width
+
 </script>
 
 <style>
-	.loading {
-		text-align: center;
-		margin: auto;
+	.spin {
+		animation: spin-animation 2s infinite;
+		animation-timing-function: linear;
+		display: inline-block;
 	}
-</style>
 
-<div class="container loading">
-	<Stretch size="40" color="#209CEE"/>
+@keyframes spin-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+  </style>
+
+<div class="spin is-flex is-justify-content-center is-align-items-center">
+	<iconify-icon icon="fa6-solid:spinner"></iconify-icon>
 </div>

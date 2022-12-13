@@ -1,4 +1,5 @@
 <script>
+	import Loader from "./../../ui/Loader.svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import Box from "./../../ui/Box.svelte"
@@ -7,7 +8,8 @@
 	import {httpAPI, formatDate, round, state2icon, type2icon} from "../../../lib/utils.js"
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faSpinner, faTimeline} from '@fortawesome/free-solid-svg-icons/index.js'
+
+
 
 	let index
 	let loaded = false
@@ -38,13 +40,32 @@
 	})
 
 </script>
+<style>
+	.spin {
+		animation: spin-animation 2s infinite;
+		animation-timing-function: linear;
+		display: inline-block;
+	}
 
+@keyframes spin-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+  </style>
 <Box title="History" icon="icon-park-outline:history-query">
 		<div class="has-text-centered">
 			{#if !loaded}
 			<div class="box is-inline-block has-text-centered mt-4 mb-5 is-size-6 has-text-weight-bold">
 				<div class="mb-4">Loading Data</div>
-				<Fa class="has-text-info is-size-4" icon={faSpinner} spin />
+				<Loader width=28 />
+				
+				
 			</div>
 				
 			{:else}

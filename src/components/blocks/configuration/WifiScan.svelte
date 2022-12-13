@@ -1,9 +1,8 @@
 <script>
+	import Loader from "./../../ui/Loader.svelte";
 	import { serialQueue } from "./../../../lib/queue.js";
 	import WifiIcon from "./../../ui/WifiIcon.svelte";
 	import {removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
 	import InputForm from "../../ui/InputForm.svelte"
 	import Button from "../../ui/Button.svelte"
 	import {onMount, onDestroy} from "svelte"
@@ -95,13 +94,13 @@
 					{/each}
 				{:else if state == "scan"}
 				<tr class="has-background-light">
-					<th class="py-3 has-text-centered">Scanning Networks</th>
-					<td class="py-3 has-text-info is-size-6"><Fa icon={faSpinner} spin /></td>
+					<th class="has-text-centered is-vcentered">Scanning Networks</th>
+					<td class="has-text-info is-size-6"><Loader width="20" /></td>
 				</tr>
 				{:else}
 					<tr class="has-background-light">
-						<th class="py-3 has-text-centered">No network found, scan again</th>
-						<td class="py-3 has-text-info is-size-6"></td>
+						<th class="has-text-centered is-vcentered">No network found, scan again</th>
+						<td class="has-text-info is-size-6"></td>
 					</tr>
 				{/if}
 		</tbody>
