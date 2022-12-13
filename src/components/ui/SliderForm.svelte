@@ -1,5 +1,5 @@
 <script>
-	import Fa from 'svelte-fa/src/fa.svelte'
+	import Icon from '@iconify/svelte';
 	export let value;
 	export let min;
 	export let max;
@@ -33,7 +33,8 @@
 	{/if}
 	<div class="is-flex has-text-info is-flex-direction-row my-0 mx-0 py-0">
 		{#if icon}
-		<Fa class="mt-4 mr-3" size="1.6x" icon={icon} />
+		<Icon class="mt-4 mr-3" icon={icon} width=25/>
+
 		{/if}
 		<div class="" on:mouseenter={togglecolor} on:mouseleave={togglecolor} >			
 			<input class="slider is-fullwidth is-medium has-tooltip-arrow {hover||focus?'is-info':''}" 

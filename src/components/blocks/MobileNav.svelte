@@ -3,6 +3,7 @@
 	import Fa from 'svelte-fa/src/index.js';
 	import {faChartSimple, faTimeline, faCalendarDays, faGear, faBolt} from '@fortawesome/free-solid-svg-icons/index.js'
 	import {push, link} from 'svelte-spa-router'
+	import Icon from '@iconify/svelte';
 	
 	export let charging
 	export let selected
@@ -52,22 +53,23 @@
 
 </style>
 
-<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-2">	
+<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-1">	
 			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"}>
-				<Fa icon={faChartSimple} size="2x" />
+				<Icon class="mt-1" icon="fa6-solid:chart-simple" width=30/>
 			</a>
 			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"}>
-				<Fa icon={faCalendarDays} size="2x"/>
+				<Icon class="mt-1" icon="fa6-solid:calendar-days" width=30/>
 			</a>
 			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}">
-				<Fa icon={faBolt} size="2.5x" />
+				<Icon class="mt-1 mb-0" icon="fa6-solid:bolt" width=35/>
 			</a>
-			<a class="nav-item" href="/history" use:link class:active={selected=="/history"}>
-				<Fa icon={faTimeline} size="2x"/>
+			<a class="nav-item" href="/history" use:link class:active={selected=="/istory"}>
+				<Icon class="" icon="icon-park-outline:history-query" width=38/>
 			</a>
 		<div class="is-flex {$uistates_store.breakpoint == "mobilemini"?"is-justify-content-right":"is-justify-content-center"}">
 				<a href="/configuration" class="nav-conf" use:link class:active={selected.includes("/configuration")}>
-					<Fa icon={faGear} size="2x" />
+					<Icon class="mt-1" icon="fa6-solid:gear" width=30/>
+
 				</a>
 		</div>
 </div>

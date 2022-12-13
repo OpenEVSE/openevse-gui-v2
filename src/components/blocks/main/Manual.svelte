@@ -210,7 +210,7 @@ $: setDivertMode($uistates_store.divertmode)
 		</div>
 
 	<div class="container ">
-		<Slider  icon={faGaugeHigh} tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step=1 label="CHARGE RATE"
+		<Slider icon="fa6-solid:gauge-high" tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step=1 label="CHARGE RATE"
 		value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 		{#key $claims_target_store.claims.charge_current}
 		{#if $claims_target_store.claims.charge_current}

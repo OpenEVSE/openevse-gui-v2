@@ -39,7 +39,7 @@
 
 </script>
 
-<Box title="History" icon="fa6-solid:timeline">
+<Box title="History" icon="icon-park-outline:history-query">
 		<div class="has-text-centered">
 			{#if !loaded}
 			<div class="box is-inline-block has-text-centered mt-4 mb-5 is-size-6 has-text-weight-bold">

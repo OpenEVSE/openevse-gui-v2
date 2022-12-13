@@ -61,7 +61,7 @@
 
 		<div class="borders mb-4">
 			<div class="has-text-weight-bold is-size-6">Max Current</div>
-			<SliderForm bind:value={$config_store.max_current_soft} unit="A" min={$config_store.min_current_hard}} max={$config_store.max_current_hard} onchange={setMaxCurrent} />
+			<SliderForm icon="fa6-solid:gauge-high" bind:value={$config_store.max_current_soft} unit="A" min={$config_store.min_current_hard}} max={$config_store.max_current_hard} onchange={setMaxCurrent} />
 		</div>
 		<div class="borders mb-4">
 			<div class="has-text-weight-bold is-size-6">Scheduler Random start adjust</div>
@@ -87,7 +87,7 @@
 		</div>
 		<div class="borders">
 			<div class="has-text-weight-bold is-size-6">Led Brightness</div>
-			<SliderForm bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
+			<SliderForm icon="ic:outline-light-mode" bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
 		</div>
 	</div>
 
