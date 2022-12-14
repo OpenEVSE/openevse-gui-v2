@@ -1,6 +1,5 @@
 <script>
-	import Fa from 'svelte-fa'
-	import {faRobot, faBolt, faBan} from '@fortawesome/free-solid-svg-icons/index.js'
+	import 'iconify-icon';
 	export let mode // 0: Auto, 1: On, 2: OFF
 	export let ischarging = false
 	export let setmode = (m,c) => {}
@@ -34,7 +33,10 @@
 		button  manual-charge has-tooltip-arrow is-primary {mode == 1 && ischarging?"has-text-warning":""}"
 		data-tooltip={disabled?null:"Enable Charge"}
 		on:click|preventDefault={() => {setmode(1)}}>
-		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faBolt} />&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;
+		<iconify-icon class="is-size-3" icon="fa6-solid:bolt"></iconify-icon>
+		<!-- <Fa size=1.6x icon={faBolt} -->
+		 &nbsp;&nbsp;&nbsp;
 	</button>
 	{#if isauto}
 	<button {disabled} class="{mode==0 || disabled?"no-pointer":""} {mode == 0?"":"is-outlined"}
@@ -42,7 +44,9 @@
 		button manual-charge has-tooltip-arrow is-info {mode == 0 && ischarging?"has-text-warning":""}" 
 		data-tooltip={disabled?null:"Let OpenEVSE decide"}
 		on:click|preventDefault={() => { setmode(0)}}>
-		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faRobot} class=""/>&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;
+		<iconify-icon class="is-size-3" icon="fa6-solid:robot"></iconify-icon>
+		&nbsp;&nbsp;&nbsp;
 	</button>
 	{/if}
 	<button {disabled} class="{mode==2 || disabled?"no-pointer":""} {mode == 2?"":"is-outlined "} 
@@ -50,6 +54,8 @@
 		button manual-charge has-tooltip-arrow is-danger" 
 		 data-tooltip={disabled?null:"Disable Charge"}
 		on:click|preventDefault={() => { setmode(2)}}>
-		&nbsp;&nbsp;&nbsp;<Fa size=1.6x icon={faBan} />&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;
+		<iconify-icon class="is-size-3" icon="fa6-solid:ban"></iconify-icon>
+		&nbsp;&nbsp;&nbsp;
 	</button>
 </div>

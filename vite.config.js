@@ -12,13 +12,13 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     plugins: [
-      svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip"}),
+      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: "*\.\(png\|jpg|ico\)"}),
       VitePWA({ 
         registerType: 'autoUpdate',
         injectRegister: null,
         selfDestroying: true,
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,gz}']
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,gz,woff,woff2,eot,ttf,}']
         },
         useCredentials: 'true',
         devOptions: {

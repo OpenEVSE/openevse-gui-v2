@@ -1,13 +1,10 @@
 <script>
 	import { uistates_store } from "./../../lib/stores/uistates.js";
-	import Fa from 'svelte-fa/src/index.js';
-	import {faChartSimple, faTimeline, faCalendarDays, faGear, faBolt} from '@fortawesome/free-solid-svg-icons/index.js'
-	import {push, link} from 'svelte-spa-router'
-	import Icon from '@iconify/svelte';
+	import {link} from 'svelte-spa-router'
+	import 'iconify-icon';
 	
 	export let charging
 	export let selected
-	let submenu_visible = false
 
 </script>
 
@@ -53,22 +50,22 @@
 
 </style>
 
-<div class="mobnav is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-1">	
+<div class="mobnav is-size-3 is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row has-background-dark py-1">	
 			<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"}>
-				<Icon class="mt-1" icon="fa6-solid:chart-simple" width=30/>
+				<iconify-icon inline icon="fa6-solid:chart-simple"></iconify-icon>
 			</a>
 			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"}>
-				<Icon class="mt-1" icon="fa6-solid:calendar-days" width=30/>
+				<iconify-icon inline icon="fa6-solid:calendar-days"></iconify-icon>
 			</a>
 			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}">
-				<Icon class="mt-1 mb-0" icon="fa6-solid:bolt" width=35/>
+				<iconify-icon class="is-size-2" inline icon="fa6-solid:bolt"></iconify-icon>
 			</a>
-			<a class="nav-item" href="/history" use:link class:active={selected=="/istory"}>
-				<Icon class="mt-1" icon="icon-park-outline:history-query" width=40/>
+			<a class="nav-item" href="/history" use:link class:active={selected=="/history"}>
+				<iconify-icon inline icon="icon-park-outline:history-query"></iconify-icon>
 			</a>
 		<div class="is-flex {$uistates_store.breakpoint == "mobilemini"?"is-justify-content-right":"is-justify-content-center"}">
 				<a href="/configuration" class="nav-conf" use:link class:active={selected.includes("/configuration")}>
-					<Icon class="mt-1" icon="fa6-solid:gear" width=30/>
+					<iconify-icon inline icon="fa6-solid:gear"></iconify-icon>
 
 				</a>
 		</div>

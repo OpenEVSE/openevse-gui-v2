@@ -1,4 +1,5 @@
 <script>
+	import "@fontsource/roboto"; // The font we are gonna serve with fontsource
 	import Status from "./components/blocks/Status.svelte";
 	import {location} from 'svelte-spa-router'
 		// @ts-ignore
@@ -10,7 +11,6 @@
 	import { routes } from "./lib/routes.js"
 	import FetchData from './components/data/FetchData.svelte'
 	import { uistates_store } from './lib/stores/uistates.js'
-	import { status_store } from "./lib/stores/status.js";
 	import {getBreakpoint} from "./lib/utils.js"
 
 	function getWindowSize() {
@@ -25,6 +25,11 @@
 	main {
 		height: 100%;
 	}
+
+  	:global(body) {
+    font-family: "Roboto", sans-serif;
+	}
+  
 
 </style>
 <svelte:window on:load={getWindowSize} on:resize={getWindowSize} />

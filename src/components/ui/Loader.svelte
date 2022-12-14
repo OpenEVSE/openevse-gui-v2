@@ -1,6 +1,5 @@
 <script>
 	import 'iconify-icon';
-	export let width
 
 </script>
 
@@ -24,5 +23,5 @@
   </style>
 
 <div class="spin is-flex is-justify-content-center is-align-items-center">
-	<iconify-icon icon="fa6-solid:spinner"></iconify-icon>
+	<iconify-icon inline icon="fa6-solid:spinner"></iconify-icon>
 </div>
