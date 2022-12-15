@@ -203,15 +203,15 @@ $: setDivertMode($uistates_store.divertmode)
 	<div class="is-flex is-justify-content-center my-5">
 		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$uistates_store.divertmode} name={$uistates_store.divertmode == 1?"ECO":"Normal"} color="is-primary" 
 			tooltip={$uistates_store.divertmode?"Disable Eco mode":"Enable Eco mode"} icon={faSolarPanel} breakpoint={$uistates_store.breakpoint}
-			action={() => setDivertMode(!$uistates_store.divertmode)} />
+			action={() => setDivertMode(!$uistates_store.divertmode)} disabled={$claims_target_store.claims.state == EvseClients.timer && $claims_target_store.properties.state == "active"}/>
 		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="SHAPER" color="is-info" 
-			tooltip={ $uistates_store.shaper?"Disable Unballaster":"Enable Unballaster"} icon={faBuildingShield} breakpoint={$uistates_store.breakpoint}
+			tooltip={ $uistates_store.shaper?"Disable Shaper":"Enable Shaper"} icon={faBuildingShield} breakpoint={$uistates_store.breakpoint}
 			action={() => setShaper(!$uistates_store.shaper)} />
 		</div>
 
 	<div class="container ">
 		<Slider icon="fa6-solid:gauge-high" tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step={1} label="CHARGE RATE"
-		value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
+		bind:value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 		{#key $claims_target_store.claims.charge_current}
 		{#if $claims_target_store.claims.charge_current}
 		<div class="is-flex is-justify-content-center is-align-content is-vcentered">

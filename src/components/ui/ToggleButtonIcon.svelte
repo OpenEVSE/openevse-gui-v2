@@ -9,12 +9,13 @@
 	export let button
 	export let breakpoint = "mobile"
 	export let visible = true
+	export let disabled = false
 </script>
 
 {#if visible}
 <div class="mx-1 mb-0 has-text-centered has-text-info" >
 	<button bind:this={button} class="button has-tooltip-arrow has-tooltip px-5 {color} {state?"":"is-outlined"} {breakpoint=="mobilemini"?"is-is-normal":breakpoint=="dekstop"?"is-medium":""}"
-	data-tooltip={tooltip} on:click={action}
+	data-tooltip={tooltip} on:click={action} {disabled}
 	>
 		<div class="icon">
 			<Fa icon={icon} size="1.5x" />
