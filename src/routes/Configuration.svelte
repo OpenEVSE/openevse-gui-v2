@@ -37,7 +37,8 @@
 				<a href="/configuration/emoncms" use:link><div class="my-1 is-inline-block button is-info is-outlined is-flex is-align-items-center"><div class="is-inline-block icn"><Icon icon="fa-solid:chart-bar" width="20" /></div>Energy Monitoring</div></a>
 				<a href="/configuration/ohmconnect" use:link><div class="my-1 is-inline-block button is-info is-outlined is-flex is-align-items-center"><div class="is-inline-block icn"><Icon icon="mdi:energy-circle" width="20" /></div>Ohm Connect</div></a>
 				<a href="/configuration/dev" use:link><div class="my-1 is-inline-block button is-info is-outlined is-flex is-align-items-center"><div class="is-inline-block icn"><Icon icon="mdi:console" width="20" /></div>Developper</div></a>
-				</div>
+				<a href="/configuration/about" use:link><div class="my-1 is-inline-block button is-info is-outlined is-flex is-align-items-center"><div class="is-inline-block icn"><Icon icon="mdi:about-circle-outline" width="20" /></div>About</div></a>	
+			</div>
 		</Box>
 	</div>
 </div>
