@@ -17,7 +17,7 @@
 </style>
 
 <Box title="Status" icon="fluent:live-20-filled">
-	<div class="my-3">
+	<div class="my-3" class:is-hidden={!$uistates_store.vehicle_update || $uistates_store.vehicle_update < 1}>
 		<span class="has-text-weight-bold  is-size-7">Last updated:</span>
 		<span class="is-size-7 {$uistates_store.vehicle_update > 3600?"has-text-danger":$uistates_store.vehicle_update < 300?"has-text-primary":"has-text-orange"} ">{s2mns($uistates_store.vehicle_update)}</span>
 	</div>
