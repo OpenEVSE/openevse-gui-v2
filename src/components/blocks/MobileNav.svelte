@@ -57,7 +57,7 @@
 			<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"}>
 				<iconify-icon inline icon="fa6-solid:calendar-days"></iconify-icon>
 			</a>
-			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}">
+			<a href="/" use:link class="pt-2 nav-item {selected=="/"?charging?"charging":"active":""}">
 				<iconify-icon class="is-size-2" inline icon="fa6-solid:bolt"></iconify-icon>
 			</a>
 			<a class="nav-item" href="/history" use:link class:active={selected=="/history"}>
