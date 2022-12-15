@@ -12,7 +12,7 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     plugins: [
-      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html|ico)$/i}),
+      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html|woff|ico)$/i}),
 
       VitePWA({ 
         registerType: 'autoUpdate',
@@ -30,9 +30,24 @@ export default defineConfig(({ command, mode }) => {
           name: 'OpenEVSE Wifi UI',
           short_name: 'OpenEVSE',
           description: 'Web UI for OpenEVSE WiFi module',
-          theme_color: '#ffffff',
+          theme_color: '#32b3d4',
           icons: [
-          ]
+            {
+              src: 'pwa-192x192.png',
+              sizes: '192x192',
+              type: 'image/png'
+            },
+            {
+              src: 'pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png'
+            },
+            {
+              src: 'pwa-maskable.png',
+              sizes: '96x96',
+              type: 'image/png',
+              purpose: 'any maskable'
+            }]
           }
         })
     ],
