@@ -46,7 +46,7 @@
 			{#if !loaded}
 			<div class="box is-inline-block has-text-centered mt-4 mb-5 is-size-6 has-text-weight-bold">
 				<div class="mb-4">Loading Data</div>
-				<Loader width=28 />
+				<Loader/>
 				
 				
 			</div>

@@ -46,7 +46,7 @@
 	{#if state == "" && (name || (client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt") ))}
 	<button class="tag is-danger is-clickable" on:click|preventDefault={()=>action()}><Fa icon={faXmark} /></button>
 	{:else if state == "loading"}
-	<span class="tag is-danger"><Loader width="12" /></span>
+	<span class="tag is-danger"><Loader /></span>
 	{:else if state == "ok"}
 	<span class="tag is-primary"><Fa icon={faCheck} size="1x" /></span>
 	{:else if state == "ok"}
