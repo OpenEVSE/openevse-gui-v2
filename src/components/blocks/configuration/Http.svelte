@@ -65,8 +65,11 @@
 		else {
 			const data = {
 			www_username: auth_checked?auth_usr:"",
-			www_password: auth_checked?auth_pwd:""
+			lang: stg_language
 			}
+			if (auth_pwd != "_DUMMY_PASSWORD")
+				data.www_password = auth_pwd
+
 			if (await config_store.upload(data)) 
 				{
 					auth_submit_state = "ok"
@@ -82,8 +85,6 @@
 	let getAuthData = (u,p) => {
 		auth_usr = u
 		auth_pwd = p
-		if (auth_pwd == "_DUMMY_PASSWORD")
-			auth_pwd = ""
 		if (u || p)  {
 			auth_checked = true
 			return true

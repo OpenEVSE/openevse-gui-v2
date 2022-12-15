@@ -12,41 +12,27 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     plugins: [
-      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: "*\.\(png\|jpg|ico\)"}),
+      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html|ico)$/i}),
+
       VitePWA({ 
         registerType: 'autoUpdate',
         injectRegister: null,
         selfDestroying: true,
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,gz,woff,woff2,eot,ttf,}']
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,gz,woff,woff2}']
         },
         useCredentials: 'true',
         devOptions: {
           enabled: true
         },
-        includeAssets: ['favicon.ico', 'masked-icon.png', 'pwa-192x192.png', 'pwa-512x512.png', 'pwa-maskable.png'],
+        includeAssets: ['favicon.ico'],
         manifest: {
           name: 'OpenEVSE Wifi UI',
           short_name: 'OpenEVSE',
           description: 'Web UI for OpenEVSE WiFi module',
           theme_color: '#ffffff',
           icons: [
-            {
-              src: 'pwa-192x192.png',
-              sizes: '192x192',
-              type: 'image/png'
-            },
-            {
-              src: 'pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png'
-            },
-            {
-              src: 'pwa-maskable.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any maskable'
-            }]
+          ]
           }
         })
     ],
