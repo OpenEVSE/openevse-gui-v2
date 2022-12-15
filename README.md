@@ -10,6 +10,8 @@
 
 set VITE_OPENEVSEHOST in .env ( default to openevse.local)
 
+git submodule update --init --recursive
+npm install
 npm run dev
 
 point your browser to http://localhost:5173
