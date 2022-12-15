@@ -27,7 +27,7 @@ export default defineConfig(({ command, mode }) => {
         },
         includeAssets: ['favicon.ico'],
         manifest: {
-          name: 'OpenEVSE Wifi UI',
+          name: 'OpenEVSE',
           short_name: 'OpenEVSE',
           description: 'Web UI for OpenEVSE WiFi module',
           theme_color: '#32b3d4',
