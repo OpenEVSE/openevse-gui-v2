@@ -3,7 +3,8 @@
 	import Button from "./../../ui/Button.svelte";
 	import Box from "./../../ui/Box.svelte";
 	import {httpAPI} from "../../../lib/utils.js"
-	let rapi_cmd = ""
+	import DevHelp from "../../help/DevHelp.svelte"
+	let rapi_cmd = "$"
 	let rapi_cmd_result = []
 	let rapiurl = "/r?json=1&rapi="
 	let button_send_state = "default"
@@ -31,6 +32,7 @@
 			button_send_state = "ok"
 			rapi_cmd_result.push(res)
 			rapi_cmd_result = rapi_cmd_result
+			rapi_cmd = "$"
 			return true
 		}
 	}
@@ -49,7 +51,8 @@
 		white-space: -o-pre-wrap;
 	}
 </style>
-<Box title="Developer" icon="mdi:console">
+<Box title="Developer" icon="mdi:console" has_help={true}>
+	<div slot="help"><DevHelp  /> </div>
 	<div class="mt-4 mb-2">
 		<Button name="Debug" color="is-info" butn_submit={()=>openConsole("debug")} />
 		<Button name="OpenEVSE" color="is-info" butn_submit={()=>openConsole("openevse")} />
@@ -64,8 +67,10 @@
 			{/each}
 			</div>
 		</div>
+		<form on:submit={send_rapi_cmd}>
 		<InputForm  title="Rapi Command" bind:value={rapi_cmd} placeholder="" type="text" />
 		<Button name="Send" color="is-info" butn_submit={send_rapi_cmd} state={button_send_state}/>
 		<Button name="Clear" color="is-info" butn_submit={clear_rapi_cmd} />
+		<form>
 	</div>
 </Box>
