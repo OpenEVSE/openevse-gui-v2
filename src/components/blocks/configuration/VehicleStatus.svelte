@@ -14,9 +14,6 @@
 	.has-text-orange {
 		color: orange;
 	}
-	.is-orange {
-		background-color: orange;
-	}
 </style>
 
 <Box title="Status" icon="fluent:live-20-filled">
@@ -40,17 +37,20 @@
 		</tbody>
 		{:else}
 		<tbody>
+			{#if $status_store.battery_level != undefined}
 			<tr>
 				<td>Battery Level</td>
 				<td class="has-text-right">
 					<div class="tag tags is-info is-flex is-flex-direction-row is-align-items-center is-justify-content-center">
 						<div class="is-flex-stretch-1 is-flex-grow-1 mr-2">
-							<progress class="progress {$status_store.battery_level < 20 ? "is-danger":$status_store.battery_level< 60 ?"is-orange":"is-primary"}" value={$status_store.battery_level} min="0" max="100">{$status_store.battery_level}</progress>
+							<progress class="progress {$status_store.battery_level < 20 ? "is-danger":$status_store.battery_level < 60 ?"is-warning":"is-primary"}" value={$status_store.battery_level} min="0" max="100">{$status_store.battery_level}</progress>
 						</div>
 						<div class="is-info is-size-7 has-text-weight-bold">{$status_store.battery_level}%</div>
 					</div>
 				</td>
 			</tr>
+			{/if}
+			{#if $status_store.battery_range != undefined}
 			<tr>
 				<td>Battery Range</td>
 				<td class="has-text-right"><span class="tag tags is-info">
@@ -66,10 +66,13 @@
 					{/if}
 				</span></td>
 			</tr>
+			{/if}
+			{#if $status_store.time_to_full_charge != undefined}
 			<tr>
 				<td>Time to full charge</td>
 				<td class="has-text-right"><span class="tag tags is-info">{sec2time($status_store.time_to_full_charge)}</span></td>
 			</tr>
+			{/if}
 		</tbody>
 		{/if}
 	</Box>

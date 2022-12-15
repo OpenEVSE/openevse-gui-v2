@@ -1,5 +1,4 @@
 <script>
-	import Status from "../components/blocks/Status.svelte"
 	import Manual from "../components/blocks/main/Manual.svelte"
 
 </script>
