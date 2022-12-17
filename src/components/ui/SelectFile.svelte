@@ -1,6 +1,5 @@
 <script>
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faUpload} from '@fortawesome/free-solid-svg-icons/index.js'
+	import 'iconify-icon';
 	export let file = ""
 	let inputfield
 	let button
@@ -18,7 +17,6 @@
 
 <div class="is-hidden"><input class="file-input" bind:this={inputfield} type="file" on:change={(e)=>onFileSelected(e)} accept=".bin,.hex" /></div>
 <button bind:this={button} class="button is-info is-outlined" on:click={onClick}>
-			<Fa icon={faUpload}/>
-		  Choose a file…
-		  
+	<iconify-icon icon="fa6-solid:file-export" class="is-size-5" ></iconify-icon>
+	<span class="ml-1">Select</span>	  
 </button>

@@ -13,9 +13,8 @@
 	let fw_modal_opened = false
 	let modal
 	let fw_has_update = false
-	let fw_update_json
 	let url = "https://api.github.com/repos/OpenEVSE/ESP32_WiFi_V4.x/releases/latest"
-	let fw = {name: undefined, version: undefined, data: undefined, url: undefined}
+	let fw = {name: undefined, version: undefined, url: undefined}
 
 	onMount(()=>getFwUpdate())
 
@@ -23,13 +22,14 @@
 	async function getFwUpdate() {
 		let fw_update_json = await httpAPI("GET",url)
 		if (fw_update_json != "error") {
-			fw.version = await fw_update_json.tag_name
+			fw.version = fw_update_json.tag_name
 			fw.name = $config_store.buildenv + ".bin"
-			if (fw.version == $config_store.version) {
-				let item = fw_update_json.assets.find(obj => {
+			fw.html_url = fw_update_json.html_url
+			let item = fw_update_json.assets.find(obj => {
 					return obj.name === fw.name
 				})
-				fw.url = item.browser_download_url
+			fw.url = item.browser_download_url
+			if (fw.version != $config_store.version) {
 				fw_has_update = true
 			}
 			
@@ -70,15 +70,15 @@
 
 
 <Box title="Firmware" icon="fa6-solid:microchip">
-	<table class="table is-fullwidth is-vcentered">
+	<table class="table is-fullwidth is-vcentered is-narrow">
 		<thead>
 			<tr class="has-background-info"	>
-				<th class="has-text-white">Hardware</th>
+				<th class="has-text-white ">Hardware</th>
 				<th class="has-text-white">Version</th>
-				<th class="has-text-white" >Action</th>
+				<th class="has-text-white has-text-centered " >Action</th>
 			</tr>
 		</thead>
-		<tbody class="is-size-7">
+		<tbody class="is-size-7-mobile">
 			<tr>
 				<td class="has-text-weight-bold">OpenEVSE</td>
 				<td>{$config_store.firmware}</td>
@@ -88,9 +88,15 @@
 				<td class="has-text-weight-bold">OpenEVSE Wifi</td>
 				<td>
 					<div>{$config_store.version}</div>
+					{#if fw.version && $config_store.version != fw.version}
 					<div class="tag is-primary is-small has-text-weight-bold">
-						<iconify-icon icon="ic:round-system-update-alt"  style="font-size: 22px" class=""></iconify-icon>
+						Update<div class="is-hidden-mobile">&nbsp;Available</div>
 					</div>
+					{:else if fw.version && $config_store.version == fw.version}
+					<div class="tag is-info is-small has-text-weight-bold">
+						Up to date
+					</div>
+					{/if}
 				</td>
 				<td>
 					<div class="has-text-centered ">
@@ -98,7 +104,7 @@
 							<Button width="80px" size="is-small" name="Restart" butn_submit={restartESP} state={restartEspState}/>
 						</div>
 						<div class="mb-2">
-							<Button bind:this={modal} width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} />
+							<Button bind:this={modal} width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
 						</div>
 					</div>
 				</td>

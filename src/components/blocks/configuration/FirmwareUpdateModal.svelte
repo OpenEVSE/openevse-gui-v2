@@ -2,6 +2,7 @@
 	import { config_store } from "./../../../lib/stores/config.js";
 	import { serialQueue } from "./../../../lib/queue.js";
 	import { status_store } from "../../../lib/stores/status.js"
+	import {httpAPI} from "../../../lib/utils.js" 
 	import {onDestroy, onMount} from "svelte"
 	import Box from "../../ui/Box.svelte"
 	import Button from "../../ui/Button.svelte"
@@ -17,7 +18,6 @@
 	let file
 	let uploadButtonState = "default"
 	let fileSent = "no"
-	let percentDone = 0
 	let timeout
 
 	onDestroy(() => {
@@ -25,8 +25,6 @@
 	})
 
 	onMount(()=> {
-		let file = $config_store.buildenv
-		//getFileFromUrl(update)
 		
 	})
 
@@ -45,24 +43,34 @@
 			formData.set("update", file);
 			xhr.send(formData);
   		});
+	
+	let updateToLatest = async (url) => {
+		const data = {
+			url: url
+		}
+		$status_store.ota_progress = 0
+		uploadButtonState = "loading"
+		await httpAPI("POST","/update",JSON.stringify(data))
+	}
 
 	async function uploadFw() {
 		// Prevent UI to send any request while OTA is in progress
-		serialQueue.pause()
-		$status_store.ota_progress = 0
-		uploadButtonState = "loading"
-		const response = await uploadFiles('/update', file)
-		if (response.status >= 400) {
-			console.log("Upload Error (HTTP" + response.status + ")")
-			uploadButtonState = "error"
-			fileSent = "ko"
+		if (file) {
+			serialQueue.pause()
+			$status_store.ota_progress = 0
+			uploadButtonState = "loading"
+			const response = await uploadFiles('/update', file)
+			if (response.status >= 400) {
+				console.log("Upload Error (HTTP" + response.status + ")")
+				uploadButtonState = "error"
+				fileSent = "ko"
+			}
+			else {
+				uploadButtonState = "ok"
+				fileSent = "ok"
+			}
+			serialQueue.resume()
 		}
-		else {
-			uploadButtonState = "ok"
-			fileSent = "ok"
-		}
-		serialQueue.resume()
-
 	}
 
 	function displayOta() {
@@ -77,11 +85,10 @@
 		}
 		else if ($status_store.ota == "failed") {
 			uploadButtonState = "error"
+			timeout = setTimeout(()=> $status_store.ota = "",3000)
 		}
 	}
 
-	$: file, (
-	console.log("file: " + file)), (fileSent = "no")
 	$: $status_store.ota,displayOta()
 
 </script>
@@ -112,14 +119,14 @@
 							<td class="has-text-info">{$config_store.version}</td>
 						</tr>
 						<tr>
-							<td class="has-text-weight-semibold">Available</td>
-							<td class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">
-								<div class="is-flex is-align-items-center is-flex-wrap-wrap">
-									<span class="mr-2">{update.version}</span>
-									<button on:click={()=>{location.href=update.url; console.log(update.url)}} download class="button is-small is-outlined  {$config_store.version != update.version ?"is-primary":"is-info"}">
-											<iconify-icon icon="material-symbols:download-for-offline-outline"  style="font-size: 26px" class="mr-1"></iconify-icon>
-										{update.name}
-									</button>
+							<td class="has-text-weight-semibold">Latest</td>
+							<td class="">
+								<div class="is-flex is-align-items-center is-flex-direction-row is-flex-wrap-wrap ">
+									<span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>
+									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-black">
+										<iconify-icon icon="mdi:github" class="is-size-4 mt-2"></iconify-icon>
+									</a>
+									<Button size="is-small" icon="fa6-solid:cloud-arrow-down" disabled={uploadButtonState == "loading"} name="Upgrade to {update.version}" color="{$config_store.version != update.version ?"is-primary":"is-info	"}" butn_submit={()=>{updateToLatest(update.url)}} state={uploadButtonState}/>
 								</div>
 							
 							</td>
@@ -142,10 +149,10 @@
 			{:else}
 				<div class="is-flex is-align-items-center">
 					<Fa class="is-size-6 mx-2 has-text-primary" icon={faFileCircleCheck}/>
-					<span class="my-2">
+					<span class="my-2 is-size-7">
 						{file.name}
 					</span>
-					<div class="ml-2 is-size-5 is-inline-block">
+					<div class="ml-2 is-size-6 is-inline-block">
 						<IconButton icon={faSquareMinus} color="has-text-danger" butn_submit={()=>{file = null}} tooltip="Remove file" />
 					</div>
 				</div>
@@ -153,11 +160,11 @@
 			</div>
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-start">
-			<Button disabled={uploadButtonState == "loading"} name="Upload" color="is-info" butn_submit={uploadFw} state={uploadButtonState}/>&nbsp;
+			<Button disabled={uploadButtonState == "loading"} name="Upload" icon="fa6-solid:file-arrow-up" color="is-info" butn_submit={uploadFw} state={uploadButtonState}/>&nbsp;
 			<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{:else}
-		<div class="my-2">
+		<div class="is-flex is-align-items-center my-2 is-size-7">
 			<Fa class="is-size-6 has-text-danger mx-2" icon={faFileCircleXmark} />No file selected
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-start">

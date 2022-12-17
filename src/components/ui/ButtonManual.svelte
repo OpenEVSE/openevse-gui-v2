@@ -42,7 +42,7 @@
 	<button {disabled} class="{mode==0 || disabled?"no-pointer":""} {mode == 0?"":"is-outlined"}
 		{breakpoint=="mobilemini"?"":breakpoint=="desktop"?"is-large":"is-medium"} 
 		button manual-charge has-tooltip-arrow is-info {mode == 0 && ischarging?"has-text-warning":""}" 
-		data-tooltip={disabled?null:"Let OpenEVSE decide"}
+		data-tooltip={disabled?null:"AUTO (let OpenEVSE decide)"}
 		on:click|preventDefault={() => { setmode(0)}}>
 		&nbsp;&nbsp;&nbsp;
 		<iconify-icon class="is-size-3" icon="fa6-solid:robot"></iconify-icon>
