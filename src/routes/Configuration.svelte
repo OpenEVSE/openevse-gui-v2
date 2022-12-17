@@ -1,10 +1,9 @@
 <script>
 	import { link } from "svelte-spa-router"
 	import Box from "../components/ui/Box.svelte"
-	import Fa from "svelte-fa/src/fa.svelte";
-	import {faSolarPanel, faMicrochip, faNetworkWired, faGear,faCar, faClock, faBuildingShield, faChartLine, faGlobe, faHelmetSafety} from '@fortawesome/free-solid-svg-icons/index.js'
-	import {faNfcSymbol} from '@fortawesome/free-brands-svg-icons/index.js'
 	import Icon from '@iconify/svelte';
+	// import 'iconify-icon';
+	// import { addIcon } from 'iconify-icon';
 
 </script>
 

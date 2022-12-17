@@ -1,8 +1,8 @@
 <script>
+	import { config_store } from "./../../../lib/stores/config.js";
 	import { serialQueue } from "./../../../lib/queue.js";
-	import { config_store } from "../../../lib/stores/config.js"
 	import { status_store } from "../../../lib/stores/status.js"
-	import {onDestroy} from "svelte"
+	import {onDestroy, onMount} from "svelte"
 	import Box from "../../ui/Box.svelte"
 	import Button from "../../ui/Button.svelte"
 	import IconButton from "../../ui/IconButton.svelte"
@@ -10,7 +10,9 @@
 	import SelectFile from "../../ui/SelectFile.svelte"
 	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faFileCircleCheck, faFileCircleXmark, faSquareMinus, faMicrochip} from '@fortawesome/free-solid-svg-icons/index.js'
+	import 'iconify-icon';
 	export let is_opened = false
+	export let update = {}
 
 	let file
 	let uploadButtonState = "default"
@@ -18,16 +20,23 @@
 	let percentDone = 0
 	let timeout
 
-		onDestroy(() => {
-			clearTimeout(timeout)
-		})
-	const uploadFiles = (url, file, onProgress) =>
+	onDestroy(() => {
+		clearTimeout(timeout)
+	})
+
+	onMount(()=> {
+		let file = $config_store.buildenv
+		//getFileFromUrl(update)
+		
+	})
+
+
+	const uploadFiles = (url, file) =>
 		new Promise((resolve, reject) => {
 			if (import.meta.env.DEV) { 
 				url = "/api" + url
 			}
 			const xhr = new XMLHttpRequest();
-			xhr.upload.addEventListener('progress', e => onProgress(e.loaded / e.total));
 			xhr.addEventListener('load', () => resolve({ status: xhr.status, body: xhr.responseText }));
 			xhr.addEventListener('error', () => reject(new Error('File upload failed')));
 			xhr.addEventListener('abort', () => reject(new Error('File upload aborted')));
@@ -42,11 +51,7 @@
 		serialQueue.pause()
 		$status_store.ota_progress = 0
 		uploadButtonState = "loading"
-		const onProgress = progress => {
-			percentDone = Math.round(progress * 100)
-			console.log('Progress:', `${percentDone}%`)
-		}
-		const response = await uploadFiles('/update', file, onProgress)
+		const response = await uploadFiles('/update', file)
 		if (response.status >= 400) {
 			console.log("Upload Error (HTTP" + response.status + ")")
 			uploadButtonState = "error"
@@ -55,15 +60,29 @@
 		else {
 			uploadButtonState = "ok"
 			fileSent = "ok"
-			timeout = setTimeout(()=> location.reload(),3000)
 		}
 		serialQueue.resume()
 
 	}
 
-	$: file, () => {
-		fileSent = "no"
+	function displayOta() {
+		if ($status_store.ota == "started") {
+			if (uploadButtonState != "loading")
+				uploadButtonState = "loading"
+			console.log("ota: " + $status_store.ota_progress)
+		}
+		else if ($status_store.ota == "completed") {
+			uploadButtonState = "ok"
+			timeout = setTimeout(()=> location.reload(),3000)
+		}
+		else if ($status_store.ota == "failed") {
+			uploadButtonState = "error"
+		}
 	}
+
+	$: file, (
+	console.log("file: " + file)), (fileSent = "no")
+	$: $status_store.ota,displayOta()
 
 </script>
 
@@ -89,23 +108,36 @@
 							<td class="">{$config_store.buildenv}</td>
 						</tr>
 						<tr>
-							<td class="has-text-weight-semibold">Version</td>
-							<td class="">{$config_store.version}</td>
+							<td class="has-text-weight-semibold">Installed</td>
+							<td class="has-text-info">{$config_store.version}</td>
+						</tr>
+						<tr>
+							<td class="has-text-weight-semibold">Available</td>
+							<td class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">
+								<div class="is-flex is-align-items-center is-flex-wrap-wrap">
+									<span class="mr-2">{update.version}</span>
+									<button on:click={()=>{location.href=update.url; console.log(update.url)}} download class="button is-small is-outlined  {$config_store.version != update.version ?"is-primary":"is-info"}">
+											<iconify-icon icon="material-symbols:download-for-offline-outline"  style="font-size: 26px" class="mr-1"></iconify-icon>
+										{update.name}
+									</button>
+								</div>
+							
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		{#if file}
+		{#if file || $status_store.ota == "started"}
 		<div>
 			<div class="is-inline-block my-2">
 		
-			{#if uploadButtonState == "loading"}
-				Uploading <span class="">{file.name}</span>, please wait...
-				<progress class="progress is-primary" value={$status_store.ota_progress} max="100">{percentDone}%</progress>
-			{:else if fileSent == "ko" }
+			{#if $status_store.ota == "started"}
+				Firmware update in progress...
+				<progress class="progress is-primary" value={$status_store.ota_progress?$status_store.ota_progress:0} max="100">{$status_store.ota_progress}%</progress>
+			{:else if $status_store.ota == "failed" }
 				Upload Failed
-			{:else if fileSent == "ok" }
+			{:else if $status_store.ota == "completed" }
 				<span class="">{file.name}</span> uploaded successfully, page will reload in few sec
 			{:else}
 				<div class="is-flex is-align-items-center">
