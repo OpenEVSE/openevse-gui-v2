@@ -9,6 +9,7 @@
 	import Button from "../../ui/Button.svelte"
 	import WifiScan from "./WifiScan.svelte"
 	import Box from "../../ui/Box.svelte"
+	export let is_wizard = false
 
 	function displayMode(mode) {
 		switch (mode) {
@@ -49,13 +50,13 @@
 
 	{#if $status_store.mode != "Wired"}
 	<div class="my-3">
-				{#if setWifi == false}
+				{#if setWifi == false && $config_store.ssid}
 				<WifiDisplay ssid={$config_store.ssid} rssi={$status_store.srssi}/>
 				<div class="mt-3" >
 					<Button name="Change WiFi Network" butn_submit={selectWifi}/>
 				</div>
 				{:else}
-				<WifiScan bind:active={setWifi} ssid={$config_store.ssid}/>
+				<WifiScan bind:active={setWifi} ssid={$config_store.ssid} {is_wizard}/>
 				{/if}
 	</div>
 	{/if}

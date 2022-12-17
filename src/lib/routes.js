@@ -21,6 +21,7 @@ import OhmConnect       from '../routes/OhmConnect.svelte'
 import Vehicle          from '../routes/Vehicle.svelte'
 import Dev              from '../routes/Dev.svelte'
 import About            from '../routes/About.svelte'
+import Wizard           from '../routes/Wizard.svelte'
 
 export const routes = {
     // Exact path
@@ -45,6 +46,7 @@ export const routes = {
     '/configuration/ohmconnect': wrap({ component: OhmConnect}),
     '/configuration/dev': wrap({ component: Dev}),
     '/configuration/about': wrap({ component: About}),
+    '/wizard/:step?': wrap({ component: Wizard}),
     // Catch-all
     // This is optional, but if present it must be the last
     '*': NotFound,

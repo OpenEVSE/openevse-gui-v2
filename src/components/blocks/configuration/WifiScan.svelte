@@ -1,4 +1,6 @@
 <script>
+	import { uistates_store } from "./../../../lib/stores/uistates.js";
+	import { config_store } from "./../../../lib/stores/config.js";
 	import Loader from "./../../ui/Loader.svelte";
 	import { serialQueue } from "./../../../lib/queue.js";
 	import WifiIcon from "./../../ui/WifiIcon.svelte";
@@ -8,6 +10,8 @@
 	import {onMount, onDestroy} from "svelte"
 	export let active = false
 	export let ssid = ""
+	export let is_wizard = false
+
 	let key = ""
 	let networks
 	let timeout
@@ -43,6 +47,18 @@
 		let param = "ssid=" + ssid + "&pass=" + key
 		let response = await serialQueue.add(()=>httpAPI("POST", "/savenetwork", param, "text"))
 		active = false
+		setTimeout(()=> { 
+					console.log("redirecting url")
+					let url = ""
+					if (!import.meta.env.DEV) {
+						url = "http://" + $config_store.hostname + ".local"
+					}
+					if (is_wizard) {
+						url = url +  "/#/wizard/3"
+					}
+					$uistates_store.wizard_step = 3
+					location.replace(url) }
+				, 4000 )
 		return true
 	}
 
@@ -95,7 +111,7 @@
 				{:else if state == "scan"}
 				<tr class="has-background-light">
 					<th class="has-text-centered is-vcentered">Scanning Networks</th>
-					<td class="has-text-info is-size-6"><Loader width="20" /></td>
+					<td class="has-text-info is-size-6"><Loader /></td>
 				</tr>
 				{:else}
 					<tr class="has-background-light">
@@ -113,7 +129,9 @@
 <div class="is-flex is-align-items-center">
 	<Button name="Connect" color="is-primary" butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
 	<Button name="Scan" butn_submit={scanAgain} bind:state={scanButnState}/>
+	{#if $config_store.ssid}
 	<Button name="Cancel" color="is-danger" butn_submit={() => active = false}/>
+	{/if}
 </div>
 
 </form>

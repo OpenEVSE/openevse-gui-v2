@@ -33,7 +33,8 @@ const model = {
 		status_expanded: false,
 		window_width: window.innerWidth,
 		breakpoint: undefined,
-		has_fetched: false
+		has_fetched: false,
+		wizard_step: 0
 }
 
 function createUIStatesStore() {

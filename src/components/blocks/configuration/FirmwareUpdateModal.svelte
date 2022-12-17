@@ -122,7 +122,7 @@
 							<td class="has-text-weight-semibold">Latest</td>
 							<td class="">
 								<div class="is-flex is-align-items-center is-flex-direction-row is-flex-wrap-wrap ">
-									<span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>
+									<span class="mr-1 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>
 									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-black">
 										<iconify-icon icon="mdi:github" class="is-size-4 mt-2"></iconify-icon>
 									</a>

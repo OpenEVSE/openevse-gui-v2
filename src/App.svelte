@@ -1,4 +1,7 @@
 <script>
+	import { config_store } from "./lib/stores/config.js";
+	import { status_store } from "./lib/stores/status.js";
+	import { uistates_store } from './lib/stores/uistates.js'
 	import "@fontsource/roboto"; // The font we are gonna serve with fontsource
 	import Status from "./components/blocks/Status.svelte";
 	import {location} from 'svelte-spa-router'
@@ -10,7 +13,7 @@
 	import Router from 'svelte-spa-router'
 	import { routes } from "./lib/routes.js"
 	import FetchData from './components/data/FetchData.svelte'
-	import { uistates_store } from './lib/stores/uistates.js'
+
 	import {getBreakpoint} from "./lib/utils.js"
 
 	function getWindowSize() {
@@ -39,16 +42,21 @@
 
 <main>		
 	{#if $uistates_store.data_loaded}
-	<div class="content">
-		<div class="container px-3 pt-2 pb-6">
-			<Status />
-			<div>
-				<Router {routes} />
+		{#if $status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid)}
+		<!-- Wizard mode -->
+		
+		{:else}
+		<div class="content">
+			<div class="container px-3 pt-2 pb-6">
+				<Status />
+				<div>
+					<Router {routes} />
+				</div>
+					
 			</div>
-				
 		</div>
-	</div>
 	<MobileNav charging={$uistates_store.charging} selected={$location} />
+		{/if}
 	<DataManager />
 	{:else}
 	<FetchData />
