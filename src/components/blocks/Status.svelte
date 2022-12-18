@@ -138,5 +138,5 @@ in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 </div>
 {/if}
 {#if $uistates_store.ws_connected == false}
-<AlertBox title="Connection error" body="Websocket has been disconnected, waiting for reconnection" visible={true}/>
+<AlertBox title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={true}/>
 {/if}
