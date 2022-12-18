@@ -22,6 +22,12 @@
 	$: resetStatus(status)
 
 </script>
+<style>
+	.select {
+		max-width: 250px;;
+	}
+</style>
+
 <div class="is-inline-block my-2">
 	{#if title}
 	<div class="has-text-weight-bold">{title}</div>

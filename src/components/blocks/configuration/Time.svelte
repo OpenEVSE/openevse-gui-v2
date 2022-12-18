@@ -143,7 +143,7 @@
 	{/if}
 	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 
-	<div class="">
+	<div class="select-tz">
 		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={createTzObj(timeZone)} onChange={setTimeZone} />
 
 	</div>

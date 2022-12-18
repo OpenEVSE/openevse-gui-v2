@@ -54,9 +54,9 @@
 						url = "http://" + $config_store.hostname + ".local"
 					}
 					if (is_wizard) {
-						url = url +  "/#/wizard/3"
+						url = url +  "/#/wizard/4"
 					}
-					$uistates_store.wizard_step = 3
+					$uistates_store.wizard_step = 4
 					location.replace(url) }
 				, 4000 )
 		return true

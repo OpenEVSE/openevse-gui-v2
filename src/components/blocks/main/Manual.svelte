@@ -215,7 +215,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 		<Slider icon="fa6-solid:gauge-high" tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step={1} label="CHARGE RATE"
 		bind:value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 		{#key $claims_target_store.claims.charge_current}
-		{#if $claims_target_store.claims.charge_current && $claims_target_store.properties.charge_current < $config_store.max_current_soft}
+		{#if $claims_target_store.claims.charge_current && $claims_target_store.properties.charge_current < $config_store.max_current_soft && $claims_target_store.claims.charge_current != EvseClients.timer}
 		<div class="is-flex is-justify-content-center is-align-content is-vcentered">
 			<RemovableTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
 		</div>
