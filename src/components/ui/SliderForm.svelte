@@ -1,5 +1,6 @@
 <script>
-	import Icon from '@iconify/svelte';
+	import 'iconify-icon';
+
 	export let value;
 	export let min;
 	export let max;
@@ -33,7 +34,7 @@
 	{/if}
 	<div class="is-flex has-text-info is-flex-direction-row my-0 mx-0 py-0">
 		{#if icon}
-		<Icon class="mt-4 mr-3" icon={icon} width=25/>
+		<iconify-icon class="mt-4 mr-3" icon={icon} style="font-size: 25px"></iconify-icon>
 
 		{/if}
 		<div class="" on:mouseenter={togglecolor} on:mouseleave={togglecolor} >			

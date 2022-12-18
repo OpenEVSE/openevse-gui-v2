@@ -2,7 +2,6 @@
 	import Help from "./Help.svelte";
 	import { scale, fade} from 'svelte/transition';
 	import { expoOut, expoInOut } from 'svelte/easing';
-	import Icon from '@iconify/svelte';
 	import 'iconify-icon';
 
 	export let title = "title"
