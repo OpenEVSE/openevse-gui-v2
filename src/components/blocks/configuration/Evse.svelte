@@ -1,14 +1,13 @@
 <script>
-	import Select from "./../../ui/Select.svelte";
-	import Help from "./../../ui/Help.svelte";
-	import Switch from "./../../ui/Switch.svelte";
-	import { serialQueue } from "./../../../lib/queue.js";
-	import SliderForm from "./../../ui/SliderForm.svelte";
-	import { config_store } from "./../../../lib/stores/config.js";
-	import InputForm from "./../../ui/InputForm.svelte";
-	import Box from "./../../ui/Box.svelte";
+	import Select			 from "./../../ui/Select.svelte";
+	import Help				 from "./../../ui/Help.svelte";
+	import Switch			 from "./../../ui/Switch.svelte";
+	import { serialQueue }	 from "./../../../lib/queue.js";
+	import SliderForm 		 from "./../../ui/SliderForm.svelte";
+	import { config_store }  from "./../../../lib/stores/config.js";
+	import InputForm 		 from "./../../ui/InputForm.svelte";
+	import Box 				 from "./../../ui/Box.svelte";
 
-	// let input_random_start = {value: 0}
 	let input_random_start = 0
 	let select_service_level = ""
 	const service_items = [{name: "Auto", value: 0},{name: "Level 1", value: 1},{name: "Level 2", value: 2}]
@@ -42,6 +41,7 @@
 		else select_service_level = "error"
 	}
 </script>
+
 <style>
 	.inputbox {
 		max-width: 200px;
@@ -55,6 +55,7 @@
 	}
 
 </style>
+
 <Box title="EVSE" icon="mdi:evse">
 	<div class="is-flex is-flex-direction-column is-align-items-center mt-4 ">
 

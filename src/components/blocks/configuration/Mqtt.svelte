@@ -1,21 +1,19 @@
 <script>
-	import MQTThelp from "./../../help/MQTThelp.svelte";
-	import InputForm from "./../../ui/InputForm.svelte";
-	import Box from "../../ui/Box.svelte";
+	import MQTThelp 		from "./../../help/MQTThelp.svelte";
+	import InputForm 		from "./../../ui/InputForm.svelte";
+	import Box 				from "../../ui/Box.svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
-	import Button from "./../../ui/Button.svelte";
-	import { serialQueue } from "./../../../lib/queue.js";
-	import Switch from "./../../ui/Switch.svelte";
-	import AlertBox from "../../ui/AlertBox.svelte"
-	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
+	import Button 			from "./../../ui/Button.svelte";
+	import { serialQueue }  from "./../../../lib/queue.js";
+	import Switch 			from "./../../ui/Switch.svelte";
+	import AlertBox 		from "../../ui/AlertBox.svelte"
 
-	let mqtt_pass = ""
 	let stg_submit_state
 	let alert_body
 	let alert_visible = false
 
 	async function toggleMQTT() {	
-		let res = await serialQueue.add(() => config_store.saveParam("mqtt_enabled", $config_store.mqtt_enabled))
+		await serialQueue.add(() => config_store.saveParam("mqtt_enabled", $config_store.mqtt_enabled))
 	}
 
 	let stg_submit = async () => {

@@ -1,15 +1,14 @@
 <script>
+
+	import InputForm 		from "./../../ui/InputForm.svelte";
+	import Box 				from "../../ui/Box.svelte";
+	import Button 			from "./../../ui/Button.svelte";
+	import Switch			from "./../../ui/Switch.svelte";
+	import AlertBox 		from "../../ui/AlertBox.svelte"
 	import { status_store } from "./../../../lib/stores/status.js";
-	import InputForm from "./../../ui/InputForm.svelte";
-	import Box from "../../ui/Box.svelte";
+	import { serialQueue }  from "./../../../lib/queue.js";
 	import { config_store } from "./../../../lib/stores/config.js";
-	import Button from "./../../ui/Button.svelte";
-	import { serialQueue } from "./../../../lib/queue.js";
-	import Switch from "./../../ui/Switch.svelte";
-	import AlertBox from "../../ui/AlertBox.svelte"
-
 	
-
 	let stg_submit_state
 	let alert_body
 	let alert_visible = false

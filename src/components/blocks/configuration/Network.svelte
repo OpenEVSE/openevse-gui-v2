@@ -1,13 +1,14 @@
 <script>
 	import { serialQueue } from "./../../../lib/queue.js";
-	import {status_store} from '../../../lib/stores/status.js'
-	import {config_store} from "../../../lib/stores/config.js"
-	import InputForm from "../../ui/InputForm.svelte"
-	import WifiDisplay from "./WifiDisplay.svelte"
-	import Button from "../../ui/Button.svelte"
-	import WifiScan from "./WifiScan.svelte"
-	import Box from "../../ui/Box.svelte"
+	import {status_store}  from '../../../lib/stores/status.js'
+	import {config_store}  from "../../../lib/stores/config.js"
+	import InputForm 	   from "../../ui/InputForm.svelte"
+	import WifiDisplay 	   from "./WifiDisplay.svelte"
+	import Button 		   from "../../ui/Button.svelte"
+	import WifiScan 	   from "./WifiScan.svelte"
+	import Box 			   from "../../ui/Box.svelte"
 	import 'iconify-icon';
+	
 	export let is_wizard = false
 
 	function displayMode(mode) {

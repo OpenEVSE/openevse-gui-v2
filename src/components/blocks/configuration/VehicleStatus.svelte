@@ -1,8 +1,8 @@
 <script>
-	import { config_store } from "./../../../lib/stores/config.js";
-	import { uistates_store } from "./../../../lib/stores/uistates.js";
-	import {status_store} from "../../../lib/stores/status.js"
-	import Box from "../../ui/Box.svelte"
+	import { config_store }			   from "./../../../lib/stores/config.js";
+	import { uistates_store } 		   from "./../../../lib/stores/uistates.js";
+	import {status_store} 			   from "../../../lib/stores/status.js"
+	import Box 						   from "../../ui/Box.svelte"
 	import {sec2time, s2mns, miles2km} from "../../../lib/utils.js"
 
 </script>

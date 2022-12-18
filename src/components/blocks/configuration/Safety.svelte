@@ -1,9 +1,9 @@
 <script>
 	import { serialQueue } from "./../../../lib/queue.js";
-	import SafetyTableRow from "../../ui/SafetyTableRow.svelte";
-	import {config_store} from "../../../lib/stores/config.js"
-	import {status_store} from "../../../lib/stores/status.js"
-	import Box from "../../ui/Box.svelte"
+	import SafetyTableRow  from "../../ui/SafetyTableRow.svelte";
+	import {config_store}  from "../../../lib/stores/config.js"
+	import {status_store}  from "../../../lib/stores/status.js"
+	import Box 			   from "../../ui/Box.svelte"
 
 	export let editable = true
 

@@ -1,13 +1,14 @@
 <script>
-	import { uistates_store } from "./../../../lib/stores/uistates.js";
-	import { config_store } from "./../../../lib/stores/config.js";
-	import Loader from "./../../ui/Loader.svelte";
-	import { serialQueue } from "./../../../lib/queue.js";
-	import WifiIcon from "./../../ui/WifiIcon.svelte";
+	import { uistates_store } 				 from "./../../../lib/stores/uistates.js";
+	import { config_store } 				 from "./../../../lib/stores/config.js";
+	import {onMount, onDestroy} 			 from "svelte"
 	import {removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"
-	import InputForm from "../../ui/InputForm.svelte"
-	import Button from "../../ui/Button.svelte"
-	import {onMount, onDestroy} from "svelte"
+	import { serialQueue } 					 from "./../../../lib/queue.js";
+	import Loader 							 from "./../../ui/Loader.svelte";
+	import WifiIcon 						 from "./../../ui/WifiIcon.svelte";
+	import InputForm 						 from "../../ui/InputForm.svelte"
+	import Button 							 from "../../ui/Button.svelte"
+
 	export let active = false
 	export let ssid = ""
 	export let is_wizard = false

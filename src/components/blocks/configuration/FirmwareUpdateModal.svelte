@@ -1,15 +1,16 @@
 <script>
-	import { config_store } from "./../../../lib/stores/config.js";
-	import { serialQueue } from "./../../../lib/queue.js";
-	import { status_store } from "../../../lib/stores/status.js"
-	import {httpAPI} from "../../../lib/utils.js" 
+	import { config_store } 	from "./../../../lib/stores/config.js";
+	import { serialQueue }		from "./../../../lib/queue.js";
+	import { status_store } 	from "../../../lib/stores/status.js"
+	import {httpAPI}			from "../../../lib/utils.js" 
 	import {onDestroy, onMount} from "svelte"
-	import Box from "../../ui/Box.svelte"
-	import Button from "../../ui/Button.svelte"
-	import IconButton from "../../ui/IconButton.svelte"
-	import Modal from "../../ui/Modal.svelte"
-	import SelectFile from "../../ui/SelectFile.svelte"
+	import Box 					from "../../ui/Box.svelte"
+	import Button 				from "../../ui/Button.svelte"
+	import IconButton 			from "../../ui/IconButton.svelte"
+	import Modal 				from "../../ui/Modal.svelte"
+	import SelectFile 			from "../../ui/SelectFile.svelte"
 	import 'iconify-icon';
+	
 	export let is_opened = false
 	export let update = {}
 
@@ -170,8 +171,5 @@
 			<Button disabled={uploadButtonState == "loading" || fileSent == "ok"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{/if}
-		
-		
-		
 	</Box>
 </Modal>

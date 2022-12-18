@@ -1,15 +1,16 @@
 <script>
-	import { serialQueue } from "./../../../lib/queue.js";
-	import Box from "../../ui/Box.svelte"
-	import {status_store} from "../../../lib/stores/status.js"
-	import {config_store} from "../../../lib/stores/config.js"
-	import InputForm from "../../ui/InputForm.svelte"
-	import {httpAPI, createTzObj, formatDate, getTZ} from '../../../lib/utils.js'
-	import timeZone from "../../../../library/posix_tz_db/zones.json"
-	import {onMount} from "svelte"
-	import Button from "../../ui/Button.svelte"
-	import Select from "../../ui/Select.svelte"
-	import { DateTime } from "luxon";
+	import { serialQueue } 		  from "./../../../lib/queue.js";
+	import {httpAPI, createTzObj} from '../../../lib/utils.js'
+	import {status_store} 		  from "../../../lib/stores/status.js"
+	import {config_store} 		  from "../../../lib/stores/config.js"
+	import {onMount} 			  from "svelte"
+	import { DateTime } 		  from "luxon";
+	import Box 					  from "../../ui/Box.svelte"
+	import InputForm 			  from "../../ui/InputForm.svelte"
+	import timeZone 			  from "../../../../library/posix_tz_db/zones.json"
+	import Button 				  from "../../ui/Button.svelte"
+	import Select 				  from "../../ui/Select.svelte"
+
 
 	let inputSntpState = 0
 	let date

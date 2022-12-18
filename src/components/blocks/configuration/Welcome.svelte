@@ -1,5 +1,5 @@
 <script>
-	import Box from "./../../ui/Box.svelte";
+	import Box  from "./../../ui/Box.svelte";
 	import Logo from "./../../../assets/logo-mini.png"
 		
 </script>

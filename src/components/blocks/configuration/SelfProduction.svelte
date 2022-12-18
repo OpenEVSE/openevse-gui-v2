@@ -1,17 +1,16 @@
 <script>
-	import SelfProductionHelp from "./../../help/SelfProductionHelp.svelte";
-	import Select from "./../../ui/Select.svelte";
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
-	import { status_store } from "./../../../lib/stores/status.js";
-	import InputForm from "./../../ui/InputForm.svelte";
-	import Box from "../../ui/Box.svelte";
-	import { config_store } from "./../../../lib/stores/config.js";
-	import Button from "./../../ui/Button.svelte";
-	import { serialQueue } from "./../../../lib/queue.js";
-	import Switch from "./../../ui/Switch.svelte";
-	import {s2mns, round} from "../../../lib/utils.js"
-	import AlertBox from "../../ui/AlertBox.svelte"
-	import {faSolarPanel} from '@fortawesome/free-solid-svg-icons/index.js'
+	import { status_store }   from "./../../../lib/stores/status.js";
+	import { config_store }   from "./../../../lib/stores/config.js";
+	import { serialQueue }    from "./../../../lib/queue.js";
+	import {s2mns, round} 	  from "../../../lib/utils.js"
+	import SelfProductionHelp from "./../../help/SelfProductionHelp.svelte";
+	import Select 			  from "./../../ui/Select.svelte";
+	import InputForm 		  from "./../../ui/InputForm.svelte";
+	import Box 				  from "../../ui/Box.svelte";
+	import Button 			  from "./../../ui/Button.svelte";
+	import Switch 			  from "./../../ui/Switch.svelte";
+	import AlertBox 		  from "../../ui/AlertBox.svelte"
 	
 	let stg_submit_state
 	let modes = [{name: "Production", value: 0}, {name:"Excess Power", value: 1}]

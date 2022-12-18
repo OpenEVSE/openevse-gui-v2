@@ -1,12 +1,13 @@
 <script>
-	import Loader from "./../../ui/Loader.svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
-	import Box from "./../../ui/Box.svelte"
 	import { history_store } from "./../../../lib/stores/history.js"
 	import { onMount } from "svelte"
 	import {httpAPI, formatDate, round, state2icon, type2icon} from "../../../lib/utils.js"
 	import { serialQueue } from "./../../../lib/queue.js";
+	import Box from "./../../ui/Box.svelte"
+	import Loader from "./../../ui/Loader.svelte";
+
 
 
 

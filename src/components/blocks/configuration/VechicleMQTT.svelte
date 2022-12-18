@@ -1,10 +1,10 @@
 <script>
-	import { serialQueue } from "./../../../lib/queue.js";
-	import Button from "./../../ui/Button.svelte";
+	import { serialQueue }  from "./../../../lib/queue.js";
 	import { config_store } from "./../../../lib/stores/config.js";
-	import InputForm from "./../../ui/InputForm.svelte";
-	import AlertBox from "../../ui/AlertBox.svelte"
-	import Select from "./../../ui/Select.svelte";
+	import Button 			from "./../../ui/Button.svelte";
+	import InputForm 		from "./../../ui/InputForm.svelte";
+	import AlertBox 		from "../../ui/AlertBox.svelte"
+	import Select 			from "./../../ui/Select.svelte";
 
 	let stg_submit_state
 	let alert_body

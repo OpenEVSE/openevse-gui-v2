@@ -1,14 +1,15 @@
 <script>
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
-	import RemovableTag from "./../../ui/RemovableTag.svelte";
-	import { config_store } from "./../../../lib/stores/config.js";
-	import { onMount } from "svelte";
-	import { status_store } from "./../../../lib/stores/status.js";
-	import Button from "./../../ui/Button.svelte";
-	import { serialQueue } from "./../../../lib/queue.js";
-	import Switch from "./../../ui/Switch.svelte";
-	import Box from "../../ui/Box.svelte"
-	import {httpAPI} from "../../../lib/utils.js"
+	import { config_store }   from "./../../../lib/stores/config.js";
+	import { status_store }   from "./../../../lib/stores/status.js";
+	import {httpAPI} 		  from "../../../lib/utils.js"
+	import { serialQueue }    from "./../../../lib/queue.js";
+	import { onMount } 		  from "svelte";
+	import RemovableTag 	  from "./../../ui/RemovableTag.svelte";
+	import Button 			  from "./../../ui/Button.svelte";
+	import Switch 			  from "./../../ui/Switch.svelte";
+	import Box 				  from "../../ui/Box.svelte"
+
 
 	let scanning = false
 	let tags = []

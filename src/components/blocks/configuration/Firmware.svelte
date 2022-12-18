@@ -1,11 +1,11 @@
 <script>
-	import { onMount } from "svelte";
+	import { onMount } 			from "svelte";
+	import {httpAPI} 			from "../../../lib/utils.js"
 	import { serialQueue } 		from "../../../lib/queue.js";
-	import Box 					from "../../ui/Box.svelte"
 	import {config_store} 		from "../../../lib/stores/config.js"
+	import Box 					from "../../ui/Box.svelte"
 	import Button 				from "../../ui/Button.svelte"
 	import FirmwareUpdateModal 	from "./FirmwareUpdateModal.svelte"
-	import {httpAPI} 			from "../../../lib/utils.js"
 	import 'iconify-icon';
 
 	let restartOpenEvseState = "default"

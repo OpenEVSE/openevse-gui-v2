@@ -1,15 +1,14 @@
 <script>
-	import Test from "./../../../routes/Test.svelte";
-	import Select from "./../../ui/Select.svelte";
-	import { tesla_store } from "./../../../lib/stores/tesla.js";
-	import { onMount } from "svelte";
-	import Help from "./../../ui/Help.svelte";
-	import { serialQueue } from "./../../../lib/queue.js";
-	import Button from "./../../ui/Button.svelte";
+	import { tesla_store }  from "./../../../lib/stores/tesla.js";
+	import { onMount } 		from "svelte";
+	import { serialQueue } 	from "./../../../lib/queue.js";
 	import { config_store } from "./../../../lib/stores/config.js";
-	import InputForm from "./../../ui/InputForm.svelte";
-	import AlertBox from "../../ui/AlertBox.svelte"
-	import {httpAPI} from "./../../../lib/utils.js"
+	import {httpAPI} 		from "./../../../lib/utils.js"
+	import Select 			from "./../../ui/Select.svelte";
+	import Button 			from "./../../ui/Button.svelte";
+	import InputForm 		from "./../../ui/InputForm.svelte";
+	import AlertBox 		from "../../ui/AlertBox.svelte"
+
 
 	let stg_submit_state
 	let alert_body

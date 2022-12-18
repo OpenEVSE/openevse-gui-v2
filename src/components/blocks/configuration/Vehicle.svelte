@@ -1,14 +1,11 @@
 <script>
-	import { onMount } from "svelte";
-	import VehicleTesla from "./VehicleTesla.svelte";
-	import VechicleMQTT from "./VechicleMQTT.svelte";
-	import Box from "../../ui/Box.svelte";
+	import { onMount }		from "svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
-	import Select from "./../../ui/Select.svelte";
+	import VehicleTesla 	from "./VehicleTesla.svelte";
+	import VechicleMQTT 	from "./VechicleMQTT.svelte";
+	import Box 				from "../../ui/Box.svelte";
+	import Select 			from "./../../ui/Select.svelte";
 	import VehicleTeslaHelp from "./../../help/VehicleTeslaHelp.svelte";
-	import {faGear} from '@fortawesome/free-solid-svg-icons/index.js'
-
-
 	
 	let mode = 0 // 0: none, 1: Tesla, 2: MQTT
 	let modes = [{name: "None/HTTP", value: 0}, {name:"Tesla", value: 1}, {name: "MQTT", value: 2}]

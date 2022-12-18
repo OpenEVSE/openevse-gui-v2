@@ -1,12 +1,12 @@
 <script>
 	import { config_store } from "./../../../lib/stores/config.js";
-	import Tabs from "./../../ui/Tabs.svelte";
-	import AlertBox from "./../../ui/AlertBox.svelte";
-	import Switch from "../../ui/Switch.svelte";
-	import {onMount} from "svelte"
-	import InputForm from "../../ui/InputForm.svelte";
-	import Box from "../../ui/Box.svelte"
-	import Button from "../../ui/Button.svelte"
+	import {onMount} 		from "svelte"
+	import Tabs 			from "./../../ui/Tabs.svelte";
+	import AlertBox			from "./../../ui/AlertBox.svelte";
+	import Switch 			from "../../ui/Switch.svelte";
+	import InputForm 		from "../../ui/InputForm.svelte";
+	import Box 				from "../../ui/Box.svelte"
+	import Button 			from "../../ui/Button.svelte"
 
 	let alert_visible = false
 	let activetab = 0
