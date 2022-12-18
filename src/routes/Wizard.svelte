@@ -66,7 +66,7 @@
 			{/if}
 			{#if $uistates_store.wizard_step == 4}
 			<button class="button is-white ml-4"on:click={()=>push("/")}>
-				&nbsp; Finish Wizard &nbsp;
+				&nbsp; Quit Wizard &nbsp;
 			</button>
 			{/if}
 	</div>
