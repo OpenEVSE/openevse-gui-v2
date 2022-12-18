@@ -45,12 +45,6 @@
 
 </script>
 <style>
-	.code {
-		white-space: pre-wrap;
-		white-space: -moz-pre-wrap;
-		white-space: -pre-wrap;
-		white-space: -o-pre-wrap;
-	}
 </style>
 <Box title="Developer" icon="mdi:console" has_help={true}>
 	<div slot="help"><DevHelp  /> </div>
@@ -61,14 +55,14 @@
 
 	<div class="container mt-4">
 		<div>
-			<div class="is-size-7 code">
+			<div class="is-size-7">
 			{#each rapi_cmd_result as { cmd, ret } }
 			 &gt; {cmd} <br>
 			 &lt; {ret} <br>
 			{/each}
 			</div>
 		</div>
-		<form on:submit={send_rapi_cmd}>
+		<form on:submit|preventDefault={send_rapi_cmd}>
 		<InputForm  title="Rapi Command" bind:value={rapi_cmd} placeholder="" type="text" />
 		<Button name="Send" color="is-info" butn_submit={send_rapi_cmd} state={button_send_state}/>
 		<Button name="Clear" color="is-info" butn_submit={clear_rapi_cmd} />
