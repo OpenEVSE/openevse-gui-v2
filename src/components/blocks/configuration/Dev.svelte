@@ -1,9 +1,10 @@
 <script>
-	import InputForm from "./../../ui/InputForm.svelte";
-	import Button from "./../../ui/Button.svelte";
-	import Box from "./../../ui/Box.svelte";
-	import {httpAPI} from "../../../lib/utils.js"
-	import DevHelp from "../../help/DevHelp.svelte"
+	import InputForm 	from "./../../ui/InputForm.svelte";
+	import Button 		from "./../../ui/Button.svelte";
+	import Box 			from "./../../ui/Box.svelte";
+	import {httpAPI} 	from "../../../lib/utils.js"
+	import DevHelp 		from "../../help/DevHelp.svelte"
+
 	let rapi_cmd = "$"
 	let rapi_cmd_result = []
 	let rapiurl = "/r?json=1&rapi="
@@ -60,7 +61,7 @@
 
 	<div class="container mt-4">
 		<div>
-			<div class="is-size-7">
+			<div class="is-size-7 code">
 			{#each rapi_cmd_result as { cmd, ret } }
 			 &gt; {cmd} <br>
 			 &lt; {ret} <br>
