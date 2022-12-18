@@ -1,10 +1,9 @@
 <script>
-	import { uistates_store } from "./../../lib/stores/uistates.js";
-	import { DateTime } from "luxon";
-	import { status_store } from './../../lib/stores/status.js'
+	import { uistates_store } 	  from "./../../lib/stores/uistates.js";
+	import { DateTime } 		  from "luxon";
+	import { status_store }		  from './../../lib/stores/status.js'
 	import { onMount, onDestroy } from 'svelte'
 	
-
 	let socket
 	let timerId
 	let lastmsg

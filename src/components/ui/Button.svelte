@@ -1,6 +1,6 @@
 <script>
 	import 'iconify-icon';
-	import Loader from "./Loader.svelte";
+	import Loader 				from "./Loader.svelte";
 	import {onMount, onDestroy} from 'svelte'
 	
 	export let butn_submit = () => {}

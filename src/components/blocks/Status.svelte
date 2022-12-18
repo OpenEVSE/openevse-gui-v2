@@ -1,18 +1,17 @@
 <script>
-	import DivertShaperStatus from "./../ui/DivertShaperStatus.svelte";
-	import AlertBox from "./../ui/AlertBox.svelte";
-	import { claims_target_store } from "./../../lib/stores/claims_target.js";
-	import TaskDisplay from "../ui/TaskDisplay.svelte";
-	import {status_store} from "../../lib/stores/status.js"
-	import {plan_store} from "../../lib/stores/plan.js"
-	import {uistates_store} from "../../lib/stores/uistates.js"
-	import StatusTile from "../ui/StatusTile.svelte"
-	import StatusItems from "../ui/StatusItems.svelte"
-	import ExpandArrow from "../ui/ExpandArrow.svelte"
-	import {sec2time} from "../../lib/utils.js"
-	import { scale } from 'svelte/transition';
-	import { expoInOut } from 'svelte/easing';
-
+	import {status_store} 			from "../../lib/stores/status.js"
+	import {plan_store} 			from "../../lib/stores/plan.js"
+	import {uistates_store} 		from "../../lib/stores/uistates.js"
+	import {sec2time} 				from "../../lib/utils.js"
+	import { scale } 				from 'svelte/transition';
+	import { expoInOut } 			from 'svelte/easing';
+	import { claims_target_store }  from "./../../lib/stores/claims_target.js";
+	import DivertShaperStatus 		from "./../ui/DivertShaperStatus.svelte";
+	import AlertBox 			    from "./../ui/AlertBox.svelte";
+	import TaskDisplay 				from "../ui/TaskDisplay.svelte";
+	import StatusTile 				from "../ui/StatusTile.svelte"
+	import StatusItems 				from "../ui/StatusItems.svelte"
+	import ExpandArrow 				from "../ui/ExpandArrow.svelte"
 
 	let elapsed
 	$uistates_store.status_expanded

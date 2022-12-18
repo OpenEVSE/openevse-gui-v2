@@ -7,7 +7,7 @@
 	import Button from "../../ui/Button.svelte"
 	import {onDestroy} from "svelte"
 
-	export let is_opened;
+	export let is_opened = false;
 	export let timer = null;
 	let timeout
 
@@ -52,13 +52,6 @@
 
 	$: if (alert_visible == false) {
 			populate_checkboxes();
-	}
-
-	$: (timer) => {
-		if (timer == null) 
-			title = "New Timer"
-		else 
-			title = "Timer " + $schedule_store[timer].id
 	}
 
 	function days2table(sched) {

@@ -1,6 +1,6 @@
 <script>
 	import { uistates_store } from "./../../lib/stores/uistates.js";
-	import {link} from 'svelte-spa-router'
+	import {link} 			  from 'svelte-spa-router'
 	import 'iconify-icon';
 	
 	export let charging

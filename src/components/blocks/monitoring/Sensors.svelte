@@ -1,6 +1,6 @@
 <script>
 	import {status_store} from "../../../lib/stores/status.js"
-	import {round} from "../../../lib/utils.js"
+	import {round} 		  from "../../../lib/utils.js"
 
 </script>
 <style>

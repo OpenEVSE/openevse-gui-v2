@@ -1,6 +1,6 @@
 
 <script>
-	import { serialQueue } from "./../../../lib/queue.js";
+	import { serialQueue }  from "./../../../lib/queue.js";
 	import { onDestroy } 	from "svelte";
 	import Box 				from "../../ui/Box.svelte"
 	// @ts-ignore
@@ -8,7 +8,7 @@
 	import TimerTableRow 	from "../../ui/TimerTableRow.svelte"
 	import Button 			from "../../ui/Button.svelte"
 	import {schedule_store} from "../../../lib/stores/schedule.js"
-	import {faCalendarDays} from '@fortawesome/free-solid-svg-icons/index.js'
+
 
 	let timers_modal_opened = false
 	let timer = null

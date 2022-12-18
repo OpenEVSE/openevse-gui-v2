@@ -1,7 +1,7 @@
 <script>
-	import Help from "./Help.svelte";
-	import { scale, fade} from 'svelte/transition';
-	import { expoOut, expoInOut } from 'svelte/easing';
+	import Help 			 from "./Help.svelte";
+	import { scale, fade} 	 from 'svelte/transition';
+	import { expoInOut }	 from 'svelte/easing';
 	import 'iconify-icon';
 
 	export let title = "title"

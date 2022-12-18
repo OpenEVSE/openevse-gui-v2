@@ -1,17 +1,17 @@
 <script>
 	import "hacktimer/HackTimer.js"
-	import WebSocket from "./WebSocket.svelte";
-	import {EvseClients} 			from  "./../../lib/vars.js"
-	import { uistates_store }		from "./../../lib/stores/uistates.js"
-	import { status_store }			from "./../../lib/stores/status.js"
-	import { schedule_store } 		from "./../../lib/stores/schedule.js"
-	import { plan_store } 			from "./../../lib/stores/plan.js"
-	import { config_store } 		from "./../../lib/stores/config.js"
-	import { claims_target_store } 	from "./../../lib/stores/claims_target.js"
-	import { override_store } 		from "./../../lib/stores/override.js"
+	import WebSocket 					from "./WebSocket.svelte";
+	import {EvseClients} 				from  "./../../lib/vars.js"
+	import { uistates_store }			from "./../../lib/stores/uistates.js"
+	import { status_store }				from "./../../lib/stores/status.js"
+	import { schedule_store } 			from "./../../lib/stores/schedule.js"
+	import { plan_store } 				from "./../../lib/stores/plan.js"
+	import { config_store } 			from "./../../lib/stores/config.js"
+	import { claims_target_store } 		from "./../../lib/stores/claims_target.js"
+	import { override_store } 			from "./../../lib/stores/override.js"
 	import { clientid2name, formatDate} from "./../../lib/utils.js"
-	import { serialQueue } from "./../../lib/queue.js";
-	import {onMount} from "svelte"
+	import { serialQueue } 				from "./../../lib/queue.js";
+	import {onMount} 					from "svelte"
 
 	let counter_divert_update
 	let last_divert_update

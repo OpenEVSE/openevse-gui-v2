@@ -1,6 +1,6 @@
 <script>
-	import logo from "../../assets/logo.png"
-	import {onDestroy} from "svelte"
+	import logo 			  from "../../assets/logo.png"
+	import {onDestroy} 		  from "svelte"
 	import { link, location } from "svelte-spa-router"
 
 	let logoid

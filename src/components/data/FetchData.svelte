@@ -1,24 +1,19 @@
 <script>
-	import AlertBox from "./../ui/AlertBox.svelte";
 	import { onMount } from "svelte";
 	import { uistates_store }		from "./../../lib/stores/uistates.js"
 	import { status_store }			from "./../../lib/stores/status.js"
 	import { schedule_store } 		from "./../../lib/stores/schedule.js"
 	import { plan_store } 			from "./../../lib/stores/plan.js"
 	import { config_store } 		from "./../../lib/stores/config.js"
-	import { claims_target_store } 	from "./../../lib/stores/claims_target.js";
-	// import { claim_store } 			from "./../../lib/stores/claim.js"
-	import { override_store } from "./../../lib/stores/override.js";
-	import Logo from "./../../assets/logo-mini.png"
-
-	 
+	import { claims_target_store } 	from "./../../lib/stores/claims_target.js"
+	import { override_store } 		from "./../../lib/stores/override.js"
+	import Logo 					from "./../../assets/logo-mini.png"
+	import AlertBox 				from "./../ui/AlertBox.svelte"
 
 	let status = "Loading"
 	let progress = 0
 	
-
 	async function loadData() {
-		
 		let res
 		status = "Loading step 1"
 		res = await status_store.download()
