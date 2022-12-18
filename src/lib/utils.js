@@ -1,6 +1,5 @@
 import { DateTime } from "luxon";
 import {EvseClients} from "./vars.js"
-import {faHand, faRobot, faCar, faHourglassHalf, faThumbsUp, faBan, faBolt, faTriangleExclamation, faCircleXmark, faCircleInfo, faBell} from '@fortawesome/free-solid-svg-icons/index.js'
 import { uistates_store } from "./stores/uistates.js";
 import {get} from 'svelte/store'
 

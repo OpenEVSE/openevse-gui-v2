@@ -33,7 +33,7 @@
 	<th style="width:40%" class="is-size-4 m0 py-1">
 		<div class="is-flex is-justify-content-center is-align-items-center">
 
-			<div class="mr-2 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal" data-tooltip={formatDays(t_days)}>
+			<div class="mr-2 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal is-capitalized" data-tooltip={formatDays(t_days)}>
 				<iconify-icon inline class="has-text-info" icon="ion:calendar"></iconify-icon>
 			</div>
 
