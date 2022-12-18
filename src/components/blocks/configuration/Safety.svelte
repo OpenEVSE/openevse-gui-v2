@@ -4,7 +4,6 @@
 	import {config_store} from "../../../lib/stores/config.js"
 	import {status_store} from "../../../lib/stores/status.js"
 	import Box from "../../ui/Box.svelte"
-	import Icon from '@iconify/svelte';
 
 	export let editable = true
 

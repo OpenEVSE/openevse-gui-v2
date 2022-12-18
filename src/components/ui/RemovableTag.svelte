@@ -1,11 +1,6 @@
 <script>
 	import Loader from "./Loader.svelte";
 	import 'iconify-icon';
-	import Fa from "svelte-fa/src/fa.svelte";
-	import {
-		faSpinner,
-		faCheck,
-		faXmark,} from "@fortawesome/free-solid-svg-icons/index.js";
 	import {displayIcon, clientid2name} from "../../lib/utils.js"
 
 	export let action = () => {};
@@ -46,7 +41,7 @@
 		<iconify-icon class="" icon={"fa6-solid:xmark"}></iconify-icon>
 	</button>
 	{:else if state == "loading"}
-	<span class="tag is-danger"><Loader /></span>
+	<span class="tag is-danger"><Loader size="is-size-6" /></span>
 	{:else if state == "ok"}
 	<span class="tag is-primary"><iconify-icon class="" icon={"fa6-solid:check"}></iconify-icon></span>
 	{:else if state == "error"}

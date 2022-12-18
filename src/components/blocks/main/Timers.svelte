@@ -18,7 +18,8 @@
 
 	onDestroy(() => {
 		for ( let timeout in timeouts) {
-			clearTimeout(timeout)
+			if (timeout)
+				clearTimeout(timeout)
 		}	
 	})
 
@@ -60,7 +61,7 @@
 		margin: auto;
 	}
 </style>
-<Box title="Schedule" icon="fluent:calendar-ltr-20-filled">
+<Box title="Schedule" icon="ion:calendar">
 	<div class="mb-2">
 		<table class="table is-size-6 has-text-weight-normall timers">
 			<tbody>

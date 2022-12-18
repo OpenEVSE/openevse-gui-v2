@@ -22,7 +22,8 @@
 		scanWifi()
 	})
 	onDestroy(() => {
-		clearTimeout(timeout)
+		if (timeout)
+			clearTimeout(timeout)
 	})
 
 	async function scanWifi() {
@@ -111,12 +112,12 @@
 					{/each}
 				{:else if state == "scan"}
 				<tr class="has-background-light">
-					<th class="has-text-centered is-vcentered">Scanning Networks</th>
-					<td class="has-text-info is-size-6"><Loader /></td>
+					<td class="has-text-centered is-vcentered has-text-weight-semibold">Scanning Networks</td>
+					<td class="has-text-info is-size-5"><Loader /></td>
 				</tr>
 				{:else}
 					<tr class="has-background-light">
-						<th class="has-text-centered is-vcentered">No network found, scan again</th>
+						<th class="has-text-centered is-vcentered has-text-weight-semibold">No network found, scan again</th>
 						<td class="has-text-info is-size-6"></td>
 					</tr>
 				{/if}

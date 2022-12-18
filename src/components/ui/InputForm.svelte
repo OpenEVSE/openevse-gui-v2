@@ -1,7 +1,7 @@
 <script>
+	import Loader from "./Loader.svelte";
 	import {onMount, onDestroy} from "svelte"
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faSpinner, faCheck, faXmark} from '@fortawesome/free-solid-svg-icons/index.js'
+	import 'iconify-icon';
 
 	export let title = undefined
 	export let value
@@ -50,14 +50,14 @@
 	.state {
         float: right;
         margin-right: 10px;
-        margin-top: -32px;
+        margin-top: -33px;
         position: relative;
         z-index: 2;
     }
 	.state-num {
         float: right;
         margin-right: 40px;
-        margin-top: -32px;
+        margin-top: -33px;
         position: relative;
         z-index: 2;
     }
@@ -68,13 +68,13 @@
 		{/if}
 		<input bind:this={field} {readonly} class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off" {maxlength}
 		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	>
-		<div class="{type == "number"?"state-num":"state"}">
+		<div class="is-size-5 {type == "number"?"state-num":"state"}">
 			{#if status==1}
-			<Fa class="has-text-info"icon={faSpinner} spin />
+			<Loader  color="has-text-info"/>
 			{:else if status==2}
-			<Fa class="has-text-primary" icon={faCheck}/>
+			<iconify-icon class="has-text-primary" icon="fa6-solid:check"></iconify-icon>
 			{:else if status==3}
-			<Fa class="has-text-danger" icon={faXmark}/>
+			<iconify-icon class="has-text-primary" icon="fa6-solid:xmark"></iconify-icon>
 			{/if}
 		</div>
 		{#if type=="password"}	

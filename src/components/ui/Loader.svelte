@@ -1,6 +1,7 @@
 <script>
 	import 'iconify-icon';
 	export let size = ""
+	export let color = ""
 
 </script>
 
@@ -24,4 +25,4 @@
 
   </style>
 
-<iconify-icon class={size} icon="eos-icons:loading"></iconify-icon>
+<iconify-icon class="{size} {color?color:""}" icon="eos-icons:loading"></iconify-icon>

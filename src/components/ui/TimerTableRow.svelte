@@ -33,16 +33,16 @@
 	<th style="width:40%" class="is-size-4 m0 py-1">
 		<div class="is-flex is-justify-content-center is-align-items-center">
 
-			<div class=" no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal" data-tooltip={formatDays(t_days)}>
-				<iconify-icon inline class="mt-1" style="font-size: 30px" icon="fluent:calendar-ltr-20-filled"></iconify-icon>
+			<div class="mr-2 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal" data-tooltip={formatDays(t_days)}>
+				<iconify-icon inline class="has-text-info" icon="ion:calendar"></iconify-icon>
 			</div>
 
-			<div class="mx-1 has-text-weight-normal">
+			<div class="mr-2 has-text-weight-normal">
 				<a class="has-text-info" href={$location} use:link on:click={() => {edit(t_id)}}>
 					<iconify-icon inline class="is-size-4" icon="fa6-solid:square-pen"></iconify-icon>
 				</a>
 			</div>
-			<div class="mx-1 has-text-weight-normal">
+			<div class="has-text-weight-normal">
 				<IconButton icon="fa6-solid:square-minus" size="is-size-4" state={removeState} color="has-text-danger" butn_submit={()=>{remove(t_id)}} />
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 <script>
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faSpinner, faCheck, faXmark} from '@fortawesome/free-solid-svg-icons/index.js'
+	import Loader from "./Loader.svelte";
+	import 'iconify-icon';
 	import {onDestroy} from "svelte"
 
 	export let value
@@ -39,13 +39,13 @@
 			{/each}
 		</select>
 	</div>
-	<div class="is-inline-block mx-2 my-2">
+	<div class="is-inline-block mx-2 my-2 is-size-5">
 		{#if status=="loading"}
-		<Fa class="has-text-info"icon={faSpinner} spin />
+		<Loader color="has-text-info" />
 		{:else if status=="ok"}
-		<Fa class="has-text-primary" icon={faCheck}/>
+		<iconify-icon class="has-text-primary" icon="fa6-solid:check"></iconify-icon>
 		{:else if status=="error"}
-		<Fa class="has-text-danger" icon={faXmark}/>
+		<iconify-icon class="has-text-danger" icon="fa6-solid:xmark"></iconify-icon>
 		{/if}
 	</div>
 </div>

@@ -1,9 +1,5 @@
 <script>
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
-	import {faSolarPanel,
-			faGaugeHigh,
-			faBuildingShield,
-			faBolt} 		from '@fortawesome/free-solid-svg-icons/index.js'
 	import {EvseClients} 			from  "./../../../lib/vars.js"
 	import { claims_target_store }	from "./../../../lib/stores/claims_target.js"
 	import Box 						from "../../ui/Box.svelte"
@@ -204,10 +200,10 @@ $: set_uistates_divertmode($status_store.divertmode)
 
 	<div class="is-flex is-justify-content-center my-5">
 		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$uistates_store.divertmode} name={$uistates_store.divertmode == 1?"ECO":"Normal"} color="is-primary" 
-			tooltip={$uistates_store.divertmode?"Disable Eco mode":"Enable Eco mode"} icon={faSolarPanel} breakpoint={$uistates_store.breakpoint}
+			tooltip={$uistates_store.divertmode?"Disable Eco mode":"Enable Eco mode"} icon="fa6-solid:solar-panel" breakpoint={$uistates_store.breakpoint}
 			action={() => setDivertMode(!$uistates_store.divertmode)} disabled={$claims_target_store.claims.state == EvseClients.timer && $claims_target_store.properties.state == "active"}/>
 		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="SHAPER" color="is-info" 
-			tooltip={ $uistates_store.shaper?"Disable Shaper":"Enable Shaper"} icon={faBuildingShield} breakpoint={$uistates_store.breakpoint}
+			tooltip={ $uistates_store.shaper?"Disable Shaper":"Enable Shaper"} icon="fa6-solid:building-shield" breakpoint={$uistates_store.breakpoint}
 			action={() => setShaper(!$uistates_store.shaper)} />
 		</div>
 

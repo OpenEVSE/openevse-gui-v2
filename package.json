@@ -16,7 +16,6 @@
     "bulma": "^0.9.4",
     "sass": "^1.53.0",
     "svelte": "^3.49.0",
-    "svelte-fa": "^3.0.3",
     "svelte-loading-spinners": "^0.1.7",
     "svelte-preprocess": "^4.10.7",
     "vite": "^3.2.3",
@@ -27,9 +26,6 @@
   "dependencies": {
     "@fontsource/open-sans": "^4.5.13",
     "@fontsource/roboto": "^4.5.8",
-    "@fortawesome/free-brands-svg-icons": "^6.2.1",
-    "@fortawesome/free-regular-svg-icons": "^6.2.1",
-    "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "bulma-slider": "^2.0.5",
     "bulma-switch": "^2.0.4",
     "full-icu": "^1.5.0",

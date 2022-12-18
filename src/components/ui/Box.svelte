@@ -3,6 +3,7 @@
 	import { scale, fade} from 'svelte/transition';
 	import { expoOut, expoInOut } from 'svelte/easing';
 	import Icon from '@iconify/svelte';
+	import 'iconify-icon';
 
 	export let title = "title"
 	export let has_help = false
@@ -28,7 +29,8 @@
 	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center">
 		{#if icon}
 		<div class="mr-1 mt-1">
-			<Icon icon={icon} class="pt-1" width="26" />
+ 			<iconify-icon class="is-size-4" icon={icon}></iconify-icon>
+
 		</div>
 		{/if}
 		<span>{title}</span>

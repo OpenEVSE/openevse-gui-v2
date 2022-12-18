@@ -7,7 +7,6 @@
 	import { serialQueue } from "./../../../lib/queue.js";
 	import Switch from "./../../ui/Switch.svelte";
 	import AlertBox from "../../ui/AlertBox.svelte"
-	import Icon from '@iconify/svelte';
 
 	
 
