@@ -19,7 +19,7 @@
 	}
 </style>
 
-<div class:is-hidden={!visible} class="box mt-2 mb-5 pt-3"  in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" out:fade="{{ delay: 0, duration: 300, easing: expoOut}}">
+<div class:is-hidden={!visible} class="box mt-2 mb-5 pt-3"  in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}" >
 	<div class:is-hidden={!has_help}>
 		<Help>
 		<slot name="help"></slot>

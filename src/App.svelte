@@ -44,19 +44,24 @@
 	{#if $uistates_store.data_loaded}
 		{#if $status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid)}
 		<!-- Wizard mode -->
-		
+
 		{:else}
 		<div class="content">
 			<div class="container px-3 pt-2 pb-6">
+				{#if !$location.includes("/wizard")}
 				<Status />
+				{/if}
+
 				<div>
 					<Router {routes} />
 				</div>
 					
 			</div>
 		</div>
-	<MobileNav charging={$uistates_store.charging} selected={$location} />
+		{#if !$location.includes("/wizard")}
+		<MobileNav charging={$uistates_store.charging} selected={$location} />
 		{/if}
+	{/if}
 	<DataManager />
 	{:else}
 	<FetchData />
