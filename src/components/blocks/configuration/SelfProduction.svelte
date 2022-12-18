@@ -98,7 +98,7 @@
 		color: orange;
 	}
 </style>
-<Box title="Self Production" has_help={true} icon="fa-solid:solar-panel">
+<Box title="Self Production" has_help={true} icon="fa6-solid:solar-panel">
 	<div slot="help"><SelfProductionHelp  /> </div>
 	<Switch name="divertswitch" label="Handle Self Production" onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>
 	<div class="is-size-7">Dynamically adjust charge rate based on self production or excess power (grid export).</div>

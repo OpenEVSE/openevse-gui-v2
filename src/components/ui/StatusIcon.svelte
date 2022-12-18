@@ -1,8 +1,9 @@
 <script>
-	import Fa from 'svelte-fa/src/fa.svelte'
+	import 'iconify-icon';
 	export let icon
 	export let color
 	export let bp
+	export let classes = ""
 </script>
 
-<Fa size={bp == "mobilemini"?"1.3x":"1x"} class={color} icon={icon}/>
+<iconify-icon class="{classes} {color} {bp == "mobilemini"?"is-size-5":"is-size-4"}" {icon}></iconify-icon>

@@ -3,12 +3,11 @@
 	import {status_store} from '../../../lib/stores/status.js'
 	import {config_store} from "../../../lib/stores/config.js"
 	import InputForm from "../../ui/InputForm.svelte"
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import WifiDisplay from "./WifiDisplay.svelte"
 	import Button from "../../ui/Button.svelte"
 	import WifiScan from "./WifiScan.svelte"
 	import Box from "../../ui/Box.svelte"
+	import 'iconify-icon';
 	export let is_wizard = false
 
 	function displayMode(mode) {
@@ -63,9 +62,9 @@
 	<div class="my-2">
 		<span class="has-text-weight-bold is-size-6">IP adress: </span><span>{$status_store.ipaddress}</span>
 	</div>
-	<div class="my-2 is-align-items-center">
+	<div class="my-2 is-flex is-align-items-center">
 		<span class="has-text-weight-bold is-size-6">Connected: </span>
-			<Fa class="pt-1 ml-2 is-size-5 {$status_store.net_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.net_connected==1?faCircleCheck:faCircleXmark} />
+		<iconify-icon inline class="ml-2 is-size-5 {$status_store.net_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.net_connected==1?"fa6-solid:circle-check":"fa6-solid:circle-xmark"}></iconify-icon>
 	</div>
 
 	<InputForm type="text" title="Host Name" placeholder="OpenEVSE host name" bind:value={$config_store.hostname} 

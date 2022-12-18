@@ -130,7 +130,7 @@
 	$: $config_store.time_zone, ()=> {tz = $config_store.time_zone }
 </script>
 
-<Box title="Time" icon="fa6-regular:clock">
+<Box title="Time" icon="fa6-solid:clock">
 
 	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
 	{#if !timemode}

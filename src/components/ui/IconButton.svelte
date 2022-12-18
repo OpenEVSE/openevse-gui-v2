@@ -1,7 +1,7 @@
 <script>
+	import Loader from "./Loader.svelte";
 	import { link, location} from "svelte-spa-router"
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faCheck, faXmark, faSpinner} from '@fortawesome/free-solid-svg-icons/index.js'
+	import 'iconify-icon';
 	export let color = "has-text-white"
 	export let state = ""
 	export let butn_submit = () => {}
@@ -30,13 +30,14 @@ on:click|preventDefault={butn_submit} data-tooltip={tooltip}>
 
 
 
-{#if state == "ok"}
-	<Fa icon={faCheck} {size}/>
-{:else if state == "error"}
-	<Fa icon={faXmark} {size}/>
-{:else if state == "loading"}
-	<Fa icon={faSpinner} {size} spin/>
-{:else}
-	<Fa icon={icon} {size}/>
-{/if}
+	{#if state == "ok"}
+	<iconify-icon inline class="{size}" icon="fa6-solid:check"></iconify-icon>
+	{:else if state == "error"}
+	<iconify-icon inline class="{size}" icon="fa6-solid:xmark"></iconify-icon>
+	{:else if state == "loading"}
+	<div class="mt-1"><Loader /></div>
+	
+	{:else}
+	<iconify-icon inline class="{size}" icon={icon}></iconify-icon>
+	{/if}
 </a>

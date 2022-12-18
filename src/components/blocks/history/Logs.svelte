@@ -7,7 +7,6 @@
 	import { onMount } from "svelte"
 	import {httpAPI, formatDate, round, state2icon, type2icon} from "../../../lib/utils.js"
 	import { serialQueue } from "./../../../lib/queue.js";
-	import Fa from 'svelte-fa/src/fa.svelte'
 
 
 
@@ -52,7 +51,7 @@
 			</div>
 				
 			{:else}
-			<table class="table is-size-7">
+			<table class="table is-size-7-mobile is-size-6">
 				<thead>
 					<tr>
 						<th><abbr title="Time">Time</abbr></th>
@@ -67,13 +66,13 @@
 					<tr>
 						<th>{formatDate(item.time,$config_store.time_zone, "short")}</th>
 						<td class="has-tooltip" data-tooltip={item.type}>
-							<Fa size={"1x"} class={item.type=="warning"?"has-text-danger":"has-text-info"} icon={type2icon(item.type)}/>
-						</td>
+							<iconify-icon icon="{type2icon(item.type)}"  class="{item.type=="warning"?"has-text-danger":"has-text-info"} is-size-5"></iconify-icon>
+						</td	>
 						<td class="has-tooltip" data-tooltip={state2icon(item.evseState).tooltip}>
-							<Fa size={"1x"} class={state2icon(item.evseState).color} icon={state2icon(item.evseState).type}/>
+							<iconify-icon  class="{state2icon(item.evseState).color} is-size-5" icon={state2icon(item.evseState).type}></iconify-icon>
 						</td>
-						<td>{round(item.energy/1000,1)}</td>
-						<td>{item.temperature}</td>
+						<td class="has-text-weight-bold">{round(item.energy/1000,1)}</td>
+						<td class="has-text-weight-bold">{item.temperature}</td>
 					</tr>
 					{/each}
 				</tbody>

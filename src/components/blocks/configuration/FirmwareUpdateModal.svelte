@@ -9,8 +9,6 @@
 	import IconButton from "../../ui/IconButton.svelte"
 	import Modal from "../../ui/Modal.svelte"
 	import SelectFile from "../../ui/SelectFile.svelte"
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faFileCircleCheck, faFileCircleXmark, faSquareMinus, faMicrochip} from '@fortawesome/free-solid-svg-icons/index.js'
 	import 'iconify-icon';
 	export let is_opened = false
 	export let update = {}
@@ -136,8 +134,8 @@
 			</div>
 		</div>
 		{#if file || $status_store.ota == "started"}
-		<div>
-			<div class="is-inline-block my-2">
+		<div class="is-flex is-align-items-center my-2 ml-1 is-size-6">
+			<div class="is-inline-block">
 		
 			{#if $status_store.ota == "started"}
 				Firmware update in progress...
@@ -147,13 +145,13 @@
 			{:else if $status_store.ota == "completed" }
 				<span class="">{file.name}</span> uploaded successfully, page will reload in few sec
 			{:else}
-				<div class="is-flex is-align-items-center">
-					<Fa class="is-size-6 mx-2 has-text-primary" icon={faFileCircleCheck}/>
-					<span class="my-2 is-size-7">
+				<div class="s-flex is-align-items-center ml-1 is-size-6">
+					<!-- <iconify-icon class="is-size-6 has-text-info mr-2" icon="fa6-solid:file-circle-check"></iconify-icon> -->
+					<span class="my-2 is-size-6">
 						{file.name}
 					</span>
-					<div class="ml-2 is-size-6 is-inline-block">
-						<IconButton icon={faSquareMinus} color="has-text-danger" butn_submit={()=>{file = null}} tooltip="Remove file" />
+					<div class=" is-size-6 is-inline-block">
+						<IconButton icon="fa6-solid:square-minus" color="has-text-danger" butn_submit={()=>{file = null}} tooltip="Remove file" />
 					</div>
 				</div>
 			{/if}
@@ -164,8 +162,8 @@
 			<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{:else}
-		<div class="is-flex is-align-items-center my-2 is-size-7">
-			<Fa class="is-size-6 has-text-danger mx-2" icon={faFileCircleXmark} />No file selected
+		<div class="is-flex is-align-items-center my-2 ml-1 is-size-6">
+			No file selected
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-start">
 			<SelectFile bind:file={file}/>&nbsp;

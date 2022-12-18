@@ -1,7 +1,6 @@
 <script>
-	import Fa from 'svelte-fa/src/fa.svelte'
 	import IconButton from "./IconButton.svelte"
-	import { faSquarePen, faSquareMinus, faCalendarDays } from '@fortawesome/free-solid-svg-icons/index.js'
+	import 'iconify-icon';
 	import { link, location } from "svelte-spa-router"
 	import {displayTime} from "../../lib/utils.js"
 	export let t_id
@@ -35,16 +34,16 @@
 		<div class="is-flex is-justify-content-center">
 		{#key t_days }
 			<div class="mx-1 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal has-text-centered is-capitalized" data-tooltip={formatDays(t_days)}>
-				<Fa icon={faCalendarDays} size=1.1x />
+				<iconify-icon inline class="is-size-4" icon="fa6-solid:calendar-days"></iconify-icon>
 			</div>
 		{/key}
 			<div class="mx-1 has-text-weight-normal">
 				<a class="has-text-info" href={$location} use:link on:click={() => {edit(t_id)}}>
-					<Fa icon={faSquarePen} size=1.1x />
+					<iconify-icon inline class="is-size-4" icon="fa6-solid:square-pen"></iconify-icon>
 				</a>
 			</div>
 			<div class="mx-1 has-text-weight-normal">
-				<IconButton icon={faSquareMinus} size=1.1x state={removeState} color="has-text-danger" butn_submit={()=>{remove(t_id)}} />
+				<IconButton icon="fa6-solid:square-minus" size="is-size-4" state={removeState} color="has-text-danger" butn_submit={()=>{remove(t_id)}} />
 			</div>
 		</div>
 	</th>

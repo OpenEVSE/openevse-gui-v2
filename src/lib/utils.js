@@ -154,9 +154,9 @@ export function clientid2name(id) {
 export function displayIcon(mode) {
 	switch (mode) {
 		case "manual":
-			return faHand
+			return "fa6-solid:hand"
 		default:
-			return faRobot
+			return "fa6-solid:robot"
 	}
 }
 
@@ -167,18 +167,23 @@ export function state2icon(state) {
 	}
 	let iconcolor
 	switch (state) {
+		case 0:
+			icon.type = "majesticons:rocket-3-start-line"
+			icon.color = "has-text-info"
+			icon.tooltip = "Starting"
+			break
 		case 1: 
-			icon.type = faCar
+			icon.type = "mdi:car-off"
 			icon.color = "has-text-danger"
 			icon.tooltip = "Active - Car not connected"
 			break
 		case 2:
-			icon.type = faCar
+			icon.type = "mdi:car"
 			icon.color = "has-text-primary"
 			icon.tooltip = "Active - Car connected"
 			break
 		case 3:
-			icon.type = faBolt
+			icon.type = "fa6-solid:bolt"
 			icon.color = "has-text-warning"
 			icon.tooltip = "Charging"
 			break
@@ -190,18 +195,18 @@ export function state2icon(state) {
 		case 9:
 		case 10:
 		case 11:
-			icon.type = faTriangleExclamation
+			icon.type = "fa6-solid:triangle-exclamation"
 			icon.color = "has-text-danger"
 			icon.tooltip = "Error"
 			break;
 		case 254: // sleeping
 			icon.color = "has-text-danger"
-			icon.type = faBan
+			icon.type = "fa6-solid:ban"
 			icon.tooltip = "Disabled - Sleeping"
 			break;
 		case 255: 
 			icon.color = "has-text-danger"
-			icon.type = faCircleXmark
+			icon.type = "fa6-solid:circle-xmark"
 			icon.tooltip = "Disabled"
 			break;
 	}
@@ -212,13 +217,13 @@ export function type2icon(type) {
 	let icon
 	switch (type) {
 		case "information":
-			icon = faCircleInfo
+			icon = "fa6-solid:circle-info"
 			break
 		case "notification":
-			icon = faBell
+			icon = "fa6-solid:bell"
 			break
 		case "warning":
-			icon = faTriangleExclamation
+			icon = "fa6-solid:triangle-exclamation"
 			break
 	}
 	return icon

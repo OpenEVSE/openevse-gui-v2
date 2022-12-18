@@ -1,6 +1,5 @@
 <script>
 	import { uistates_store } from "./../../lib/stores/uistates.js";
-	import { faCar, faHourglassHalf, faThumbsUp, faBan, faBolt, faTriangleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons/index.js'
 	import StatusIcon from "./StatusIcon.svelte"
 	import Logo from "./../../assets/logo-mini.png"
 	import { link } from "svelte-spa-router"
@@ -24,7 +23,7 @@
 			message = "Waiting for EV"
 			color = "is-primary"
 			iconcolor = "has-text-white"
-			icon = faHourglassHalf
+			icon = "fa6-solid:hourglass-half"
 			break
 		case 2: // Connected
 			status = "active"
@@ -32,7 +31,7 @@
 			message = "Ready to charge"
 			color = "is-primary"
 			iconcolor = "has-text-white"
-			icon = faThumbsUp
+			icon = "fa6-solid:thumbs-up"
 			break;
 		case 3: // Charging
 			status = "active"
@@ -40,7 +39,7 @@
 			message = "Charging..."
 			color = "is-primary"
 			iconcolor = "has-text-warning"
-			icon = faBolt
+			icon = "fa6-solid:bolt"
 			break;
 		case 4: // Error
 		case 5:
@@ -55,7 +54,7 @@
 			message = "Error " + state
 			color = "is-danger"
 			iconcolor = "has-text-white"
-			icon = faTriangleExclamation
+			icon = "fa6-solid:triangle-exclamation"
 			break;
 		case 254: // sleeping
 			status = "disabled"
@@ -63,7 +62,7 @@
 			message = "EVSE Disabled"
 			color = "is-danger"
 			iconcolor = "has-text-white"
-			icon = faBan
+			icon = "fa6-solid:ban"
 			break;
 		case 255: 
 			status = "disabled"
@@ -71,7 +70,7 @@
 			message = "EVSE Disabled "
 			color = "is-danger"
 			iconcolor = "has-text-white"
-			icon = faCircleXmark
+			icon = "fa6-solid:circle-xmark"
 			break;
 	}
 
@@ -90,7 +89,7 @@
 		<StatusIcon icon={icon} color={iconcolor} bp={bp}/>
 	</div>
 	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-bottom {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?"Vehicle Connected":"No Vehicle Connected"}>
-		<StatusIcon icon={vehicle?faCar:faCar} color="has-text-white" bp={bp}/>
+		<StatusIcon icon={vehicle?"mdi:car":"mdi:car-off"} color="has-text-white" bp={bp}/>
 	</div>
 	<div class="is-flex-grow-1 has-text-centered {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini" ?"is-hidden":""}" ><a href="/" use:link><img src={Logo} alt="logo" /></a></div>
 	<div class="no-pointer {bp != "mobilemini"?"mt-1 is-medium":"mt-0 is-medium"} mb-1 ml-auto mr-2 is-capitalized  has-text-weight-semibold has-text-dark is-dark has-tooltip-arrow has-tooltip-bottom" data-tooltip="OpenEVSE local time">{time}</div>

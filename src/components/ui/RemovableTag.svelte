@@ -1,5 +1,6 @@
 <script>
 	import Loader from "./Loader.svelte";
+	import 'iconify-icon';
 	import Fa from "svelte-fa/src/fa.svelte";
 	import {
 		faSpinner,
@@ -33,10 +34,7 @@
 <div class="tags has-addons my-1 {client?"item":""}" >
 	<div class="tag is-flex-grow-1 {color} has-text-weight-semibold ">
 		{#if client}
-		<Fa
-			icon={displayIcon(clientid2name(client))}
-			class="has-text-white mr-2 is-capitalized"
-		/>
+		<iconify-icon class="mr-1" icon={displayIcon(clientid2name(client))}></iconify-icon>
 		{clientid2name(client)}
 		{:else if name}
 		{name}
@@ -44,12 +42,14 @@
 
 	</div>
 	{#if state == "" && (name || (client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt") ))}
-	<button class="tag is-danger is-clickable" on:click|preventDefault={()=>action()}><Fa icon={faXmark} /></button>
+	<button class="tag is-danger is-clickable" on:click|preventDefault={()=>action()}>
+		<iconify-icon class="" icon={"fa6-solid:xmark"}></iconify-icon>
+	</button>
 	{:else if state == "loading"}
 	<span class="tag is-danger"><Loader /></span>
 	{:else if state == "ok"}
-	<span class="tag is-primary"><Fa icon={faCheck} size="1x" /></span>
-	{:else if state == "ok"}
-	<span class="tag is-danger"><Fa icon={faXmark} size="1x" /></span>
+	<span class="tag is-primary"><iconify-icon class="" icon={"fa6-solid:check"}></iconify-icon></span>
+	{:else if state == "error"}
+	<span class="tag is-danger"><iconify-icon class="" icon={"fa6-solid:xmark"}></iconify-icon></span>
 	{/if}
 </div>
