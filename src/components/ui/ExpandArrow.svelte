@@ -1,8 +1,7 @@
 <script>
-import Fa from 'svelte-fa/src/fa.svelte'
-import { faAngleDown, faAngleUp, faAngleRight } from '@fortawesome/free-solid-svg-icons/index.js'
+import 'iconify-icon';
 export let expand
-let size = "lg"
+let size = ""
 </script>
 <style>
 .arrow {
@@ -14,12 +13,12 @@ let size = "lg"
 </style>
 <div class="arrow ">
 	{#if !expand}
-		<button class="button is-ghost has-text-dark is-inverted" tabindex="0" on:click={() => {expand=true; size="lg"}} on:mouseenter={() => size = "2x"} on:focus={() => size = "2x"} on:mouseleave={() => size = "lg"} on:blur={() => size = "lg"}>
-			<Fa size={size} icon={faAngleDown} />
+		<button class="button is-ghost has-text-dark is-inverted" tabindex="0" on:click={() => {expand=true; size=""}} on:mouseenter={() => size = "is-size-4"} on:focus={() => size = "is-size-4"} on:mouseleave={() => size = ""} on:blur={() => size = ""}>
+			<iconify-icon class={size} icon="fa6-solid:angle-down"></iconify-icon>
 		</button>
 	{:else}
-		<button class="button is-ghost  has-text-dark is-inverted" tabindex="0" on:click={() => {expand=false; size="lg"}}  on:mouseenter={() => size = "2x"} on:focus={() => size = "2x"} on:mouseleave={() => size = "lg"} on:blur={() => size = "lg"}>
-			<Fa size={size} icon={faAngleUp} />
+		<button class="button is-ghost  has-text-dark is-inverted" tabindex="0" on:click={() => {expand=false; size=""}}  on:mouseenter={() => size = "is-size-4"} on:focus={() => size = "is-size-4"} on:mouseleave={() => size = ""} on:blur={() => size = ""}>
+			<iconify-icon class={size} icon="fa6-solid:angle-up"></iconify-icon>
 		</button>
 	{/if}
 </div>

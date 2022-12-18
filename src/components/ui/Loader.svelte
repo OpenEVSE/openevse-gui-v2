@@ -1,15 +1,16 @@
 <script>
 	import 'iconify-icon';
+	export let size = ""
 
 </script>
 
 <style>
-	.spin {
+	/* .spin {
 		animation: spin-animation 2s infinite;
 		animation-timing-function: linear;
 		display: inline-block;
-	}
-
+	} */
+/* 
 @keyframes spin-animation {
     0% {
         transform: rotate(0deg);
@@ -17,11 +18,10 @@
 
     100% {
         transform: rotate(360deg);
+		
     }
-}
+} */
 
   </style>
 
-<div class="spin is-flex is-justify-content-center is-align-items-center">
-	<iconify-icon inline icon="fa6-solid:spinner"></iconify-icon>
-</div>
+<iconify-icon class={size} icon="eos-icons:loading"></iconify-icon>

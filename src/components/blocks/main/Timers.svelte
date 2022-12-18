@@ -60,7 +60,7 @@
 		margin: auto;
 	}
 </style>
-<Box title="Schedule" icon="fa6-solid:calendar-days">
+<Box title="Schedule" icon="fluent:calendar-ltr-20-filled">
 	<div class="mb-2">
 		<table class="table is-size-6 has-text-weight-normall timers">
 			<tbody>

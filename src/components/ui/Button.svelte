@@ -66,7 +66,7 @@
 		on:mouseleave={() => {is_overed = false}} 
 		>
 		{#if state == "loading"}
-		<Loader />
+		<Loader size={size == "is-small"? "is-size-5" : "is-size-4"} />
 		{:else if icon || state != "default"}
 		<iconify-icon icon="{state=="default"?icon:state == "ok"?"fa6-solid:check":"fa6-solid:xmark"}"  class="{state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}  {size == "is-small"? "is-size-5" : "is-size-4"}"></iconify-icon>
 		{/if}

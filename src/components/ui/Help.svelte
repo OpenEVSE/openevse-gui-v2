@@ -1,10 +1,9 @@
 <script>
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faCircleQuestion} from '@fortawesome/free-solid-svg-icons/index.js'
 	import Modal from "../ui/Modal.svelte"
-	import { link } from "svelte-spa-router"
+	import 'iconify-icon';
 
 	export let is_opened = false
+	let size = ""
 </script>
 <style>
 	.help {
@@ -13,7 +12,9 @@
 	}
 </style>
 <div class="help is-size-5">
-	<a href={null} on:click|preventDefault={()=>is_opened=true}><Fa class="has-text-info" icon={faCircleQuestion}/></a>
+	<a href={null} class="has-text-info" on:click|preventDefault={()=>is_opened=true} on:mouseenter={()=> size="is-size-4 is-hovered"} on:focus={()=> size="is-size-4 is-hovered"} on:mouseleave={()=> size=""} on:blur={()=> size="is-size-5"}>
+		<iconify-icon class=" {size}" icon="fa6-solid:circle-question"></iconify-icon>
+	</a>
 </div>
 
 <Modal bind:is_opened canClose={true}>

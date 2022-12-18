@@ -28,15 +28,15 @@
 
 <tr>
 	<!-- <th>{t_id}</th> -->
-	<th>{displayTime(t_time)}</th>
-	<th><span class="tag {t_state === 'active'?'is-primary':'is-danger'} tags py-0 is-capitalized">{t_state}</span></th>
-	<th style="width:40%" class="is-size-5-mobile is-size-5-tablet is-size-4-desktop m0 py-1">
-		<div class="is-flex is-justify-content-center">
-		{#key t_days }
-			<div class="mx-1 no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal has-text-centered is-capitalized" data-tooltip={formatDays(t_days)}>
-				<iconify-icon inline class="is-size-4" icon="fa6-solid:calendar-days"></iconify-icon>
+	<th style="width:20%">{displayTime(t_time)}</th>
+	<th style="width:40%"><span class="tag {t_state === 'active'?'is-primary':'is-danger'} tags py-0 is-capitalized">{t_state}</span></th>
+	<th style="width:40%" class="is-size-4 m0 py-1">
+		<div class="is-flex is-justify-content-center is-align-items-center">
+
+			<div class=" no-pointer has-tooltip-arrow has-tooltip-info has-tooltip-multiline has-text-weight-normal" data-tooltip={formatDays(t_days)}>
+				<iconify-icon inline class="mt-1" style="font-size: 30px" icon="fluent:calendar-ltr-20-filled"></iconify-icon>
 			</div>
-		{/key}
+
 			<div class="mx-1 has-text-weight-normal">
 				<a class="has-text-info" href={$location} use:link on:click={() => {edit(t_id)}}>
 					<iconify-icon inline class="is-size-4" icon="fa6-solid:square-pen"></iconify-icon>
