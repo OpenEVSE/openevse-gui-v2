@@ -1,4 +1,5 @@
 <script>
+	import Wizard from "./routes/Wizard.svelte";
 	import { config_store } from "./lib/stores/config.js";
 	import { status_store } from "./lib/stores/status.js";
 	import { uistates_store } from './lib/stores/uistates.js'
@@ -42,11 +43,13 @@
 
 <main>		
 	{#if $uistates_store.data_loaded}
-		{#if $status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid)}
-		<!-- Wizard mode -->
-
-		{:else}
+		
 		<div class="content">
+			{#if $status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid)}
+			<div class="container px-3 pt-2 pb-6">
+				<Wizard />
+			</div>
+			{:else}
 			<div class="container px-3 pt-2 pb-6">
 				{#if !$location.includes("/wizard")}
 				<Status />
@@ -57,11 +60,11 @@
 				</div>
 					
 			</div>
+			{/if}
 		</div>
 		{#if !$location.includes("/wizard")}
 		<MobileNav charging={$uistates_store.charging} selected={$location} />
 		{/if}
-	{/if}
 	<DataManager />
 	{:else}
 	<FetchData />
