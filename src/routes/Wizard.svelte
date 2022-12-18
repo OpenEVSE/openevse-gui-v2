@@ -9,6 +9,7 @@
 	import { onMount } 		  from "svelte";
 	import {push} 			  from 'svelte-spa-router'
 	import 'iconify-icon';
+	import 
 	export let params = {}
 
 	onMount(()=> {

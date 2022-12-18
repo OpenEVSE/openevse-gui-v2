@@ -6,16 +6,13 @@
 	import "@fontsource/roboto"; // The font we are gonna serve with fontsource
 	import Status from "./components/blocks/Status.svelte";
 	import {location} from 'svelte-spa-router'
-		// @ts-ignore
 	import MobileNav from "./components/blocks/MobileNav.svelte"
-	import {onMount, onDestroy} from "svelte"
 	import DataManager from "./components/data/DataManager.svelte"
-	// import Header from './components/blocks/Header.svelte';
 	import Router from 'svelte-spa-router'
 	import { routes } from "./lib/routes.js"
 	import FetchData from './components/data/FetchData.svelte'
-
 	import {getBreakpoint} from "./lib/utils.js"
+	import "./lib/icons.js"
 
 	function getWindowSize() {
 		$uistates_store.window_width = window.innerWidth
