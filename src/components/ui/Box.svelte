@@ -22,7 +22,8 @@
 		overflow-x: hidden;
 		overflow-y: scroll;
 		/* max-height: calc(100% - 45px); */
-		height: calc(100% - 45px);
+		max-height: calc(100% - 45px);
+		height: fit-content;
 	}
 
 	.contentbox {
