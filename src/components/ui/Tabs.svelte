@@ -16,9 +16,6 @@
 		background-color: hsl(0, 0%, 96%);
 	}
 
-	.tabs {
-		margin-top:-20px;
-	}
 </style>
 <div class="tabs is-size-6 is-size-7-mobile">
 	<ul>

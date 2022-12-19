@@ -5,8 +5,8 @@
 <table class="table is-fullwidth">
 	<thead>
 		<tr class="has-background-info">
-			<th class="has-text-white">Errors</th>
-			<th class="has-text-white has-text-centered">Count</th>
+			<th class="has-text-white py-1">Errors</th>
+			<th class="has-text-white has-text-centered py-1">Count</th>
 		</tr>
 	</thead>
 	<tbody>

@@ -12,8 +12,8 @@
 <table class="table is-fullwidth">
 	<thead>
 		<tr class="has-background-info"	>
-			<th class="has-text-white">Settings</th>
-			<th class="has-text-white has-text-centered" style="width:40%">Value</th>
+			<th class="has-text-white py-1">Settings</th>
+			<th class="has-text-white has-text-centered py-1" style="width:40%">Value</th>
 		</tr>
 	</thead>
 	<tbody>

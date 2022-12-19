@@ -1,4 +1,5 @@
 <script>
+	import Borders from "./../../ui/Borders.svelte";
 	import Select			 from "./../../ui/Select.svelte";
 	import Help				 from "./../../ui/Help.svelte";
 	import Switch			 from "./../../ui/Switch.svelte";
@@ -46,24 +47,16 @@
 	.inputbox {
 		max-width: 200px;
 	}
-
-	.borders {
-		border-radius: 10px;
-		border: 1px solid rgb(50, 179, 212);
-		width: 70%;
-		padding: 20px;
-	}
-
 </style>
 
 <Box title="EVSE" icon="mdi:evse">
 	<div class="is-flex is-flex-direction-column is-align-items-center mt-4 ">
 
-		<div class="borders mb-4">
+		<Borders>
 			<div class="has-text-weight-bold is-size-6">Max Current</div>
 			<SliderForm icon="fa6-solid:gauge-high" bind:value={$config_store.max_current_soft} unit="A" min={$config_store.min_current_hard}} max={$config_store.max_current_hard} onchange={setMaxCurrent} />
-		</div>
-		<div class="borders mb-4">
+		</Borders>
+		<Borders>
 			<div class="has-text-weight-bold is-size-6">Scheduler Random start adjust</div>
 			<div class="is-flex is-align-items-center">	
 				<div class="inputbox ">	
@@ -72,23 +65,24 @@
 				</div>
 				<div class="ml-2"> seconds</div>
 			</div>
-		</div>
-		<div class="borders mb-4">
+		</Borders>
+		<Borders>
 			<div class="has-text-weight-bold is-size-6">Service Level</div>
 			<Select bind:value={$config_store.service} bind:status={select_service_level} items={service_items} onChange={setServiceLevel}/>
-		</div>
-		<div class="borders mb-4">
+		</Borders>
+
+		<Borders>
 			<Help>Some vehicles will shutdown if left in sleep mode (pilot signal enable) and then can not be woken up by timers/PV divert. 
 				Changing the pause state to disable should resolve this issue, however this removes the ability for the charger to detect
 					if a vehicle is connected when paused.
 			</Help>
 			<div class="has-text-weight-bold is-size-6">Pause Status</div>
 			<Switch name="pausemode" label="{$config_store.pause_uses_disabled?"Disable":"Sleep"}" bind:checked={$config_store.pause_uses_disabled} onChange={togglePauseMode}  />
-		</div>
-		<div class="borders">
+		</Borders>
+		<Borders>
 			<div class="has-text-weight-bold is-size-6">Led Brightness</div>
 			<SliderForm icon="ic:outline-light-mode" bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
-		</div>
+		</Borders>
 	</div>
 
 </Box>

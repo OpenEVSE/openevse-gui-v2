@@ -20,15 +20,46 @@
 	}
 </script>
 <style>
-	.container {
-		height: 100%;
-	}
 	main {
+		position: fixed;
 		height: 100%;
+		width: 100vw;
+		overflow: hidden;
+		overflow-y: hidden;
 	}
 
   	:global(body) {
     font-family: "Roboto", sans-serif;
+	}
+	.status {
+		/* position: fixed; */
+		/* top: 0px;
+		left: 0px; */
+		z-index: 1;
+		/* border: solid; */
+	}
+
+	.route {
+		/* position: relative; */
+		/* top: 10vh; */
+		/* bottom: 0px; */
+		width: 100vw;
+		/* height: 100%; */
+		z-index: 0;
+		/* border: solid; */
+		/* top: 220px;
+		left: 0px; */
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+		flex: 1;
+	}
+
+	.screen {
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+		overflow-y: hidden;
 	}
   
 
@@ -40,28 +71,26 @@
 
 <main>		
 	{#if $uistates_store.data_loaded}
-		
-		<div class="content">
-			{#if $status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid)}
-			<div class="container px-3 pt-2 pb-6">
-				<Wizard />
-			</div>
-			{:else}
-			<div class="container px-3 pt-2 pb-6">
-				{#if !$location.includes("/wizard")}
-				<Status />
-				{/if}
-
-				<div>
-					<Router {routes} />
-				</div>
-					
-			</div>
-			{/if}
+	<div class="screen is-flex is-flex-direction-column">
+		{#if !$location.includes("/wizard")}
+		<div class="status is-flex is-justify-content-center mx-3 mt-1 p-0">
+			<Status />
 		</div>
+		{/if}
+		{#if $status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid)}
+		<div class="route">
+			<Wizard />
+		</div>
+		{:else}
+		<div class="route">
+			<Router {routes} />
+		</div>
+		{/if}
 		{#if !$location.includes("/wizard")}
 		<MobileNav charging={$uistates_store.charging} selected={$location} />
 		{/if}
+		
+	</div>
 	<DataManager />
 	{:else}
 	<FetchData />

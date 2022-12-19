@@ -25,14 +25,14 @@
 
 	function connect2socket(s) {
 		var host
-		if (import.meta.env.VITE_REMOTEHOST == "true")
-			host = import.meta.env.VITE_OPENEVSEHOST
-		else host = window.location.host
-		
+		// if (import.meta.env.VITE_REMOTEHOST == "true")
+		// 	host = import.meta.env.VITE_OPENEVSEHOST
+		// else host = window.location.host
+		host = window.location.host
 		// Vite Proxy crash with openevse web socket so connecting directly in dev mode
-		if (import.meta.env.DEV) { 
-			host = import.meta.env.VITE_OPENEVSEHOST
-		}
+		// if (import.meta.env.DEV) { 
+		// 	host = $status_store.ipaddress
+		// }
 
 		if (!s) {
 			console.log("opening socket")

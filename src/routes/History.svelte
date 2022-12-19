@@ -1,13 +1,15 @@
 <script>
 	import Logs from "./../components/blocks/history/Logs.svelte";
-	import Status from "../components/blocks/Status.svelte"
 	
 </script>
 <style>
+	.columns {
+		height: 100%;
+	}
 </style>
 
-<div class="columns is-centered is-vcentered">
-	<div class="column is-two-thirds">
+<div class="columns is-centered is-mobile p-0 m-0">
+	<div class="column is-two-thirds-tablet">
 		<Logs />
 	</div>
 </div>

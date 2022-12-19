@@ -3,11 +3,13 @@
 
 </script>
 <style>
+	.columns {
+		height: 100%;
+	}
 </style>
 
-
-<div class="columns is-centered is-vcentered is-full-width">
-	<div class="column is-two-thirds">
+<div class="columns is-mobile is-centered p-0 m-0" >
+	<div class="column is-two-thirds-tablet">
 		<Manual />
+		</div>
 	</div>
-</div>

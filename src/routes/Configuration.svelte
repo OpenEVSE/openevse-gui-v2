@@ -15,9 +15,12 @@
 		left: 30px;
 		top: 8px;
 	}
+	.columns {
+		height: 100%;
+	}
 </style>
-<div class="columns is-centered is-vcentered">
-	<div class="column is-two-thirds">
+<div class="columns is-centered is-mobile p-0 m-0">
+	<div class="column is-two-thirds-tablet">
 		<Box title = "Configuration" icon="fa6-solid:gear">
 			<div class="is-flex is-flex-direction-column is-align-items-center">
 				<!-- <a href="/configuration/system" use:link><div class="my-1 is-inline-block button is-info is-outlined">System</div></a> -->

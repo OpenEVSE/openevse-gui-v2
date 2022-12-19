@@ -1,4 +1,5 @@
 <script>
+	import Borders from "./../../ui/Borders.svelte";
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import { config_store }   from "./../../../lib/stores/config.js";
 	import { status_store }   from "./../../../lib/stores/status.js";
@@ -86,25 +87,22 @@
 </script>
 
 <style>
-	.borders {
-		border-radius: 10px;
-		border: 1px solid rgb(50, 179, 212);
-		/* padding: 20px; */
-		/* width: 200px;
-		height: 150px; */
-		padding: 10px;
-		max-width: 350px;
-		max-height: 800px;
-		overflow:auto; 
+	.scrollable {
+		max-height: 200px;
+		overflow:scroll;
+		box-sizing: content-box;
+		overflow-y: scroll;
 	}
+
 </style>
 
-<Box title="RFID" icon="bx:rfid">
+<Box title="RFID" icon="bx:rfid" >
 	<Switch name="rfidswitch" label="Enable RFID" bind:checked={$config_store.rfid_enabled} onChange={toggleRFID}/>
 	{#if $config_store.rfid_enabled}
-	<div class="is-flex is-justify-content-center mt-3 mb-3">
-		<div class="borders has-text-centered">
-			<div class="has-text-weight-bold my-2">Manage scanned tags</div>
+	<div class="is-flex is-justify-content-center mt-3">
+		<Borders>
+			<div class="has-text-centered pb-2">
+				<div class="has-text-weight-bold mb-4">Manage scanned tags</div>
 			<Button name={$uistates_store.rfidscan_update>0?$uistates_store.rfidscan_update:"Scan"} butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
 				<!-- <div class="tag is-info {$uistates_store.rfidscan_update>0?"":"is-hidden"}">{$uistates_store.rfidscan_update}</div> -->
 			{#if $status_store.rfid_waiting > 0}
@@ -122,19 +120,29 @@
 				<Button bind:this={button_inst} width="80px" size="is-small" name="Register" color="is-primary" butn_submit={()=>registerTag($status_store.rfid_input,button_inst)} />
 				{/if}
 			{/if}
+			</div>
+		</Borders>
+		<div class="borders has-text-centered">
+			
 		</div>
 	</div>
 	{/if}
 	{#if tags[0] != "" }
 	<div class="is-flex is-justify-content-center">
-		<div class="borders my-4 is-flex-grow-1">
-			<div class="has-text-weight-bold is-size-6  has-text-centered">Registered Tags</div>
-			{#each tags as tag,i}
-				<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
-			{/each}
-			<div class="has-text-centered"><Button bind:this={button2_inst} name="Remove All" size="is-small" color="is-danger" butn_submit={()=>removeTag("all",button2_inst)} /></div>
+		<Borders>
+			<div class="has-text-weight-bold is-size-6 has-text-centered mb-2">Registered Tags</div>
+					<div class="scrollable my-2">
+				
+						{#each tags as tag,i}
+							<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
+						{/each}
+						
+					</div>
+					<div class="has-text-centered">
+						<Button bind:this={button2_inst} name="Remove All" size="is-small" color="is-danger" butn_submit={()=>removeTag("all",button2_inst)} />
+					</div>
 			
-		</div>
+		</Borders>
 	</div>
 	{/if}
 </Box>

@@ -24,13 +24,13 @@
 
 <style type="text/scss">
 	.statusbox {
-	border-radius: 6px;
-	color: black;
-	background-color: hsl(0, 0%, 96%);
-	display: block;
-	margin-bottom: 3rem;
-	position: relative;
-	// transition:all 3s ease-in-out;
+		// width: 100%;
+		border-radius: 6px;
+		color: black;
+		background-color: hsl(0, 0%, 96%);
+		// display: block;
+		// margin-bottom: 3rem;
+		// transition:all 3s ease-in-out;
 	}
 	
 	.statusbox.disabled {
@@ -59,8 +59,8 @@
 </style>
 
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded}
-<div class="statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light px-1 pt-2 pb-1 has-background-light mb-5 mt-0" 
-in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
+<div class=" container statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
+in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 	<div>
 		<div class="mb-2 mx-0">
 			<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />
@@ -139,3 +139,4 @@ in:scale="{{ delay: 300, duration: 400, easing: expoInOut }}" >
 {#if $uistates_store.ws_connected == false}
 <AlertBox title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={true}/>
 {/if}
+

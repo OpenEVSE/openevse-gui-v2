@@ -66,6 +66,10 @@ export default defineConfig(({ command, mode }) => {
           target: 'http://' + env.VITE_OPENEVSEHOST,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
+        },
+        '/ws': {
+          target: 'ws://' + env.VITE_OPENEVSEHOST,
+          ws: true,
         }
       }
     }

@@ -10,10 +10,11 @@
 
 <style>
 	.mobnav {
- 		position: fixed;
-  		top:	auto;
-  		bottom: 0;
+ 		/* position: fixed; */
+  		/* top:	auto; */
+  		/* bottom: 0; */
 		width: 100%;
+		height: 68px;
 	}
 	.nav-item {
 		/* color: rgb(202, 202, 202); */

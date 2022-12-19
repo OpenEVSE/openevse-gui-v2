@@ -17,12 +17,11 @@
 		margin-top: 0px;
 		margin-bottom: 0px;
 	}
-	.scrollable {
-		/* max-height: 66vh; */	
-		overflow: scroll;
+	.scrollable {	
 		overflow-x: hidden;
 		overflow-y: scroll;
-		max-height: 100%;
+		/* max-height: calc(100% - 45px); */
+		height: calc(100% - 45px);
 	}
 
 	.contentbox {
@@ -30,13 +29,13 @@
 		border-radius: 6px;
 		color: black;
 		background-color: white;
-		margin: 0;
-		max-height: 100%;
-
+		max-height: calc(100% + 5px);
+		max-width: 100%;
+		height: 100%;
 	}
 </style>
 
-<div class:is-hidden={!visible} class="contentbox p-2" in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}" >
+<div class:is-hidden={!visible} class="contentbox p-2 " in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}" >
 	<div class:is-hidden={!has_help}>
 		<Help>
 		<slot name="help"></slot>
@@ -51,11 +50,11 @@
 		{/if}
 		<span>{title}</span>
 	</div>
-	<div style="width: 40%;" class="mb-2"><hr></div>
+	<div  class="mb-2"><hr></div>
 	<div class="scrollable">
-		<div>
-			<slot>
-			</slot>
+		<div class="">
+				<slot>
+				</slot>
 		</div>
 	</div>
 

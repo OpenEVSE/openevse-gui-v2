@@ -56,16 +56,33 @@ body::-webkit-scrollbar { display: none; }
 
 
 body {
-	-ms-overflow-style: none;  /* IE and Edge */
-	scrollbar-width: none;     /* Firefox */
-	overflow: auto;
+	// -ms-overflow-style: none;  /* IE and Edge */
+	// scrollbar-width: none;     /* Firefox */
+	// overflow: auto;
+	// overflow-x: hidden;
 	background: linear-gradient(hsl(195, 78%, 30%), hsl(189, 53%, 47%));
 	background-repeat: no-repeat;
 	height: 100%;
+	width: 100%;
 }
 
-.content {
-	// overflow-y:auto;
-	height: 100%;
-}
 
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: 0;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #32b3d4;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: hsl(195, 78%, 30%);
+  }

@@ -1,22 +1,23 @@
 <script>
+	
+	import {config_store}			from "../../../lib/stores/config.js"
+	import {claims_store} 			from "../../../lib/stores/claims.js"
+	import {override_store} 		from "./../../../lib/stores/override.js";
+	import {status_store} 			from "../../../lib/stores/status.js"
+	import {schedule_store} 		from "../../../lib/stores/schedule.js"
+	import {uistates_store} 		from "../../../lib/stores/uistates.js"
+	import {uisettings_store} 		from "../../../lib/stores/uisettings.js"
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
 	import {EvseClients} 			from  "./../../../lib/vars.js"
-	import { claims_target_store }	from "./../../../lib/stores/claims_target.js"
+	import {claims_target_store}	from "./../../../lib/stores/claims_target.js"
+	import {onMount} 				from 'svelte'
+	import {httpAPI}	 			from '../../../lib/utils.js'
+	import { serialQueue }			from "./../../../lib/queue.js";
 	import Box 						from "../../ui/Box.svelte"
 	import Slider 					from "../../ui/SliderForm.svelte"
 	import ButtonManual 			from "../../ui/ButtonManual.svelte"
 	import SelectTimeLmt 			from "../../ui/SelectTimeLmt.svelte"
 	import SelectChargeLmt			from "../../ui/SelectChargeLmt.svelte"
-	import {config_store}			from "../../../lib/stores/config.js"
-	import {claims_store} 			from "../../../lib/stores/claims.js"
-	import { override_store } 		from "./../../../lib/stores/override.js";
-	import {status_store} 			from "../../../lib/stores/status.js"
-	import {schedule_store} 		from "../../../lib/stores/schedule.js"
-	import {uistates_store} 		from "../../../lib/stores/uistates.js"
-	import {uisettings_store} 		from "../../../lib/stores/uisettings.js"
-	import {onMount} 				from 'svelte'
-	import {httpAPI}	 			from '../../../lib/utils.js'
-	import { serialQueue }			from "./../../../lib/queue.js";
 	import RemovableTag 			from "../../ui/RemovableTag.svelte"
 
 	let setamp_tag
@@ -188,7 +189,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 </script>
 
 <Box title="Charge" icon="fa6-solid:bolt">
-	<div class="has-text-centered mt-5 mb-0 pb-0 has-text-weight-bold has-text-info">EVSE STATE</div>
+	<div class="has-text-centered mt-5 mb-0 pb-0 has-text-weight-bold has-text-info">Toggle Charge</div>
 	<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 	{#if $config_store.rfid_enabled}
 	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
