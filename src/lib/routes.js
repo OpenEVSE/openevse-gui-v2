@@ -1,4 +1,3 @@
-import { wrap }         from 'svelte-spa-router/wrap'
 import Main             from '../routes/Main.svelte'
 import Schedule         from '../routes/Schedule.svelte'
 import Monitoring       from '../routes/Monitoring.svelte'
@@ -25,28 +24,28 @@ import Wizard           from '../routes/Wizard.svelte'
 
 export const routes = {
     // Exact path
-    '/': wrap({ component: Main }),
-    '/schedule': wrap({ component: Schedule}),
-    '/monitoring': wrap({ component: Monitoring}),
-    '/history': wrap({ component: History}),
-    '/configuration': wrap({ component: Configuration}),
-    '/configuration/services': wrap({ component: Services}),
-    '/configuration/rfid': wrap({ component: RFID}),
-    '/configuration/safety': wrap({ component: Safety}),
-    '/configuration/evse': wrap({ component: Evse}),
-    '/configuration/mqtt': wrap({ component: MQTT}),
-    '/configuration/http': wrap({ component: HTTP}),
-    '/configuration/network': wrap({ component: Network}),
-    '/configuration/firmware': wrap({ component: Firmware}),
-    '/configuration/time': wrap({ component: Time}),
-    '/configuration/shaper': wrap({ component: Shaper}),
-    '/configuration/selfproduction': wrap({ component: SelfProduction}),
-    '/configuration/vehicle': wrap({ component: Vehicle}),
-    '/configuration/emoncms': wrap({ component: EmonCMS}),
-    '/configuration/ohmconnect': wrap({ component: OhmConnect}),
-    '/configuration/dev': wrap({ component: Dev}),
-    '/configuration/about': wrap({ component: About}),
-    '/wizard/:step?': wrap({ component: Wizard}),
+    '/': Main ,
+    '/schedule': Schedule,
+    '/monitoring': Monitoring,
+    '/history': History,
+    '/configuration':Configuration,
+    '/configuration/services': Services,
+    '/configuration/rfid':RFID,
+    '/configuration/safety': Safety,
+    '/configuration/evse': Evse,
+    '/configuration/mqtt': MQTT,
+    '/configuration/http': HTTP,
+    '/configuration/network': Network,
+    '/configuration/firmware': Firmware,
+    '/configuration/time': Time,
+    '/configuration/shaper': Shaper,
+    '/configuration/selfproduction': SelfProduction,
+    '/configuration/vehicle': Vehicle,
+    '/configuration/emoncms': EmonCMS,
+    '/configuration/ohmconnect': OhmConnect,
+    '/configuration/dev': Dev,
+    '/configuration/about': About,
+    '/wizard/:step?':Wizard,
     // Catch-all
     // This is optional, but if present it must be the last
     '*': NotFound,

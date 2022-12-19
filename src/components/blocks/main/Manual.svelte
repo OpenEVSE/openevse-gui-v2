@@ -7,13 +7,13 @@
 	import {schedule_store} 		from "../../../lib/stores/schedule.js"
 	import {uistates_store} 		from "../../../lib/stores/uistates.js"
 	import {uisettings_store} 		from "../../../lib/stores/uisettings.js"
-	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
 	import {EvseClients} 			from  "./../../../lib/vars.js"
 	import {claims_target_store}	from "./../../../lib/stores/claims_target.js"
 	import {onMount} 				from 'svelte'
 	import {httpAPI}	 			from '../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
 	import Box 						from "../../ui/Box.svelte"
+	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
 	import Slider 					from "../../ui/SliderForm.svelte"
 	import ButtonManual 			from "../../ui/ButtonManual.svelte"
 	import SelectTimeLmt 			from "../../ui/SelectTimeLmt.svelte"

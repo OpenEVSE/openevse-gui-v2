@@ -18,6 +18,7 @@
 		margin-bottom: 0px;
 	}
 	.scrollable {	
+		overflow: scroll;
 		overflow-x: hidden;
 		overflow-y: scroll;
 		/* max-height: calc(100% - 45px); */
@@ -25,7 +26,7 @@
 	}
 
 	.contentbox {
-		overflow: hidden;
+		/* overflow: visible	; */
 		border-radius: 6px;
 		color: black;
 		background-color: white;
@@ -52,10 +53,8 @@
 	</div>
 	<div  class="mb-2"><hr></div>
 	<div class="scrollable">
-		<div class="">
-				<slot>
-				</slot>
-		</div>
+		<slot>
+		</slot>
 	</div>
 
 </div>
