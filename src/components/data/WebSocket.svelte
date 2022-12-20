@@ -54,14 +54,12 @@
 				lastmsg = DateTime.now().toUnixInteger()
 				$uistates_store.ws_connected = false
 				cancelKeepAlive()
-				// TODO: Display Alertbox mesg
 				
 				
 			})
 			s.addEventListener("close", function (e) {
 				console.log('Socket is closed. Reconnect attempt in 1 second.', e.reason);
-				lastmsg = DateTime.now().toUnixInteger()
-				$uistates_store.ws_connected = false
+				lastmsg = DateTime.now().toUnixInteger()	
 				cancelKeepAlive()
 				setTimeout(()=>connect2socket(), 1000)
 				
@@ -72,7 +70,7 @@
 	function keepAlive(s) { 
 		let newmsg = DateTime.now().toUnixInteger()
 		let timing = newmsg - lastmsg
-		if (timing >= 40) {
+		if (timing >= 120) {
 			// Roger we have a problem, try to reconnect the websocket
 			console.log("No msg over websocket for " + timing + " sec, restart websocket")
 			s.close()

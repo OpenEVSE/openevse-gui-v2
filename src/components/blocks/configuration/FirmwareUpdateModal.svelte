@@ -80,7 +80,7 @@
 		}
 		else if ($status_store.ota == "completed") {
 			uploadButtonState = "ok"
-			timeout = setTimeout(()=> location.reload(),3000)
+			timeout = setTimeout(()=> location.reload(),6000)
 		}
 		else if ($status_store.ota == "failed") {
 			uploadButtonState = "error"

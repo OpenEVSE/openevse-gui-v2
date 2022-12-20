@@ -7,7 +7,6 @@
 	import { expoInOut } 			from 'svelte/easing';
 	import { claims_target_store }  from "./../../lib/stores/claims_target.js";
 	import DivertShaperStatus 		from "./../ui/DivertShaperStatus.svelte";
-	import AlertBox 			    from "./../ui/AlertBox.svelte";
 	import TaskDisplay 				from "../ui/TaskDisplay.svelte";
 	import StatusTile 				from "../ui/StatusTile.svelte"
 	import StatusItems 				from "../ui/StatusItems.svelte"
@@ -132,11 +131,11 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 {:else}
 <div class="statusbox disabled has-background-light mb-5 mt-0 px-3 has-text-centered">
 	<h4 class="title">EVSE Error</h4>
-	<div>OpenEVSE not responding or not connected</div>
+	<h5>OpenEVSE module is not responding</h5>
+	<div class="block">Please check your setup before going further</div>
 	<button class="button is-info is-outlined my-3" on:click={()=>location.reload()}>Force Reload</button>
 </div>
 {/if}
-{#if $uistates_store.ws_connected == false}
-<AlertBox title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={true}/>
-{/if}
+
+
 

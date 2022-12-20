@@ -4,10 +4,12 @@
 	export let visible = false;
 	export let button = false
 	export let label = ""
+	export let closable = true;
 	export let action = () => {}
 
 	function close() {
-		visible = false;
+		if (closable)
+			visible = false;
 	}
 </script>
 
@@ -18,7 +20,9 @@
 		<article class="message is-danger">
 			<div class="message-header">
 			<p>{title}</p>
+			{#if closable}
 			<button class="delete" aria-label="delete" on:click={close}></button>
+			{/if}
 			</div>
 			<div class="message-body">
 				{body}

@@ -1,15 +1,17 @@
 <script>
-	import { uistates_store } from './lib/stores/uistates.js'
-	import "@fontsource/roboto";
-	import Status from "./components/blocks/Status.svelte";
-	import {location} from 'svelte-spa-router'
-	import MobileNav from "./components/blocks/MobileNav.svelte"
-	import DataManager from "./components/data/DataManager.svelte"
-	import Router from 'svelte-spa-router'
-	import { routes } from "./lib/routes.js"
-	import FetchData from './components/data/FetchData.svelte'
-	import {getBreakpoint} from "./lib/utils.js"
+	import { status_store } 	from "./lib/stores/status.js";
+	import { uistates_store } 	from './lib/stores/uistates.js'
+	import Status 				from "./components/blocks/Status.svelte";
+	import {location} 			from 'svelte-spa-router'
+	import MobileNav 			from "./components/blocks/MobileNav.svelte"
+	import DataManager 			from "./components/data/DataManager.svelte"
+	import Router 				from 'svelte-spa-router'
+	import { routes } 			from "./lib/routes.js"
+	import FetchData 			from './components/data/FetchData.svelte'
+	import {getBreakpoint} 		from "./lib/utils.js"
+	import AlertBox 		   	from "./components/ui/AlertBox.svelte";
 	import "./lib/icons.js"
+	import "@fontsource/roboto";
 
 	function getWindowSize() {
 		$uistates_store.window_width = window.innerWidth
@@ -33,7 +35,7 @@
 		/* position: fixed; */
 		/* top: 0px;
 		left: 0px; */
-		z-index: 0;
+		z-index: 1;
 		/* border: solid; */
 	}
 
@@ -56,8 +58,8 @@
 	.screen {
 		height: 100%;
 		width: 100%;
-		overflow: hidden;
-		overflow-y: hidden;
+		/* overflow: hidden;
+		overflow-y: hidden; */
 	}
   
 
@@ -70,9 +72,11 @@
 <main>		
 	{#if $uistates_store.data_loaded}
 	<div class="screen is-flex is-flex-direction-column">
+		{#if $status_store.evse_connected == 1}
 		<div class="status is-flex is-justify-content-center mx-3 mt-1 p-0">
 			<Status />
 		</div>
+		{/if}
 		<div class="route">
 			<Router {routes} />
 		</div>
@@ -84,6 +88,14 @@
 	<DataManager />
 	{:else}
 	<FetchData />
+	{/if}
+	{#if $uistates_store.data_loaded}
+		{#if $uistates_store.ws_connected == false}
+		<AlertBox title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={true} closable={false}/>
+		{/if}
+		{#if $status_store.evse_connected != 1}
+		<AlertBox title="OpenEVSE module error" body="Missing OpenEVSE module. Please check your setup before going further" visible={true} closable={false}/>
+		{/if}
 	{/if}
 </main>
 

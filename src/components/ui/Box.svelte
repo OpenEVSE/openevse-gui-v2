@@ -55,7 +55,7 @@
 		margin-bottom: 0px;
 	}
 	.contentbox {
-		/* overflow: hidden; */
+		overflow: visible;
 		border-radius: 6px;
 		color: black;
 		background-color: white;
@@ -73,7 +73,7 @@
 	}
 	.maincontent {	
 		overflow-x:hidden; 
-		overflow-y:auto; 
+		/* overflow-y:visible;  */
 		max-height: calc(100% - 42px);
 		/* box-sizing: border-box; */
 		/* height: 100%; */
@@ -82,7 +82,7 @@
 
 </style>
 
-<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox p-2  {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}" >
+<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox p-3  {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}" >
 	<div class:is-hidden={!has_help} class="is-pulled-right">
 		<Help>
 		<slot name="help"></slot>
