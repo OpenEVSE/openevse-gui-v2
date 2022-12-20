@@ -1,2 +1,0 @@
-get collections:
-https://api.iconify.design/{PREFIX}.json?icons={[ICONS]}

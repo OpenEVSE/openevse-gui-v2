@@ -26,9 +26,10 @@
 			fw.name = $config_store.buildenv + ".bin"
 			fw.html_url = fw_update_json.html_url
 			let item = fw_update_json.assets.find(obj => {
-					return obj.name === fw.name
-				})
-			fw.url = item.browser_download_url
+				return obj.name === fw.name
+			})
+			if (item)
+				fw.url = item.browser_download_url
 			if (fw.version != $config_store.version) {
 				fw_has_update = true
 			}
