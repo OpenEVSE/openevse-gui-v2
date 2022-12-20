@@ -21,8 +21,8 @@ import Dev              from '../routes/Dev.svelte'
 import About            from '../routes/About.svelte'
 import Wizard           from '../routes/Wizard.svelte'
 
+
 export const routes = {
-    // Exact path
     '/': Main ,
     '/schedule': Schedule,
     '/monitoring': Monitoring,

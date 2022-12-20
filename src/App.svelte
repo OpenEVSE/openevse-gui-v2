@@ -77,15 +77,9 @@
 			<Status />
 		</div>
 		{/if}
-		{#if $status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid)}
-		<div class="route">
-			<Wizard />
-		</div>
-		{:else}
 		<div class="route">
 			<Router {routes} />
 		</div>
-		{/if}
 		{#if !$location.includes("/wizard")}
 		<MobileNav charging={$uistates_store.charging} selected={$location} />
 		{/if}
