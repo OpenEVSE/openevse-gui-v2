@@ -1,22 +1,11 @@
 <script>
 	import ConfigMenuButton from "./../components/ui/ConfigMenuButton.svelte";
 	import CentralView from "./../components/ui/CentralView.svelte";
-	import { link } from "svelte-spa-router"
 	import Box from "../components/ui/Box.svelte"
 	import 'iconify-icon';
 
 </script>
 
-<style>
-	.button {
-		width: 250px;
-	}
-	.icn {
-		position: absolute;
-		left: 30px;
-		top: 8px;
-	}
-</style>
 <CentralView>
 	<Box title = "Configuration" icon="fa6-solid:gear">
 		<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly is-align-items-space-evenly">
