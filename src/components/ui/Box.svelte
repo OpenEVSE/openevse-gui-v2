@@ -39,7 +39,7 @@
 		margin-bottom: 0px;
 	}
 	.contentbox {
-		overflow: hidden;
+		/* overflow: hidden; */
 		border-radius: 6px;
 		color: black;
 		background-color: white;
@@ -60,7 +60,7 @@
 		overscroll-behavior: contain;
 	}
 	.scrollable {
-		overflow: hidden; 
+		/* overflow: hidden;  */
 		box-sizing: border-box;
 		/* height: 100%; */
 	}

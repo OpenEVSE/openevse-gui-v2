@@ -51,7 +51,7 @@
 <Box title="History" icon="icon-park-outline:history-query">
 		<div class="has-text-centered is-flex is-justify-content-center is-align-items-center" style="height: calc(100% - 60px);">
 			{#if !loaded}
-			<div class="box has-text-centered is-size-6 has-text-weight-bold">
+			<div class="box has-text-centered is-size-6 has-text-weight-bold  my-5">
 				<div class="mb-4">Loading Data</div>
 				<Loader size="is-size-4" color="has-text-info"/>
 				
