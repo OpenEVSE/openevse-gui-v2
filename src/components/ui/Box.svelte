@@ -1,4 +1,5 @@
 <script>
+	import { uistates_store } from "./../../lib/stores/uistates.js";
 	import { onMount } from "svelte"
 	import Help 			 from "./Help.svelte"
 	import { scale, fade} 	 from 'svelte/transition'
@@ -23,10 +24,10 @@
 	function checkOverflow(scr,cnt)
 	{	
 		if (scr && cnt && cnt.clientHeight && scr.scrollHeight) {
-			console.log("client: " + cnt.clientHeight + " scroll: " + scr.scrollHeight)
+			// console.log("client: " + cnt.clientHeight + " scroll: " + scr.scrollHeight)
 			var isOverflowing = cnt.clientHeight < scr.scrollHeight
-			console.log(isOverflowing)
-			is_scrollable = isOverflowing
+			// console.log(isOverflowing)
+			$uistates_store.box_is_scrollable = isOverflowing
 		}
 
 	}
@@ -68,12 +69,10 @@
 		/* height: 100%; */
 		overscroll-behavior: contain;
 	}
-	.scrollable {
-		/* overflow: hidden;  */
-	}
+
 </style>
 
-<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox p-2 {is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}">
+<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox p-2 {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}">
 	<div class:is-hidden={!has_help} class="is-pulled-right">
 		<Help>
 		<slot name="help"></slot>
@@ -91,7 +90,7 @@
 	</div>
 	<div  class="mb-2"><hr></div>
 	<div class="maincontent" >
-		<div class="scrollable" bind:this={scrollable} >
+		<div  bind:this={scrollable} >
 			<slot>
 			</slot>
 		</div>
