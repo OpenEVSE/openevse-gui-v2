@@ -1,5 +1,4 @@
 <script>
-	import CentralView 		  from "./../components/ui/CentralView.svelte";
 	import Time 			  from "./../components/blocks/configuration/Time.svelte";
 	import Firmware 		  from "./../components/blocks/configuration/Firmware.svelte";
 	import Evse 			  from "./../components/blocks/configuration/Evse.svelte";

@@ -1,7 +1,4 @@
 <script>
-	import Wizard from "./routes/Wizard.svelte";
-	import { config_store } from "./lib/stores/config.js";
-	import { status_store } from "./lib/stores/status.js";
 	import { uistates_store } from './lib/stores/uistates.js'
 	import "@fontsource/roboto";
 	import Status from "./components/blocks/Status.svelte";
@@ -17,6 +14,7 @@
 	function getWindowSize() {
 		$uistates_store.window_width = window.innerWidth
 		$uistates_store.breakpoint = getBreakpoint()
+		$uistates_store.box_resize = true
 	}
 </script>
 <style>

@@ -11,22 +11,31 @@
 	export let visible = true
 	export let icon = ""
 
+
+
 	let scrollable
 	let contentbox
 	let clientHeight
 	let scrollHeight
 
-	let is_scrollable = false
+
 	let obs = new ResizeObserver(()=>checkOverflow(scrollable,contentbox))
 
 	onMount(()=>{
 		obs.observe(scrollable)
 	})
 
+	function handleResize() {
+		if ($uistates_store.box_resize) {
+			checkOverflow(scrollable,contentbox)
+			$uistates_store.box_resize = false;
+		}
+    }
+
 	function checkOverflow(scr,cnt)
 	{	
 		if (scr && cnt && (clientHeight != cnt.clientHeight || scrollHeight != scr.scrollHeight)) {
-			clientHeight =  cnt.clientHeight
+			clientHeight =  cnt.clientHeight - 40
 			scrollHeight = scr.scrollHeight
 			console.log("client: " + clientHeight + " scroll: " + scrollHeight)
 			var isOverflowing = clientHeight < scrollHeight
@@ -34,6 +43,8 @@
 			$uistates_store.box_is_scrollable = isOverflowing
 		}
 	}
+
+	$: $uistates_store.box_resize, handleResize()
 
 </script>
 <style>
@@ -50,7 +61,7 @@
 		background-color: white;
 		max-height: calc(100% + 5px);
 		min-height: 50%;
-		position: relative;
+		/* height: 100%; */
 		
 	}
 	.contentbox.is-full-height {
@@ -66,6 +77,7 @@
 		max-height: calc(100% - 42px);
 		/* box-sizing: border-box; */
 		/* height: 100%; */
+		overscroll-behavior: contain;
 	}
 
 </style>
@@ -87,14 +99,12 @@
 		<span>{title}</span>
 	</div>
 	<div  class="mb-2"><hr></div>
-	<div class="is-flex is-align-items-center is-justify-content-center">
-		<div class="maincontent">
-			<div  class="" bind:this={scrollable} >
-				<slot>
-				</slot>
-			</div>
-		</div>
+	<!-- <div class="maincontent"  > -->
+	<div  class="maincontent" bind:this={scrollable} >
+		<slot>
+		</slot>
 	</div>
+	<!-- </div> -->
 
 
 </div>

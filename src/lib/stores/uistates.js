@@ -35,7 +35,8 @@ const model = {
 		breakpoint: undefined,
 		has_fetched: false,
 		wizard_step: 0,
-		box_is_scrollable: false
+		box_is_scrollable: false,
+		box_resize: false
 }
 
 function createUIStatesStore() {

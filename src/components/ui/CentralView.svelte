@@ -1,5 +1,5 @@
 <script>
-	import { uistates_store } from "./../../lib/stores/uistates.js";
+
 </script>
 <style>
 	.columns {
