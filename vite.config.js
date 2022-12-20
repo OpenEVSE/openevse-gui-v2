@@ -12,7 +12,7 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     plugins: [
-      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html|woff|ico)$/i}),
+      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
 
       VitePWA({ 
         registerType: 'autoUpdate',

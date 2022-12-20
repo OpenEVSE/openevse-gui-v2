@@ -54,7 +54,7 @@
 
 		<Borders>
 			<div class="has-text-weight-bold is-size-6">Max Current</div>
-			<SliderForm icon="fa6-solid:gauge-high" bind:value={$config_store.max_current_soft} unit="A" min={$config_store.min_current_hard}} max={$config_store.max_current_hard} onchange={setMaxCurrent} />
+			<SliderForm icon="fa6-solid:gauge-high" bind:value={$config_store.max_current_soft} unit="A" min={$config_store.min_current_hard?$config_store.min_current_hard:6} max={$config_store.max_current_hard?$config_store.max_current_hard:32} onchange={setMaxCurrent} />
 		</Borders>
 		<Borders>
 			<div class="has-text-weight-bold is-size-6">Scheduler Random start adjust</div>
