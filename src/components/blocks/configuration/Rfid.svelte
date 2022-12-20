@@ -92,6 +92,7 @@
 		overflow:scroll;
 		box-sizing: content-box;
 		overflow-y: scroll;
+		overscroll-behavior-y: contain;
 	}
 
 </style>

@@ -3,7 +3,7 @@
 	import { config_store } from "./lib/stores/config.js";
 	import { status_store } from "./lib/stores/status.js";
 	import { uistates_store } from './lib/stores/uistates.js'
-	import "@fontsource/roboto"; // The font we are gonna serve with fontsource
+	import "@fontsource/roboto";
 	import Status from "./components/blocks/Status.svelte";
 	import {location} from 'svelte-spa-router'
 	import MobileNav from "./components/blocks/MobileNav.svelte"
@@ -35,7 +35,7 @@
 		/* position: fixed; */
 		/* top: 0px;
 		left: 0px; */
-		z-index: 1;
+		z-index: 0;
 		/* border: solid; */
 	}
 
@@ -43,14 +43,14 @@
 		/* position: relative; */
 		/* top: 10vh; */
 		/* bottom: 0px; */
-		width: 100vw;
-		/* height: 100%; */
+		width: 100%;
+		height: 100%;
 		z-index: 0;
 		/* border: solid; */
 		/* top: 220px;
 		left: 0px; */
 		overflow: hidden;
-		overflow-x: hidden;
+		overflow-x: hidden;	
 		overflow-y: hidden;
 		flex: 1;
 	}

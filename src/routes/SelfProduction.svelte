@@ -1,10 +1,8 @@
 <script>
-	import SelfProduction from "../components/blocks/configuration/SelfProduction.svelte"
+	import CentralView 		from "./../components/ui/CentralView.svelte";
+	import SelfProduction 	from "../components/blocks/configuration/SelfProduction.svelte"
 </script>
 
-
-<div class="columns is-centered">
-	<div class="column is-two-thirds ">
-		<SelfProduction />
-	</div>
-</div>
+<CentralView>
+	<SelfProduction />
+</CentralView>

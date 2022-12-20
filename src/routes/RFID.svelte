@@ -1,11 +1,9 @@
 <script>
-
-	import Rfid from "../components/blocks/configuration/Rfid.svelte"
+	import CentralView 	from "./../components/ui/CentralView.svelte";
+	import Rfid			from "../components/blocks/configuration/Rfid.svelte"
 </script>
 
+<CentralView>
+	<Rfid />
+</CentralView>
 
-<div class="columns is-centered">
-	<div class="column is-two-thirds ">
-		<Rfid />
-	</div>
-</div>

@@ -1,10 +1,9 @@
 <script>
-	import Mqtt from "../components/blocks/configuration/Mqtt.svelte"
+	import CentralView 	from "./../components/ui/CentralView.svelte";
+	import Mqtt 		from "../components/blocks/configuration/Mqtt.svelte"
 </script>
 
+<CentralView>
+	<Mqtt />
+</CentralView>
 
-<div class="columns is-centered">
-	<div class="column is-two-thirds ">
-		<Mqtt />
-	</div>
-</div>

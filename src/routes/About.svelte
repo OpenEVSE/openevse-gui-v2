@@ -1,11 +1,8 @@
 <script>
-	import About from "../components/blocks/configuration/About.svelte"
+	import CentralView	 from "./../components/ui/CentralView.svelte";
+	import About		 from "../components/blocks/configuration/About.svelte"
 </script>
-
-
-<div class="columns is-centered">
-	<div class="column is-two-thirds ">
-		<About />
-	</div>
-</div>
-	
+<CentralView>
+	<About />
+</CentralView>
+		

@@ -1,4 +1,5 @@
 <script>
+	import CentralView from "./../components/ui/CentralView.svelte";
 	import Box from "./../components/ui/Box.svelte";
 	import Tabs from "./../components/ui/Tabs.svelte";
 	import Safety from "../components/blocks/monitoring/Safety.svelte"
@@ -20,20 +21,19 @@
 	}
 
 </script>
-<div class="columns is-centered">
-	<div class="column is-two-thirds">
-		<Box title="Monitoring" icon="fa6-solid:chart-simple">
-			<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
-			{#if activetab == 0}
-				<Energy />
-			{:else if activetab == 1}
-				<Sensors />	
-			{:else if activetab == 2}
-				<Safety />	
-			{:else if activetab == 3}
-				<Current />
-			{/if}
-		</Box>
+
+<CentralView>
+	<Box title="Monitoring" icon="fa6-solid:chart-simple">
+		<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
+		{#if activetab == 0}
+			<Energy />
+		{:else if activetab == 1}
+			<Sensors />	
+		{:else if activetab == 2}
+			<Safety />	
+		{:else if activetab == 3}
+			<Current />
+		{/if}
+	</Box>
+</CentralView>
 		
-	</div>
-</div>

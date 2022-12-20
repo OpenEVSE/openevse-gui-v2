@@ -2,6 +2,13 @@
 	import {status_store} from "../../../lib/stores/status.js"
 
 </script>
+<style>
+	.tag {
+		box-sizing: border-box;
+		width: 100%;
+		font-size: medium;
+	}
+</style>
 <table class="table is-fullwidth">
 	<thead>
 		<tr class="has-background-info">

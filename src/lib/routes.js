@@ -1,7 +1,6 @@
 import Main             from '../routes/Main.svelte'
 import Schedule         from '../routes/Schedule.svelte'
 import Monitoring       from '../routes/Monitoring.svelte'
-import Services         from '../routes/Services.svelte'
 import Configuration    from '../routes/Configuration.svelte'
 import NotFound         from '../routes/NotFound.svelte'
 import History          from '../routes/History.svelte'
@@ -29,7 +28,6 @@ export const routes = {
     '/monitoring': Monitoring,
     '/history': History,
     '/configuration':Configuration,
-    '/configuration/services': Services,
     '/configuration/rfid':RFID,
     '/configuration/safety': Safety,
     '/configuration/evse': Evse,

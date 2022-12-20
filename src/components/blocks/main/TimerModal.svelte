@@ -1,4 +1,5 @@
 <script>
+	import BoxModal from "./../../ui/BoxModal.svelte";
 	import { serialQueue } from "../../../lib/queue.js";
 	import Box from "../../ui/Box.svelte";
 	import {schedule_store} from "../../../lib/stores/schedule.js"
@@ -161,8 +162,7 @@
 <Modal bind:is_opened>
 
 	<AlertBox body="You must select at least one day" bind:visible={alert_visible} />
-	
-	<Box title={timer == null?"New Timer":"Timer" + $schedule_store[timer].id} >
+	<BoxModal title={timer == null?"New Timer":"Timer" + $schedule_store[timer].id} >
 		<div class="mt-2 is-size-6">				
 			<label class="checkbox">
 				<input id="d_mon" type="checkbox" bind:checked={selected_days[0]} on:change={checkDays} >
@@ -233,9 +233,9 @@
 						{/if}
 				</div>
 		</div>
-		<div class="mt-4 is-flex is-justify-content-center">
+		<div class="mt-4 is-flex is-justify-content-center mb-4">
 			<Button name="Save" color="is-info" butn_submit={saveTimer} state={saveTimerState}/>
 			<Button name="Close" color="is-danger" butn_submit={()=>is_opened = false} />
 		</div>
-	</Box>
+	</BoxModal>
 </Modal>

@@ -1,10 +1,9 @@
 <script>
-	import EmonCMS from "../components/blocks/configuration/EmonCMS.svelte"
+	import CentralView 	from "./../components/ui/CentralView.svelte";
+	import EmonCMS 		from "../components/blocks/configuration/EmonCMS.svelte"
 </script>
 
 
-<div class="columns is-centered">
-	<div class="column is-two-thirds ">
-		<EmonCMS />
-	</div>
-</div>
+<CentralView>
+	<EmonCMS />
+</CentralView>

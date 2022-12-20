@@ -1,10 +1,9 @@
 <script>
-	import Network from "../components/blocks/configuration/Network.svelte"
+	import CentralView 	from "./../components/ui/CentralView.svelte";
+	import Network 		from "../components/blocks/configuration/Network.svelte"
 </script>
 
-
-<div class="columns is-centered">
-	<div class="column is-two-thirds ">
-		<Network />
-	</div>
-</div>
+<CentralView>
+	<Network />
+</CentralView>
+	
