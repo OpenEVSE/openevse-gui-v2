@@ -46,10 +46,20 @@
 		max-height: calc(100% + 5px);
 		box-sizing: border-box;
 		/* height: 100%; */
+
 		
 	}
-	.is-full-height {
+	.contentbox.is-full-height {
 		height: 100%;
+	}
+	.contentbox:not(.is-full-height) {
+		position: relative;
+		top: 50%;
+		left: 50%;
+
+		-webkit-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
 	}
 	.maincontent {	
 		overflow-x:hidden; 
