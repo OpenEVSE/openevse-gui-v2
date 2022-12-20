@@ -70,11 +70,9 @@
 <main>		
 	{#if $uistates_store.data_loaded}
 	<div class="screen is-flex is-flex-direction-column">
-		{#if !$location.includes("/wizard")}
 		<div class="status is-flex is-justify-content-center mx-3 mt-1 p-0">
 			<Status />
 		</div>
-		{/if}
 		<div class="route">
 			<Router {routes} />
 		</div>
