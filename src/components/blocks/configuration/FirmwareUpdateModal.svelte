@@ -2,7 +2,7 @@
 	import { config_store } 	from "./../../../lib/stores/config.js";
 	import { serialQueue }		from "./../../../lib/queue.js";
 	import { status_store } 	from "../../../lib/stores/status.js"
-	import {httpAPI}			from "../../../lib/utils.js" 
+	import {httpAPI, round}			from "../../../lib/utils.js" 
 	import {onDestroy, onMount} from "svelte"
 	import Box 					from "../../ui/Box.svelte"
 	import Button 				from "../../ui/Button.svelte"
@@ -21,26 +21,24 @@
 	let fileSent = "no"
 	let timeout
 	let canClose = true
-	let progress
 
 	onDestroy(() => {
 		clearTimeout(timeout)
 	})
 
 	onMount(()=> {
-		updateProgress(1)
+	})	
+
+	const progress = tweened(0, {
+		duration: 1000,
+		easing: cubicOut,
 	})
 
-
 	async function updateProgress(val) {
-		if (val == undefined) 
-			progress = 0
-		else if (val)
+		if (val != undefined)
 		{
-			progress = tweened(0, {
-			duration: 4000,
-			easing: cubicOut,
- 			}).set(val);
+			progress.set(val)
+			
 		}
 	}
 	
@@ -166,7 +164,7 @@
 		
 			{#if $status_store.ota == "started"}
 				Firmware update in progress...
-				<progress class="progress is-primary" value={progress} max="100">{progress}%</progress>
+				<progress class="progress is-primary" value={$progress} max=100>{$progress} %</progress>
 			{:else if $status_store.ota == "failed" }
 				Upload Failed
 			{:else if $status_store.ota == "completed" }
