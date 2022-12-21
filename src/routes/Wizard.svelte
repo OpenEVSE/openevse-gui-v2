@@ -1,4 +1,6 @@
 <script>
+	import WizardBoxButtons from "./../components/ui/WizardBoxButtons.svelte";
+	import Wizard from "./Wizard.svelte";
 	import Time 			  from "./../components/blocks/configuration/Time.svelte";
 	import Firmware 		  from "./../components/blocks/configuration/Firmware.svelte";
 	import Evse 			  from "./../components/blocks/configuration/Evse.svelte";
@@ -33,6 +35,7 @@
 </style>
 
 <div class="columns is-mobile is-centered p-0 m-0" >
+	<WizardBoxButtons step={$uistates_store.wizard_step}/>
 	<div class="column is-two-thirds-tablet">
 		{#if params.step == 0 || params.step == undefined}
 		<Welcome />
@@ -45,24 +48,6 @@
 		{:else if params.step == 4}
 		<Firmware />
 		{/if}
-		<div class="is-flex is-justify-content-center mt-3">
-			{#if $uistates_store.wizard_step > 0}
-			<button class="button is-white mr-4" on:click={goPrev}>
-				<iconify-icon class="is-size-5" icon="material-symbols:navigate-before"></iconify-icon> 
-				Previous &nbsp;
-			</button>
-			{/if}
-			{#if $uistates_store.wizard_step < 4}
-			<button class="button is-white ml-4" on:click={goNext}>
-				&nbsp; Next
-				<iconify-icon class="is-size-5" icon="material-symbols:navigate-next"></iconify-icon> 
-			</button>
-			{/if}
-			{#if $uistates_store.wizard_step == 4}
-			<button class="button is-white ml-4"on:click={()=>push("/")}>
-				&nbsp; Quit Wizard &nbsp;
-			</button>
-			{/if}
-		</div>
+		
 	</div>
 </div>

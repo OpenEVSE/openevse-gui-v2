@@ -53,13 +53,12 @@
 		margin-bottom: 0px;
 	}
 	.contentbox {
-		overflow: visible;
+		overflow: hidden;
 		border-radius: 6px;
 		color: black;
 		background-color: white;
 		max-height: calc(100% + 5px);
 		min-height: 50%;
-		/* height: 100%; */
 		
 	}
 	.contentbox.is-full-height {
@@ -97,12 +96,8 @@
 		<span>{title}</span>
 	</div>
 	<div  class="mb-2"><hr></div>
-	<!-- <div class="maincontent"  > -->
 	<div  class="maincontent" bind:this={scrollable} >
 		<slot>
 		</slot>
 	</div>
-	<!-- </div> -->
-
-
 </div>

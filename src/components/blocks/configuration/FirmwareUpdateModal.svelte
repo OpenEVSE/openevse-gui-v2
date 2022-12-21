@@ -9,6 +9,8 @@
 	import IconButton 			from "../../ui/IconButton.svelte"
 	import Modal 				from "../../ui/Modal.svelte"
 	import SelectFile 			from "../../ui/SelectFile.svelte"
+	import { tweened } 			from "svelte/motion";
+	 import { cubicOut }		from "svelte/easing";	
 	import 'iconify-icon';
 	
 	export let is_opened = false
@@ -28,7 +30,16 @@
 		
 	})
 
+	const progress = tweened(0, {
+		duration: 4000,
+		easing: cubicOut,
+ 	});
 
+	function updateProgress(val) {
+		if (val != undefined)
+			progress.set(val)
+	}
+	
 	const uploadFiles = (url, file) =>
 		new Promise((resolve, reject) => {
 			if (import.meta.env.DEV) { 
@@ -93,6 +104,7 @@
 	}
 
 	$: $status_store.ota,displayOta()
+	$: updateProgress($status_store.ota_progress)
 
 </script>
 
@@ -150,7 +162,7 @@
 		
 			{#if $status_store.ota == "started"}
 				Firmware update in progress...
-				<progress class="progress is-primary" value={$status_store.ota_progress?$status_store.ota_progress:0} max="100">{$status_store.ota_progress}%</progress>
+				<progress class="progress is-primary" value={progress?progress:0} max="100">{progress}%</progress>
 			{:else if $status_store.ota == "failed" }
 				Upload Failed
 			{:else if $status_store.ota == "completed" }
