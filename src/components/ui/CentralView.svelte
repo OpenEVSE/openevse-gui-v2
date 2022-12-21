@@ -11,7 +11,7 @@
 </style>
 <div class="container windw">
 	<div class="columns is-mobile is-centered p-0 m-0" >
-		<div class="column is-two-thirds-tablet is-two-thirds-desktop">
+		<div class="column is-three-quarters-tablet is-two-thirds-desktop">
 				<slot>
 				</slot>
 		</div>
