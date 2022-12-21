@@ -64,10 +64,6 @@
 	.contentbox.is-full-height {
 		height: 100%;
 	}
-	.contentbox:not(.is-full-height) {
-		/* position: relative; */
-		/* min-height: 70%; */
-	}
 	.maincontent {	
 		overflow-x:hidden; 
 		/* overflow-y:visible;  */

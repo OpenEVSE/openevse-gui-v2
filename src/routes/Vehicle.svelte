@@ -19,12 +19,6 @@
 </script>
 
 <style>
-	.columns {
-		height: 100%;
-	}
-	.windw {
-		height: 100%;
-	}
 </style>
 
 <CentralView>
