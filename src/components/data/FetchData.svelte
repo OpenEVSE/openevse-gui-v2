@@ -1,4 +1,5 @@
 <script>
+	import ProgressBar from "./../ProgressBar.svelte";
 	import { onMount } from "svelte";
 	import { uistates_store }		from "./../../lib/stores/uistates.js"
 	import { status_store }			from "./../../lib/stores/status.js"
@@ -99,7 +100,7 @@
 			<div class=" is-flex is-align-items-center" ><img src={Logo} alt="logo" /></div>
 			
 		</div>
-		<div class="mt-5"><progress class="progress is-small is-primary" value={progress} max="100"></progress></div>
+		<div class="mt-5"><ProgressBar value={progress} /></div>
 		
 	</div>
 </div>
