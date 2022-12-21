@@ -27,7 +27,7 @@
 	})
 
 	onMount(()=> {
-		
+		updateProgress(22)
 	})
 
 	const progress = tweened(0, {
@@ -36,7 +36,9 @@
  	});
 
 	function updateProgress(val) {
-		if (val != undefined)
+		if (val == undefined) 
+			progress.set(0)
+		else if (val)
 			progress.set(val)
 	}
 	
@@ -162,7 +164,7 @@
 		
 			{#if $status_store.ota == "started"}
 				Firmware update in progress...
-				<progress class="progress is-primary" value={progress?progress:0} max="100">{progress}%</progress>
+				<progress class="progress is-primary" value={progress} max="100">{progress}%</progress>
 			{:else if $status_store.ota == "failed" }
 				Upload Failed
 			{:else if $status_store.ota == "completed" }
