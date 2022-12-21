@@ -99,58 +99,61 @@
 </style>
 <Box title="Self Production" has_help={true} icon="fa6-solid:solar-panel">
 	<div slot="help"><SelfProductionHelp  /> </div>
-	<Switch name="divertswitch" label="Handle Self Production" onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>
-	<div class="is-size-7">Dynamically adjust charge rate based on self production or excess power (grid export).</div>
-	<div class:is-hidden={!$config_store.divert_enabled} class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
-		{#if $uistates_store.divert_type == 0}
-		<div class="mr-2 is-inline-block">
-			<span>Production:</span>
-			<span class="has-text-primary">{$status_store.solar}W</span>
+	<div class="pb-1" >
+		<Switch name="divertswitch" label="Handle Self Production" onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>
+		<div class="is-size-7">Dynamically adjust charge rate based on self production or excess power (grid export).</div>
+		<div class:is-hidden={!$config_store.divert_enabled} class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
+			{#if $uistates_store.divert_type == 0}
+			<div class="mr-2 is-inline-block">
+				<span>Production:</span>
+				<span class="has-text-primary">{$status_store.solar}W</span>
+			</div>
+		
+			{:else}
+			<div class="mr-2">
+				<span>Grid +Import/-Export:</span>
+				<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
+			</div>
+			{/if}
+			<div class="mr-2">
+				<span>Available Current:</span>
+				<span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
+			</div>
+			<div class="mr-2" class:is-hidden={!$status_store.smoothed_available_current}>
+				<span>Smoothed Current:</span>
+				<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
+			</div>
+			<div class="mr-2">
+				<span class="has-text-weight-bold  is-size-7">Last updated:</span>
+				<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{s2mns($uistates_store.divert_update)}</span>
+			</div>
 		</div>
-	
+		
+		<Select title="Mode" bind:value={$uistates_store.divert_type} items={modes} />
+		{#if $uistates_store.divert_type==0}
+		<div><InputForm title="Feed:" bind:value={$config_store.mqtt_solar} placeholder="/topic/energy_production" /></div>
+		<div class="is-size-7">Self Production MQTT topic (in W) to modulate charge rate based on production</div>
 		{:else}
-		<div class="mr-2">
-			<span>Grid +Import/-Export:</span>
-			<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
-		</div>
+		<div><InputForm title="Feed:" bind:value={$config_store.mqtt_grid_ie} placeholder="/topic/grid" /></div>
+		
+		<div class="is-size-7">Grid (+I/-E) MQTT topic to modulate charge rate based on excess power</div>
 		{/if}
-		<div class="mr-2">
-			<span>Available Current:</span>
-			<span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
+	
+		{#if $uistates_store.divert_type==1}
+		<div><InputForm title="Required PV power ratio:" type="number" bind:value={$config_store.divert_PV_ratio} placeholder="1.1" /></div>
+		<div class="is-size-7">The fraction of PV current that suffices to start charging or increment current</div>
+		{/if}
+		<div><InputForm title="Divert smoothing attack:" type="number" bind:value={$config_store.divert_attack_smoothing_factor} placeholder="0.4" /></div>
+		<div class="is-size-7">The amount of the new feed value to add to the divert available power rolling average</div>
+		<div><InputForm title="Divert smoothing decay:" type="number" bind:value={$config_store.divert_decay_smoothing_factor} placeholder="0.005" /></div>
+	
+		<div class="is-size-7">The amount of the new feed value to remove to the divert available power rolling average</div>
+		<div><InputForm title="Minimum Charge Time:" type="number" bind:value={$config_store.divert_min_charge_time} placeholder="600" /></div>
+		<div class="is-size-7">The minimum amount of time (seconds) to charge the car once enabled via the self production divert. This can help minimise wear and tear on the EVSE.</div>
+		<div class="block mt-5">
+			<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 		</div>
-		<div class="mr-2" class:is-hidden={!$status_store.smoothed_available_current}>
-			<span>Smoothed Current:</span>
-			<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
-		</div>
-		<div class="mr-2">
-			<span class="has-text-weight-bold  is-size-7">Last updated:</span>
-			<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{s2mns($uistates_store.divert_update)}</span>
-		</div>
+		<AlertBox body={alert_body} bind:visible={alert_visible} />
 	</div>
 	
-	<Select title="Mode" bind:value={$uistates_store.divert_type} items={modes} />
-	{#if $uistates_store.divert_type==0}
-	<div><InputForm title="Feed:" bind:value={$config_store.mqtt_solar} placeholder="/topic/energy_production" /></div>
-	<div class="is-size-7">Self Production MQTT topic (in W) to modulate charge rate based on production</div>
-	{:else}
-	<div><InputForm title="Feed:" bind:value={$config_store.mqtt_grid_ie} placeholder="/topic/grid" /></div>
-	
-	<div class="is-size-7">Grid (+I/-E) MQTT topic to modulate charge rate based on excess power</div>
-	{/if}
-
-	{#if $uistates_store.divert_type==1}
-	<div><InputForm title="Required PV power ratio:" type="number" bind:value={$config_store.divert_PV_ratio} placeholder="1.1" /></div>
-	<div class="is-size-7">The fraction of PV current that suffices to start charging or increment current</div>
-	{/if}
-	<div><InputForm title="Divert smoothing attack:" type="number" bind:value={$config_store.divert_attack_smoothing_factor} placeholder="0.4" /></div>
-	<div class="is-size-7">The amount of the new feed value to add to the divert available power rolling average</div>
-	<div><InputForm title="Divert smoothing decay:" type="number" bind:value={$config_store.divert_decay_smoothing_factor} placeholder="0.005" /></div>
-
-	<div class="is-size-7">The amount of the new feed value to remove to the divert available power rolling average</div>
-	<div><InputForm title="Minimum Charge Time:" type="number" bind:value={$config_store.divert_min_charge_time} placeholder="600" /></div>
-	<div class="is-size-7">The minimum amount of time (seconds) to charge the car once enabled via the self production divert. This can help minimise wear and tear on the EVSE.</div>
-	<div class="block mt-5">
-		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
-	</div>
-	<AlertBox body={alert_body} bind:visible={alert_visible} />
 </Box>

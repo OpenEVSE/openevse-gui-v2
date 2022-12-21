@@ -37,9 +37,7 @@
 		if (scr && cnt && (clientHeight != cnt.clientHeight || scrollHeight != scr.scrollHeight)) {
 			clientHeight =  cnt.clientHeight - 40
 			scrollHeight = scr.scrollHeight
-			console.log("client: " + clientHeight + " scroll: " + scrollHeight)
 			var isOverflowing = clientHeight < scrollHeight
-			console.log(isOverflowing)
 			$uistates_store.box_is_scrollable = isOverflowing
 		}
 	}
@@ -74,7 +72,7 @@
 	.maincontent {	
 		overflow-x:hidden; 
 		/* overflow-y:visible;  */
-		max-height: calc(100% - 42px);
+		max-height: calc(100% - 50px);
 		/* box-sizing: border-box; */
 		/* height: 100%; */
 		overscroll-behavior: contain;

@@ -36,7 +36,7 @@
 		/* position: fixed; */
 		/* top: 0px;
 		left: 0px; */
-		z-index: 1;
+		z-index: 0;
 		/* border: solid; */
 	}
 
