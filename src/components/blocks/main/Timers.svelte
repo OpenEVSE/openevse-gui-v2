@@ -1,5 +1,6 @@
 
 <script>
+	import Borders from "./../../ui/Borders.svelte";
 	import { serialQueue }  from "./../../../lib/queue.js";
 	import { onDestroy } 	from "svelte";
 	import Box 				from "../../ui/Box.svelte"
@@ -61,26 +62,28 @@
 	}
 </style>
 <Box title="Schedule" icon="ion:calendar">
-	<div class="mb-2 has-text-centered">
-		<table class="table is-size-6 has-text-weight-normall timers">
-			<tbody>
-				{#if $schedule_store.length}
-					{#each $schedule_store as schedule,id} 
-						<TimerTableRow bind:this={timers[id]} 
-						t_id={schedule.id}
-						t_time={schedule.time}
-						t_state={schedule.state}
-						t_days={schedule.days}
-						edit={() => {editTimer(schedule.id)}}
-						remove={() => {removeTimer(schedule.id)}}
-						removeState={timersState[id]}
-						/>
-					{/each}
-				{:else}
-				<span class="content">Schedule is empty</span>
-				{/if}	
-			</tbody>
-		</table>
+	<div class="my-2 is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
+		<Borders>
+			<table class="table is-size-6 has-text-weight-normall timers">
+				<tbody>
+					{#if $schedule_store.length}
+						{#each $schedule_store as schedule,id} 
+							<TimerTableRow bind:this={timers[id]} 
+							t_id={schedule.id}
+							t_time={schedule.time}
+							t_state={schedule.state}
+							t_days={schedule.days}
+							edit={() => {editTimer(schedule.id)}}
+							remove={() => {removeTimer(schedule.id)}}
+							removeState={timersState[id]}
+							/>
+						{/each}
+					{:else}
+					<span class="content">Schedule is empty</span>
+					{/if}	
+				</tbody>
+			</table>
+		</Borders>
 		<div class="mt-4"><Button name="New" butn_submit={addTimer}/></div>
 		
 	</div>

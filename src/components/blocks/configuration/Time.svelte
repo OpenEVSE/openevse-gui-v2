@@ -148,7 +148,7 @@
 		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={createTzObj(timeZone)} onChange={setTimeZone} />
 
 	</div>
-	<div class="mt-4">
+	<div class="mt-4 mb-1">
 		<Button name="Set Time" butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
 	</div>
 </Box>
