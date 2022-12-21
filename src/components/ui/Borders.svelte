@@ -3,12 +3,12 @@
 		.borders {
 			border-radius: 10px;
 			border: 1px solid rgb(50, 179, 212);
-			max-width: 400px;
+			width: 50%;
 	}
 
 </style>
 
-<div class="borders mb-2 p-2">
+<div class="borders mb-2 p-2 has-text-centered">
 	<slot>
 	</slot>
 </div>

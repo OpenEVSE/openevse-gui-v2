@@ -45,7 +45,7 @@
 
 <style>
 	.inputbox {
-		max-width: 200px;
+		max-width: 100px;
 	}
 </style>
 
@@ -58,13 +58,14 @@
 		</Borders>
 		<Borders>
 			<div class="has-text-weight-bold is-size-6">Scheduler Random start adjust</div>
-			<div class="is-flex is-align-items-center">	
-				<div class="inputbox ">	
-				<InputForm  type="number" title="" placeholder="OpenEVSE host name" bind:value={$config_store.scheduler_start_window} 
-				status={input_random_start} onChange={()=>onChange("scheduler_start_window", $config_store.scheduler_start_window)}/>
+			<div class="is-flex is-justify-content-center">
+				<div class="inputbox">	
+					<InputForm  type="number" title="" placeholder="OpenEVSE host name" bind:value={$config_store.scheduler_start_window} 
+					status={input_random_start} onChange={()=>onChange("scheduler_start_window", $config_store.scheduler_start_window)}/>
 				</div>
-				<div class="ml-2"> seconds</div>
 			</div>
+			
+			<div class="ml-2"> seconds</div>
 		</Borders>
 		<Borders>
 			<div class="has-text-weight-bold is-size-6">Service Level</div>
