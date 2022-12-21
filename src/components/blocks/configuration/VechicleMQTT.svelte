@@ -35,7 +35,7 @@
 }
 </script>
 
-<div class="mt-1">
+<div class="mt-1 mb-1">
 	<Select title="Range Unit" bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
 	<InputForm title="State of Charge topic:" bind:value={$config_store.mqtt_vehicle_soc} placeholder="topic/soc" is_inline={true} />
 	<div class="is-size-7">The battery level of charge as a percentage</div>

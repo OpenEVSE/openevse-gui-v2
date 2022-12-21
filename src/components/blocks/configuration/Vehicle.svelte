@@ -5,7 +5,6 @@
 	import VechicleMQTT 	from "./VechicleMQTT.svelte";
 	import Box 				from "../../ui/Box.svelte";
 	import Select 			from "./../../ui/Select.svelte";
-	import VehicleTeslaHelp from "./../../help/VehicleTeslaHelp.svelte";
 	
 	let mode = 0 // 0: none, 1: Tesla, 2: MQTT
 	let modes = [{name: "None/HTTP", value: 0}, {name:"Tesla", value: 1}, {name: "MQTT", value: 2}]
@@ -24,8 +23,8 @@
 	})
 </script>
 
-<Box title="Vehicle" has_help={mode==1?true:false} icon="bi:ev-front">
-	<div slot="help"><VehicleTeslaHelp /> </div>
+
+<div>
 	<Select title="Connection Type" bind:value={mode} items={modes} />
 	{#if mode == 2}
 	<VechicleMQTT />
@@ -47,4 +46,5 @@
 		</code>
 	</div>
 	{/if}
-</Box>
+</div>
+

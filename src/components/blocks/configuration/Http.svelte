@@ -117,7 +117,7 @@
 	<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
 	{#if activetab == 0}
 	<!-- Authentification -->
-	<div >
+	<div class="my-1" >
 		<form>
 			<Switch name="auth_enabled" label="Enable" tooltip="Enable HTTP authentication" tooltip_pos="top" bind:checked={auth_checked} />
 			<div><InputForm  title="Username" bind:value={auth_usr} placeholder="Admin" type="text" disabled={!auth_checked} /></div>

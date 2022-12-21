@@ -166,7 +166,7 @@
 	$: loggedin, getVehicles()
 
 </script>
-<div class="mt-1">
+<div class="mb-1">
 	<Select title="Range Unit" bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
 	{#if loggedin}
 		{#if status == "loading"}
@@ -183,8 +183,11 @@
 		</div>
 		{:else if mode == 0}
 		<div>
-			<InputForm title="Username:" bind:value={username} placeholder="Tesla username" />
-			<InputForm title="Password:" bind:value={password} type="password" placeholder="Tesla password" />
+			<form>
+				<InputForm title="Username:" bind:value={username} placeholder="Tesla username" />
+				<InputForm title="Password:" bind:value={password} type="password" placeholder="Tesla password" />
+			</form>
+
 			<div class="block mt-5">
 				<Button name="Login" color="is-info" state={stg_submit_state} butn_submit={login} />
 				<Button name="Advanced" color="is-info" butn_submit={()=>mode=1} />

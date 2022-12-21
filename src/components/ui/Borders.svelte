@@ -3,7 +3,8 @@
 		.borders {
 			border-radius: 10px;
 			border: 1px solid rgb(50, 179, 212);
-			width: 50%;
+			max-width: 92%;
+			min-width: 300px;
 	}
 
 </style>

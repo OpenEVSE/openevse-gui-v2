@@ -73,7 +73,7 @@
 	<InputForm title="Emoncms write-apikey*:" type="password" bind:value={$config_store.emoncms_apikey} placeholder="api key" />
 
 	
-	<div class="block mt-5">
+	<div class="block mt-5 mb-1">
 		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>
 	<AlertBox body={alert_body} bind:visible={alert_visible} />

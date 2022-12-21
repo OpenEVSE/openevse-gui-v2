@@ -53,7 +53,7 @@
 		<Button name="OpenEVSE" color="is-info" butn_submit={()=>openConsole("openevse")} />
 	</div>
 
-	<div class="container mt-4">
+	<div class="container mt-4 mb-1">
 		<div>
 			<div class="is-size-7">
 			{#each rapi_cmd_result as { cmd, ret } }

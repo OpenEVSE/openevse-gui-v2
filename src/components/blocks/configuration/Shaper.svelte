@@ -57,7 +57,7 @@
 	<div class="is-size-7">Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.</div>
 	<div><InputForm title="Max power allowed (in W):" type="number" bind:value={$config_store.current_shaper_max_pwr} placeholder="9000" /></div>
 	<div><InputForm title="Live power load MQTT Topic (in W):" bind:value={$config_store.mqtt_live_pwr} placeholder="/topic/powerload" /></div>
-	<div class="block mt-5">
+	<div class="block mt-5 pb-1">
 		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>
 	<AlertBox body={alert_body} bind:visible={alert_visible} />
