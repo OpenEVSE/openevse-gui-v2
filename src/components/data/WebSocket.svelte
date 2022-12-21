@@ -8,6 +8,7 @@
 	let timerId
 	let lastmsg
 	let timeout
+	let firstcon = true
 	// let isgettingclaim = false
 	// let isgettingschedule = false
 	// let isgettingplan = false
@@ -41,6 +42,7 @@
 				console.log("connected to websocket")
 				$uistates_store.ws_connected = true
 				keepAlive(s)
+				firstcon = false
 			} )
 			s.addEventListener("message", function (e) {
 				lastmsg = DateTime.now().toUnixInteger()
@@ -50,12 +52,12 @@
 				status_store.update(() => store)
 			})
 			s.addEventListener("error", function (e) {
-				console.error('Socket encountered error: ', e.message, 'Closing socket');
+				if (!firstcon) {
+					console.error('Socket encountered error: ', e.message, 'Closing socket');
 				lastmsg = DateTime.now().toUnixInteger()
 				$uistates_store.ws_connected = false
 				cancelKeepAlive()
-				
-				
+				}	
 			})
 			s.addEventListener("close", function (e) {
 				console.log('Socket is closed. Reconnect attempt in 1 second.', e.reason);
