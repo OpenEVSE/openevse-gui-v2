@@ -24,21 +24,19 @@ export async function httpAPI(method,url,body=null,type = "json",timeout = 10000
 			url = "/api" + url
 	}
 	const res = await fetch(url, data).then((response) => {
-		if (response.status >= 400 && response.status < 600) {
+		if (!response.ok) {
 		//   throw new Error("Bad response from server: " + response.status);
 		  return "error"
 		}
-		return response
-	}).then((response) => {
-	   if(type == "json") {
+		else {
+			if(type == "json") {
 				// @ts-ignore
-			if (response.json()) {
 				const json_response = response.json()
 				return json_response
 			}
+			// @ts-ignore
+			else return response.text()
 		}
-		// @ts-ignore
-		else return response.text()
 	}).catch((error) => {
 		console.log(error)
 		return "error"

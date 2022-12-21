@@ -104,5 +104,5 @@
 	</div>
 </div>
 {#if status == "error"}
-<AlertBox visible={true} body="OpenEVSE not responding or not connected" button={true} label="Reload" action={()=>location.reload()}/>
+<AlertBox visible={true} body="OpenEVSE not responding or not connected" button={true} label="Reload" closable={false} action={()=>location.reload()}/>
 {/if}

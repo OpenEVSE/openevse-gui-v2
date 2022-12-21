@@ -1,4 +1,5 @@
 <script>
+	import WebSocket 			from "./components/data/WebSocket.svelte";
 	import { status_store } 	from "./lib/stores/status.js";
 	import { uistates_store } 	from './lib/stores/uistates.js'
 	import Status 				from "./components/blocks/Status.svelte";
@@ -91,6 +92,7 @@
 	{:else}
 	<FetchData />
 	{/if}
+	<WebSocket />
 	
 </main>
 
