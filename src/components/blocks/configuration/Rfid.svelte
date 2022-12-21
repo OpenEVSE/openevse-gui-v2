@@ -88,11 +88,11 @@
 
 <style>
 	.scrollable {
-		max-height: 200px;
-		overflow:scroll;
+		/* max-height: 100%; */
+		/* overflow:hidden;
 		box-sizing: content-box;
 		overflow-y: scroll;
-		overscroll-behavior-y: contain;
+		overscroll-behavior-y: contain; */
 	}
 
 </style>
@@ -123,9 +123,6 @@
 			{/if}
 			</div>
 		</Borders>
-		<div class="borders has-text-centered">
-			
-		</div>
 	</div>
 	{/if}
 	{#if tags[0] != "" }
@@ -139,7 +136,7 @@
 						{/each}
 						
 					</div>
-					<div class="has-text-centered">
+					<div class="has-text-centered mt-4">
 						<Button bind:this={button2_inst} name="Remove All" size="is-small" color="is-danger" butn_submit={()=>removeTag("all",button2_inst)} />
 					</div>
 			

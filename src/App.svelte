@@ -94,7 +94,7 @@
 		<AlertBox title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={true} closable={false}/>
 		{/if}
 		{#if $status_store.evse_connected != 1}
-		<AlertBox title="OpenEVSE module error" body="Missing OpenEVSE module. Please check your setup before going further" visible={true} closable={false}/>
+		<AlertBox title="Missing OpenEVSE module." body="Please check your setup before going further" visible={true} closable={false}/>
 		{/if}
 	{/if}
 </main>

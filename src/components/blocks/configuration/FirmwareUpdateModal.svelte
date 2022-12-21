@@ -18,6 +18,7 @@
 	let uploadButtonState = "default"
 	let fileSent = "no"
 	let timeout
+	let canClose = true;
 
 	onDestroy(() => {
 		clearTimeout(timeout)
@@ -57,6 +58,7 @@
 		if (file) {
 			serialQueue.pause()
 			$status_store.ota_progress = 0
+			canClose = false;
 			uploadButtonState = "loading"
 			const response = await uploadFiles('/update', file)
 			if (response.status >= 400) {
@@ -80,10 +82,12 @@
 		}
 		else if ($status_store.ota == "completed") {
 			uploadButtonState = "ok"
+			canClose = true
 			timeout = setTimeout(()=> location.reload(),6000)
 		}
 		else if ($status_store.ota == "failed") {
 			uploadButtonState = "error"
+			canClose = true
 			timeout = setTimeout(()=> $status_store.ota = "",3000)
 		}
 	}
@@ -92,7 +96,7 @@
 
 </script>
 
-<Modal bind:is_opened canClose={false}>
+<Modal bind:is_opened {canClose}>
 	<Box title="Firmware Update" icon="fa6-solid:microchip">
 		<div class="pt-2">
 			
@@ -118,13 +122,19 @@
 							<td class="has-text-info">{$config_store.version}</td>
 						</tr>
 						<tr>
-							<td class="has-text-weight-semibold">Latest</td>
-							<td class="">
-								<div class="is-flex is-align-items-center is-flex-direction-row is-flex-wrap-wrap ">
-									<span class="mr-1 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>
-									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-black">
+							<td class="has-text-weight-semibold">
+								<div class="is-flex is-align-items-center">
+									Latest
+									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-black ml-2">
 										<iconify-icon icon="mdi:github" class="is-size-4 mt-2"></iconify-icon>
 									</a>
+								</div>
+								
+							</td>
+							<td class="">
+								<div class="is-flex is-align-items-center is-flex-direction-row is-flex-wrap-wrap ">
+									<span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>
+									
 									<Button size="is-small" icon="fa6-solid:cloud-arrow-down" disabled={uploadButtonState == "loading"} name="Upgrade to {update.version}" color="{$config_store.version != update.version ?"is-primary":"is-info	"}" butn_submit={()=>{updateToLatest(update.url)}} state={uploadButtonState}/>
 								</div>
 							
