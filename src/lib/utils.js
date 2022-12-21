@@ -31,10 +31,11 @@ export async function httpAPI(method,url,body=null,type = "json",timeout = 10000
 		return response
 	}).then((response) => {
 	   if(type == "json") {
-		if (JSON.parse(response.text())
-		// @ts-ignore
-		const json_response = response.json()
-		return json_response
+				// @ts-ignore
+			if (response.json()) {
+				const json_response = response.json()
+				return json_response
+			}
 		}
 		// @ts-ignore
 		else return response.text()
