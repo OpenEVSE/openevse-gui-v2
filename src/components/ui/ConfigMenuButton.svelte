@@ -17,7 +17,7 @@
 </style>
 
 <a href={url} use:link>
-	<div class="my-1 is-inline-block button is-info is-outlined is-flex is-align-items-center">
+	<div class="mx-2 my-1 is-inline-block button is-info is-outlined is-flex is-align-items-center">
 		<div class="is-inline-block icn">
 			<iconify-icon icon={icon} class="is-size-4" />
 		</div>

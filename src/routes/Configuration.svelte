@@ -8,7 +8,7 @@
 
 <CentralView>
 	<Box title = "Configuration" icon="fa6-solid:gear">
-		<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly is-align-items-space-evenly">
+		<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center">
 			<ConfigMenuButton url="/configuration/network" icon="mdi:local-area-network" name="Network" />
 			<ConfigMenuButton url="/configuration/firmware" icon="fa6-solid:microchip" name="Firmware" />
 			<ConfigMenuButton url="/configuration/evse" icon="mdi:evse" name="EVSE" />
