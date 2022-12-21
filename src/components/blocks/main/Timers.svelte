@@ -56,15 +56,12 @@
 
 </script>
 <style>
-	.timers {
-		/* max-width : 600px; */
-		margin: auto;
-	}
+
 </style>
 <Box title="Schedule" icon="ion:calendar">
 	<div class="my-2 is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
 		<Borders>
-			<table class="table is-size-6 has-text-weight-normall timers">
+			<table class="table is-size-6 has-text-weight-normal">
 				<tbody>
 					{#if $schedule_store.length}
 						{#each $schedule_store as schedule,id} 

@@ -79,7 +79,7 @@
 				<th class="has-text-white has-text-centered " >Action</th>
 			</tr>
 		</thead>
-		<tbody class="is-size-7-mobile">
+		<tbody>
 			<tr>
 				<td class="has-text-weight-bold">OpenEVSE</td>
 				<td>{$config_store.firmware}</td>

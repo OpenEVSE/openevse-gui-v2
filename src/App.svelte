@@ -78,7 +78,7 @@
 			<Status />
 		</div>
 		{/if}
-		<AlertBoxNoModal title="Missing OpenEVSE module." body="Please check your setup before going further" visible={!$status_store.evse_connected} />
+		<AlertBoxNoModal title="Missing OpenEVSE module." body="OpenEVSE module is missing. Please check your setup before going further" visible={!$status_store.evse_connected} />
 		<AlertBoxNoModal title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={!$uistates_store.ws_connected} />
 		<div class="route">
 			<Router {routes} />
