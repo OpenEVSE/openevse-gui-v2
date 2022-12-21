@@ -42,7 +42,8 @@
 				console.log("connected to websocket")
 				$uistates_store.ws_connected = true
 				keepAlive(s)
-				firstcon = false
+				if (firstcon)
+					firstcon = false
 			} )
 			s.addEventListener("message", function (e) {
 				lastmsg = DateTime.now().toUnixInteger()
@@ -61,8 +62,10 @@
 			})
 			s.addEventListener("close", function (e) {
 				console.log('Socket is closed. Reconnect attempt in 1 second.', e.reason);
-				lastmsg = DateTime.now().toUnixInteger()	
+				lastmsg = DateTime.now().toUnixInteger()
 				cancelKeepAlive()
+				if (firstcon)
+					firstcon = false
 				setTimeout(()=>connect2socket(), 1000)
 				
 			})
