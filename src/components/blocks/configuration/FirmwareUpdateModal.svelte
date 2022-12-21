@@ -151,14 +151,13 @@
 		
 			{#if $status_store.ota == "started"}
 				Firmware update in progress...
-				<ProgressBar value={$status_store.ota_progress}
+				<ProgressBar value={$status_store.ota_progress} />
 			{:else if $status_store.ota == "failed" }
 				Upload Failed
 			{:else if $status_store.ota == "completed" }
 				<span class="">{file.name}</span> uploaded successfully, page will reload in few sec
 			{:else}
 				<div class="s-flex is-align-items-center ml-1 is-size-6">
-					<!-- <iconify-icon class="is-size-6 has-text-info mr-2" icon="fa6-solid:file-circle-check"></iconify-icon> -->
 					<span class="my-2 is-size-6">
 						{file.name}
 					</span>
