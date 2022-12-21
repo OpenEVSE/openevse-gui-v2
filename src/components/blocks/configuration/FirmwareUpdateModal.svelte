@@ -97,6 +97,10 @@
 
 </script>
 
+<style>
+
+</style>
+
 <Modal bind:is_opened {canClose}>
 	<Box title="Firmware Update" icon="fa6-solid:microchip">
 		<div class="pt-2">
@@ -146,26 +150,27 @@
 			</div>
 		</div>
 		{#if file || $status_store.ota == "started"}
-		<div class="is-flex is-align-items-center my-2 ml-1 is-size-6">
-			<div class="is-inline-block">
-		
-			{#if $status_store.ota == "started"}
+		<div class="my-2 ml-1 is-size-6">
+			<div>
+				{#if $status_store.ota == "started"}
 				Firmware update in progress...
-				<ProgressBar value={$status_store.ota_progress} />
-			{:else if $status_store.ota == "failed" }
-				Upload Failed
-			{:else if $status_store.ota == "completed" }
-				<span class="">{file.name}</span> uploaded successfully, page will reload in few sec
-			{:else}
-				<div class="s-flex is-align-items-center ml-1 is-size-6">
-					<span class="my-2 is-size-6">
-						{file.name}
-					</span>
-					<div class=" is-size-6 is-inline-block">
-						<IconButton icon="fa6-solid:square-minus" color="has-text-danger" butn_submit={()=>{file = null}} tooltip="Remove file" />
-					</div>
+				<div style="width: 80%" class="has-text-centered">
+					<ProgressBar value={$status_store.ota_progress} />
 				</div>
-			{/if}
+				{:else if $status_store.ota == "failed" }
+					Upload Failed
+				{:else if $status_store.ota == "completed" }
+					<span class="">{file.name}</span> uploaded successfully, page will reload in few sec
+				{:else}
+					<div class="s-flex is-align-items-center ml-1 is-size-6">
+						<span class="my-2 is-size-6">
+							{file.name}
+						</span>
+						<div class=" is-size-6 is-inline-block">
+							<IconButton icon="fa6-solid:square-minus" color="has-text-danger" butn_submit={()=>{file = null}} tooltip="Remove file" />
+						</div>
+					</div>
+				{/if}
 			</div>
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-start">
