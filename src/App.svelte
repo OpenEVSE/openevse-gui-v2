@@ -9,7 +9,7 @@
 	import { routes } 			from "./lib/routes.js"
 	import FetchData 			from './components/data/FetchData.svelte'
 	import {getBreakpoint} 		from "./lib/utils.js"
-	import AlertBox 		   	from "./components/ui/AlertBox.svelte";
+	import AlertBoxNoModal 		from "./components/ui/AlertBoxNoModal.svelte";
 	import "./lib/icons.js"
 	import "@fontsource/roboto";
 
@@ -77,6 +77,8 @@
 			<Status />
 		</div>
 		{/if}
+		<AlertBoxNoModal title="Missing OpenEVSE module." body="Please check your setup before going further" visible={!$status_store.evse_connected} />
+		<AlertBoxNoModal title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={!$uistates_store.ws_connected} />
 		<div class="route">
 			<Router {routes} />
 		</div>
@@ -89,14 +91,7 @@
 	{:else}
 	<FetchData />
 	{/if}
-	{#if $uistates_store.data_loaded}
-		{#if $uistates_store.ws_connected == false}
-		<AlertBox title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={true} closable={false}/>
-		{/if}
-		{#if $status_store.evse_connected != 1}
-		<AlertBox title="Missing OpenEVSE module." body="Please check your setup before going further" visible={true} closable={false}/>
-		{/if}
-	{/if}
+	
 </main>
 
 
