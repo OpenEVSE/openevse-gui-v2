@@ -20,26 +20,28 @@
 	let uploadButtonState = "default"
 	let fileSent = "no"
 	let timeout
-	let canClose = true;
+	let canClose = true
+	let progress
 
 	onDestroy(() => {
 		clearTimeout(timeout)
 	})
 
 	onMount(()=> {
-		updateProgress(22)
+		updateProgress(1)
 	})
 
-	const progress = tweened(0, {
-		duration: 4000,
-		easing: cubicOut,
- 	});
 
-	function updateProgress(val) {
+	async function updateProgress(val) {
 		if (val == undefined) 
-			progress.set(0)
+			progress = 0
 		else if (val)
-			progress.set(val)
+		{
+			progress = tweened(0, {
+			duration: 4000,
+			easing: cubicOut,
+ 			}).set(val);
+		}
 	}
 	
 	const uploadFiles = (url, file) =>
