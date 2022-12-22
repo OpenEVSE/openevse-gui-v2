@@ -154,7 +154,7 @@
 			<div>
 				{#if $status_store.ota == "started"}
 				Firmware update in progress...
-				<div style="width: 80%" class="is-flex is-justify-content-center">
+				<div style="width: 100%" class="is-flex is-justify-content-center">
 					<ProgressBar value={$status_store.ota_progress} />
 				</div>
 				{:else if $status_store.ota == "failed" }
