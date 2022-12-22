@@ -1,5 +1,5 @@
 <script>
-	import 'iconify-icon';
+	
 	export let size = ""
 	export let color = ""
 

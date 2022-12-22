@@ -1,7 +1,7 @@
 <script>
 	import Loader from "./Loader.svelte";
 	import {onMount, onDestroy} from "svelte"
-	import 'iconify-icon';
+	
 
 	export let title = undefined
 	export let value

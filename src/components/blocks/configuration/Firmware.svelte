@@ -6,7 +6,7 @@
 	import Box 					from "../../ui/Box.svelte"
 	import Button 				from "../../ui/Button.svelte"
 	import FirmwareUpdateModal 	from "./FirmwareUpdateModal.svelte"
-	import 'iconify-icon';
+	
 
 	let restartOpenEvseState = "default"
 	let restartEspState = "default"

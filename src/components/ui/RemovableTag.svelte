@@ -1,6 +1,6 @@
 <script>
 	import Loader from "./Loader.svelte";
-	import 'iconify-icon';
+	
 	import {displayIcon, clientid2name} from "../../lib/utils.js"
 
 	export let action = () => {};

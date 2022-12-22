@@ -1,5 +1,5 @@
 <script>
-	import 'iconify-icon';
+	
 	export let file = ""
 	let inputfield
 	let button

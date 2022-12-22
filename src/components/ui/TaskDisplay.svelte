@@ -1,6 +1,6 @@
 <script>
 	import {displayTime, displayIcon} from "../../lib/utils.js"
-	import 'iconify-icon';
+	
 	export let state 
 	export let time = ""
 	export let mode

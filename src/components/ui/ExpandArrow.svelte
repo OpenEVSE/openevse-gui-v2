@@ -1,5 +1,5 @@
 <script>
-import 'iconify-icon';
+
 export let expand
 let size = ""
 </script>

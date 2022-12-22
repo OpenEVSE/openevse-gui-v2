@@ -1,4 +1,4 @@
-	import 'iconify-icon';
+	
 	import { addIcon, disableCache } from 'iconify-icon';
 
 	// Disable all caching

@@ -1,5 +1,5 @@
 <script>
-import 'iconify-icon';
+
 import Switch 							from "./Switch.svelte"
 
 export let title

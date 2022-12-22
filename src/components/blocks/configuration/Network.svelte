@@ -7,7 +7,7 @@
 	import Button 		   from "../../ui/Button.svelte"
 	import WifiScan 	   from "./WifiScan.svelte"
 	import Box 			   from "../../ui/Box.svelte"
-	import 'iconify-icon';
+	
 	
 	export let is_wizard = false
 

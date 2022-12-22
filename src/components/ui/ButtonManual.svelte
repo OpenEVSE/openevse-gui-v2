@@ -1,5 +1,5 @@
 <script>
-	import 'iconify-icon';
+	
 	export let mode // 0: Auto, 1: On, 2: OFF
 	export let ischarging = false
 	export let setmode = (m,c) => {}

@@ -25,7 +25,7 @@ export default defineConfig(({ command, mode }) => {
         devOptions: {
           enabled: true
         },
-        includeAssets: ['favicon.ico'],
+        includeAssets: ['favicon.ico','term.js','term.html'],
         manifest: {
           name: 'OpenEVSE',
           short_name: 'OpenEVSE',

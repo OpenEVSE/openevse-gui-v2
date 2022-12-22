@@ -1,5 +1,5 @@
 <script>
-import 'iconify-icon';
+
 import Box from "./../../ui/Box.svelte";
 </script>
 <Box title="About" icon="mdi:about-circle-outline">

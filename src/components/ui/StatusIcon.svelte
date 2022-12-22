@@ -1,5 +1,5 @@
 <script>
-	import 'iconify-icon';
+	
 	export let icon
 	export let color
 	export let bp

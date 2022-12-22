@@ -10,7 +10,7 @@
 	import Modal 				from "../../ui/Modal.svelte"
 	import SelectFile 			from "../../ui/SelectFile.svelte"
 	import ProgressBar			from "./../../ProgressBar.svelte";
-	import 'iconify-icon';
+	
 	
 	export let is_opened = false
 	export let update = {}

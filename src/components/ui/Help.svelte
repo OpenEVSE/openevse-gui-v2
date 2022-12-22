@@ -1,6 +1,6 @@
 <script>
 	import Modal from "../ui/Modal.svelte"
-	import 'iconify-icon';
+	
 
 	export let is_opened = false
 	let size = ""

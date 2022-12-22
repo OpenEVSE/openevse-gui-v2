@@ -9,7 +9,7 @@
 	import { uistates_store } from "./../lib/stores/uistates.js";
 	import { onMount } 		  from "svelte";
 	import {push} 			  from 'svelte-spa-router'
-	import 'iconify-icon';
+	
 	export let params = {}
 
 	onMount(()=> {

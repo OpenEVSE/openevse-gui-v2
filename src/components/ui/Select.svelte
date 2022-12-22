@@ -1,6 +1,6 @@
 <script>
 	import Loader from "./Loader.svelte";
-	import 'iconify-icon';
+	
 	import {onDestroy} from "svelte"
 
 	export let value

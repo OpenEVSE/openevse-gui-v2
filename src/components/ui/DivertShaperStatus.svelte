@@ -2,7 +2,7 @@
 	import { status_store }   from "./../../lib/stores/status.js";
 	import { uistates_store } from "./../../lib/stores/uistates.js";
 	import {round} 			  from "../../lib/utils.js"
-	import 'iconify-icon';
+	
 </script>
 
 {#if $status_store?.divert_active}

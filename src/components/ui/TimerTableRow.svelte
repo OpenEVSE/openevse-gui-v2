@@ -1,6 +1,6 @@
 <script>
 	import IconButton from "./IconButton.svelte"
-	import 'iconify-icon';
+	
 	import { link, location } from "svelte-spa-router"
 	import {displayTime} from "../../lib/utils.js"
 	export let t_id

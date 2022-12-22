@@ -1,7 +1,7 @@
 <script>
 	import Loader from "./Loader.svelte";
 	import { link, location} from "svelte-spa-router"
-	import 'iconify-icon';
+	
 	export let color = "has-text-white"
 	export let state = ""
 	export let butn_submit = () => {}

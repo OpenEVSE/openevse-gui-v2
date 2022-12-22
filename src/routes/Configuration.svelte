@@ -2,7 +2,7 @@
 	import ConfigMenuButton from "./../components/ui/ConfigMenuButton.svelte";
 	import CentralView from "./../components/ui/CentralView.svelte";
 	import Box from "../components/ui/Box.svelte"
-	import 'iconify-icon';
+	
 
 </script>
 

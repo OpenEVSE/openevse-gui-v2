@@ -11,6 +11,7 @@
 	import FetchData 			from './components/data/FetchData.svelte'
 	import {getBreakpoint} 		from "./lib/utils.js"
 	import AlertBoxNoModal 		from "./components/ui/AlertBoxNoModal.svelte";
+	import 'iconify-icon';
 	import "./lib/icons.js"
 	import "@fontsource/roboto";
 
