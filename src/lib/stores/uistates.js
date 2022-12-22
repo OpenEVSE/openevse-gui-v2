@@ -30,6 +30,7 @@ const model = {
 		// local states
 		data_loaded: false,
 		ws_connected: undefined,
+		http_error: false,
 		status_expanded: false,
 		window_width: window.innerWidth,
 		breakpoint: undefined,

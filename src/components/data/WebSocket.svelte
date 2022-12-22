@@ -64,8 +64,10 @@
 				console.log('Socket is closed. Reconnect attempt in 1 second.', e.reason);
 				lastmsg = DateTime.now().toUnixInteger()
 				cancelKeepAlive()
-				if (firstcon)
+				if (firstcon) {
 					firstcon = false
+				}
+				else $uistates_store.ws_connected = false
 				setTimeout(()=>connect2socket(), 1000)
 				
 			})

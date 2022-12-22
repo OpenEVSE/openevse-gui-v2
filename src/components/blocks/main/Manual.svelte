@@ -1,20 +1,19 @@
 <script>
-	
-	import {config_store}			from "../../../lib/stores/config.js"
-	import {claims_store} 			from "../../../lib/stores/claims.js"
+	import {config_store}			from "./../../../lib/stores/config.js"
+	import {claims_store} 			from "./../../../lib/stores/claims.js"
 	import {override_store} 		from "./../../../lib/stores/override.js";
-	import {status_store} 			from "../../../lib/stores/status.js"
-	import {schedule_store} 		from "../../../lib/stores/schedule.js"
-	import {uistates_store} 		from "../../../lib/stores/uistates.js"
-	import {uisettings_store} 		from "../../../lib/stores/uisettings.js"
-	import {EvseClients} 			from  "./../../../lib/vars.js"
+	import {status_store} 			from "./../../../lib/stores/status.js"
+	import {schedule_store} 		from "./../../../lib/stores/schedule.js"
+	import {uistates_store} 		from "./../../../lib/stores/uistates.js"
+	import {uisettings_store} 		from "./../../../lib/stores/uisettings.js"
+	import {EvseClients} 			from "./../../../lib/vars.js"
 	import {claims_target_store}	from "./../../../lib/stores/claims_target.js"
 	import {onMount} 				from 'svelte'
-	import {httpAPI}	 			from '../../../lib/utils.js'
+	import {httpAPI}	 			from './../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
-	import Box 						from "../../ui/Box.svelte"
+	import Box 						from "./../../ui/Box.svelte"
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
-	import Slider 					from "../../ui/SliderForm.svelte"
+	import Slider 					from "./../../ui/SliderForm.svelte"
 	import ButtonManual 			from "../../ui/ButtonManual.svelte"
 	import SelectTimeLmt 			from "../../ui/SelectTimeLmt.svelte"
 	import SelectChargeLmt			from "../../ui/SelectChargeLmt.svelte"
@@ -122,11 +121,9 @@
 			button_shaper.blur()
 	}
 
-	async function setDivertMode(state) {
-		state = state == true ? "2" : "1"
-		let param = "divertmode="+state
-		if (state != $status_store.divertmode && $status_store.divertmode != undefined) {
-			let res = await serialQueue.add(() => httpAPI("POST","/divertmode", param, "text"))
+	async function setDivertMode(mode) {
+		if (mode != $config_store.charge_mode) {
+			let res = await serialQueue.add(() => config_store.saveParam("charge_mode",mode))
 		}
 		if (button_divert)
 			button_divert.blur()
@@ -200,10 +197,10 @@ $: set_uistates_divertmode($status_store.divertmode)
 	{/if}
 
 	<div class="is-flex is-justify-content-center my-5">
-		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$uistates_store.divertmode} name={$uistates_store.divertmode == 1?"ECO":"Normal"} color="is-primary" 
-			tooltip={$uistates_store.divertmode?"Disable Eco mode":"Enable Eco mode"} icon="fa6-solid:solar-panel" breakpoint={$uistates_store.breakpoint}
-			action={() => setDivertMode(!$uistates_store.divertmode)} disabled={$claims_target_store.claims.state == EvseClients.timer && $claims_target_store.properties.state == "active"}/>
-		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="SHAPER" color="is-info" 
+		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$config_store.charge_mode == "eco"?true:false} name={$config_store.charge_mode} color="is-primary"
+			tooltip={$config_store.charge_mode=="eco"?"Switch to Fast mode":"Switch to Eco mode"} icon="fa6-solid:solar-panel" icon2="mdi:electricity-from-grid" size={20} size2={26} breakpoint={$uistates_store.breakpoint}
+			action={() => setDivertMode($config_store.charge_mode == "eco" ? "fast" : "eco")} />
+		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="SHAPER" size={20} color="is-info" 
 			tooltip={ $uistates_store.shaper?"Disable Shaper":"Enable Shaper"} icon="fa6-solid:building-shield" breakpoint={$uistates_store.breakpoint}
 			action={() => setShaper(!$uistates_store.shaper)} />
 		</div>

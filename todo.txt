@@ -1,0 +1,5 @@
+- write json models for each stores (can be only used values)
+- refine setups page layout
+- fix the ..!!::;;:; scrolling problem
+- center vertically main content ( need to fix the scroll bug first)
+- 

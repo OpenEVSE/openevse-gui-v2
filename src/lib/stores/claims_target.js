@@ -1,9 +1,10 @@
-import                      "./../../lib/vars.js"
+import "./../../lib/vars.js"
 import { get, writable }    from 'svelte/store'
 import {httpAPI}            from '../utils.js'
+import model                from './json/claims_target.json'
 
 function createClaimsTargetStore() {
-    const P  = writable()
+    const P  = writable(model)
     const { subscribe, set, update } = P
 
 	// get claims/target

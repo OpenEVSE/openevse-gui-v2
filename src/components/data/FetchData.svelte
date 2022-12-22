@@ -22,14 +22,14 @@
 			status = "error"
 			return false
 		}
-		progress = 20
+		progress = 30
 		status = "Loading step 2"
 		res = await schedule_store.download()
 		if (!res) {
 			 status = "error"
 			return false
 		}
-		progress = 30
+		progress = 40
 		$uistates_store.schedule_version = $status_store.schedule_version
 		status = "Loading step 3"
 		res = await plan_store.download()
@@ -37,7 +37,7 @@
 			 status = "error"
 			 return false
 		}
-		progress = 40
+		progress = 50
 		$uistates_store.schedule_plan_version = $status_store.schedule_plan_version
 		status = "Loading step 4"
 		res = await config_store.download()
@@ -45,10 +45,9 @@
 			status = "error"
 			return false
 		}
-		progress = 60
+		progress = 70
 		$uistates_store.config_version = $status_store.config_version
 		status = "Loading step 5"
-		progress = 80
 		if($status_store.manual_override) {
 			status = "Loading step 6"
 			res = await override_store.download()
@@ -56,7 +55,7 @@
 				status = "error"
 				return false
 			}
-			progress = 90
+			progress = 80
 			$uistates_store.override_version = $status_store.override_version
 		}
 		// status = "Get Claim"

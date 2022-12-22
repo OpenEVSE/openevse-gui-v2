@@ -1,0 +1,20 @@
+{
+    "properties": {
+        "state": null,
+        "charge_current": null,
+        "max_current": null,
+		"energy_limit": null,
+		"time_limit": null,
+		"charge_limit": null,
+		"auto_release": null
+    },
+    "claims": {
+        "state": null,
+        "charge_current": null,
+        "max_current": null,
+		"energy_limit": null,
+		"time_limit": null,
+		"charge_limit": null,
+		"auto_release": null
+    }
+}

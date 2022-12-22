@@ -1,10 +1,9 @@
 import {EvseClients}        from "../vars.js"
 import { get, writable }    from 'svelte/store'
 import {httpAPI}            from '../utils.js'
-import { serialQueue }		from "./../queue.js";
-
+import model                from "./json/claims.json"
 function createClaimStore() {
-    const P  = writable()
+    const P  = writable(model)
     const { subscribe, set, update } = P
 
 	async function download() {
@@ -26,7 +25,7 @@ function createClaimStore() {
     async function release(clientid=EvseClients["manual"]) {
         let res = await httpAPI("DELETE", "/claims/" +clientid)
         if (res) {
-            let store = {}
+            let store = []
             P.update(() => store)
             return true
         }

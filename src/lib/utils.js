@@ -98,7 +98,7 @@ export function createTzObj(tz) {
 	}
 }
 
-export function round(value, precision) {
+export function round(value, precision = null) {
 	var multiplier = Math.pow(10, precision || 0);
 	return Math.round(value * multiplier) / multiplier;
 }
