@@ -5,10 +5,15 @@
 	
 
 </script>
+<style>
+		.config-menu {
+		width: 250px;
+	}
+</style>
 
 <CentralView>
 	<Box title = "Configuration" icon="fa6-solid:gear">
-		<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center">
+		<div class="config-menu is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap" style="width: 100%;">
 			<ConfigMenuButton url="/configuration/network" icon="mdi:local-area-network" name="Network" />
 			<ConfigMenuButton url="/configuration/firmware" icon="fa6-solid:microchip" name="Firmware" />
 			<ConfigMenuButton url="/configuration/evse" icon="mdi:evse" name="EVSE" />

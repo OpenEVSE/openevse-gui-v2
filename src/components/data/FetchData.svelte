@@ -1,6 +1,5 @@
 <script>
-	import ProgressBar from "./../ProgressBar.svelte";
-	import { onMount } from "svelte";
+	import { onMount } 				from "svelte";
 	import { uistates_store }		from "./../../lib/stores/uistates.js"
 	import { status_store }			from "./../../lib/stores/status.js"
 	import { schedule_store } 		from "./../../lib/stores/schedule.js"
@@ -10,6 +9,7 @@
 	import { override_store } 		from "./../../lib/stores/override.js"
 	import Logo 					from "./../../assets/logo-mini.png"
 	import AlertBox 				from "./../ui/AlertBox.svelte"
+	import ProgressBar 				from "../ui/ProgressBar.svelte";
 
 	let status = "Loading"
 	let progress = 0
@@ -29,7 +29,7 @@
 			 status = "error"
 			return false
 		}
-		progress = 40
+		progress = 60
 		$uistates_store.schedule_version = $status_store.schedule_version
 		status = "Loading step 3"
 		res = await plan_store.download()
@@ -37,7 +37,7 @@
 			 status = "error"
 			 return false
 		}
-		progress = 50
+		progress = 70
 		$uistates_store.schedule_plan_version = $status_store.schedule_plan_version
 		status = "Loading step 4"
 		res = await config_store.download()
@@ -45,7 +45,7 @@
 			status = "error"
 			return false
 		}
-		progress = 70
+		progress = 90
 		$uistates_store.config_version = $status_store.config_version
 		status = "Loading step 5"
 		if($status_store.manual_override) {
@@ -70,7 +70,9 @@
 			progress = 100
 			status = "Loading ok"
 			$uistates_store.claims_version = $status_store.claims_version
-			$uistates_store.data_loaded = true;
+			setTimeout(() => {
+				$uistates_store.data_loaded = true;
+			}, 500);
 		}
 		
 	}

@@ -9,7 +9,7 @@
 	import IconButton 			from "../../ui/IconButton.svelte"
 	import Modal 				from "../../ui/Modal.svelte"
 	import SelectFile 			from "../../ui/SelectFile.svelte"
-	import ProgressBar			from "./../../ProgressBar.svelte";
+	import ProgressBar			from "../../ui/ProgressBar.svelte";
 	
 	
 	export let is_opened = false
