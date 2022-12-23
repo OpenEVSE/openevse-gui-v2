@@ -1,4 +1,5 @@
 <script>
+	import ProgressBar from "./../../ui/ProgressBar.svelte";
 	import { config_store } 	from "./../../../lib/stores/config.js";
 	import { uistates_store } 	from "./../../../lib/stores/uistates.js";
 	import { history_store } 	from "./../../../lib/stores/history.js"
@@ -14,6 +15,8 @@
 
 	let index
 	let loaded = false
+	let progress = 0
+
 	async function init() {
 		index = await serialQueue.add(() => httpAPI("GET","/logs"))
 		if ($uistates_store.logidx_min != index.min || $uistates_store.logidx_max != index.max) {
@@ -23,14 +26,17 @@
 			$uistates_store.logidx_max = index.max
 			//reset history
 			$history_store = ""
-			for (let i = index.min; i <= index.max; i++) {
+			for (let i = index.min; i <= index.max; i++) {progress = (i - index.min)*100/(index.max-index.min)
 				await serialQueue.add(() => history_store.download(i))
+				
 			}
 			loaded = true
+			
 		}
 		else {
+			progress = 100
 			await serialQueue.add(() => history_store.download(index.max))
-			loaded = true
+				loaded = true
 		}
 		
 	}
@@ -49,15 +55,13 @@
 </style>
 
 <Box title="History" icon="icon-park-outline:history-query">
-		<div class="has-text-centered is-flex is-justify-content-center is-align-items-center" >
+		<div class="has-text-centered" style=" height: 100%;" >
 			{#if !loaded}
-			<div class="box has-text-centered is-size-6 has-text-weight-bold  my-5">
+			<div class="box has-text-centered is-size-6 has-text-weight-bold is-flex is-flex-direction-column">
 				<div class="mb-4">Loading Data</div>
-				<Loader size="is-size-4" color="has-text-info"/>
-				
-				
+				<!-- <Loader size="is-size-4" color="has-text-info"/> -->
+				<ProgressBar value={progress} />
 			</div>
-				
 			{:else}
 			<div class="table-container">
 				<table class="table is-size-7-mobile is-size-6 is-fullwidth">

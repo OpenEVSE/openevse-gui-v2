@@ -68,8 +68,7 @@
 		overflow-x:hidden; 
 		/* overflow-y:visible;  */
 		max-height: calc(100% - 50px);
-		/* box-sizing: border-box; */
-		/* height: 100%; */
+		box-sizing: border-box;
 		overscroll-behavior: contain;
 	}
 
@@ -86,11 +85,11 @@
 		{#if icon}
 		<div class="mr-1 ">
 				<iconify-icon class="is-size-4" icon={icon}></iconify-icon>
-
 		</div>
 		{/if}
 		<span>{title}</span>
 	</div>
+
 	<div  class="mb-2"><hr></div>
 	<div  class="maincontent" bind:this={scrollable} >
 		<slot>
