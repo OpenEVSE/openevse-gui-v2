@@ -55,7 +55,7 @@
 				status = "error"
 				return false
 			}
-			progress = 80
+			progress = 95
 			$uistates_store.override_version = $status_store.override_version
 		}
 		// status = "Get Claim"
