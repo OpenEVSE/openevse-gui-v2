@@ -4,7 +4,7 @@
 	export let value = 0
 
 	const progress = tweened(0, {
-		duration: 2000,
+		duration: 1000,
 		easing: cubicOut,
 	})
 

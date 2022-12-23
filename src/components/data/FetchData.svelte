@@ -72,7 +72,7 @@
 			$uistates_store.claims_version = $status_store.claims_version
 			setTimeout(() => {
 				$uistates_store.data_loaded = true;
-			}, 500);
+			}, 1000);
 		}
 		
 	}
