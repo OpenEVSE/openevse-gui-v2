@@ -3,8 +3,6 @@
 	import Evse 		from "./../components/blocks/configuration/Evse.svelte";
 	
 </script>
-<style>
-</style>
 
 <CentralView>
 	<Evse />

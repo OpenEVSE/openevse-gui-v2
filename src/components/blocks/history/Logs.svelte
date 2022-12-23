@@ -1,5 +1,6 @@
 <script>
-	import ProgressBar from "./../../ui/ProgressBar.svelte";
+	import Borders from "./../../ui/Borders.svelte";
+	import ProgressBar			from "./../../ui/ProgressBar.svelte";
 	import { config_store } 	from "./../../../lib/stores/config.js";
 	import { uistates_store } 	from "./../../../lib/stores/uistates.js";
 	import { history_store } 	from "./../../../lib/stores/history.js"
@@ -11,7 +12,6 @@
 			state2icon,
 			type2icon} 			from "../../../lib/utils.js"
 	import Box 					from "./../../ui/Box.svelte"
-	import Loader 				from "./../../ui/Loader.svelte";
 
 	let index
 	let loaded = false
@@ -55,12 +55,14 @@
 </style>
 
 <Box title="History" icon="icon-park-outline:history-query">
-		<div class="has-text-centered" style=" height: 100%;" >
+		<div class="has-text-centered">
 			{#if !loaded}
-			<div class="box has-text-centered is-size-6 has-text-weight-bold is-flex is-flex-direction-column">
-				<div class="mb-4">Loading Data</div>
-				<!-- <Loader size="is-size-4" color="has-text-info"/> -->
-				<ProgressBar value={progress} />
+			<div class="has-text-centered is-size-6 has-text-weight-bold is-inline-block mt-5">
+				<Borders>
+					<div class="mb-4">Loading Data</div>
+					<ProgressBar value={progress} />
+				</Borders>
+
 			</div>
 			{:else}
 			<div class="table-container">

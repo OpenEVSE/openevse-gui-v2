@@ -59,7 +59,6 @@
 		background-color: white;
 		max-height: calc(100% + 5px);
 		min-height: 50%;
-		
 	}
 	.contentbox.is-full-height {
 		height: 100%;
@@ -68,8 +67,9 @@
 		overflow-x:hidden; 
 		/* overflow-y:visible;  */
 		max-height: calc(100% - 50px);
-		box-sizing: border-box;
+		/* box-sizing: border-box; */
 		overscroll-behavior: contain;
+		
 	}
 
 </style>
