@@ -55,17 +55,18 @@
 </style>
 
 <Box title="History" icon="icon-park-outline:history-query">
-		<div class="has-text-centered">
+		<div class="has-text-centered is-flex-grow-1 is-flex is-justify-content-center" style="height: 100%;">
 			{#if !loaded}
-			<div class="has-text-centered is-size-6 has-text-weight-bold is-inline-block mt-5">
-				<Borders>
-					<div class="mb-4">Loading Data</div>
-					<ProgressBar value={progress} />
-				</Borders>
-
+			<div class="is-flex-shrink-0 is-flex-grow-1 is-flex is-align-items-center is-justify-content-center" style="min-height: 100%:">
+				<div class="has-text-centered is-size-6 has-text-weight-bold is-inline-block">
+					<Borders>
+						<div>Loading Data</div>
+						<ProgressBar value={progress} />
+					</Borders>
+				</div>
 			</div>
 			{:else}
-			<div class="table-container">
+			<div class="table-container is-flex-grow-1 is-flex is-justify-content-center">
 				<table class="table is-size-7-mobile is-size-6 is-fullwidth">
 					<thead>
 						<tr>

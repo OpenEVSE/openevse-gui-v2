@@ -186,45 +186,48 @@ $: set_uistates_divertmode($status_store.divertmode)
 </script>
 
 <Box title="Charge" icon="fa6-solid:bolt">
-	<div class="has-text-centered mt-5 mb-0 pb-0 has-text-weight-bold has-text-info">Toggle Charge</div>
-	<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
-	{#if $config_store.rfid_enabled}
-	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
-	{:else if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
-	<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
-	{:else}
-	<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
-	{/if}
-
-	<div class="is-flex is-justify-content-center my-5">
-		<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$config_store.charge_mode == "eco"?true:false} name={$config_store.charge_mode} color="is-primary"
-			tooltip={$config_store.charge_mode=="eco"?"Switch to Fast mode":"Switch to Eco mode"} icon="fa6-solid:solar-panel" icon2="mdi:electricity-from-grid" size={20} size2={26} breakpoint={$uistates_store.breakpoint}
-			action={() => setDivertMode($config_store.charge_mode == "eco" ? "fast" : "eco")} />
-		<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="SHAPER" size={20} color="is-info" 
-			tooltip={ $uistates_store.shaper?"Disable Shaper":"Enable Shaper"} icon="fa6-solid:building-shield" breakpoint={$uistates_store.breakpoint}
-			action={() => setShaper(!$uistates_store.shaper)} />
-		</div>
-
-	<div class="container ">
-		<Slider icon="fa6-solid:gauge-high" tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step={1} label="CHARGE RATE"
-		bind:value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
-		{#key $claims_target_store.claims.charge_current}
-		{#if $claims_target_store.claims.charge_current && $claims_target_store.properties.charge_current < $config_store.max_current_soft && $claims_target_store.claims.charge_current != EvseClients.timer}
-		<div class="is-flex is-justify-content-center is-align-content is-vcentered">
-			<RemovableTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
-		</div>
+	<div class="is-flex is-align-items-center is-justify-content-center is-flex-direction-column" style="height: 100%;">
+		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-info mt-2">Toggle Charge</div>
+		<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
+		{#if $config_store.rfid_enabled}
+		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
+		{:else if $schedule_store.length || $status_store.divertmode == 2 || $status_store.ocpp_connected == 1}
+		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
+		{:else}
+		<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
 		{/if}
-		{/key}
+	
+		<div class="is-flex is-justify-content-center my-5">
+			<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$config_store.charge_mode == "eco"?true:false} name={$config_store.charge_mode} color="is-primary"
+				tooltip={$config_store.charge_mode=="eco"?"Switch to Fast mode":"Switch to Eco mode"} icon="fa6-solid:solar-panel" icon2="mdi:electricity-from-grid" size={20} size2={26} breakpoint={$uistates_store.breakpoint}
+				action={() => setDivertMode($config_store.charge_mode == "eco" ? "fast" : "eco")} />
+			<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name="SHAPER" size={20} color="is-info" 
+				tooltip={ $uistates_store.shaper?"Disable Shaper":"Enable Shaper"} icon="fa6-solid:building-shield" breakpoint={$uistates_store.breakpoint}
+				action={() => setShaper(!$uistates_store.shaper)} />
+			</div>
+	
+		<div>
+			<Slider icon="fa6-solid:gauge-high" tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step={1} label="CHARGE RATE"
+			bind:value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
+			{#key $claims_target_store.claims.charge_current}
+			{#if $claims_target_store.claims.charge_current && $claims_target_store.properties.charge_current < $config_store.max_current_soft && $claims_target_store.claims.charge_current != EvseClients.timer}
+			<div class="is-flex is-justify-content-center is-align-content">
+				<RemovableTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
+			</div>
+			{/if}
+			{/key}
+		</div>
+	
+		<div class="is-flex is-justify-content-center is-align-content pt-2 mb-2">
+			<SelectTimeLmt title="TIME LIMIT" bind:value={$uistates_store.time_lmt} disabled={true}/>
+			<SelectChargeLmt title="ENERGY LIMIT" bind:value={$uistates_store.charge_lmt} disabled={true}/>
+			<!-- <SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
+			<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	 -->
+		</div>
+		<!-- <div class="is-flex is-justify-content-left mt-2">
+			<Switch name="swAutoRelease" label="Clear on disconnect" bind:checked={$uisettings_store.auto_release} 
+			tooltip="Clear charge session settings when vehicle is unplugged"  />
+		</div> -->
 	</div>
-
-	<div class="columns is-mobile is-justify-content-center is-align-content pt-2 my-4">
-		<SelectTimeLmt title="TIME LIMIT" bind:value={$uistates_store.time_lmt} disabled={true}/>
-		<SelectChargeLmt title="ENERGY LIMIT" bind:value={$uistates_store.charge_lmt} disabled={true}/>
-		<!-- <SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
-		<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	 -->
-	</div>
-	<!-- <div class="is-flex is-justify-content-left mt-2">
-		<Switch name="swAutoRelease" label="Clear on disconnect" bind:checked={$uisettings_store.auto_release} 
-		tooltip="Clear charge session settings when vehicle is unplugged"  />
-	</div> -->
+	
 </Box>

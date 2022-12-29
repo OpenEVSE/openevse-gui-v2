@@ -10,39 +10,8 @@
 	export let has_help = false
 	export let visible = true
 	export let icon = ""
-
-
-
-	let scrollable
 	let contentbox
-	let clientHeight
-	let scrollHeight
 
-
-	let obs = new ResizeObserver(()=>checkOverflow(scrollable,contentbox))
-
-	onMount(()=>{
-		obs.observe(scrollable)
-	})
-
-	function handleResize() {
-		if ($uistates_store.box_resize) {
-			checkOverflow(scrollable,contentbox)
-			$uistates_store.box_resize = false;
-		}
-    }
-
-	function checkOverflow(scr,cnt)
-	{	
-		if (scr && cnt && (clientHeight != cnt.clientHeight || scrollHeight != scr.scrollHeight)) {
-			clientHeight =  cnt.clientHeight - 40
-			scrollHeight = scr.scrollHeight
-			var isOverflowing = clientHeight < scrollHeight
-			$uistates_store.box_is_scrollable = isOverflowing
-		}
-	}
-
-	$: $uistates_store.box_resize, handleResize()
 
 </script>
 <style>
@@ -59,22 +28,24 @@
 		background-color: white;
 		max-height: calc(100% + 5px);
 		min-height: 50%;
+		/* height: 100%; */
 	}
 	.contentbox.is-full-height {
 		height: 100%;
 	}
 	.maincontent {	
 		overflow-x:hidden; 
-		/* overflow-y:visible;  */
+		overflow-y:scroll; 
 		max-height: calc(100% - 50px);
 		/* box-sizing: border-box; */
 		overscroll-behavior: contain;
+		/* height: 100%; */
 		
 	}
 
 </style>
 
-<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox p-2 {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 600, easing: expoInOut }}" >
+<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox p-2 is-flex is-flex-direction-column {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 600, easing: expoInOut }}" >
 	<div class:is-hidden={!has_help} class="is-pulled-right">
 		<Help>
 		<slot name="help"></slot>
@@ -91,7 +62,7 @@
 	</div>
 
 	<div  class="mb-2"><hr></div>
-	<div  class="maincontent" bind:this={scrollable} >
+	<div  class="maincontent is-flex-grow-1 is-flex is-flex-direction-column" >
 		<slot>
 		</slot>
 	</div>

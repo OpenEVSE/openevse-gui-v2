@@ -33,6 +33,7 @@
   	:global(body) {
     font-family: "Roboto", sans-serif;
 	}
+
 	.status {
 		/* position: fixed; */
 		/* top: 0px;
@@ -75,13 +76,13 @@
 	{#if $uistates_store.data_loaded}
 	<div class="screen is-flex is-flex-direction-column">
 		{#if $status_store.evse_connected == 1}
-		<div class="status is-flex is-justify-content-center mx-3 mt-1 p-0">
+		<div class="status is-flex is-justify-content-center is-flex-shrink-0 mx-3 mt-1 p-0">
 			<Status />
 		</div>
 		{/if}
 		<AlertBoxNoModal title="Missing OpenEVSE module." body="OpenEVSE module is missing. Please check your setup before going further" visible={!$status_store.evse_connected} />
 		<AlertBoxNoModal title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={!$uistates_store.ws_connected} />
-		<div class="route">
+		<div class="route is-flex-grow-1">
 			<Router {routes} />
 		</div>
 		{#if !$location.includes("/wizard")}

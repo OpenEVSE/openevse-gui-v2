@@ -52,6 +52,12 @@ $breadcrumb-item-color: $text;
 @import "../node_modules/bulma-switch/src/sass/index";
 @import "../node_modules/@creativebulma/bulma-tooltip/src/sass/index";
 
+
+* {
+	box-sizing: border-box;
+  }
+
+  
 body::-webkit-scrollbar { display: none; }
 
 
