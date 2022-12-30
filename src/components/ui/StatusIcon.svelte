@@ -2,7 +2,7 @@
 	
 	export let icon
 	export let color
-	export let bp
+	export let bp // breakpoint
 	export let classes = ""
 </script>
 

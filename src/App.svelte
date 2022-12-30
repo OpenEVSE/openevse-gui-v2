@@ -10,10 +10,10 @@
 	import { routes } 			from "./lib/routes.js"
 	import FetchData 			from './components/data/FetchData.svelte'
 	import {getBreakpoint} 		from "./lib/utils.js"
-	import AlertBoxNoModal 		from "./components/ui/AlertBoxNoModal.svelte";
-	import 'iconify-icon';
+	import AlertBoxNoModal 		from "./components/ui/AlertBoxNoModal.svelte"
+	import 'iconify-icon'
 	import "./lib/icons.js"
-	import "@fontsource/roboto";
+	import "@fontsource/roboto"
 
 	function getWindowSize() {
 		$uistates_store.window_width = window.innerWidth
