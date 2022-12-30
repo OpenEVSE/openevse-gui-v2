@@ -48,7 +48,7 @@
 			<a class="nav-item" href="/history" use:link class:active={selected=="/history"}>
 				<iconify-icon inline icon="icon-park-outline:history-query"></iconify-icon>
 			</a>
-			<a href="/configuration" class="nav-item" use:link class:active={selected.includes("/configuration")}>
-				<iconify-icon inline icon="fa6-solid:gear"></iconify-icon>
+			<a href="/configuration" class="nav-item" use:link>
+				<iconify-icon inline icon="fa6-solid:gear" class="{selected.includes("/configuration")?"has-text-white":""}"></iconify-icon>
 			</a>
 </div>
