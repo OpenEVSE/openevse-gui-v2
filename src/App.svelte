@@ -35,23 +35,13 @@
 	}
 
 	.status {
-		/* position: fixed; */
-		/* top: 0px;
-		left: 0px; */
 		z-index: 0;
-		/* border: solid; */
 	}
 
 	.route {
-		/* position: relative; */
-		/* top: 10vh; */
-		/* bottom: 0px; */
 		width: 100%;
 		height: 100%;
 		z-index: 0;
-		/* border: solid; */
-		/* top: 220px;
-		left: 0px; */
 		overflow: hidden;
 		overflow-x: hidden;	
 		overflow-y: hidden;
@@ -61,8 +51,6 @@
 	.screen {
 		height: 100%;
 		width: 100%;
-		/* overflow: hidden;
-		overflow-y: hidden; */
 	}
   
 
