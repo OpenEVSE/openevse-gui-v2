@@ -4,7 +4,7 @@
 	import { uistates_store } 	from './lib/stores/uistates.js'
 	import Status 				from "./components/blocks/Status.svelte";
 	import {location} 			from 'svelte-spa-router'
-	import MobileNav 			from "./components/blocks/MobileNav.svelte"
+	import NavBar 				from "./components/blocks/NavBar.svelte"
 	import DataManager 			from "./components/data/DataManager.svelte"
 	import Router 				from 'svelte-spa-router'
 	import { routes } 			from "./lib/routes.js"
@@ -74,7 +74,7 @@
 			<Router {routes} />
 		</div>
 		{#if !$location.includes("/wizard")}
-		<MobileNav charging={$uistates_store.charging} selected={$location} />
+		<NavBar charging={$uistates_store.charging} selected={$location} />
 		{/if}
 		
 	</div>
