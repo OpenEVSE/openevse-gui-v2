@@ -206,7 +206,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 				action={() => setShaper(!$uistates_store.shaper)} />
 			</div>
 	
-		<div>
+		<div class="container mb-2">
 			<Slider icon="fa6-solid:gauge-high" tooltip="Adjust Charge Rate" unit="A" min=6 max={$config_store.max_current_soft} step={1} label="CHARGE RATE"
 			bind:value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 			{#key $claims_target_store.claims.charge_current}
