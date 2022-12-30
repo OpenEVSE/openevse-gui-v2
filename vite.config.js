@@ -37,6 +37,11 @@ export default defineConfig(({ command, mode }) => {
               sizes: '96x96',
               type: 'image/png',
               purpose: 'any maskable'
+            },
+            {
+              src: 'pwa-192x192.png',
+              sizes: '192x192',
+              type: 'image/png'
             }]
           }
         })
