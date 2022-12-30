@@ -93,3 +93,10 @@ body {
   ::-webkit-scrollbar-thumb:hover {
 	background: hsl(195, 78%, 30%);
   }
+
+  * {
+	scrollbar-color: #32b3d4 white;
+	scrollbar-width: thin;
+	}
+
+  
