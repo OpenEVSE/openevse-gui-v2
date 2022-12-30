@@ -45,7 +45,7 @@
 
 </style>
 
-<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox p-2 is-flex is-flex-direction-column {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 600, easing: expoInOut }}" >
+<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox p-0 is-flex is-flex-direction-column {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 600, easing: expoInOut }}" >
 	<div class:is-hidden={!has_help} class="is-pulled-right">
 		<Help>
 		<slot name="help"></slot>
