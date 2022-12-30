@@ -1,8 +1,5 @@
 <script>
-	import { uistates_store } from "./../../lib/stores/uistates.js";
 	import {link} 			  from 'svelte-spa-router'
-	
-	
 	export let charging
 	export let selected
 
@@ -34,20 +31,7 @@
 		color: hsl(57, 93%, 48%);;
 	}
 
-	.nav-conf {
-		color: hsl(189, 53%, 47%);
-		border: 0;
-		background-color: hsl(195, 78%, 30%);
-	}
-	.nav-conf:hover {
-		color: white;
-		scale: 1.2;
-	}
-	.nav-conf.active {
-		color: white;
-	}
 
-	
 
 </style>
 
