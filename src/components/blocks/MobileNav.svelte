@@ -59,7 +59,7 @@
 				<iconify-icon inline icon="ion:calendar"></iconify-icon>
 			</a>
 			<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}">
-				<iconify-icon inline icon="fa6-solid:bolt" height="1.3em" class="pt-2"></iconify-icon>
+				<iconify-icon inline icon="fa6-solid:bolt" height="1.2em" class="pt-2"></iconify-icon>
 			</a>
 			<a class="nav-item" href="/history" use:link class:active={selected=="/history"}>
 				<iconify-icon inline icon="icon-park-outline:history-query"></iconify-icon>
