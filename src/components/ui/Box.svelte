@@ -67,7 +67,7 @@
 	</div>
 
 	<div  class="mb-2 px-2"><hr></div>
-	<div  class="maincontent is-flex-grow-1 is-flex is-flex-direction-column px-2" >
+	<div  class="maincontent is-flex-grow-1 is-flex is-flex-direction-column px-2 pb-2" >
 		<slot>
 		</slot>
 	</div>
