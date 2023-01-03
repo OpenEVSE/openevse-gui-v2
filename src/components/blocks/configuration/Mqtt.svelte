@@ -1,4 +1,5 @@
 <script>
+	import { status_store } from "./../../../lib/stores/status.js";
 	import MQTThelp 		from "./../../help/MQTThelp.svelte";
 	import InputForm 		from "./../../ui/InputForm.svelte";
 	import Box 				from "../../ui/Box.svelte";
@@ -67,6 +68,9 @@
 	<div slot="help"><MQTThelp /> </div>
 	<div class="pb-2">
 		<Switch name="mqttswitch" label="Enable MQTT" onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled}/>
+		<div class="{$config_store.mqtt_enabled?"":"is-hidden"}">
+			<span class="{$status_store.mqtt_connected?"has-text-primary":"has-text-danger"}">{$status_store.mqtt_connected?"Connected to mqtt server":"Not connceted to mqtt server"}</span>
+		</div>
 		<div><InputForm title="Host*" is_inline={true} bind:value={$config_store.mqtt_server} placeholder="server IP / Hostname" /></div>
 		<div><InputForm title="Port*" is_inline={true} bind:value={$config_store.mqtt_port} placeholder="1883" type="number" /></div>
 		<Switch name="mqttselfcert" label="Reject self-signed certificates" bind:checked={$config_store.mqtt_reject_unauthorized}/>
