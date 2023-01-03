@@ -42,7 +42,10 @@
 </script>
 
 <Box title="OhmConnect" icon="mdi:energy-circle">
-	<Switch name="emoncmsswitch" label="Enable OhmConnect" onChange={toggleOhmConnect} bind:checked={$config_store.ohm_enabled} is_rtl={true}/>
+	<div>
+		<Switch name="emoncmsswitch" label="Enable OhmConnect" onChange={toggleOhmConnect} bind:checked={$config_store.ohm_enabled} is_rtl={true}/>
+	</div>
+	
 	<div class="is-size-7">OhmConnect monitors real-time conditions on the electricity grid. When dirty and unsustainable power plants turn on, our users receive a notification to save energy.</div>
 	{#if $config_store.ohm_enabled}
 	<div class="is-size-7">

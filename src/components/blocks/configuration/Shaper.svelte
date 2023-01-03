@@ -53,7 +53,9 @@
 		<span class="is-size-7 has-text-weight-bold">Load: <span class="has-text-info">{$status_store.shaper_live_pwr} W</span></span>
 		<span class="is-size-7 has-text-weight-bold">Current Available: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} A</span></span>
 	</div>
-	<Switch name="shaperswitch" label="Enable Shaper" onChange={toggleShaper} bind:checked={$config_store.current_shaper_enabled}/>
+	<div>
+		<Switch name="shaperswitch" label="Enable Shaper" onChange={toggleShaper} bind:checked={$config_store.current_shaper_enabled}/>
+	</div>
 	<div class="is-size-7">Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.</div>
 	<div><InputForm title="Max power allowed (in W):" type="number" bind:value={$config_store.current_shaper_max_pwr} placeholder="9000" /></div>
 	<div><InputForm title="Live power load MQTT Topic (in W):" bind:value={$config_store.mqtt_live_pwr} placeholder="/topic/powerload" /></div>

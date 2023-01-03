@@ -1,6 +1,5 @@
 <script>
 	import { uistates_store } from "./../../lib/stores/uistates.js";
-	import { onMount } from "svelte"
 	import Help 			 from "./Help.svelte"
 	import { scale, fade} 	 from 'svelte/transition'
 	import { expoInOut }	 from 'svelte/easing'	
@@ -21,6 +20,7 @@
 		margin-bottom: 0px;
 	}
 	.contentbox {
+		position: relative;
 		overflow: hidden;
 		border-radius: 6px;
 		color: black;
@@ -42,15 +42,21 @@
 		
 	}
 
+	.help {
+		position: absolute;
+		right: 5px;
+
+	}
+
 </style>
 
 <div class:is-hidden={!visible} bind:this={contentbox} class="contentbox is-flex is-flex-direction-column {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 600, easing: expoInOut }}" >
-	<div class:is-hidden={!has_help} class="is-pulled-right p-2">
+	<div class:is-hidden={!has_help} class="help">
 		<Help>
 		<slot name="help"></slot>
 		</Help>
 	</div>
-	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center is-flex-direction-row p-2">
+	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center is-flex-direction-row px-2 pt-2">
 	
 		{#if icon}
 		<div class="mr-1 ">
@@ -60,8 +66,8 @@
 		<span>{title}</span>
 	</div>
 
-	<div  class="mb-2 p-2"><hr></div>
-	<div  class="maincontent is-flex-grow-1 is-flex is-flex-direction-column p-2" >
+	<div  class="mb-2 px-2"><hr></div>
+	<div  class="maincontent is-flex-grow-1 is-flex is-flex-direction-column px-2" >
 		<slot>
 		</slot>
 	</div>

@@ -56,7 +56,10 @@
 </script>
 
 <Box title="Energy Monitoring" icon="fa6-solid:chart-bar">
-	<Switch name="emoncmsswitch" label="Enable Emoncms" onChange={toggleEmonCMS} bind:checked={$config_store.emoncms_enabled} is_rtl={true}/>
+	<div>
+		<Switch name="emoncmsswitch" label="Enable Emoncms" onChange={toggleEmonCMS} bind:checked={$config_store.emoncms_enabled} is_rtl={true}/>
+	</div>
+
 	{#if $config_store.emoncms_enabled}
 	<div class="is-size-7">
 		<span class="">Connected:</span>
