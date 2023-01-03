@@ -70,11 +70,11 @@
 				<table class="table is-size-7-mobile is-size-6 is-fullwidth">
 					<thead>
 						<tr>
-							<th><abbr title="Time">Time</abbr></th>
-							<th><abbr title="Type">Type</abbr></th>
-							<th><abbr title="Status">Status</abbr></th>
-							<th><abbr title="Energy">Kwh</abbr></th>
-							<th><abbr title="Temperature">T°</abbr></th>
+							<th class="has-text-centered"><abbr title="Time">Time</abbr></th>
+							<th class="has-text-centered"><abbr title="Type">Type</abbr></th>
+							<th class="has-text-centered"><abbr title="Status">Status</abbr></th>
+							<th class="has-text-centered"><abbr title="Energy">Kwh</abbr></th>
+							<th class="has-text-centered"><abbr title="Temperature">T°</abbr></th>
 						</tr>
 					</thead>
 					<tbody>

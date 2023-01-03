@@ -25,19 +25,12 @@
 	})
 
 	function connect2socket(s) {
-		var host
-		// if (import.meta.env.VITE_REMOTEHOST == "true")
-		// 	host = import.meta.env.VITE_OPENEVSEHOST
-		// else host = window.location.host
-		host = window.location.host
-		// Vite Proxy crash with openevse web socket so connecting directly in dev mode
-		// if (import.meta.env.DEV) { 
-		// 	host = $status_store.ipaddress
-		// }
-
+		let host 	= window.location.host
+		let ishttps = location.protocol === "https:"
+		let proto 	= ishttps?"wss://":"ws://"
 		if (!s) {
 			console.log("opening socket")
-			s = new WebSocket("ws://" + host + "/ws")
+			s = new WebSocket(proto + host + "/ws")
 			s.addEventListener("open", function (event) {
 				console.log("connected to websocket")
 				$uistates_store.ws_connected = true
