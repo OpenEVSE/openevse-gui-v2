@@ -12,9 +12,13 @@
 	import FetchData 			from './components/data/FetchData.svelte'
 	import {getBreakpoint} 		from "./lib/utils.js"
 	import AlertBoxNoModal 		from "./components/ui/AlertBoxNoModal.svelte"
+	import { _ } 				from 'svelte-i18n'
+	import "./lib/i18n.js"
 	import 'iconify-icon'
 	import "./lib/icons.js"
 	import "@fontsource/roboto"
+
+	
 
 	let islandscape = false
 
@@ -85,9 +89,9 @@
 			<Status />
 		</div>
 		{/if}
-		<AlertBoxNoModal title="Missing OpenEVSE module." body="OpenEVSE module is missing. Please check your setup before going further" visible={!$status_store.evse_connected} />
-		<AlertBoxNoModal title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={!$uistates_store.ws_connected} />
-		<AlertBox title="Alert" body="This application has been designed for portrait mode. Please rotate" visible={islandscape} closable={false} />
+		<AlertBoxNoModal title={$_("alert-evsemissing-title")} body={$_("alert-evsemissing-body")} visible={!$status_store.evse_connected} />
+		<AlertBoxNoModal title={$_("alert-conerror-title")} body={$_("alert-conerror-body")} visible={!$uistates_store.ws_connected} />
+		<AlertBox title={$_("alert-portrait-title")} body={$_("alert-portrait-body")} visible={islandscape} closable={false} />
 		<div class="route is-flex-grow-1">
 			<Router {routes} />
 		</div>
@@ -97,10 +101,9 @@
 		
 	</div>
 	<DataManager />
+	<WebSocket />
 	{:else}
 	<FetchData />
 	{/if}
-	<WebSocket />
-	
 </main>
 

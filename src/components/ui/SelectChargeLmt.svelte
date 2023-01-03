@@ -29,7 +29,7 @@
     { name: "90 kWh", value: 90 }];
 </script>
 
-<div class="mx-2">
+<div class="mx-2 is-flex is-align-items-center is-flex-direction-column">
 	<div class="has-text-weight-bold has-text-centered has-text-info">{title}</div>
 	<div class="select is-info">		
 		<select bind:value disabled={disabled}>

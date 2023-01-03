@@ -1,0 +1,25 @@
+{
+	"alert-evsemissing-title": "Missing OpenEVSE module",
+	"alert-evsemissing-body": "OpenEVSE module is missing. Please check your setup before going further",
+	"alert-conerror-title": "Connection error",
+	"alert-conerror-body": "Websocket  disconnected, waiting for reconnection",
+	"alert-portrait-title": "Warning",
+	"alert-portrait-body": "This application has been designed for portrait mode",
+	"charge-title": "Charge",
+	"charge-toggle": "Toggle Charge",
+	"charge-enable": "Enable Charge",
+	"charge-disable": "Disable Charge",
+	"charge-auto": "AUTO (let OpenEVSE decide)",
+	"charge-mode-fast": "fast",
+	"charge-mode-eco": "eco",
+	"charge-mode-fast-ttip": "Switch to Fast mode",
+	"charge-mode-eco-ttip": "Switch to Eco mode",
+	"charge-shaper": "shaper",
+	"charge-shaper-disable": "Disable Shaper",
+	"charge-shaper-enable": "Enable Shaper",
+	"charge-rate-label": "CHARGE RATE",
+	"charge-rate-ttip": "Adjust Charge Rate",
+	"charge-time-lmt": "TIME LIMIT",
+	"charge-energy-lmt": "ENERGY LIMIT"
+
+}

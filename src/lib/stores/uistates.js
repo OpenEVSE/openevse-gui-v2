@@ -29,7 +29,7 @@ const model = {
 		divert_type: null,
 		// local states
 		data_loaded: false,
-		ws_connected: undefined,
+		ws_connected: true,
 		http_error: false,
 		status_expanded: false,
 		window_width: window.innerWidth,

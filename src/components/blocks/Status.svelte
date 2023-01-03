@@ -58,7 +58,7 @@
 </style>
 
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded}
-<div class=" container statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
+<div class="container statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
 in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 	<div>
 		<div class="mb-2 mx-0">
@@ -67,7 +67,7 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 
 		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center">
 			<StatusTile title="Elapsed" value={elapsed} />
-			<StatusTile title="Delivered" value={$status_store.session_energy/1000} precision={1} unit="kWh" />
+			<StatusTile title="Delivered" value={$status_store.session_energy/1000} precision={1} unit="kwh" />
 			<StatusTile title="Current" value={$status_store.amp/1000} precision={1} unit="A" />
 			{#if $uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini"}
 			<!-- // Desktop & Tablet only -->
@@ -94,8 +94,6 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 			{:else if $status_store.shaper == 1}
 			<StatusTile title="Available" value={$status_store.shaper_cur} unit="A" />
 			{/if}
-			<!-- <StatusTile title="Total" value={$status_store.total_energy} precision={1} unit="kWh" />
-			<StatusTile title="Voltage" value={$status_store.voltage} unit="V" />	 -->
 			{#if $status_store.battery_level != undefined}
 			<StatusTile title="Battery" value={$status_store.battery_level} unit="%" />
 			{/if}

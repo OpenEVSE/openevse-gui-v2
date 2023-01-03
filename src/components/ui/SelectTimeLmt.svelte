@@ -19,7 +19,7 @@
     { name: "8 hours", value: 8 * 60 / 15 }];
 </script>
 
-<div class="mx-2">
+<div class="mx-2 is-flex is-align-items-center is-flex-direction-column">
 	<div class="has-text-weight-bold has-text-centered has-text-info">{title}</div>
 	<div class="select is-info">		
 		<select bind:value disabled={disabled}>
