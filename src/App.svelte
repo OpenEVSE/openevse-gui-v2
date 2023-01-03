@@ -1,4 +1,5 @@
 <script>
+	import AlertBox from "./components/ui/AlertBox.svelte";
 	import WebSocket 			from "./components/data/WebSocket.svelte";
 	import { status_store } 	from "./lib/stores/status.js";
 	import { uistates_store } 	from './lib/stores/uistates.js'
@@ -15,10 +16,26 @@
 	import "./lib/icons.js"
 	import "@fontsource/roboto"
 
+	let islandscape = false
+
 	function getWindowSize() {
 		$uistates_store.window_width = window.innerWidth
 		$uistates_store.breakpoint = getBreakpoint()
 		$uistates_store.box_resize = true
+	}
+
+	function noLandScape(e) {
+		switch(screen.orientation.type) {
+			case "landscape-primary":
+			case "landscape-secondary":	
+				islandscape = true
+				break
+			default:
+				islandscape = false
+				break
+
+		}
+		console.log("islandscape: " + islandscape)
 	}
 </script>
 <style>
@@ -55,7 +72,7 @@
   
 
 </style>
-<svelte:window on:load={getWindowSize} on:resize={getWindowSize} />
+<svelte:window on:load={getWindowSize} on:resize={getWindowSize} on:orientationchange ={noLandScape}/>
 <svelte:head>
 	<!-- <style src="./mystyles.scss"></style> -->
 </svelte:head>
@@ -70,6 +87,7 @@
 		{/if}
 		<AlertBoxNoModal title="Missing OpenEVSE module." body="OpenEVSE module is missing. Please check your setup before going further" visible={!$status_store.evse_connected} />
 		<AlertBoxNoModal title="Connection error" body="Websocket  disconnected, waiting for reconnection" visible={!$uistates_store.ws_connected} />
+		<AlertBox title="Alert" body="This application has been designed for portrait mode. Please rotate" visible={islandscape} closable={false} />
 		<div class="route is-flex-grow-1">
 			<Router {routes} />
 		</div>
@@ -85,5 +103,4 @@
 	<WebSocket />
 	
 </main>
-
 
