@@ -44,13 +44,13 @@
 
 </style>
 
-<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox p-2 is-flex is-flex-direction-column {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 600, easing: expoInOut }}" >
-	<div class:is-hidden={!has_help} class="is-pulled-right">
+<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox is-flex is-flex-direction-column {$uistates_store.box_is_scrollable?"is-full-height":""}" in:scale="{{ delay: 0, duration: 600, easing: expoInOut }}" >
+	<div class:is-hidden={!has_help} class="is-pulled-right p-2">
 		<Help>
 		<slot name="help"></slot>
 		</Help>
 	</div>
-	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center is-flex-direction-row">
+	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center is-flex-direction-row p-2">
 	
 		{#if icon}
 		<div class="mr-1 ">
@@ -60,8 +60,8 @@
 		<span>{title}</span>
 	</div>
 
-	<div  class="mb-2"><hr></div>
-	<div  class="maincontent is-flex-grow-1 is-flex is-flex-direction-column" >
+	<div  class="mb-2 p-2"><hr></div>
+	<div  class="maincontent is-flex-grow-1 is-flex is-flex-direction-column p-2" >
 		<slot>
 		</slot>
 	</div>
