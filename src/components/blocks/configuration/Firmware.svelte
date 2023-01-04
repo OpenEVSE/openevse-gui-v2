@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		  		from 'svelte-i18n'
 	import { onMount } 			from "svelte";
 	import {httpAPI} 			from "../../../lib/utils.js"
 	import { serialQueue } 		from "../../../lib/queue.js";
@@ -70,20 +71,20 @@
 </script>
 
 
-<Box title="Firmware" icon="fa6-solid:microchip">
+<Box title={$_("config.titles.firmware")} icon="fa6-solid:microchip">
 	<table class="table is-fullwidth is-vcentered is-narrow">
 		<thead>
 			<tr class="has-background-info"	>
-				<th class="has-text-white ">Hardware</th>
-				<th class="has-text-white">Version</th>
-				<th class="has-text-white has-text-centered " >Action</th>
+				<th class="has-text-white ">{$_("config.firmware.hardware")}</th>
+				<th class="has-text-white">{$_("config.firmware.version")}</th>
+				<th class="has-text-white has-text-centered" >{$_("config.firmware.action")}</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td class="has-text-weight-bold">OpenEVSE</td>
 				<td>{$config_store.firmware}</td>
-				<td><div class="has-text-centered"><Button width="80px" size="is-small" name="Restart" butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
+				<td><div class="has-text-centered"><Button width="100px" size="is-small" name={$_("config.firmware.restart")} butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
 			</tr>
 			<tr>
 				<td class="has-text-weight-bold">OpenEVSE Wifi</td>
@@ -91,21 +92,21 @@
 					<div>{$config_store.version}</div>
 					{#if fw.version && $config_store.version != fw.version}
 					<div class="tag is-primary is-small has-text-weight-bold">
-						Update<div class="is-hidden-mobile">&nbsp;Available</div>
+						{fw.version}
 					</div>
 					{:else if fw.version && $config_store.version == fw.version}
 					<div class="tag is-info is-small has-text-weight-bold">
-						Up to date
+						{$_("config.firmware.up2date")}
 					</div>
 					{/if}
 				</td>
 				<td>
 					<div class="has-text-centered ">
 						<div class="mb-2">
-							<Button width="80px" size="is-small" name="Restart" butn_submit={restartESP} state={restartEspState}/>
+							<Button width="100px" size="is-small" name={$_("config.firmware.restart")} butn_submit={restartESP} state={restartEspState}/>
 						</div>
 						<div class="mb-2">
-							<Button bind:this={modal} width="80px" size="is-small" name="Update" butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
+							<Button bind:this={modal} width="100px" size="is-small" name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
 						</div>
 					</div>
 				</td>

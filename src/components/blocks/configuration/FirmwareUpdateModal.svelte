@@ -1,8 +1,9 @@
 <script>
+	import { _ } 		  		from 'svelte-i18n'
 	import { config_store } 	from "./../../../lib/stores/config.js";
 	import { serialQueue }		from "./../../../lib/queue.js";
 	import { status_store } 	from "../../../lib/stores/status.js"
-	import {httpAPI, round}			from "../../../lib/utils.js" 
+	import {httpAPI}			from "../../../lib/utils.js" 
 	import {onDestroy, onMount} from "svelte"
 	import Box 					from "../../ui/Box.svelte"
 	import Button 				from "../../ui/Button.svelte"
@@ -102,34 +103,28 @@
 </style>
 
 <Modal bind:is_opened {canClose}>
-	<Box title="Firmware Update" icon="fa6-solid:microchip">
+	<Box title={$_("config.titles.firmware-update")} icon="fa6-solid:microchip">
 		<div class="pt-2">
 			
 			<div class="">
 				<table class="table is-fullwidth is-vcentered">
-					<thead>
-						
-						<tr class="has-background-info has-text-white py-1"	>
-							<th colspan=2 class="has-text-white py-1">Current Firmware</th>
-						</tr>
-					</thead>
 					<tbody class="is-size-6">
 						<tr>
-							<td class="has-text-weight-semibold">ESP info</td>
+							<td class="has-text-weight-semibold">{$_("config.firmware.espinfo")}</td>
 							<td class="">{$config_store.espinfo}</td>
 						</tr>
 						<tr>
-							<td class="has-text-weight-semibold">Build</td>
+							<td class="has-text-weight-semibold">{$_("config.firmware.build")}</td>
 							<td class="">{$config_store.buildenv}</td>
 						</tr>
 						<tr>
-							<td class="has-text-weight-semibold">Installed</td>
+							<td class="has-text-weight-semibold">{$_("config.firmware.installed")}</td>
 							<td class="has-text-info">{$config_store.version}</td>
 						</tr>
 						<tr>
 							<td class="has-text-weight-semibold">
 								<div class="is-flex is-align-items-center">
-									Latest
+									{$_("config.firmware.latest")}
 									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-black ml-2">
 										<iconify-icon icon="mdi:github" class="is-size-4 mt-2"></iconify-icon>
 									</a>
@@ -140,7 +135,7 @@
 								<div class="is-flex is-align-items-center is-flex-direction-row is-flex-wrap-wrap ">
 									<span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>
 									
-									<Button size="is-small" icon="fa6-solid:cloud-arrow-down" disabled={uploadButtonState == "loading"} name="Upgrade to {update.version}" color="{$config_store.version != update.version ?"is-primary":"is-info	"}" butn_submit={()=>{updateToLatest(update.url)}} state={uploadButtonState}/>
+									<Button size="is-small" icon="fa6-solid:cloud-arrow-down" disabled={uploadButtonState == "loading"} name="{$_("config.firmware.upgrade2")} {update.version}" color="{$config_store.version != update.version ?"is-primary":"is-info	"}" butn_submit={()=>{updateToLatest(update.url)}} state={uploadButtonState}/>
 								</div>
 							
 							</td>
@@ -153,37 +148,37 @@
 		<div class="my-2 ml-1 is-size-6">
 			<div>
 				{#if $status_store.ota == "started"}
-				Firmware update in progress...
+				{$_("config.firmware.progress")}
 				<div style="width: 100%" class="is-flex is-justify-content-center">
 					<ProgressBar value={$status_store.ota_progress} />
 				</div>
 				{:else if $status_store.ota == "failed" }
-					Upload Failed
+				{$_("config.firmware.failed")}
 				{:else if $status_store.ota == "completed" }
-					<span class="">{file.name}</span> uploaded successfully, page will reload in few sec
+				{$_("config.firmware.complete")}
 				{:else}
 					<div class="s-flex is-align-items-center ml-1 is-size-6">
 						<span class="my-2 is-size-6">
 							{file.name}
 						</span>
 						<div class=" is-size-6 is-inline-block">
-							<IconButton icon="fa6-solid:square-minus" color="has-text-danger" butn_submit={()=>{file = null}} tooltip="Remove file" />
+							<IconButton icon="fa6-solid:square-minus" color="has-text-danger" butn_submit={()=>{file = null}} tooltip={$_("config.firmware.remove")} />
 						</div>
 					</div>
 				{/if}
 			</div>
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-start">
-			<Button disabled={uploadButtonState == "loading"} name="Upload" icon="fa6-solid:file-arrow-up" color="is-info" butn_submit={uploadFw} state={uploadButtonState}/>&nbsp;
-			<Button disabled={uploadButtonState == "loading"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
+			<Button disabled={uploadButtonState == "loading"} name={$_("config.firmware.upload")} icon="fa6-solid:file-arrow-up" color="is-info" butn_submit={uploadFw} state={uploadButtonState}/>&nbsp;
+			<Button disabled={uploadButtonState == "loading"} name={$_("close")} color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{:else}
 		<div class="is-flex is-align-items-center my-2 ml-1 is-size-6">
-			No file selected
+			{$_("config.firmware.nofile")}
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-start">
 			<SelectFile bind:file={file}/>&nbsp;
-			<Button disabled={uploadButtonState == "loading" || fileSent == "ok"} name="Close" color="is-danger" butn_submit={()=>is_opened=false} />
+			<Button disabled={uploadButtonState == "loading" || fileSent == "ok"} name={$_("close")} color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{/if}
 	</Box>

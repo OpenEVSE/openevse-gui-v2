@@ -140,6 +140,7 @@
 		"titles": {
 			"network": "Network",
 			"firmware": "Firmware",
+			"firmware-update": "Firmware Update",
 			"evse": "EVSE",
 			"safety": "Safety",
 			"time": "Time",
@@ -175,7 +176,25 @@
 			"pass-desc": "WPA Key",
 			"connect": "Connect",
 			"scan": "Scan"
-			
+		},
+		"firmware": {
+			"hardware": "Hardware",
+			"version": "Version",
+			"action": "Action",
+			"restart": "Restart",
+			"update": "Update",
+			"up2date": "Up to date",
+			"espinfo": "ESP info",
+			"build": "Build",
+			"installed": "Installed",
+			"latest":	"Latest",
+			"nofile": "No file selected",
+			"upgrade2": "Upgrade to",
+			"progress": "Firmware update in progress...",
+			"failed": "Upload failed",
+			"complete": "Firmware upgrade successfull, page will reload in few sec",
+			"remove": "Remove file",
+			"upload": "Upload"
 		}
 	}
 
