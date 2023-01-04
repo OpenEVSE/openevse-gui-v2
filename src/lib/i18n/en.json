@@ -285,6 +285,33 @@
 			"maxpower": "Max power allowed (in W)",
 			"livepower": "Live power load MQTT Topic (in W)"
 		
+		},
+		"selfprod": {
+			"enable": "Handle Self Production",
+			"desc": "Dynamically adjust charge rate based on self production or excess power (grid export).",
+			"production": "Production",
+			"excess": "Excess Power",
+			"grid": "Grid +Import/-Export",
+			"availablecur": "Available Current",
+			"smoothedcur": "Smoothed Current",
+			"lastupdated": "Last updated",
+			"mode": "Mode",
+			"feed": "Feed",
+			"feed-prod-desc": "Self Production MQTT topic (in W) to modulate charge rate based on production",
+			"feed-excess-desc": "Grid (+I/-E) MQTT topic to modulate charge rate based on excess power",
+			"powerratio": "Required PV power ratio",
+			"powerratio-desc": "The fraction of PV current that suffices to start charging or increment current",
+			"smoothattack": "Divert smoothing attack",
+			"smoothattack-desc": "The amount of the new feed value to add to the divert available power rolling average",
+			"smoothdecay": "Divert smoothing decay",
+			"smoothdecay-desc": "The amount of the new feed value to remove to the divert available power rolling average",
+			"minchargetime": "Minimum Charge Time",
+			"minchargetime-desc": "The minimum amount of time (seconds) to charge the car once enabled via the self production divert. This can help minimise wear and tear on the EVSE.",
+			"help-1": "If Production feed is available: charge rate is modulated based on energy produced.",
+			"help-2": "If Excess Power feed is available: charge rate will be modulated by available excess power.",
+			"help-3": "If EVSE is sleeping: charging will begin when solar PV / excess power > min charge rate.",
+			"help-4": "Charging will pause if the excess power drops below the min charge rate for a period of time.",
+			"help-5": "Note: It's assumed that EVSE power is included in the grid feed"
 		}
 	}
 

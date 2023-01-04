@@ -284,6 +284,33 @@
 			"shaperdesc": "Module le courant de charge selon la puissance totale instantanée de votre compteur afin de ne pas dépasser votre contrat.",
 			"maxpower": "Puissance Maxi authorisée (en W)",
 			"livepower": "Topic MQTT Puissance Instantanée compteur (en W)"
+		},
+		"selfprod": {
+			"enable": "Gestion de l'Auto Production",
+			"desc": "Ajuste dynamiquement la puissance de charge en fonction de l'energie produite ou de l'export vers le réseau (+I/-E).",
+			"production": "Production",
+			"excess": "Export Réseau",
+			"grid": "+Import/-Export Réseau",
+			"availablecur": "Courant Disponible",
+			"smoothedcur": "Courant Lissé",
+			"lastupdated": "Dernière maj",
+			"mode": "Mode",
+			"feed": "Sujet MQTT",
+			"feed-prod-desc": "Sujet MQTT Auto production (en W) pour moduler la charge en fonction de la production",
+			"feed-excess-desc": "Sujet MQTT +Import/-Export pour moduler la charge en fonction de l'excès de puissance",
+			"powerratio": "Ratio de puissance PV requise",
+			"powerratio-desc": "Ratio de courant PV suffisant pour démarrer la charge ou augmenter le courant.",
+			"smoothattack": "Lissage augmentation de la puissance:",
+			"smoothattack-desc": "Le montant de la nouvelle valeur reçue à ajouter à la moyenne de puissance disponible",
+			"smoothdecay": "Lissage diminution de la puissance",
+			"smoothdecay-desc": "Le montant de la nouvelle valeur reçue à retirer de la moyenne de puissance disponible",
+			"minchargetime": "Temps de charge minimum",
+			"minchargetime-desc": "Le minimum de temps de charge (secondes) une fois activé par l'autoproduction. Cela peut aider à limiter l'usure du relai.",
+			"help-1": "Si la valeur de production solaire est disponible: le courant de charge est modulé selon le total de production solaire.",
+			"help-2": "Si le déficit/excédent (+Import/-Export) est disponible, le courant de charge sera modulé selon l'excédent.",
+			"help-3": "Si l'EVSE est en pause: la charge débutera quand la production Solaire ou l'excédent de puissance > puissance de charge minimale (min charge rate)",
+			"help-4": "La charge se mettra en pause si l'excédent de puissance tombe sous la puissance de charge minimale.",
+			"help-5": "Note: La puissance consommée par l'EVSE est inclue dans le flux d'excédent/déficit"
 		}
 	}
 }
