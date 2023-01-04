@@ -1,5 +1,6 @@
 <script>
-	import Borders from "./../../ui/Borders.svelte";
+	import { _ } 				from 'svelte-i18n'
+	import Borders 				from "./../../ui/Borders.svelte";
 	import ProgressBar			from "./../../ui/ProgressBar.svelte";
 	import { config_store } 	from "./../../../lib/stores/config.js";
 	import { uistates_store } 	from "./../../../lib/stores/uistates.js";
@@ -54,13 +55,13 @@
 	
 </style>
 
-<Box title="History" icon="icon-park-outline:history-query">
+<Box title={$_("logs-title")} icon="icon-park-outline:history-query">
 		<div class="has-text-centered is-flex-grow-1 is-flex is-justify-content-center" style="height: 100%;">
 			{#if !loaded}
 			<div class="is-flex-shrink-0 is-flex-grow-1 is-flex is-align-items-center is-justify-content-center" style="min-height: 100%:">
 				<div class="has-text-centered is-size-6 has-text-weight-bold is-inline-block">
 					<Borders>
-						<div>Loading Data</div>
+						<div>{$_("logs-loading")}</div>
 						<ProgressBar value={progress} />
 					</Borders>
 				</div>
@@ -70,18 +71,18 @@
 				<table class="table is-size-7-mobile is-size-6 is-fullwidth">
 					<thead>
 						<tr>
-							<th class="has-text-centered"><abbr title="Time">Time</abbr></th>
-							<th class="has-text-centered"><abbr title="Type">Type</abbr></th>
-							<th class="has-text-centered"><abbr title="Status">Status</abbr></th>
-							<th class="has-text-centered"><abbr title="Energy">Kwh</abbr></th>
-							<th class="has-text-centered"><abbr title="Temperature">T°</abbr></th>
+							<th class="has-text-centered"><abbr title={$_("logs-time")}>{$_("logs-time")}</abbr></th>
+							<th class="has-text-centered"><abbr title={$_("logs-type")}>{$_("logs-type")}</abbr></th>
+							<th class="has-text-centered"><abbr title="{$_("logs-status")}">{$_("logs-status")}</abbr></th>
+							<th class="has-text-centered"><abbr title="{$_("logs-energy")}">{$_("units.kwh")}</abbr></th>
+							<th class="has-text-centered"><abbr title={$_("logs-temp")}>{$_("logs-T")}</abbr></th>
 						</tr>
 					</thead>
 					<tbody>
 						{#each $history_store as item}
 						<tr>
 							<th>{formatDate(item.time,$config_store.time_zone, "short")}</th>
-							<td class="has-tooltip" data-tooltip={item.type}>
+							<td class="has-tooltip" data-tooltip={$_("logs-types."+item.type)}>
 								<iconify-icon icon="{type2icon(item.type)}"  class="{item.type=="warning"?"has-text-danger":"has-text-info"} is-size-5"></iconify-icon>
 							</td	>
 							<td class="has-tooltip" data-tooltip={state2icon(item.evseState).tooltip}>

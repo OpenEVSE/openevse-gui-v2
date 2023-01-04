@@ -112,5 +112,27 @@
 	"safety-count": "Compte",
 	"safety-gfci": "GFCI",
 	"safety-noground": "Terre",
-	"safety-stuck": "Relai Collé"
+	"safety-stuck": "Relai Collé",
+	"logs-title": "Historique",
+	"logs-loading": "Chargement des données",
+	"logs-time": "Heure",
+	"logs-type": "Type",
+	"logs-status": "Status",
+	"logs-energy": "Energie",
+	"logs-temp": "Température",
+	"logs-T": "T°",
+	"logs-types": {
+		"information": "information",
+		"notification": "notification",
+		"warning": "avertissement"
+	},
+	"logs-states": {
+		"loading": "Démarrage",
+		"active-nocar": "Actif - VE non connecté",
+		"active-car": "Actif - VE connecté",
+		"active-charge": "Charge",
+		"error": "Erreur",
+		"sleeping": "Désactivé - En Veille",
+		"disabled": "Désactivé"
+	}
 }

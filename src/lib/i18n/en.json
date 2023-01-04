@@ -112,5 +112,27 @@
 	"safety-count": "Count",
 	"safety-gfci": "GFCI",
 	"safety-noground": "No Ground",
-	"safety-stuck": "Stuck Contact"
+	"safety-stuck": "Stuck Contact",
+	"logs-title": "History",
+	"logs-loading": "Loading Data",
+	"logs-time": "Time",
+	"logs-type": "Type",
+	"logs-status": "Status",
+	"logs-energy": "Energy",
+	"logs-temp": "Temperature",
+	"logs-T": "T°",
+	"logs-types": {
+		"information": "information",
+		"notification": "notification",
+		"warning": "warning"
+	},
+	"logs-states": {
+		"loading": "Starting",
+		"active-nocar": "Active - Car not connected",
+		"active-car": "Active - Car connected",
+		"active-charge": "Charging",
+		"error": "Error",
+		"sleeping": "Disabled - Sleeping",
+		"disabled": "Disabled"
+	}
 }

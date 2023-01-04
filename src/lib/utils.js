@@ -1,7 +1,8 @@
-import { DateTime } from "luxon";
-import {EvseClients} from "./vars.js"
-import { uistates_store } from "./stores/uistates.js";
-import {get} from 'svelte/store'
+import {_} 					from 'svelte-i18n'
+import {DateTime} 			from "luxon";
+import {EvseClients}		from "./vars.js"
+import { uistates_store } 	from "./stores/uistates.js";
+import {get} 				from 'svelte/store'
 
 export async function httpAPI(method,url,body=null,type = "json",timeout = 10000) {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
@@ -162,29 +163,30 @@ export function displayIcon(mode) {
 export function state2icon(state) {
 	let icon = { 
 		type: undefined,
-		color: undefined
+		color: undefined,
+		tooltip: undefined
 	}
-	let iconcolor
+	
 	switch (state) {
 		case 0:
 			icon.type = "majesticons:rocket-3-start-line"
 			icon.color = "has-text-info"
-			icon.tooltip = "Starting"
+			icon.tooltip = get(_)("logs-states.loading")
 			break
 		case 1: 
 			icon.type = "mdi:car-off"
 			icon.color = "has-text-danger"
-			icon.tooltip = "Active - Car not connected"
+			icon.tooltip = get(_)("logs-states.active-nocar")
 			break
 		case 2:
 			icon.type = "mdi:car"
 			icon.color = "has-text-primary"
-			icon.tooltip = "Active - Car connected"
+			icon.tooltip = get(_)("logs-states.active-car")
 			break
 		case 3:
 			icon.type = "fa6-solid:bolt"
 			icon.color = "has-text-warning"
-			icon.tooltip = "Charging"
+			icon.tooltip = get(_)("logs-states.active-charge")
 			break
 		case 4: // Error
 		case 5:
@@ -196,17 +198,17 @@ export function state2icon(state) {
 		case 11:
 			icon.type = "fa6-solid:triangle-exclamation"
 			icon.color = "has-text-danger"
-			icon.tooltip = "Error"
+			icon.tooltip = get(_)("logs-states.error")
 			break;
 		case 254: // sleeping
 			icon.color = "has-text-danger"
 			icon.type = "fa6-solid:ban"
-			icon.tooltip = "Disabled - Sleeping"
+			icon.tooltip = get(_)("logs-states.sleeping")
 			break;
 		case 255: 
 			icon.color = "has-text-danger"
 			icon.type = "fa6-solid:circle-xmark"
-			icon.tooltip = "Disabled"
+			icon.tooltip = get(_)("logs-states.disabled")
 			break;
 	}
 	return icon
