@@ -13,21 +13,21 @@
 <table class="table is-fullwidth">
 	<thead>
 		<tr class="has-background-info">
-			<th class="has-text-white py-1">{$_("safety-errors")}</th>
-			<th class="has-text-white has-text-centered py-1">{$_("safety-count")}</th>
+			<th class="has-text-white py-1">{$_("config.safety.errors")}</th>
+			<th class="has-text-white has-text-centered py-1">{$_("config.safety.count")}</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>{$_("safety-gfci")}</td>
+			<td>{$_("config.safety.gfci")}</td>
 			<td class="has-text-centered"><span class="tag {$status_store.gfcicount==0?'is-primary':'is-danger'} is-primary ">{$status_store.gfcicount}</span></td>
 		</tr>
 		<tr>
-			<td>{$_("safety-noground")}</td>
+			<td>{$_("config.safety.noground")}</td>
 			<td class="has-text-centered"><span class="tag {$status_store.nogndcount==0?'is-primary':'is-danger'}">{$status_store.nogndcount}</span></td>
 		</tr>
 		<tr>
-			<td>{$_("safety-stuck")}</td>
+			<td>{$_("config.safety.stuck")}</td>
 			<td class="has-text-centered"><span class="tag {$status_store.stuckcount==0?'is-primary':'is-danger'}">{$status_store.stuckcount}</span></td>
 		</tr>
 	</tbody>

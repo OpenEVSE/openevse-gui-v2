@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		   from 'svelte-i18n'
 	import { serialQueue } from "./../../../lib/queue.js";
 	import SafetyTableRow  from "../../ui/SafetyTableRow.svelte";
 	import {config_store}  from "../../../lib/stores/config.js"
@@ -9,39 +10,39 @@
 
 </script>
 
-<Box title="Safety" icon="mdi:shield-alert-outline">
+<Box title={$_("config.titles.safety")} icon="mdi:shield-alert-outline">
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info"	>
-				<th class="has-text-white">Test</th>
-				<th class="has-text-white has-text-centered">Enabled</th>
+				<th class="has-text-white is-capitalized">{$_("config.safety.test")}</th>
+				<th class="has-text-white has-text-centered is-capitalized">{$_("enabled")}</th>
 			</tr>
 		</thead>
 		<tbody>
-			<SafetyTableRow title="GFCI Self Test" 			name="gfci_check" 	bind:checked={$config_store.gfci_check}   {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("gfci_check",  $config_store.gfci_check))} />
-			<SafetyTableRow title="Ground Monitoring" 		name="ground_check" bind:checked={$config_store.ground_check} {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("ground_check",$config_store.ground_check))} />
-			<SafetyTableRow title="Stuck Contact Detection" name="relay_check"	bind:checked={$config_store.relay_check}  {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("relay_check", $config_store.relay_check))} />
-			<SafetyTableRow title="Temperature Monitoring" 	name="temp_check" 	bind:checked={$config_store.temp_check}   {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("temp_check",  $config_store.temp_check))} />
-			<SafetyTableRow title="Diode Check" 			name="diode_check" 	bind:checked={$config_store.diode_check}  {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("diode_check", $config_store.diode_check ))} />
-			<SafetyTableRow title="Vent Required" 			name="vent_check" 	bind:checked={$config_store.vent_check}   {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("vent_check",  $config_store.vent_check  ))} />
+			<SafetyTableRow title={$_("config.safety.gfci-test")}    name="gfci_check" 	bind:checked={$config_store.gfci_check}   {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("gfci_check",  $config_store.gfci_check))} />
+			<SafetyTableRow title={$_("config.safety.gnd-monitor")}  name="ground_check" bind:checked={$config_store.ground_check} {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("ground_check",$config_store.ground_check))} />
+			<SafetyTableRow title={$_("config.safety.stuck-detect")} name="relay_check"	bind:checked={$config_store.relay_check}  {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("relay_check", $config_store.relay_check))} />
+			<SafetyTableRow title={$_("config.safety.temp-monitor")} name="temp_check" 	bind:checked={$config_store.temp_check}   {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("temp_check",  $config_store.temp_check))} />
+			<SafetyTableRow title={$_("config.safety.diode-check")}	 name="diode_check" 	bind:checked={$config_store.diode_check}  {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("diode_check", $config_store.diode_check ))} />
+			<SafetyTableRow title={$_("config.safety.vent-requ")}	 name="vent_check" 	bind:checked={$config_store.vent_check}   {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("vent_check",  $config_store.vent_check  ))} />
 		</tbody>
 		<thead>
 			<tr class="has-background-info">
-				<th class="has-text-white">Error</th>
-				<th class="has-text-white has-text-centered">Count</th>
+				<th class="has-text-white">{$_("config.safety.errors")}</th>
+				<th class="has-text-white has-text-centered">{$_("config.safety.count")}</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>GFCI</td>
+				<td>{$_("config.safety.gfci")}</td>
 				<td class="has-text-centered"><span class="tag {$status_store.gfcicount==0?'is-primary':'is-danger'} is-primary ">{$status_store.gfcicount}</span></td>
 			</tr>
 			<tr>
-				<td>No Ground</td>
+				<td>{$_("config.safety.noground")}</td>
 				<td class="has-text-centered"><span class="tag {$status_store.nogndcount==0?'is-primary':'is-danger'}">{$status_store.nogndcount}</span></td>
 			</tr>
 			<tr>
-				<td>Stuck Contact</td>
+				<td>{$_("config.safety.stuck")}</td>
 				<td class="has-text-centered"><span class="tag {$status_store.stuckcount==0?'is-primary':'is-danger'}">{$status_store.stuckcount}</span></td>
 			</tr>
 		</tbody>

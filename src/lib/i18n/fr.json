@@ -2,6 +2,7 @@
 	"active": "activé",
 	"disabled": "désactivé",
 	"disable": "désactiver",
+	"enabled": "activé",
 	"pause": "pause",
 	"sleep": "veille",
 	"state": "state",
@@ -112,11 +113,6 @@
 	"monitoring-sensors-voltage": "Tension",
 	"monitoring-sensors-evsetemp": "EVSE T°",
 	"monitoring-sensors-esptemp": "ESP32 T°",
-	"safety-errors": "Erreurs",
-	"safety-count": "Compte",
-	"safety-gfci": "GFCI",
-	"safety-noground": "Terre",
-	"safety-stuck": "Relai Collé",
 	"logs-title": "Historique",
 	"logs-loading": "Chargement des données",
 	"logs-time": "Heure",
@@ -207,6 +203,20 @@
 			"service": "Niveau de Service",
 			"pause": "Mode de pause",
 			"led-bn": "Luminosité des Leds"
+		},
+		"safety": {
+			"test": "Test",
+			"gfci-test": "Auto test GFCI",
+			"gnd-monitor": "Test qualité de la Terre",
+			"stuck-detect": "Détection Relai Collé",
+			"temp-monitor": "Surveillance Température",
+			"diode-check" : "Test Diode",
+			"vent-requ": "Ventilation Requise",
+			"errors": "Erreurs",
+			"count": "Compte",
+			"gfci": "GFCI",
+			"noground": "Mauvaise Terre",
+			"stuck": "Relai Collé"
 		}
 	}
 }

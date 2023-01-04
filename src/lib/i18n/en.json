@@ -2,6 +2,7 @@
 	"active": "active",
 	"disabled": "disabled",
 	"disable": "disable",
+	"enabled": "enabled",
 	"pause": "pause",
 	"sleep": "sleep",
 	"state": "state",
@@ -112,11 +113,6 @@
 	"monitoring-sensors-voltage": "Voltage",
 	"monitoring-sensors-evsetemp": "EVSE T°",
 	"monitoring-sensors-esptemp": "ESP32 T°",
-	"safety-errors": "Errors",
-	"safety-count": "Count",
-	"safety-gfci": "GFCI",
-	"safety-noground": "No Ground",
-	"safety-stuck": "Stuck Contact",
 	"logs-title": "History",
 	"logs-loading": "Loading Data",
 	"logs-time": "Time",
@@ -207,6 +203,20 @@
 			"service": "Service Level",
 			"pause": "Pause Status",
 			"led-bn": "Led Brightness"
+		},
+		"safety": {
+			"test": "Test",
+			"gfci-test": "GFCI Self Test",
+			"gnd-monitor": "Ground Monitoring",
+			"stuck-detect": "Stuck Contact Detection",
+			"temp-monitor": "Temperature Monitoring",
+			"diode-check" : "Diode Check",
+			"vent-requ": "Vent Required",
+			"errors": "Errors",
+			"count": "Count",
+			"gfci": "GFCI",
+			"noground": "No Ground",
+			"stuck": "Stuck Contact"
 		}
 	}
 
