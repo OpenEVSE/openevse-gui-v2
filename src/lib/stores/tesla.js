@@ -1,8 +1,13 @@
 import { writable } from 'svelte/store'
 import {httpAPI} from '../utils.js'
 
+const model = {
+    "count": undefined,
+    "vehicles": []
+  }
+
 function createTeslaStore() {
-    const P  = writable()
+    const P  = writable(model)
     const { subscribe, set, update } = P
 
 	async function download() {
