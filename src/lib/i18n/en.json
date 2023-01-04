@@ -1,6 +1,9 @@
 {
 	"active": "active",
 	"disabled": "disabled",
+	"disable": "disable",
+	"pause": "pause",
+	"sleep": "sleep",
 	"state": "state",
 	"save": "save",
 	"close": "close",
@@ -195,6 +198,15 @@
 			"complete": "Firmware upgrade successfull, page will reload in few sec",
 			"remove": "Remove file",
 			"upload": "Upload"
+		},
+		"evse": {
+			"maxcur": "Max Current",
+			"random": "Scheduler Random start adjust",
+			"random-help": "<p>Some vehicles will shutdown if left in sleep mode (pilot signal enable) and can not be woken up thereafter by the charger.</p><br><p>Changing the pause state to disable should resolve this issue.<br>However this removes the ability for the charger to detect if a vehicle is connected when paused.</p>",
+			"seconds": "seconds",
+			"service": "Service Level",
+			"pause": "Pause Status",
+			"led-bn": "Led Brightness"
 		}
 	}
 

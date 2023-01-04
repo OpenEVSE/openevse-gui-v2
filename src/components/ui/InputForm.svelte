@@ -5,7 +5,7 @@
 
 	export let title = undefined
 	export let value
-	export let placeholder
+	export let placeholder = ""
 	export let type = "text"
 	export let maxlength = null
 	export let onChange = () => {}

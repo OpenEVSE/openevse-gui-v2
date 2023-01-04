@@ -1,5 +1,6 @@
 <script>
-	import Borders from "./../../ui/Borders.svelte";
+	import { _ } 			 from 'svelte-i18n'
+	import Borders 			 from "./../../ui/Borders.svelte";
 	import Select			 from "./../../ui/Select.svelte";
 	import Help				 from "./../../ui/Help.svelte";
 	import Switch			 from "./../../ui/Switch.svelte";
@@ -49,39 +50,36 @@
 	}
 </style>
 
-<Box title="EVSE" icon="mdi:evse">
+<Box title={$_("config.titles.evse")} icon="mdi:evse">
 	<div class="is-flex is-flex-direction-column is-align-items-center mt-4 ">
 
 		<Borders>
-			<div class="has-text-weight-bold is-size-6">Max Current</div>
-			<SliderForm icon="fa6-solid:gauge-high" bind:value={$config_store.max_current_soft} unit="A" min={$config_store.min_current_hard?$config_store.min_current_hard:6} max={$config_store.max_current_hard?$config_store.max_current_hard:32} onchange={setMaxCurrent} />
+			<div class="has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>
+			<SliderForm icon="fa6-solid:gauge-high" bind:value={$config_store.max_current_soft} unit={$_("units.A")} min={$config_store.min_current_hard?$config_store.min_current_hard:6} max={$config_store.max_current_hard?$config_store.max_current_hard:32} onchange={setMaxCurrent} />
 		</Borders>
 		<Borders>
-			<div class="has-text-weight-bold is-size-6">Scheduler Random start adjust</div>
+			<div class="has-text-weight-bold is-size-6">{$_("config.evse.random")}</div>
 			<div class="is-flex is-justify-content-center">
 				<div class="inputbox">	
-					<InputForm  type="number" title="" placeholder="OpenEVSE host name" bind:value={$config_store.scheduler_start_window} 
+					<InputForm  type="number" title="" bind:value={$config_store.scheduler_start_window} 
 					status={input_random_start} onChange={()=>onChange("scheduler_start_window", $config_store.scheduler_start_window)}/>
 				</div>
 			</div>
 			
-			<div class="ml-2"> seconds</div>
+			<div class="ml-2"> {$_("config.evse.seconds")}</div>
 		</Borders>
 		<Borders>
-			<div class="has-text-weight-bold is-size-6">Service Level</div>
+			<div class="has-text-weight-bold is-size-6">{$_("config.evse.service")}</div>
 			<Select bind:value={$config_store.service} bind:status={select_service_level} items={service_items} onChange={setServiceLevel}/>
 		</Borders>
 
 		<Borders>
-			<Help>Some vehicles will shutdown if left in sleep mode (pilot signal enable) and then can not be woken up by timers/PV divert. 
-				Changing the pause state to disable should resolve this issue, however this removes the ability for the charger to detect
-					if a vehicle is connected when paused.
-			</Help>
-			<div class="has-text-weight-bold is-size-6">Pause Status</div>
+			<Help>{@html $_("config.evse.random-help")}</Help>
+			<div class="has-text-weight-bold is-size-6">{$_("config.evse.pause")}</div>
 			<Switch name="pausemode" label="{$config_store.pause_uses_disabled?"Disable":"Sleep"}" bind:checked={$config_store.pause_uses_disabled} onChange={togglePauseMode}  />
 		</Borders>
 		<Borders>
-			<div class="has-text-weight-bold is-size-6">Led Brightness</div>
+			<div class="has-text-weight-bold is-size-6">{$_("config.evse.led-bn")}</div>
 			<SliderForm icon="ic:outline-light-mode" bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
 		</Borders>
 	</div>

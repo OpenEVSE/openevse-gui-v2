@@ -18,7 +18,7 @@
 </div>
 
 <Modal bind:is_opened canClose={true}>
-	<div class="notification">
+	<div class="notification has-text-left">
 		<button class="delete" on:click={()=>is_opened=false}></button>
 		<slot></slot>
 	</div>
