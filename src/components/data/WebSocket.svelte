@@ -41,12 +41,10 @@
 				status_store.update(() => store)
 			})
 			s.addEventListener("error", function (e) {
-				if (!firstcon) {
-					console.error('Socket encountered error: ', e.message, 'Closing socket');
+				console.error('Socket encountered error: ', e.message, 'Closing socket');
 				lastmsg = DateTime.now().toUnixInteger()
 				$uistates_store.ws_connected = false
 				cancelKeepAlive()
-				}	
 			})
 			s.addEventListener("close", function (e) {
 				console.log('Socket is closed. Reconnect attempt in 1 second.', e.reason);

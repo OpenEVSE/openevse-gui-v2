@@ -1,18 +1,19 @@
 <script>
-	import CentralView from "./../components/ui/CentralView.svelte";
-	import Box from "./../components/ui/Box.svelte";
-	import Tabs from "./../components/ui/Tabs.svelte";
-	import Safety from "../components/blocks/monitoring/Safety.svelte"
-	import Energy from "../components/blocks/monitoring/Energy.svelte"
-	import Sensors from "../components/blocks/monitoring/Sensors.svelte"
-	import Current from "../components/blocks/monitoring/Current.svelte"
+	import { _ } 		from 'svelte-i18n'
+	import CentralView  from "./../components/ui/CentralView.svelte";
+	import Box 			from "./../components/ui/Box.svelte";
+	import Tabs 		from "./../components/ui/Tabs.svelte";
+	import Safety 		from "../components/blocks/monitoring/Safety.svelte"
+	import Energy 		from "../components/blocks/monitoring/Energy.svelte"
+	import Sensors 		from "../components/blocks/monitoring/Sensors.svelte"
+	import Current 		from "../components/blocks/monitoring/Current.svelte"
 
 	let activetab = 0
 	let tabs = [
-		{name: "Energy", url:"/monitoring	"},
-		{name: "Sensors", url:"/monitoring"},
-		{name: "Safety", url:"/monitoring"},
-		{name: "Settings", url:"/monitoring"}
+		{name: $_("monitoring-tab-energy"), url:"/monitoring	"},
+		{name: $_("monitoring-tab-sensors"), url:"/monitoring"},
+		{name: $_("monitoring-tab-safety"), url:"/monitoring"},
+		{name: $_("monitoring-tab-settings"), url:"/monitoring"}
 	]
 
 	let clickTab = (i) => {
@@ -22,7 +23,7 @@
 </script>
 
 <CentralView>
-	<Box title="Monitoring" icon="fa6-solid:chart-simple">
+	<Box title={$_("monitoring-title")} icon="fa6-solid:chart-simple">
 		<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
 		{#if activetab == 0}
 			<Energy />

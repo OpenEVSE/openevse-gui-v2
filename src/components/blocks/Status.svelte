@@ -1,9 +1,10 @@
 <script>
 	import { _ } 					from 'svelte-i18n'
+	import { config_store } 		from "./../../lib/stores/config.js";
 	import {status_store} 			from "../../lib/stores/status.js"
 	import {plan_store} 			from "../../lib/stores/plan.js"
 	import {uistates_store} 		from "../../lib/stores/uistates.js"
-	import {sec2time} 				from "../../lib/utils.js"
+	import {sec2time, miles2km} 				from "../../lib/utils.js"
 	import { scale } 				from 'svelte/transition';
 	import { expoInOut } 			from 'svelte/easing';
 	import { claims_target_store }  from "./../../lib/stores/claims_target.js";
@@ -68,15 +69,15 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 
 		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center">
 			<StatusTile title={$_("status-tile-elapsed")} value={elapsed} />
-			<StatusTile title={$_("status-tile-delivered")} value={$status_store.session_energy/1000} precision={1} unit="kwh" />
-			<StatusTile title={$_("status-tile-current")} value={$status_store.amp/1000} precision={1} unit="A" />
+			<StatusTile title={$_("status-tile-delivered")} value={$status_store.session_energy/1000} precision={1} unit={$_("units.kwh")} />
+			<StatusTile title={$_("status-tile-current")} value={$status_store.amp/1000} precision={1} unit={$_("units.A")} />
 			{#if $uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini"}
 			<!-- // Desktop & Tablet only -->
-			<StatusTile title={$_("status-tile-power")} value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
+			<StatusTile title={$_("status-tile-power")} value={($status_store.amp/1000) * $status_store.voltage} unit={$_("units.W")} />
 			{/if}
 			{#if $uistates_store.breakpoint == "desktop"}
 			<!-- // Desktop only -->
-			<StatusTile title={$_("status-tile-setpoint")} value={$status_store.pilot} unit="A" />
+			<StatusTile title={$_("status-tile-setpoint")} value={$status_store.pilot} unit={$_("units.A")} />
 			{/if}
 		</div>
 
@@ -84,22 +85,27 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 		<div class="mx-0 is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center">
 			{#if $uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini"}
 			<!-- // Mobile only -->
-			<StatusTile title={$_("status-tile-power")} value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
+			<StatusTile title={$_("status-tile-power")} value={($status_store.amp/1000) * $status_store.voltage} unit={$_("units.W")} />
 			{/if}
 			{#if $uistates_store.breakpoint != "desktop"}
 			<!-- // Tablet & Mobile only -->
-			<StatusTile title={$_("status-tile-setpoint")} value={$status_store.pilot} unit="A" />
+			<StatusTile title={$_("status-tile-setpoint")} value={$status_store.pilot} unit={$_("units.A")} />
 			{/if}
 			{#if $status_store.divertmode == 2}
-			<StatusTile title={$_("status-tile-available")} value={$status_store.charge_rate} unit="A" />
+			<StatusTile title={$_("status-tile-available")} value={$status_store.charge_rate} unit={$_("units.A")} />
 			{:else if $status_store.shaper == 1}
-			<StatusTile title={$_("status-tile-available")} value={$status_store.shaper_cur} unit="A" />
+			<StatusTile title={$_("status-tile-available")} value={$status_store.shaper_cur} unit={$_("units.A")} />
 			{/if}
 			{#if $status_store.battery_level != undefined}
 			<StatusTile title={$_("status-tile-battery")} value={$status_store.battery_level} unit="%" />
 			{/if}
 			{#if $status_store.battery_range != undefined}
-			<StatusTile title={$_("status-tile-range")} value={$status_store.battery_range} unit="km" />
+				{#if !$config_store.tesla_enabled || $config_store.tesla_enabled && $config_store.mqtt_vehicle_range_miles}
+				<StatusTile title={$_("status-tile-range")} value={$status_store.battery_range} unit={ $config_store.mqtt_vehicle_range_miles?$_("units.miles"):$_("units.km")} />
+				{:else if !$config_store.mqtt_vehicle_range_miles}
+				<StatusTile title={$_("status-tile-range")} value={miles2km($status_store.battery_range)} unit={$_("units.miles")} />
+				
+				{/if}
 			{/if}
 			{#if $status_store.time_to_full_charge}
 			<StatusTile title={$_("status-tile-remaining")} value={sec2time($status_store.time_to_full_charge)} />
