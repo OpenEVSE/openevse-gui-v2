@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		    from 'svelte-i18n'
 	import { config_store } from "./../../../lib/stores/config.js";
 	import {onMount} 		from "svelte"
 	import Tabs 			from "./../../ui/Tabs.svelte";
@@ -25,7 +26,7 @@
 
 	const stg_langs = [
 		{name: "English", code: "en"},
-		{name: "French",  code: "fr"}
+		{name: "Français",  code: "fr"}
 	]
 
 	let clickTab = (i) => {
@@ -33,8 +34,8 @@
 	}
 
 	let tabs = [
-		{name: "Authentication", url:"/configuration/http"},
-		{name: "Settings", url:"/configuration/http"}
+		{name: $_("config.http.authentication"), url:"/configuration/http"},
+		{name: $_("config.http.settings"), url:"/configuration/http"}
 	]
 
 	let stg_submit = async () => {
@@ -113,29 +114,29 @@
 	
 </script>
 
-<Box title="HTTP Server" icon="mdi:web">
+<Box title={$_("config.titles.http")} icon="mdi:web">
 	<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
 	{#if activetab == 0}
-	<!-- Authentification -->
+	<!-- Authentication -->
 	<div class="my-1" >
 		<form>
-			<Switch name="auth_enabled" label="Enable" tooltip="Enable HTTP authentication" tooltip_pos="top" bind:checked={auth_checked} />
-			<div><InputForm  title="Username" bind:value={auth_usr} placeholder="Admin" type="text" disabled={!auth_checked} /></div>
-			<div><InputForm title="Password" bind:value={auth_pwd} placeholder="15 characters max" type="password" maxlength=15 disabled={!auth_checked} /></div>
-			<Button name="Save" color="is-info" state={auth_submit_state} butn_submit={auth_submit} />
+			<Switch name="auth_enabled" label={$_("enable")} tooltip={$_("config.http.enable-ttip")} tooltip_pos="right" bind:checked={auth_checked} />
+			<div><InputForm  title={$_("config.http.username")} bind:value={auth_usr} placeholder="Admin" type="text" disabled={!auth_checked} /></div>
+			<div><InputForm title={$_("config.http.password")} bind:value={auth_pwd} placeholder={$_("config.http.inputmax")} type="password" maxlength=15 disabled={!auth_checked} /></div>
+			<Button name={$_("save")} color="is-info" state={auth_submit_state} butn_submit={auth_submit} />
 		</form>
 	</div>
 	{:else if activetab == 1}
 	<!-- Settings -->
 	<div class="my-2">
 		<div class="block">
-			<Switch name="https_enabled" label="Enable HTTPS" bind:checked={auth_https_checked} disabled={!stg_has_https} />
+			<Switch name="https_enabled" label={$_("config.http.enablehttps")} bind:checked={auth_https_checked} disabled={!stg_has_https} />
 			{#if !stg_has_https}
-			<div class=" is-size-7 is-italic">HTTPS not supported on current firmware</div>
+			<div class=" is-size-7 is-italic">{$_("config.http.nohttps")}</div>
 			{/if}
 		</div>
 		<div class="block">
-			<div class="has-text-weight-semibold mb-1">Default Language</div>
+			<div class="has-text-weight-semibold mb-1">{$_("config.http.lang")}</div>
 			<div class="select is-info">		
 				<select bind:value={stg_language}>
 					{#each stg_langs as lang}
@@ -145,11 +146,11 @@
 			</div>
 		</div>
 		<div class="block">
-			<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+			<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 		</div>
 			
 		
 	</div>
 	{/if}
 </Box>
-<AlertBox title="Error" body="Please set a username & password first" bind:visible={alert_visible}/>
+<AlertBox title={$_("error")} body={$_("config.http.errormsg")} bind:visible={alert_visible}/>

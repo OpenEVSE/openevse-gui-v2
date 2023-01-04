@@ -1,5 +1,6 @@
 <script>
-	import Loader from "./Loader.svelte";
+	import { _ } 		    	from 'svelte-i18n'
+	import Loader 				from "./Loader.svelte";
 	import {onMount, onDestroy} from "svelte"
 	
 
@@ -81,7 +82,7 @@
 		<div class="my-2 {disabled?"has-text-grey-light":""}">
 			<label class="checkbox">
 				<input type="checkbox" bind:checked={show} {disabled}>
-				Show
+				{$_("show")}
 			</label>
 		</div>
 		{/if}
