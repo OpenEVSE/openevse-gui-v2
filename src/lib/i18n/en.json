@@ -284,7 +284,6 @@
 			"shaperdesc": "Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.",
 			"maxpower": "Max power allowed (in W)",
 			"livepower": "Live power load MQTT Topic (in W)"
-		
 		},
 		"selfprod": {
 			"enable": "Handle Self Production",
@@ -312,6 +311,48 @@
 			"help-3": "If EVSE is sleeping: charging will begin when solar PV / excess power > min charge rate.",
 			"help-4": "Charging will pause if the excess power drops below the min charge rate for a period of time.",
 			"help-5": "Note: It's assumed that EVSE power is included in the grid feed"
+		},
+		"vehicle": {
+			"status": "Status",
+			"setup": "Setup",
+			"lastupdated": "Last updated",
+			"vehicle": "Vehicle",
+			"battery": "Battery Level",
+			"range": "Battery Range",
+			"timeleft": "Time to full charge",
+			"mode": {
+				"none": "None/HTTP",
+				"tesla": "Tesla",
+				"mqtt": "MQTT"
+			},
+			"contype": "Connection Type",
+			"contype-desc": "Select the vehicle connection type",
+			"httppush": "HTTP Push (Always Active)",
+			"httppush-desc-1": "To update manually vehicule data, send HTTP POST request to:",
+			"httppush-desc-2": "containing json data in body:",
+			"help-1": "The Tesla login may break from time-to-time as Tesla change their login API, hopefully OpenEVSE will be able to resolve the issue on our server, but should the login fail you can use a 3rd Party app to generate the appropriate tokens.",
+			"help-2": "These can be entered in the `Advanced` section as an alternative method of logging in.",
+			"rangeunit": "Range Unit",
+			"topic-soc": "State of Charge topic",
+			"topic-soc-desc": "The battery level of charge as a percentage",
+			"topic-range": "Range topic",
+			"topic-range-desc": "The range (on electric) of the vehicle based on the current battery level",
+			"topic-time2charge": "Time to charge topic",
+			"topic-time2charge-desc": "The time until the battery is fully charged in seconds",
+			"tesla-fetching": "Fetching vehicle info...",
+			"tesla-select": "Select Vehicle",
+			"tesla-fetching-error": "Error fetching vehicles",
+			"tesla-fetching-novehicle": "No vehicle found",
+			"logout": "Logout",
+			"login": "Login",
+			"username": "Username",
+			"username-desc": "Tesla username",
+			"password": "Password",
+			"password-desc": "Tesla password",
+			"advanced": "Advanced",
+			"normal": "Normal",
+			"access-token": "Access Token",
+			"refresh-token": "Refresh Token"
 		}
 	}
 

@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		    from 'svelte-i18n'
 	import VehicleStatus 	from "./../components/blocks/configuration/VehicleStatus.svelte";
 	import Box 				from "./../components/ui/Box.svelte";
 	import CentralView 		from "./../components/ui/CentralView.svelte";
@@ -8,8 +9,8 @@
 
 	let activetab = 0
 	let tabs = [
-		{name: "Status", url:"/configuration/vehicle"},
-		{name: "Setup", url:"/configuration/vehicle"}
+		{name: $_("config.vehicle.status"), url:"/configuration/vehicle"},
+		{name: $_("config.vehicle.setup"), url:"/configuration/vehicle"}
 	]
 
 	let clickTab = (i) => {

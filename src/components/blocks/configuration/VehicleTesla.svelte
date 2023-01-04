@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		    from 'svelte-i18n'
 	import { tesla_store }  from "./../../../lib/stores/tesla.js";
 	import { onMount } 		from "svelte";
 	import { serialQueue } 	from "./../../../lib/queue.js";
@@ -167,30 +168,30 @@
 
 </script>
 <div class="mb-1">
-	<Select title="Range Unit" bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
+	<Select title={$_("config.vehicle.rangeunit")} bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
 	{#if loggedin}
 		{#if status == "loading"}
-		<div>Fetching vehicle info ...</div>
+		<div>{$_("config.vehicle.tesla-fetching")}</div>
 		{:else if $tesla_store.count}
-		<Select title="Select Vehicle:" bind:value={$config_store.tesla_vehicle_id} status={select_status} items={vehicles} onChange={()=>selectVehicle($config_store.tesla_vehicle_id)}/>
+		<Select title="{$_("config.vehicle.tesla-select")}:" bind:value={$config_store.tesla_vehicle_id} status={select_status} items={vehicles} onChange={()=>selectVehicle($config_store.tesla_vehicle_id)}/>
 		{:else if status == "error"}
-		<div>Error fetching vehicles</div>
+		<div>{$_("config.vehicle.tesla-fetching-error")}</div>
 		{:else}
-		<div>No vehicle found</div>
+		<div>{$_("config.vehicle.tesla-fetching-novehicle")}</div>
 		{/if}
 		<div class="block mt-5">
-			<Button name="Logout" color="is-info" state={stg_submit_state} butn_submit={logout} />
+			<Button name={$_("config.vehicle.logout")} color="is-info" state={stg_submit_state} butn_submit={logout} />
 		</div>
 		{:else if mode == 0}
 		<div>
 			<form>
-				<InputForm title="Username:" bind:value={username} placeholder="Tesla username" />
-				<InputForm title="Password:" bind:value={password} type="password" placeholder="Tesla password" />
+				<InputForm title="{$_("config.vehicle.username")}:" bind:value={username} placeholder={$_("config.vehicle.username-desc")} />
+				<InputForm title="{$_("config.vehicle.password")}:" bind:value={password} type="password" placeholder={$_("config.vehicle.password-desc")} />
 			</form>
 
 			<div class="block mt-5">
-				<Button name="Login" color="is-info" state={stg_submit_state} butn_submit={login} />
-				<Button name="Advanced" color="is-info" butn_submit={()=>mode=1} />
+				<Button name={$_("config.vehicle.login")} color="is-info" state={stg_submit_state} butn_submit={login} />
+				<Button name={$_("config.vehicle.advanced")} color="is-info" butn_submit={()=>mode=1} />
 			</div>
 		</div>
 		{:else if mode == 1}
@@ -198,8 +199,8 @@
 			<InputForm title="Access Token:" bind:value={$config_store.tesla_access_token} type="password" placeholder="" />
 			<InputForm title="Refresh Token:" bind:value={$config_store.tesla_refresh_token} type="password" placeholder="" />
 			<div class="block mt-5">
-				<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
-				<Button name="Normal" color="is-info" butn_submit={()=>mode=0} />
+				<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+				<Button name={$_("config.vehicle.normal")} color="is-info" butn_submit={()=>mode=0} />
 			</div>
 		</div>
 	{/if}

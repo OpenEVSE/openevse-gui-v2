@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		    from 'svelte-i18n'
 	import { serialQueue }  from "./../../../lib/queue.js";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import Button 			from "./../../ui/Button.svelte";
@@ -36,15 +37,15 @@
 </script>
 
 <div class="mt-1 mb-1">
-	<Select title="Range Unit" bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
-	<InputForm title="State of Charge topic:" bind:value={$config_store.mqtt_vehicle_soc} placeholder="topic/soc" is_inline={true} />
-	<div class="is-size-7">The battery level of charge as a percentage</div>
-	<InputForm title="Range topic:" bind:value={$config_store.mqtt_vehicle_range} placeholder="topic/range" is_inline={true}/>
-	<div class="is-size-7">The range (on electric) of the vehicle based on the current battery level</div>
-	<InputForm title="Time to charge topic:" bind:value={$config_store.mqtt_vehicle_eta} placeholder="topic/timeleft" is_inline={true} />
-	<div class="is-size-7">The time until the battery is fully charged in seconds</div>
+	<Select title="{$_("config.vehicle.rangeunit")}:" bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
+	<InputForm title="{$_("config.vehicle.topic-soc")}:" bind:value={$config_store.mqtt_vehicle_soc} placeholder="topic/soc" is_inline={true} />
+	<div class="is-size-7">{$_("config.vehicle.topic-soc-desc")}</div>
+	<InputForm title="{$_("config.vehicle.topic-range")}:" bind:value={$config_store.mqtt_vehicle_range} placeholder="topic/range" is_inline={true}/>
+	<div class="is-size-7">{$_("config.vehicle.topic-range-desc")}</div>
+	<InputForm title="{$_("config.vehicle.topic-time2charge")}:" bind:value={$config_store.mqtt_vehicle_eta} placeholder="topic/timeleft" is_inline={true} />
+	<div class="is-size-7">{$_("config.vehicle.topic-time2charge-desc")}</div>
 	<div class="block mt-5">
-		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+		<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>
 	<AlertBox body={alert_body} bind:visible={alert_visible} />
 </div>

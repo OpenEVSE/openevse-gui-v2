@@ -311,6 +311,48 @@
 			"help-3": "Si l'EVSE est en pause: la charge débutera quand la production Solaire ou l'excédent de puissance > puissance de charge minimale (min charge rate)",
 			"help-4": "La charge se mettra en pause si l'excédent de puissance tombe sous la puissance de charge minimale.",
 			"help-5": "Note: La puissance consommée par l'EVSE est inclue dans le flux d'excédent/déficit"
+		},
+		"vehicle": {
+			"status": "Status",
+			"setup": "Paramètres",
+			"lastupdated": "Dernière maj",
+			"vehicle": "Véhicule",
+			"battery": "Niveau Batterie",
+			"range": "Portée Batterie",
+			"timeleft": "Temps restant (100%)",
+			"mode": {
+				"none": "Aucun/HTTP",
+				"tesla": "Tesla",
+				"mqtt": "MQTT"
+			},
+			"contype": "Type de Connection",
+			"contype-desc": "Selectionner le type de connection aux données véhicule",
+			"httppush": "HTTP Push (Toujours Actif)",
+			"httppush-desc-1": "Pour mettre à jours manuellement les données véhicule, envoyez une requête HTTP POST vers:",
+			"httppush-desc-2": "contenant les données json suivantes dans le 'body':",
+			"help-1": "L'identification Tesla peut cesser de fonctionner de temps en temps quand Tesla change son API, heureusement OpenEVSE est capable de résoudre le problème sur notre serveur. Mais si elle échoue, vous pouvez utiliser une application externe pour générer le token approprié.",
+			"help-2": "Celui-ci peut être configuré dans la section `Avancé` comme méthode alternative d'authentification.",
+			"rangeunit": "Unité",
+			"topic-soc": "Sujet MQTT Etat de charge (SOC)",
+			"topic-soc-desc": "Le niveau de charge de la battery en %",
+			"topic-range": "Sujet MQTT Distance",
+			"topic-range-desc": "L'autonomie du véhicule basée sur le niveau de charge de la batterie",
+			"topic-time2charge": "Sujet MQTT Temps de Charge restant",
+			"topic-time2charge-desc": "Le temps restant jusqu'à la charge complète en secondes",
+			"tesla-fetching": "Récupération des infos véhicule...",
+			"tesla-select": "Selectionner Vehicle",
+			"tesla-fetching-error": "Erreur récupération des infos",
+			"tesla-fetching-novehicle": "Aucun véhicule trouvé",
+			"logout": "Déconnecter",
+			"login": "Connecter",
+			"username": "Identifiant",
+			"username-desc": "Identifiant Tesla",
+			"password": "Mot de Passe",
+			"password-desc": "Mot de Passe Tesla password",
+			"advanced": "Avancé",
+			"normal": "Normal",
+			"access-token": "Access Token",
+			"refresh-token": "Refresh Token"
 		}
 	}
 }
