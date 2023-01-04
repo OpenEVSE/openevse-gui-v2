@@ -1,4 +1,9 @@
 {
+	"active": "activé",
+	"disabled": "désactivé",
+	"state": "state",
+	"save": "sauvegarder",
+	"close": "fermer",
 	"alert-evsemissing-title": "Module OpenEVSE manquant",
 	"alert-evsemissing-body": "Module OpenEVSE non détecté. Veuillez vérifiez votre installation avant d'aller plus loin.",
 	"alert-conerror-title": "Erreur de connection",
@@ -20,5 +25,22 @@
 	"charge-rate-label": "COURANT",
 	"charge-rate-ttip": "Ajuster le courant de charge",
 	"charge-time-lmt": "LIMITER TEMPS",
-	"charge-energy-lmt": "LIMITER ENERGIE"
+	"charge-energy-lmt": "LIMITER KWH",
+	"scheduler-title": "Planificateur",
+	"scheduler-timer": "Minuteur",
+	"scheduler-newtimer": "Nouveau minuteur",
+	"scheduler-time": "Heure",
+	"scheduler-state": "Etat",
+	"scheduler-checkall": "Décocher tout",
+	"scheduler-uncheckall": "Cocher tout",
+	"days": 
+		{
+		"monday": "lundi",
+		"tuesday": "mardi",
+		"wednesday": "mercredi",
+		"thursday": "jeudi",
+		"friday": "vendredi",
+		"saturday": "samedi",
+		"sunday": "dimanche"
+		}
 }

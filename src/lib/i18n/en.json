@@ -1,4 +1,9 @@
 {
+	"active": "active",
+	"disabled": "disabled",
+	"state": "state",
+	"save": "save",
+	"close": "close",
 	"alert-evsemissing-title": "Missing OpenEVSE module",
 	"alert-evsemissing-body": "OpenEVSE module is missing. Please check your setup before going further",
 	"alert-conerror-title": "Connection error",
@@ -20,6 +25,23 @@
 	"charge-rate-label": "CHARGE RATE",
 	"charge-rate-ttip": "Adjust Charge Rate",
 	"charge-time-lmt": "TIME LIMIT",
-	"charge-energy-lmt": "ENERGY LIMIT"
+	"charge-energy-lmt": "ENERGY LIMIT",
+	"scheduler-title": "Scheduler",
+	"scheduler-timer": "timer",
+	"scheduler-newtimer": "new timer",
+	"scheduler-time": "Time",
+	"scheduler-state": "State",
+	"scheduler-checkall": "Check All",
+	"scheduler-uncheckall": "Uncheck All",
+	"days": 
+		{
+		"monday": "monday",
+		"tuesday": "tuesday",
+		"wednesday": "wednesday",
+		"thursday": "thursday",
+		"friday": "friday",
+		"saturday": "saturday",
+		"sunday": "sunday"
+		}
 
 }

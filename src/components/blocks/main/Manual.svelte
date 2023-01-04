@@ -188,7 +188,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 
 <Box title={$_("charge-title")} icon="fa6-solid:bolt">
 	<div class="is-flex is-align-items-center is-justify-content-center is-flex-direction-column" style="height: 100%;">
-		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-info mt-2">{$_("charge-toggle")}</div>
+		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-info mt-2 is-uppercase">{$_("charge-toggle")}</div>
 		<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 		{#if $config_store.rfid_enabled}
 		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>

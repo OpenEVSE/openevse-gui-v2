@@ -1,6 +1,7 @@
 
 <script>
-	import Borders from "./../../ui/Borders.svelte";
+	import { _ } 			from 'svelte-i18n'
+	import Borders 			from "./../../ui/Borders.svelte";
 	import { serialQueue }  from "./../../../lib/queue.js";
 	import { onDestroy } 	from "svelte";
 	import Box 				from "../../ui/Box.svelte"
@@ -58,7 +59,7 @@
 <style>
 
 </style>
-<Box title="Schedule" icon="ion:calendar">
+<Box title={$_("scheduler-title")} icon="ion:calendar">
 	<div class="my-2 is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
 		<Borders>
 			<table class="table is-size-6 has-text-weight-normal">
@@ -81,7 +82,7 @@
 				</tbody>
 			</table>
 		</Borders>
-		<div class="mt-4"><Button name="New" butn_submit={addTimer}/></div>
+		<div class="mt-4"><Button name={$_("scheduler-newtimer")} butn_submit={addTimer}/></div>
 		
 	</div>
 	

@@ -1,12 +1,12 @@
 <script>
-	import BoxModal from "./../../ui/BoxModal.svelte";
-	import { serialQueue } from "../../../lib/queue.js";
-	import Box from "../../ui/Box.svelte";
+	import { _ } 			from 'svelte-i18n'
+	import BoxModal 		from "./../../ui/BoxModal.svelte";
+	import { serialQueue }	from "../../../lib/queue.js";
 	import {schedule_store} from "../../../lib/stores/schedule.js"
-	import AlertBox from "../../ui/AlertBox.svelte"
-	import Modal from "../../ui/Modal.svelte"
-	import Button from "../../ui/Button.svelte"
-	import {onDestroy} from "svelte"
+	import AlertBox 		from "../../ui/AlertBox.svelte"
+	import Modal 			from "../../ui/Modal.svelte"
+	import Button 			from "../../ui/Button.svelte"
+	import {onDestroy} 		from "svelte"
 
 	export let is_opened = false;
 	export let timer = null;
@@ -162,50 +162,52 @@
 <Modal bind:is_opened>
 
 	<AlertBox body="You must select at least one day" bind:visible={alert_visible} />
-	<BoxModal title={timer == null?"New Timer":"Timer" + $schedule_store[timer].id} >
+	<BoxModal title={timer == null?$_("scheduler-newtimer"): $_("scheduler-timer")+" #" + $schedule_store[timer].id} >
 		<div class="mt-2 is-size-6">				
 			<label class="checkbox">
 				<input id="d_mon" type="checkbox" bind:checked={selected_days[0]} on:change={checkDays} >
-				Mon
+				<span class="is-capitalized">{$_("days.monday").substr(0,3)}</span>
 			</label>
 			<label class="checkbox">
 				<input id="d_tue" type="checkbox" bind:checked={selected_days[1]} on:change={checkDays}>
-				Tue
+				<span class="is-capitalized">{$_("days.tuesday").substr(0,3)}</span>
 			</label>
 			<label class="checkbox">
 				<input id="d_wed" type="checkbox" bind:checked={selected_days[2]} on:change={checkDays}>
-				Wed
+				<span class="is-capitalized">{$_("days.wednesday").substr(0,3)}</span>
 			</label>
 			<label class="checkbox">
 				<input id="d_thu" type="checkbox" bind:checked={selected_days[3]} on:change={checkDays}>
-				Thu
+				<span class="is-capitalized">{$_("days.thursday").substr(0,3)}</span>
 			</label>
 			<label class="checkbox">
 				<input id="d_fri" type="checkbox" bind:checked={selected_days[4]} on:change={checkDays}>
-				Fri
+				<span class="is-capitalized">{$_("days.friday").substr(0,3)}</span>
 			</label>
 			<label class="checkbox">
 				<input id="d_sat" type="checkbox"bind:checked={selected_days[5]} on:change={checkDays}>
-				Sat
+				<span class="is-capitalized">{$_("days.saturday").substr(0,3)}</span>
 			</label>
 			<label class="checkbox">
 				<input id="d_sun" type="checkbox" bind:checked={selected_days[6]} on:change={checkDays}>
-				Sun
+				<span class="is-capitalized">{$_("days.sunday").substr(0,3)}</span>
 			</label>
-			<label class="checkbox has-text-weight-semibold">
-				<input id="d_all" type="checkbox" bind:checked={selected_days[7]} on:change={() => {checkAll(selected_days[7])}}>
-				{#if !selected_days[7]}
-				Check All
-				{:else}
-				Uncheck All
-				{/if}
-			</label>
+			<div>
+				<label class="checkbox has-text-weight-semibold">
+					<input id="d_all" type="checkbox" bind:checked={selected_days[7]} on:change={() => {checkAll(selected_days[7])}}>
+					{#if !selected_days[7]}
+					{$_("scheduler-checkall")}
+					{:else}
+					{$_("scheduler-uncheckall")}
+					{/if}
+				</label>
+			</div>	
 		</div>
 		<div class="pt-5">
 			<div class="is-flex is-justify-content-space-around">
 				<div class="is-inline-block">
 					<label class="has-text-weight-semibold">
-						<div>Time</div>
+						<div>{$_("scheduler-time")}</div>
 						{#if timer == null}
 						<input class="input is-info" id="t_start" type="time" bind:value={default_timer.time}>
 						{:else}
@@ -214,28 +216,28 @@
 					</label>
 				</div>
 				<div class="is-inline-block">
-					<div class="has-text-weight-semibold">State</div>
+					<div class="has-text-weight-semibold">{$_("scheduler-state")}</div>
 					
 						{#if timer == null}
 						<div class="select {default_timer.state=="active"?"is-primary":"is-danger"}" >
 							<select bind:this={select} bind:value={default_timer.state}>
-								<option value="active" selected><span class="">Active</span></option>
-								<option value="disabled">Disabled</option>
+								<option value="active" selected>{$_("active")}</option>
+								<option value="disabled">{$_("disabled")}</option>
 							</select>
 							</div>
 						{:else}
 						<div class="select {$schedule_store[timer].state=="active"?"is-primary":"is-danger"}" >
 							<select bind:value={$schedule_store[timer].state}>
-								<option value="active" selected>Active</option>
-								<option value="disabled">Disabled</option>
+								<option value="active">{$_("active")}</option>
+								<option value="disabled">{$_("disabled")}</option>
 							</select>
 						</div>
 						{/if}
 				</div>
 		</div>
 		<div class="mt-4 is-flex is-justify-content-center mb-4">
-			<Button name="Save" color="is-info" butn_submit={saveTimer} state={saveTimerState}/>
-			<Button name="Close" color="is-danger" butn_submit={()=>is_opened = false} />
+			<Button name={$_("save")} color="is-info" butn_submit={saveTimer} state={saveTimerState}/>
+			<Button name={$_("close")} color="is-danger" butn_submit={()=>is_opened = false} />
 		</div>
 	</BoxModal>
 </Modal>

@@ -1,8 +1,8 @@
 <script>
-	import IconButton from "./IconButton.svelte"
-	
-	import { link, location } from "svelte-spa-router"
-	import {displayTime} from "../../lib/utils.js"
+	import { _ } 				from 'svelte-i18n'
+	import IconButton 			from "./IconButton.svelte"
+	import { link, location } 	from "svelte-spa-router"
+	import {displayTime}		from "../../lib/utils.js"
 	export let t_id
 	export let t_time
 	export let t_state
@@ -12,8 +12,12 @@
 	export let removeState = ""
 
 	function formatDays(days){
-    	var d = days.toString().replace(/,/g, " "); 
-    	return d
+    	// const d = days.toString().replace(/,/g, " ");
+		let td = ""
+		days.forEach(e => {
+			td += $_("days." + e) + " "
+		});
+    	return td
     }
 
 </script>
@@ -29,7 +33,7 @@
 <tr>
 	<!-- <th>{t_id}</th> -->
 	<th style="width:20%">{displayTime(t_time)}</th>
-	<th style="width:10%"><span class="tag {t_state === 'active'?'is-primary':'is-danger'} tags py-0 is-capitalized">{t_state}</span></th>
+	<th style="width:10%"><span class="tag {t_state === 'active'?'is-primary':'is-danger'} tags py-0 is-capitalized">{t_state == "active"?$_("active"):$_("disabled")}</span></th>
 	<th style="" class="is-size-4 m0 py-1">
 		<div class="is-flex is-justify-content-center is-align-items-center">
 

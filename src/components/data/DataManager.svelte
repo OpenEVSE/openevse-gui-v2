@@ -37,16 +37,16 @@
 
 	export async function refreshSchedulestore(ver) {
 		if (ver != $uistates_store.schedule_version) {
+			$uistates_store.schedule_version=ver
 			const res = await serialQueue.add(schedule_store.download)
-			if (res) $uistates_store.schedule_version=ver
 			return res
 		}
 	}
 
 	export async function refreshPlanStore(ver) {
 		if (ver != $uistates_store.schedule_plan_version) {
+			$uistates_store.schedule_plan_version=ver
 			const res = await serialQueue.add(plan_store.download)
-			if (res) $uistates_store.schedule_plan_version=ver
 			return res
 		}
 	}

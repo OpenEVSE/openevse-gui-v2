@@ -73,7 +73,7 @@
 
 		{#if name}
 			{#if state == "default"}
-			<span class={icon?"ml-1":""}>{name}</span>
+			<span class="{icon?"ml-1":""} is-capitalized">{name}</span>
 			{/if}
 		{/if}
 	</button>
