@@ -261,7 +261,19 @@
 			"retain": "Retenir les Publications (Retain)",
 			"topic-voltage": "Sujet Tension (V)",
 			"topic-voltage-desc": "Sujet MQTT de la tension (en V) pour améliorer le calcul de puissance"
-
+		},
+		"rfid": {
+			"enable": "Activer RFID",
+			"managetag": "Gérer les badges authorisés",
+			"scan": "Scanner",
+			"remove": "Retirer",
+			"register": "Enregistrer",
+			"placetag": "Placer un badge RFID sur le scanner...",
+			"scansuccess": "Badge scanné avec succès",
+			"tagregistered": "Badge déjà enregistré",
+			"newtag": "Nouveau badge détecté",
+			"registeredtags": "Badges Enregistrés",
+			"removeall": "Tout Retirer"
 		}
 	}
 }

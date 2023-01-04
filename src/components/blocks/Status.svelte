@@ -118,7 +118,7 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 						{#if $uistates_store.stateclaimfrom == "manual" || !$claims_target_store.claims.state}
 						<TaskDisplay mode={$_("clients.manual")} state={$status_store.status} />
 						{:else if $uistates_store.stateclaimfrom == "rfid"}
-						<TaskDisplay mode={$_("clients." + $uistates_store.stateclaimfrom )}  msg={!$status_store.rfid_auth?$_("status-task-rfid-msg"):$status_store.rfid_auth} state={$claims_target_store.properties.state} />
+						<TaskDisplay mode={$_("clients." + $uistates_store.stateclaimfrom )}  msg={!$status_store.rfid_auth?$_("status-task-rfid-msg"):$status_store.rfid_auth} state={$claims_target_store.properties.state == "active"?$_("active"):$_("disabled")} />
 						{:else if $uistates_store.stateclaimfrom != "timer"}
 						<TaskDisplay mode={$_("clients." + $uistates_store.stateclaimfrom)} state={$claims_target_store.properties.state == "active"?$_("active"):$_("disabled")} />
 						{:else if $uistates_store.stateclaimfrom == "timer"}

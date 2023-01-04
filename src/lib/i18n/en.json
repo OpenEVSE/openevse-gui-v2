@@ -260,10 +260,20 @@
 			"basetopic": "Base Topic",
 			"retain": "Retain published data",
 			"topic-voltage": "Voltage Topic",
-			"topic-voltage-desc": "Voltage MQTT topic to improve power calculations",
-			"help": {
-				
-			}
+			"topic-voltage-desc": "Voltage MQTT topic to improve power calculations"
+		},
+		"rfid": {
+			"enable": "Enable RFID",
+			"managetag": "Manage scanned tags",
+			"scan": "Scan",
+			"remove": "Remove",
+			"register": "Register",
+			"placetag": "Place your RFID tag on the scanner...",
+			"scansuccess": "Tag scanned successfully",
+			"tagregistered": "Tag already registered",
+			"newtag": "New tag detected",
+			"registeredtags": "Registered Tags",
+			"removeall": "Remove All"
 		}
 	}
 
