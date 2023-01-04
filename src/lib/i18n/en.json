@@ -134,5 +134,25 @@
 		"error": "Error",
 		"sleeping": "Disabled - Sleeping",
 		"disabled": "Disabled"
+	},
+	"config": {
+		"titles": {
+			"network": "Network",
+			"firmware": "Firmware",
+			"evse": "EVSE",
+			"safety": "Safety",
+			"time": "Time",
+			"http": "HTTP",
+			"mqtt": "MQTT",
+			"rfid": "RFID",
+			"shaper": "Shaper",
+			"selfprod": "Self Production",
+			"vehicle": "Vehicle",
+			"emon": "Energy Monitoring",
+			"ohm": "Ohm Connect",
+			"dev": "Developper",
+			"about": "About"
+		}
 	}
+
 }

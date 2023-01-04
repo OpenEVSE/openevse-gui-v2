@@ -134,5 +134,24 @@
 		"error": "Erreur",
 		"sleeping": "Désactivé - En Veille",
 		"disabled": "Désactivé"
+	},
+	"config": {
+		"titles": {
+			"network": "Réseau",
+			"firmware": "Micrologiciel",
+			"evse": "EVSE",
+			"safety": "Sécurité",
+			"time": "Date / Heure",
+			"http": "HTTP",
+			"mqtt": "MQTT",
+			"rfid": "RFID",
+			"shaper": "Délestage",
+			"selfprod": "Auto Production",
+			"vehicle": "Véhicule",
+			"emon": "Emoncms",
+			"ohm": "Ohm Connect",
+			"dev": "Développeur",
+			"about": "À propos"
+		}
 	}
 }
