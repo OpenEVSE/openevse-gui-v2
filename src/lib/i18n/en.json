@@ -274,6 +274,17 @@
 			"newtag": "New tag detected",
 			"registeredtags": "Registered Tags",
 			"removeall": "Remove All"
+		},
+		"shaper": {
+			"enable": "Enable Shaper",
+			"updated": "Live Power Load data up to date, throttling current...",
+			"notupdated": "Waiting for Live Power Load data",
+			"load": "Load",
+			"curavail": "Current Available",
+			"shaperdesc": "Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.",
+			"maxpower": "Max power allowed (in W)",
+			"livepower": "Live power load MQTT Topic (in W)"
+		
 		}
 	}
 

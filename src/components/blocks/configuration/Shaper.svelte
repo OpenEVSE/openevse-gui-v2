@@ -1,4 +1,5 @@
 <script>
+	import { _ } 			    from 'svelte-i18n'
 	import { status_store } 	from "./../../../lib/stores/status.js";
 	import { config_store } 	from "../../../lib/stores/config.js";
 	import { serialQueue } 		from "../../../lib/queue.js";
@@ -23,7 +24,7 @@
 			return
 		}
 		else if (!$config_store.mmqtt_live_pwr) {
-			alert_body = "Live power load MQTT Topic c is missing"
+			alert_body = "Live power load MQTT Topic is missing"
 			alert_visible=true
 			return
 		}
@@ -47,20 +48,20 @@
 	}
 </script>
 
-<Box title="Shaper" icon="fa6-solid:building-shield">
+<Box title={$_("config.titles.shaper")} icon="fa6-solid:building-shield">
 	<div class="my-3" class:is-hidden={!$config_store.current_shaper_enabled}>
-		<div class="is-size-7 {$status_store.shaper_updated?"has-text-primary":"has-text-danger"}">{$status_store.shaper_updated?"Live Power Load data up to date, throttling current...":"Waiting for Live Power Load data"}</div>
-		<span class="is-size-7 has-text-weight-bold">Load: <span class="has-text-info">{$status_store.shaper_live_pwr} W</span></span>
-		<span class="is-size-7 has-text-weight-bold">Current Available: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} A</span></span>
+		<div class="is-size-7 {$status_store.shaper_updated?"has-text-primary":"has-text-danger"}">{$status_store.shaper_updated?$_("config.shaper.updated"):$_("config.shaper.notupdated")}</div>
+		<span class="is-size-7 has-text-weight-bold">{$_("config.shaper.load")}: <span class="has-text-info">{$status_store.shaper_live_pwr} {$_("units.W")}</span></span>
+		<span class="is-size-7 has-text-weight-bold">{$_("config.shaper.curavail")}: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} {$_("units.A")}</span></span>
 	</div>
 	<div>
-		<Switch name="shaperswitch" label="Enable Shaper" onChange={toggleShaper} bind:checked={$config_store.current_shaper_enabled}/>
+		<Switch name="shaperswitch" label={$_("config.shaper.enable")} onChange={toggleShaper} bind:checked={$config_store.current_shaper_enabled}/>
 	</div>
-	<div class="is-size-7">Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.</div>
-	<div><InputForm title="Max power allowed (in W):" type="number" bind:value={$config_store.current_shaper_max_pwr} placeholder="9000" /></div>
-	<div><InputForm title="Live power load MQTT Topic (in W):" bind:value={$config_store.mqtt_live_pwr} placeholder="/topic/powerload" /></div>
+	<div class="is-size-7">{$_("config.shaper.shaperdesc")}</div>
+	<div><InputForm title="{$_("config.shaper.maxpower")}:" type="number" bind:value={$config_store.current_shaper_max_pwr} placeholder="9000" /></div>
+	<div><InputForm title="{$_("config.shaper.livepower")}:" bind:value={$config_store.mqtt_live_pwr} placeholder="/topic/powerload" /></div>
 	<div class="block mt-5 pb-1">
-		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+		<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>
 	<AlertBox body={alert_body} bind:visible={alert_visible} />
 </Box>
