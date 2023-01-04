@@ -217,6 +217,17 @@
 			"gfci": "GFCI",
 			"noground": "No Ground",
 			"stuck": "Stuck Contact"
+		},
+		"time": {
+			"date": "Date",
+			"usebrowsertime": "Use Browser Time",
+			"ntpserver": "NTP Server",
+			"ntpserver-desc": "NTP server adress",
+			"settimefrom": "Set time from",
+			"ntp": "NTP",
+			"manual": "Manual",
+			"timezone": "Time Zone",
+			"settime": "Set Time"
 		}
 	}
 

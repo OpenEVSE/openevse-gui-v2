@@ -217,6 +217,17 @@
 			"gfci": "GFCI",
 			"noground": "Mauvaise Terre",
 			"stuck": "Relai Collé"
+		},
+		"time": {
+			"date": "Date/Heure",
+			"usebrowsertime": "Utiliser la date/heure du navigateur",
+			"ntpserver": "Serveur NTP",
+			"ntpserver-desc": "Adresse du serveur NTP",
+			"settimefrom": "Régler la date/heure depuis",
+			"ntp": "NTP",
+			"manual": "Manuel",
+			"timezone": "Fuseau Horaire",
+			"settime": "Régler date/heure"
 		}
 	}
 }

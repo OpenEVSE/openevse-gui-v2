@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		   		  from 'svelte-i18n'
 	import { serialQueue } 		  from "./../../../lib/queue.js";
 	import {httpAPI, createTzObj} from '../../../lib/utils.js'
 	import {status_store} 		  from "../../../lib/stores/status.js"
@@ -22,8 +23,8 @@
 	let allow_time_update = true
 	let butn_settime
 	let timemodes = [
-		{name: "Manual", value: 0},
-		{name: "NTP",    value: 1}
+		{name: $_("config.time.manual"), value: 0},
+		{name: $_("config.time.ntp"),    value: 1}
 	]
 
 	function updateDateField(t) {
@@ -131,24 +132,24 @@
 	$: $config_store.time_zone, ()=> {tz = $config_store.time_zone }
 </script>
 
-<Box title="Time" icon="fa6-solid:clock">
+<Box title={$_("config.titles.time")} icon="fa6-solid:clock">
 
-	<InputForm type="datetime-local" title="Date" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
+	<InputForm type="datetime-local" title="{$_("config.time.date")}:" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
 	{#if !timemode}
-	<div><Button name="Use Browser Time" butn_submit={timeNow}/></div>
+	<div><Button name={$_("config.time.usebrowsertime")} butn_submit={timeNow}/></div>
 	{:else}
 	<div>
-		<InputForm type="text" title="NTP Server" placeholder="NTP host name" bind:value={$config_store.sntp_hostname} 
+		<InputForm type="text" title="{$_("config.time.ntpserver")}:" placeholder={$_("config.time.ntpserver-desc")}  bind:value={$config_store.sntp_hostname} 
 			status={inputSntpState} onChange={() => {setNTP($config_store.sntp_hostname)}}/>
 	</div>
 	{/if}
-	<Select title="Set time from:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
+	<Select title="{$_("config.time.settimefrom")}:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
 
 	<div class="select-tz">
-		<Select title="Time zone:" status={selectTimeZoneState} bind:value={tz} items={createTzObj(timeZone)} onChange={setTimeZone} />
+		<Select title="{$_("config.time.timezone")}:" status={selectTimeZoneState} bind:value={tz} items={createTzObj(timeZone)} onChange={setTimeZone} />
 
 	</div>
 	<div class="mt-4 mb-1">
-		<Button name="Set Time" butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
+		<Button name={$_("config.time.settime")} butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
 	</div>
 </Box>
