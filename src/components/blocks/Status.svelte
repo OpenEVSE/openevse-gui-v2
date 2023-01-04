@@ -1,4 +1,5 @@
 <script>
+	import { _ } 					from 'svelte-i18n'
 	import {status_store} 			from "../../lib/stores/status.js"
 	import {plan_store} 			from "../../lib/stores/plan.js"
 	import {uistates_store} 		from "../../lib/stores/uistates.js"
@@ -66,16 +67,16 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 		</div>
 
 		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center">
-			<StatusTile title="Elapsed" value={elapsed} />
-			<StatusTile title="Delivered" value={$status_store.session_energy/1000} precision={1} unit="kwh" />
-			<StatusTile title="Current" value={$status_store.amp/1000} precision={1} unit="A" />
+			<StatusTile title={$_("status-tile-elapsed")} value={elapsed} />
+			<StatusTile title={$_("status-tile-delivered")} value={$status_store.session_energy/1000} precision={1} unit="kwh" />
+			<StatusTile title={$_("status-tile-current")} value={$status_store.amp/1000} precision={1} unit="A" />
 			{#if $uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini"}
 			<!-- // Desktop & Tablet only -->
-			<StatusTile title="Power" value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
+			<StatusTile title={$_("status-tile-power")} value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
 			{/if}
 			{#if $uistates_store.breakpoint == "desktop"}
 			<!-- // Desktop only -->
-			<StatusTile title="Setpoint" value={$status_store.pilot} unit="A" />
+			<StatusTile title={$_("status-tile-setpoint")} value={$status_store.pilot} unit="A" />
 			{/if}
 		</div>
 
@@ -83,25 +84,25 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 		<div class="mx-0 is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center">
 			{#if $uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini"}
 			<!-- // Mobile only -->
-			<StatusTile title="Power" value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
+			<StatusTile title={$_("status-tile-power")} value={($status_store.amp/1000) * $status_store.voltage} unit="W" />
 			{/if}
 			{#if $uistates_store.breakpoint != "desktop"}
 			<!-- // Tablet & Mobile only -->
-			<StatusTile title="Setpoint" value={$status_store.pilot} unit="A" />
+			<StatusTile title={$_("status-tile-setpoint")} value={$status_store.pilot} unit="A" />
 			{/if}
 			{#if $status_store.divertmode == 2}
-			<StatusTile title="Available" value={$status_store.charge_rate} unit="A" />
+			<StatusTile title={$_("status-tile-available")} value={$status_store.charge_rate} unit="A" />
 			{:else if $status_store.shaper == 1}
-			<StatusTile title="Available" value={$status_store.shaper_cur} unit="A" />
+			<StatusTile title={$_("status-tile-available")} value={$status_store.shaper_cur} unit="A" />
 			{/if}
 			{#if $status_store.battery_level != undefined}
-			<StatusTile title="Battery" value={$status_store.battery_level} unit="%" />
+			<StatusTile title={$_("status-tile-battery")} value={$status_store.battery_level} unit="%" />
 			{/if}
 			{#if $status_store.battery_range != undefined}
-			<StatusTile title="Range" value={$status_store.battery_range} unit="km" />
+			<StatusTile title={$_("status-tile-range")} value={$status_store.battery_range} unit="km" />
 			{/if}
 			{#if $status_store.time_to_full_charge}
-			<StatusTile title="Remaining" value={sec2time($status_store.time_to_full_charge)} />
+			<StatusTile title={$_("status-tile-remaining")} value={sec2time($status_store.time_to_full_charge)} />
 			{/if}
 
 		</div>
@@ -109,15 +110,15 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 				<div class="is-flex mt-3 mt-4 mb-1 ml-4 ">
 					<div class="columns">
 						{#if $uistates_store.stateclaimfrom == "manual" || !$claims_target_store.claims.state}
-						<TaskDisplay mode="manual" state={$status_store.status} />
+						<TaskDisplay mode={$_("clients.manual")} state={$status_store.status} />
 						{:else if $uistates_store.stateclaimfrom == "rfid"}
-						<TaskDisplay mode={$uistates_store.stateclaimfrom} msg={!$status_store.rfid_auth?"Waiting for RFID badge":$status_store.rfid_auth} state={$claims_target_store.properties.state} />
+						<TaskDisplay mode={$_("clients." + $uistates_store.stateclaimfrom )}  msg={!$status_store.rfid_auth?$_("status-task-rfid-msg"):$status_store.rfid_auth} state={$claims_target_store.properties.state} />
 						{:else if $uistates_store.stateclaimfrom != "timer"}
-						<TaskDisplay mode={$uistates_store.stateclaimfrom} state={$claims_target_store.properties.state} />
+						<TaskDisplay mode={$_("clients." + $uistates_store.stateclaimfrom)} state={$claims_target_store.properties.state == "active"?$_("active"):$_("disabled")} />
 						{:else if $uistates_store.stateclaimfrom == "timer"}
-						<TaskDisplay mode="timer" msg={$plan_store.current_event.state=="active"?"Activated since":"Disabled since"} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
+						<TaskDisplay mode={$_("clients.timer")} msg={$plan_store.current_event.state=="active"?$_("status-task-timer-activated"):$_("status-task-timer-disabled")} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
 						{#if $plan_store.current_event.state != $plan_store.next_event.state}
-						<TaskDisplay mode="timer" msg={$plan_store.next_event.state=="active"?"Activate at":"Disable at"} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
+						<TaskDisplay mode="timer" msg={$plan_store.next_event.state=="active"?$_("status-task-timer-activate"):$_("status-task-timer-disable")} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
 						{/if}
 					{/if}
 					</div>

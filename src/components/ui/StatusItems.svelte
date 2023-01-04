@@ -1,8 +1,9 @@
 <script>
+	import { _ } 			  from 'svelte-i18n'
 	import { uistates_store } from "./../../lib/stores/uistates.js";
-	import StatusIcon from "./StatusIcon.svelte"
-	import Logo from "./../../assets/logo-mini.png"
-	import { link } from "svelte-spa-router"
+	import StatusIcon 		  from "./StatusIcon.svelte"
+	import Logo 			  from "./../../assets/logo-mini.png"
+	import { link } 		  from "svelte-spa-router"
 	export let state
 	export let time
 	export let vehicle
@@ -20,7 +21,7 @@
 		case 1: // Not connected
 			status = "active"
 			charging = false
-			message = "Waiting for EV"
+			message = $_("status-items-waiting")
 			color = "is-primary"
 			iconcolor = "has-text-white"
 			icon = "fa6-solid:hourglass-half"
@@ -28,7 +29,7 @@
 		case 2: // Connected
 			status = "active"
 			charging = false
-			message = "Ready to charge"
+			message = $_("status-items-ready")
 			color = "is-primary"
 			iconcolor = "has-text-white"
 			icon = "fa6-solid:thumbs-up"
@@ -36,7 +37,7 @@
 		case 3: // Charging
 			status = "active"
 			charging = true
-			message = "Charging..."
+			message = $_("status-items-charging")
 			color = "is-primary"
 			iconcolor = "has-text-warning"
 			icon = "fa6-solid:bolt"
@@ -51,7 +52,7 @@
 		case 11:
 			status = "disabled"
 			charging = false
-			message = "Error " + state
+			message = $_("status-items-error") + " " + state
 			color = "is-danger"
 			iconcolor = "has-text-white"
 			icon = "fa6-solid:triangle-exclamation"
@@ -59,7 +60,7 @@
 		case 254: // sleeping
 			status = "disabled"
 			charging = false
-			message = "EVSE Disabled"
+			message = $_("status-items-disabled")
 			color = "is-danger"
 			iconcolor = "has-text-white"
 			icon = "fa6-solid:ban"
@@ -67,7 +68,7 @@
 		case 255: 
 			status = "disabled"
 			charging = false
-			message = "EVSE Disabled "
+			message = $_("status-items-disabled")
 			color = "is-danger"
 			iconcolor = "has-text-white"
 			icon = "fa6-solid:circle-xmark"
@@ -85,12 +86,12 @@
 
 
 <div class="is-flex is-justify-content-center">
-	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-bottom {color}" data-tooltip={message}>
+	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-right {color}" data-tooltip={message}>
 		<StatusIcon icon={icon} color={iconcolor} bp={bp}/>
 	</div>
-	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-bottom {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?"Vehicle Connected":"No Vehicle Connected"}>
+	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-right {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?$_("status-items-connected"):$_("status-items-notconnected")}>
 		<StatusIcon icon={vehicle?"mdi:car":"mdi:car-off"} color="has-text-white" bp={bp}/>
 	</div>
 	<div class="is-flex-grow-1 has-text-centered {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini" ?"is-hidden":""}" ><a href="/" use:link><img src={Logo} alt="logo" /></a></div>
-	<div class="no-pointer {bp != "mobilemini"?"mt-1 is-medium":"mt-0 is-medium"} mb-1 ml-auto mr-2 is-capitalized  has-text-weight-semibold has-text-dark is-dark has-tooltip-arrow has-tooltip-bottom" data-tooltip="OpenEVSE local time">{time}</div>
+	<div class="no-pointer {bp != "mobilemini"?"mt-1 is-medium":"mt-0 is-medium"} mb-1 ml-auto mr-2 is-capitalized  has-text-weight-semibold has-text-dark is-dark">{time}</div>
 </div>

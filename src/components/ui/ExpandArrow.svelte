@@ -7,7 +7,7 @@ let size = ""
 .arrow {
 	position: absolute;
 	bottom: 0px;
-	right: 5px;
+	right: 0px;
 	background-color: transparent;
 }
 </style>
