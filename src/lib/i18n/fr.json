@@ -4,6 +4,7 @@
 	"state": "state",
 	"save": "sauvegarder",
 	"close": "fermer",
+	"cancel": "annuler",
 	"session": "Session",
 	"total": "Total",
 	"value": "Valeur",
@@ -152,6 +153,29 @@
 			"ohm": "Ohm Connect",
 			"dev": "Développeur",
 			"about": "À propos"
+		},
+		"network": {
+			"modes": {
+				"ap": "Point d'Accès (AP)",
+				"sta": "Client (STA)",
+				"staap": "Client + Point d'Accès (STA+AP)",
+				"wired": "Filaire Ethernet"
+			},
+			"mode": "Mode",
+			"ssid": "SSID",
+			"signal": "Signal",
+			"change": "Changer de réseau",
+			"ip": "Adresse IP",
+			"connected": "Connecté",
+			"host": "Nom d'Hôte",
+			"scanning": "Recherche de réseaux WiFi",
+			"failed": "Pas de réseau trouvé, veuillez recommencer",
+			"ssid-desc": "Nom du réseau WiFi",
+			"pass": "Mot de passe WiFi",
+			"pass-desc": "clef WPA",
+			"connect": "Connecter",
+			"scan": "Scanner"
+			
 		}
 	}
 }

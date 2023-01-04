@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		  					 from 'svelte-i18n'
 	import { uistates_store } 				 from "./../../../lib/stores/uistates.js";
 	import { config_store } 				 from "./../../../lib/stores/config.js";
 	import {onMount, onDestroy} 			 from "svelte"
@@ -97,8 +98,8 @@
 	<table class="table is-hoverable has-text-centered is-fullwidth is-bordered is-size-7 mb-3">
 		<thead>
 			<tr class="has-background-info ">
-				<th class="has-text-white has-text-centered" style="width: 70%;">SSID</th>
-				<th class="has-text-white has-text-centered">Signal</th>
+				<th class="has-text-white has-text-centered" style="width: 70%;">{$_("config.network.ssid")}</th>
+				<th class="has-text-white has-text-centered">{$_("config.network.signal")}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -113,12 +114,12 @@
 					{/each}
 				{:else if state == "scan"}
 				<tr class="has-background-light">
-					<td class="has-text-centered is-vcentered has-text-weight-semibold">Scanning Networks</td>
+					<td class="has-text-centered is-vcentered has-text-weight-semibold">{$_("config.network.scanning")}</td>
 					<td class="has-text-info is-size-5"><Loader /></td>
 				</tr>
 				{:else}
 					<tr class="has-background-light">
-						<th class="has-text-centered is-vcentered has-text-weight-semibold">No network found, scan again</th>
+						<th class="has-text-centered is-vcentered has-text-weight-semibold">{$_("config.network.failed")}</th>
 						<td class="has-text-info is-size-6"></td>
 					</tr>
 				{/if}
@@ -127,13 +128,13 @@
 	</table>
 </div>
 <form>
-<InputForm type="text" title="SSID" placeholder="WiFi SSID" bind:value={ssid} />
-<InputForm type="password" title="WiFi Password" placeholder="WPA Key" bind:value={key} />
+<InputForm type="text" title={$_("config.network.ssid")} placeholder={$_("config.network.ssid-desc")} bind:value={ssid} />
+<InputForm type="password" title={$_("config.network.pass")} placeholder={$_("config.network.pass-desc")} bind:value={key} />
 <div class="is-flex is-align-items-center">
-	<Button name="Connect" color="is-primary" butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
-	<Button name="Scan" butn_submit={scanAgain} bind:state={scanButnState}/>
+	<Button name={$_("config.network.connect")} color="is-primary" butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
+	<Button name={$_("config.network.scan")} butn_submit={scanAgain} bind:state={scanButnState}/>
 	{#if $config_store.ssid}
-	<Button name="Cancel" color="is-danger" butn_submit={() => active = false}/>
+	<Button name={$_("cancel")} color="is-danger" butn_submit={() => active = false}/>
 	{/if}
 </div>
 
