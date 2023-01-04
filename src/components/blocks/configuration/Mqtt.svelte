@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		    from 'svelte-i18n'
 	import { status_store } from "./../../../lib/stores/status.js";
 	import MQTThelp 		from "./../../help/MQTThelp.svelte";
 	import InputForm 		from "./../../ui/InputForm.svelte";
@@ -64,28 +65,28 @@
 	}
 </script>
 
-<Box title="MQTT" has_help={true} icon="simple-icons:mqtt">
+<Box title={$_("config.titles.mqtt")} has_help={true} icon="simple-icons:mqtt">
 	<div slot="help"><MQTThelp /> </div>
 	<div class="pb-2">
-		<Switch name="mqttswitch" label="Enable MQTT" onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled}/>
+		<Switch name="mqttswitch" label={$_("config.mqtt.enable")} onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled}/>
 		<div class="{$config_store.mqtt_enabled?"":"is-hidden"}">
-			<span class="{$status_store.mqtt_connected?"has-text-primary":"has-text-danger"}">{$status_store.mqtt_connected?"Connected to mqtt server":"Not connceted to mqtt server"}</span>
+			<span class="{$status_store.mqtt_connected?"has-text-primary":"has-text-danger"}">{$status_store.mqtt_connected?$_("config.mqtt.connected"):$_("config.mqtt.notconnected")}</span>
 		</div>
-		<div><InputForm title="Host*" is_inline={true} bind:value={$config_store.mqtt_server} placeholder="server IP / Hostname" /></div>
-		<div><InputForm title="Port*" is_inline={true} bind:value={$config_store.mqtt_port} placeholder="1883" type="number" /></div>
-		<Switch name="mqttselfcert" label="Reject self-signed certificates" bind:checked={$config_store.mqtt_reject_unauthorized}/>
-		<div><InputForm title="Username" is_inline={true} bind:value={$config_store.mqtt_user} placeholder="Username" /></div>
+		<div><InputForm title="{$_("config.mqtt.host")}*" is_inline={true} bind:value={$config_store.mqtt_server} placeholder="server IP / Hostname" /></div>
+		<div><InputForm title="{$_("config.mqtt.port")}*" is_inline={true} bind:value={$config_store.mqtt_port} placeholder="1883" type="number" /></div>
+		<Switch name="mqttselfcert" label={$_("config.mqtt.rejectselfsigned")} bind:checked={$config_store.mqtt_reject_unauthorized}/>
+		<div><InputForm title={$_("config.mqtt.username")} is_inline={true} bind:value={$config_store.mqtt_user} placeholder="Username" /></div>
 		<div>
 			<form>
-				<InputForm title="Password" is_inline={true} bind:value={$config_store.mqtt_pass} placeholder="Password" type="password" />
+				<InputForm title={$_("config.mqtt.password")} is_inline={true} bind:value={$config_store.mqtt_pass} placeholder="Password" type="password" />
 			</form>
 		</div>
-		<div><InputForm title="Base Topic*" is_inline={true} bind:value={$config_store.mqtt_topic} placeholder="openevse" /></div>
-		<Switch name="mqttretain" label="Retain published data" bind:checked={$config_store.mqtt_retained}/>
-		<div><InputForm title="Voltage Topic" is_inline={true} bind:value={$config_store.mqtt_vrms} placeholder="topic/voltage" /></div>
-		<div class="is-size-7">Voltage MQTT topic to improve power calculations</div>
+		<div><InputForm title={$_("config.mqtt.basetopic")} is_inline={true} bind:value={$config_store.mqtt_topic} placeholder="openevse" /></div>
+		<Switch name="mqttretain" label={$_("config.mqtt.retain")} bind:checked={$config_store.mqtt_retained}/>
+		<div><InputForm title={$_("config.mqtt.topic-voltage")} is_inline={true} bind:value={$config_store.mqtt_vrms} placeholder="topic/voltage" /></div>
+		<div class="is-size-7">{$_("config.mqtt.topic-voltage-desc")}</div>
 		<div class="block mt-2 ">
-			<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+			<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 		</div>
 		<AlertBox body={alert_body} bind:visible={alert_visible} />
 	</div>

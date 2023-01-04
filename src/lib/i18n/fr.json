@@ -233,16 +233,35 @@
 			"settime": "Régler date/heure"
 		},
 		"http": {
+			"enable": "Activer le serveur HTTP",
 			"authentication": "Authentification",
 			"settings": "Paramètres",
-			"username": "Utilisateur",
+			"username": "Identifiant",
 			"password": "Mot de Passe",
 			"enablehttps": "Activer HTTPS",
 			"nohttps": "HTTPS n'est pas supporté sur cette version du firmware",
 			"lang": "Language par défaut",
 			"enable-ttip": "Activer l'authentification HTTP",
 			"inputmax": "15 charactères max",
-			"errormsg": "Nom d'utilisateur ou mot de passe manquant"
+			"errormsg": "Nom d'utilisateur ou mot de passe manquant"	
+		},
+		"mqtt": {
+			"enable": "Activer MQTT",
+			"missing-host": "Adresse du serveur MQTT manquante",
+			"missing-port": "Port du serveur MQTT manquant",
+			"missing-basetopic": "Le topic MQTT principal est manquant",
+			"connected": "Connecté au serveur MQTT",
+			"notconnected": "Non connecté au serveur MQTT",
+			"host": "Hôte",
+			"port": "Port",
+			"rejectselfsigned": "Rejeter les certificats auto-signés",
+			"username": "Identifiant",
+			"password": "Mot de Passe",
+			"basetopic": "Sujet principal",
+			"retain": "Retenir les Publications (Retain)",
+			"topic-voltage": "Sujet Tension (V)",
+			"topic-voltage-desc": "Sujet MQTT de la tension (en V) pour améliorer le calcul de puissance"
+
 		}
 	}
 }

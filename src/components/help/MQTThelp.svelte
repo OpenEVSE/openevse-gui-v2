@@ -1,9 +1,9 @@
 <div>
-	<div class="has-text-weight-bold is-size-6 mb-4">
-		Status published to:
+	<div class="has-text-weight-bold is-size-6">
+		Status
 	</div>
 	<div class="is-size-6">	
-		[Base-topic]/[status] value
+		[Base-topic]/status [value]
 		<div class="is-size-7 has-text-weight-bold">
 			<ul class="mt-0 mb-2">
 				<li><span class="has-text-info">openevse/amp 16</span></li>

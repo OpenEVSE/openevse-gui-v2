@@ -120,7 +120,7 @@
 	<!-- Authentication -->
 	<div class="my-1" >
 		<form>
-			<Switch name="auth_enabled" label={$_("enable")} tooltip={$_("config.http.enable-ttip")} tooltip_pos="right" bind:checked={auth_checked} />
+			<Switch name="auth_enabled" label={$_("config.http.enable")} tooltip={$_("config.http.enable-ttip")} tooltip_pos="right" bind:checked={auth_checked} />
 			<div><InputForm  title={$_("config.http.username")} bind:value={auth_usr} placeholder="Admin" type="text" disabled={!auth_checked} /></div>
 			<div><InputForm title={$_("config.http.password")} bind:value={auth_pwd} placeholder={$_("config.http.inputmax")} type="password" maxlength=15 disabled={!auth_checked} /></div>
 			<Button name={$_("save")} color="is-info" state={auth_submit_state} butn_submit={auth_submit} />

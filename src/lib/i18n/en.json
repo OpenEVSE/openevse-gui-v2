@@ -233,6 +233,7 @@
 			"settime": "Set Time"
 		},
 		"http": {
+			"enable": "Enable HTTP server",
 			"authentication": "Authentication",
 			"settings": "Settings",
 			"username": "Username",
@@ -243,6 +244,26 @@
 			"enable-ttip": "Enable HTTP authentication",
 			"inputmax": "15 characters max",
 			"errormsg": "Please set a username & password first"
+		},
+		"mqtt": {
+			"enable": "Enable MQTT",
+			"missing-host": "MQTT Host is missing",
+			"missing-port": "MQTT Port is missing",
+			"missing-basetopic": "MQTT Base Topic is missing",
+			"connected": "Connected to mqtt server",
+			"notconnected": "Not connected to mqtt server",
+			"host": "Host",
+			"port": "Port",
+			"rejectselfsigned": "Reject self-signed certificates",
+			"username": "Username",
+			"password": "Password",
+			"basetopic": "Base Topic",
+			"retain": "Retain published data",
+			"topic-voltage": "Voltage Topic",
+			"topic-voltage-desc": "Voltage MQTT topic to improve power calculations",
+			"help": {
+				
+			}
 		}
 	}
 
