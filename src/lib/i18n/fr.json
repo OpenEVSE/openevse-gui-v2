@@ -235,7 +235,7 @@
 			"settime": "Régler date/heure"
 		},
 		"http": {
-			"enable": "Activer le serveur HTTP",
+			"enable": "Activer l'authentification HTTP",
 			"authentication": "Authentification",
 			"settings": "Paramètres",
 			"username": "Identifiant",

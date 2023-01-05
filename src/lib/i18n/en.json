@@ -235,7 +235,7 @@
 			"settime": "Set Time"
 		},
 		"http": {
-			"enable": "Enable HTTP server",
+			"enable": "Enable HTTP authentication",
 			"authentication": "Authentication",
 			"settings": "Settings",
 			"username": "Username",
