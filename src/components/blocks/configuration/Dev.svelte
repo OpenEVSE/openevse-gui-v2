@@ -17,9 +17,9 @@
 			url = "/term.html?debug"
 		else if (cons=="openevse")
 			url = "/term.html?evse"
-		if (import.meta.env.DEV) {
-			url = "/api" + url
-		}
+		// if (import.meta.env.DEV) {
+		// 	url = "/api" + url
+		// }
 		window.open(url, '_blank')
 	}
 
