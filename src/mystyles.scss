@@ -62,10 +62,10 @@ body::-webkit-scrollbar { display: none; }
 
 
 body {
-	// -ms-overflow-style: none;  /* IE and Edge */
-	// scrollbar-width: none;     /* Firefox */
-	// overflow: auto;
-	// overflow-x: hidden;
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;     /* Firefox */
+	overflow: hidden;
+	overflow-x: hidden;
 	background: linear-gradient(hsl(195, 78%, 30%), hsl(189, 53%, 47%));
 	background-repeat: no-repeat;
 	height: 100%;

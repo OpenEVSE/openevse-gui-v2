@@ -1,26 +1,35 @@
 <script>
+	import Modal from "./../../ui/Modal.svelte";
 	import { _ } 		from 'svelte-i18n'
 	import InputForm 	from "./../../ui/InputForm.svelte";
 	import Button 		from "./../../ui/Button.svelte";
 	import Box 			from "./../../ui/Box.svelte";
 	import {httpAPI} 	from "../../../lib/utils.js"
 	import DevHelp 		from "../../help/DevHelp.svelte"
+	import Terminal 	from "./Terminal.svelte"
 
 	let rapi_cmd = "$"
 	let rapi_cmd_result = []
 	let rapiurl = "/r?json=1&rapi="
 	let button_send_state = "default"
+	let opened = false
+	let mode
 
 	function openConsole(cons) {
-		let url
-		if (cons=="debug")
-			url = "/term.html?debug"
-		else if (cons=="openevse")
-			url = "/term.html?evse"
+		// let url
+		if (cons=="debug") {
+			// url = "/term.html?debug"
+			mode = "debug"
+		}
+		else if (cons=="evse") {
+			// url = "/term.html?evse"
+			mode = "evse"
+		}
 		// if (import.meta.env.DEV) {
 		// 	url = "/api" + url
 		// }
-		window.open(url, '_blank')
+		opened = true
+		// window.open(url, '_blank')
 	}
 
 	async function send_rapi_cmd() {
@@ -51,7 +60,7 @@
 	<div slot="help"><DevHelp /> </div>
 	<div class="mt-4 mb-2">
 		<Button name="Debug" color="is-info" butn_submit={()=>openConsole("debug")} />
-		<Button name="OpenEVSE" color="is-info" butn_submit={()=>openConsole("openevse")} />
+		<Button name="OpenEVSE" color="is-info" butn_submit={()=>openConsole("evse")} />
 	</div>
 
 	<div class="container mt-4 mb-1">
@@ -70,3 +79,6 @@
 		<form>
 	</div>
 </Box>
+<!-- <Modal bind:is_opened canClose={true}> -->
+	<Terminal {mode} bind:opened/>
+<!-- </Modal> -->
