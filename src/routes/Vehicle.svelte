@@ -25,12 +25,17 @@
 <CentralView>
 	<Box title="Vehicle" icon="bi:ev-front" has_help={activetab==1?true:false}>
 		<div slot="help"><VehicleTeslaHelp /> </div>
-		<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
-		{#if activetab == 0}
+		<div>
+			<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
+		</div>
+		<div class="content">
+			{#if activetab == 0}
 			<VehicleStatus/>
-		{:else if activetab == 1}
+			{:else}
 			<Vehicle />
-		{/if}
+			{/if}
+		</div>
+
 	</Box>
 </CentralView>
 
