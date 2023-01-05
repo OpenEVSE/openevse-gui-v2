@@ -1,17 +1,25 @@
 <script>
 	import { onMount, onDestroy } from "svelte";
-
+	import {httpAPI} from "./../../../lib/utils.js"
 	export let mode
 	export let opened = false
 	let socket
 	let terminal = ""
 	let termscreen
 
-	function connect2socket(mode) {
+	async function connect2socket(mode) {
 		let host 	= window.location.host
-		// let host 	= "openevse.local"
 		let ishttps = location.protocol === "https:"
 		let proto 	= ishttps?"wss://":"ws://"
+		let url = location.protocol + "//" + location.host + "/" + mode
+		let res = await httpAPI("GET",url,null,"text")
+		if (res && (res.msg != "error" && res != "error")) {
+			res = res.replace(/(\r\n|\n|\r)/gm, "\n");
+			terminal = res
+			setTimeout(() => {
+				scrollToBottom(termscreen);
+			}, 100);
+		}
 		if (!socket) {
 			console.log("opening Terminal socket")
 			socket = new WebSocket(proto + host + "/" + mode + "/console")

@@ -73,6 +73,14 @@ export default defineConfig(({ command, mode }) => {
         '/evse/console': {
           target: 'ws://' + env.VITE_OPENEVSEHOST,
           ws: true,
+        },
+        '/debug': {
+          target: 'http://' + env.VITE_OPENEVSEHOST,
+          changeOrigin: true,
+        },
+        '/evse': {
+          target: 'http://' + env.VITE_OPENEVSEHOST,
+          changeOrigin: true,
         }
       }
     }
