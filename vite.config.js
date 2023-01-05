@@ -65,6 +65,14 @@ export default defineConfig(({ command, mode }) => {
         '/ws': {
           target: 'ws://' + env.VITE_OPENEVSEHOST,
           ws: true,
+        },
+        '/debug/console': {
+          target: 'ws://' + env.VITE_OPENEVSEHOST,
+          ws: true,
+        },
+        '/evse/console': {
+          target: 'ws://' + env.VITE_OPENEVSEHOST,
+          ws: true,
         }
       }
     }

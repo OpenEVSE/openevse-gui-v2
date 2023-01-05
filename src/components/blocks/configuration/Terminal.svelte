@@ -5,79 +5,66 @@
 	export let opened = false
 	let socket
 	let terminal = ""
+	let termscreen
 
 	function connect2socket(mode) {
-		// let host 	= window.location.host
-		let host 	= "192.168.1.8"
+		let host 	= window.location.host
+		// let host 	= "openevse.local"
 		let ishttps = location.protocol === "https:"
 		let proto 	= ishttps?"wss://":"ws://"
 		if (!socket) {
 			console.log("opening Terminal socket")
-			// if (mode != "debug" || mode != "evse") 
-			// 	mode = "debug"
-			console.log("mode: " + mode)
 			socket = new WebSocket(proto + host + "/" + mode + "/console")
-			socket.binaryType = "arraybuffer";
 			socket.addEventListener("open", function (event) {
 				console.log("connected to Terminal websocket")
 			} )
 			socket.addEventListener("message", function (e) {
 				let line
-				if (e.data instanceof ArrayBuffer) {
-					// binary frame
-					const view = new DataView(e.data);
-					console.log(view.getInt32(0));
-					line = view.getInt32(0)
-				} else {
-					// text frame
-					console.log(e.data);
-					line = e.data
-				}
+				line = e.data
+				line = line.replace(/(\r\n|\n|\r)/gm, "\n");
+				if (terminal.length > 51200)
+					terminal = ""
 				terminal += line
+				scrollToBottom(termscreen);
+				
 			})
 			socket.addEventListener("error", function (e) {
-				console.error('Terminal Socket encountered error: ', e, 'Closing socket');
+				console.error('Terminal Socket encountered error. Closing socket');
 			})
 			socket.addEventListener("close", function (e) {
 				console.log('Terminal Socket is closed.', e.reason);
 				socket = null;
-				connect2socket(mode)			
+				if (opened)
+					setTimeout(() => {
+						connect2socket(mode)	
+					}, 500);		
 			})
 		}
 	}
-	function handleSocket(opened) {
-		if(opened) {
-			connect2socket(mode)	
-		}
-		else {
-			if (socket)
-			{
-				socket.close()
-				socket = null
-			}
+	
 
-			
-		}
-	}
+	const scrollToBottom = async (node) => {
+		node.scroll({ top: node.scrollHeight, behavior: 'smooth' });
+	}; 
 
-	// onMount( ()=>{
-	// 	connect2socket(mode)
-	// })
+	onMount( ()=>{
+		connect2socket(mode)
+	})
 	onDestroy (()=> {
 		if(socket)
 			socket.close()
 		socket = null
 	})
 
-	$: handleSocket(opened)
 </script>
 <style>
 	.term {
 		border: solid;
 		border-color: white;
-		overflow: hidden;
+		overflow-y: auto;
+		overflow-x: hidden;
 		color:#fff;
-		background-color:rgb(12, 40, 61);
+		background-color:black;
 		width: 90%;
 		height: 90%;
 		position:absolute;
@@ -92,7 +79,7 @@
 		top: 0px;
 		left: 0px;
 		padding: 0px;
-		background-color: black;
+		background-color: rgb(12, 40, 61);
 		opacity: 90%;
 		width: 100vw;
 		height: 100vh;
@@ -106,8 +93,8 @@
     }
 </style>
 
-<div class="bg is-overlay" class:is-hidden={!opened} on:click={()=>opened=false} on:keypress={()=>opened=false}>
-	<div class="term is-size-7" on:click|stopPropagation on:keypress|stopPropagation>
+<div class="bg is-overlay" on:click={()=>opened=false} on:keypress={()=>opened=false}>
+	<div bind:this={termscreen} class="term is-size-7" on:click|stopPropagation on:keypress|stopPropagation>
 		<pre>{terminal}</pre>
 	</div>
 </div>

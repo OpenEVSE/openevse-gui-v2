@@ -80,5 +80,7 @@
 	</div>
 </Box>
 <!-- <Modal bind:is_opened canClose={true}> -->
-	<Terminal {mode} bind:opened/>
+	{#if opened}
+	<Terminal mode={mode} bind:opened={opened}/>
+	{/if}
 <!-- </Modal> -->
