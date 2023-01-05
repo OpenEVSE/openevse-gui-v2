@@ -1,4 +1,4 @@
-import { register, init, getLocaleFromNavigator } from 'svelte-i18n';
+import { register, init } from 'svelte-i18n';
 import { uisettings_store } from './stores/uisettings.js'
 import { get } from 'svelte/store'
 

@@ -1,13 +1,13 @@
 <script>
-	import { _ } 		    from 'svelte-i18n'
-	import { config_store } from "./../../../lib/stores/config.js";
-	import {onMount} 		from "svelte"
-	import Tabs 			from "./../../ui/Tabs.svelte";
-	import AlertBox			from "./../../ui/AlertBox.svelte";
-	import Switch 			from "../../ui/Switch.svelte";
-	import InputForm 		from "../../ui/InputForm.svelte";
-	import Box 				from "../../ui/Box.svelte"
-	import Button 			from "../../ui/Button.svelte"
+	import { _ , locales} 	from 'svelte-i18n'
+	import { config_store } 		from "./../../../lib/stores/config.js";
+	import {onMount} 				from "svelte"
+	import Tabs 					from "./../../ui/Tabs.svelte";
+	import AlertBox					from "./../../ui/AlertBox.svelte";
+	import Switch 					from "../../ui/Switch.svelte";
+	import InputForm 				from "../../ui/InputForm.svelte";
+	import Box 						from "../../ui/Box.svelte"
+	import Button 					from "../../ui/Button.svelte"
 
 	let alert_visible = false
 	let activetab = 0
@@ -23,11 +23,6 @@
 	let stg_submit_state
 	let stg_has_https
 	let stg_language = 'en'
-
-	const stg_langs = [
-		{name: "English", code: "en"},
-		{name: "Français",  code: "fr"}
-	]
 
 	let clickTab = (i) => {
 		activetab = i
@@ -129,18 +124,18 @@
 	{:else if activetab == 1}
 	<!-- Settings -->
 	<div class="my-2">
-		<div class="block">
+		<!-- <div class="block">
 			<Switch name="https_enabled" label={$_("config.http.enablehttps")} bind:checked={auth_https_checked} disabled={!stg_has_https} />
 			{#if !stg_has_https}
 			<div class=" is-size-7 is-italic">{$_("config.http.nohttps")}</div>
 			{/if}
-		</div>
+		</div> -->
 		<div class="block">
 			<div class="has-text-weight-semibold mb-1">{$_("config.http.lang")}</div>
 			<div class="select is-info">		
 				<select bind:value={stg_language}>
-					{#each stg_langs as lang}
-					<option value={lang.code}>{lang.name}</option>
+					{#each $locales as lang}
+					<option value={lang}>{lang}</option>
 					{/each}	
 				</select>
 			</div>

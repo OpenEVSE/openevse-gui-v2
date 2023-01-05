@@ -57,24 +57,22 @@
 </style>
 
 <svelte:options accessors/>
-<div class="is-inline-block p0">
-	<button type="button" style="width:{width}" bind:this={butn} 
-		class="button is-flex is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size} {margin}"
-		class:no-pointer={nopointer} {disabled} data-tooltip={tooltip}
-		on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} 
-		on:mouseenter={() => {is_overed = true}} 
-		on:mouseleave={() => {is_overed = false}} 
-		>
-		{#if state == "loading"}
-		<Loader size={size == "is-small"? "is-size-5" : "is-size-4"} color="has-text-info" />
-		{:else if icon || state != "default"}
-		<iconify-icon icon="{state=="default"?icon:state == "ok"?"fa6-solid:check":"fa6-solid:xmark"}"  class="{state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}  {size == "is-small"? "is-size-5" : "is-size-4"}"></iconify-icon>
-		{/if}
+<button type="button" bind:this={butn} 
+	class="button is-flex is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size} {margin}"
+	class:no-pointer={nopointer} {disabled} data-tooltip={tooltip}
+	on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} 
+	on:mouseenter={() => {is_overed = true}} 
+	on:mouseleave={() => {is_overed = false}} 
+	>
+	{#if state == "loading"}
+	<Loader size={size == "is-small"? "is-size-5" : "is-size-4"} color="has-text-info" />
+	{:else if icon || state != "default"}
+	<iconify-icon icon="{state=="default"?icon:state == "ok"?"fa6-solid:check":"fa6-solid:xmark"}"  class="{state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}  {size == "is-small"? "is-size-5" : "is-size-4"}"></iconify-icon>
+	{/if}
 
-		{#if name}
-			{#if state == "default"}
-			<span class="{icon?"ml-1":""} is-capitalized">{name}</span>
-			{/if}
+	{#if name}
+		{#if state == "default"}
+		<span class="{icon?"ml-1":""} is-capitalized">{name}</span>
 		{/if}
-	</button>
-</div>
+	{/if}
+</button>
