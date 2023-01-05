@@ -4,23 +4,22 @@
 		export let url
 		export let name
 		export let icon
+		export let height = "1.5em"
 </script>
 <style>
 	.button {
-		width: 250px;
+		position: relative;
+		width: 200px;
 	}
-	.icn {
-		position: absolute;
-		left: 30px;
-		top: 8px;
+	.name {
+		width: 100%;
 	}
 </style>
 
 <a href={url} use:link>
-	<div class="mx-2 my-1 is-inline-block button is-info is-outlined is-flex is-align-items-center mx-6">
-		<div class="is-inline-block icn">
-			<iconify-icon icon={icon} class="is-size-4" />
-		</div>
-		{name}
+	<div class="mx-2 my-1 button is-info is-outlined">
+		<iconify-icon inline icon={icon} {height} class=""/>
+		<div class="name">{name}</div>
+	
 	</div>
 </a>
