@@ -5,13 +5,14 @@ import { get } from 'svelte/store'
 register("en", () => import("./i18n/en.json"))
 register("fr", () => import("./i18n/fr.json"))
 
-let locale = 'en'
+let locale = "en"
+if ( get(uisettings_store).lang != undefined ) {
+	locale = get(uisettings_store).lang
+}
 
 let param = {
-	fallbackLocale: 'en'
-}
-if ( get(uisettings_store).lang != undefined ) {
-	param.initialLocale = get(uisettings_store).lang
+	fallbackLocale: 'en',
+	initialLocale: locale
 }
 
 init(param);

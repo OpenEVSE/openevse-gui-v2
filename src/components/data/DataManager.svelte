@@ -1,4 +1,5 @@
 <script>
+	import { uisettings_store } from "./../../lib/stores/uisettings.js";
 	import "hacktimer/HackTimer.js"
 	import {EvseClients} 				from  "./../../lib/vars.js"
 	import { uistates_store }			from "./../../lib/stores/uistates.js"
@@ -147,7 +148,11 @@
 	}
 
 	function refreshLocale(lang) {
-		$locale = lang
+		if ($locale != $config_store.lang) {
+			$locale = lang
+			let setting = {lang: $locale}
+			uisettings_store.set({...$uisettings_store, ...setting}) 
+		}
 	}
 
 

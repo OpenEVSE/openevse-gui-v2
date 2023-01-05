@@ -1,4 +1,5 @@
 <script>
+	import { _ , locale } 					from 'svelte-i18n'
 	import { uisettings_store } 	from "./../../lib/stores/uisettings.js";
 	import { onMount } 				from "svelte";
 	import { uistates_store }		from "./../../lib/stores/uistates.js"
@@ -46,6 +47,12 @@
 			status = "error"
 			return false
 		}
+		if ($uisettings_store.lang != $config_store.lang) {
+			$locale = $config_store.lang
+			let settings = {lang: $locale}
+			uisettings_store.set({...$uisettings_store, ...settings}) 
+		}
+		
 		progress = 90
 		$uistates_store.config_version = $status_store.config_version
 		status = "Loading step 5"
