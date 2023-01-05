@@ -58,13 +58,14 @@
 
 <svelte:options accessors/>
 <button type="button" bind:this={butn} 
-	class="button is-inline-block is-flex is-justify-content-center is-outlined has-tooltip-arrow has-tooltip {color} {size} {margin}"
+	class="button is-inline-block is-outlined has-tooltip-arrow has-tooltip {color} {size} {margin}"
 	class:no-pointer={nopointer} {disabled} data-tooltip={tooltip}
 	on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} 
 	on:mouseenter={() => {is_overed = true}} 
 	on:mouseleave={() => {is_overed = false}} 
 	>
-	{#if state == "loading"}
+	<div class="is-flex is-align-items-center">
+		{#if state == "loading"}
 	<Loader size={size == "is-small"? "is-size-5" : "is-size-4"} color="has-text-info" />
 	{:else if icon || state != "default"}
 	<iconify-icon icon="{state=="default"?icon:state == "ok"?"fa6-solid:check":"fa6-solid:xmark"}"  class="{state == "ok"?"has-text-primary":state == "error"?"has-text-danger":""}  {size == "is-small"? "is-size-5" : "is-size-4"}"></iconify-icon>
@@ -72,7 +73,9 @@
 
 	{#if name}
 		{#if state == "default"}
-		<span class="{icon?"ml-1":""} is-capitalized">{name}</span>
+		<div class="{icon?"ml-2":""} is-capitalized is-inline-block">{name}</div>
 		{/if}
 	{/if}
+	</div>
+	
 </button>
