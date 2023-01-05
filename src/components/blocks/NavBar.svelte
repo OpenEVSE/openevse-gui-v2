@@ -33,18 +33,19 @@
 
 
 
+
 </style>
 
-<div class="mobnav is-flex-shrink-0 is-flex-grow-0  has-background-dark ">	
-	<div class="container  is-size-3 is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-rowpy-1">
+<div class="mobnav is-flex-shrink-0 is-flex-grow-0  has-background-dark is-flex is-align-items-center">	
+	<div class="container  is-size-3 is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row">
 		<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"}>
-			<iconify-icon inline icon="fa6-solid:chart-simple"></iconify-icon>
+			<iconify-icon  inline icon="fa6-solid:chart-simple"></iconify-icon>
 		</a>
 		<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"}>
 			<iconify-icon inline icon="ion:calendar"></iconify-icon>
 		</a>
 		<a href="/" use:link class="nav-item {selected=="/"?charging?"charging":"active":""}">
-			<iconify-icon inline icon="fa6-solid:bolt" height="1.2em" class="pt-2"></iconify-icon>
+			<iconify-icon inline icon="fa6-solid:bolt" height="1.2em" class="pt-2	"></iconify-icon>
 		</a>
 		<a class="nav-item" href="/history" use:link class:active={selected=="/history"}>
 			<iconify-icon inline icon="icon-park-outline:history-query"></iconify-icon>
