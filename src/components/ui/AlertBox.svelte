@@ -1,4 +1,5 @@
 <script>
+	import Modal from "./Modal.svelte"
 	export let title = "Error";
 	export let body;
 	export let visible = false;
@@ -14,9 +15,7 @@
 </script>
 
 {#if visible == true}
-<div id="t_modal" class="modal is-active">
-	<div class="modal-background" on:click={close} on:keydown={close}></div>
-	<div class="modal-content p-3">
+<Modal bind:is_opened={visible} canClose={closable}>
 		<article class="message is-danger">
 			<div class="message-header">
 			<p>{title}</p>
@@ -33,6 +32,5 @@
 			</div>
 			{/if}
 		</article>
-	</div>
-</div>
+</Modal>
 {/if}

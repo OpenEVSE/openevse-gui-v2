@@ -56,13 +56,13 @@
 	}
 
 	.status {
-		z-index: 0;
+		z-index: 1;
 	}
 
 	.route {
 		width: 100%;
 		height: 100%;
-		z-index: 0;
+		z-index: 1;
 		overflow: hidden;
 		overflow-x: hidden;	
 		overflow-y: hidden;
@@ -72,6 +72,13 @@
 	.screen {
 		height: 100%;
 		width: 100%;
+	}
+
+	.nav {
+		z-index: 0;
+		width: 100%;
+		height: 56px;
+		flex: 0;
 	}
   
 
@@ -96,7 +103,10 @@
 			<Router {routes} />
 		</div>
 		{#if !$location.includes("/wizard")}
-		<NavBar charging={$uistates_store.charging} selected={$location} />
+		<div class="nav">
+			<NavBar charging={$uistates_store.charging} selected={$location} />
+		</div>
+		
 		{/if}
 		
 	</div>
