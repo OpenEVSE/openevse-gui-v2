@@ -1,5 +1,5 @@
 <script>
-
+	import { _ } 		    from 'svelte-i18n'
 	import InputForm 		from "./../../ui/InputForm.svelte";
 	import Box 				from "../../ui/Box.svelte";
 	import Button 			from "./../../ui/Button.svelte";
@@ -19,17 +19,17 @@
 
 	let stg_submit = async () => {
 		if (!$config_store.emoncms_server) {
-			alert_body = "Emoncms Server is missing"
+			alert_body = $_("config.emon.missing-server")
 			alert_visible=true
 			return
 		}
 		else if (!$config_store.emoncms_node) {
-			alert_body = "Emoncms Node is missing"
+			alert_body = $_("config.emon.missing-node")
 			alert_visible=true
 			return
 		}
 		else if (!$config_store.emoncms_apikey) {
-			alert_body = "API Key is missing"
+			alert_body = $_("config.emon.missing-key")
 			alert_visible=true
 			return
 		}
@@ -55,29 +55,31 @@
 	}
 </script>
 
-<Box title="Energy Monitoring" icon="fa6-solid:chart-bar">
+<Box title={$_("config.titles.emon")} icon="fa6-solid:chart-bar">
 	<div>
-		<Switch name="emoncmsswitch" label="Enable Emoncms" onChange={toggleEmonCMS} bind:checked={$config_store.emoncms_enabled} is_rtl={true}/>
+		<Switch name="emoncmsswitch" label={$_("config.emon.enable")} onChange={toggleEmonCMS} bind:checked={$config_store.emoncms_enabled} is_rtl={true}/>
 	</div>
 
 	{#if $config_store.emoncms_enabled}
 	<div class="is-size-7">
-		<span class="">Connected:</span>
-		<span class="has-text-weight-bold {$status_store.emoncms_connected == 1 ?"has-text-primary":"has-text-danger"}">{$status_store.emoncms_connected == 1 ? "yes" : "no"}</span>
-		<span class="ml-2">Posts:</span>
+		<span class="">{$_("config.emon.connected")}:</span>
+		{#key $status_store.emoncms_connected }
+		<span class="has-text-weight-bold {$status_store.emoncms_connected == 1 ?"has-text-primary":"has-text-danger"}">{$status_store.emoncms_connected == 1 ?$_("yes"):$_("no")}</span>
+		{/key}
+		<span class="ml-2">{$_("config.emon.posts")}:</span>
 		<span class="">{$status_store.packets_success}/{$status_store.packets_sent}</span>
 	</div>
 	{/if}
 	
-	<InputForm title="Emoncms Server*:" bind:value={$config_store.emoncms_server} placeholder="server" />
+	<InputForm title="{$_("config.emon.server")}*:" bind:value={$config_store.emoncms_server} placeholder="server" />
 	<div class="is-size-7">e.g: <a href="https://data.openevse.com/emoncms">data.openevse.com/emoncms</a>, <a href="https://emoncms.org/">emoncms.org</a>, <a href="http://emonpi/">emonpi</a></div>
 
-	<InputForm title="Emoncms Node*:" bind:value={$config_store.emoncms_node} placeholder="node name" />
-	<InputForm title="Emoncms write-apikey*:" type="password" bind:value={$config_store.emoncms_apikey} placeholder="api key" />
+	<InputForm title="{$_("config.emon.node")}*:" bind:value={$config_store.emoncms_node} placeholder="node name" />
+	<InputForm title="{$_("config.emon.apikey")}*:" type="password" bind:value={$config_store.emoncms_apikey} placeholder="api key" />
 
 	
 	<div class="block mt-5 mb-1">
-		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+		<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>
 	<AlertBox body={alert_body} bind:visible={alert_visible} />
 </Box>

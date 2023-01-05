@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		from 'svelte-i18n'
 	import InputForm 	from "./../../ui/InputForm.svelte";
 	import Button 		from "./../../ui/Button.svelte";
 	import Box 			from "./../../ui/Box.svelte";
@@ -46,8 +47,8 @@
 </script>
 <style>
 </style>
-<Box title="Developer" icon="mdi:console" has_help={true}>
-	<div slot="help"><DevHelp  /> </div>
+<Box title={$_("config.titles.dev")} icon="mdi:console" has_help={true}>
+	<div slot="help"><DevHelp /> </div>
 	<div class="mt-4 mb-2">
 		<Button name="Debug" color="is-info" butn_submit={()=>openConsole("debug")} />
 		<Button name="OpenEVSE" color="is-info" butn_submit={()=>openConsole("openevse")} />
@@ -63,9 +64,9 @@
 			</div>
 		</div>
 		<form on:submit|preventDefault={send_rapi_cmd}>
-		<InputForm  title="Rapi Command" bind:value={rapi_cmd} placeholder="" type="text" />
-		<Button name="Send" color="is-info" butn_submit={send_rapi_cmd} state={button_send_state}/>
-		<Button name="Clear" color="is-info" butn_submit={clear_rapi_cmd} />
+		<InputForm  title={$_("config.dev.rapi-cmd")} bind:value={rapi_cmd} placeholder="" type="text" />
+		<Button name={$_("config.dev.send")} color="is-info" butn_submit={send_rapi_cmd} state={button_send_state}/>
+		<Button name={$_("config.dev.clear")} color="is-info" butn_submit={clear_rapi_cmd} />
 		<form>
 	</div>
 </Box>

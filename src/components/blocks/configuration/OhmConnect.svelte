@@ -1,4 +1,5 @@
 <script>
+	import { _ } 		    from 'svelte-i18n'
 	import { status_store } from "./../../../lib/stores/status.js";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import { serialQueue }  from "./../../../lib/queue.js";
@@ -41,12 +42,12 @@
 	}
 </script>
 
-<Box title="OhmConnect" icon="mdi:energy-circle">
+<Box title={$_("config.titles.ohm")} icon="mdi:energy-circle">
 	<div>
-		<Switch name="emoncmsswitch" label="Enable OhmConnect" onChange={toggleOhmConnect} bind:checked={$config_store.ohm_enabled} is_rtl={true}/>
+		<Switch name="emoncmsswitch" label={$_("config.ohm.enable")} onChange={toggleOhmConnect} bind:checked={$config_store.ohm_enabled} is_rtl={true}/>
 	</div>
 	
-	<div class="is-size-7">OhmConnect monitors real-time conditions on the electricity grid. When dirty and unsustainable power plants turn on, our users receive a notification to save energy.</div>
+	<div class="is-size-7">{$_("config.ohm.desc")}</div>
 	{#if $config_store.ohm_enabled}
 	<div class="is-size-7">
 		<span class="">Ohm Hour:</span>
@@ -54,15 +55,15 @@
 	</div>
 	{/if}
 	
-	<InputForm title="Ohm Key:*:" bind:value={$config_store.ohm} placeholder="Key" />
+	<InputForm title="{$_("config.ohm.ohmkey")}*:" bind:value={$config_store.ohm} placeholder="Key" />
 	<div class="is-size-7">
-		Ohm Key can be obtained by logging in to OhmConnect, enter Settings and locate the link in "Open Source Projects".<br>
-		<span class="has-text-weight-bold">Example: </span><span>https://login.ohmconnect.com/verify-ohm-hour/OpnEoVse</span><br>
-		<span class="has-text-weight-bold">Key:</span>OpnEoVse
+		{$_("config.ohm.ohmkey-desc")}<br>
+		<span class="has-text-weight-bold">{$_("config.ohm.example")}: </span><span>https://login.ohmconnect.com/verify-ohm-hour/OpnEoVse</span><br>
+		<span class="has-text-weight-bold">{$_("config.ohm.key")}:</span>OpnEoVse
 	</div>
 
 	<div class="block mt-5 mb-1">
-		<Button name="Save" color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+		<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>
 	<AlertBox body={alert_body} bind:visible={alert_visible} />
 </Box>

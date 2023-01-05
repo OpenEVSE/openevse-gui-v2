@@ -15,6 +15,8 @@
 	"value": "Valeur",
 	"show": "Afficher",
 	"error": "Erreur",
+	"yes": "Oui",
+	"no": "Non",
 	"alert-evsemissing-title": "Module OpenEVSE manquant",
 	"alert-evsemissing-body": "Module OpenEVSE non détecté. Veuillez vérifiez votre installation avant d'aller plus loin.",
 	"alert-conerror-title": "Erreur de connection",
@@ -153,7 +155,7 @@
 			"selfprod": "Auto Production",
 			"vehicle": "Véhicule",
 			"emon": "Emoncms",
-			"ohm": "Ohm Connect",
+			"ohm": "OhmConnect",
 			"dev": "Développeur",
 			"about": "À propos"
 		},
@@ -240,7 +242,7 @@
 			"password": "Mot de Passe",
 			"enablehttps": "Activer HTTPS",
 			"nohttps": "HTTPS n'est pas supporté sur cette version du firmware",
-			"lang": "Language par défaut",
+			"lang": "Langue",
 			"enable-ttip": "Activer l'authentification HTTP",
 			"inputmax": "15 charactères max",
 			"errormsg": "Nom d'utilisateur ou mot de passe manquant"	
@@ -353,6 +355,31 @@
 			"normal": "Normal",
 			"access-token": "Access Token",
 			"refresh-token": "Refresh Token"
+		},
+		"emon": {
+			"enable": "Activer Emoncms",
+			"connected": "Connecté",
+			"posts": "Publications",
+			"server": "Serveur Emoncms",
+			"node": "Noeud",
+			"apikey": "Clef API Ecriture",
+			"missing-server": "Adresse serveur Emoncms manquante",
+			"missing-node": "Noeud Emoncms manquant",
+			"missing-key": "Clef API manquante"
+		},
+		"ohm": {
+			"enable": "Activer Ohm Connect",
+			"desc": "OhmConnect supervise en temps réel les conditions sur le réseau électrique. Quand les centrales les plus polluantes ou que la charge est trop elevée, nos utilisateurs reçoivent une notification afin de sauvegarder l'energie.",
+			"ohmhour": "Ohm Hour",
+			"ohmkey": "Clef Ohm",
+			"ohmkey-desc" : "La clef Ohm peut être obtenue sur votre compte OhmConnect. Aller dans Settings et trouver le lien \"Open Source Projects\"",
+			"example": "Example",
+			"key": "Clef"
+		},
+		"dev": {
+			"rapi-cmd": "Commande Rapi",
+			"send": "Envoyer",
+			"clear": "Effacer"
 		}
 	}
 }

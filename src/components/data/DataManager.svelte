@@ -11,6 +11,7 @@
 	import { clientid2name, formatDate} from "./../../lib/utils.js"
 	import { serialQueue } 				from "./../../lib/queue.js";
 	import {onMount} 					from "svelte"
+	import { locale }					from 'svelte-i18n'
 
 	let counter_divert_update
 	let last_divert_update
@@ -145,6 +146,10 @@
 		}
 	}
 
+	function refreshLocale(lang) {
+		$locale = lang
+	}
+
 
 
 	// Refresh stores when new version is published over websocket
@@ -158,6 +163,7 @@
 	$: countDivertUpdate		($status_store.divert_update)
 	$: countVehicleUpdate		($status_store.vehicle_state_update)
 	$: countRFIDScan			($status_store.rfid_waiting)
+	$: refreshLocale			($config_store.lang)
 	
 
 </script>

@@ -1,4 +1,5 @@
 <script>
+	import { uisettings_store } 	from "./../../lib/stores/uisettings.js";
 	import { onMount } 				from "svelte";
 	import { uistates_store }		from "./../../lib/stores/uistates.js"
 	import { status_store }			from "./../../lib/stores/status.js"
