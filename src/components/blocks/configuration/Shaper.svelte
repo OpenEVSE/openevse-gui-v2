@@ -23,7 +23,7 @@
 			alert_visible=true
 			return
 		}
-		else if (!$config_store.mmqtt_live_pwr) {
+		else if (!$config_store.mqtt_live_pwr) {
 			alert_body = "Live power load MQTT Topic is missing"
 			alert_visible=true
 			return
