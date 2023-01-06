@@ -62,9 +62,11 @@
 	
 		<div class="mt-4 mb-2 is-flex is-justify-content-center">
 			<Borders>
-				<div class="has-text-weight-bold has-text-centered mb-2">{$_("config.dev.consoles")}</div>
-				<Button name="Debug" color="is-info" butn_submit={()=>openConsole("debug")} />
-				<Button name="OpenEVSE" color="is-info" butn_submit={()=>openConsole("evse")} />
+				<div class="mb-2">
+					<div class="has-text-weight-bold has-text-centered mb-2">{$_("config.dev.consoles")}</div>
+					<Button name="Debug" color="is-info" butn_submit={()=>openConsole("debug")} />
+					<Button name="OpenEVSE" color="is-info" butn_submit={()=>openConsole("evse")} />
+				</div>
 			</Borders>
 		</div>
 
@@ -72,19 +74,21 @@
 
 	<div class="container mt-4 mb-1 is-flex is-justify-content-center">
 		<Borders>
-			<div>
-				<div class="is-size-7">
-				{#each rapi_cmd_result as { cmd, ret } }
-				&gt; {cmd} <br>
-				&lt; {ret} <br>
-				{/each}
+			<div class="mb-2">
+				<div>
+					<div class="is-size-7">
+					{#each rapi_cmd_result as { cmd, ret } }
+					&gt; {cmd} <br>
+					&lt; {ret} <br>
+					{/each}
+					</div>
 				</div>
+				<form on:submit|preventDefault={send_rapi_cmd}>
+				<InputForm  title={$_("config.dev.rapi-cmd")} bind:value={rapi_cmd} placeholder="" type="text" />
+				<Button name={$_("config.dev.send")} color="is-info" butn_submit={send_rapi_cmd} state={button_send_state}/>
+				<Button name={$_("config.dev.clear")} color="is-info" butn_submit={clear_rapi_cmd} />
+				<form>
 			</div>
-			<form on:submit|preventDefault={send_rapi_cmd}>
-			<InputForm  title={$_("config.dev.rapi-cmd")} bind:value={rapi_cmd} placeholder="" type="text" />
-			<Button name={$_("config.dev.send")} color="is-info" butn_submit={send_rapi_cmd} state={button_send_state}/>
-			<Button name={$_("config.dev.clear")} color="is-info" butn_submit={clear_rapi_cmd} />
-			<form>
 		</Borders>
 	</div>
 </Box>
