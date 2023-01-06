@@ -66,7 +66,8 @@
 	<div class="back" class:is-hidden={!back}>
 		<a href="/#/" on:click|preventDefault={()=>history.back()}>
 			<iconify-icon inline class="is-size-5 m-0 p-0" icon="material-symbols:arrow-back-ios-new-rounded"></iconify-icon>
-			<span class="has-text-weight-bold">Back</span>
+			<!-- <iconify-icon inline class="is-size-5 m-0 p-0" icon="fa6-solid:gear"></iconify-icon> -->
+			<!-- <span class="has-text-weight-bold">Back</span> -->
 		</a>
 	</div>
 	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center is-justify-content-center is-flex-direction-row px-2 pt-2">
