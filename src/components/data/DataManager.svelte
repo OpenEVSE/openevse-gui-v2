@@ -109,7 +109,7 @@
 	}
 
 	function countDivertUpdate(time) {
-		if (last_divert_update != time) {
+		if (last_divert_update != time || !time) {
 			last_divert_update = time
 			clearInterval(counter_divert_update);
 			$uistates_store.divert_update = time

@@ -1,6 +1,7 @@
 <script>
 	import { _ } 			  from 'svelte-i18n'
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
+	import { derived }		  from "svelte/store"
 	import { status_store }   from "./../../../lib/stores/status.js";
 	import { config_store }   from "./../../../lib/stores/config.js";
 	import { serialQueue }    from "./../../../lib/queue.js";
@@ -17,7 +18,7 @@
 	let modes = [{name: $_("config.selfprod.production"), value: 0}, {name:$_("config.selfprod.excess"), value: 1}]
 	let alert_body
 	let alert_visible = false
-
+	let updated
 	async function toggleDivert() {	
 		let res = await serialQueue.add(() => config_store.saveParam("divert_enabled", $config_store.divert_enabled))
 	}
@@ -89,8 +90,15 @@
 		}
 	}
 
+	function updateCounter(cnt) {
+		updated = s2mns(cnt)
+	}
+
+	let divertelapsed = derived(uistates_store, store => s2mns(store.divert_update))
+
+
 	$: setMode($config_store.mqtt_grid_ie)
-	$: updated = s2mns($uistates_store.divert_update)
+	// $: updateCounter($uistates_store.divert_update)
 
 </script>
 
@@ -128,7 +136,7 @@
 			<div class="mr-2">
 				<span class="has-text-weight-bold  is-size-7">{$_("config.selfprod.lastupdated")}:</span>
 				<!-- <span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{$uistates_store.divert_update}</span> -->
-				<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{updated}</span>
+				<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{$divertelapsed}</span>
 			</div>
 		</div>
 		
