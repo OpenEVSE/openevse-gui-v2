@@ -37,6 +37,6 @@
 	<span class="is-size-7 mr-2 has-text-weight-bold">{$_("status-current-available")}: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} A</span></span>
 </div>
 	{#if $status_store.shaper_updated == false}
-	<div class="is-size-7 mr-2 has-text-danger">{$_("status-shaper-erro")}</div>
+	<div class="is-size-7 mr-2 has-text-danger">{$_("status-shaper-error")}</div>
 	{/if}
 {/if}
