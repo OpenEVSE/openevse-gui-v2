@@ -3,9 +3,12 @@
 	import { uistates_store } 	from "./../lib/stores/uistates.js";
 	import { status_store } 	from "./../lib/stores/status.js";
 	import { onMount } 			from "svelte";
-	import {replace}				from 'svelte-spa-router'
+	import {replace}			from 'svelte-spa-router'
 	import CentralView 			from "./../components/ui/CentralView.svelte";
 	import Manual 				from "./../components/blocks/main/Manual.svelte"
+	// let Manual;
+	// import("./../components/blocks/main/Manual.svelte")
+	// .then(result => Manual = result.default);
 
 	onMount(()=> {
 		if ($status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid)) {
@@ -14,6 +17,7 @@
 	})
 </script>
 
+
 <CentralView>
-	<Manual />
+	<svelte:component this={Manual}/>
 </CentralView>

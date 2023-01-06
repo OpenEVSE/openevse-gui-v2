@@ -4,6 +4,7 @@
 	import Signal3 from './svg/wifi_signal_3.svelte';
 	import Signal4 from './svg/wifi_signal_4.svelte';
 	import Signal5 from './svg/wifi_signal_5.svelte';
+
 	export let dbm
 	let icon
 

@@ -23,7 +23,7 @@
 	
 </script>
 
-<style type="text/scss">
+<style lang="scss">
 	.statusbox {
 		// width: 100%;
 		border-radius: 6px;

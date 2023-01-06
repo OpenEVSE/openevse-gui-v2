@@ -15,9 +15,10 @@
 	import { _ } 				from 'svelte-i18n'
 	import "./lib/i18n.js"
 	import 'iconify-icon'
-	import "./lib/icons.js"
+	// import "./lib/icons.js"
 	import "@fontsource/roboto"
 
+	import("./lib/icons.js")
 	
 
 	let islandscape = false
