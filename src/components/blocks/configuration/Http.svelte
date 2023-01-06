@@ -109,7 +109,7 @@
 	
 </script>
 
-<Box title={$_("config.titles.http")} icon="mdi:web">
+<Box title={$_("config.titles.http")} icon="mdi:web" back={true}>
 	<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
 	{#if activetab == 0}
 	<!-- Authentication -->

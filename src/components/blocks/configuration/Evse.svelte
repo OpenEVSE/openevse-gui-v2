@@ -50,8 +50,8 @@
 	}
 </style>
 
-<Box title={$_("config.titles.evse")} icon="mdi:evse">
-	<div class="is-flex is-flex-direction-column is-align-items-center mt-4 ">
+<Box title={$_("config.titles.evse")} icon="mdi:evse" back={true}>
+	<div class="is-flex is-flex-direction-column is-align-items-center mt-4 " back={true}>
 
 		<Borders>
 			<div class="has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>

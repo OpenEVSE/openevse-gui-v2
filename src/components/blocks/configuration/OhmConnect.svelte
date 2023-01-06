@@ -42,7 +42,7 @@
 	}
 </script>
 
-<Box title={$_("config.titles.ohm")} icon="mdi:energy-circle">
+<Box title={$_("config.titles.ohm")} icon="mdi:energy-circle" back={true}>
 	<div>
 		<Switch name="emoncmsswitch" label={$_("config.ohm.enable")} onChange={toggleOhmConnect} bind:checked={$config_store.ohm_enabled} is_rtl={true}/>
 	</div>

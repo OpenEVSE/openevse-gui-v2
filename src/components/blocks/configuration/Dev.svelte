@@ -57,7 +57,7 @@
 </script>
 <style>
 </style>
-<Box title={$_("config.titles.dev")} icon="mdi:console" has_help={true}>
+<Box title={$_("config.titles.dev")} icon="mdi:console" has_help={true} back={true}>
 	<div slot="help"><DevHelp /> </div>
 	
 		<div class="mt-4 mb-2 is-flex is-justify-content-center">

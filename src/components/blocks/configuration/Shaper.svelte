@@ -48,7 +48,7 @@
 	}
 </script>
 
-<Box title={$_("config.titles.shaper")} icon="fa6-solid:building-shield">
+<Box title={$_("config.titles.shaper")} icon="fa6-solid:building-shield" back={true}>
 	<div class="my-3" class:is-hidden={!$config_store.current_shaper_enabled}>
 		<div class="is-size-7 {$status_store.shaper_updated?"has-text-primary":"has-text-danger"}">{$status_store.shaper_updated?$_("config.shaper.updated"):$_("config.shaper.notupdated")}</div>
 		<span class="is-size-7 has-text-weight-bold">{$_("config.shaper.load")}: <span class="has-text-info">{$status_store.shaper_live_pwr} {$_("units.W")}</span></span>

@@ -99,7 +99,7 @@
 		color: orange;
 	}
 </style>
-<Box title={$_("config.titles.selfprod")} has_help={true} icon="fa6-solid:solar-panel">
+<Box title={$_("config.titles.selfprod")} has_help={true} icon="fa6-solid:solar-panel" back={true}>
 	<div slot="help"><SelfProductionHelp  /> </div>
 	<div class="pb-1" >
 		<Switch name="divertswitch" label={$_("config.selfprod.enable")} onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>

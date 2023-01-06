@@ -65,7 +65,7 @@
 	}
 </script>
 
-<Box title={$_("config.titles.mqtt")} has_help={true} icon="simple-icons:mqtt">
+<Box title={$_("config.titles.mqtt")} has_help={true} icon="simple-icons:mqtt" back={true}>
 	<div slot="help"><MQTThelp /> </div>
 	<div class="pb-2">
 		<Switch name="mqttswitch" label={$_("config.mqtt.enable")} onChange={toggleMQTT} bind:checked={$config_store.mqtt_enabled}/>

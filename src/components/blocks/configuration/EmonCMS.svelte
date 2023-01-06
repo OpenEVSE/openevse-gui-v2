@@ -55,7 +55,7 @@
 	}
 </script>
 
-<Box title={$_("config.titles.emon")} icon="fa6-solid:chart-bar">
+<Box title={$_("config.titles.emon")} icon="fa6-solid:chart-bar" back={true}>
 	<div>
 		<Switch name="emoncmsswitch" label={$_("config.emon.enable")} onChange={toggleEmonCMS} bind:checked={$config_store.emoncms_enabled} is_rtl={true}/>
 	</div>

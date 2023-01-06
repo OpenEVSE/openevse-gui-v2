@@ -71,7 +71,7 @@
 </script>
 
 
-<Box title={$_("config.titles.firmware")} icon="fa6-solid:microchip">
+<Box title={$_("config.titles.firmware")} icon="fa6-solid:microchip" back={true}>
 	<table class="table is-fullwidth is-vcentered is-narrow">
 		<thead>
 			<tr class="has-background-info"	>

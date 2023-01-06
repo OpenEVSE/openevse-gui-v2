@@ -10,7 +10,7 @@
 
 </script>
 
-<Box title={$_("config.titles.safety")} icon="mdi:shield-alert-outline">
+<Box title={$_("config.titles.safety")} icon="mdi:shield-alert-outline" back={true}>
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info"	>

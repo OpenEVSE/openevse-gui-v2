@@ -87,7 +87,7 @@
 	
 </script>
 
-<Box title="RFID" icon="bx:rfid" >
+<Box title="RFID" icon="bx:rfid" back={true}>
 	<div>
 		<Switch name="rfidswitch" label={$_("config.rfid.enable")} bind:checked={$config_store.rfid_enabled} onChange={toggleRFID}/>
 	</div>

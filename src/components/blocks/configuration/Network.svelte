@@ -43,7 +43,7 @@
 	}
 </script>
 
-<Box title={$_("config.titles.network")} icon="mdi:local-area-network">
+<Box title={$_("config.titles.network")} icon="mdi:local-area-network" back={true}>
 	<span class="is-size-6 has-text-weight-bold">
 		 	{$_("config.network.mode")}:
 	</span>

@@ -23,7 +23,7 @@
 </style>
 
 <CentralView>
-	<Box title="Vehicle" icon="bi:ev-front" has_help={activetab==1?true:false}>
+	<Box title="Vehicle" icon="bi:ev-front" has_help={activetab==1?true:false} back={true}>
 		<div slot="help"><VehicleTeslaHelp /> </div>
 		<div>
 			<Tabs tabs={tabs} {activetab} onClick={clickTab}/>

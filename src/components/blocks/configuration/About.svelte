@@ -2,7 +2,7 @@
 import { _ } from 'svelte-i18n'
 import Box	 from "./../../ui/Box.svelte";
 </script>
-<Box title={$_("config.titles.about")} icon="mdi:about-circle-outline">
+<Box title={$_("config.titles.about")} icon="mdi:about-circle-outline" back={true}>
 	<div class="has-text-centered">
 		<span class="is-size-6 has-text-weight-bold">OpenEVSE-UI</span>
 		<span class="is-size-7">- {import.meta.env.VITE_VERSION}</span>
