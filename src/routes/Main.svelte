@@ -6,9 +6,6 @@
 	import {replace}			from 'svelte-spa-router'
 	import CentralView 			from "./../components/ui/CentralView.svelte";
 	import Manual 				from "./../components/blocks/main/Manual.svelte"
-	// let Manual;
-	// import("./../components/blocks/main/Manual.svelte")
-	// .then(result => Manual = result.default);
 
 	onMount(()=> {
 		if ($status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid)) {
@@ -19,5 +16,5 @@
 
 
 <CentralView>
-	<svelte:component this={Manual}/>
+	<Manual />>
 </CentralView>
