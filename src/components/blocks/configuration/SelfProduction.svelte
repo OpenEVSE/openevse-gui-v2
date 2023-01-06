@@ -90,6 +90,7 @@
 	}
 
 	$: setMode($config_store.mqtt_grid_ie)
+	$: updated = s2mns($uistates_store.divert_update)
 
 </script>
 
@@ -126,7 +127,8 @@
 			</div>
 			<div class="mr-2">
 				<span class="has-text-weight-bold  is-size-7">{$_("config.selfprod.lastupdated")}:</span>
-				<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{s2mns($uistates_store.divert_update)}</span>
+				<!-- <span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{$uistates_store.divert_update}</span> -->
+				<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{updated}</span>
 			</div>
 		</div>
 		
