@@ -377,9 +377,10 @@
 			"key": "Key"
 		},
 		"dev": {
-			"rapi-cmd": "Rapi Command",
+			"rapi-cmd": "Rapi Commands",
 			"send": "Send",
-			"clear": "Clear"
+			"clear": "Clear",
+			"consoles": "Consoles"
 		}
 	}
 

@@ -377,9 +377,10 @@
 			"key": "Clef"
 		},
 		"dev": {
-			"rapi-cmd": "Commande Rapi",
+			"rapi-cmd": "Commandes Rapi",
 			"send": "Envoyer",
-			"clear": "Effacer"
+			"clear": "Effacer",
+			"consoles": "Consoles"
 		}
 	}
 }
