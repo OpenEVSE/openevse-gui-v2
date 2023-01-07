@@ -97,7 +97,7 @@
 		<Borders>
 			<div class="has-text-centered pb-2">
 				<div class="has-text-weight-bold mb-4">{$_("config.rfid.managetag")}</div>
-			<Button name={$uistates_store.rfidscan_update>0?$uistates_store.rfidscan_update:$_("config.rfid.scan")} butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
+			<Button name={$status_store.rfid_waiting>0?$status_store.rfid_waiting:$_("config.rfid.scan")} butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
 				<!-- <div class="tag is-info {$uistates_store.rfidscan_update>0?"":"is-hidden"}">{$uistates_store.rfidscan_update}</div> -->
 			{#if $status_store.rfid_waiting > 0}
 				<div class="mt-2 has-text-weight-bold">{$_("config.rfid.placetag")}

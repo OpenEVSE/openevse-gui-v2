@@ -117,7 +117,6 @@
 	}
 
 	function countVehicleUpdate() {
-		// clearTimeout(counter_vehicle_update);
 		if (!counter_vehicle_update) {
 			counter_vehicle_update = setTimeout(() => {
 				$status_store.vehicle_state_update += 1
@@ -127,18 +126,15 @@
 
 	}
 
-	function countRFIDScan(time) {
-		if (last_RFIDScan_update != time) {
-			last_RFIDScan_update = time
-			clearInterval(counter_rfid_scan)
-			$uistates_store.rfidscan_update = time
-			counter_rfid_scan = setInterval(() => {
-				$uistates_store.rfidscan_update -= 1
-				if ($uistates_store.rfidscan_update <= 0) {
-					clearInterval(counter_rfid_scan)
-					$uistates_store.rfidscan_update = 0
-				}
-			}, 1000);
+	
+	function countRFIDScan() {
+		if (!counter_rfid_scan) {
+			if ($status_store.rfid_waiting > 0) {
+				counter_rfid_scan = setTimeout(() => {
+					$status_store.rfid_waiting -= 1
+					counter_rfid_scan = null
+				}, 1000);
+			}
 		}
 	}
 
@@ -160,10 +156,10 @@
 	$: refreshOverrideStore     ($status_store.override_version)
 	$: refreshDateTime			($status_store.time, $config_store.time_zone)
 	$: refreshUIState			($status_store)
+	$: refreshLocale			($config_store.lang)
 	$: $status_store.divert_update,        countDivertUpdate()
 	$: $status_store.vehicle_state_update, countVehicleUpdate()
-	$: countRFIDScan			($status_store.rfid_waiting)
-	$: refreshLocale			($config_store.lang)
+	$: $status_store.rfid_waitin, 		   countRFIDScan()
 	
 
 </script>

@@ -1,7 +1,6 @@
 <script>
 	import { _ } 		  			   from 'svelte-i18n'
 	import { config_store }			   from "./../../../lib/stores/config.js"
-	import { uistates_store } 		   from "./../../../lib/stores/uistates.js"
 	import {status_store} 			   from "../../../lib/stores/status.js"
 	import { derived} 				   from "svelte/store"
 	import {sec2time, s2mns, miles2km} from "../../../lib/utils.js"
