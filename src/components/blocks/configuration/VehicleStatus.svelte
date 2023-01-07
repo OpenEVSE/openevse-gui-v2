@@ -1,11 +1,12 @@
 <script>
 	import { _ } 		  			   from 'svelte-i18n'
-	import { config_store }			   from "./../../../lib/stores/config.js";
-	import { uistates_store } 		   from "./../../../lib/stores/uistates.js";
+	import { config_store }			   from "./../../../lib/stores/config.js"
+	import { uistates_store } 		   from "./../../../lib/stores/uistates.js"
 	import {status_store} 			   from "../../../lib/stores/status.js"
+	import { derived, get } 				   from "svelte/store"
 	import {sec2time, s2mns, miles2km} from "../../../lib/utils.js"
 
-	$: updated = s2mns($uistates_store.vehicle_update)
+	let evelapsed = derived(uistates_store, store => s2mns(store.vehicle_update))
 </script>
 <style>
 	.tags {
@@ -19,7 +20,7 @@
 <div class="">
 	<div class="my-3">
 		<span class="has-text-weight-bold  is-size-7">{$_("config.vehicle.lastupdated")}:</span>
-		<span class="is-size-7 {$uistates_store.vehicle_update > 3600?"has-text-danger":$uistates_store.vehicle_update < 300?"has-text-primary":"has-text-orange"} ">{updated}</span>
+		<span class="is-size-7 {$uistates_store.vehicle_update > 3600?"has-text-danger":$uistates_store.vehicle_update < 300?"has-text-primary":"has-text-orange"} ">{$evelapsed}</span>
 	</div>
 	<table class="table is-fullwidth ">
 		<thead>

@@ -18,7 +18,7 @@
 	let modes = [{name: $_("config.selfprod.production"), value: 0}, {name:$_("config.selfprod.excess"), value: 1}]
 	let alert_body
 	let alert_visible = false
-	let updated
+
 	async function toggleDivert() {	
 		let res = await serialQueue.add(() => config_store.saveParam("divert_enabled", $config_store.divert_enabled))
 	}
@@ -90,15 +90,11 @@
 		}
 	}
 
-	function updateCounter(cnt) {
-		updated = s2mns(cnt)
-	}
-
 	let divertelapsed = derived(uistates_store, store => s2mns(store.divert_update))
 
 
 	$: setMode($config_store.mqtt_grid_ie)
-	// $: updateCounter($uistates_store.divert_update)
+
 
 </script>
 
