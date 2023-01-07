@@ -121,7 +121,7 @@
 	}
 
 	function countVehicleUpdate(time) {
-		if (last_vehicle_update != time) {
+		if (last_vehicle_update != time || !time) {
 			last_vehicle_update = time
 			clearInterval(counter_vehicle_update);
 			$uistates_store.vehicle_update = time
