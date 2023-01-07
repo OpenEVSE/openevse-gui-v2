@@ -3,10 +3,11 @@
 	import { config_store }			   from "./../../../lib/stores/config.js"
 	import { uistates_store } 		   from "./../../../lib/stores/uistates.js"
 	import {status_store} 			   from "../../../lib/stores/status.js"
-	import { derived, get } 				   from "svelte/store"
+	import { derived} 				   from "svelte/store"
 	import {sec2time, s2mns, miles2km} from "../../../lib/utils.js"
 
-	let evelapsed = derived(uistates_store, store => s2mns(store.vehicle_update))
+	let evelapsed = derived(status_store, store => s2mns(store.vehicle_state_update))
+	
 </script>
 <style>
 	.tags {
@@ -20,7 +21,7 @@
 <div class="">
 	<div class="my-3">
 		<span class="has-text-weight-bold  is-size-7">{$_("config.vehicle.lastupdated")}:</span>
-		<span class="is-size-7 {$uistates_store.vehicle_update > 3600?"has-text-danger":$uistates_store.vehicle_update < 300?"has-text-primary":"has-text-orange"} ">{$evelapsed}</span>
+		<span class="is-size-7 {$status_store.vehicle_state_update > 3600?"has-text-danger":$status_store.vehicle_state_update < 300?"has-text-primary":"has-text-orange"} ">{$evelapsed}</span>
 	</div>
 	<table class="table is-fullwidth ">
 		<thead>

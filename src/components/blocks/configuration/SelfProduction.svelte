@@ -90,7 +90,7 @@
 		}
 	}
 
-	let divertelapsed = derived(uistates_store, store => s2mns(store.divert_update))
+	let divertelapsed = derived(status_store, store => s2mns(store.divert_update))
 
 
 	$: setMode($config_store.mqtt_grid_ie)
@@ -131,8 +131,7 @@
 			</div>
 			<div class="mr-2">
 				<span class="has-text-weight-bold  is-size-7">{$_("config.selfprod.lastupdated")}:</span>
-				<!-- <span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{$uistates_store.divert_update}</span> -->
-				<span class="is-size-7 {$uistates_store.divert_update > 60?"has-text-danger":$uistates_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{$divertelapsed}</span>
+				<span class="is-size-7 {$status_store.divert_update > 60?"has-text-danger":$status_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{$divertelapsed}</span>
 			</div>
 		</div>
 		

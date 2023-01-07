@@ -15,9 +15,7 @@
 	import { locale }					from 'svelte-i18n'
 
 	let counter_divert_update
-	let last_divert_update
 	let counter_vehicle_update
-	let last_vehicle_update
 	let counter_rfid_scan
 	let last_RFIDScan_update
 
@@ -108,26 +106,23 @@
 		}
 	}
 
-	function countDivertUpdate(time) {
-		if (last_divert_update != time || !time) {
-			last_divert_update = time
-			clearInterval(counter_divert_update);
-			$uistates_store.divert_update = time
-			counter_divert_update = setInterval(() => {
-				$uistates_store.divert_update += 1
+	function countDivertUpdate() { 
+		if(!counter_divert_update) {
+			counter_divert_update = setTimeout(() => {
+				$status_store.divert_update += 1
+				counter_divert_update = null
 			}, 1000);
 		}
 
 	}
 
-	function countVehicleUpdate(time) {
-		if (last_vehicle_update != time || !time) {
-			last_vehicle_update = time
-			clearInterval(counter_vehicle_update);
-			$uistates_store.vehicle_update = time
-			counter_vehicle_update = setInterval(() => {
-				$uistates_store.vehicle_update += 1
-			}, 1000);
+	function countVehicleUpdate() {
+		// clearTimeout(counter_vehicle_update);
+		if (!counter_vehicle_update) {
+			counter_vehicle_update = setTimeout(() => {
+				$status_store.vehicle_state_update += 1
+				counter_vehicle_update = null
+		}, 1000);
 		}
 
 	}
@@ -165,8 +160,8 @@
 	$: refreshOverrideStore     ($status_store.override_version)
 	$: refreshDateTime			($status_store.time, $config_store.time_zone)
 	$: refreshUIState			($status_store)
-	$: countDivertUpdate		($status_store.divert_update)
-	$: countVehicleUpdate		($status_store.vehicle_state_update)
+	$: $status_store.divert_update,        countDivertUpdate()
+	$: $status_store.vehicle_state_update, countVehicleUpdate()
 	$: countRFIDScan			($status_store.rfid_waiting)
 	$: refreshLocale			($config_store.lang)
 	
