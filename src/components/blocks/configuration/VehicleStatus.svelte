@@ -17,7 +17,7 @@
 	}
 </style>
 <div class="">
-	<div class="my-3" class:is-hidden={!$uistates_store.vehicle_update || $uistates_store.vehicle_update < 1}>
+	<div class="my-3">
 		<span class="has-text-weight-bold  is-size-7">{$_("config.vehicle.lastupdated")}:</span>
 		<span class="is-size-7 {$uistates_store.vehicle_update > 3600?"has-text-danger":$uistates_store.vehicle_update < 300?"has-text-primary":"has-text-orange"} ">{updated}</span>
 	</div>
