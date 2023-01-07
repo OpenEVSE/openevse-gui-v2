@@ -144,7 +144,7 @@
 		"titles": {
 			"network": "Réseau",
 			"firmware": "Micrologiciel",
-			"firmware-update": "Mise à jours",
+			"firmware-update": "Mise à jour",
 			"evse": "EVSE",
 			"safety": "Sécurité",
 			"time": "Date / Heure",
