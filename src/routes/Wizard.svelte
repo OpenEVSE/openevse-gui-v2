@@ -34,8 +34,9 @@
 </style>
 
 <div class="columns is-mobile is-centered p-0 m-0" >
-	<WizardBoxButtons step={$uistates_store.wizard_step}/>
+	
 	<div class="column is-two-thirds-tablet">
+		<WizardBoxButtons bind:step={$uistates_store.wizard_step}/>
 		{#if params.step == 0 || params.step == undefined}
 		<Welcome />
 		{:else if params.step == 1}

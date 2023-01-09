@@ -15,7 +15,7 @@ push('/wizard/' + step)
 
 </script>
 
-<div class="is-flex is-justify-content-center mt-3">
+<div class="is-flex is-justify-content-center my-3">
 	{#if step > 0}
 	<button class="button is-white mr-4" on:click={goPrev}>
 		<iconify-icon class="is-size-5" icon="material-symbols:navigate-before"></iconify-icon> 

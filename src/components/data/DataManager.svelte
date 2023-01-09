@@ -125,7 +125,6 @@
 		}
 
 	}
-
 	
 	function countRFIDScan() {
 		if (!counter_rfid_scan) {
