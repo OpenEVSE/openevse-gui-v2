@@ -1,5 +1,5 @@
 <script>
-	import AlertBox from "./components/ui/AlertBox.svelte";
+	import AlertBox 			from "./components/ui/AlertBox.svelte";
 	import WebSocket 			from "./components/data/WebSocket.svelte";
 	import { status_store } 	from "./lib/stores/status.js";
 	import { uistates_store } 	from './lib/stores/uistates.js'

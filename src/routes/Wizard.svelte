@@ -15,17 +15,8 @@
 		if (params.step)
 		$uistates_store.wizard_step = parseInt(params.step)
 	})
+	$: params.step, $uistates_store.wizard_step = parseInt(params.step)?parseInt(params.step):0
 
-	function goNext() {
-
-		$uistates_store.wizard_step +=  1
-		push('/wizard/' + $uistates_store.wizard_step)
-	}
-
-	function goPrev() {
-		$uistates_store.wizard_step -= 1
-		push('/wizard/' + $uistates_store.wizard_step)
-	}
 </script>
 <style>
 	.columns {

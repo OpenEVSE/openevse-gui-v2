@@ -1,8 +1,10 @@
 <script>
+	import { onMount } from "svelte";
 	import { uistates_store } from "./../../lib/stores/uistates.js";
 	import Help 			 from "./Help.svelte"
 	import { scale, fade} 	 from 'svelte/transition'
 	import { expoInOut }	 from 'svelte/easing'	
+	import {location} 		from 'svelte-spa-router'
 
 	export let title = "title"
 	export let has_help = false
@@ -10,8 +12,12 @@
 	export let icon = ""
 	export let back = false
 	let contentbox
+	
+	onMount(()=> {
+		back = $location.includes("/wizard")?false:back
+	})
 
-
+	
 </script>
 <style>
 	hr {
