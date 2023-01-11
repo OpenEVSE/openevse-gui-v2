@@ -31,6 +31,7 @@
 			alert_visible=true
 			return false
 		}
+		stg_submit_state = "loading"
 
 		const data = {
 			ocpp_server: $config_store.ocpp_server,
@@ -96,7 +97,7 @@
 					<div class="is-flex is-flex-direction-column is-align-items-start mb-4">
 							<Switch name="ocpp_auto" label={$_("config.ocpp.auth-auto")} bind:checked={$config_store.ocpp_auth_auto}/>
 						<div class:is-hidden={!$config_store.ocpp_auth_auto}>
-							<InputForm title="{$_("config.ocpp.idtag")}:" bind:value={$config_store.ocpp_idtag} placeholder="F4D1A7694ECD21" is_inline />
+							<InputForm title="{$_("config.ocpp.idtag")}*:" bind:value={$config_store.ocpp_idtag} placeholder="F4D1A7694ECD21" is_inline />
 						</div>
 							<Switch name="ocpp_auth_offline" label={$_("config.ocpp.auth-offline")} bind:checked={$config_store.ocpp_auth_offline}/>
 					</div>
