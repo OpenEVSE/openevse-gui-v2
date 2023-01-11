@@ -80,15 +80,17 @@
 		<div class="mb-2">
 			<Switch name="ocpp_switch" label={$_("config.ocpp.enable")} onChange={toggleOCPP} bind:checked={$config_store.ocpp_enabled}/>
 		</div>
-		<div class="has-text-weight-bold {$config_store.ocpp_enabled?"":"is-hidden"} {$status_store.ocpp_connected?"has-text-primary":"has-text-danger"}">
+		{#key $status_store.ocpp_connected}
+		<div class:is-hidden={!$config_store.ocpp_enabled} class="has-text-weight-bold {$status_store.ocpp_connected?"has-text-primary":"has-text-danger"}">
 			{$_("config.ocpp.connected")}: {$status_store.ocpp_connected?$_("yes"):$_("no")}
 		</div>
+		{/key}
 		<InputForm title="{$_("config.ocpp.server")}*:" bind:value={$config_store.ocpp_server} placeholder="wss://domain/steve/websocket/CentralSystemService" />
 		<div class="mr-2">
 			<InputForm title="{$_("config.ocpp.chargeBoxId")}*:" bind:value={$config_store.ocpp_chargeBoxId} is_inline />
 		</div>
 		<div class="mb-4">
-			<InputForm title="{$_("config.ocpp.authkey")}*:" bind:value={$config_store.ocpp_authkey} placeholder={$_("config.ocpp.authkey-desc")}/>
+			<InputForm title="{$_("config.ocpp.authkey")}*:" type="password" bind:value={$config_store.ocpp_authkey} placeholder={$_("config.ocpp.authkey-desc")}/>
 		</div>
 		<div class="is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
 			<Borders>
