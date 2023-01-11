@@ -21,7 +21,7 @@
 				<ConfigMenuButton url="/configuration/shaper" icon="fa6-solid:building-shield" name={$_("config.titles.shaper")} />
 				<ConfigMenuButton url="/configuration/selfproduction" icon="fa6-solid:solar-panel" name={$_("config.titles.selfprod")} height="1.3em" />
 				<ConfigMenuButton url="/configuration/vehicle" icon="bi:ev-front" name={$_("config.titles.vehicle")} />
-				<ConfigMenuButton url="/configuration/ocpp" icon="carbon:load-balancer-network" name={$_("config.titles.ocpp")} />
+				<ConfigMenuButton url="/configuration/ocpp" icon="custom:arduinoocpp" name={$_("config.titles.ocpp")} />
 				<ConfigMenuButton url="/configuration/emoncms" icon="fa6-solid:chart-bar" name={$_("config.titles.emon")} />
 				<ConfigMenuButton url="/configuration/ohmconnect" icon="mdi:energy-circle" name={$_("config.titles.ohm")} />
 				<ConfigMenuButton url="/configuration/dev" icon="mdi:console" name={$_("config.titles.dev")} />
