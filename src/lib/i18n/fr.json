@@ -153,6 +153,7 @@
 			"rfid": "RFID",
 			"shaper": "Délestage",
 			"selfprod": "Auto Production",
+			"ocpp": "OCPP",
 			"vehicle": "Véhicule",
 			"emon": "Emoncms",
 			"ohm": "OhmConnect",
@@ -381,6 +382,25 @@
 			"send": "Envoyer",
 			"clear": "Effacer",
 			"consoles": "Consoles"
+		},
+		"ocpp": {
+			"enable": "Activer OCPP",
+			"server": "URL Système Central",
+			"chargeBoxId": "ID Chargeur",
+			"authkey": "Clef d'Authentification",
+			"authkey-desc": "Clef WebSocket (Profil de Sécurité 2)",
+			"auth": "Authorisation de la Charge",
+			"auth-auto": "Autorisation Automatique",
+			"idtag": "Tag ID",
+			"auth-offline": "Passer l'autorisation si hors-ligne",
+			"controls": "Contrôles",
+			"suspend-evse": "OCPP peut suspendre l'EVSE",
+			"energize-plug": "OCPP peut alimenter la prise",
+			"connected": "Connecté",
+			"missing-server": "URL du serveur OCPP manquante",
+			"missing-chargeBoxId": "ID Chargeur manquant",
+			"missing-authkey": "Clef d'Authentification manquante",
+			"missing-idtag": "Tag ID manquant"
 		}
 	}
 }

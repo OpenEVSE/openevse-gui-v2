@@ -9,7 +9,7 @@
 
 </style>
 
-<div class="borders mb-2 p-2 has-text-centered">
+<div class="borders mb-2 p-2 has-text-centered is-flex-shrink-0">
 	<slot>
 	</slot>
 </div>

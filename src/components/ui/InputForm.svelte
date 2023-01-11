@@ -67,7 +67,7 @@
 		{#if title}
 		<span class="has-text-weight-semibold {disabled?"has-text-grey-light":""}">{title}</span>
 		{/if}
-		<input bind:this={field} {readonly} class="input is-info" type={typecss} placeholder={placeholder} value={value} autocomplete="off" {maxlength}
+		<input bind:this={field} {readonly} class="input is-info" type={typecss} placeholder={placeholder} value={value!=undefined?value:""} autocomplete="off" {maxlength}
 		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	>
 		<div class="is-size-5 {type == "number"?"state-num":"state"}">
 			{#if status==1}
