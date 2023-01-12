@@ -129,7 +129,9 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 					{/if}
 					</div>
 				</div>
+				{#if $uistates_store.status_expanded}
 				<DivertShaperStatus />
+				{/if}
 		<div class="mt-1"><ExpandArrow bind:expand={$uistates_store.status_expanded} /></div>
 	</div>
 </div>
