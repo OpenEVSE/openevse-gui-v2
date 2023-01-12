@@ -30,17 +30,22 @@
 	}
 
 	function noLandScape(e) {
+		console.log(screen.availHeight)
 		switch(screen.orientation.type) {
+
 			case "landscape-primary":
 			case "landscape-secondary":	
-				islandscape = true
-				break
+				
+				if(screen.availHeight < 700) {
+					islandscape = true
+					break
+				}
+
 			default:
 				islandscape = false
 				break
 
 		}
-		console.log("islandscape: " + islandscape)
 	}
 </script>
 <style>
