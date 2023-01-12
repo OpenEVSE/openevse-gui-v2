@@ -141,6 +141,8 @@
 
 	function set_uistates_charge_current() {
 		$uistates_store.charge_current = getChgCurrent()
+		if ($uistates_store.charge_current > $config_store.max_current_soft) 
+			$uistates_store.charge_current = $config_store.max_current_soft
 	}	
 	function set_uistates_shaper(val) {
 		val = val == 1?true:false
@@ -211,7 +213,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 			<Slider icon="fa6-solid:gauge-high" tooltip={$_("charge-rate-ttip")} unit="A" min=6 max={$config_store.max_current_soft} step={1} label={$_("charge-rate-label")}
 			bind:value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 			{#key $claims_target_store.claims.charge_current}
-			{#if $claims_target_store.claims.charge_current && $claims_target_store.properties.charge_current < $config_store.max_current_soft && $claims_target_store.claims.charge_current != EvseClients.timer}
+			{#if $claims_target_store.claims.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer}
 			<div class="is-flex is-justify-content-center is-align-content">
 				<RemovableTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
 			</div>
