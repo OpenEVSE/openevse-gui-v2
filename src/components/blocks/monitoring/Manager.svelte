@@ -23,7 +23,7 @@
 	<tbody>
 		{#if $claims_target_store.claims.state}
 		<tr>
-			<td class="has-text-left is-italic">state</td>
+			<td class="has-text-left is-italic is-size-7-mobile">state</td>
 			<td class="has-text-centered is-capitalized is-flex is-justify-content-center">
 				<div class="tags has-addons">
 					<span class="tag is-size-7-mobile is-info has-text-weight-bold">
@@ -39,7 +39,7 @@
 		{/if}
 		{#if $claims_target_store.claims.max_current}
 		<tr>
-			<td class="has-text-left is-italic">max_current</td>
+			<td class="has-text-left is-italic is-size-7-mobile">max_current</td>
 			<td class="has-text-centered is-capitalized is-flex is-justify-content-center">
 				<div class="tags has-addons">
 					<span class="tag is-info has-text-weight-bold is-size-7-mobile">
@@ -55,7 +55,7 @@
 		{/if}
 		{#if $claims_target_store.claims.charge_current}
 		<tr>
-			<td class="has-text-left is-italic">charge_current</td>
+			<td class="has-text-left is-italic is-size-7-mobile">charge_current</td>
 			<td class="has-text-centered is-capitalized is-flex is-justify-content-center">
 				<div class="tags has-addons">
 					<span class="tag is-info has-text-weight-bold is-size-7-mobile">
@@ -71,7 +71,7 @@
 		{/if}
 		{#if $claims_target_store.claims.auto_release}
 		<tr>
-			<td class="has-text-left is-italic">auto_release</td>
+			<td class="has-text-left is-italic is-size-7-mobile">auto_release</td>
 			<td class="has-text-centered is-capitalized is-flex is-justify-content-center">
 				<div class="tags has-addons">
 					<span class="tag is-info has-text-weight-bold is-size-7-mobile">
@@ -87,7 +87,7 @@
 		{/if}
 		{#if $claims_target_store.claims.time_limit}
 		<tr>
-			<td class="has-text-left is-italic">time_limit</td>
+			<td class="has-text-left is-italic is-size-7-mobile">time_limit</td>
 			<td class="has-text-centered is-capitalized is-flex is-justify-content-center">
 				<div class="tags has-addons">
 					<span class="tag has-text-weight-bold is-info has-text-weight-bold is-size-7-mobile">
@@ -103,7 +103,7 @@
 		{/if}
 		{#if $claims_target_store.claims.energy_limit}
 		<tr>
-			<td class="has-text-left is-italic">energy_limit</td>
+			<td class="has-text-left is-italic is-size-7-mobile	">energy_limit</td>
 			<td class="has-text-centered is-capitalized is-flex is-justify-content-center">
 				<div class="tags has-addons">
 					<span class="tag is-info has-text-weight-bold is-size-7-mobile">
