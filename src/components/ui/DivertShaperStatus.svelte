@@ -1,4 +1,5 @@
 <script>
+	import { config_store } from "./../../lib/stores/config.js";
 	import { _ } 			  from 'svelte-i18n'
 	import { status_store }   from "./../../lib/stores/status.js";
 	import { uistates_store } from "./../../lib/stores/uistates.js";
@@ -6,7 +7,7 @@
 	
 </script>
 
-{#if $status_store?.divert_active}
+{#if $config_store?.divert_enabled}
 <div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
 	<iconify-icon class="has-text-primary is-size-6 mr-1" icon="fa6-solid:solar-panel"></iconify-icon>
 	{#if $uistates_store.divert_type == 0}
@@ -30,7 +31,8 @@
 		<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
 	</div>
 </div>
-{:else if $status_store.shaper}
+{/if}
+{#if $status_store.shaper}
 <div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-6 has-text-weight-bold">
 	<iconify-icon class="has-text-info mr-1" icon="fa6-solid:building-shield"></iconify-icon>
 	<span class="is-size-7 mr-2 has-text-weight-bold">{$_("status-shaper-houseload")}: <span class="has-text-info">{$status_store.shaper_live_pwr} W</span></span>
