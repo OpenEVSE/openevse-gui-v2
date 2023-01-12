@@ -22,7 +22,7 @@ function createClaimStore() {
         else return false
     }
 
-    async function release(clientid=EvseClients["manual"]) {
+    async function release(clientid=EvseClients["manual"].id) {
         let res = await httpAPI("DELETE", "/claims/" +clientid)
         if (res) {
             let store = []
