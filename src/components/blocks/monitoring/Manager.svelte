@@ -14,7 +14,7 @@
 </style>
 
 <table class="table is-fullwidth">
-	<thead>
+	<thead class="is-size-7-mobile">
 		<tr class="has-background-info"	>
 			<th class="has-text-white has-text-left py-1">{$_("monitoring-manager-prop")}</th>
 			<th class="has-text-white has-text-centered py-1">{$_("monitoring-manager-service")} | {$_("monitoring-manager-val")}</th>
