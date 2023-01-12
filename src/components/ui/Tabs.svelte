@@ -17,14 +17,16 @@
 	}
 
 </style>
-<div class="tabs is-size-6 is-size-7-mobile">
-	<ul>
-		{#each tabs as tab,i}
-		<li class:is-active={activetab==i}>
-			<a bind:this={linkid[i]} class="tab" href={tab.url} use:link on:click|preventDefault={() => {onClick(i); linkid[i].blur()}}>
-			<span class="has-text-weight-bold">{tab.name}</span>
-			</a>
-		</li>
-		{/each}
-	</ul>
-  </div>
+<div class="mb-2">
+	<div class="tabs is-size-6 is-size-7-mobile">
+		<ul>
+			{#each tabs as tab,i}
+			<li class:is-active={activetab==i}>
+				<a bind:this={linkid[i]} class="tab" href={tab.url} use:link on:click|preventDefault={() => {onClick(i); linkid[i].blur()}}>
+				<span class="has-text-weight-bold">{tab.name}</span>
+				</a>
+			</li>
+			{/each}
+		</ul>
+	</div>
+</div>

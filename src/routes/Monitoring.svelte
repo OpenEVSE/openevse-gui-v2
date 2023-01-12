@@ -6,14 +6,14 @@
 	import Safety 		from "../components/blocks/monitoring/Safety.svelte"
 	import Energy 		from "../components/blocks/monitoring/Energy.svelte"
 	import Sensors 		from "../components/blocks/monitoring/Sensors.svelte"
-	import Current 		from "../components/blocks/monitoring/Current.svelte"
+	import Manager 		from "../components/blocks/monitoring/Manager.svelte"
 
 	let activetab = 0
 	let tabs = [
 		{name: $_("monitoring-tab-energy"), url:"/monitoring	"},
 		{name: $_("monitoring-tab-sensors"), url:"/monitoring"},
 		{name: $_("monitoring-tab-safety"), url:"/monitoring"},
-		{name: $_("monitoring-tab-settings"), url:"/monitoring"}
+		{name: $_("monitoring-tab-manager"), url:"/monitoring"}
 	]
 
 	let clickTab = (i) => {
@@ -32,7 +32,7 @@
 		{:else if activetab == 2}
 			<Safety />	
 		{:else if activetab == 3}
-			<Current />
+			<Manager />
 		{/if}
 	</Box>
 </CentralView>

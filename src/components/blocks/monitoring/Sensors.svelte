@@ -1,7 +1,8 @@
 <script>
-	import { _ } 		  from 'svelte-i18n'
-	import {status_store} from "../../../lib/stores/status.js"
-	import {round} 		  from "../../../lib/utils.js"
+	import { config_store } from "./../../../lib/stores/config.js";
+	import { _ } 		    from 'svelte-i18n'
+	import {status_store}   from "../../../lib/stores/status.js"
+	import {round} 		    from "../../../lib/utils.js"
 
 </script>
 <style>
@@ -39,6 +40,13 @@
 		<tr>
 			<td>{$_("monitoring-sensors-esptemp")}</td>
 			<td class="has-text-right"><span class="tag is-info">{round($status_store.temp4/10,1)} {$_("units.C")}</span></td>
+		</tr>
+		<tr>
+			<td>{$_("monitoring-sensors-sensorscale")}</td>
+			<td class="has-text-right"><span class="tag is-info">{$config_store.scale}</span></td>
+		</tr>			<tr>
+			<td>{$_("monitoring-sensors-sensoroffset")}</td>
+			<td class="has-text-right"><span class="tag is-info">{$config_store.offset}</span></td>
 		</tr>
 	</tbody>
 </table>
