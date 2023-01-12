@@ -16,7 +16,7 @@
 <table class="table is-fullwidth">
 	<thead>
 		<tr class="has-background-info"	>
-			<th class="has-text-white has-text-centered py-1">{$_("monitoring-manager-prop")}</th>
+			<th class="has-text-white has-text-left py-1">{$_("monitoring-manager-prop")}</th>
 			<th class="has-text-white has-text-centered py-1">{$_("monitoring-manager-service")}</th>
 			<th class="has-text-white has-text-centered py-1">{$_("monitoring-manager-val")}</th>
 		</tr>
@@ -24,7 +24,7 @@
 	<tbody>
 		{#if $claims_target_store.claims.state}
 		<tr>
-			<td class="has-text-centered has-text-weight-bold">state</td>
+			<td class="has-text-left is-italic">state</td>
 			<td class="has-text-centered is-capitalized"><span class="tag is-size-7 is-info has-text-weight-bold">
 				<iconify-icon  class="has-text-white mr-1" icon={displayIcon(clientid2name($claims_target_store.claims.state))}></iconify-icon>
 				{clientid2name($claims_target_store.claims.state)}
@@ -32,14 +32,14 @@
 		</td>
 			<td class="has-text-centered">
 				<span class="tag has-text-weight-bold is-size-7 {$claims_target_store.properties.state == "active"?"is-primary":"is-danger"} is-capitalized">
-					{$claims_target_store.properties.state}
+					{$_($claims_target_store.properties.state)}
 				</span>
 			</td>
 		</tr>
 		{/if}
 		{#if $claims_target_store.claims.max_current}
 		<tr>
-			<td class="has-text-centered has-text-weight-bold">max_current</td>
+			<td class="has-text-left is-italic">max_current</td>
 			<td class="has-text-centered is-capitalized">
 				<span class="tag is-size-7 is-info has-text-weight-bold">
 					<iconify-icon  class="has-text-white mr-1" icon={displayIcon(clientid2name($claims_target_store.claims.max_current))}></iconify-icon>
@@ -55,7 +55,7 @@
 		{/if}
 		{#if $claims_target_store.claims.charge_current}
 		<tr>
-			<td class="has-text-centered has-text-weight-bold">charge_current</td>
+			<td class="has-text-left is-italic">charge_current</td>
 			<td class="has-text-centered is-capitalized">
 				<span class="tag is-size-7 is-info has-text-weight-bold">
 					<iconify-icon  class="has-text-white mr-1" icon={displayIcon(clientid2name($claims_target_store.claims.charge_current))}></iconify-icon>
@@ -71,7 +71,7 @@
 		{/if}
 		{#if $claims_target_store.claims.auto_release}
 		<tr>
-			<td class="has-text-centered has-text-weight-bold">auto_release</td>
+			<td class="has-text-left is-italic">auto_release</td>
 			<td class="has-text-centered is-capitalized">
 				<span class="tag is-size-7 is-info has-text-weight-bold">
 					<iconify-icon  class="has-text-white mr-1" icon={displayIcon(clientid2name($claims_target_store.claims.auto_release))}></iconify-icon>
@@ -87,7 +87,7 @@
 		{/if}
 		{#if $claims_target_store.claims.time_limit}
 		<tr>
-			<td class="has-text-centered has-text-weight-bold">time_limit</td>
+			<td class="has-text-left is-italic">time_limit</td>
 			<td class="has-text-centered is-capitalized">
 				<span class="tag has-text-weight-bold is-size-7 is-info has-text-weight-bold">
 					<iconify-icon  class="has-text-white mr-1" icon={displayIcon(clientid2name($claims_target_store.claims.time_limit))}></iconify-icon>
@@ -103,7 +103,7 @@
 		{/if}
 		{#if $claims_target_store.claims.energy_limit}
 		<tr>
-			<td class="has-text-centered has-text-weight-bold">energy_limit</td>
+			<td class="has-text-left is-italic">energy_limit</td>
 			<td class="has-text-centered is-capitalized">
 				<span class="tag is-size-7 is-info has-text-weight-bold">
 					<iconify-icon  class="has-text-white mr-1" icon={displayIcon(clientid2name($claims_target_store.claims.energy_limit))}></iconify-icon>

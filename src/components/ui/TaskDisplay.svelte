@@ -1,6 +1,6 @@
 <script>
 	import {displayTime, displayIcon} from "../../lib/utils.js"
-	
+	import { _ } 				      from 'svelte-i18n'
 	export let state 
 	export let time = ""
 	export let mode
@@ -22,7 +22,7 @@
 		{#if time != ""}
 		{msg} {displayTime(time)}
 		{:else}
-		{state}
+		{$_(state)}
 			{#if msg}
 			&nbsp;{msg}
 			{/if}
