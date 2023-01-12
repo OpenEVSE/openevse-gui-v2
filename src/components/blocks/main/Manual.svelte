@@ -212,7 +212,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 			</div>
 	
 		<div class="container mb-2">
-			<Slider icon="fa6-solid:gauge-high" tooltip={$_("charge-rate-ttip")} unit="A" min=6 max={$config_store.max_current_soft} step={1} label={$_("charge-rate-label")} disabled={EvseClients[clientid2name($claims_target_store.claims.charge_current)].priority > EvseClients.manual.priority} 
+			<Slider icon="fa6-solid:gauge-high" tooltip={$_("charge-rate-ttip")} unit="A" min=6 max={$config_store.max_current_soft} step={1} label={$_("charge-rate-label")} disabled={EvseClients[clientid2name($claims_target_store.claims?.charge_current)]?.priority > EvseClients.manual.priority} 
 			bind:value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 			{#key $claims_target_store.claims.charge_current}
 			{#if $claims_target_store.claims.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer.id}
