@@ -42,7 +42,7 @@
 		<tbody>
 			<tr>
 				<td>{$_("monitoring-energy-service")}</td>
-				<td class="has-text-right"><span class="tag is-info">{$status_store.service_level}</span></td>
+				<td class="has-text-right"><span class="tag is-normal is-info">{$status_store.service_level}</span></td>
 			</tr>
 			<tr>
 				<td>{$_("monitoring-energy-servicemin")}</td>
