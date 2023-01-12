@@ -188,7 +188,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 </script>
 
 <Box title={$_("charge-title")} icon="fa6-solid:bolt">
-	<div class="is-flex is-align-items-center is-justify-content-center is-flex-direction-column" style="height: 100%;">
+	<div class="is-flex is-align-items-center is-justify-content-center is-flex-direction-column">
 		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-info mt-2 is-uppercase">{$_("charge-toggle")}</div>
 		<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 		{#if $claims_target_store.claims.state == EvseClients["rfid"].id}
@@ -208,7 +208,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 			<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name={$_("charge-shaper")} size={20} color="is-info" 
 				tooltip={ $uistates_store.shaper?$_("charge-shaper-disable"):$_("charge-shaper-enable")} icon="fa6-solid:building-shield" breakpoint={$uistates_store.breakpoint}
 				action={() => setShaper(!$uistates_store.shaper)} />
-			</div>
+		</div>
 	
 		<div class="container mb-2">
 			<Slider icon="fa6-solid:gauge-high" tooltip={$_("charge-rate-ttip")} unit="A" min=6 max={$config_store.max_current_soft} step={1} label={$_("charge-rate-label")} disabled={EvseClients[clientid2name($claims_target_store.claims?.charge_current)]?.priority > EvseClients.manual.priority} 
@@ -231,5 +231,4 @@ $: set_uistates_divertmode($status_store.divertmode)
 			tooltip="Clear charge session settings when vehicle is unplugged"  />
 		</div> -->
 	</div>
-	
 </Box>

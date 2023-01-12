@@ -105,7 +105,7 @@
 </style>
 <Box title={$_("config.titles.selfprod")} has_help={true} icon="fa6-solid:solar-panel" back={true}>
 	<div slot="help"><SelfProductionHelp  /> </div>
-	<div class="pb-1" >
+	<div class="pb-1 my-3" >
 		<Switch name="divertswitch" label={$_("config.selfprod.enable")} onChange={toggleDivert} bind:checked={$config_store.divert_enabled} is_rtl={true}/>
 		<div class="is-size-7">{$_("config.selfprod.desc")}</div>
 		<div class:is-hidden={!$config_store.divert_enabled} class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
@@ -155,7 +155,7 @@
 		<div class="is-size-7">{$_("config.selfprod.smoothdecay-desc")}</div>
 		<div><InputForm title="{$_("config.selfprod.minchargetime")}:" type="number" bind:value={$config_store.divert_min_charge_time} placeholder="600" /></div>
 		<div class="is-size-7">{$_("config.selfprod.minchargetime-desc")}.</div>
-		<div class="block mt-5">
+		<div class="block mt-5 pb-1">
 			<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 		</div>
 		<AlertBox body={alert_body} bind:visible={alert_visible} />

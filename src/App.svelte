@@ -29,32 +29,13 @@
 		$uistates_store.box_resize = true
 	}
 
-	function noLandScape(e) {
-		console.log(screen.availHeight)
-		switch(screen.orientation.type) {
-
-			case "landscape-primary":
-			case "landscape-secondary":	
-				
-				if(screen.availHeight < 700) {
-					islandscape = true
-					break
-				}
-
-			default:
-				islandscape = false
-				break
-
-		}
-	}
 </script>
 <style>
 	main {
-		position: fixed;
+		/* position: fixed; */
 		height: 100%;
 		width: 100vw;
 		overflow: hidden;
-		overflow-y: hidden;
 	}
 
   	:global(body) {
@@ -68,53 +49,56 @@
 	.route {
 		width: 100%;
 		height: 100%;
-		z-index: 1;
+		z-index: 0;
 		overflow: hidden;
 		overflow-x: hidden;	
-		overflow-y: hidden;
+		overflow-y: overlay;
 		flex: 1;
 	}
 
 	.screen {
-		height: 100%;
+		overflow-y: hidden;
+		height: calc(100vh - 56px);
 		width: 100%;
 	}
 
 	.nav {
+		position: fixed;
 		z-index: 0;
+		bottom: 0;
 		width: 100%;
 		height: 56px;
 	}
   
 
 </style>
-<svelte:window on:load={getWindowSize} on:resize={getWindowSize} on:orientationchange ={noLandScape}/>
+<svelte:window on:load={getWindowSize} on:resize={getWindowSize}/>
 <svelte:head>
 	<!-- <style src="./mystyles.scss"></style> -->
 </svelte:head>
 
 <main>		
 	{#if $uistates_store.data_loaded}
-	<div class="screen is-flex is-flex-direction-column">
-		{#if $status_store.evse_connected == 1}
-		<div class="status is-flex is-justify-content-center is-flex-shrink-0 mx-3 mt-1 p-0">
-			<Status />
-		</div>
-		{/if}
-		<AlertBoxNoModal title={$_("alert-evsemissing-title")} body={$_("alert-evsemissing-body")} visible={!$status_store.evse_connected} />
-		<AlertBoxNoModal title={$_("alert-conerror-title")} body={$_("alert-conerror-body")} visible={!$uistates_store.ws_connected} />
-		<AlertBox title={$_("alert-portrait-title")} body={$_("alert-portrait-body")} visible={islandscape} closable={false} />
-		<div class="route is-flex-grow-1">
+	<div class="screen">
+
+		<div class="route">
+			{#if $status_store.evse_connected == 1}
+			<div class="status is-flex is-justify-content-center is-flex-shrink-0 mx-3 mt-1 p-0">
+				<Status />
+			</div>
+			{/if}
+			<AlertBoxNoModal title={$_("alert-evsemissing-title")} body={$_("alert-evsemissing-body")} visible={!$status_store.evse_connected} />
+			<AlertBoxNoModal title={$_("alert-conerror-title")} body={$_("alert-conerror-body")} visible={!$uistates_store.ws_connected} />
+			<AlertBox title={$_("alert-portrait-title")} body={$_("alert-portrait-body")} visible={islandscape} closable={false} />
 			<Router {routes} />
 		</div>
-		{#if !$location.includes("/wizard")}
-		<div class="nav">
-			<NavBar charging={$uistates_store.charging} selected={$location} />
-		</div>
-		
-		{/if}
-		
 	</div>
+	{#if !$location.includes("/wizard")}
+	<div class="nav">
+		<NavBar charging={$uistates_store.charging} selected={$location} />
+	</div>
+	
+	{/if}
 	<DataManager />
 	<WebSocket />
 	{:else}

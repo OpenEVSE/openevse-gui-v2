@@ -6,4 +6,4 @@
 
 <CentralView>
 	<Time />
-</CentralView>>
+</CentralView>

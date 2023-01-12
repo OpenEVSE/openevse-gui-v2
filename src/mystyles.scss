@@ -36,7 +36,7 @@ $warning: $yellow;
 
 
 // Update some of Bulma's component variables
-$body-overflow-y: auto;
+// $body-overflow-y: auto;
 $pageloader-opacity: 1;
 $breadcrumb-item-active-color: $info;
 $tabs-link-active-color: $info;
@@ -58,13 +58,13 @@ $breadcrumb-item-color: $text;
   }
 
   
-body::-webkit-scrollbar { display: none; }
+// body::-webkit-scrollbar { display: none; }
 
 
 body {
-	-ms-overflow-style: none;  /* IE and Edge */
-	scrollbar-width: none;     /* Firefox */
-	overflow: hidden;
+	// -ms-overflow-style: none;  /* IE and Edge */
+	// scrollbar-width: none;     /* Firefox */
+	overflow-y: hidden;
 	overflow-x: hidden;
 	background: linear-gradient(hsl(195, 78%, 30%), hsl(189, 53%, 47%));
 	background-repeat: no-repeat;
@@ -73,29 +73,46 @@ body {
 	overscroll-behavior-y: contain;
 }
 
+html {
+	overflow: hidden;
+}
+
 
 /* width */
 ::-webkit-scrollbar {
-	width: 3px;
+	width: 8px;
   }
   
   /* Track */
-  ::-webkit-scrollbar-track {
-	background: 0;
-  }
+::-webkit-scrollbar-track {
+	background: none;
+	width: 5px;
+}
+
+::-webkit-scrollbar-track:hover {
+	background: #fbf9ed;
+	
+}
+	
   
   /* Handle */
-  ::-webkit-scrollbar-thumb {
-	background: #32b3d4;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-	background: hsl(195, 78%, 30%);
+::-webkit-scrollbar-thumb {
+	// background: hsl(189, 53%, 47%);
+	background:  #32b3d4;;
+	border-radius: 8px;
+	
+}
+
+@media screen and (max-width: 768px){
+	::-webkit-scrollbar {
+		-webkit-appearance: none;
+		display: none;
+	}
   }
 
-  * {
-	scrollbar-color: #32b3d4 white;
-	scrollbar-width: thin;
-	}
+
+* {
+scrollbar-color: hsl(189, 53%, 47%) white;
+scrollbar-width: thin;
+}
 

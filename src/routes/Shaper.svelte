@@ -5,4 +5,4 @@
 
 <CentralView>
 	<Shaper />
-</CentralView>>
+</CentralView>
