@@ -1,13 +1,13 @@
 export const EvseClients = {
-	manual: 65537,
-	divert: 65538,
-	boost:  65539,
-	timer:  65540,
-	limit:  65542,
-	error:  65543,
-	ohm:	65544,
-	ocpp:	65545,
-	rfid:	65546,
-	mqtt:   65547,
-	shaper: 65548
+	divert: { id: 65538, priority: 50 },
+	boost: 	{ id: 65539, priority: 200},
+	timer: 	{ id: 65540, priority: 100},
+	limit:  { id: 65542, priority: 1100},
+	error:	{ id: 65543, priority: 10000},
+	ohm:	{ id: 65544, priority: 500},
+	ocpp:	{ id: 65545, priority: 1050},
+	rfid:	{ id: 65546, priority: 1030},
+	mqtt: 	{ id: 65547, prioirty: 500},
+	shaper: { id: 65548, priority: 5000},
+	manual: { id: 65537, priority: 1000 }
 }

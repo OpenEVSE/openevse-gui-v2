@@ -10,6 +10,8 @@
 	export let unit = "";
 	export let icon = null
 	export let onchange = (val) => {};
+	export let disabled = false
+
 	let hover = false
 	let focus = false
 
@@ -43,6 +45,7 @@
 				step={step?step:1} 
 				min={min} max={max} 
 				type="range" bind:value={value} on:change={()=>onchange(value)}
+				{disabled}
 				on:focus={togglefocus} on:blur={togglefocus} />	
 		</div>
 		<div class="ml-2 mt-3 tag is-medium has-text-weight-semibold is-info">{value}{unit}</div>

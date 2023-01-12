@@ -10,7 +10,7 @@
 	import {EvseClients} 			from "./../../../lib/vars.js"
 	import {claims_target_store}	from "./../../../lib/stores/claims_target.js"
 	import {onMount} 				from 'svelte'
-	import {httpAPI}	 			from './../../../lib/utils.js'
+	import {httpAPI, clientid2name}	from './../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
 	import Box 						from "./../../ui/Box.svelte"
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
@@ -73,7 +73,7 @@
 			}
 
 		// keep charge_current claim	
-		if ($claims_target_store.claims.charge_current == EvseClients["manual"]) {
+		if ($claims_target_store.claims.charge_current == EvseClients["manual"]["id"]) {
 				data.charge_current = $claims_target_store.properties.charge_current
 			}
 		switch(m) {
@@ -102,7 +102,7 @@
 			if (data.charge_current) 
 				await serialQueue.add(() => override_store.upload(data))
 			// Mode Auto, clearing override
-			else if ($claims_target_store.claims.state == EvseClients["manual"] ) {
+			else if ($claims_target_store.claims.state == EvseClients["manual"]["id"] ) {
 				if ($status_store.manual_override) { 
 					let res = await serialQueue.add(override_store.clear)
 				}
@@ -151,7 +151,7 @@
 	}
 	function set_uistates_divertmode(val) {
 		val = val == 2?true:false
-		if ($claims_target_store.claims.state == EvseClients.timer && $claims_target_store.properties.state == "active")
+		if ($claims_target_store.claims.state == EvseClients.timer.id && $claims_target_store.properties.state == "active")
 				$uistates_store.divertmode = false
 	    else
 			$uistates_store.divertmode = val		
@@ -161,7 +161,7 @@
 		tag.state = "loading"
 		let client = $claims_target_store.claims[prop]
 		let res
-		if (client == EvseClients["manual"]) {
+		if (client == EvseClients["manual"].id) {
 			// remove props using /override else use /claims
 			res = await serialQueue.add(() =>override_store.removeProp(prop))
 		}
@@ -210,10 +210,10 @@ $: set_uistates_divertmode($status_store.divertmode)
 			</div>
 	
 		<div class="container mb-2">
-			<Slider icon="fa6-solid:gauge-high" tooltip={$_("charge-rate-ttip")} unit="A" min=6 max={$config_store.max_current_soft} step={1} label={$_("charge-rate-label")}
+			<Slider icon="fa6-solid:gauge-high" tooltip={$_("charge-rate-ttip")} unit="A" min=6 max={$config_store.max_current_soft} step={1} label={$_("charge-rate-label")} disabled={EvseClients[clientid2name($claims_target_store.claims.charge_current)].priority > EvseClients.manual.priority} 
 			bind:value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 			{#key $claims_target_store.claims.charge_current}
-			{#if $claims_target_store.claims.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer}
+			{#if $claims_target_store.claims.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer.id}
 			<div class="is-flex is-justify-content-center is-align-content">
 				<RemovableTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
 			</div>

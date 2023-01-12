@@ -87,7 +87,7 @@
 
 	function getMode(state,clientid) {
 		$uistates_store.stateclaimfrom = clientid2name(clientid)
-		if (clientid == EvseClients["manual"] || clientid == undefined) {
+		if (clientid == EvseClients["manual"].id || clientid == undefined) {
 			// Mode Manual		
 			switch (state) {
 				case "active":

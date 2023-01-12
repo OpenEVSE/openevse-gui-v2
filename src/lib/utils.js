@@ -122,28 +122,28 @@ export let getBreakpoint = function () {
 export function clientid2name(id) {
 	let name
 	switch (id) {
-		case EvseClients["manual"]:
+		case EvseClients["manual"].id:
 			name =  "manual"
 			break;
-		case EvseClients["divert"]:
+		case EvseClients["divert"].id:
 			name = "divert"
 			break;
-		case EvseClients["timer"]:
+		case EvseClients["timer"].id:
 			name = "timer"
 			break;
-		case EvseClients["ohm"]:
+		case EvseClients["ohm"].id:
 			name = "ohm"
 			break;
-		case EvseClients["ocpp"]:
+		case EvseClients["ocpp"].id:
 			name = "ocpp"
 			break;
-		case EvseClients["rfid"]:
+		case EvseClients["rfid"].id:
 			name = "rfid"
 			break;
-		case EvseClients["mqtt"]:
+		case EvseClients["mqtt"].id:
 			name = "mqtt"
 			break;
-		case EvseClients["shaper"]:
+		case EvseClients["shaper"].id:
 			name = "shaper"
 			break;
 	}
