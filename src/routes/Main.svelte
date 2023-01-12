@@ -16,5 +16,5 @@
 
 
 <CentralView>
-	<Manual />>
+	<Manual />
 </CentralView>

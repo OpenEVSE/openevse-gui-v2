@@ -28,21 +28,21 @@
 	}
 	.contentbox {
 		position: relative;
-		overflow: hidden;
+		/* overflow: hidden; */
 		border-radius: 6px;
 		color: black;
 		background-color: white;
-		max-height: calc(100% + 5px);
+		/* max-height: calc(100% + 5px); */
 		min-height: 50%;
 		/* height: 100%; */
 	}
-	.contentbox.is-full-height {
+	/* .contentbox.is-full-height {
 		height: 100%;
-	}
+	} */
 	.maincontent {	
 		overflow-x:hidden; 
-		overflow-y:scroll; 
-		max-height: calc(100% - 50px);
+		overflow-y:visible; 
+		/* max-height: calc(100% - 50px); */
 		/* box-sizing: border-box; */
 		overscroll-behavior: contain;
 		/* height: 100%; */
@@ -87,7 +87,7 @@
 	</div>
 
 	<div  class="mb-2 px-2"><hr></div>
-	<div  class="maincontent is-flex-grow-1 is-flex is-flex-direction-column px-2 pb-2" >
+	<div  class="maincontent is-flex is-flex-direction-column px-2 py-2" >
 		<slot>
 		</slot>
 	</div>

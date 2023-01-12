@@ -72,7 +72,7 @@
 
 
 <Box title={$_("config.titles.firmware")} icon="fa6-solid:microchip" back={true}>
-	<table class="table is-fullwidth is-vcentered is-narrow">
+	<table class="table is-fullwidth is-narrow">
 		<thead>
 			<tr class="has-background-info"	>
 				<th class="has-text-white ">{$_("config.firmware.hardware")}</th>

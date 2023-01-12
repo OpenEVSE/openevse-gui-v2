@@ -68,7 +68,8 @@
 		<span class="has-text-weight-bold is-size-6">{$_("config.network.connected")}: </span>
 		<iconify-icon inline class="ml-2 is-size-5 {$status_store.net_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.net_connected==1?"fa6-solid:circle-check":"fa6-solid:circle-xmark"}></iconify-icon>
 	</div>
-
+	<div class="mb-1">
 	<InputForm type="text" title={$_("config.network.host")} placeholder="openevse" bind:value={$config_store.hostname} 
 		status={input_host_status} onChange={()=>onChange("hostname", $config_store.hostname)}/>
+	</div>
 </Box>
