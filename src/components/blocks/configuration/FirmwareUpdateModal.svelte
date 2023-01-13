@@ -1,4 +1,5 @@
 <script>
+	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 		  		from 'svelte-i18n'
 	import { config_store } 	from "./../../../lib/stores/config.js";
 	import { serialQueue }		from "./../../../lib/queue.js";
@@ -17,7 +18,7 @@
 	export let update = {}
 
 	let file
-	let uploadButtonState = "default"
+	let uploadButtonState = ""
 	let fileSent = "no"
 	let timeout
 	let canClose = true
@@ -84,10 +85,12 @@
 		else if ($status_store.ota == "completed") {
 			uploadButtonState = "ok"
 			canClose = true
+			$status_store.ota_progress = 0
 			timeout = setTimeout(()=> location.reload(),6000)
 		}
 		else if ($status_store.ota == "failed") {
 			uploadButtonState = "error"
+			$status_store.ota_progress = 0
 			canClose = true
 			timeout = setTimeout(()=> $status_store.ota = "",3000)
 		}
@@ -144,12 +147,12 @@
 				</table>
 			</div>
 		</div>
-		{#if file || $status_store.ota == "started"}
-		<div class="my-2 ml-1 is-size-6">
-			<div>
-				{#if $status_store.ota == "started"}
+		{#if file || $status_store.ota_progress > 0}
+		<div class="my-2 is-size-6 is-flex is-justify-content-center ">
+			<div class="is-flex-shrink-0 is-flex-grow-1">
+				{#if $status_store.ota == "started" || $status_store.ota_progress > 0}
 				{$_("config.firmware.progress")}
-				<div style="width: 100%" class="is-flex is-justify-content-center">
+				<div class="is-flex-shrink-0 is-flex-grow-1 is-flex is-justify-content-center" >
 					<ProgressBar value={$status_store.ota_progress} />
 				</div>
 				{:else if $status_store.ota == "failed" }
@@ -157,26 +160,31 @@
 				{:else if $status_store.ota == "completed" }
 				{$_("config.firmware.complete")}
 				{:else}
-					<div class="s-flex is-align-items-center ml-1 is-size-6">
-						<span class="my-2 is-size-6">
-							{file.name}
-						</span>
-						<div class=" is-size-6 is-inline-block">
-							<IconButton icon="fa6-solid:square-minus" color="has-text-danger" butn_submit={()=>{file = null}} tooltip={$_("config.firmware.remove")} />
-						</div>
+				
+					<div class="is-flex is-align-items-center is-justify-content-center is-size-6">
+						<Borders >
+							<span class="my-2 is-size-6">
+								{file.name}
+							</span>
+							<div class="ml-2 is-size-6 is-inline-block">
+								<IconButton icon="fa6-solid:square-minus" color="has-text-danger" butn_submit={()=>{file = null}} tooltip={$_("config.firmware.remove")} />
+							</div>
+						</Borders>
 					</div>
+
+					
 				{/if}
 			</div>
 		</div>
-		<div class="is-flex is-align-items-center is-justify-content-start">
+		<div class="is-flex is-align-items-center is-justify-content-center">
 			<Button disabled={uploadButtonState == "loading"} name={$_("config.firmware.upload")} icon="fa6-solid:file-arrow-up" color="is-info" butn_submit={uploadFw} state={uploadButtonState}/>&nbsp;
 			<Button disabled={uploadButtonState == "loading"} name={$_("close")} color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{:else}
-		<div class="is-flex is-align-items-center my-2 ml-1 is-size-6">
+		<div class="is-flex is-align-items-center is-justify-content-center my-2 is-size-6">
 			{$_("config.firmware.nofile")}
 		</div>
-		<div class="is-flex is-align-items-center is-justify-content-start">
+		<div class="is-flex is-align-items-center is-justify-content-center">
 			<SelectFile bind:file={file}/>&nbsp;
 			<Button disabled={uploadButtonState == "loading" || fileSent == "ok"} name={$_("close")} color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>

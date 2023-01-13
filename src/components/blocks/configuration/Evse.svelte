@@ -10,17 +10,17 @@
 	import InputForm 		 from "./../../ui/InputForm.svelte";
 	import Box 				 from "./../../ui/Box.svelte";
 
-	let input_random_start = 0
+	let input_random_start
 	let select_service_level = ""
 	const service_items = [{name: "Auto", value: 0},{name: "Level 1", value: 1},{name: "Level 2", value: 2}]
 
 	async function onChange(prop,val) {
-		input_random_start = 1
+		input_random_start = "loading"
 		let res = await serialQueue.add(()=>config_store.saveParam(prop, val))
 		if (await res) {
-			input_random_start= 2 //ok
+			input_random_start= "ok" 
 		}
-		else input_random_start = 3 //error
+		else input_random_start = "error" 
 		return res
 	}
 
@@ -28,7 +28,8 @@
 		let res = await serialQueue.add(()=>config_store.saveParam("max_current_soft",$config_store.max_current_soft))
 	}
 	async function setLed() {
-		let res = await serialQueue.add(()=>config_store.saveParam("led_brightness",$config_store.led_brigthness))
+		console.log("led brightn: " + $config_store.led_brightness)
+		let res = await serialQueue.add(()=>config_store.saveParam("led_brightness",$config_store.led_brightness))
 	}
 
 	async function togglePauseMode() {
@@ -45,43 +46,57 @@
 </script>
 
 <style>
-	.inputbox {
+	/* .inputbox {
 		max-width: 100px;
-	}
+	} */
 </style>
 
 <Box title={$_("config.titles.evse")} icon="mdi:evse" back={true}>
-	<div class="is-flex is-flex-direction-column is-align-items-center mt-4 " back={true}>
-
-		<Borders>
-			<div class="has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>
-			<SliderForm icon="fa6-solid:gauge-high" bind:value={$config_store.max_current_soft} unit={$_("units.A")} min={$config_store.min_current_hard?$config_store.min_current_hard:6} max={$config_store.max_current_hard?$config_store.max_current_hard:32} onchange={setMaxCurrent} />
-		</Borders>
-		<Borders>
-			<div class="has-text-weight-bold is-size-6">{$_("config.evse.random")}</div>
-			<div class="is-flex is-justify-content-center">
-				<div class="inputbox">	
-					<InputForm  type="number" title="" bind:value={$config_store.scheduler_start_window} 
-					status={input_random_start} onChange={()=>onChange("scheduler_start_window", $config_store.scheduler_start_window)}/>
-				</div>
+	<div class="columns is-centered">
+		<div class="column is-two-thirds">
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Borders grow={true}>
+					<div class="has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>
+					<SliderForm icon="fa6-solid:gauge-high" bind:value={$config_store.max_current_soft} unit={$_("units.A")} min={$config_store.min_current_hard?$config_store.min_current_hard:6} max={$config_store.max_current_hard?$config_store.max_current_hard:32} onchange={setMaxCurrent} />
+				</Borders>
 			</div>
-			
-			<div class="ml-2"> {$_("config.evse.seconds")}</div>
-		</Borders>
-		<Borders>
-			<div class="has-text-weight-bold is-size-6">{$_("config.evse.service")}</div>
-			<Select bind:value={$config_store.service} bind:status={select_service_level} items={service_items} onChange={setServiceLevel}/>
-		</Borders>
-
-		<Borders>
-			<Help>{@html $_("config.evse.random-help")}</Help>
-			<div class="has-text-weight-bold is-size-6">{$_("config.evse.pause")}</div>
-			<Switch name="pausemode" label="{$config_store.pause_uses_disabled?"Disable":"Sleep"}" bind:checked={$config_store.pause_uses_disabled} onChange={togglePauseMode}  />
-		</Borders>
-		<Borders>
-			<div class="has-text-weight-bold is-size-6">{$_("config.evse.led-bn")}</div>
-			<SliderForm icon="ic:outline-light-mode" bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
-		</Borders>
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Borders grow={true} has_help={true}>
+					<div slot="help">
+						{@html $_("config.evse.random-help")}
+					</div>
+					<div class="has-text-weight-bold is-size-6">{$_("config.evse.random")}</div>
+					<div class="is-flex is-justify-content-center is-align-items-center">
+						<div class="inputbox">	
+							<InputForm is_inline={true} type="number" min=0 max=3600  bind:value={$config_store.scheduler_start_window} 
+							bind:status={input_random_start} onChange={()=>onChange("scheduler_start_window", $config_store.scheduler_start_window)}/>
+						</div>
+						<div class="ml-2 is-inline-block"> {$_("config.evse.seconds")}</div>
+					</div>
+				</Borders>
+			</div>
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Borders grow={true}>
+					<div class="has-text-weight-bold is-size-6">{$_("config.evse.service")}</div>
+					<Select bind:value={$config_store.service} bind:status={select_service_level} items={service_items} onChange={setServiceLevel}/>
+				</Borders>
+			</div>
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Borders grow={true} has_help={true}>
+					<div slot="help">
+						{@html $_("config.evse.pause-help")}
+					</div>
+					<div class="has-text-weight-bold is-size-6">{$_("config.evse.pause")}</div>
+					<Switch name="pausemode" label="{$config_store.pause_uses_disabled?"Disable":"Sleep"}" bind:checked={$config_store.pause_uses_disabled} onChange={togglePauseMode}  />
+				</Borders>
+			</div>
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Borders grow={true}>
+					<div class="has-text-weight-bold is-size-6">{$_("config.evse.led-bn")}</div>
+					<SliderForm icon="ic:outline-light-mode" bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
+				</Borders>
+			</div>
+		</div>	
 	</div>
 
 </Box>

@@ -18,7 +18,7 @@
 	let networks
 	let timeout
 	let state = ""
-	let scanButnState = "default"
+	let scanButnState = ""
 
 	onMount(() => {
 		scanWifi()
@@ -126,16 +126,25 @@
 		</tbody>
 
 	</table>
-</div>
-<form>
-<InputForm type="text" title={$_("config.network.ssid")} placeholder={$_("config.network.ssid-desc")} bind:value={ssid} />
-<InputForm type="password" title={$_("config.network.pass")} placeholder={$_("config.network.pass-desc")} bind:value={key} />
-<div class="is-flex is-align-items-center">
-	<Button name={$_("config.network.connect")} color="is-primary" butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
-	<Button name={$_("config.network.scan")} butn_submit={scanAgain} bind:state={scanButnState}/>
-	{#if $config_store.ssid}
-	<Button name={$_("cancel")} color="is-danger" butn_submit={() => active = false}/>
-	{/if}
+
+
+	<form>
+		<div class="is-flex is-flex-direction-column is-justify-content-center">
+			<div class="container">
+				<InputForm type="text" title={$_("config.network.ssid")} placeholder={$_("config.network.ssid-desc")} bind:value={ssid} />
+				<InputForm type="password" title={$_("config.network.pass")} placeholder={$_("config.network.pass-desc")} bind:value={key} />
+			</div>
+			
+			
+		</div>
+			
+			<div class="is-flex is-align-items-center is-justify-content-center">
+				<Button name={$_("config.network.connect")} color="is-primary" butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
+				<Button name={$_("config.network.scan")} butn_submit={scanAgain} bind:state={scanButnState}/>
+				{#if $config_store.ssid}
+				<Button name={$_("cancel")} color="is-danger" butn_submit={() => active = false}/>
+				{/if}
+			</div>
+	</form>
 </div>
 
-</form>

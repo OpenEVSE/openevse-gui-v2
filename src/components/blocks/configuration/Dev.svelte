@@ -11,7 +11,7 @@
 	let rapi_cmd = "$"
 	let rapi_cmd_result = []
 	let rapiurl = "/r?json=1&rapi="
-	let button_send_state = "default"
+	let button_send_state = ""
 	let opened = false
 	let mode
 

@@ -26,6 +26,8 @@
 	let button_shaper
 
 	async function setChgCurrent(val) {
+		if ($uistates_store.charge_current == val)
+			return
 		$uistates_store.charge_current = val
 		if (val == $config_store.max_current_soft) {
 			//remove claim
@@ -168,8 +170,7 @@
 		else {
 			res = await serialQueue.add(() =>claims_store.removeClaimProp($claims_target_store.claims[prop],prop))
 		}
-		if (res) tag.state = "ok"
-		else tag.state = "error"
+		tag.state = ""
 	}
 
 	onMount( () => {
@@ -212,7 +213,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 	
 		<div class="container mb-2">
 			<Slider icon="fa6-solid:gauge-high" tooltip={$_("charge-rate-ttip")} unit="A" min=6 max={$config_store.max_current_soft} step={1} label={$_("charge-rate-label")} disabled={EvseClients[clientid2name($claims_target_store.claims?.charge_current)]?.priority > EvseClients.manual.priority} 
-			bind:value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
+			value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 			{#if $claims_target_store?.claims?.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer.id}
 			<div class="is-flex is-justify-content-center is-align-content">
 				<RemovableTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />

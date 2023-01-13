@@ -1,6 +1,6 @@
 <script>
 	import CentralView 	from "./../components/ui/CentralView.svelte";
-	import Timers	 	from "../components/blocks/main/Timers.svelte"
+	import Timers	 	from "../components/blocks/scheduler/Timers.svelte"
 </script>
 
 

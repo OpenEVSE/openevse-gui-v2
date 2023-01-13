@@ -90,8 +90,8 @@
 		width: 512,
 		height: 512,
 	});
-	addIcon('material-symbols:arrow-back-ios-new-rounded', {
-		body: '<path fill="currentColor" d="M15.125 21.1L6.7 12.7q-.15-.15-.212-.325q-.063-.175-.063-.375t.063-.375q.062-.175.212-.325l8.425-8.425q.35-.35.875-.35t.9.375q.375.375.375.875t-.375.875L9.55 12l7.35 7.35q.35.35.35.862q0 .513-.375.888t-.875.375q-.5 0-.875-.375Z"/>',
+	addIcon('mdi:arrow-back-circle', {
+		body: '<path fill="currentColor" d="M2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10a10 10 0 0 1-10 10A10 10 0 0 1 2 12m16-1h-8l3.5-3.5l-1.42-1.42L6.16 12l5.92 5.92l1.42-1.42L10 13h8v-2Z"/>',
 		width: 24,
 		height: 24,
 	});
@@ -99,6 +99,11 @@
 		body: '<path fill="currentColor" d="M 272 95 L 272 129 Q 272 144 287 144 L 289 144 Q 304 144 319 147 Q 384 160 384 241 Q 384 256 384 271 Q 384 352 319 365 Q 304 368 289 368 L 287 368 Q 272 368 272 383 L 272 417 Q 272 432 287 432 L 321 432 Q 336 432 350 428 Q 448 400 448 271 Q 448 256 448 241 Q 448 112 350 84 Q 336 80 321 80 L 287 80 Q 272 80 272 95 Z"/><ellipse fill="currentColor" cx="291" cy="256" rx="50" ry="57"/><path fill="currentColor" d="M 63 432 L 97 432 Q 112 432 117 418 L 235 94 Q 240 80 225 80 L 191 80 Q 176 80 171 94 L 53 418 Q 48 432 63 432 Z"/>',
 		width: 512,
 		height: 512,
+	});
+	addIcon('ic:outline-save-alt', {
+		body: '<path fill="currentColor" d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5l-5-5l1.41-1.41L11 12.67V3h2v9.67z"/>',
+		width: 24,
+		height: 24,
 	});
 
 

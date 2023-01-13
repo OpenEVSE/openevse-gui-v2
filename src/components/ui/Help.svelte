@@ -1,25 +1,24 @@
 <script>
 	import Modal from "../ui/Modal.svelte"
-	
-
 	export let is_opened = false
-	let size = ""
 </script>
 <style>
-	.help {
-		float: right;
-		float: top;
+	
+	.help:hover {
+		transform: scale(1.2);
 	}
 </style>
-<div class="help is-size-5">
-	<a href={null} class="has-text-info" on:click|preventDefault={()=>is_opened=true} on:mouseenter={()=> size="is-size-4 is-hovered"} on:focus={()=> size="is-size-4 is-hovered"} on:mouseleave={()=> size=""} on:blur={()=> size="is-size-5"}>
-		<iconify-icon class=" {size}" icon="fa6-solid:circle-question"></iconify-icon>
+
+<div class="help m-0 p-0">
+	<a href={null} class="has-text-info" on:click|preventDefault={()=>is_opened=true} >
+		<iconify-icon class="is-size-5" icon="fa6-solid:circle-question"></iconify-icon>
 	</a>
 </div>
-
 <Modal bind:is_opened canClose={true}>
-	<div class="notification has-text-left">
+	<div class="notification has-text-left is-size-6">
 		<button class="delete" on:click={()=>is_opened=false}></button>
 		<slot></slot>
 	</div>
 </Modal>
+
+

@@ -1,4 +1,5 @@
 <script>
+	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 			from 'svelte-i18n'
 	import BoxModal 		from "./../../ui/BoxModal.svelte";
 	import { serialQueue }	from "../../../lib/queue.js";
@@ -12,7 +13,7 @@
 	export let timer = null;
 	let timeout
 
-	let saveTimerState = "default"
+	let saveTimerState = ""
 	let alert_visible = false
 	let select
 	const default_timer = 	{
@@ -163,46 +164,50 @@
 
 	<AlertBox body="You must select at least one day" bind:visible={alert_visible} />
 	<BoxModal title={timer == null?$_("scheduler-newtimer"): $_("scheduler-timer")+" #" + $schedule_store[timer].id} >
-		<div class="mt-2 is-size-6">				
-			<label class="checkbox">
-				<input id="d_mon" type="checkbox" bind:checked={selected_days[0]} on:change={checkDays} >
-				<span class="is-capitalized">{$_("days.monday").substr(0,3)}</span>
-			</label>
-			<label class="checkbox">
-				<input id="d_tue" type="checkbox" bind:checked={selected_days[1]} on:change={checkDays}>
-				<span class="is-capitalized">{$_("days.tuesday").substr(0,3)}</span>
-			</label>
-			<label class="checkbox">
-				<input id="d_wed" type="checkbox" bind:checked={selected_days[2]} on:change={checkDays}>
-				<span class="is-capitalized">{$_("days.wednesday").substr(0,3)}</span>
-			</label>
-			<label class="checkbox">
-				<input id="d_thu" type="checkbox" bind:checked={selected_days[3]} on:change={checkDays}>
-				<span class="is-capitalized">{$_("days.thursday").substr(0,3)}</span>
-			</label>
-			<label class="checkbox">
-				<input id="d_fri" type="checkbox" bind:checked={selected_days[4]} on:change={checkDays}>
-				<span class="is-capitalized">{$_("days.friday").substr(0,3)}</span>
-			</label>
-			<label class="checkbox">
-				<input id="d_sat" type="checkbox"bind:checked={selected_days[5]} on:change={checkDays}>
-				<span class="is-capitalized">{$_("days.saturday").substr(0,3)}</span>
-			</label>
-			<label class="checkbox">
-				<input id="d_sun" type="checkbox" bind:checked={selected_days[6]} on:change={checkDays}>
-				<span class="is-capitalized">{$_("days.sunday").substr(0,3)}</span>
-			</label>
-			<div>
-				<label class="checkbox has-text-weight-semibold">
-					<input id="d_all" type="checkbox" bind:checked={selected_days[7]} on:change={() => {checkAll(selected_days[7])}}>
-					{#if !selected_days[7]}
-					{$_("scheduler-checkall")}
-					{:else}
-					{$_("scheduler-uncheckall")}
-					{/if}
+		<div class="mt-2 is-size-6 is-flex is-justify-content-center">	
+			<Borders>			
+				<label class="checkbox">
+					<input id="d_mon" type="checkbox" bind:checked={selected_days[0]} on:change={checkDays} >
+					<span class="is-capitalized">{$_("days.monday").substr(0,3)}</span>
 				</label>
-			</div>	
+				<label class="checkbox">
+					<input id="d_tue" type="checkbox" bind:checked={selected_days[1]} on:change={checkDays}>
+					<span class="is-capitalized">{$_("days.tuesday").substr(0,3)}</span>
+				</label>
+				<label class="checkbox">
+					<input id="d_wed" type="checkbox" bind:checked={selected_days[2]} on:change={checkDays}>
+					<span class="is-capitalized">{$_("days.wednesday").substr(0,3)}</span>
+				</label>
+				<label class="checkbox">
+					<input id="d_thu" type="checkbox" bind:checked={selected_days[3]} on:change={checkDays}>
+					<span class="is-capitalized">{$_("days.thursday").substr(0,3)}</span>
+				</label>
+				<label class="checkbox">
+					<input id="d_fri" type="checkbox" bind:checked={selected_days[4]} on:change={checkDays}>
+					<span class="is-capitalized">{$_("days.friday").substr(0,3)}</span>
+				</label>
+				<label class="checkbox">
+					<input id="d_sat" type="checkbox"bind:checked={selected_days[5]} on:change={checkDays}>
+					<span class="is-capitalized">{$_("days.saturday").substr(0,3)}</span>
+				</label>
+				<label class="checkbox">
+					<input id="d_sun" type="checkbox" bind:checked={selected_days[6]} on:change={checkDays}>
+					<span class="is-capitalized">{$_("days.sunday").substr(0,3)}</span>
+				</label>
+				<div>
+					<label class="checkbox has-text-weight-semibold">
+						<input id="d_all" type="checkbox" bind:checked={selected_days[7]} on:change={() => {checkAll(selected_days[7])}}>
+						{#if !selected_days[7]}
+						{$_("scheduler-checkall")}
+						{:else}
+						{$_("scheduler-uncheckall")}
+						{/if}
+					</label>
+				</div>	
+			</Borders>
 		</div>
+
+		
 		<div class="pt-5">
 			<div class="is-flex is-justify-content-space-around">
 				<div class="is-inline-block">
