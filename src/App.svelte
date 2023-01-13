@@ -33,9 +33,10 @@
 <style>
 	main {
 		/* position: fixed; */
-		height: 100%;
+		height: 100vh;
 		width: 100vw;
 		overflow: hidden;
+		overflow-y: hidden;
 	}
 
   	:global(body) {
@@ -47,23 +48,26 @@
 	}
 
 	.route {
+		position: absolute;
 		width: 100%;
-		height: 100%;
-		z-index: 0;
+		z-index: 1;
+		bottom: 56px;	
 		overflow: hidden;
 		overflow-x: hidden;	
-		overflow-y: overlay;
-		flex: 1;
+		overflow-y: scroll;
+		/* flex: 1; */
+		height: calc( 100% - 56px );
 	}
 
-	.screen {
+	/* .screen {
 		overflow-y: hidden;
 		height: calc(100vh - 56px);
 		width: 100%;
-	}
+	} */
 
 	.nav {
 		position: fixed;
+		overflow: hidden;
 		z-index: 0;
 		bottom: 0;
 		width: 100%;
@@ -79,11 +83,11 @@
 
 <main>		
 	{#if $uistates_store.data_loaded}
-	<div class="screen">
+	<!-- <div class="screen"> -->
 
 		<div class="route">
 			{#if $status_store.evse_connected == 1}
-			<div class="status is-flex is-justify-content-center is-flex-shrink-0 mx-3 mt-1 p-0">
+			<div class="status mx-3 mt-1 p-0">
 				<Status />
 			</div>
 			{/if}
@@ -92,7 +96,7 @@
 			<AlertBox title={$_("alert-portrait-title")} body={$_("alert-portrait-body")} visible={islandscape} closable={false} />
 			<Router {routes} />
 		</div>
-	</div>
+	<!-- </div> -->
 	{#if !$location.includes("/wizard")}
 	<div class="nav">
 		<NavBar charging={$uistates_store.charging} selected={$location} />

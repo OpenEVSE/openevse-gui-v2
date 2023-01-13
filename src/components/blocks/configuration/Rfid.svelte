@@ -12,7 +12,7 @@
 	import Switch 			  from "./../../ui/Switch.svelte";
 	import Box 				  from "../../ui/Box.svelte"
 
-
+	let mounted = false
 	let scanning = false
 	let tags = []
 	let tags_inst = []
@@ -20,17 +20,28 @@
 	let button_inst
 	let button2_inst
 
+	let formdata
+
 	
 	onMount(() => {
 		updateTags($config_store.rfid_storage)
+		updateFormData()
+		mounted = true
 	})
 	$: $config_store.rfid_storage, resetStates()
 	$: updateTags($config_store.rfid_storage)
 	$: scanState($status_store.rfid_waiting)
 
+	let updateFormData = () => {
+		formdata = {
+			rfid_enabled: {val: $config_store.rfid_enabled, state: ""}
+		}	
+	}
+
+
 	function scanState(count) {
 		if (count != undefined) {
-			but_scan_state = "default"
+			but_scan_state = ""
 		}	
 	}
 
@@ -39,7 +50,14 @@
 	}
 
 	async function toggleRFID() {
-		let res = await serialQueue.add(() => config_store.saveParam("rfid_enabled", $config_store.rfid_enabled))
+		formdata.rfid_enabled.state = "loading"
+		if (await serialQueue.add(() => config_store.saveParam("rfid_enabled", formdata.rfid_enabled.val))) {
+			formdata.rfid_enabled.state = "ok"
+					return true
+		} else {
+			formdata.rfid_enabled.state = "error"
+			return false
+		}
 	}
 
 	async function scanTag() {
@@ -86,52 +104,74 @@
 
 	
 </script>
-
+<style>
+	.enable {
+		min-width: 230px;
+	}
+	
+</style>
+{#if mounted}
 <Box title="RFID" icon="bx:rfid" back={true}>
-	<div>
-		<Switch name="rfidswitch" label={$_("config.rfid.enable")} bind:checked={$config_store.rfid_enabled} onChange={toggleRFID}/>
+
+	<div class="pb-1 is-flex is-align-items-center is-justify-content-center">
+		<Borders classes={$config_store.rfid_enabled?"has-background-primary-light":"has-background-light"}>
+			<div class="enable">
+				<Switch name="rfidswitch" label={formdata.rfid_enabled.val?$_("enabled"):$_("disabled")} bind:checked={formdata.rfid_enabled.val} disabled={formdata.rfid_enabled.state=="loading"} onChange={toggleRFID}/>
+			</div>
+			
+		</Borders>
 	</div>
 
-	{#if $config_store.rfid_enabled}
-	<div class="is-flex is-justify-content-center mt-3">
-		<Borders>
-			<div class="has-text-centered pb-2">
-				<div class="has-text-weight-bold mb-4">{$_("config.rfid.managetag")}</div>
-			<Button name={$status_store.rfid_waiting>0?$status_store.rfid_waiting:$_("config.rfid.scan")} butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
-				<!-- <div class="tag is-info {$uistates_store.rfidscan_update>0?"":"is-hidden"}">{$uistates_store.rfidscan_update}</div> -->
-			{#if $status_store.rfid_waiting > 0}
-				<div class="mt-2 has-text-weight-bold">{$_("config.rfid.placetag")}
-				</div>
-			{/if}
-			{#if $status_store.rfid_input}
-				<div class="mt-2 has-text-weight-bold">{$_("config.rfid.scansuccess")}</div>
-				<div class="has-text-weight-bold my-2 has-text-info">UID: {$status_store.rfid_input}</div>
-				{#if tags.find($status_store.rfid_input)}
-				<div>{$_("config.rfid.tagregistered")}</div>
-				<Button bind:this={button_inst} width="80px" size="is-small" name={$_("config.rfid.remove")} color="is-danger" butn_submit={()=>removeTag($status_store.rfid_input,button_inst)} />
-				{:else}
-				<div>{$_("config.rfid.newtag")}</div>
-				<Button bind:this={button_inst} width="80px" size="is-small" name={$_("config.rfid.register")} color="is-primary" butn_submit={()=>registerTag($status_store.rfid_input,button_inst)} />
-				{/if}
-			{/if}
+	{#if formdata.rfid_enabled.val}
+	<div class="columns is-centered m-0 p-0">
+		<div class="column is-two-thirds m-0 pb-1">
+			<div class=" is-flex is-justify-content-center">
+				<Borders grow>
+					<div class="has-text-centered pb-2">
+						<div class="has-text-weight-bold mb-4">{$_("config.rfid.managetag")}</div>
+						<Button name={$status_store.rfid_waiting>0?$status_store.rfid_waiting:$_("config.rfid.scan")} butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
+						<!-- <div class="tag is-info {$uistates_store.rfidscan_update>0?"":"is-hidden"}">{$uistates_store.rfidscan_update}</div> -->
+						{#if $status_store.rfid_waiting > 0}
+						<div class="mt-2 has-text-weight-bold">{$_("config.rfid.placetag")}
+						</div>
+						{/if}
+						{#if $status_store.rfid_input}
+						<div class="mt-2 has-text-weight-bold">{$_("config.rfid.scansuccess")}</div>
+						<div class="has-text-weight-bold my-2 has-text-info">UID: {$status_store.rfid_input}</div>
+						{#if tags.find($status_store.rfid_input)}
+						<div>{$_("config.rfid.tagregistered")}</div>
+						<Button bind:this={button_inst} width="80px" size="is-small" name={$_("config.rfid.remove")} color="is-danger" butn_submit={()=>removeTag($status_store.rfid_input,button_inst)} />
+						{:else}
+						<div>{$_("config.rfid.newtag")}</div>
+						<Button bind:this={button_inst} width="80px" size="is-small" name={$_("config.rfid.register")} color="is-primary" butn_submit={()=>registerTag($status_store.rfid_input,button_inst)} />
+						{/if}
+					{/if}
+					</div>
+				</Borders>
 			</div>
-		</Borders>
+		</div>
 	</div>
 	{/if}
 	{#if tags[0] != "" }
-	<div class="is-flex is-justify-content-center">
-		<Borders>
-			<div class="has-text-weight-bold is-size-6 has-text-centered mb-2">{$_("config.rfid.registeredtags")}</div>
+	<div class="columns is-centered m-0 pb-1">
+		<div class="column is-two-thirds m-0">
+			<div class="is-flex is-justify-content-center">
+				<Borders grow>
+					<div class="has-text-weight-bold is-size-6 has-text-centered mb-2">{$_("config.rfid.registeredtags")}</div>
+					<div class="has-text-centered mt-4">
+						<Button bind:this={button2_inst} name={$_("config.rfid.removeall")} color="is-danger" butn_submit={()=>removeTag("all",button2_inst)} />
+					</div>
 					<div class="scrollable my-2">
 						{#each tags as tag,i}
 							<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
 						{/each}
 					</div>
-					<div class="has-text-centered mt-4">
-						<Button bind:this={button2_inst} name={$_("config.rfid.removeall")} size="is-small" color="is-danger" butn_submit={()=>removeTag("all",button2_inst)} />
-					</div>
-			
-		</Borders>
+				</Borders>
+				
+			</div>
+		</div>
 	</div>
+
 	{/if}
 </Box>
+{/if}

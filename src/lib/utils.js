@@ -3,6 +3,7 @@ import {DateTime} 			from "luxon";
 import {EvseClients}		from "./vars.js"
 import { uistates_store } 	from "./stores/uistates.js";
 import {get} 				from 'svelte/store'
+import { config_store } 	from './stores/config.js';
 
 export async function httpAPI(method,url,body=null,type = "json",timeout = 10000) {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
@@ -51,6 +52,7 @@ export async function httpAPI(method,url,body=null,type = "json",timeout = 10000
 	return res
 		
 }
+
 
 export const removeDuplicateObjects = (array, key) => {
     const set = new Set()

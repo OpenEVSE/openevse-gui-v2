@@ -17,7 +17,11 @@
 	let counter_divert_update
 	let counter_vehicle_update
 	let counter_rfid_scan
-	let last_RFIDScan_update
+	let refresh_config = false
+	let refresh_schedule = false
+	let refresh_target = false
+	let refresh_override = false
+	let refresh_plan = false
 
 	onMount(()=> {
 		getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
@@ -28,46 +32,67 @@
 		$uistates_store.time_localestring = formatDate(t,tz)
 	}
 	export async function refreshConfigStore(ver) {
+		if (refresh_config)
+			return
 		if (ver != $uistates_store.config_version) {
+			refresh_config = true
 			const res = await serialQueue.add(config_store.download)
-			if (res) $uistates_store.config_version=ver
+			if (res)
+				$uistates_store.config_version=ver
+			refresh_config = false
 			return res
 		}
 	}
 
 	export async function refreshSchedulestore(ver) {
+		if (refresh_schedule)
+			return
 		if (ver != $uistates_store.schedule_version) {
+			refresh_schedule = true
 			$uistates_store.schedule_version=ver
 			const res = await serialQueue.add(schedule_store.download)
+			refresh_schedule = false
 			return res
 		}
 	}
 
 	export async function refreshPlanStore(ver) {
+		if (refresh_plan)
+			return
 		if (ver != $uistates_store.schedule_plan_version) {
+			refresh_plan = true
 			$uistates_store.schedule_plan_version=ver
 			const res = await serialQueue.add(plan_store.download)
+			refresh_plan = false
 			return res
 		}
 	}
 
 	export async function refreshClaimsTargetStore(ver) {
+		if (refresh_target)
+			return
 		if (ver != $uistates_store.claims_version) {
+			refresh_target = true
 			$uistates_store.claims_version = ver
 			const res = await serialQueue.add(claims_target_store.download)
 			if (res) {		
 				getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
 			}
+			refresh_target = false
 			return res
 		}
 		return false
 	}
 
 	export async function refreshOverrideStore(version) {
+		if (refresh_override)
+			return
 		if ($uistates_store.override_version != version) {
+			refresh_override = true
 			$uistates_store.override_version = version
 			const res = await serialQueue.add(override_store.download)
-			if (res)
+			refresh_override = false
+			if (res) 
 				return res
 			else return false
 		}
@@ -153,7 +178,7 @@
 	$: refreshPlanStore			($status_store.schedule_plan_version)
 	$: refreshClaimsTargetStore	($status_store.claims_version)
 	$: refreshOverrideStore     ($status_store.override_version)
-	$: refreshDateTime			($status_store.time, $config_store.time_zone)
+	$: refreshDateTime			($status_store.time, $config_store?.time_zone)
 	$: refreshUIState			($status_store)
 	$: refreshLocale			($config_store.lang)
 	$: $status_store.divert_update,        countDivertUpdate()
