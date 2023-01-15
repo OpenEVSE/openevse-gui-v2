@@ -11,62 +11,73 @@
 	import InputForm 				from "../../ui/InputForm.svelte";
 	import Box 						from "../../ui/Box.svelte"
 
-
+	let mounted = false
+	let alert_body
 	let alert_visible = false
+	const hiddenpass = "••••••••••"
+
 	let languages = []
 
 	let formdata = {
-		www_username: {val: "",   state: ""},
-		www_password: {val: "",   state: ""},
-		lang:		  {val: "en", state: ""},
+		www_username: {val: "",   state: "", req: true},
+		www_password: {val: "",   state: "", req: true},
+		lang:		  {val: "en", state: "", req: false},
 	}
 	
 	let auth_checked = false
 	let auth_submit_state = ""
 
-	$locales.forEach(lang => {
-		languages.push({name: lang, value: lang})
-	});
+	
 	
 	let auth_submit = async () => {
-		
-		if ( auth_checked && (!formdata.www_username.val || !formdata.www_password.val )) {
-			alert_visible = true
-			auth_submit_state = ""
-			auth_checked = false
-			return false
+		let reqfields_ok = true
+		let data = {}
+		if (auth_checked) {
+			for (const key of Object.keys(formdata)) {
+				if (formdata[key].req) {
+					if (formdata[key].val == "") {
+						alert_body = $_("config.http.missing-" + key)
+						alert_visible = true
+						auth_checked = false
+						reqfields_ok = false
+						return
+					}
+				}
+				data[key] = formdata[key].val
+			}
+			if ( formdata.www_password.val && formdata.www_password.val != hiddenpass) {
+				data.www_password = formdata.www_password.val
+			} else delete data.www_password
 		}
 		else {
-			auth_submit_state = "loading"
-
-			if ( !auth_checked ) {
-				formdata.www_username.val = ""
-				formdata.www_password.val = ""
-			}
-			const data = {
-			www_username: formdata.www_username.val,
-			}
-			if (formdata.www_password.val != "_DUMMY_PASSWORD")
-				data.www_password = formdata.www_password.val
-
-			if (await serialQueue.add(() => config_store.upload(data))) 
-				{
-					auth_submit_state = "ok"
-					return true
-				}
-			else {
-				auth_submit_state = "error"
-				return false
-			}
+			data.www_username = formdata.www_username.val = ""
+			data.www_password = formdata.www_password.val = ""
 		}
+
+		if (!reqfields_ok)
+			return false
+
+		
+		
+		auth_submit_state = "loading"
+		if (await serialQueue.add(() => config_store.upload(data))) 
+			{
+				auth_submit_state = "ok"
+				return true
+			}
+		else {
+			auth_submit_state = "error"
+			return false
+		}
+
 	}
 
 	let getAuthData = (u,p) => {
 		formdata.www_username.val = u
 		formdata.www_password.val = p
-		if (p == "_DUMMY_PASSWORD") 
-			formdata.www_password.val = ""
-		if (u || p)  {
+		if (p) 
+			formdata.www_password.val = hiddenpass
+		if (u && p)  {
 			auth_checked = true
 			return true
 		}
@@ -94,16 +105,19 @@
 	}
 
 	onMount(() => {
+		$locales.forEach(lang => {
+			languages.push({name: lang, value: lang})
+		});
 		formdata.lang.val = $config_store.lang?$config_store.lang:"en"
 		getAuthData($config_store.www_username,$config_store.www_password)
+		mounted = true
 	})
-	$: console.log("login state: " + formdata.www_username.state)
 
-	// $: getAuthData($config_store.www_username,$config_store.www_password)
-	// $: $config_store.lang, () => {formdata.lang.val = $config_store.lang}
+	$: console.log("login state: " + formdata.www_username.state)
 	
 </script>
 
+{#if mounted}
 <Box title={$_("config.titles.http")} icon="mdi:web" back={true}>
 	<div class="columns is-centered">
 		<div class="column is-two-thirds">
@@ -133,4 +147,5 @@
 		</div>
 	</div>
 </Box>
-<AlertBox title={$_("error")} body={$_("config.http.errormsg")} bind:visible={alert_visible}/>
+<AlertBox title={$_("error")} body={alert_body} bind:visible={alert_visible}/>
+{/if}

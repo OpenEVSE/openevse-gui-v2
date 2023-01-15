@@ -253,14 +253,16 @@
 			"lang": "UI Language",
 			"enable-ttip": "Enable HTTP authentication",
 			"inputmax": "15 characters max",
-			"errormsg": "Please set a username & password first"
+			"errormsg": "Please set a username & password first",
+			"missing-www_username": "Missing username",
+			"missing-www_password": "Missing password"
 		},
 		"mqtt": {
 			"enable": "Enable MQTT",
 			"disable": "Disable MQTT",
-			"missing-host": "MQTT Host is missing",
-			"missing-port": "MQTT Port is missing",
-			"missing-basetopic": "MQTT Base Topic is missing",
+			"missing-mqtt_server": "MQTT Host is missing",
+			"missing-mqtt_port": "MQTT Port is missing",
+			"missing-mqtt_topic": "MQTT Base Topic is missing",
 			"connected": "Connected to mqtt server",
 			"notconnected": "Not connected to mqtt server",
 			"host": "Host",

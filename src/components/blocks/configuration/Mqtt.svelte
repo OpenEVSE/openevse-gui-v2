@@ -19,46 +19,46 @@
 	let mounted = false
 	const hiddenpass = "••••••••••"
 
+	let updateFormData = () => {
+		formdata = {
+			mqtt_enabled: 			  {val: $config_store.mqtt_enabled, state: "", req: false},
+			mqtt_server:   			  {val: $config_store.mqtt_server, state: "", req: true},
+			mqtt_port:				  {val: $config_store.mqtt_port,  state: "", req: true},
+			mqtt_reject_unauthorized: {val: $config_store.mqtt_reject_unauthorized, state: "", req: false},
+			mqtt_user: 				  {val: $config_store.mqtt_user, state: "", req: false},
+			mqtt_pass: 				  {val: $config_store.mqtt_pass?hiddenpass:"", state: "", req: false},
+			mqtt_topic: 		      {val: $config_store.mqtt_topic, state: "", req: true},
+			mqtt_retained: 			  {val: $config_store.mqtt_retained, state: "", req: false},
+			mqtt_vrms:				  {val: $config_store.mqtt_vrms, state: "", req: false}
+		}	
+	}
+
 	async function toggleMQTT() {	
 		let data = {
 			mqtt_enabled: formdata.mqtt_enabled.val,
-			mqtt_reject_unauthorized: formdata.mqtt_reject_unauthorized.val,
-			mqtt_retained: formdata.mqtt_retained.val,
-			mqtt_vrms: formdata.mqtt_vrms.val
-		}
-
+		}	
+		let reqfields_ok = true
 		if (!$config_store.mqtt_enabled) {
-			if (!formdata.mqtt_server.val)
-			{
-				alert_body = $_("config.mqtt.missing-host")
-				alert_visible = true
-				formdata.mqtt_enabled.val = false
-				return
+			for (const key of Object.keys(formdata)) {
+				if (formdata[key].req) {
+					if (formdata[key].val == "") {
+						alert_body = $_("config.mqtt.missing-" + key)
+						alert_visible = true
+						formdata.mqtt_enabled.val = false
+						reqfields_ok = false
+						return false
+					}
+				}
+				data[key] = formdata[key].val	
 			}
-			else if (!formdata.mqtt_port.val) {
-				alert_body = $_("config.mqtt.missing-port")
-				alert_visible = true
-				formdata.mqtt_enabled.val = false
-				return
-			}
-			else if (!formdata.mqtt_topic.val) {
-				alert_body = $_("config.mqtt.missing-basetopic")
-				alert_visible = true
-				formdata.mqtt_enabled.val = false
-				return
-			}
-		}
-		data.mqtt_server = formdata.mqtt_server.val
-		data.mqtt_port = formdata.mqtt_port.val
-		data.mqtt_topic = formdata.mqtt_topic.val
-		if (formdata.mqtt_user.val) {
-			data.mqtt_user = formdata.mqtt_user.val
 		}
 
-		if ( formdata.mqtt_pass.val && formdata.mqtt_pass.val != hiddenpass) {
-			data.mqtt_pass = formdata.mqtt_pass.val
-		}
+		if ( formdata.mqtt_pass.val && formdata.mqtt_pass.val !== hiddenpass) {
+				data.mqtt_pass = formdata.mqtt_pass.val
+			} else delete data.mqtt_pass
 
+		if (!reqfields_ok)
+			return false
 
 		formdata.mqtt_enabled.state = "loading"
 		if (await serialQueue.add(() => config_store.upload(data)))
@@ -74,7 +74,13 @@
 
 	let setProperty = async (prop) => {
 		if (formdata[prop].val.length > 64)
-			return
+			return false
+		if (formdata.mqtt_enabled.val && formdata[prop].req && !formdata[prop].val ) {
+			alert_body = $_("config.mqtt.missing-" + prop)
+			alert_visible = true
+			formdata[prop].val = $config_store[prop]
+			return false
+		}
 		const props = {}
 		props[prop] = formdata[prop].val
 		formdata[prop].state = "loading"
@@ -90,25 +96,12 @@
 		}
 	}
 
-	let updateFormData = () => {
-		formdata = {
-			mqtt_enabled: 			  {val: $config_store.mqtt_enabled, state: ""},
-			mqtt_server:   			  {val: $config_store.mqtt_server, state: ""},
-			mqtt_port:				  {val: $config_store.mqtt_port,  state: ""},
-			mqtt_reject_unauthorized: {val: $config_store.mqtt_reject_unauthorized, state: ""},
-			mqtt_user: 				  {val: $config_store.mqtt_user, state: ""},
-			mqtt_pass: 				  {val: $config_store.mqtt_pass?"••••••••••":"", state: ""},
-			mqtt_topic: 		      {val: $config_store.mqtt_topic, state: ""},
-			mqtt_retained: 			  {val: $config_store.mqtt_retained, state: ""},
-			mqtt_vrms:				  {val: $config_store.mqtt_vrms, state: ""}
-		}	
-	}
 
 	onMount(() => {
 		updateFormData()
 		Object.keys(formdata).forEach(key => {
-			if (formdata[key] == undefined) {
-				formdata[key] = ""
+			if (formdata[key].val == undefined) {
+				formdata[key].val = ""
 			}
 		});
 		mounted = true

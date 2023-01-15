@@ -21,6 +21,9 @@
 		border:0;
 		width: 34px;
 	}
+	.tag.but:hover {
+		background-color: hsl(195, 75%, 22%);
+	}
 	.tag.name {
 		min-width: 80px;
 		text-align: center;
@@ -43,13 +46,13 @@
 
 	</div>
 	{#if state == "" && (name || (client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt") ))}
-	<button class="tag but is-danger is-clickable m-0 p-2" on:click|preventDefault={()=>action()} >
+	<button class="tag but is-dark is-clickable m-0 p-2" on:click|preventDefault={()=>action()} >
 		<iconify-icon class="" icon={"fa6-solid:xmark"}></iconify-icon>
 	</button>
 	{:else if state == "loading"}
-	<span class="tag but is-danger m-0 p-2"><Loader size="is-size-6" /></span>
+	<span class="tag but is-dark m-0 p-2"><Loader size="is-size-6" /></span>
 	{:else if state == "ok"}
-	<span class="tag but is-primary  m-0 p-2"><iconify-icon icon={"fa6-solid:check"}></iconify-icon></span>
+	<span class="tag but is-dark  m-0 p-2"><iconify-icon icon={"fa6-solid:check"}></iconify-icon></span>
 	{:else if state == "error"}
 	<span class="tag but is-danger  m-0 p-2"><iconify-icon icon={"fa6-solid:xmark"}></iconify-icon></span>
 	{/if}
