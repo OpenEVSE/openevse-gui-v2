@@ -252,7 +252,9 @@
       "lang": "Langue de l'Interface",
       "enable-ttip": "Activer l'authentification HTTP",
       "inputmax": "15 charactères max",
-      "errormsg": "Nom d'utilisateur ou mot de passe manquant"
+      "errormsg": "Nom d'utilisateur ou mot de passe manquant",
+      "missing-www_username": "Nom d'utilisateur manquant",
+			"missing-www_password": "Mot de passe manquant"
     },
     "mqtt": {
       "enable": "Activer",
