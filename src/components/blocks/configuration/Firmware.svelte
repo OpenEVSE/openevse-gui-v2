@@ -1,4 +1,5 @@
 <script>
+	import { status_store } from "./../../../lib/stores/status.js";
 	import { _ } 		  		from 'svelte-i18n'
 	import { onMount } 			from "svelte";
 	import {httpAPI} 			from "../../../lib/utils.js"
@@ -21,22 +22,22 @@
 
 
 	async function getFwUpdate() {
-		let fw_update_json = await httpAPI("GET",url)
-		if (fw_update_json != "error") {
-			fw.version = fw_update_json.tag_name
-			fw.name = $config_store.buildenv + ".bin"
-			fw.html_url = fw_update_json.html_url
-			let item = fw_update_json.assets.find(obj => {
-				return obj.name === fw.name
-			})
-			if (item)
-				fw.url = item.browser_download_url
-			if (fw.version != $config_store.version) {
-				fw_has_update = true
+		if ($status_store.net_connected) {
+			let fw_update_json = await httpAPI("GET",url)
+			if (fw_update_json != "error") {
+				fw.version = fw_update_json.tag_name
+				fw.name = $config_store.buildenv + ".bin"
+				fw.html_url = fw_update_json.html_url
+				let item = fw_update_json.assets.find(obj => {
+					return obj.name === fw.name
+				})
+				if (item)
+					fw.url = item.browser_download_url
+				if (fw.version != $config_store.version) {
+					fw_has_update = true
+				}
 			}
-			
 		}
-
 	}
 	
 	async function restartOpenEvse() {
