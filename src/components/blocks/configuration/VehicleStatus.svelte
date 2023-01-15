@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import { _ } 		  			   from 'svelte-i18n'
 	import { config_store }			   from "./../../../lib/stores/config.js"
 	import {status_store} 			   from "../../../lib/stores/status.js"
@@ -6,7 +7,15 @@
 	import {sec2time, s2mns, miles2km} from "../../../lib/utils.js"
 
 	let evelapsed = derived(status_store, store => s2mns(store.vehicle_state_update))
-	
+	let mode
+	function getMode() {
+		if ($config_store.tesla_enabled)
+			mode = 1
+		else if ($config_store.mqtt_vehicle_soc)
+			mode = 2
+		else mode = 0
+	}
+	onMount(()=>getMode())
 </script>
 <style>
 	.tags {
@@ -18,7 +27,7 @@
 	}
 </style>
 <div class="">
-	<div class="my-3">
+	<div class="my-3" class:is-hidden={mode==0}>
 		<span class="has-text-weight-bold  is-size-7">{$_("config.vehicle.lastupdated")}:</span>
 		<span class="is-size-7 {$status_store.vehicle_state_update > 3600?"has-text-danger":$status_store.vehicle_state_update < 300?"has-text-primary":"has-text-orange"} ">{$evelapsed}</span>
 	</div>
