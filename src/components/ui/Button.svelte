@@ -23,7 +23,7 @@
 	onMount(()=> {
 		state = ""
 		if (width == "" && name) {
-			width = name.length + 2 + "ch"
+			width = name.length + 4 + "ch"
 		}
 	})
 

@@ -2,6 +2,7 @@
 	import {link} 			  from 'svelte-spa-router'
 	export let charging
 	export let selected
+	export let disabled = false
 
 </script>
 
@@ -38,7 +39,7 @@
 
 <div class="mobnav is-flex-shrink-0 is-flex-grow-0  has-background-dark is-flex is-align-items-center">	
 	<div class="container  is-size-3 is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row">
-		<a class="nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"}>
+		<a class=" nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"}>
 			<iconify-icon  inline icon="fa6-solid:chart-simple"></iconify-icon>
 		</a>
 		<a class="nav-item" href="/schedule" use:link class:active={selected=="/schedule"}>
