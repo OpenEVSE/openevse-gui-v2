@@ -10,7 +10,7 @@
 		cursor: default;
     }
 </style>
-<div>
+<div class="container">
 	<table class="table has-text-centered is-fullwidth is-bordered is-size-7">
 		<thead>
 			<tr class="has-background-info">

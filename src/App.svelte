@@ -58,6 +58,10 @@
 		/* flex: 1; */
 		height: calc( 100% - 56px );
 	}
+	.route.wizard {
+		height: 100%;
+		bottom: 0px;
+	}
 
 	/* .screen {
 		overflow-y: hidden;
@@ -85,7 +89,7 @@
 	{#if $uistates_store.data_loaded}
 	<!-- <div class="screen"> -->
 
-		<div class="route">
+		<div class="route" class:wizard={$location.includes("/wizard")}>
 			{#if $status_store.evse_connected == 1}
 			<div class="status mx-3 mt-1 p-0">
 				<Status />

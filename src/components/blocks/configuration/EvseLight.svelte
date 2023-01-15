@@ -52,7 +52,7 @@
 </style>
 
 <Box title={$_("config.titles.evse")} icon="mdi:evse" back={true}>
-	<div class="columns is-centered is-vcentered">
+	<div class="columns is-centered">
 		<div class="column is-two-thirds">
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
@@ -75,28 +75,6 @@
 					</div>
 				</Borders>
 			</div>
-			<div class="my-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
-					<div class="has-text-weight-bold is-size-6">{$_("config.evse.service")}</div>
-					<Select bind:value={$config_store.service} bind:status={select_service_level} items={service_items} onChange={setServiceLevel}/>
-				</Borders>
-			</div>
-			<div class="my-1 is-flex is-justify-content-center" >
-				<Borders grow={true} has_help={true}>
-					<div slot="help">
-						{@html $_("config.evse.pause-help")}
-					</div>
-					<div class="has-text-weight-bold is-size-6">{$_("config.evse.pause")}</div>
-					<Switch name="pausemode" label="{$config_store.pause_uses_disabled?"Disable":"Sleep"}" bind:checked={$config_store.pause_uses_disabled} onChange={togglePauseMode}  />
-				</Borders>
-			</div>
-			<div class="mt-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
-					<div class="has-text-weight-bold is-size-6">{$_("config.evse.led-bn")}</div>
-					<SliderForm icon="ic:outline-light-mode" bind:value={$config_store.led_brightness} min=0 max=255 onchange={setLed} />
-				</Borders>
-			</div>
 		</div>	
 	</div>
-
 </Box>
