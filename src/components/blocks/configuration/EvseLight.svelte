@@ -54,13 +54,13 @@
 <Box title={$_("config.titles.evse")} icon="mdi:evse" back={true}>
 	<div class="columns is-centered">
 		<div class="column is-two-thirds">
-			<div class="my-1 is-flex is-justify-content-center" >
+			<div class="my-2 is-flex is-justify-content-center" >
 				<Borders grow={true}>
 					<div class="has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>
 					<SliderForm icon="fa6-solid:gauge-high" bind:value={$config_store.max_current_soft} unit={$_("units.A")} min={$config_store.min_current_hard?$config_store.min_current_hard:6} max={$config_store.max_current_hard?$config_store.max_current_hard:32} onchange={setMaxCurrent} />
 				</Borders>
 			</div>
-			<div class="my-1 is-flex is-justify-content-center" >
+			<div class="mt-4 mb-3 is-flex is-justify-content-center" >
 				<Borders grow={true} has_help={true}>
 					<div slot="help">
 						{@html $_("config.evse.random-help")}

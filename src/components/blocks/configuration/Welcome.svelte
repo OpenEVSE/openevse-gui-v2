@@ -4,10 +4,10 @@
 		
 </script>
 <Box title="Setup" icon="fa6-solid:gear">
-	<div class="has-text-centered mt-6">
+	<div class="has-text-centered mt-4">
 		<div class="has-text-info is-size-4">Welcome to</div>
 		<img src={Logo} alt="logo" />
-		<div class="my-4">
+		<div class="mt-4 mb-6">
 			First initialisation, please follow this quick setup process.	
 		</div>
 		

@@ -45,6 +45,19 @@
 </script>
 
 <Box title={$_("config.titles.network")} icon="mdi:local-area-network" back={true}>
+	{#if $status_store.mode != "Wired"}
+	<div class="my-3">
+				{#if setWifi == false && $config_store.ssid}
+				<WifiDisplay ssid={$config_store.ssid} rssi={$status_store.srssi}/>
+				<div class="mt-3 is-flex is-justify-content-center" >
+					<Button name={$_("config.network.change")} butn_submit={selectWifi}/>
+				</div>
+				{:else}
+				<WifiScan bind:active={setWifi} ssid={$config_store.ssid} {is_wizard}/>
+				{/if}
+	</div>
+	{/if}
+
 	<div class="is-flex is-justify-content-center">
 		<Borders>
 			<span class="is-size-6 has-text-weight-bold">
@@ -64,17 +77,5 @@
 		<InputForm type="text" title={$_("config.network.host")} placeholder="openevse" bind:value={$config_store.hostname} 
 			status={input_host_status} onChange={()=>onChange("hostname", $config_store.hostname)}/>
 	</div>
-	{#if $status_store.mode != "Wired"}
-	<div class="my-3">
-				{#if setWifi == false && $config_store.ssid}
-				<WifiDisplay ssid={$config_store.ssid} rssi={$status_store.srssi}/>
-				<div class="mt-3 is-flex is-justify-content-center" >
-					<Button name={$_("config.network.change")} butn_submit={selectWifi}/>
-				</div>
-				{:else}
-				<WifiScan bind:active={setWifi} ssid={$config_store.ssid} {is_wizard}/>
-				{/if}
-	</div>
-	{/if}
 
 </Box>
