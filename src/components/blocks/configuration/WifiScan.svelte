@@ -85,8 +85,8 @@
 
 		return "Scanning ..."
 	}
-
 </script>
+
 
 <style>
 		.nopointer {

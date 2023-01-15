@@ -17,6 +17,7 @@
 	export let disabled = false
 	export let readonly = false
 	export let is_inline = false
+	export let size = null
 
 
 	let show = false
@@ -66,12 +67,12 @@
 
     }
 </style>
-<div class="my-2 has-text-left {is_inline?"is-inline-block":""}">
+<div class="mb-2 has-text-left {is_inline?"is-inline-block":""}">
 		{#if title}
 		<div class="has-text-weight-semibold {disabled?"has-text-grey-light":""}">{title}</div>
 		{/if}
 		<input {readonly} class="input is-info" type={typecss} placeholder={placeholder} value={value!=undefined?value:""} autocomplete="off" {maxlength} min={min} max={max}
-		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	>
+		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	style={size?"width: " + size + "ch;":null}>
 		<div class="main ">
 			<span class="is-size-5 state has-background-white is-flex is-align-items-center is-justify-content-center" class:is-hidden={!status}>
 				{#if status=="loading"}
@@ -84,7 +85,7 @@
 			</span>
 		</div>	
 		{#if type=="password"}
-		<div class="my-2 mx-3 {disabled?"has-text-grey-light":""}">
+		<div class="mt-1 mx-3 {disabled?"has-text-grey-light":""}">
 			<label class="checkbox">
 				<input type="checkbox" bind:checked={show} {disabled}>
 				{$_("show")}

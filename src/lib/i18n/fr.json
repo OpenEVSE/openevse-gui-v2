@@ -274,6 +274,8 @@
       "password": "Mot de Passe",
       "basetopic": "Sujet principal",
       "basetopic-desc": "Sujet dans lequel OpenEVSE va publier les données",
+      "announcetopic": "Sujet LWT/Annonce",
+      "announcetopic-desc": "Sujet dans lequel OpenEVSE va publier les données d'annonce et LWT",
       "retain": "Retenir les Publications (Retain)",
       "topic-voltage": "Sujet Tension (V)",
       "topic-voltage-desc": "Sujet MQTT de la tension (en V) pour améliorer le calcul de puissance"

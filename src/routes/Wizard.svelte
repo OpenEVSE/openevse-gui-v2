@@ -19,9 +19,9 @@
 
 </script>
 <style>
-	.columns {
+	/* .columns {
 		height: 90%;
-	}
+	} */
 </style>
 
 <div class="columns is-mobile is-centered p-0 m-0" >

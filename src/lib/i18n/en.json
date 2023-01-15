@@ -275,6 +275,8 @@
 			"password": "Password",
 			"basetopic": "Base Topic",
 			"basetopic-desc": "Topic where OpenEVSE will publish data",
+			"announcetopic": "LWT/Announce Topic",
+			"announcetopic-desc": "Topic where OpenEVSE will post announce data and LWT",
 			"retain": "Retain published data",
 			"topic-voltage": "Voltage Topic",
 			"topic-voltage-desc": "Voltage MQTT topic to improve power calculations"

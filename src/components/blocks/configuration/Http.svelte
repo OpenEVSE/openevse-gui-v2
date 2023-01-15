@@ -126,8 +126,14 @@
 					<div class="has-text-weight-bold">{$_("config.http.enable")}</div>
 					<form class="has-text-left" on:submit|preventDefault>
 						<Switch name="auth_enabled" label={auth_checked?$_("enabled"):$_("disabled")} bind:checked={auth_checked} onChange={auth_submit} bind:status={auth_submit_state}/>
-						<div><InputForm  title={$_("config.http.username")} bind:value={formdata.www_username.val} placeholder={$_("config.http.inputmax")} type="text" maxlength=15 bind:status={formdata.www_username.state}/></div>
-						<div><InputForm title={$_("config.http.password")} bind:value={formdata.www_password.val} placeholder={$_("config.http.inputmax")} type="password" maxlength=15 bind:status={formdata.www_password.state}/></div>
+						<div class="is-flex is-justify-content-space-evenly is-flex-wrap-wrap">
+							<div class="mx-1">
+								<InputForm size=20 title={$_("config.http.username")} bind:value={formdata.www_username.val} placeholder={$_("config.http.inputmax")} type="text" maxlength=15 bind:status={formdata.www_username.state}/>
+							</div>
+							<div class="mx-1">
+							<InputForm size=20 title={$_("config.http.password")} bind:value={formdata.www_password.val} placeholder={$_("config.http.inputmax")} type="password" maxlength=15 bind:status={formdata.www_password.state}/>
+							</div>
+						</div>
 						<div class="has-text-centered" class:is-hidden={!auth_checked}>
 							<Button name={$_("update")} bind:state={auth_submit_state} disabled={!formdata.www_username.val || !formdata.www_password.val } butn_submit={auth_submit}/>
 						</div>
