@@ -17,6 +17,7 @@
   "value": "Valeur",
   "show": "Afficher",
   "error": "Erreur",
+  "notification": "Notification",
   "yes": "Oui",
   "no": "Non",
   "connected": "connecté",
@@ -50,6 +51,7 @@
   "scheduler-state": "Etat",
   "scheduler-checkall": "Décocher tout",
   "scheduler-uncheckall": "Cocher tout",
+  "scheduler-empty": "Aucun timer enregistré",
   "days": {
     "monday": "lundi",
     "tuesday": "mardi",
@@ -186,7 +188,8 @@
       "pass": "Mot de passe WiFi",
       "pass-desc": "clef WPA",
       "connect": "Connecter",
-      "scan": "Scanner"
+      "scan": "Scanner",
+      "redirect": "Le réseau a changé, tentative de redirection vers le nom d'hôte, remplacez l'adresse par l'ip si cela ne fonctionne pas"
     },
     "firmware": {
       "hardware": "Matériel",

@@ -53,14 +53,14 @@
 	.help {
 		position: absolute;
 		right: 7px;
-		top: 7px;
+		top: 8px;
 
 	}
 
 	.back {
 		position: absolute;
 		left: 7px;
-		top: 5px;
+		top: 6px;
 
 	}
 
@@ -79,7 +79,7 @@
 		</div>
 		<div class="back m-0 p-0" class:is-hidden={!back}>
 			<a href="/#/" class="has-text-info" on:click|preventDefault={()=>history.back()}>
-				<div class="is-flex is-align-items-center">
+				<div class="has-text-centered" style="width: 28px; height:28px">
 					<iconify-icon inline class="is-size-4 m-0 p-0" icon="mdi:arrow-back-circle"></iconify-icon>
 				</div>
 			</a>

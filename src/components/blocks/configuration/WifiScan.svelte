@@ -1,4 +1,5 @@
 <script>
+	import AlertBox from "./../../ui/AlertBox.svelte";
 	import { _ } 		  					 from 'svelte-i18n'
 	import { uistates_store } 				 from "./../../../lib/stores/uistates.js";
 	import { config_store } 				 from "./../../../lib/stores/config.js";
@@ -9,6 +10,7 @@
 	import WifiIcon 						 from "./../../ui/WifiIcon.svelte";
 	import InputForm 						 from "../../ui/InputForm.svelte"
 	import Button 							 from "../../ui/Button.svelte"
+	import {location} 					     from 'svelte-spa-router'
 
 	export let active = false
 	export let ssid = ""
@@ -19,6 +21,8 @@
 	let timeout
 	let state = ""
 	let scanButnState = ""
+	let connectButnState = ""
+	let alertbox_redirect = false
 
 	onMount(() => {
 		scanWifi()
@@ -48,22 +52,31 @@
 	}
 	async function connectWifi() {
 		let param = "ssid=" + ssid + "&pass=" + key
+		connectButnState = "loading"
 		let response = await serialQueue.add(()=>httpAPI("POST", "/savenetwork", param, "text"))
-		active = false
-		setTimeout(()=> { 
-					console.log("redirecting url")
-					let url = ""
-					if (!import.meta.env.DEV) {
-						url = "http://" + $config_store.hostname + ".local"
-					}
-					if (is_wizard) {
-						$uistates_store.wizard_step = 3
-						url = url +  "/#/wizard/" + $uistates_store.wizard_step
-					}
-					
-					location.replace(url) }
-				, 4000 )
+		if (!response) {
+			connectButnState = "error"
+		}
+		else {
+			connectButnState = "ok"
+			alertbox_redirect = true
+			setTimeout(()=> { 
+				console.log("redirecting url")
+				active = false
+				let url = ""
+				if (!import.meta.env.DEV) {
+					url = "http://" + $config_store.hostname + ".local"
+				}
+				if (is_wizard) {
+					$uistates_store.wizard_step = 3
+					url = url +  "/#/wizard/" + $uistates_store.wizard_step
+				}
+				else url = url + $location
+				window.location.replace(url) }
+			, 5000 )
 		return true
+		}
+		
 	}
 
 	function scanAgain() {
@@ -139,12 +152,14 @@
 		</div>
 			
 			<div class="is-flex is-align-items-center is-justify-content-center">
-				<Button name={$_("config.network.connect")} color="is-primary" butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
+				<Button name={$_("config.network.connect")} color="is-primary" bind:state={connectButnState} butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
 				<Button name={$_("config.network.scan")} butn_submit={scanAgain} bind:state={scanButnState}/>
 				{#if $config_store.ssid}
 				<Button name={$_("cancel")} color="is-danger" butn_submit={() => active = false}/>
 				{/if}
 			</div>
 	</form>
-</div>
 
+	
+</div>
+<AlertBox title={$_("notification")} body={$_("config.network.redirect")} bind:visible={alertbox_redirect}/>

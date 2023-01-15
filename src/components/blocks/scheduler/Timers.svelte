@@ -62,25 +62,25 @@
 <Box title={$_("scheduler-title")} icon="ion:calendar">
 	<div class="my-2 is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
 		<Borders>
+			{#if $schedule_store.length}
 			<table class="table is-size-6 has-text-weight-normal">
 				<tbody>
-					{#if $schedule_store.length}
-						{#each $schedule_store as schedule,id} 
-							<TimerTableRow bind:this={timers[id]} 
-							t_id={schedule.id}
-							t_time={schedule.time}
-							t_state={schedule.state}
-							t_days={schedule.days}
-							edit={() => {editTimer(schedule.id)}}
-							remove={() => {removeTimer(schedule.id)}}
-							removeState={timersState[id]}
-							/>
-						{/each}
-					{:else}
-					<span class="content">Schedule is empty</span>
-					{/if}	
+					{#each $schedule_store as schedule,id} 
+					<TimerTableRow bind:this={timers[id]} 
+					t_id={schedule.id}
+					t_time={schedule.time}
+					t_state={schedule.state}
+					t_days={schedule.days}
+					edit={() => {editTimer(schedule.id)}}
+					remove={() => {removeTimer(schedule.id)}}
+					removeState={timersState[id]}
+						/>
+					{/each}
 				</tbody>
 			</table>
+			{:else}
+			<div class="content">{$_("scheduler-empty")}</div>
+			{/if}	
 		</Borders>
 		<div class="mt-4"><Button name={$_("scheduler-newtimer")} butn_submit={addTimer}/></div>
 		
