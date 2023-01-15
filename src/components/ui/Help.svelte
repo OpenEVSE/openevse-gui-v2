@@ -11,7 +11,9 @@
 
 <div class="help m-0 p-0">
 	<a href={null} class="has-text-info" on:click|preventDefault={()=>is_opened=true} >
-		<iconify-icon class="is-size-5" icon="fa6-solid:circle-question"></iconify-icon>
+		<div style="width: 28px; height:28px" class="has-text-centered">
+			<iconify-icon inline class="is-size-5" icon="fa6-solid:circle-question"></iconify-icon>
+		</div>
 	</a>
 </div>
 <Modal bind:is_opened canClose={true}>

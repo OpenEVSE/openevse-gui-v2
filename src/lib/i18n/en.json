@@ -17,6 +17,7 @@
 	"value": "Value",
 	"show": "Show",
 	"error": "Error",
+	"notification": "Notification",
 	"yes": "Yes",
 	"no": "No",
 	"connected": "connected",
@@ -50,6 +51,7 @@
 	"scheduler-state": "State",
 	"scheduler-checkall": "Check All",
 	"scheduler-uncheckall": "Uncheck All",
+	"scheduler-empty": "No timers recorded",
 	"days": 
 		{
 		"monday": "monday",
@@ -187,7 +189,8 @@
 			"pass": "WiFi Password",
 			"pass-desc": "WPA Key",
 			"connect": "Connect",
-			"scan": "Scan"
+			"scan": "Scan",
+			"redirect": "Wifi has changed, trying to reload url using hostname, set IP manually if it fails"
 		},
 		"firmware": {
 			"hardware": "Hardware",
