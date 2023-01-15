@@ -4,7 +4,6 @@
 	import { config_store } from "./../../../lib/stores/config.js";
 	import VehicleTesla 	from "./VehicleTesla.svelte";
 	import VechicleMQTT 	from "./VechicleMQTT.svelte";
-	import Box 				from "../../ui/Box.svelte";
 	import Select 			from "./../../ui/Select.svelte";
 	
 	let mode = 0 // 0: none, 1: Tesla, 2: MQTT
