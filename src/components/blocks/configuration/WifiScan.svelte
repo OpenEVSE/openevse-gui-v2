@@ -128,7 +128,7 @@
 	</table>
 
 
-	<form>
+	<form on:submit|preventDefault>
 		<div class="is-flex is-flex-direction-column is-justify-content-center">
 			<div class="container">
 				<InputForm type="text" title={$_("config.network.ssid")} placeholder={$_("config.network.ssid-desc")} bind:value={ssid} />

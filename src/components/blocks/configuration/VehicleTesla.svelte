@@ -184,7 +184,7 @@
 		</div>
 		{:else if mode == 0}
 		<div>
-			<form>
+			<form on:submit|preventDefault>
 				<InputForm title="{$_("config.vehicle.username")}:" bind:value={username} placeholder={$_("config.vehicle.username-desc")} />
 				<InputForm title="{$_("config.vehicle.password")}:" bind:value={password} type="password" placeholder={$_("config.vehicle.password-desc")} />
 			</form>

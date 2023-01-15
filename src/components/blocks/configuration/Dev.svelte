@@ -87,7 +87,7 @@
 				<InputForm  title={$_("config.dev.rapi-cmd")} bind:value={rapi_cmd} placeholder="" type="text" />
 				<Button name={$_("config.dev.send")} color="is-info" butn_submit={send_rapi_cmd} state={button_send_state}/>
 				<Button name={$_("config.dev.clear")} color="is-info" butn_submit={clear_rapi_cmd} />
-				<form>
+				</form>
 			</div>
 		</Borders>
 	</div>
