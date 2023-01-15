@@ -66,7 +66,7 @@
 
     }
 </style>
-<div class="my-2 {is_inline?"is-inline-block":""}">
+<div class="my-2 has-text-left {is_inline?"is-inline-block":""}">
 		{#if title}
 		<div class="has-text-weight-semibold {disabled?"has-text-grey-light":""}">{title}</div>
 		{/if}
@@ -84,7 +84,7 @@
 			</span>
 		</div>	
 		{#if type=="password"}
-		<div class="my-2 {disabled?"has-text-grey-light":""}">
+		<div class="my-2 mx-3 {disabled?"has-text-grey-light":""}">
 			<label class="checkbox">
 				<input type="checkbox" bind:checked={show} {disabled}>
 				{$_("show")}

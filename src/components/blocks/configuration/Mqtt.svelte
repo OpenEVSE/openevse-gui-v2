@@ -141,39 +141,40 @@
 					
 				</Borders>
 			</div>
+			<form on:submit|preventDefault>
+				<div class="my-1 is-flex is-justify-content-center" >
+					<Borders grow={true} classes="mb-4">
 
-			<div class="my-1 is-flex is-justify-content-center" >
-				<Borders grow={true} classes="mb-4">
-
-					<InputForm title="{$_("config.mqtt.host")}*"  bind:value={formdata.mqtt_server.val} placeholder="server IP / Hostname" bind:status={formdata.mqtt_server.state} onChange={()=>setProperty("mqtt_server")}/>
-					<InputForm title="{$_("config.mqtt.port")}*"  bind:value={formdata.mqtt_port.val} placeholder="1883" type="number" bind:status={formdata.mqtt_port.state} onChange={()=>setProperty("mqtt_port")} />
-					<div class="has-text-left">
-						<Switch name="mqttselfcert" label={$_("config.mqtt.rejectselfsigned")} bind:checked={formdata.mqtt_reject_unauthorized.val} bind:status={formdata.mqtt_reject_unauthorized.state} onChange={()=>setProperty("mqtt_reject_unauthorized")}/>
-					</div>
-					<div>
-						<InputForm title={$_("config.mqtt.username")} bind:value={formdata.mqtt_user.val} placeholder="Username" />
-					</div>
-					<div>
-						<InputForm title={$_("config.mqtt.password")} bind:value={formdata.mqtt_pass.val} placeholder="Password" type="password" bind:status={formdata.mqtt_pass.state} onChange={()=>setProperty("mqtt_pass")} />
-					</div>
-				</Borders>
-			</div>
-			<div class="my-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
-					<div>
-						<InputForm title="{$_("config.mqtt.basetopic")}*" bind:value={formdata.mqtt_topic.val} placeholder="openevse" bind:status={formdata.mqtt_topic.state} onChange={()=>setProperty("mqtt_topic")} />
-					</div>
-					<div class="is-size-7 mb-2">{$_("config.mqtt.basetopic-desc")}</div>
-					<div class="has-text-left">
-						<Switch name="mqttretain" label={$_("config.mqtt.retain")} bind:checked={formdata.mqtt_retained.val} bind:status={formdata.mqtt_retained.state} onChange={()=>setProperty("mqtt_retained")} />
-					</div>
-					
-					<div class="mt-4">
-						<InputForm title={$_("config.mqtt.topic-voltage")} bind:value={formdata.mqtt_vrms.val} placeholder="topic/voltage" bind:status={formdata.mqtt_vrms.state} onChange={()=>setProperty("mqtt_vrms")} />
-					</div>
-					<div class="is-size-7">{$_("config.mqtt.topic-voltage-desc")}</div>
-				</Borders>	
-			</div>
+						<InputForm title="{$_("config.mqtt.host")}*"  bind:value={formdata.mqtt_server.val} placeholder="server IP / Hostname" bind:status={formdata.mqtt_server.state} onChange={()=>setProperty("mqtt_server")}/>
+						<InputForm title="{$_("config.mqtt.port")}*"  bind:value={formdata.mqtt_port.val} placeholder="1883" type="number" bind:status={formdata.mqtt_port.state} onChange={()=>setProperty("mqtt_port")} />
+						<div class="has-text-left">
+							<Switch name="mqttselfcert" label={$_("config.mqtt.rejectselfsigned")} bind:checked={formdata.mqtt_reject_unauthorized.val} bind:status={formdata.mqtt_reject_unauthorized.state} onChange={()=>setProperty("mqtt_reject_unauthorized")}/>
+						</div>
+						<div>
+							<InputForm title={$_("config.mqtt.username")} bind:value={formdata.mqtt_user.val} placeholder="Username" bind:status={formdata.mqtt_user.state} onChange={()=>setProperty("mqtt_user")} />
+						</div>
+						<div>
+							<InputForm title={$_("config.mqtt.password")} bind:value={formdata.mqtt_pass.val} placeholder="Password" type="password" bind:status={formdata.mqtt_pass.state} onChange={()=>setProperty("mqtt_pass")} />
+						</div>
+					</Borders>
+				</div>
+				<div class="my-1 is-flex is-justify-content-center" >
+					<Borders grow={true}>
+						<div>
+							<InputForm title="{$_("config.mqtt.basetopic")}*" bind:value={formdata.mqtt_topic.val} placeholder="openevse" bind:status={formdata.mqtt_topic.state} onChange={()=>setProperty("mqtt_topic")} />
+						</div>
+						<div class="is-size-7 mb-2">{$_("config.mqtt.basetopic-desc")}</div>
+						<div class="has-text-left">
+							<Switch name="mqttretain" label={$_("config.mqtt.retain")} bind:checked={formdata.mqtt_retained.val} bind:status={formdata.mqtt_retained.state} onChange={()=>setProperty("mqtt_retained")} />
+						</div>
+						
+						<div class="mt-4">
+							<InputForm title={$_("config.mqtt.topic-voltage")} bind:value={formdata.mqtt_vrms.val} placeholder="topic/voltage" bind:status={formdata.mqtt_vrms.state} onChange={()=>setProperty("mqtt_vrms")} />
+						</div>
+						<div class="is-size-7">{$_("config.mqtt.topic-voltage-desc")}</div>
+					</Borders>	
+				</div>
+			</form>
 		</div>
 	</div>
 	<AlertBox body={alert_body} bind:visible={alert_visible} />
