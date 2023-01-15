@@ -71,7 +71,7 @@
 					$uistates_store.wizard_step = 3
 					url = url +  "/#/wizard/" + $uistates_store.wizard_step
 				}
-				else url = url + $location
+				else url = url + "/#" + $location
 				window.location.replace(url) }
 			, 5000 )
 		return true
