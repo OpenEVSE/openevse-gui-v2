@@ -170,6 +170,15 @@
 		}
 	}
 
+	function getDivertMode(grid = "") {
+		if (grid) {
+			$uistates_store.divert_type = 1
+		}
+		else {
+			$uistates_store.divert_type = 0
+		}
+	}
+
 
 
 	// Refresh stores when new version is published over websocket
@@ -181,6 +190,7 @@
 	$: refreshDateTime			($status_store.time, $config_store?.time_zone)
 	$: refreshUIState			($status_store)
 	$: refreshLocale			($config_store.lang)
+	$: getDivertMode			($config_store.mqtt_grid_ie)
 	$: $status_store.divert_update,        countDivertUpdate()
 	$: $status_store.vehicle_state_update, countVehicleUpdate()
 	$: $status_store.rfid_waitin, 		   countRFIDScan()

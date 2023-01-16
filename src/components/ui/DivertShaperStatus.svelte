@@ -7,7 +7,7 @@
 	
 </script>
 
-{#if $config_store?.divert_enabled}
+{#if $config_store.divert_enabled}
 <div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
 	<iconify-icon class="has-text-primary is-size-6 mr-1" icon="fa6-solid:solar-panel"></iconify-icon>
 	{#if $uistates_store.divert_type == 0}
