@@ -81,20 +81,7 @@
 	
 	}
 
-	function setMode(grid = "") {
-		if (grid) {
-			$uistates_store.divert_type = 1
-		}
-		else {
-			$uistates_store.divert_type = 0
-		}
-	}
-
 	let divertelapsed = derived(status_store, store => s2mns(store.divert_update))
-
-
-	$: setMode($config_store.mqtt_grid_ie)
-
 
 </script>
 
