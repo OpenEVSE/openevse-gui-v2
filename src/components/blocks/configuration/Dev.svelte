@@ -71,7 +71,7 @@
 
 	
 
-	<div class="container mt-4 mb-1 is-flex is-justify-content-center">
+	<div class="mt-4 mb-1 is-flex is-justify-content-center">
 		<Borders>
 			<div class="mb-2">
 				<div>
@@ -84,8 +84,12 @@
 				</div>
 				<form on:submit|preventDefault={send_rapi_cmd}>
 				<InputForm  title={$_("config.dev.rapi-cmd")} bind:value={rapi_cmd} placeholder="" type="text" />
-				<Button name={$_("config.dev.send")} color="is-info" butn_submit={send_rapi_cmd} state={button_send_state}/>
-				<Button name={$_("config.dev.clear")} color="is-info" butn_submit={clear_rapi_cmd} />
+				<div class="is-inline-block">
+					<Button name={$_("config.dev.send")} color="is-info" butn_submit={send_rapi_cmd} state={button_send_state}/>
+				</div>
+				<div class="is-inline-block">
+					<Button name={$_("config.dev.clear")} color="is-info" butn_submit={clear_rapi_cmd} />
+				</div>
 				</form>
 			</div>
 		</Borders>
