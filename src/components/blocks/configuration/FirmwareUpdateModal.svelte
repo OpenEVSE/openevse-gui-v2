@@ -38,6 +38,7 @@
 			}
 			const xhr = new XMLHttpRequest();
 			xhr.addEventListener('load', () => resolve({ status: xhr.status, body: xhr.responseText }));
+			xhr.addEventListener("progress", progressHandler, false);
 			xhr.addEventListener('error', () => reject(new Error('File upload failed')));
 			xhr.addEventListener('abort', () => reject(new Error('File upload aborted')));
 			xhr.open('POST', url, true);
@@ -46,6 +47,13 @@
 			xhr.send(formData);
   		});
 	
+	function progressHandler(event) {
+		console.log("Uploaded " + event.loaded + " bytes of " + event.total);
+		var percent = (event.loaded / event.total) * 100;
+		console.log(Math.round(percent)+ "% uploaded");
+		_("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+	}
+
 	let updateToLatest = async (url) => {
 		const data = {
 			url: url
@@ -80,7 +88,6 @@
 		if ($status_store.ota == "started") {
 			if (uploadButtonState != "loading")
 				uploadButtonState = "loading"
-			console.log("ota: " + $status_store.ota_progress)
 		}
 		else if ($status_store.ota == "completed") {
 			uploadButtonState = "ok"
