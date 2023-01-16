@@ -1,11 +1,13 @@
 <script>
-	import { onMount, onDestroy } from "svelte";
-	import {httpAPI} from "./../../../lib/utils.js"
+	import { beforeUpdate, afterUpdate } from 'svelte';
+	import { onMount, onDestroy } 		 from "svelte";
+	import {httpAPI} 					 from "./../../../lib/utils.js"
 	export let mode
 	export let opened = false
 	let socket
-	let terminal = ""
 	let termscreen
+	let content
+	let timeout
 
 	async function connect2socket(mode) {
 		let host 	= window.location.host
@@ -13,13 +15,18 @@
 		let proto 	= ishttps?"wss://":"ws://"
 		let url = location.protocol + "//" + location.host + "/" + mode
 		let res = await httpAPI("GET",url,null,"text")
+
+		if (timeout) {
+			clearTimeout(timeout)
+			timeout = null
+		}
+			
 		if (res && (res.msg != "error" && res != "error")) {
 			res = res.replace(/(\r\n|\n|\r)/gm, "\n");
-			terminal = res
+			content.innerHTML = res
 			setTimeout(() => {
-				scrollToBottom(termscreen);
-			}, 100);
-		}
+				termscreen.scroll({ top: termscreen.scrollHeight});
+			}, 100);		}
 		if (!socket) {
 			console.log("opening Terminal socket")
 			socket = new WebSocket(proto + host + "/" + mode + "/console")
@@ -30,11 +37,20 @@
 				let line
 				line = e.data
 				line = line.replace(/(\r\n|\n|\r)/gm, "\n");
-				if (terminal.length > 51200)
-					terminal = ""
-				terminal += line
-				scrollToBottom(termscreen);
+
+				var data = content.innerHTML.split(/\r?\n/);
+				if (data.length > 2000) {
+					data = data.slice(-data.length,-data.length + 200)
+					content.innerHTML = data.join('\n')
+				}
 				
+				if (content.length > 51200)
+					content = ""
+				// terminal += line
+				if (line && termscreen) {
+					content.append(line)
+					scrollToBottom(termscreen)
+				}		
 			})
 			socket.addEventListener("error", function (e) {
 				console.error('Terminal Socket encountered error. Closing socket');
@@ -43,17 +59,25 @@
 				console.log('Terminal Socket is closed.', e.reason);
 				socket = null;
 				if (opened)
-					setTimeout(() => {
+					timeout = setTimeout(() => {
 						connect2socket(mode)	
 					}, 500);		
 			})
 		}
 	}
-	
-
 	const scrollToBottom = async (node) => {
-		node.scroll({ top: node.scrollHeight, behavior: 'smooth' });
-	}; 
+		if ( node.scrollTop + 20 >= (node.scrollHeight - node.clientHeight )) {
+			node.scroll({ top: node.scrollHeight});
+		}
+	}
+
+	// beforeUpdate(() => {
+	// 	autoscroll = termscreen && (termscreen.offsetHeight + termscreen.scrollTop) > (termscreen.scrollHeight - 20);
+	// });
+
+	// afterUpdate(() => {
+	// 	if (autoscroll) termscreen.scrollTo(0, termscreen.scrollHeight);
+	// });
 
 	onMount( ()=>{
 		connect2socket(mode)
@@ -62,6 +86,7 @@
 		if(socket)
 			socket.close()
 		socket = null
+		clearTimeout(timeout)
 	})
 
 </script>
@@ -103,6 +128,6 @@
 
 <div class="bg is-overlay" on:click={()=>opened=false} on:keypress={()=>opened=false}>
 	<div bind:this={termscreen} class="term is-size-7" on:click|stopPropagation on:keypress|stopPropagation>
-		<pre>{terminal}</pre>
+		<pre bind:this={content}></pre>
 	</div>
 </div>
