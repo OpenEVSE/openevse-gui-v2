@@ -1,4 +1,5 @@
 <script>
+	import { uisettings_store } from "./../../../lib/stores/uisettings.js";
 	import { beforeUpdate, afterUpdate } from 'svelte';
 	import { onMount, onDestroy } 		 from "svelte";
 	import {httpAPI} 					 from "./../../../lib/utils.js"
@@ -25,7 +26,7 @@
 			res = res.replace(/(\r\n|\n|\r)/gm, "\n");
 			content.innerHTML = res
 			setTimeout(() => {
-				termscreen.scroll({ top: termscreen.scrollHeight});
+				content.scroll({ top: content.scrollHeight});
 			}, 100);		}
 		if (!socket) {
 			console.log("opening Terminal socket")
@@ -47,9 +48,9 @@
 				if (content.length > 51200)
 					content = ""
 				// terminal += line
-				if (line && termscreen) {
+				if (line) {
 					content.append(line)
-					scrollToBottom(termscreen)
+					scrollToBottom(content)
 				}		
 			})
 			socket.addEventListener("error", function (e) {
@@ -65,19 +66,20 @@
 			})
 		}
 	}
-	const scrollToBottom = async (node) => {
-		if ( node.scrollTop + 20 >= (node.scrollHeight - node.clientHeight )) {
+	const scrollToBottom = async (node,force = false) => {
+		if ( node.scrollTop + 30 >= (node.scrollHeight - node.clientHeight ) || force) {
 			node.scroll({ top: node.scrollHeight});
 		}
 	}
 
-	// beforeUpdate(() => {
-	// 	autoscroll = termscreen && (termscreen.offsetHeight + termscreen.scrollTop) > (termscreen.scrollHeight - 20);
-	// });
+	const toggleFont = () => {
+		$uisettings_store.term_fontbig = !$uisettings_store.term_fontbig
+		setTimeout(() => {
+			scrollToBottom(content,true)
+		}, 100);
+		
+	}
 
-	// afterUpdate(() => {
-	// 	if (autoscroll) termscreen.scrollTo(0, termscreen.scrollHeight);
-	// });
 
 	onMount( ()=>{
 		connect2socket(mode)
@@ -94,7 +96,7 @@
 	.term {
 		border: solid;
 		border-color: white;
-		overflow-y: auto;
+		overflow-y: hidden;
 		overflow-x: hidden;
 		color:#fff;
 		background-color:black;
@@ -105,6 +107,7 @@
 		top:50%;
 		left:50%;
 		transform:translate(-50%,-50%);
+	
 		
     }
 	.bg {
@@ -123,11 +126,57 @@
 		white-space: pre-wrap;
 		background: none;
 		color: white;
+		overflow-y: auto;
+		width: 100%;
+		height: 100%;
+		
     }
+
+	.blur-top {
+		/* background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.7) 5%, #000 100%); */
+		background: linear-gradient(0deg, rgba(2,0,36,0) 0%, rgba(0,0,0,0.036852240896358524) 34%, rgba(0,0,0,1) 95%);
+
+		width: calc(100% - 8px);
+		height: 32px;
+		top: 0px;
+		left:0px;
+		position: absolute;
+	}
+	
+	.blur-bot {
+		/* background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.7) 5%, #000 100%); */
+		background: linear-gradient(180deg, rgba(2,0,36,0) 0%, rgba(0,0,0,0.036852240896358524) 34%, rgba(0,0,0,1) 95%);
+
+		width: calc(100% - 8px);
+		height: 32px;
+		bottom: 0px;
+		left:0px;
+		position: absolute;
+	}
+
+	.zoom {
+		position: absolute;
+		top: 4px;
+		right: 14px;
+		
+	}
+	.zoom a {
+		color: white;
+	}
+	.zoom a:hover {
+		color: hsl(189, 53%, 47%);
+	}
 </style>
 
 <div class="bg is-overlay" on:click={()=>opened=false} on:keypress={()=>opened=false}>
-	<div bind:this={termscreen} class="term is-size-7" on:click|stopPropagation on:keypress|stopPropagation>
-		<pre bind:this={content}></pre>
+	<div bind:this={termscreen} class="term is-size-{$uisettings_store.term_fontbig?6:7}" on:click|stopPropagation on:keypress|stopPropagation>
+		<pre class="px-3 py-3" bind:this={content}></pre>
+	<div class="blur-top"></div>
+	<div class="blur-bot"></div>
+	</div>
+	<div class="zoom">
+		<a href={null} on:click|stopPropagation={toggleFont}>
+			<iconify-icon height="30px"  icon={$uisettings_store.term_fontbig?"mdi:format-font-size-decrease":"mdi:format-font-size-increase"}></iconify-icon>
+		</a>
 	</div>
 </div>
