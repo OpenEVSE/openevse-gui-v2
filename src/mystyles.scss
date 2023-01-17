@@ -32,9 +32,18 @@ $warning: $yellow;
 
 
 
-@import "../node_modules/bulma/bulma";
 
-
+@import "../node_modules/bulma/sass/utilities/_all";
+@import "../node_modules/bulma/sass/base/_all";
+@import "../node_modules/bulma/sass/elements/_all";
+@import "../node_modules/bulma/sass/form/_all";
+@import "../node_modules/bulma/sass/grid/_all";
+@import "../node_modules/bulma/sass/helpers/_all";
+@import "../node_modules/bulma/sass/utilities/_all";
+@import "../node_modules/bulma/sass/components/level";	
+@import "../node_modules/bulma/sass/components/modal";
+@import "../node_modules/bulma/sass/components/tabs";
+@import "../node_modules/bulma/sass/components/message";
 
 // Update some of Bulma's component variables
 // $body-overflow-y: auto;

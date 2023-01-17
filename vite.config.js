@@ -13,7 +13,7 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     plugins: [
-      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
+      svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
       // legacy({
       //   targets: ['defaults'],
       // }),
@@ -28,12 +28,15 @@ export default defineConfig(({ command, mode }) => {
         devOptions: {
           enabled: true
         },
-        includeAssets: ['favicon.ico','term.js','term.html','jquery.js'],
+        includeAssets: ['favicon.ico'],
         manifest: {
-          name: 'OpenEVSE',
+          name: 'OpenEVSE UI',
           short_name: 'OpenEVSE',
-          description: 'Web UI for OpenEVSE WiFi module',
-          theme_color: '#32b3d4',
+          description: 'OpenEVSE User Interface',
+          categories: 'car,energy,electric vehicle,ev,charger',
+          theme_color: 'blue',
+          background_color: 'hsl(189, 53%, 47%)',
+          display: 'standalone',
           icons: [
             {
               src: 'pwa-maskable.png',

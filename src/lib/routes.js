@@ -20,7 +20,6 @@ import Vehicle          from '../routes/Vehicle.svelte'
 import Dev              from '../routes/Dev.svelte'
 import About            from '../routes/About.svelte'
 import Wizard           from '../routes/Wizard.svelte'
-import Template         from '../routes/Template.svelte'
 
 
 export const routes = {
@@ -45,7 +44,6 @@ export const routes = {
     '/configuration/dev': Dev,
     '/configuration/about': About,
     '/wizard/:step?':Wizard,
-    '/template':Template,
     // Catch-all
     // This is optional, but if present it must be the last
     '*': NotFound,
