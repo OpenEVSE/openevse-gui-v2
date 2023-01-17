@@ -25,7 +25,6 @@
     "workbox-window": "^6.5.4"
   },
   "dependencies": {
-    "@fontsource/open-sans": "^4.5.13",
     "@fontsource/roboto": "^4.5.8",
     "bulma-slider": "^2.0.5",
     "bulma-switch": "^2.0.4",
@@ -33,8 +32,6 @@
     "hacktimer": "^1.1.3",
     "iconify-icon": "^1.0.2",
     "luxon": "^3.1.0",
-    "node-gyp": "^9.3.0",
-    "node-sass": "^8.0.0",
     "promise-batching-queue": "^0.0.5",
     "svelte-i18n": "^3.6.0",
     "svelte-local-storage-store": "^0.3.1",
