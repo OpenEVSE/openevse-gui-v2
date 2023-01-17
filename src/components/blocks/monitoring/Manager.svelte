@@ -5,13 +5,6 @@
 	import {config_store} 		   from "../../../lib/stores/config.js"
 	import {clientid2name, displayIcon} 		   from "../../../lib/utils.js"
 </script>
-<style>
-	.tag-full {
-		box-sizing: border-box;
-		width: 100%;
-		font-size: medium;
-	}
-</style>
 
 <table class="table is-fullwidth">
 	<thead class="is-size-7-mobile">

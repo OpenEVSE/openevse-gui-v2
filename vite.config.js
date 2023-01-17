@@ -4,6 +4,15 @@ import viteCompression from 'vite-plugin-compression'
 import { VitePWA } from 'vite-plugin-pwa'
 // import legacy from '@vitejs/plugin-legacy'
 
+import { dependencies } from './package.json';
+function renderChunks(deps) {
+  let chunks = {};
+  Object.keys(deps).forEach((key) => {
+    // if (['luxon', 'svelte-i18n', 'iconify-icon'].includes(key)) return;
+    chunks[key] = [key];
+  });
+  return chunks;
+}
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -12,6 +21,18 @@ export default defineConfig(({ command, mode }) => {
   
   
   return {
+    build: {
+      sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: [],
+            ...renderChunks(dependencies),
+          },
+        },
+      },
+    },
+
     plugins: [
       svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
       // legacy({
