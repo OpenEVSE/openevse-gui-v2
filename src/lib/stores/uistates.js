@@ -1,5 +1,4 @@
 import { writable, derived } from 'svelte/store'
-import { s2mns } from '../utils'
 
 const model = {
 		// copy from other stores

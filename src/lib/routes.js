@@ -47,7 +47,6 @@ export const routes = {
     '/configuration/dev': Dev,
     '/configuration/about': About,
     '/wizard/:step?':Wizard,
-    '/template':Template,
     // Catch-all
     // This is optional, but if present it must be the last
     '*': NotFound,

@@ -1,9 +1,9 @@
 import {EvseClients}        from "../vars.js"
 import { get, writable }    from 'svelte/store'
 import {httpAPI}            from '../utils.js'
-import model                from "./json/claims.json"
+
 function createClaimStore() {
-    const P  = writable(model)
+    const P  = writable()
     const { subscribe, set, update } = P
 
 	async function download() {

@@ -34,7 +34,7 @@ export default defineConfig(({ command, mode }) => {
     },
 
     plugins: [
-      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
+      svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
       // legacy({
       //   targets: ['defaults'],
       // }),
