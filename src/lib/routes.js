@@ -21,7 +21,6 @@ import Vehicle          from '../routes/Vehicle.svelte'
 import Dev              from '../routes/Dev.svelte'
 import About            from '../routes/About.svelte'
 import Wizard           from '../routes/Wizard.svelte'
-import Template         from '../routes/Template.svelte'
 
 
 export const routes = {
