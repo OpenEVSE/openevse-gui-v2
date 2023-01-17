@@ -239,12 +239,13 @@
     },
     "time": {
       "date": "Date/Heure",
-      "usebrowsertime": "Utiliser la date/heure du navigateur",
+      "usebrowsertime": "Régler à l'heure locale",
       "ntpserver": "Serveur NTP",
       "ntpserver-desc": "Adresse du serveur NTP",
       "settimefrom": "Régler la date/heure depuis",
       "ntp": "NTP",
       "manual": "Manuel",
+      "local": "Heure Locale",
       "timezone": "Fuseau Horaire",
       "settime": "Régler date/heure"
     },

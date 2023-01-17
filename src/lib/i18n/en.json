@@ -240,12 +240,13 @@
 		},
 		"time": {
 			"date": "Date",
-			"usebrowsertime": "Use Browser Time",
+			"usebrowsertime": "Set local Time",
 			"ntpserver": "NTP Server",
 			"ntpserver-desc": "NTP server adress",
 			"settimefrom": "Set time from",
 			"ntp": "NTP",
 			"manual": "Manual",
+			"local": "Local Time",
 			"timezone": "Time Zone",
 			"settime": "Set Time"
 		},
