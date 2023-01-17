@@ -1,6 +1,7 @@
 <script>
 	import Modal from "./Modal.svelte"
-	export let title = "Error";
+	import {_} from "svelte-i18n"
+	export let title = $_("error");
 	export let body;
 	export let visible = false;
 	export let button = false

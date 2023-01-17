@@ -17,6 +17,7 @@
   "value": "Valeur",
   "show": "Afficher",
   "error": "Erreur",
+  "warning": "Attention",
   "notification": "Notification",
   "yes": "Oui",
   "no": "Non",
@@ -196,6 +197,7 @@
       "version": "Version",
       "action": "Action",
       "restart": "Redémarrer",
+      "reset": "Réinitialiser",
       "update": "Mise à jour",
       "up2date": "À jour",
       "espinfo": "ESP info",
@@ -208,7 +210,8 @@
       "failed": "Echec de l'envoi",
       "complete": "Mise à jours terminée avec succès, la page va recharger dans quelques secondes.",
       "remove": "Retirer le fichier",
-      "upload": "Envoyer"
+      "upload": "Envoyer",
+      "reset-warning": "Le module va être réinitialisé en mode usine. La configuration va être perdue. Veuillez confirmer"
     },
     "evse": {
       "maxcur": "Courant Maxi",

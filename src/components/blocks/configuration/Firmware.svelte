@@ -1,4 +1,6 @@
 <script>
+	import AlertBoxNoModal from "./../../ui/AlertBoxNoModal.svelte";
+	import AlertBox from "./../../ui/AlertBox.svelte";
 	import { status_store } from "./../../../lib/stores/status.js";
 	import { _ } 		  		from 'svelte-i18n'
 	import { onMount } 			from "svelte";
@@ -12,11 +14,13 @@
 
 	let restartOpenEvseState = ""
 	let restartEspState = ""
+	let resetEspState = ""
 	let fw_modal_opened = false
-	let modal
 	let fw_has_update = false
 	let url = "https://api.github.com/repos/OpenEVSE/ESP32_WiFi_V4.x/releases/latest"
 	let fw = {name: undefined, version: undefined, url: undefined}
+	let alert_visible = false
+	let alert2_visible = false
 
 	onMount(()=>getFwUpdate())
 
@@ -68,6 +72,27 @@
 		}
 	}
 
+	async function resetESP(confirm=true) {
+		if (confirm) {
+			alert_visible = true
+		}
+		else {	
+			resetEspState = "loading"
+			alert_visible = false
+			let res = httpAPI("GET", "/reset")
+			if (res) {
+				alert2_visible = true
+				resetEspState = "ok"
+			}
+			else {
+				alert_visible = true
+				resetEspState = "error"
+			}
+
+
+		}
+	}
+
 
 </script>
 
@@ -104,11 +129,15 @@
 				<td>
 					<div class="has-text-centered ">
 						<div class="mb-2">
+							<Button  size="is-small" width="80px"name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
+						</div>
+						<div class="mb-2">
 							<Button size="is-small" width="80px" name={$_("config.firmware.restart")} butn_submit={restartESP} state={restartEspState}/>
 						</div>
 						<div class="mb-2">
-							<Button bind:this={modal} width="80px" size="is-small" name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
+							<Button size="is-small" width="80px" name={$_("config.firmware.reset")} butn_submit={resetESP} state={resetEspState}/>
 						</div>
+						
 					</div>
 				</td>
 			</tr>
@@ -118,3 +147,5 @@
 {#if fw_modal_opened}
 <FirmwareUpdateModal bind:is_opened={fw_modal_opened} update={fw} />
 {/if}
+<AlertBox title={$_("warning")} body={$_("config.firmware.reset-warning")} label={$_("reset")} button={true} action={()=>resetESP(false)} bind:visible={alert_visible}></AlertBox>
+<AlertBox title="Resetting device" body="Device will reboot to it's factory state in few seconds." bind:visible={alert2_visible}/>
