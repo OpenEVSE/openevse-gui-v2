@@ -17,6 +17,7 @@
 	"value": "Value",
 	"show": "Show",
 	"error": "Error",
+	"warning": "Warning",
 	"notification": "Notification",
 	"yes": "Yes",
 	"no": "No",
@@ -197,6 +198,7 @@
 			"version": "Version",
 			"action": "Action",
 			"restart": "Restart",
+			"reset": "Reset",
 			"update": "Update",
 			"up2date": "Up to date",
 			"espinfo": "ESP info",
@@ -209,7 +211,8 @@
 			"failed": "Upload failed",
 			"complete": "Firmware upgrade successfull, page will reload in few sec",
 			"remove": "Remove file",
-			"upload": "Upload"
+			"upload": "Upload",
+			"reset-warning": "This will reset device to factory default. All configuration will be lost. Please confirm"
 		},
 		"evse": {
 			"maxcur": "Max Current",
