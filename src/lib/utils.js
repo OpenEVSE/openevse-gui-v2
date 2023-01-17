@@ -70,8 +70,12 @@ export function sec2time(sec) {
 }
 
 export function formatDate(t,z,format="") {
-	let tz = z.split("|")[0]
-	const d = DateTime.fromISO(t).setZone(tz)
+	let d
+	if (z) {
+		let tz = z.split("|")[0]
+		d = DateTime.fromISO(t).setZone(tz)
+	}
+	else d = DateTime.fromISO(t)
 	const arr = d.toLocaleString(DateTime.DATETIME_SHORT).split(" ")
 	if (format=="short")
 		arr[0] = arr[0].slice(0,5)

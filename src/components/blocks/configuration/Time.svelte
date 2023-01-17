@@ -15,17 +15,18 @@
 
 	let inputSntpState = ""
 	let date
-	let timemode = 1 // 0: manual 1: NTP
+	let timemode = 2 // 0: manual, 1: Browser, 2: NTP
 	let tz = "UTC"
 	let setTimeButnState = ""
 	let selectTimeModeState = ""
 	let selectTimeZoneState = ""
 	let allow_time_update = true
 	let butn_settime
-		let timemodes = [
-			{name: $_("config.time.manual"), value: 0},
-			{name: $_("config.time.ntp"),    value: 1}
-		]
+	let timemodes = [
+		{name: $_("config.time.manual"), value: 0},
+		{name: $_("config.time.local"), value: 1},
+		{name: $_("config.time.ntp"),    value: 2}
+	]
 
 	function updateDateField(t) {
 		if (allow_time_update && t != undefined) {
@@ -52,11 +53,13 @@
 	async function setTime() {
 		const formData = new FormData();
 		setTimeButnState = "loading"
-		if (timemode == 0) {
-			var newdate = new Date(date)		
+		if (timemode == 0 || timemode == 1) {
+
+			const zone = $config_store.time_zone.split("|")[0]
+			var newdate = DateTime.fromISO(date)
 			formData.set('ntp', 'false');
 			formData.set('tz', tz);
-			formData.set('time', newdate.toISOString());
+			formData.set('time', newdate.toISO());
 		}
 		else {
 			formData.set('ntp', "true");
@@ -79,26 +82,43 @@
 
 	async function setTimeMode() {
 		selectTimeModeState = "loading"
-		butn_settime.disabled = true
+		if (butn_settime)
+			butn_settime.disabled = true
 		const data = {
-			sntp_enabled: timemode==1?true:false,
+			sntp_enabled: timemode==2?true:false,
 		}
-			if (await config_store.upload(data)) 
-				{
-					selectTimeModeState = "ok"
-					allow_time_update = true
-					butn_settime.disabled = false
-					return true
+		console.log("timemode " + timemode)
+		if (timemode != 2) {
+			tz = "Etc/Universal|UTC0"
+			data.time_zone = tz
+		}
+
+
+		if (await config_store.upload(data)) 
+			{
+				selectTimeModeState = "ok"
+				allow_time_update = true
+				if (timemode == 1) {
+					timeNow()
+					setTime()
 				}
-			else {
-				selectTimeModeState = "error"
-				butn_settime.disabled = false
-				return false
+				if (timemode == 2) {
+					setTime()
+				}
+				if (butn_settime)
+					butn_settime.disabled = false
+				return true
 			}
+		else {
+			selectTimeModeState = "error"
+			butn_settime.disabled = false
+			return false
+		}
+
 	}
 
 	function getTimeMode(val) {
-		if (val) timemode = 1
+		if (val) timemode = 2
 		else timemode = 0
 	}
 
@@ -128,9 +148,10 @@
 
 	onMount(() => {
 		tz = $config_store.time_zone
+		getTimeMode($config_store.sntp_enabled)
 		})
 
-	$: getTimeMode($config_store.sntp_enabled)
+
 	$: $status_store.time, updateDateField($status_store.time)
 	$: $config_store.time_zone, ()=> {tz = $config_store.time_zone }
 </script>
@@ -138,25 +159,21 @@
 <Box title={$_("config.titles.time")} icon="fa6-solid:clock" back={true}>
 	<div class="is-flex is-flex-direction-column is-align-items-center">
 		<div class="is-flex is-flex-direction-column is-align-items-start">
-		<InputForm type="datetime-local" title="{$_("config.time.date")}:" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
-			{#if !timemode}
-			<Button name={$_("config.time.usebrowsertime")} butn_submit={timeNow}/>
-			{:else}
-
+			<div class="">
+				<InputForm type="datetime-local" title="{$_("config.time.date")}:" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
+				{#if timemode == 0}
+				<Button name={$_("config.time.settime")} butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
+				{/if}
+			</div>
+			{#if timemode == 2}
 			<InputForm type="text" title="{$_("config.time.ntpserver")}:" placeholder={$_("config.time.ntpserver-desc")}  bind:value={$config_store.sntp_hostname} 
 				status={inputSntpState} onChange={() => {setNTP($config_store.sntp_hostname)}}/>
-
 			{/if}
-			
 			<Select title="{$_("config.time.settimefrom")}:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
+			{#if timemode==2}
 			<Select title="{$_("config.time.timezone")}:" status={selectTimeZoneState} bind:value={tz} items={createTzObj(timeZone)} onChange={setTimeZone} />
+			{/if}
 		</div>
-			
-		
-
-			<div class="mt-4 mb-1 is-inline-block">
-				<Button name={$_("config.time.settime")} butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
-			</div>
 	</div>
 	
 </Box>
