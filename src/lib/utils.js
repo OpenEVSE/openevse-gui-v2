@@ -165,6 +165,25 @@ export function displayIcon(mode) {
 			return "fa6-solid:robot"
 	}
 }
+export function getStateDesc(state) {
+	switch (state) {
+		case 0: return get(_)("logs-states.loading")
+		case 1: return get(_)("logs-states.active-nocar")
+		case 2: return get(_)("logs-states.active-car")
+		case 3: return get(_)("logs-states.active-charge")
+		// Errors
+		case 4: return get(_)("logs-states.error-vent")
+		case 5: return get(_)("logs-states.error-diode")
+		case 6:return get(_)("logs-states.error-gfi")
+		case 7: return  get(_)("logs-states.error-ground")
+		case 8: return get(_)("logs-states.error-relay")
+		case 9: return get(_)("logs-states.error-gfitest")
+		case 10: return get(_)("logs-states.error-temp")
+		case 11: return get(_)("logs-states.error-current")
+		case 254: return get(_)("logs-states.sleeping")
+		case 255: return get(_)("logs-states.disabled")
+	}
+}
 
 export function state2icon(state) {
 	let icon = { 
@@ -172,49 +191,67 @@ export function state2icon(state) {
 		color: undefined,
 		tooltip: undefined
 	}
-	
+
+	icon.tooltip = getStateDesc(state)
 	switch (state) {
 		case 0:
 			icon.type = "majesticons:rocket-3-start-line"
 			icon.color = "has-text-info"
-			icon.tooltip = get(_)("logs-states.loading")
 			break
 		case 1: 
 			icon.type = "mdi:car-off"
 			icon.color = "has-text-danger"
-			icon.tooltip = get(_)("logs-states.active-nocar")
 			break
 		case 2:
 			icon.type = "mdi:car"
 			icon.color = "has-text-primary"
-			icon.tooltip = get(_)("logs-states.active-car")
 			break
 		case 3:
 			icon.type = "fa6-solid:bolt"
 			icon.color = "has-text-warning"
-			icon.tooltip = get(_)("logs-states.active-charge")
 			break
-		case 4: // Error
+		// Errors
+		case 4: 
+			icon.type = "fa6-solid:bolt"
+			icon.color = "has-text-warning"
+			break
+
 		case 5:
+			icon.type = "fa6-solid:bolt"
+			icon.color = "has-text-warning"
+			break
+
 		case 6:
+			icon.type = "fa6-solid:bolt"
+			icon.color = "has-text-warning"
+			break
 		case 7:
+			icon.type = "fa6-solid:bolt"
+			icon.color = "has-text-warning"
+			break
 		case 8:
+			icon.type = "fa6-solid:bolt"
+			icon.color = "has-text-warning"
+			break
 		case 9:
+			icon.type = "fa6-solid:bolt"
+			icon.color = "has-text-warning"
+			break
 		case 10:
+			icon.type = "fa6-solid:bolt"
+			icon.color = "has-text-warning"
+			break
 		case 11:
 			icon.type = "fa6-solid:triangle-exclamation"
 			icon.color = "has-text-danger"
-			icon.tooltip = get(_)("logs-states.error")
 			break;
 		case 254: // sleeping
 			icon.color = "has-text-danger"
 			icon.type = "fa6-solid:ban"
-			icon.tooltip = get(_)("logs-states.sleeping")
 			break;
 		case 255: 
 			icon.color = "has-text-danger"
 			icon.type = "fa6-solid:circle-xmark"
-			icon.tooltip = get(_)("logs-states.disabled")
 			break;
 	}
 	return icon
