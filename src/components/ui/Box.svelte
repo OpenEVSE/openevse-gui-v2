@@ -42,8 +42,8 @@
 		height: 100%;
 	} */
 	.maincontent {	
-		overflow-x:hidden; 
-		overflow-y:hidden; 
+		/* overflow-x:hidden; 
+		overflow-y:hidden;  */
 		/* max-height: calc(100% - 50px); */
 		/* box-sizing: border-box; */
 		overscroll-behavior: contain;

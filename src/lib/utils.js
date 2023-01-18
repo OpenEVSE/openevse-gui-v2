@@ -4,6 +4,7 @@ import {EvseClients}		from "./vars.js"
 import { uistates_store } 	from "./stores/uistates.js";
 import {get} 				from 'svelte/store'
 import { config_store } 	from './stores/config.js';
+import serialQueue 			from './queue.js';
 
 export async function httpAPI(method,url,body=null,type = "json",timeout = 10000) {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
@@ -69,7 +70,7 @@ export function sec2time(sec) {
 	return new Date(sec * 1000).toISOString().slice(11, 16)
 }
 
-export function formatDate(t,z,format="") {
+export function formatDate(t,z,format=null) {
 	let d
 	if (z) {
 		let tz = z.split("|")[0]
@@ -77,9 +78,20 @@ export function formatDate(t,z,format="") {
 	}
 	else d = DateTime.fromISO(t)
 	const arr = d.toLocaleString(DateTime.DATETIME_SHORT).split(" ")
-	if (format=="short")
-		arr[0] = arr[0].slice(0,5)
-	return arr[0] + " " + arr[1]
+	let datearr = arr[0].split("/")
+	if (format=="short") {
+		//remove year
+		datearr.pop()
+	}
+	// fixing missing trailing 0 luxxon bug on US locale
+	datearr[0] = datearr[0].length == 1?"0"+datearr[0]:datearr[0]
+	datearr[1] = datearr[1].length == 1?"0"+datearr[1]:datearr[1]
+	const date = datearr.join("/")
+	let time = arr[1]
+	if (arr[2]) 
+		time += " " + arr[2]
+
+	return date + " " + time
 }
 
 export function displayTime(t) {
@@ -288,4 +300,40 @@ export function s2mns(s){return(s-(s%=60))/60+(9<s?'mn ':'mn 0')+s+'s'}
 
 export function miles2km(d) {
 	return d * 1.60934
+}
+
+export function validateFormData(formdata,i18n_path,service_enabled=false){
+	let resp = { 
+		ok: true,
+		msg: null,
+		data: {}
+	}
+	for (const key of Object.keys(formdata)) {
+		if (service_enabled && formdata[key].req && !formdata[key].val) {
+				//error
+				resp.ok = false
+				resp.msg = get(_)(i18n_path + key)
+		}
+		else {
+			const hiddenpass = "••••••••••"
+			resp.data[key] = formdata[key].val
+			if (formdata[key].pwd && formdata[key].val !== hiddenpass)
+			{
+				resp.data[key] = formdata[key].val
+			}
+			else delete resp.data[key].val
+
+		}
+	}
+
+	return resp
+}
+
+export async function postFormData(data,ref=null) {
+	if ( await serialQueue.add(() => config_store.upload(data))) {
+		return true
+	}
+	else {
+		return false
+	}
 }

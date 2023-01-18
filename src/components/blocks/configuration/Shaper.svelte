@@ -1,67 +1,102 @@
 <script>
+	import Borders from "./../../ui/Borders.svelte";
+	import { onMount } from "svelte";
 	import { _ } 			    from 'svelte-i18n'
 	import { status_store } 	from "./../../../lib/stores/status.js";
 	import { config_store } 	from "../../../lib/stores/config.js";
-	import { serialQueue } 		from "../../../lib/queue.js";
+	import { validateFormData,
+			 postFormData } 	from "./../../../lib/utils.js"
 	import InputForm 			from "../../ui/InputForm.svelte";
 	import Box 					from "../../ui/Box.svelte";
-	import Button				from "../../ui/Button.svelte";
 	import Switch 				from "../../ui/Switch.svelte";
 	import AlertBox 			from "../../ui/AlertBox.svelte"
 
 	let stg_submit_state
 	let alert_body
 	let alert_visible = false
+	let mounted = false
+	let formdata
 
-	async function toggleShaper() {	
-		let res = await serialQueue.add(() => config_store.saveParam("current_shaper_enabled", $config_store.current_shaper_enabled))
+	let updateFormData = () => {
+		formdata = {
+			current_shaper_enabled: {val: $config_store.current_shaper_enabled, state: "", req: false},
+			current_shaper_max_pwr:	{val: $config_store.current_shaper_max_pwr, state: "", req: true},
+			mqtt_live_pwr:			{val: $config_store.mqtt_live_pwr, state: "", req: true}
+		}	
 	}
 
-	let stg_submit = async () => {
-		if (!$config_store.current_shaper_max_pwr) {
-			alert_body = "Max Power allowed is missing"
-			alert_visible=true
-			return
-		}
-		else if (!$config_store.mqtt_live_pwr) {
-			alert_body = "Live power load MQTT Topic is missing"
-			alert_visible=true
-			return
-		}
-		stg_submit_state = "loading"
-	
-		const data = {
-			current_shaper_max_pwr: $config_store.current_shaper_max_pwr,
-			mqtt_live_pwr: $config_store.mqtt_live_pwr
-		}
-
-		if (await config_store.upload(data)) 
-			{
-				stg_submit_state = "ok"
+	let toggleShaper = async () => {	
+		let valid = validateFormData(formdata,"config.shaper.missing-",$config_store.shaper_enabled)
+		if (valid.ok) {
+			formdata.current_shaper_enabled.state = "loading"
+			if (await postFormData(valid.data)) {
+				formdata.current_shaper_enabled.state = "ok"
 				return true
 			}
+			else {
+				formdata.current_shaper_enabled.state = "error"
+				return false
+			}
+		}
 		else {
-			stg_submit_state = "error"
+			formdata.current_shaper_enabled.val = false
+			alert_body = valid.msg
+			alert_visible = true 
 			return false
 		}
-	
 	}
+
+	let setProperty = async (prop) => {
+		let propdata = {}
+		propdata[prop] = {val: formdata[prop].val, state: "", req: formdata[prop].req}
+		formdata[prop].state = "loading"
+		let valid = validateFormData(propdata, "config.shaper.missing-")
+		if (valid.ok) {
+			if (await postFormData(valid.data)) {
+				formdata[prop].state = "ok"
+				return true
+			}				
+			else {
+				formdata[prop].state = "error"
+				return false
+			}
+		}
+		else {
+			alert_body = valid.msg
+			alert_visible = true
+			return false
+		}
+	}
+
+
+	onMount( () => {
+		updateFormData()
+		mounted = true
+
+	})
 </script>
 
+{#if mounted}
 <Box title={$_("config.titles.shaper")} icon="fa6-solid:building-shield" back={true} >
-	<div class="pb-1 my-3">
-		<div class="is-size-7 {$status_store.shaper_updated?"has-text-primary":"has-text-danger"}">{$status_store.shaper_updated?$_("config.shaper.updated"):$_("config.shaper.notupdated")}</div>
-		<span class="is-size-7 has-text-weight-bold">{$_("config.shaper.load")}: <span class="has-text-info">{$status_store.shaper_live_pwr} {$_("units.W")}</span></span>
-		<span class="is-size-7 has-text-weight-bold">{$_("config.shaper.curavail")}: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} {$_("units.A")}</span></span>
+	<div class="mb-2 is-flex is-align-items-center is-justify-content-center">
+		<Borders classes={formdata.current_shaper_enabled.val?"has-background-primary-light":"has-background-light"}>
+			<Switch name="shaperswitch" label={$_("config.shaper.enable")} onChange={toggleShaper} bind:checked={formdata.current_shaper_enabled.val} disabled={formdata.current_shaper_enabled.state == "loading"}/>
+			{#if formdata.current_shaper_enabled.val}
+			<div class="pb-1 my-3">
+				<div class="is-size-7 {$status_store.shaper_updated?"has-text-info":"has-text-danger"}">{$status_store.shaper_updated?$_("config.shaper.updated"):$_("config.shaper.notupdated")}</div>
+				<span class="is-size-7 has-text-weight-bold">{$_("config.shaper.load")}: <span class="has-text-info">{$status_store.shaper_live_pwr} {$_("units.W")}</span></span>
+				<span class="is-size-7 has-text-weight-bold">{$_("config.shaper.curavail")}: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} {$_("units.A")}</span></span>
+			</div>
+			{/if}	
+		</Borders>
 	</div>
-	<div>
-		<Switch name="shaperswitch" label={$_("config.shaper.enable")} onChange={toggleShaper} bind:checked={$config_store.current_shaper_enabled}/>
-	</div>
+
 	<div class="is-size-7">{$_("config.shaper.shaperdesc")}</div>
-	<div><InputForm title="{$_("config.shaper.maxpower")}:" type="number" bind:value={$config_store.current_shaper_max_pwr} placeholder="9000" /></div>
-	<div><InputForm title="{$_("config.shaper.livepower")}:" bind:value={$config_store.mqtt_live_pwr} placeholder="/topic/powerload" /></div>
+	<div><InputForm title="{$_("config.shaper.maxpower")}:" type="number"  bind:status={formdata.current_shaper_max_pwr.state} bind:value={formdata.current_shaper_max_pwr.val} placeholder="9000" onChange={()=>setProperty("current_shaper_max_pwr")}/></div>
+	<div><InputForm title="{$_("config.shaper.livepower")}:" bind:status={formdata.mqtt_live_pwr.state} bind:value={formdata.mqtt_live_pwr.val} placeholder="/topic/powerload"  onChange={()=>setProperty("mqtt_live_pwr")} /></div>
 	<div class="block mt-5 pb-1">
-		<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+		<!-- <Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} /> -->
 	</div>
 	<AlertBox body={alert_body} bind:visible={alert_visible} />
 </Box>
+{/if}

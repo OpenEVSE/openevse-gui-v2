@@ -145,7 +145,7 @@
 						<div class="has-text-centered">
 							<div class="is-inline-block">
 								<div class="has-text-weight-bold">{$_("config.mqtt.proto")}</div>
-								<Select bind:value={formdata.mqtt_protocol.val} items={protocols} bind:status={formdata.mqtt_protocol.state} onChange={async ()=> { await setProperty("mqtt_protocol")}}/>
+								<Select bind:value={formdata.mqtt_protocol.val} items={protocols} bind:status={formdata.mqtt_protocol.state} onChange={async ()=> {setProperty("mqtt_protocol")}}/>
 							</div>
 							<InputForm is_inline title="{$_("config.mqtt.host")}*" size={16} bind:value={formdata.mqtt_server.val} placeholder="server IP / Hostname" bind:status={formdata.mqtt_server.state} onChange={()=>setProperty("mqtt_server")}/>
 							<InputForm is_inline title="{$_("config.mqtt.port")}*" size={10} bind:value={formdata.mqtt_port.val} placeholder="1883" type="number" bind:status={formdata.mqtt_port.state} onChange={()=>setProperty("mqtt_port")} />

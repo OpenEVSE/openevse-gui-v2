@@ -314,7 +314,9 @@
 			"curavail": "Current Available",
 			"shaperdesc": "Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.",
 			"maxpower": "Max power allowed (in W)",
-			"livepower": "Live power load MQTT Topic (in W)"
+			"livepower": "Live power load MQTT Topic (in W)",
+			"missing-current_shaper_max_pwr": "Max Power value missing",
+			"missing-mqtt_live_pwr": "Live power MQTT topic missing"
 		},
 		"selfprod": {
 			"enable": "Handle Self Production",

@@ -56,9 +56,9 @@
 </style>
 
 <Box title={$_("logs-title")} icon="icon-park-outline:history-query">
-		<div class="has-text-centered is-flex-grow-1 is-flex is-justify-content-center" style="height: 100%;">
+		<div class="has-text-centered is-flex-grow-1 is-flex is-justify-content-center">
 			{#if !loaded}
-			<div class="is-flex-shrink-0 is-flex-grow-1 is-flex is-align-items-center is-justify-content-center" style="min-height: 100%:">
+			<div class="is-flex-shrink-0 is-flex-grow-1 is-flex is-align-items-center is-justify-content-center">
 				<div class="has-text-centered is-size-6 has-text-weight-bold is-inline-block">
 					<Borders>
 						<div>{$_("logs-loading")}</div>
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 			{:else}
-			<div class="table-container is-flex-grow-1 is-flex is-justify-content-center">
+			<div class="table-container is-flex-grow-1 is-flex is-justify-content-center" style="overflow: visible;">
 				<table class="table is-size-7-mobile is-size-6 is-fullwidth">
 					<thead>
 						<tr>
@@ -88,8 +88,8 @@
 							<td class="has-tooltip" data-tooltip={state2icon(item.evseState).tooltip}>
 								<iconify-icon  class="{state2icon(item.evseState).color} is-size-5" icon={state2icon(item.evseState).type}></iconify-icon>
 							</td>
-							<td class="has-text-weight-bold">{round(item.energy/1000,1)}</td>
-							<td class="has-text-weight-bold">{item.temperature}</td>
+							<td class="has-text-weight-bold">{round(item.energy/1000,1).toFixed(1)}</td>
+							<td class="has-text-weight-bold">{round(item.temperature,1).toFixed(1)}</td>
 						</tr>
 						{/each}
 					</tbody>

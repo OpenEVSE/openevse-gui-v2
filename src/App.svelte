@@ -32,7 +32,7 @@
 <style>
 	main {
 		/* position: fixed; */
-		height: 100vh;
+		height: 100%;
 		width: 100vw;
 		overflow: hidden;
 		overflow-y: hidden;
