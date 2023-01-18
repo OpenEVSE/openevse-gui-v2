@@ -60,10 +60,10 @@
 
 </style>
 <Box title={$_("scheduler-title")} icon="ion:calendar">
-	<div class="my-2 is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
+	<div class="my-2 is-flex is-justify-content-center is-align-items-center is-flex-direction-column" >
 		<Borders>
 			{#if $schedule_store.length}
-			<table class="table is-size-6 has-text-weight-normal">
+			<table class="table is-size-6 has-text-weight-normal" >
 				<tbody>
 					{#each $schedule_store as schedule,id} 
 					<TimerTableRow bind:this={timers[id]} 

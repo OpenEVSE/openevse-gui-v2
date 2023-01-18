@@ -1,9 +1,13 @@
 <script>
+	import { onMount } from "svelte";
 	import { claims_target_store } from "./../../../lib/stores/claims_target.js";
 	import { _ } 				   from 'svelte-i18n'
-	import {status_store} 		   from "../../../lib/stores/status.js"
-	import {config_store} 		   from "../../../lib/stores/config.js"
-	import {clientid2name, displayIcon} 		   from "../../../lib/utils.js"
+	import { clientid2name,
+			 displayIcon } 		   from "../../../lib/utils.js"
+	
+	let mounted = false
+
+	onMount( ()=> mounted = true)
 </script>
 <style>
 	.tag.service {
@@ -15,6 +19,8 @@
 		width: 12ch;
 	}
 </style>
+
+{#if mounted}
 <table class="table is-fullwidth">
 	<thead class="is-size-7-mobile">
 		<tr class="has-background-info"	>
@@ -121,3 +127,4 @@
 		{/if}
 	</tbody>
 </table>
+{/if}

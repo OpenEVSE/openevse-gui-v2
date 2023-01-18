@@ -32,12 +32,12 @@
 
 <tr>
 	<!-- <th>{t_id}</th> -->
-	<th style="width:20%">{displayTime(t_time)}</th>
+	<th style="width:20%" class="is-size-7-mobile">{displayTime(t_time)}</th>
 	<th style="width:10%"><span class="tag {t_state === 'active'?'is-primary':'is-danger'} tags py-0 is-capitalized">{t_state == "active"?$_("active"):$_("disabled")}</span></th>
 	<th style="" class="is-size-4 m0 py-1">
 		<div class="is-flex is-justify-content-center is-align-items-center">
 
-			<div class="mr-2 no-pointer has-tooltip-arrow- has-tooltip-bottom has-tooltip-info has-tooltip-multiline has-text-weight-normal is-capitalized" data-tooltip={formatDays(t_days)}>
+			<div class="mr-2 no-pointer has-tooltip-arrow- has-tooltip-top has-tooltip-info has-tooltip-multiline has-text-weight-normal is-capitalized" data-tooltip={formatDays(t_days)}>
 				<iconify-icon inline class="has-text-info" icon="ion:calendar"></iconify-icon>
 			</div>
 

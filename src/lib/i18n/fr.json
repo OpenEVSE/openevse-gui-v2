@@ -274,9 +274,9 @@
     "mqtt": {
       "enable": "Activer",
 	    "disable": "Désactiver",
-      "missing-host": "Adresse du serveur MQTT manquante",
-      "missing-port": "Port du serveur MQTT manquant",
-      "missing-basetopic": "Le topic MQTT principal est manquant",
+      "missing-mqtt_server": "Adresse du serveur MQTT manquante",
+      "missing-mqtt_port": "Port du serveur MQTT manquant",
+      "missing-mqtt_topic": "Le topic MQTT principal est manquant",
       "connected": "Connecté:",
       "notconnected": "Non connecté au serveur MQTT",
       "host": "Hôte",
@@ -314,7 +314,9 @@
       "curavail": "Courant Disponible",
       "shaperdesc": "Module le courant de charge selon la puissance totale instantanée de votre compteur afin de ne pas dépasser votre contrat.",
       "maxpower": "Puissance Maxi authorisée (en W)",
-      "livepower": "Topic MQTT Puissance Instantanée compteur (en W)"
+      "livepower": "Sujet MQTT Puissance Instantanée compteur (en W)",
+      "missing-current_shaper_max_pwr": "Valeur puissance Max manquante",
+			"missing-mqtt_live_pwr": "Sujet MQTT puissance instantanée manquant"
     },
     "selfprod": {
       "enable": "Gestion de l'Auto Production",
