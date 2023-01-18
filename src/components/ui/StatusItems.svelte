@@ -4,6 +4,8 @@
 	import StatusIcon 		  from "./StatusIcon.svelte"
 	import Logo 			  from "./../../assets/logo-mini.png"
 	import { link } 		  from "svelte-spa-router"
+	import { getStateDesc }	  from "./../../lib/utils.js"
+
 	export let state
 	export let time
 	export let vehicle
@@ -15,68 +17,72 @@
 	let iconcolor = "has-text-danger"
 	let icon
 
-	$: switch (state) {
-		case 0: // Unknown
-			break
-		case 1: // Not connected
-			status = "active"
-			charging = false
-			message = $_("status-items-waiting")
-			color = "is-primary"
-			iconcolor = "has-text-white"
-			icon = "fa6-solid:hourglass-half"
-			break
-		case 2: // Connected
-			status = "active"
-			charging = false
-			message = $_("status-items-ready")
-			color = "is-primary"
-			iconcolor = "has-text-white"
-			icon = "fa6-solid:thumbs-up"
-			break;
-		case 3: // Charging
-			status = "active"
-			charging = true
-			message = $_("status-items-charging")
-			color = "is-primary"
-			iconcolor = "has-text-warning"
-			icon = "fa6-solid:bolt"
-			break;
-		case 4: // Error
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-		case 10:
-		case 11:
-			status = "disabled"
-			charging = false
-			message = $_("status-items-error") + " " + state
-			color = "is-danger"
-			iconcolor = "has-text-white"
-			icon = "fa6-solid:triangle-exclamation"
-			break;
-		case 254: // sleeping
-			status = "disabled"
-			charging = false
-			message = $_("status-items-disabled")
-			color = "is-danger"
-			iconcolor = "has-text-white"
-			icon = "fa6-solid:ban"
-			break;
-		case 255: 
-			status = "disabled"
-			charging = false
-			message = $_("status-items-disabled")
-			color = "is-danger"
-			iconcolor = "has-text-white"
-			icon = "fa6-solid:circle-xmark"
-			break;
+	function getStateInfo(state) {
+		message = getStateDesc(state)
+		switch (state) {
+			case 0: // Unknown
+				break
+			case 1: // Not connected
+				status = "active"
+				charging = false
+				message = $_("status-items-waiting")
+				color = "is-primary"
+				iconcolor = "has-text-white"
+				icon = "fa6-solid:hourglass-half"
+				break
+			case 2: // Connected
+				status = "active"
+				charging = false
+				message = $_("status-items-ready")
+				color = "is-primary"
+				iconcolor = "has-text-white"
+				icon = "fa6-solid:thumbs-up"
+				break;
+			case 3: // Charging
+				status = "active"
+				charging = true
+				message = $_("status-items-charging")
+				color = "is-primary"
+				iconcolor = "has-text-warning"
+				icon = "fa6-solid:bolt"
+				break;
+			case 4: // Error
+			case 5:
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+			case 10:
+			case 11:
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fa6-solid:triangle-exclamation"
+				break;
+			case 254: // sleeping
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fa6-solid:ban"
+				break;
+			case 255: 
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fa6-solid:circle-xmark"
+				break;
+
+		}
 	}
+
+	$: getStateInfo(state)
 
 
 </script>
+
 <style>
 	.no-pointer {
 		cursor: default
