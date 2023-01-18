@@ -79,7 +79,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						{#each $history_store as item}
+						{#each $history_store.reverse()  as item}
 						<tr>
 							<th>{formatDate(item.time,$config_store.time_zone, "short")}</th>
 							<td class="has-tooltip" data-tooltip={$_("logs-types."+item.type)}>
