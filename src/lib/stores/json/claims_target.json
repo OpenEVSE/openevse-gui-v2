@@ -5,7 +5,6 @@
         "max_current": null,
 		"energy_limit": null,
 		"time_limit": null,
-		"charge_limit": null,
 		"auto_release": null
     },
     "claims": {
@@ -14,7 +13,6 @@
         "max_current": null,
 		"energy_limit": null,
 		"time_limit": null,
-		"charge_limit": null,
 		"auto_release": null
     }
 }
