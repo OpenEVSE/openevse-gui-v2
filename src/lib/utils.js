@@ -309,7 +309,7 @@ export function validateFormData(formdata,i18n_path,service_enabled=false){
 		data: {}
 	}
 	for (const key of Object.keys(formdata)) {
-		if (((service_enabled || (!service_enabled && formdata.length > 1 )) && formdata[key].req && !formdata[key].val) ) {
+		if ((!service_enabled && formdata[key].req && !formdata[key].val && Object.keys(formdata).length > 1)) {
 				//error
 				resp.ok = false
 				resp.msg = get(_)(i18n_path + key)
