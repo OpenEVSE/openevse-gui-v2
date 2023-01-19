@@ -2,7 +2,6 @@
 	import {link} 			  from 'svelte-spa-router'
 	export let charging
 	export let selected
-	export let disabled = false
 
 </script>
 

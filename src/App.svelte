@@ -12,7 +12,7 @@
 	import FetchData 			from './components/data/FetchData.svelte'
 	import {getBreakpoint} 		from "./lib/utils.js"
 	import AlertBoxNoModal 		from "./components/ui/AlertBoxNoModal.svelte"
-	import { _, locale } 				from 'svelte-i18n'
+	import { _, locale } 		from 'svelte-i18n'
 	import "./lib/i18n.js"
 	import 'iconify-icon'
 	// import "@fontsource/roboto"
@@ -61,12 +61,6 @@
 		height: 100%;
 		bottom: 0px;
 	}
-
-	/* .screen {
-		overflow-y: hidden;
-		height: calc(100vh - 56px);
-		width: 100%;
-	} */
 
 	.nav {
 		position: fixed;
