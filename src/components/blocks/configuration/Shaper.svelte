@@ -48,9 +48,9 @@
 	let setProperty = async (prop) => {
 		let propdata = {}
 		propdata[prop] = {val: formdata[prop].val, state: "", req: formdata[prop].req}
-		formdata[prop].state = "loading"
 		let valid = validateFormData(propdata, "config.shaper.missing-")
 		if (valid.ok) {
+			formdata[prop].state = "loading"
 			if (await postFormData(valid.data)) {
 				formdata[prop].state = "ok"
 				return true
