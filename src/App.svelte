@@ -12,7 +12,7 @@
 	import FetchData 			from './components/data/FetchData.svelte'
 	import {getBreakpoint} 		from "./lib/utils.js"
 	import AlertBoxNoModal 		from "./components/ui/AlertBoxNoModal.svelte"
-	import { _ } 				from 'svelte-i18n'
+	import { _, locale } 				from 'svelte-i18n'
 	import "./lib/i18n.js"
 	import 'iconify-icon'
 	// import "@fontsource/roboto"
@@ -85,10 +85,9 @@
 		@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 	</style>
 </svelte:head>	
-
+<svelte:body lang={$locale} class="notranslate" translate="no" /> 
 <main>		
 	{#if $uistates_store.data_loaded}
-	<!-- <div class="screen"> -->
 
 		<div class="route" class:wizard={$location.includes("/wizard")}>
 			{#if $status_store.evse_connected == 1}
@@ -101,7 +100,7 @@
 			<AlertBox title={$_("alert-portrait-title")} body={$_("alert-portrait-body")} visible={islandscape} closable={false} />
 			<Router {routes} />
 		</div>
-	<!-- </div> -->
+
 	{#if !$location.includes("/wizard")}
 	<div class="nav">
 		<NavBar charging={$uistates_store.charging} selected={$location} />
