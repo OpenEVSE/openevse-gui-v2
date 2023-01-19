@@ -110,7 +110,7 @@
 		"C": "°C"
 	},
 	"monitoring-title": "monitoring",
-	"monitoring-tab-energy": "Energy",
+	"monitoring-tab-data": "Data",
 	"monitoring-tab-sensors": "Sensors",
 	"monitoring-tab-safety": "Safety",
 	"monitoring-tab-manager": "Commands",
@@ -121,6 +121,7 @@
 	"monitoring-energy-servicemin": "Level 2 Minimum",
 	"monitoring-energy-servicemax": "Level 2 Maximum",
 	"monitoring-energy-delivered": "Energy Delivered",
+	"monitoring-energy-params": "Parameters",
 	"monitoring-sensors-pilot": "Control Pilot",
 	"monitoring-sensors-current": "Current",
 	"monitoring-sensors-voltage": "Voltage",
@@ -230,7 +231,9 @@
 			"seconds": "seconds",
 			"service": "Service Level",
 			"pause": "Pause Status",
-			"led-bn": "Led Brightness"
+			"led-bn": "Led Brightness",
+			"sensorscale": "Current scale",
+			"sensoroffset": "Current offset"
 		},
 		"safety": {
 			"test": "Test",

@@ -18,7 +18,7 @@
 
 </style>
 <div class="mb-2">
-	<div class="tabs is-size-6 is-size-7-mobile">
+	<div class="tabs is-size-6">
 		<ul>
 			{#each tabs as tab,i}
 			<li class:is-active={activetab==i}>

@@ -11,7 +11,6 @@
 	import Switch 				from "../../ui/Switch.svelte";
 	import AlertBox 			from "../../ui/AlertBox.svelte"
 
-	let stg_submit_state
 	let alert_body
 	let alert_visible = false
 	let mounted = false

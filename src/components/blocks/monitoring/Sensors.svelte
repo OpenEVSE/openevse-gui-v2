@@ -41,12 +41,12 @@
 			<td>{$_("monitoring-sensors-esptemp")}</td>
 			<td class="has-text-right"><span class="tag is-normal is-info">{round($status_store.temp4/10,1)} {$_("units.C")}</span></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<td>{$_("monitoring-sensors-sensorscale")}</td>
 			<td class="has-text-right"><span class="tag is-normal is-info">{$config_store.scale}</span></td>
 		</tr>			<tr>
 			<td>{$_("monitoring-sensors-sensoroffset")}</td>
 			<td class="has-text-right"><span class="tag is-normal is-info">{$config_store.offset}</span></td>
-		</tr>
+		</tr> -->
 	</tbody>
 </table>
