@@ -18,14 +18,14 @@
 
 	let updateFormData = () => {
 		formdata = {
-			current_shaper_enabled: {val: $config_store.current_shaper_enabled, state: "", req: false},
-			current_shaper_max_pwr:	{val: $config_store.current_shaper_max_pwr, state: "", req: true},
-			mqtt_live_pwr:			{val: $config_store.mqtt_live_pwr, state: "", req: true}
+			current_shaper_enabled: {val: $config_store.current_shaper_enabled?$config_store.current_shaper_enabled:false, state: "", req: false},
+			current_shaper_max_pwr:	{val: $config_store.current_shaper_max_pwr?$config_store.current_shaper_max_pwr:"", state: "", req: true},
+			mqtt_live_pwr:			{val: $config_store.mqtt_live_pwr?$config_store.mqtt_live_pwr:"", state: "", req: true}
 		}	
 	}
 
 	let toggleShaper = async () => {	
-		let valid = validateFormData(formdata,"config.shaper.missing-",$config_store.shaper_enabled)
+		let valid = validateFormData(formdata, "config.shaper.missing-",$config_store.shaper_enabled)
 		if (valid.ok) {
 			formdata.current_shaper_enabled.state = "loading"
 			if (await postFormData(valid.data)) {
@@ -48,7 +48,7 @@
 	let setProperty = async (prop) => {
 		let propdata = {}
 		propdata[prop] = {val: formdata[prop].val, state: "", req: formdata[prop].req}
-		let valid = validateFormData(propdata, "config.shaper.missing-")
+		let valid = validateFormData(propdata, "config.shaper.missing-", false, formdata)
 		if (valid.ok) {
 			formdata[prop].state = "loading"
 			if (await postFormData(valid.data)) {
@@ -63,6 +63,7 @@
 		else {
 			alert_body = valid.msg
 			alert_visible = true
+			formdata[prop].val = $config_store[prop]
 			return false
 		}
 	}
@@ -73,6 +74,7 @@
 		mounted = true
 
 	})
+
 </script>
 
 {#if mounted}
