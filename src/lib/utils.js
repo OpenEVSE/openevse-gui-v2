@@ -302,26 +302,40 @@ export function miles2km(d) {
 	return d * 1.60934
 }
 
-export function validateFormData(formdata,i18n_path,service_enabled=false){
+export function validateFormData(data,i18n_path,service_enabled=false,formdata = null){
 	let resp = { 
 		ok: true,
 		msg: null,
 		data: {}
 	}
-	for (const key of Object.keys(formdata)) {
-		if ((!service_enabled && formdata[key].req && !formdata[key].val && Object.keys(formdata).length > 1)) {
+	for (const key of Object.keys(data)) {
+		if ((data[key].req && !data[key].val) && ( !service_enabled || service_enabled && Object.keys(formdata).length == 1)) {
+
+		// if ((!service_enabled && data[key].req && !data[key].val ) || ( service_enabled && data[key].req && !data[key].val  && Object.keys(formdata).length == 1)) {
 				//error
 				resp.ok = false
 				resp.msg = get(_)(i18n_path + key)
+				console.log(key)
+				let val = get(config_store)[key]
+				// let val = st[key]
+
+				// refill the input field
+				if (formdata)
+					formdata[key].val = val
+				else
+					data[key].val = val
 		}
 		else {
 			const hiddenpass = "••••••••••"
-			resp.data[key] = formdata[key].val
-			if (formdata[key].pwd && formdata[key].val !== hiddenpass)
+			resp.data[key] = data[key].val
+			if (data[key].pwd && data[key].val !== hiddenpass)
 			{
-				resp.data[key] = formdata[key].val
+				resp.data[key] = data[key].val
 			}
-			else delete resp.data[key].val
+			else {
+				if (data[key].pwd)
+					delete resp.data[key].val
+			} 
 
 		}
 	}
