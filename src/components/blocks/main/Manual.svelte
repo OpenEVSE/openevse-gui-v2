@@ -198,13 +198,13 @@ $: set_uistates_divertmode($status_store.divertmode)
 		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-info mt-2 is-uppercase">{$_("charge-toggle")}</div>
 		<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 		{#if $claims_target_store.claims.state == EvseClients["rfid"].id}
-		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} ischarging={$uistates_store.charging}/>
 		{:else if $claims_target_store.claims.state == EvseClients["ocpp"].id}
-		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={true} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={true} ischarging={$uistates_store.charging}/>
 		{:else if $schedule_store.length || $status_store.divertmode == 2 }
-		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} ischarging={$uistates_store.charging}/>
 		{:else}
-		<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} breakpoint={$uistates_store.breakpoint} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} ischarging={$uistates_store.charging}/>
 		{/if}
 	
 		<div class="is-flex is-justify-content-center my-5">

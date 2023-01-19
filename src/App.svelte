@@ -1,5 +1,4 @@
 <script>
-	import AlertBox 			from "./components/ui/AlertBox.svelte";
 	import WebSocket 			from "./components/data/WebSocket.svelte";
 	import { status_store } 	from "./lib/stores/status.js";
 	import { uistates_store } 	from './lib/stores/uistates.js'
@@ -18,9 +17,6 @@
 	// import "@fontsource/roboto"
 
 	import("./lib/icons/icons.js")
-	
-
-	let islandscape = false
 
 	function getWindowSize() {
 		$uistates_store.window_width = window.innerWidth
@@ -28,6 +24,7 @@
 		$uistates_store.box_resize = true
 	}
 
+	$: console.log("network: " + navigator.onLine )
 </script>
 <style>
 	main {
@@ -90,8 +87,8 @@
 			</div>
 			{/if}
 			<AlertBoxNoModal title={$_("alert-evsemissing-title")} body={$_("alert-evsemissing-body")} visible={!$status_store.evse_connected} />
-			<AlertBoxNoModal title={$_("alert-conerror-title")} body={$_("alert-conerror-body")} visible={!$uistates_store.ws_connected} />
-			<AlertBox title={$_("alert-portrait-title")} body={$_("alert-portrait-body")} visible={islandscape} closable={false} />
+			<AlertBoxNoModal title={$_("alert-conerror-title")} body={$_("alert-conerror-body")} visible={!$uistates_store.ws_connected && window.navigator.onLine} />
+			<AlertBoxNoModal title={$_("alert-nonetwork-title")} body={$_("alert-nonetwork-body")} visible={!window.navigator.onLine} />
 			<Router {routes} />
 		</div>
 

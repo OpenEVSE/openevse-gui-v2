@@ -27,6 +27,8 @@
   "alert-evsemissing-body": "Module OpenEVSE non détecté. Veuillez vérifiez votre installation avant d'aller plus loin.",
   "alert-conerror-title": "Erreur de connection",
   "alert-conerror-body": "Websocket  déconnectée, en attente de reconnection",
+  "alert-nonetwork-title": "Erreur de connection",
+	"alert-nonetwork-body": "Aucun réseau detecté; en attente de connection",
   "alert-portrait-title": "Attention",
   "alert-portrait-body": "Cette application est destinée à un affichage portrait sur smartphone",
   "charge-title": "Charge",
