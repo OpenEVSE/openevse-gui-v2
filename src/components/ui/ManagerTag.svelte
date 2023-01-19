@@ -29,7 +29,7 @@
 	}
 </style>
 <div class="tags has-addons">
-	<span class="tag service is-flex is-flex-grow-1 is-justify-content-start service is-size-7-mobile is-info has-text-weight-bold">
+	<span class="tag service is-flex is-flex-grow-1 is-justify-content-start service is-size-7-mobile is-info has-text-weight-bold is-capitalized">
 			<iconify-icon  class="has-text-white mr-1" icon={icon}></iconify-icon>
 			<span>{$_("clients." + name)}</span>		
 	</span>

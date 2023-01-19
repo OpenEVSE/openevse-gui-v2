@@ -15,7 +15,7 @@
 	import { _ } 				from 'svelte-i18n'
 	import "./lib/i18n.js"
 	import 'iconify-icon'
-	import "@fontsource/roboto"
+	// import "@fontsource/roboto"
 
 	import("./lib/icons/icons.js")
 	
@@ -38,8 +38,8 @@
 		overflow-y: hidden;
 	}
 
-  	:global(body) {
-    font-family: "Roboto", sans-serif;
+  	:global(*) {
+    font-family: "Roboto", "Arial", sans-serif ;
 	}
 
 	.status {
@@ -81,8 +81,10 @@
 </style>
 <svelte:window on:load={getWindowSize} on:resize={getWindowSize}/>
 <svelte:head>
-	<!-- <style src="./mystyles.scss"></style> -->
-</svelte:head>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+	</style>
+</svelte:head>	
 
 <main>		
 	{#if $uistates_store.data_loaded}

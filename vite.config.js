@@ -13,7 +13,7 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     plugins: [
-      svelte(),viteCompression({deleteOriginFile: false, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
+      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
       // legacy({
       //   targets: ['defaults'],
       // }),
@@ -22,7 +22,7 @@ export default defineConfig(({ command, mode }) => {
         injectRegister: null,
         selfDestroying: true,
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,gz,woff,woff2}']
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,gz}']
         },
         useCredentials: 'true',
         devOptions: {
