@@ -17,7 +17,7 @@ function createOverrideStore() {
     const { subscribe, set, update } = P
 
 	async function download() {
-        if (get(status_store).manual_override == 1) {
+        if (get(status_store)?.manual_override == 1) {
 		let res = await httpAPI("GET", "/override")
         if (res && (res.msg != "error" && res != "error")) {
 		    P.update(() => res)

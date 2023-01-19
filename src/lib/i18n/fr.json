@@ -109,7 +109,7 @@
     "C": "°C"
   },
   "monitoring-title": "supervision",
-  "monitoring-tab-energy": "Energie",
+  "monitoring-tab-data": "Data",
   "monitoring-tab-sensors": "Capteurs",
   "monitoring-tab-safety": "Sécurité",
   "monitoring-tab-manager": "Commandes",
@@ -120,6 +120,7 @@
   "monitoring-energy-servicemin": "Niveau 2 Minimum",
   "monitoring-energy-servicemax": "Niveau 2 Maximum",
   "monitoring-energy-delivered": "Energie Délivrée",
+  "monitoring-energy-params": "Paramètres",
   "monitoring-sensors-pilot": "Control Pilot",
   "monitoring-sensors-current": "Courant",
   "monitoring-sensors-voltage": "Tension",
@@ -224,12 +225,14 @@
     "evse": {
       "maxcur": "Courant Maxi",
       "random": "Départ aléatoire du Planificateur",
-	  "random-help": "<p>Le nombre maximum de secondes à ajouter/soustraire à un départ de charge planifié. <br> Par ex une valeur de 600 va ajuster l'heure du départ de +/- 10 minutes. <br> Cela permet d'éviter les pics de charge lors des changements tarifaires</p>",
+	    "random-help": "<p>Le nombre maximum de secondes à ajouter/soustraire à un départ de charge planifié. <br> Par ex une valeur de 600 va ajuster l'heure du départ de +/- 10 minutes. <br> Cela permet d'éviter les pics de charge lors des changements tarifaires</p>",
       "pause-help": "<p>Certains véhicules vont s'éteindre si laissés en mode veille (Control Pilot actif) et ne peuvent être réveillés ensuite par le chargeur.</p><br><p>Changer le mode de pause sur Désactiver devrait résoudre ce soucis.<br>Cependant, cela retire la possibilité au chargeur de détecter pendant la pause si le véhicule est connecté.",
       "seconds": "secondes",
       "service": "Niveau de Service",
       "pause": "Mode de pause",
-      "led-bn": "Luminosité des Leds"
+      "led-bn": "Luminosité des Leds",
+      "sensorscale": "Echelle Courant",
+			"sensoroffset": "Décalage Courant"
     },
     "safety": {
       "test": "Test",

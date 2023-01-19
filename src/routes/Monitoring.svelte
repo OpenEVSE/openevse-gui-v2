@@ -4,14 +4,12 @@
 	import Box 			from "./../components/ui/Box.svelte";
 	import Tabs 		from "./../components/ui/Tabs.svelte";
 	import Safety 		from "../components/blocks/monitoring/Safety.svelte"
-	import Energy 		from "../components/blocks/monitoring/Energy.svelte"
-	import Sensors 		from "../components/blocks/monitoring/Sensors.svelte"
+	import Data 		from "../components/blocks/monitoring/Data.svelte"
 	import Manager 		from "../components/blocks/monitoring/Manager.svelte"
 
 	let activetab = 0
 	let tabs = [
-		{name: $_("monitoring-tab-energy"), url:"/monitoring	"},
-		{name: $_("monitoring-tab-sensors"), url:"/monitoring"},
+		{name: $_("monitoring-tab-data"), url:"/monitoring	"},
 		{name: $_("monitoring-tab-safety"), url:"/monitoring"},
 		{name: $_("monitoring-tab-manager"), url:"/monitoring"}
 	]
@@ -26,12 +24,10 @@
 	<Box title={$_("monitoring-title")} icon="fa6-solid:chart-simple">
 		<Tabs tabs={tabs} {activetab} onClick={clickTab}/>
 		{#if activetab == 0}
-			<Energy />
+			<Data />
 		{:else if activetab == 1}
-			<Sensors />	
-		{:else if activetab == 2}
 			<Safety />	
-		{:else if activetab == 3}
+		{:else if activetab == 2}
 			<Manager />
 		{/if}
 	</Box>
