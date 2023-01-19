@@ -43,7 +43,7 @@ export default defineConfig(({ command, mode }) => {
         injectRegister: null,
         selfDestroying: true,
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,gz,woff,woff2}']
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,gz}']
         },
         useCredentials: 'true',
         devOptions: {

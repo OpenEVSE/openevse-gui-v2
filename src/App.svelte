@@ -15,7 +15,7 @@
 	import { _ } 				from 'svelte-i18n'
 	import "./lib/i18n.js"
 	import 'iconify-icon'
-	import "@fontsource/roboto"
+	// import "@fontsource/roboto"
 
 	import("./lib/icons/icons.js")
 	
@@ -39,7 +39,7 @@
 	}
 
   	:global(body) {
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto", "Arial", sans-serif ;
 	}
 
 	.status {
@@ -80,9 +80,6 @@
 
 </style>
 <svelte:window on:load={getWindowSize} on:resize={getWindowSize}/>
-<svelte:head>
-	<!-- <style src="./mystyles.scss"></style> -->
-</svelte:head>
 
 <main>		
 	{#if $uistates_store.data_loaded}
