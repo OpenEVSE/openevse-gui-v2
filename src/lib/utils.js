@@ -84,8 +84,8 @@ export function formatDate(t,z,format=null) {
 		datearr.pop()
 	}
 	// fixing missing trailing 0 luxxon bug on US locale
-	datearr[0] = datearr[0].length == 1?"0"+datearr[0]:datearr[0]
-	datearr[1] = datearr[1].length == 1?"0"+datearr[1]:datearr[1]
+	datearr[0] = datearr[0]?.length == 1?"0"+datearr[0]:datearr[0]
+	datearr[1] = datearr[1]?.length == 1?"0"+datearr[1]:datearr[1]
 	const date = datearr.join("/")
 	let time = arr[1]
 	if (arr[2]) 
@@ -309,7 +309,7 @@ export function validateFormData(formdata,i18n_path,service_enabled=false){
 		data: {}
 	}
 	for (const key of Object.keys(formdata)) {
-		if (service_enabled && formdata[key].req && !formdata[key].val) {
+		if (((service_enabled || (!service_enabled && formdata.length > 1 )) && formdata[key].req && !formdata[key].val) ) {
 				//error
 				resp.ok = false
 				resp.msg = get(_)(i18n_path + key)

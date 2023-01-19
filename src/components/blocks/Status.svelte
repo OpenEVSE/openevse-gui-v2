@@ -115,16 +115,16 @@ in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
 		{/if}
 				<div class="is-flex mt-3 mt-4 mb-1 ml-4 ">
 					<div class="columns">
-						{#if $uistates_store.stateclaimfrom == "manual" || !$claims_target_store.claims.state}
+						{#if $uistates_store.stateclaimfrom == "manual" || !$claims_target_store.claims?.state}
 						<TaskDisplay mode={$_("clients.manual")} state={$status_store.status} />
 						{:else if $uistates_store.stateclaimfrom == "rfid"}
 						<TaskDisplay mode={$_("clients." + $uistates_store.stateclaimfrom )}  msg={!$status_store.rfid_auth?$_("status-task-rfid-msg"):$status_store.rfid_auth} state={$claims_target_store.properties.state} />
 						{:else if $uistates_store.stateclaimfrom != "timer"}
-						<TaskDisplay mode={$_("clients." + $uistates_store.stateclaimfrom)} state={$claims_target_store.properties.state 	} />
+						<TaskDisplay mode={$_("clients." + $uistates_store.stateclaimfrom)} state={$claims_target_store.properties?.state 	} />
 						{:else if $uistates_store.stateclaimfrom == "timer"}
-						<TaskDisplay mode={$_("clients.timer")} msg={$plan_store.current_event.state=="active"?$_("status-task-timer-activated"):$_("status-task-timer-disabled")} state={$plan_store.current_event.state} time={$plan_store.current_event.time} />
-						{#if $plan_store.current_event.state != $plan_store.next_event.state}
-						<TaskDisplay mode="timer" msg={$plan_store.next_event.state=="active"?$_("status-task-timer-activate"):$_("status-task-timer-disable")} state={$plan_store.next_event.state} time={$plan_store.next_event.time} />
+						<TaskDisplay mode={$_("clients.timer")} msg={$plan_store.current_event?.state=="active"?$_("status-task-timer-activated"):$_("status-task-timer-disabled")} state={$plan_store.current_event?.state} time={$plan_store.current_event?.time} />
+						{#if $plan_store.current_event?.state != $plan_store.next_event?.state}
+						<TaskDisplay mode="timer" msg={$plan_store.next_event.state=="active"?$_("status-task-timer-activate"):$_("status-task-timer-disable")} state={$plan_store.next_event?.state} time={$plan_store.next_event?.time} />
 						{/if}
 					{/if}
 					</div>
