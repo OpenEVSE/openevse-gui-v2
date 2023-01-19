@@ -24,7 +24,15 @@
 		$uistates_store.box_resize = true
 	}
 
-	$: console.log("network: " + navigator.onLine )
+	window.addEventListener("online", function() {
+		console.log("I am connected to the internet")
+	})
+
+	window.addEventListener("offline", function() {
+		console.log("Disconnected...so sad!!!")
+	})
+
+	$: console.log("network: " + navigator.onLine)
 </script>
 <style>
 	main {
@@ -87,8 +95,8 @@
 			</div>
 			{/if}
 			<AlertBoxNoModal title={$_("alert-evsemissing-title")} body={$_("alert-evsemissing-body")} visible={!$status_store.evse_connected} />
-			<AlertBoxNoModal title={$_("alert-conerror-title")} body={$_("alert-conerror-body")} visible={!$uistates_store.ws_connected && window.navigator.onLine} />
-			<AlertBoxNoModal title={$_("alert-nonetwork-title")} body={$_("alert-nonetwork-body")} visible={!window.navigator.onLine} />
+			<AlertBoxNoModal title={$_("alert-conerror-title")} body={$_("alert-conerror-body")} visible={!$uistates_store.ws_connected && navigator.onLine} />
+			<AlertBoxNoModal title={$_("alert-nonetwork-title")} body={$_("alert-nonetwork-body")} visible={navigator.onLine?false:true} /> 
 			<Router {routes} />
 		</div>
 

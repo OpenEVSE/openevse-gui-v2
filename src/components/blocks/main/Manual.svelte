@@ -24,6 +24,7 @@
 	let buttons_manual
 	let button_divert
 	let button_shaper
+	let waiting = false
 
 	async function setChgCurrent(val) {
 		if ($uistates_store.charge_current == val)
@@ -42,7 +43,9 @@
 				$override_store.auto_release == false
 			) {
 				if ($status_store.manual_override) {
+					waiting = true
 					res = await override_store.clear()
+					waiting = false
 				}
 			}
 			else res = await serialQueue.add(() => override_store.upload($override_store))
@@ -53,7 +56,9 @@
 			// set override
 			$override_store.charge_current = val
 			$override_store.auto_release = $uisettings_store.auto_release
+			waiting = true
 			let res = await serialQueue.add(() => override_store.upload($override_store))
+			waiting = false
 			$uistates_store.charge_current = val
 			return res
 		}
@@ -102,11 +107,14 @@
 			if ($override_store.energy_limit != undefined) {
 				data.energy_limit = $override_store.energy_limit
 			}
+			waiting = true
 			await serialQueue.add(() => override_store.upload(data))
+			waiting = false
 		}
 		else {
 			// if there's no other claim property ( only charge_current for now )
-			if (data.charge_current) 
+			waiting = true
+			if (data.charge_current)
 				await serialQueue.add(() => override_store.upload(data))
 			// Mode Auto, clearing override
 			else if ($claims_target_store.claims.state == EvseClients["manual"]["id"] ) {
@@ -114,6 +122,7 @@
 					let res = await serialQueue.add(override_store.clear)
 				}
 			}
+			waiting = false
 		}
 		buttons_manual.disabled = false
 	}
@@ -122,8 +131,9 @@
 		state = state == true ? "1" : "0"
 		let param = "shaper="+state
 		if (state != $status_store.shaper && $status_store.shaper != undefined) {
-			
+			waiting = true
 			let res = await serialQueue.add(() => httpAPI("POST","/shaper", param, "text"))
+			waiting = false
 		}
 		if (button_shaper)
 			button_shaper.blur()
@@ -131,7 +141,9 @@
 
 	async function setDivertMode(mode) {
 		if (mode != $config_store.charge_mode) {
+			waiting = true
 			let res = await serialQueue.add(() => config_store.saveParam("charge_mode",mode))
+			waiting = false
 		}
 		if (button_divert)
 			button_divert.blur()
@@ -170,10 +182,14 @@
 		let res
 		if (client == EvseClients["manual"].id) {
 			// remove props using /override else use /claims
+			waiting = true
 			res = await serialQueue.add(() =>override_store.removeProp(prop))
+			waiting = false
 		}
 		else {
+			waiting = true
 			res = await serialQueue.add(() =>claims_store.removeClaimProp($claims_target_store.claims[prop],prop))
+			waiting = false
 		}
 		tag.state = ""
 	}
@@ -198,26 +214,26 @@ $: set_uistates_divertmode($status_store.divertmode)
 		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-info mt-2 is-uppercase">{$_("charge-toggle")}</div>
 		<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 		{#if $claims_target_store.claims.state == EvseClients["rfid"].id}
-		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth || waiting} ischarging={$uistates_store.charging}/>
 		{:else if $claims_target_store.claims.state == EvseClients["ocpp"].id}
 		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={true} ischarging={$uistates_store.charging}/>
 		{:else if $schedule_store.length || $status_store.divertmode == 2 }
-		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={true}  mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
 		{:else}
-		<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
 		{/if}
 	
 		<div class="is-flex is-justify-content-center my-5">
 			<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$config_store.charge_mode == "eco"?true:false} name={$config_store.charge_mode == "eco"?$_("charge-mode-eco"):$_("charge-mode-fast")} color="is-primary"
 				tooltip={$config_store.charge_mode=="eco"?$_("charge-mode-fast-ttip"):$_("charge-mode-eco-ttip")} icon="fa6-solid:solar-panel" icon2="mdi:electricity-from-grid" size={20} size2={26} breakpoint={$uistates_store.breakpoint}
-				action={() => setDivertMode($config_store.charge_mode == "eco" ? "fast" : "eco")} />
+				action={() => setDivertMode($config_store.charge_mode == "eco" ? "fast" : "eco")} disabled={waiting}/>
 			<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name={$_("charge-shaper")} size={20} color="is-info" 
 				tooltip={ $uistates_store.shaper?$_("charge-shaper-disable"):$_("charge-shaper-enable")} icon="fa6-solid:building-shield" breakpoint={$uistates_store.breakpoint}
-				action={() => setShaper(!$uistates_store.shaper)} />
+				action={() => setShaper(!$uistates_store.shaper)} disabled={waiting} />
 		</div>
 	
 		<div class="container mb-2">
-			<Slider icon="fa6-solid:gauge-high" tooltip={$_("charge-rate-ttip")} unit="A" min=6 max={$config_store.max_current_soft} step={1} label={$_("charge-rate-label")} disabled={EvseClients[clientid2name($claims_target_store.claims?.charge_current)]?.priority > EvseClients.manual.priority} 
+			<Slider icon="fa6-solid:gauge-high" tooltip={$_("charge-rate-ttip")} unit="A" min=6 max={$config_store.max_current_soft} step={1} label={$_("charge-rate-label")} disabled={EvseClients[clientid2name($claims_target_store.claims?.charge_current)]?.priority > EvseClients.manual.priority || waiting} 
 			value={$uistates_store.charge_current} onchange={(value) => setChgCurrent(value)} />
 			{#if $claims_target_store?.claims?.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer.id}
 			<div class="is-flex is-justify-content-center is-align-content">
