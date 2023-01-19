@@ -24,16 +24,25 @@
 		cursor: default;
 		pointer-events: hover;
 	}
+	.noborderleft {
+		border-left:0px
+	}
+	.noborderright {
+		border-right:0px
+	}
+	
 </style>
 
 
 
 <button {disabled} class="{mode==role || disabled?"no-pointer":""} {mode == role?"":"is-outlined"} 
-is-large is-responsive button has-tooltip-arrow {color} {mode == role && ischarging?"has-text-warning":""}"
-data-tooltip={disabled?null:tooltip}
-on:click|preventDefault={onClick}>
-<div class="mx-4  is-flex">
-	<iconify-icon class="is-flex-grow-1 is-flex-shrink-0 is-size-3" icon={icon}></iconify-icon>
-</div>
+	{role == "2"?"noborderleft":role == 1 ? "noborderright" : ""} 
+	button is-large is-responsive button has-tooltip-arrow {color} {mode == role && ischarging?"has-text-warning":""}"
+	data-tooltip={disabled?null:tooltip}
+	on:click|preventDefault={onClick}>
+
+	<div class="mx-4  is-flex">
+		<iconify-icon class="is-flex-grow-1 is-flex-shrink-0 is-size-3" icon={icon}></iconify-icon>
+	</div>
 
 </button>

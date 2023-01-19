@@ -1,5 +1,5 @@
 <script>
-	export let title = "Error";
+	export let title;
 	export let body;
 	export let visible = false;
 

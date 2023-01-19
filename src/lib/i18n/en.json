@@ -27,6 +27,8 @@
 	"alert-evsemissing-body": "OpenEVSE module is missing. Please check your setup before going further",
 	"alert-conerror-title": "Connection error",
 	"alert-conerror-body": "Websocket  disconnected, waiting for reconnection",
+	"alert-nonetwork-title": "Connection Error",
+	"alert-nonetwork-body": "Not connected to network,waiting for device connection",
 	"alert-portrait-title": "Warning",
 	"alert-portrait-body": "This application has been designed for portrait mode",
 	"charge-title": "Charge",
