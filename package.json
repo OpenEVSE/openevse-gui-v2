@@ -25,7 +25,6 @@
     "workbox-window": "^6.5.4"
   },
   "dependencies": {
-    "@fontsource/roboto": "^4.5.8",
     "bulma-slider": "^2.0.5",
     "bulma-switch": "^2.0.4",
     "full-icu": "^1.5.0",
