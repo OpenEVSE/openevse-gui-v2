@@ -10,20 +10,6 @@
 
 	onMount( ()=> mounted = true)
 </script>
-<style>
-	.tag.service {
-		box-sizing: border-box;
-		/* width: 12ch; */
-	}
-	.tag.val {
-		box-sizing: border-box;
-		width: 12ch;
-	}
-	.tags { 
-		width: 200px;
-	}
-
-</style>
 
 {#if mounted}
 <table class="table is-fullwidth">
@@ -39,7 +25,7 @@
 		{#each Object.entries($claims_target_store.claims) as [claim, val], i}
 		<tr>
 			<td class="has-text-left is-italic is-size-7-mobile">{claim}</td>
-			<td class="has-text-centered is-capitalized is-flex is-justify-content-right">
+			<td class="has-text-centered  is-flex is-justify-content-right">
 				<ManagerTag cli={val} val={$claims_target_store.properties[claim]} />
 			</td>
 		</tr>

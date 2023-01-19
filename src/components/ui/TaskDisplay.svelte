@@ -18,7 +18,7 @@
 		<!-- <Fa icon={displayIcon(mode)} class="has-text-white" /> -->
 		&nbsp; {mode}
 	</span>
-	<span class="tag is-flex-grow-1 is-flex-shrink-1 is-capitalized has-text-weight-semibold {state=="active"?"is-primary":"is-danger"}">
+	<span class="tag is-flex-grow-1 is-flex-shrink-1 has-text-weight-semibold {state=="active"?"is-primary":"is-danger"}">
 		{#if time != ""}
 		{msg} {displayTime(time)}
 		{:else}
