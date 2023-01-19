@@ -36,8 +36,10 @@
 			// if no other properties, release override
 			if ( 
 				$override_store.state == undefined && 
+				$override_store.max_current == undefined &&
 				$override_store.energy_limit == undefined && 
-				$override_store.time_limit == undefined
+				$override_store.time_limit == undefined &&
+				$override_store.auto_release == false
 			) {
 				if ($status_store.manual_override) {
 					res = await override_store.clear()
@@ -91,11 +93,14 @@
 
 		if(data.state != undefined ) {
 			// Mode Manual setting override
+			if ($override_store.max_current != undefined) {
+				data.max_current = $override_store.max_current
+			}
 			if ($override_store.time_limit != undefined) {
 				data.time_limit = $override_store.time_limit
 			}
-			if ($override_store.charge_limit != undefined) {
-				data.charge_limit = $override_store.charge_limit
+			if ($override_store.energy_limit != undefined) {
+				data.energy_limit = $override_store.energy_limit
 			}
 			await serialQueue.add(() => override_store.upload(data))
 		}
