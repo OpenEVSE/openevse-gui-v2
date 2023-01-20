@@ -114,5 +114,5 @@
 	</div>
 </div>
 {#if status == "error"}
-<AlertBox visible={true} body="Can't connect to OpenEVSE Wifi" button={true} label="Reload" closable={false} action={()=>location.reload()}/>
+<AlertBox title={$_("error")} visible={true} body="Can't connect to OpenEVSE Wifi" button={true} label="Reload" closable={false} action={()=>location.reload()}/>
 {/if}
