@@ -12,6 +12,8 @@
 	export let is_rtl = false
 	export let onChange = () => {}
 	export let status = ""
+	export const setStatus = (val) => { status = val}
+	export const setValue = (val) => checked = val
 
 	let timeout
 	let focus = false

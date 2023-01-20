@@ -102,7 +102,7 @@
 		height: 300px;
 	}
 </style>
-<div class="fetchloader is-info is-flex is-justify-content-center is-align-items-center {status!="Ok" && status !="error"?"is-active":""}">
+<div class:is-hidden={$uistates_store.data_loaded} class="fetchloader is-info is-flex is-justify-content-center is-align-items-center {status!="Ok" && status !="error"?"is-active":""}">
 	<div class="loadercontent">
 		<div class="is-flex is-justify-content-center is-align-items-center">
 			<!-- <span class="has-text-white is-size-3 pt-1">OPEN</span><span class="has-text-primary">EVSE</span> -->
