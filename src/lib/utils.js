@@ -301,8 +301,9 @@ export function s2mns(s){return(s-(s%=60))/60+(9<s?'mn ':'mn 0')+s+'s'}
 export function miles2km(d) {
 	return d * 1.60934
 }
-
-export function validateFormData(data,i18n_path,service_enabled=false,formdata = null){
+export function validateFormData({data: data,i18n_path: i18n_path,service_enabled: service_enabled=false,formdata: formdata=null}){
+	// data object: {data: {} ,i18n_path: string ,service_enabled: bool,formdata:  }
+// export function validateFormData(data,i18n_path,service_enabled=false,formdata = null){
 	let resp = { 
 		ok: true,
 		msg: null,

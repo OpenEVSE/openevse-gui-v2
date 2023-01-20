@@ -17,7 +17,7 @@
 	</a>
 </div>
 <Modal bind:is_opened canClose={true}>
-	<div class="notification has-text-left is-size-6">
+	<div class="notification is-link is-light has-text-left is-size-6">
 		<button class="delete" on:click={()=>is_opened=false}></button>
 		<slot></slot>
 	</div>

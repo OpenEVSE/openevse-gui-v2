@@ -321,7 +321,8 @@
       "maxpower": "Puissance Maxi authorisée (en W)",
       "livepower": "Sujet MQTT Puissance Instantanée compteur (en W)",
       "missing-current_shaper_max_pwr": "Valeur puissance Max manquante",
-			"missing-mqtt_live_pwr": "Sujet MQTT puissance instantanée manquant"
+			"missing-mqtt_live_pwr": "Sujet MQTT puissance instantanée manquant",
+      "help-mqtt": "Si MQTT n'est pas une option, vous pouvez POST {data} périodiquement sur '/status'"
     },
     "selfprod": {
       "enable": "Gestion de l'Auto Production",
