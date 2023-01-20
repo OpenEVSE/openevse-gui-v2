@@ -176,7 +176,7 @@
 			</div>
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-center">
-			<Button disabled={uploadButtonState == "loading"} name={$_("config.firmware.upload")} icon="fa6-solid:file-arrow-up" color="is-info" butn_submit={uploadFw} state={uploadButtonState}/>&nbsp;
+			<Button disabled={uploadButtonState == "loading"} name={$_("config.firmware.upload")} icon="fa6-solid:file-arrow-up" color="is-info" butn_submit={uploadFw} state={uploadButtonState} />
 			<Button disabled={uploadButtonState == "loading"} name={$_("close")} color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{:else}
