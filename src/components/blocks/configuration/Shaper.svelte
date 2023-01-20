@@ -1,4 +1,5 @@
 <script>
+	import ShaperHelp from "./../../help/ShaperHelp.svelte";
 	import Borders from "./../../ui/Borders.svelte";
 	import { onMount } from "svelte";
 	import { _ } 			    from 'svelte-i18n'
@@ -20,12 +21,15 @@
 		formdata = {
 			current_shaper_enabled: {val: $config_store.current_shaper_enabled?$config_store.current_shaper_enabled:false, state: "", req: false},
 			current_shaper_max_pwr:	{val: $config_store.current_shaper_max_pwr?$config_store.current_shaper_max_pwr:"", state: "", req: true},
-			mqtt_live_pwr:			{val: $config_store.mqtt_live_pwr?$config_store.mqtt_live_pwr:"", state: "", req: true}
+			mqtt_live_pwr:			{val: $config_store.mqtt_live_pwr?$config_store.mqtt_live_pwr:"", state: "", req: false}
 		}	
 	}
 
 	let toggleShaper = async () => {	
-		let valid = validateFormData(formdata, "config.shaper.missing-",$config_store.shaper_enabled)
+		if (!formdata.current_shaper_enabled && !$config_store.mqtt_enabled) {
+			alert_body = $_("")
+		}
+		let valid = validateFormData({data: formdata, i18n_path: "config.shaper.missing-", service_enabled: $config_store.shaper_enabled})
 		if (valid.ok) {
 			formdata.current_shaper_enabled.state = "loading"
 			if (await postFormData(valid.data)) {
@@ -48,7 +52,7 @@
 	let setProperty = async (prop) => {
 		let propdata = {}
 		propdata[prop] = {val: formdata[prop].val, state: "", req: formdata[prop].req}
-		let valid = validateFormData(propdata, "config.shaper.missing-", false, formdata)
+		let valid = validateFormData({data: propdata, i18n_path: "config.shaper.missing-", service_enabled: false, formdata: formdata})
 		if (valid.ok) {
 			formdata[prop].state = "loading"
 			if (await postFormData(valid.data)) {
@@ -78,7 +82,8 @@
 </script>
 
 {#if mounted}
-<Box title={$_("config.titles.shaper")} icon="fa6-solid:building-shield" back={true} >
+<Box title={$_("config.titles.shaper")} icon="fa6-solid:building-shield" back={true} has_help={true} >
+	<div slot="help"><ShaperHelp /></div>
 	<div class="mb-2 is-flex is-align-items-center is-justify-content-center">
 		<Borders classes={formdata.current_shaper_enabled.val?"has-background-primary-light":"has-background-light"}>
 			<Switch name="shaperswitch" label={$_("config.shaper.enable")} onChange={toggleShaper} bind:checked={formdata.current_shaper_enabled.val} disabled={formdata.current_shaper_enabled.state == "loading"}/>

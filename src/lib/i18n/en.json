@@ -321,7 +321,9 @@
 			"maxpower": "Max power allowed (in W)",
 			"livepower": "Live power load MQTT Topic (in W)",
 			"missing-current_shaper_max_pwr": "Max Power value missing",
-			"missing-mqtt_live_pwr": "Live power MQTT topic missing"
+			"missing-mqtt_live_pwr": "Live power MQTT topic missing",
+			"help-mqtt": "If MQTT is not an option, you can HTTP POST {data} periodically to `/status`",
+			"help-main": "OpenEVSE can shape max current according to your real time house load, preventing to exceed the maximum power your energy plan can handle. <br> Once the module is enabled, it will need to receive live power total load data (in W) from an MQTT topic. <br>Data should be refreshed every 6mn max or OpenEVSE will temporary disable itself."
 		},
 		"selfprod": {
 			"enable": "Handle Self Production",
