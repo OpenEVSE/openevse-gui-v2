@@ -22,8 +22,8 @@
 
 	onMount(()=> {
 		state = ""
-		if (width == "" && name) {
-			width = name.length + 4 + "ch"
+		if (icon && !width && name) {
+			width = name.length + 6 + "ch"
 		}
 	})
 
