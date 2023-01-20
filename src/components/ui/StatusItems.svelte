@@ -80,11 +80,13 @@
 					break;
 
 				}
+				
 			}
 		}
 		
 
 	onMount(()=> {
+		getStateInfo(state)
 		mounted = true
 	})
 	$: getStateInfo(state)
