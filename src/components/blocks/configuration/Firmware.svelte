@@ -127,7 +127,7 @@
 					{/if}
 				</td>
 				<td>
-					<div class="has-text-centered ">
+					<div class="has-text-centered is-flex is-flex-direction-column">
 						<div class="mb-2">
 							<Button  size="is-small" width="80px"name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
 						</div>

@@ -7,7 +7,7 @@
 	export let state = ""
 	export let name = null
 	export let size = ""
-	export let width = ""
+	export let width = null
 	export let color = "is-info"
 	export let tooltip = null
 	export let icon = null
@@ -57,8 +57,9 @@
 </style>
 
 <svelte:options accessors/>
-<button type="button" bind:this={butn} style="width: {width};"
-	class="m-0 button is-inline-block is-outlined has-tooltip-arrow has-tooltip {color} {size} {margin}"
+<!-- <button bind:this={butn} style:width={width} -->
+<button bind:this={butn} style:width={width}
+	class="button is-outlined has-tooltip-arrow has-tooltip is-justify-content-center {color} {size} {margin}"
 	class:no-pointer={nopointer} {disabled} data-tooltip={tooltip}
 	on:click|preventDefault={()=>{ butn_submit(), butn.blur() }} 
 	on:mouseenter={() => {is_overed = true}} 
@@ -72,14 +73,21 @@
 		{:else if state == "error"}
 		<iconify-icon inline icon="fa6-solid:xmark"  class="has-text-danger {size == "is-small"? "is-size-6" : "is-size-5"}"></iconify-icon>
 		{:else if icon}
-		<iconify-icon inline {icon} class="{size == "is-small"? "is-size-5" : "is-size-4"}"></iconify-icon>
+		<iconify-icon inline {icon} class="mr-2 {size == "is-small"? "is-size-5" : "is-size-4"}"></iconify-icon>
 		{/if}
 
 		{#if name}
 			{#if state == ""}
-			<div class="{icon?"ml-2":""} is-capitalized is-inline-block">{name}</div>
+			<span class="{icon?"ml-1":""} is-capitalized">
+				{name}
+			</span>
 			{/if}
 		{/if}
 	</div>
 	
 </button>
+
+<!-- <button bind:this={button} class="button is-info is-outlined" on:click={onClick}>
+	<iconify-icon icon="fa6-solid:file-export" class="is-size-5" ></iconify-icon>
+	<span class="ml-1">Select</span>	  
+</button> -->
