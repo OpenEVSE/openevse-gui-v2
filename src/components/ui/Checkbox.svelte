@@ -1,5 +1,7 @@
 <script>
 export let checked = false
+export const setValue = (val) => checked = val
+
 let focus = false;
 function togglefocus() {
 		focus = !focus

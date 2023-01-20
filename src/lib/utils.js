@@ -301,30 +301,25 @@ export function s2mns(s){return(s-(s%=60))/60+(9<s?'mn ':'mn 0')+s+'s'}
 export function miles2km(d) {
 	return d * 1.60934
 }
-export function validateFormData({data: data,i18n_path: i18n_path,service_enabled: service_enabled=false,formdata: formdata=null}){
-	// data object: {data: {} ,i18n_path: string ,service_enabled: bool,formdata:  }
-// export function validateFormData(data,i18n_path,service_enabled=false,formdata = null){
+export function validateFormData({data, i18n_path, req=false, form=null}) {
 	let resp = { 
 		ok: true,
 		msg: null,
 		data: {}
 	}
 	for (const key of Object.keys(data)) {
-		if ((data[key].req && !data[key].val) && ( !service_enabled || service_enabled && Object.keys(formdata).length == 1)) {
-
-		// if ((!service_enabled && data[key].req && !data[key].val ) || ( service_enabled && data[key].req && !data[key].val  && Object.keys(formdata).length == 1)) {
+		if (data[key].req && !data[key].val && req) {
 				//error
 				resp.ok = false
 				resp.msg = get(_)(i18n_path + key)
-				console.log(key)
-				let val = get(config_store)[key]
-				// let val = st[key]
-
+				let val = get(config_store)[key]?get(config_store)[key]:""
 				// refill the input field
-				if (formdata)
-					formdata[key].val = val
-				else
-					data[key].val = val
+				if (form) {
+					form[key].input.setValue(val)
+				}					
+				else {
+					data[key].input.setValue(val)
+				}
 		}
 		else {
 			const hiddenpass = "••••••••••"
@@ -340,7 +335,6 @@ export function validateFormData({data: data,i18n_path: i18n_path,service_enable
 
 		}
 	}
-
 	return resp
 }
 
@@ -351,4 +345,50 @@ export async function postFormData(data,ref=null) {
 	else {
 		return false
 	}
+}
+
+
+export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_path = null}) => {
+	let propdata = {}
+	let enabled = get(config_store)[prop_enable]
+	if (prop) {
+		propdata[prop] = {val: form[prop].val, req: form[prop].req, input: form[prop].input}
+	}
+
+	let valid = validateFormData(
+		{
+			data: prop?propdata:form,
+			i18n_path: i18n_path,
+			req: prop?enabled:!enabled ,
+			form: prop?form:null
+		}
+	)
+	if (valid.ok) {
+		let o = {}
+		let p
+		if (!prop) {
+			o = form
+			p = prop_enable
+		}		
+		else {
+			o = propdata
+			p = prop
+		}
+		o[p].input.setStatus("loading")
+
+		if (await postFormData(valid.data)) {
+			o[p].input.setStatus("ok")
+			return { ok: true }
+		}				
+		else {
+			o[p].input.setStatus("error")
+			return { ok: true }
+		}
+	}
+	else {
+		if (!prop)
+			form[prop_enable].input.setValue(get(config_store)[prop_enable])
+		return { ok: false, msg: valid.msg  }
+	}
+
 }

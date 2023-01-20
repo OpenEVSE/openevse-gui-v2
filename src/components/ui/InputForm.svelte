@@ -18,7 +18,12 @@
 	export let readonly = false
 	export let is_inline = false
 	export let size = null
-
+	export const setStatus = (val) => {
+		status = val
+	}
+	export const setValue = (val) => {
+		value = val
+	}
 
 	let show = false
 	let typecss = "text"

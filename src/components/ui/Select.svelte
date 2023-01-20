@@ -8,6 +8,7 @@
 	export let disabled = false
 	export let items = [] // [{name: "name", value: "value"}, ...]
 	export let onChange = () => {}
+	export const setStatus = (val) => {status = val}
 	let timeout
 
 	function resetStatus(s) {
