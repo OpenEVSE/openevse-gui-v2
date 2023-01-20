@@ -47,5 +47,5 @@
 	<div class="block mt-5">
 		<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
 	</div>
-	<AlertBox body={alert_body} bind:visible={alert_visible} />
+	<AlertBox title={$_("error")}  body={alert_body} bind:visible={alert_visible} />
 </div>

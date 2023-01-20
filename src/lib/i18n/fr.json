@@ -222,7 +222,8 @@
       "complete": "Mise à jours terminée avec succès, la page va recharger dans quelques secondes.",
       "remove": "Retirer le fichier",
       "upload": "Envoyer",
-      "reset-warning": "Le module va être réinitialisé en mode usine. La configuration va être perdue. Veuillez confirmer"
+      "reset-warning": "L'appareil va être réinitialisé en mode usine. La configuration va être perdue. Veuillez confirmer",
+      "reset-reboot": "L'appareil va redémarrer en mode usine dans quelques secondes"
     },
     "evse": {
       "maxcur": "Courant Maxi",

@@ -148,4 +148,4 @@
 <FirmwareUpdateModal bind:is_opened={fw_modal_opened} update={fw} />
 {/if}
 <AlertBox title={$_("warning")} body={$_("config.firmware.reset-warning")} label={$_("reset")} button={true} action={()=>resetESP(false)} bind:visible={alert_visible}></AlertBox>
-<AlertBox title="Resetting device" body="Device will reboot to it's factory state in few seconds." bind:visible={alert2_visible}/>
+<AlertBox title={$_("warning")}  body={$_("config.firmware.reset-reboot")} bind:visible={alert2_visible}/>

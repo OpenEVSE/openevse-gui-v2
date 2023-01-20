@@ -162,7 +162,7 @@
 
 <Modal bind:is_opened>
 
-	<AlertBox body="You must select at least one day" bind:visible={alert_visible} />
+	<AlertBox title={$_("error")}  body="You must select at least one day" bind:visible={alert_visible} />
 	<BoxModal title={timer == null?$_("scheduler-newtimer"): $_("scheduler-timer")+" #" + $schedule_store[timer].id} >
 		<div class="mt-2 is-size-6 is-flex is-justify-content-center">	
 			<Borders>			

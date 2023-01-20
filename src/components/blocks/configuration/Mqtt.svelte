@@ -188,7 +188,7 @@
 			</form>
 		</div>
 	</div>
-	<AlertBox body={alert_body} bind:visible={alert_visible} />
+	<AlertBox title={$_("error")}  body={alert_body} bind:visible={alert_visible} />
 	
 </Box>
 {/if}

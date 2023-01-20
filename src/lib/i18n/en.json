@@ -222,7 +222,8 @@
 			"complete": "Firmware upgrade successfull, page will reload in few sec",
 			"remove": "Remove file",
 			"upload": "Upload",
-			"reset-warning": "This will reset device to factory default. All configuration will be lost. Please confirm"
+			"reset-warning": "This will reset device to factory default. All configuration will be lost. Please confirm",
+			"reset-reboot": "Device will reboot to it's factory state in few seconds"
 		},
 		"evse": {
 			"maxcur": "Max Current",
