@@ -37,8 +37,8 @@
 	}
 
 
-	let setProperty = async (prop,form) => {
-		const res = await submitFormData({prop: prop, form: form, prop_enable: "current_shaper_enabled", i18n_path: "config.shaper.missing-"})
+	let setProperty = async (prop) => {
+		const res = await submitFormData({prop: prop, form: formdata , prop_enable: "current_shaper_enabled", i18n_path: "config.shaper.missing-"})
 		if (!res.ok) {
 			alert_body = res.msg
 			alert_visible = true
