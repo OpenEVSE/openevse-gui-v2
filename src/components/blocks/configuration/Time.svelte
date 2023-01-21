@@ -145,6 +145,7 @@
 		if (await config_store.upload(data)) 
 			{
 				selectTimeZoneState = "ok"
+				$uisettings_store.tz = tz
 				return true
 			}
 		else {
