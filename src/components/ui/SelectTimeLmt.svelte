@@ -16,7 +16,8 @@
     { name: "5 hours", value: 5 * 60 / 15 },
     { name: "6 hours", value: 6 * 60 / 15 },
     { name: "7 hours", value: 7 * 60 / 15 },
-    { name: "8 hours", value: 8 * 60 / 15 }];
+    { name: "8 hours", value: 8 * 60 / 15 }
+    ];
 </script>
 
 <div class="mx-2 is-flex is-align-items-center is-flex-direction-column">

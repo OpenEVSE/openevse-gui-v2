@@ -28,7 +28,6 @@
 	})
 
 	export function refreshDateTime(t,tz) { // params: time (isostring) , timezone
-		$uistates_store.time_isostring = t
 		$uistates_store.time_localestring = formatDate(t,tz)
 	}
 	export async function refreshConfigStore(ver) {

@@ -23,6 +23,7 @@
   "no": "Non",
   "connected": "connecté",
   "not-connected": "non connecté",
+  "none": "aucun",
   "alert-evsemissing-title": "Module OpenEVSE manquant",
   "alert-evsemissing-body": "Module OpenEVSE non détecté. Veuillez vérifiez votre installation avant d'aller plus loin.",
   "alert-conerror-title": "Erreur de connection",

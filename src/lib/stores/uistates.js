@@ -6,7 +6,6 @@ const model = {
 		manual_override: undefined,
 		shaper: undefined,
 		divertmode: undefined,
-		
 		autorelease: true,
 		time_lmt: 0,
 		charge_lmt: 0,
@@ -22,19 +21,19 @@ const model = {
 		charging: false,
 		stateclaimfrom: null, // "manual", "timer", "divert", "shaper", "ocpp", "mqtt", "rfid"
 		time_localestring: null,
-		time_isostring: null,
 		divert_type: null,
 		// local states
 		data_loaded: false,
 		ws_connected: true,
-		http_error: false,
 		status_expanded: false,
-		window_width: window.innerWidth,
 		breakpoint: undefined,
 		has_fetched: false,
 		wizard_step: 0,
-		box_is_scrollable: false,
-		box_resize: false
+		alertbox: {
+			title: undefined,
+			body: undefined,
+			visible: false
+		}
 }
 
 function createUIStatesStore() {

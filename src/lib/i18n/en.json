@@ -23,6 +23,7 @@
 	"no": "No",
 	"connected": "connected",
 	"not-connected": "not connected",
+	"none": "none",
 	"alert-evsemissing-title": "Missing OpenEVSE module",
 	"alert-evsemissing-body": "OpenEVSE module is missing. Please check your setup before going further",
 	"alert-conerror-title": "Connection error",
