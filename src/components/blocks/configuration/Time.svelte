@@ -25,7 +25,7 @@
 	let butn_settime
 	let timemodes = [
 		{name: $_("config.time.manual"), value: 0},
-		{name: $_("config.time.local"), value: 1},
+		// {name: $_("config.time.local"), value: 1},
 		{name: $_("config.time.ntp"),    value: 2}
 	]
 
