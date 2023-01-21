@@ -1,7 +1,7 @@
 <script>
-	import ShaperHelp from "./../../help/ShaperHelp.svelte";
-	import Borders from "./../../ui/Borders.svelte";
-	import { onMount } from "svelte";
+	import ShaperHelp			from "../../help/ShaperHelp.svelte";
+	import Borders 				from "./../../ui/Borders.svelte";
+	import { onMount } 			from "svelte";
 	import { _ } 			    from 'svelte-i18n'
 	import { get }				from 'svelte/store'
 	import { status_store } 	from "./../../../lib/stores/status.js";
@@ -61,6 +61,7 @@
 	<div class="mb-2 is-flex is-align-items-center is-justify-content-center">
 		<Borders classes={formdata.current_shaper_enabled.val?"has-background-primary-light":"has-background-light"}>
 			<Switch name="shaperswitch" bind:this={formdata.current_shaper_enabled.input} label={$_("config.shaper.enable")} onChange={toggleShaper} bind:checked={formdata.current_shaper_enabled.val} bind:status={formdata.current_shaper_enabled.status} disabled={formdata.current_shaper_enabled.status == "loading"}/>
+			<!-- <Switch name="shaperswitch" bind:this={formdata.current_shaper_enabled.input} label={$_("config.shaper.enable")} onChange={toggleShaper} bind:checked={formdata.current_shaper_enabled.val} bind:status={formdata.current_shaper_enabled.status} disabled={formdata.current_shaper_enabled.status == "loading"}/> -->
 			{#if formdata.current_shaper_enabled.val}
 			<div class="pb-1 my-3">
 				<div class="is-size-7 {$status_store.shaper_updated?"has-text-info":"has-text-danger"}">{$status_store.shaper_updated?$_("config.shaper.updated"):$_("config.shaper.notupdated")}</div>
