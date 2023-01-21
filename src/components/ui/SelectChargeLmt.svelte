@@ -26,7 +26,8 @@
     { name: "60 kWh", value: 60 },
     { name: "70 kWh", value: 70 },
     { name: "80 kWh", value: 80 },
-    { name: "90 kWh", value: 90 }];
+    { name: "90 kWh", value: 90 }
+    ];
 </script>
 
 <div class="mx-2 is-flex is-align-items-center is-flex-direction-column">

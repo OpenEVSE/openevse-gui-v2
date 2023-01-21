@@ -348,7 +348,7 @@ export async function postFormData(data,ref=null) {
 }
 
 
-export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_path = null}) => {
+export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_path = null, loader = true}) => {
 	let propdata = {}
 	let enabled = get(config_store)[prop_enable]
 	if (prop) {
@@ -376,19 +376,22 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 		}
 		o[p].input.setStatus("loading")
 
-		if (await postFormData(valid.data)) {
+		if (await serialQueue.add(() => config_store.upload(valid.data))) {
 			o[p].input.setStatus("ok")
-			return { ok: true }
+			return true
 		}				
 		else {
 			o[p].input.setStatus("error")
-			return { ok: true }
+			return true
 		}
 	}
 	else {
 		if (!prop)
 			form[prop_enable].input.setValue(get(config_store)[prop_enable])
-		return { ok: false, msg: valid.msg  }
+		get(uistates_store).alertbox.title = "error"
+		get(uistates_store).alertbox.body = valid.msg
+		get(uistates_store).alertbox.visible = true
+		return false
 	}
 
 }

@@ -1,4 +1,5 @@
 <script>
+	import AlertBox from "./components/ui/AlertBox.svelte";
 	import WebSocket 			from "./components/data/WebSocket.svelte";
 	import { status_store } 	from "./lib/stores/status.js";
 	import { uistates_store } 	from './lib/stores/uistates.js'
@@ -19,9 +20,7 @@
 	import("./lib/icons/icons.js")
 
 	function getWindowSize() {
-		$uistates_store.window_width = window.innerWidth
 		$uistates_store.breakpoint = getBreakpoint()
-		$uistates_store.box_resize = true
 	}
 
 	window.addEventListener("online", function() {
@@ -111,5 +110,6 @@
 	{:else}
 	<FetchData />
 	{/if}
+	<AlertBox title={$uistates_store.alertbox.title} body={$uistates_store.alertbox.body} bind:visible={$uistates_store.alertbox.visible} />
 </main>
 

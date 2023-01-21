@@ -6,18 +6,18 @@
 
 	export let title = undefined
 	export let value
+	export let status = ""
 	export let placeholder = ""
 	export let type = "text"
 	export let maxlength = null
 	export let min = null // for type "number"
 	export let max = null // for type "number"
-	export let onChange = () => {}
-	export let onFocus = () => {}
-	export let status = ""
 	export let disabled = false
 	export let readonly = false
 	export let is_inline = false
 	export let size = null
+	export let onChange = () => {}
+	export let onFocus = () => {}
 	export const setStatus = (val) => {
 		status = val
 	}
