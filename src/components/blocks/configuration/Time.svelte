@@ -101,9 +101,11 @@
 		else {
 			// dirty hack
 			// get tz from localstorage
-			tz = $uisettings_store.tz 
+			if ($uisettings_store.tz )
+				tz = $uisettings_store.tz 
+			else tz = "Etc/Universal|UTC0"
 		}
-		data.time_zone = tz
+		data.time_zone = tz 
 		// end dirty hack
 		if (await config_store.upload(data)) 
 			{
