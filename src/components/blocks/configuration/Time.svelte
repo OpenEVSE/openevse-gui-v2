@@ -1,4 +1,5 @@
 <script>
+	import { uisettings_store } from "./../../../lib/stores/uisettings.js";
 	import { _ } 		   		  from 'svelte-i18n'
 	import { serialQueue } 		  from "./../../../lib/queue.js";
 	import {httpAPI, createTzObj} from '../../../lib/utils.js'
@@ -16,7 +17,7 @@
 	let inputSntpState = ""
 	let date
 	let timemode = 2 // 0: manual, 1: Browser, 2: NTP
-	let tz = "UTC"
+	let tz = "Etc/Universal|UTC0"
 	let setTimeButnState = ""
 	let selectTimeModeState = ""
 	let selectTimeZoneState = ""
@@ -50,9 +51,9 @@
 		}, 2000);
 	}
 
-	async function setTime() {
+	async function setTime(loader=true) {
 		const formData = new FormData();
-		setTimeButnState = "loading"
+		setTimeButnState = loader?"loading":""
 		if (timemode == 0 || timemode == 1) {
 
 			const zone = $config_store.time_zone.split("|")[0]
@@ -71,11 +72,13 @@
 		allow_time_update = true
 		let res = await serialQueue.add(() => httpAPI("POST","/settime",payload, "text"))
 		if (res == "set" )  {
-			setTimeButnState = "ok"
+			setTimeButnState = loader?"ok":""
+			//refresh status to get fresh time ( time sent after /settime is wrong ) 
+			status_store.download()
 			return true
 		}
 		else {
-			setTimeButnState = "error"
+			setTimeButnState = loader?"error":""
 			return false
 		}
 	}
@@ -87,24 +90,37 @@
 		const data = {
 			sntp_enabled: timemode==2?true:false,
 		}
-		console.log("timemode " + timemode)
 		if (timemode != 2) {
+			// dirty hack until manual time OpenEVSE bug is solved
+			//save tz in local storage
+			if (tz != "Etc/Universal|UTC0")
+				$uisettings_store.tz = tz
+			//set to UTC as OpenEVSE
 			tz = "Etc/Universal|UTC0"
-			data.time_zone = tz
 		}
-
-
+		else {
+			// dirty hack
+			// get tz from localstorage
+			tz = $uisettings_store.tz 
+		}
+		data.time_zone = tz
+		// end dirty hack
 		if (await config_store.upload(data)) 
 			{
 				selectTimeModeState = "ok"
 				allow_time_update = true
-				if (timemode == 1) {
+				if (timemode != 2) {
 					timeNow()
-					setTime()
+					setTime(false)
 				}
-				if (timemode == 2) {
-					setTime()
+				else {
+					setTime(false)
+					//dirty hack timer bug
+					setTimeout(() => {
+						setTime(false)
+					}, 100);
 				}
+				
 				if (butn_settime)
 					butn_settime.disabled = false
 				return true
@@ -138,7 +154,6 @@
 	}
 
 	function timeNow() {
-		//const localdate = DateTime().now()
 		allow_time_update = false
 		const localdate = DateTime.now()
 		date = localdate.toFormat("yyyy-MM-dd'T'HH:mm")
