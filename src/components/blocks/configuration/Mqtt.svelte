@@ -23,7 +23,7 @@
 			mqtt_port:				  {val: 1883, 		input: undefined, status: "", req: true},
 			mqtt_reject_unauthorized: {val: true, 		input: undefined, status: "", req: false},
 			mqtt_user: 				  {val: undefined,	input: undefined, status: "", req: false},
-			mqtt_pass: 				  {val: undefined,	input: undefined, status: "", req: false},
+			mqtt_pass: 				  {val: undefined,	input: undefined, status: "", req: false, pwd: true},
 			mqtt_topic: 		      {val: undefined, 	input: undefined, status: "", req: true},
 			mqtt_announce_topic:	  {val: undefined, 	input: undefined, status: "", req: false},
 			mqtt_retained: 			  {val: true, 		input: undefined, status: "", req: false},

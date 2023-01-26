@@ -3,7 +3,6 @@ import { svelte } from "@sveltejs/vite-plugin-svelte"
 import viteCompression from 'vite-plugin-compression'
 import { VitePWA } from 'vite-plugin-pwa'
 import { visualizer }		from "rollup-plugin-visualizer";
-// import legacy from '@vitejs/plugin-legacy'
 
 import { dependencies } from './package.json';
 function renderChunks(deps) {
@@ -37,9 +36,6 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       visualizer(),
       svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
-      // legacy({
-      //   targets: ['defaults'],
-      // }),
       VitePWA({ 
         registerType: 'autoUpdate',
         injectRegister: null,
