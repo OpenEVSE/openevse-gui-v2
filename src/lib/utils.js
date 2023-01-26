@@ -324,13 +324,15 @@ export function validateFormData({data, i18n_path, req=false, form=null}) {
 		else {
 			const hiddenpass = "••••••••••"
 			resp.data[key] = data[key].val
-			if (data[key].pwd && data[key].val !== hiddenpass)
+			if (data[key].pwd && data[key].val != hiddenpass)
 			{
 				resp.data[key] = data[key].val
 			}
 			else {
-				if (data[key].pwd)
-					delete resp.data[key].val
+				if (data[key].pwd) {
+					delete resp.data[key]
+				}
+					
 			} 
 
 		}
@@ -348,11 +350,18 @@ export async function postFormData(data,ref=null) {
 }
 
 
-export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_path = null, loader = true}) => {
+export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_path = null, input = null}) => {
 	let propdata = {}
-	let enabled = get(config_store)[prop_enable]
+	let enabled
+	if (prop_enable)
+		enabled = get(config_store)[prop_enable]
+	else enabled = false
 	if (prop) {
-		propdata[prop] = {val: form[prop].val, req: form[prop].req, input: form[prop].input}
+		propdata[prop] = {
+			val: 	form[prop].val,
+			req: 	form[prop].req,
+			input: 	form[prop].input
+		}
 	}
 
 	let valid = validateFormData(
@@ -364,30 +373,34 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 		}
 	)
 	if (valid.ok) {
-		let o = {}
-		let p
-		if (!prop) {
-			o = form
-			p = prop_enable
-		}		
-		else {
-			o = propdata
-			p = prop
+		if (!input) {
+			let o = {}
+			let p
+			if (!prop) {
+				o = form
+				p = prop_enable
+			}		
+			else {
+				o = propdata
+				p = prop
+			}
+			input = o[p].input
 		}
-		o[p].input.setStatus("loading")
+
+		input.setStatus("loading")
 
 		if (await serialQueue.add(() => config_store.upload(valid.data))) {
-			o[p].input.setStatus("ok")
+			input.setStatus("ok")
 			return true
 		}				
 		else {
-			o[p].input.setStatus("error")
+			input.setStatus("error")
 			return true
 		}
 	}
 	else {
-		if (!prop)
-			form[prop_enable].input.setValue(get(config_store)[prop_enable])
+		if (!prop && prop_enable)
+			input.setValue(get(config_store)[prop_enable])
 		get(uistates_store).alertbox.title = "error"
 		get(uistates_store).alertbox.body = valid.msg
 		get(uistates_store).alertbox.visible = true

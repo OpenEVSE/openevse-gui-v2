@@ -7,7 +7,7 @@
 	export let status = ""
 	export let disabled = false
 	export let items = [] // [{name: "name", value: "value"}, ...]
-	export const onChange = () => {}
+	export let onChange = () => {}
 	export const setStatus = (val) => {status = val}
 	let timeout
 

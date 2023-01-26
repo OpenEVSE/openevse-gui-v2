@@ -1,5 +1,4 @@
 <script>
-	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import ShaperHelp			from "../../help/ShaperHelp.svelte";
 	import Borders 				from "./../../ui/Borders.svelte";
 	import { onMount } 			from "svelte";
@@ -50,9 +49,9 @@
 		<Borders classes={formdata.current_shaper_enabled.val?"has-background-primary-light":"has-background-light"}>
 			<Switch 
 				name="shaperswitch" 
-				bind:this={formdata.current_shaper_enabled.input} 
 				label={$_("config.shaper.enable")} 
 				onChange={toggleShaper} 
+				bind:this={formdata.current_shaper_enabled.input} 
 				bind:checked={formdata.current_shaper_enabled.val} 
 				bind:status={formdata.current_shaper_enabled.status} 
 				disabled={formdata.current_shaper_enabled.status == "loading"}

@@ -125,8 +125,10 @@
 				<Borders grow={true}>
 					<div class="has-text-weight-bold">{$_("config.http.enable")}</div>
 					<form class="has-text-left" on:submit|preventDefault>
-						<Switch name="auth_enabled" label={auth_checked?$_("enabled"):$_("disabled")} bind:checked={auth_checked} onChange={auth_submit} bind:status={auth_submit_state}/>
 						<div class="is-flex is-justify-content-space-evenly is-flex-wrap-wrap">
+							<Borders grow={false} classes={auth_checked?"has-background-primary-light":"has-background-light"}>
+								<Switch name="auth_enabled" label={auth_checked?$_("enabled"):$_("disabled")} bind:checked={auth_checked} onChange={auth_submit} bind:status={auth_submit_state}/>
+							</Borders>
 							<div class="mx-1">
 								<InputForm size=20 title={$_("config.http.username")} bind:value={formdata.www_username.val} placeholder={$_("config.http.inputmax")} type="text" maxlength=15 bind:status={formdata.www_username.state}/>
 							</div>
