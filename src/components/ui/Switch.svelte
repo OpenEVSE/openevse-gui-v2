@@ -12,6 +12,7 @@
 	export let is_rtl = false
 	export let onChange = () => {}
 	export let status = ""
+	export let loader = false
 	export const setStatus = (val) => { status = val}
 	export const setValue = (val) => checked = val
 
@@ -68,6 +69,7 @@
 </style>
 
 <div class="switch is-flex-shrink-0 is-inline-block {tooltip?"has-tooltip-arrow has-tooltip-" + tooltip_pos + " has-tooltip-multiline":""} {hidden?"is-hidden":""}" data-tooltip={tooltip} on:mouseenter={hoverin} on:mouseleave={hoverout}>
+	{#if loader}
 	<div class="main" class:is-hidden={status==""?true:false}>
 		<span class="is-size-5 state has-background-white is-flex is-align-items-center is-justify-content-center">
 			{#if status=="loading"}
@@ -79,6 +81,7 @@
 			{/if}
 		</span>
 	</div>
+	{/if}
 	<input type="checkbox" id={name} name={name} class:is-rtl={is_rtl} class="switch is-info {focus == true?'':'is-outlined'}" 
 	bind:checked={checked} on:focus={hoverin} on:blur={hoverout} {disabled} on:change={onChange}/>
 	<label for={name} class="has-text-weight-bold has-text-left">{label?label:""}</label>
