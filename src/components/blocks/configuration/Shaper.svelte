@@ -77,10 +77,10 @@
 		</Borders>
 	</div>
 
-	<div class="is-size-7">{$_("config.shaper.shaperdesc")}</div>
+	<div class="is-size-7 mb-2">{$_("config.shaper.shaperdesc")}</div>
 	<div>
 		<InputForm 
-			title="{$_("config.shaper.maxpower")}*:" 
+			title="{$_("config.shaper.maxpower")}*" 
 			bind:this={formdata.current_shaper_max_pwr.input} 
 			type="number" bind:value={formdata.current_shaper_max_pwr.val} 
 			bind:status={formdata.current_shaper_max_pwr.status} 
@@ -91,7 +91,7 @@
 	</div>
 	<div>
 		<InputForm
-			title="{$_("config.shaper.livepower")}:" 
+			title="{$_("config.shaper.livepower")}" 
 			bind:this={formdata.mqtt_live_pwr.input} 
 			bind:value={formdata.mqtt_live_pwr.val} 
 			bind:status={formdata.mqtt_live_pwr.status} 

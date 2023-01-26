@@ -178,7 +178,9 @@
 		}
 	}
 
-
+	onMount(()=> {
+		getDivertMode($config_store.mqtt_grid_ie)
+	})
 
 	// Refresh stores when new version is published over websocket
 	$: refreshConfigStore		($status_store.config_version)
@@ -189,7 +191,6 @@
 	$: refreshDateTime			($status_store.time, $config_store?.time_zone)
 	$: refreshUIState			($status_store)
 	$: refreshLocale			($config_store.lang)
-	$: getDivertMode			($config_store.mqtt_grid_ie)
 	$: $status_store.divert_update,        countDivertUpdate()
 	$: $status_store.vehicle_state_update, countVehicleUpdate()
 	$: $status_store.rfid_waitin, 		   countRFIDScan()
