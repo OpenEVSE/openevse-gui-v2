@@ -16,7 +16,6 @@
 	let protocols = []
 
 	let formdata = {
-			current_shaper_enabled:	  {val: false, 		input: undefined, status: "", req: false},
 			mqtt_enabled: 			  {val: false, 		input: undefined, status: "", req: false},
 			mqtt_protocol:			  {val: undefined, 	input: undefined, status: "", req: false},
 			mqtt_server:   			  {val: undefined, 	input: undefined, status: "", req: true},

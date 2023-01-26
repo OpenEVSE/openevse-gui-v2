@@ -329,7 +329,6 @@
 			"help-main": "OpenEVSE can shape max current according to your real time house load, preventing to exceed the maximum power your energy plan can handle. <br> Once the module is enabled, it will need to receive live power total load data (in W) from an MQTT topic. <br>Data should be refreshed every 6mn max or OpenEVSE will temporary disable itself."
 		},
 		"selfprod": {
-			"enable": "Handle Self Production",
 			"desc": "Dynamically adjust charge rate based on self production or excess power (grid export).",
 			"production": "Production",
 			"excess": "Excess Power",
@@ -353,7 +352,15 @@
 			"help-2": "If Excess Power feed is available: charge rate will be modulated by available excess power.",
 			"help-3": "If EVSE is sleeping: charging will begin when solar PV / excess power > min charge rate.",
 			"help-4": "Charging will pause if the excess power drops below the min charge rate for a period of time.",
-			"help-5": "Note: It's assumed that EVSE power is included in the grid feed"
+			"help-5": "Note: It's assumed that EVSE power is included in the grid feed",
+
+			"missing-divert_PV_ratio": "PV power ratio is missing",
+			"missing-divert_attack_smoothing_factor": "Divert smoothing attack is missing",
+			"missing-divert_decay_smoothing_factor": "Divert smoothing decay is missing",
+			"missing-divert_min_charge_time": "Minimum Charge Time is missing",
+			"missing-mqtt_solar": "Self Production MQTT topic is missing",
+			"missing-mqtt_grid_ie": "Grid (+I/-E) MQTT topic is missing"
+
 		},
 		"vehicle": {
 			"status": "Status",

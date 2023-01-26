@@ -10,6 +10,7 @@
 	import Switch 					from "../../ui/Switch.svelte";
 	import InputForm 				from "../../ui/InputForm.svelte";
 	import Box 						from "../../ui/Box.svelte"
+	import { submitFormData } 	from "./../../../lib/utils.js";
 
 	let mounted = false
 	let alert_body
@@ -19,13 +20,13 @@
 	let languages = []
 
 	let formdata = {
-		www_username: {val: "",   state: "", req: true},
-		www_password: {val: "",   state: "", req: true},
-		lang:		  {val: "en", state: "", req: false},
+		www_username: {val: "",   status: "", req: true},
+		www_password: {val: "",   status: "", req: true},
+		lang:		  {val: "en", status: "", req: false},
 	}
 	
 	let auth_checked = false
-	let auth_submit_state = ""
+	let auth_submit_status = ""
 	let auth_submit_inst
 
 	
@@ -60,14 +61,14 @@
 
 		
 		
-		auth_submit_state = "loading"
+		auth_submit_status = "loading"
 		if (await serialQueue.add(() => config_store.upload(data))) 
 			{
-				auth_submit_state = "ok"
+				auth_submit_status = "ok"
 				return true
 			}
 		else {
-			auth_submit_state = "error"
+			auth_submit_status = "error"
 			return false
 		}
 
@@ -92,18 +93,19 @@
 	let setProperty = async (prop) => {
 		const props = {}
 		props[prop] = formdata[prop].val
-		formdata[prop].state = "loading"
+		formdata[prop].status = "loading"
 		if (await config_store.upload(props)) 
 			{
-			formdata[prop].state = "ok"
+			formdata[prop].status = "ok"
 			return true
 			}
 		else {
-			formdata[prop].state = "error"
+			formdata[prop].status = "error"
 			formdata[prop].val = $config_store[prop]
 			return false
 		}
 	}
+
 
 	onMount(() => {
 		$locales.forEach(lang => {
@@ -114,7 +116,6 @@
 		mounted = true
 	})
 
-	$: console.log("login state: " + formdata.www_username.state)
 	
 </script>
 
@@ -128,17 +129,17 @@
 					<form class="has-text-left" on:submit|preventDefault>
 						<div class="is-flex is-justify-content-space-evenly is-flex-wrap-wrap">
 							<Borders grow={false} classes={auth_checked?"has-background-primary-light":"has-background-light"}>
-								<Switch name="auth_enabled" label={auth_checked?$_("enabled"):$_("disabled")} bind:checked={auth_checked} onChange={auth_submit} bind:status={auth_submit_state} disabled={auth_submit_state=="loading"}/>
+								<Switch name="auth_enabled" label={auth_checked?$_("enabled"):$_("disabled")} bind:checked={auth_checked} onChange={auth_submit} bind:status={auth_submit_status} disabled={auth_submit_status=="loading"}/>
 							</Borders>
 							<div class="mx-1">
-								<InputForm size=20 title={$_("config.http.username")} bind:value={formdata.www_username.val} placeholder={$_("config.http.inputmax")} type="text" maxlength=15 bind:status={formdata.www_username.state}/>
+								<InputForm size=20 title={$_("config.http.username")} bind:value={formdata.www_username.val} placeholder={$_("config.http.inputmax")} type="text" maxlength=15 bind:status={formdata.www_username.status}/>
 							</div>
 							<div class="mx-1">
-							<InputForm size=20 title={$_("config.http.password")} bind:value={formdata.www_password.val} placeholder={$_("config.http.inputmax")} type="password" maxlength=15 bind:status={formdata.www_password.state}/>
+							<InputForm size=20 title={$_("config.http.password")} bind:value={formdata.www_password.val} placeholder={$_("config.http.inputmax")} type="password" maxlength=15 bind:status={formdata.www_password.status}/>
 							</div>
 						</div>
 						<div class="has-text-centered" class:is-hidden={!auth_checked}>
-							<Button name={$_("update")} bind:state={auth_submit_state} disabled={!formdata.www_username.val || !formdata.www_password.val } butn_submit={auth_submit}/>
+							<Button name={$_("update")} bind:state={auth_submit_status} disabled={!formdata.www_username.val || !formdata.www_password.val } butn_submit={auth_submit}/>
 						</div>
 					</form>
 				</Borders>
@@ -147,8 +148,8 @@
 				<Borders grow={true}>
 				<div class="block has-text-centered">
 					<div class="has-text-weight-semibold mb-1">{$_("config.http.lang")}</div>
-					{#key formdata.lang.state}
-					<Select bind:value={formdata.lang.val} items={languages} bind:status={formdata.lang.state} onChange={async ()=> { await setProperty("lang")}}/>
+					{#key formdata.lang.status}
+					<Select bind:value={formdata.lang.val} items={languages} bind:status={formdata.lang.status} onChange={async ()=> { await setProperty("lang")}}/>
 					{/key}
 				</div>
 				</Borders>

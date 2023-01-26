@@ -363,6 +363,20 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 			input: 	form[prop].input
 		}
 	}
+	// get input instance
+	if (!input) {
+		let o = {}
+		let p
+		if (!prop) {
+			o = form
+			p = prop_enable
+		}		
+		else {
+			o = propdata
+			p = prop
+		}
+		input = o[p].input
+	}
 
 	let valid = validateFormData(
 		{
@@ -373,19 +387,6 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 		}
 	)
 	if (valid.ok) {
-		if (!input) {
-			let o = {}
-			let p
-			if (!prop) {
-				o = form
-				p = prop_enable
-			}		
-			else {
-				o = propdata
-				p = prop
-			}
-			input = o[p].input
-		}
 
 		input.setStatus("loading")
 
@@ -400,7 +401,11 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 	}
 	else {
 		if (!prop && prop_enable)
-			input.setValue(get(config_store)[prop_enable])
+			{
+				const val = get(config_store)[prop_enable]
+				input.setValue(val)
+			}
+			
 		get(uistates_store).alertbox.title = "error"
 		get(uistates_store).alertbox.body = valid.msg
 		get(uistates_store).alertbox.visible = true

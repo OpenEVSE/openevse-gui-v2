@@ -324,10 +324,10 @@
       "livepower": "Sujet MQTT Puissance Instantanée compteur (en W)",
       "missing-current_shaper_max_pwr": "Valeur puissance Max manquante",
 			"missing-mqtt_live_pwr": "Sujet MQTT puissance instantanée manquant",
-      "help-mqtt": "Si MQTT n'est pas une option, vous pouvez POST {data} périodiquement sur '/status'"
+      "help-mqtt": "Si MQTT n'est pas une option, vous pouvez POST {data} périodiquement sur '/status'",
+      "help-main": "OpenEVSE peut moduler le courant max en fonction de la puissance instantanée de votre compteur afin d'éviter de dépasser votre abonnement. <br> Une fois que le module est activé, il va avoir besoin de recevoir la puissance instantanée (en W) depuis un topic MQTT. <br>Les données doivent être rafraichies toutes les 6mn au max, ou OpenEVSE se mettra en veille."
     },
     "selfprod": {
-      "enable": "Gestion de l'Auto Production",
       "desc": "Ajuste dynamiquement la puissance de charge en fonction de l'energie produite ou de l'export vers le réseau (+I/-E).",
       "production": "Production",
       "excess": "Export Réseau",
@@ -351,7 +351,13 @@
       "help-2": "Si le déficit/excédent (+Import/-Export) est disponible, le courant de charge sera modulé selon l'excédent.",
       "help-3": "Si l'EVSE est en pause: la charge débutera quand la production Solaire ou l'excédent de puissance > puissance de charge minimale (min charge rate)",
       "help-4": "La charge se mettra en pause si l'excédent de puissance tombe sous la puissance de charge minimale.",
-      "help-5": "Note: La puissance consommée par l'EVSE est inclue dans le flux d'excédent/déficit"
+      "help-5": "Note: La puissance consommée par l'EVSE est inclue dans le flux d'excédent/déficit",
+      "missing-divert_PV_ratio": "Ratio de puissance PV manquant",
+			"missing-divert_attack_smoothing_factor": "Lissage augmentation de la puissance manquant",
+			"missing-divert_decay_smoothing_factor": "Lissage diminution de la puissance manquant",
+			"missing-divert_min_charge_time": "Temps de charge minimum manquant",
+      "missing-mqtt_solar": "Sujet MQTT Auto production manquant",
+			"missing-mqtt_grid_ie": "Sujet MQTT +Import/-Export manquant"
     },
     "vehicle": {
       "status": "Status",
