@@ -1,4 +1,5 @@
 <script>
+	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 		    from 'svelte-i18n'
 	import { status_store } from "./../../../lib/stores/status.js";
 	import { config_store } from "./../../../lib/stores/config.js";
@@ -43,27 +44,36 @@
 </script>
 
 <Box title={$_("config.titles.ohm")} icon="mdi:energy-circle" back={true}>
-	<div>
-		<Switch name="emoncmsswitch" label={$_("config.ohm.enable")} onChange={toggleOhmConnect} bind:checked={$config_store.ohm_enabled} is_rtl={true}/>
-	</div>
-	
-	<div class="is-size-7">{$_("config.ohm.desc")}</div>
-	{#if $config_store.ohm_enabled}
-	<div class="is-size-7">
-		<span class="">Ohm Hour:</span>
-		<span class="has-text-weight-bold {$status_store.ohm_hour == "NotConnected" ?"has-text-danger":"has-text-primary"}">{$status_store.ohm_hour}</span>
-	</div>
-	{/if}
-	
-	<InputForm title="{$_("config.ohm.ohmkey")}*:" bind:value={$config_store.ohm} placeholder="Key" />
-	<div class="is-size-7">
-		{$_("config.ohm.ohmkey-desc")}<br>
-		<span class="has-text-weight-bold">{$_("config.ohm.example")}: </span><span>https://login.ohmconnect.com/verify-ohm-hour/OpnEoVse</span><br>
-		<span class="has-text-weight-bold">{$_("config.ohm.key")}:</span>OpnEoVse
-	</div>
+	<div class="columns is-centered">
+		<div class="column is-three-quarters is-full-mobile">
+			
+			<div class="mb-2 is-flex is-align-items-center is-justify-content-center">
+				<Borders classes={$config_store.ohm_enabled?"has-background-primary-light":"has-background-light"}>
+					<div>
+						<Switch name="emoncmsswitch" label={$_("config.ohm.enable")} onChange={toggleOhmConnect} bind:checked={$config_store.ohm_enabled} is_rtl={true}/>
+					</div>
+				</Borders>
+			</div>
+		
+			<div class="is-size-7 mb-2">{$_("config.ohm.desc")}</div>
+			{#if $config_store.ohm_enabled}
+			<div class="is-size-7">
+				<span class="">Ohm Hour:</span>
+				<span class="has-text-weight-bold {$status_store.ohm_hour == "NotConnected" ?"has-text-danger":"has-text-primary"}">{$status_store.ohm_hour}</span>
+			</div>
+			{/if}
+			
+			<InputForm title="{$_("config.ohm.ohmkey")}*:" bind:value={$config_store.ohm} placeholder="Key" />
+			<div class="is-size-7">
+				{$_("config.ohm.ohmkey-desc")}<br>
+				<span class="has-text-weight-bold">{$_("config.ohm.example")}: </span><span>https://login.ohmconnect.com/verify-ohm-hour/OpnEoVse</span><br>
+				<span class="has-text-weight-bold">{$_("config.ohm.key")}:</span>OpnEoVse
+			</div>
 
-	<div class="block mt-5 mb-1">
-		<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+			<div class="block mt-5 mb-1">
+				<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+			</div>
+		</div>
 	</div>
 	<AlertBox title={$_("error")}  body={alert_body} bind:visible={alert_visible} />
 </Box>
