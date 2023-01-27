@@ -15,7 +15,6 @@
 
 	let clickTab = (i) => {
 		activetab = i
-		console.log("tab:" + i)
 	}
 </script>
 
