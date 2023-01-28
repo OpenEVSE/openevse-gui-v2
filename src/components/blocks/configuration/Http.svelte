@@ -127,7 +127,7 @@
 				<Borders grow={true}>
 					<div class="has-text-weight-bold">{$_("config.http.enable")}</div>
 					<form class="has-text-left" on:submit|preventDefault>
-						<div class="is-flex is-justify-content-space-evenly is-flex-wrap-wrap">
+						<div class="is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
 							<Borders grow={false} classes={auth_checked?"has-background-primary-light":"has-background-light"}>
 								<Switch name="auth_enabled" label={auth_checked?$_("enabled"):$_("disabled")} bind:checked={auth_checked} onChange={auth_submit} bind:status={auth_submit_status} disabled={auth_submit_status=="loading"}/>
 							</Borders>
