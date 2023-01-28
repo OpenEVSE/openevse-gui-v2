@@ -422,7 +422,8 @@
 			"ohmkey": "Ohm Key",
 			"ohmkey-desc" :"Ohm Key can be obtained by logging in to OhmConnect, enter Settings and locate the link in 'Open Source Projects'.",
 			"example": "Example",
-			"key": "Key"
+			"key": "Key",
+			"missing-ohm": "Ohm Key is missing"
 		},
 		"dev": {
 			"rapi-cmd": "Rapi Commands",

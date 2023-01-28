@@ -1,48 +1,44 @@
 <script>
-	import Borders from "./../../ui/Borders.svelte";
-	import { _ } 		    from 'svelte-i18n'
-	import { status_store } from "./../../../lib/stores/status.js";
-	import { config_store } from "./../../../lib/stores/config.js";
-	import { serialQueue }  from "./../../../lib/queue.js";
-	import InputForm 		from "./../../ui/InputForm.svelte";
-	import Box 				from "../../ui/Box.svelte";
-	import Button 			from "./../../ui/Button.svelte";
-	import Switch 			from "./../../ui/Switch.svelte";
-	import AlertBox 		from "../../ui/AlertBox.svelte"
+	import { onMount } 			from "svelte";
+	import { _ } 		    	from 'svelte-i18n'
+	import { status_store } 	from "./../../../lib/stores/status.js";
+	import { config_store } 	from "./../../../lib/stores/config.js";
+	import { submitFormData } 	from "./../../../lib/utils.js"
+	import Borders 				from "./../../ui/Borders.svelte";
+	import InputForm 			from "./../../ui/InputForm.svelte";
+	import Box 					from "../../ui/Box.svelte";
+	import Switch 				from "./../../ui/Switch.svelte";
 
-	let stg_submit_state
-	let alert_body
-	let alert_visible = false
 
-	async function toggleOhmConnect() {	
-		let res = await serialQueue.add(() => config_store.saveParam("ohm_enabled", $config_store.emoncms_enabled))
+	let mounted = false
+	let formdata = {
+			ohm_enabled: {val: false, status: "", input: undefined, req: false},
+			ohm:	{val: null,  status: "", input: undefined, req: true}
+		}	
+
+	let updateFormData = () => {
+		formdata.ohm_enabled.val = $config_store.ohm_enabled
+		formdata.ohm.val = $config_store.ohm	
 	}
 
-	let stg_submit = async () => {
-		if ($config_store.ohm == "") {
-			alert_body = "OhmConnect Key is missing"
-			alert_visible=true
-			return
-		}
-		stg_submit_state = "loading"
-	
-		const data = {
-			ohm: $config_store.ohm
-		}
-
-		if (await serialQueue.add(()=>config_store.upload(data))) 
-			{
-				stg_submit_state = "ok"
-				return true
-			}
-		else {
-			stg_submit_state = "error"
-			return false
-		}
-	
+	let toggleOhm = async () => {
+		await submitFormData({form: formdata, prop_enable: "ohm_enabled", i18n_path: "config.ohm.missing-"})
 	}
+
+
+	let setProperty = async (prop) => {
+		await submitFormData({prop: prop, form: formdata , prop_enable: "ohm_enabled", i18n_path: "config.ohm.missing-"})
+	}
+
+	onMount( () => {
+		updateFormData()
+		mounted = true
+
+	})
+
 </script>
 
+{#if mounted}
 <Box title={$_("config.titles.ohm")} icon="mdi:energy-circle" back={true}>
 	<div class="columns is-centered">
 		<div class="column is-three-quarters is-full-mobile">
@@ -50,7 +46,16 @@
 			<div class="mb-2 is-flex is-align-items-center is-justify-content-center">
 				<Borders classes={$config_store.ohm_enabled?"has-background-primary-light":"has-background-light"}>
 					<div>
-						<Switch name="emoncmsswitch" label={$_("config.ohm.enable")} onChange={toggleOhmConnect} bind:checked={$config_store.ohm_enabled} is_rtl={true}/>
+						<Switch 
+						name="emoncmsswitch" 
+						label={$_("config.ohm.enable")} 
+						onChange={toggleOhm} 
+						bind:this={formdata.ohm_enabled.input} 
+						bind:checked={formdata.ohm_enabled.val} 
+						bind:status={formdata.ohm_enabled.status} 
+						disabled={formdata.ohm_enabled.status == "loading"}
+						/>
+					
 					</div>
 				</Borders>
 			</div>
@@ -63,17 +68,21 @@
 			</div>
 			{/if}
 			
-			<InputForm title="{$_("config.ohm.ohmkey")}*:" bind:value={$config_store.ohm} placeholder="Key" />
+			<InputForm 
+			title="{$_("config.ohm.ohmkey")}*" 
+			bind:this={formdata.ohm.input} 
+			type="txt" bind:value={formdata.ohm.val} 
+			bind:status={formdata.ohm.status} 
+			disabled={formdata.ohm.status == "loading"} 
+			placeholder="" 
+			onChange={()=>setProperty("ohm")}
+		/>
 			<div class="is-size-7">
 				{$_("config.ohm.ohmkey-desc")}<br>
 				<span class="has-text-weight-bold">{$_("config.ohm.example")}: </span><span>https://login.ohmconnect.com/verify-ohm-hour/OpnEoVse</span><br>
 				<span class="has-text-weight-bold">{$_("config.ohm.key")}:</span>OpnEoVse
 			</div>
-
-			<div class="block mt-5 mb-1">
-				<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
-			</div>
 		</div>
 	</div>
-	<AlertBox title={$_("error")}  body={alert_body} bind:visible={alert_visible} />
 </Box>
+{/if}
