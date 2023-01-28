@@ -18,6 +18,7 @@
 	
 	let formdata = {
 			max_current_soft: 		{val: false,  status: "", input: undefined, req: false},
+			is_threephased:			{val: false,  status: "", input: undefined, req: false},
 			scheduler_start_window:	{val: null,   status: "", input: undefined, req: false},
 			pause_uses_disabled:	{val: null,   status: "", input: undefined, req: false},
 			service:				{val: false,  status: "", input: undefined, req: false},
@@ -28,6 +29,7 @@
 
 	let updateFormData = () => {
 		formdata.max_current_soft.val = $config_store.max_current_soft
+		formdata.is_threephased = $config_store.is_threephased
 		formdata.scheduler_start_window.val = $config_store.scheduler_start_window
 		formdata.pause_uses_disabled.val =  $config_store.pause_uses_disabled
 		formdata.service.val = $config_store.service
@@ -65,6 +67,18 @@
 						min={$config_store.min_current_hard?$config_store.min_current_hard:6} 
 						max={$config_store.max_current_hard?$config_store.max_current_hard:32} 
 						onchange={()=>setProperty("max_current_soft")} 
+					/>
+				</Borders>
+			</div>
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Borders grow={true}>
+					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.threephase")}</div>
+					<Select 
+						bind:this={formdata.is_threephased.input}
+						bind:value={formdata.is_threephased.val} 
+						bind:status={formdata.is_threephased.status} 
+						items={service_items} 
+						onChange={()=>setProperty("is_threephased")}
 					/>
 				</Borders>
 			</div>
