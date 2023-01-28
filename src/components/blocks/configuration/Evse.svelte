@@ -11,8 +11,6 @@
 	import Box 					 from "./../../ui/Box.svelte";
 	import { submitFormData } 	 from "./../../../lib/utils.js"
 
-	let input_random_start
-	let select_service_level = ""
 	let mounted = false
 	const service_items = [{name: "Auto", value: 0},{name: "Level 1", value: 1},{name: "Level 2", value: 2}]
 	
@@ -29,7 +27,7 @@
 
 	let updateFormData = () => {
 		formdata.max_current_soft.val = $config_store.max_current_soft
-		formdata.is_threephase = $config_store.is_threephased
+		formdata.is_threephase = $config_store.is_threephase
 		formdata.scheduler_start_window.val = $config_store.scheduler_start_window
 		formdata.pause_uses_disabled.val =  $config_store.pause_uses_disabled
 		formdata.service.val = $config_store.service

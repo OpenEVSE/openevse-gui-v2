@@ -16,11 +16,13 @@
 	
 	let formdata = {
 			max_current_soft: 		{val: false,  status: "", input: undefined, req: false},
+			is_threephase:			{val: false,  status: "", input: undefined, req: false},
 			scheduler_start_window:	{val: null,   status: "", input: undefined, req: false}
 		}	
 
 	let updateFormData = () => {
 		formdata.max_current_soft.val = $config_store.max_current_soft
+		formdata.is_threephase = $config_store.is_threephase
 		formdata.scheduler_start_window.val = $config_store.scheduler_start_window
 	}
 
