@@ -388,14 +388,14 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 	)
 	if (valid.ok) {
 
-		input.setStatus("loading")
+		input?.setStatus("loading")
 
 		if (await serialQueue.add(() => config_store.upload(valid.data))) {
-			input.setStatus("ok")
+			input?.setStatus("ok")
 			return true
 		}				
 		else {
-			input.setStatus("error")
+			input?.setStatus("error")
 			return true
 		}
 	}
