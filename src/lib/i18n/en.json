@@ -426,7 +426,6 @@
 			"consoles": "Consoles"
 		},
 		"ocpp": {
-			"enable": "Enable OCPP",
 			"server": "Central System URL",
 			"chargeBoxId": "Charge Box ID",
 			"authkey": "Authentication Key",
@@ -439,10 +438,10 @@
 			"suspend-evse": "OCPP can suspend EVSE",
 			"energize-plug": "OCPP can energize plug",
 			"connected": "Connected",
-			"missing-server": "missing OCPP server url",
-			"missing-chargeBoxId": "missing Charge Box ID",
-			"missing-authkey": "missing Auth Key",
-			"missing-idtag": "missing Id Tag"
+			"missing-ocpp_server": "missing OCPP server url",
+			"missing-ocpp_chargeBoxId": "missing Charge Box ID",
+			"missing-ocpp_authkey": "missing Auth Key",
+			"missing-ocpp_idtag": "missing Id Tag"
 		}
 	}
 

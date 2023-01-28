@@ -423,7 +423,6 @@
       "consoles": "Consoles"
     },
     "ocpp": {
-      "enable": "Activer OCPP",
       "server": "URL Système Central",
       "chargeBoxId": "ID Chargeur",
       "authkey": "Clef d'Authentification",
@@ -436,10 +435,10 @@
       "suspend-evse": "OCPP peut suspendre l'EVSE",
       "energize-plug": "OCPP peut alimenter la prise",
       "connected": "Connecté",
-      "missing-server": "URL du serveur OCPP manquante",
-      "missing-chargeBoxId": "ID Chargeur manquant",
-      "missing-authkey": "Clef d'Authentification manquante",
-      "missing-idtag": "Tag ID manquant"
+      "missing-ocpp_server": "URL du serveur OCPP manquante",
+      "missing-ocpp_chargeBoxId": "ID Chargeur manquant",
+      "missing-ocpp_authkey": "Clef d'Authentification manquante",
+      "missing-ocpp_idtag": "Tag ID manquant"
     }
   }
 }
