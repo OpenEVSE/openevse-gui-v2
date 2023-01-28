@@ -13,11 +13,12 @@
 
 	let mounted = false
 	const service_items = [{name: "Auto", value: 0},{name: "Level 1", value: 1},{name: "Level 2", value: 2}]
+	const phase_items = [{name: $_("no"), value: false}, {name: $_("yes"), value: true}]
 	
 	let formdata = {
 			max_current_soft: 		{val: 32,  	  status: "", input: undefined, req: false},
 			is_threephase:			{val: false,  status: "", input: undefined, req: false},
-			scheduler_start_window:	{val: 0,    status: "", input: undefined, req: false},
+			scheduler_start_window:	{val: 0,      status: "", input: undefined, req: false},
 			pause_uses_disabled:	{val: null,   status: "", input: undefined, req: false},
 			service:				{val: false,  status: "", input: undefined, req: false},
 			led_brightness:			{val: "",     status: "", input: undefined, req: false},
@@ -27,7 +28,7 @@
 
 	let updateFormData = () => {
 		formdata.max_current_soft.val = $config_store.max_current_soft
-		formdata.is_threephase = $config_store.is_threephase
+		formdata.is_threephase.val = $config_store.is_threephase
 		formdata.scheduler_start_window.val = $config_store.scheduler_start_window
 		formdata.pause_uses_disabled.val =  $config_store.pause_uses_disabled
 		formdata.service.val = $config_store.service
@@ -68,7 +69,7 @@
 					/>
 				</Borders>
 			</div>
-			{#if $config_store.is_threephase}
+			{#if $config_store.is_threephase !== 'undefined'}
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
 					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.threephase")}</div>
@@ -76,7 +77,7 @@
 						bind:this={formdata.is_threephase.input}
 						bind:value={formdata.is_threephase.val} 
 						bind:status={formdata.is_threephase.status} 
-						items={service_items} 
+						items={phase_items} 
 						onChange={()=>setProperty("is_threephase")}
 					/>
 				</Borders>
