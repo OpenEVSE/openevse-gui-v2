@@ -419,7 +419,8 @@
       "ohmkey": "Clef Ohm",
       "ohmkey-desc": "La clef Ohm peut être obtenue sur votre compte OhmConnect. Aller dans Settings et trouver le lien \"Open Source Projects\"",
       "example": "Example",
-      "key": "Clef"
+      "key": "Clef",
+      "missing-ohm": "Clef Ohm manquante"
     },
     "dev": {
       "rapi-cmd": "Commandes Rapi",
