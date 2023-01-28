@@ -120,7 +120,7 @@
 					<div slot="help">
 						{@html $_("config.evse.pause-help")}
 					</div>
-					<div class="has-text-weight-bold is-size-6" mb-3>{$_("config.evse.pause")}</div>
+					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.pause")}</div>
 					<Switch 
 						name="pausemode" 
 						label="{formdata.pause_uses_disabled.val?"Disable":"Sleep"}" 
