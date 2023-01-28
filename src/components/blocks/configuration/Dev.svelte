@@ -1,6 +1,5 @@
 <script>
 	import Borders from "./../../ui/Borders.svelte";
-	import Modal from "./../../ui/Modal.svelte";
 	import { _ } 		from 'svelte-i18n'
 	import InputForm 	from "./../../ui/InputForm.svelte";
 	import Button 		from "./../../ui/Button.svelte";

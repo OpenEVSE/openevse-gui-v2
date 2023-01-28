@@ -175,6 +175,7 @@
 			"rfid": "RFID",
 			"shaper": "Shaper",
 			"selfprod": "Self Production",
+			"ocpp": "OCPP",
 			"vehicle": "Vehicle",
 			"emon": "Energy Monitoring",
 			"ohm": "OhmConnect",
@@ -423,6 +424,24 @@
 			"send": "Send",
 			"clear": "Clear",
 			"consoles": "Consoles"
+		},
+		"ocpp": {
+			"server": "Central System URL",
+			"chargeBoxId": "Charge Box ID",
+			"authkey": "Authentication Key",
+			"authkey-desc": "WebSocket Key (Security Profile 2)",
+			"auth": "Charge Authorization",
+			"auth-auto": "Authorize automatically",
+			"idtag": "ID-Tag",
+			"auth-offline": "Skip Authorization when offline",
+			"controls": "Controls",
+			"suspend-evse": "OCPP can suspend EVSE",
+			"energize-plug": "OCPP can energize plug",
+			"connected": "Connected",
+			"missing-ocpp_server": "missing OCPP server url",
+			"missing-ocpp_chargeBoxId": "missing Charge Box ID",
+			"missing-ocpp_authkey": "missing Auth Key",
+			"missing-ocpp_idtag": "missing Id Tag"
 		}
 	}
 

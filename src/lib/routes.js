@@ -9,6 +9,7 @@ import Safety           from '../routes/Safety.svelte'
 import Evse             from '../routes/Evse.svelte'
 import MQTT             from '../routes/MQTT.svelte'
 import HTTP             from '../routes/HTTP.svelte'
+import OCPP             from '../routes/OCPP.svelte'
 import Network          from '../routes/Network.svelte'
 import Firmware         from '../routes/Firmware.svelte'
 import Time             from '../routes/Time.svelte'
@@ -33,6 +34,7 @@ export const routes = {
     '/configuration/evse': Evse,
     '/configuration/mqtt': MQTT,
     '/configuration/http': HTTP,
+    '/configuration/ocpp': OCPP,
     '/configuration/network': Network,
     '/configuration/firmware': Firmware,
     '/configuration/time': Time,
