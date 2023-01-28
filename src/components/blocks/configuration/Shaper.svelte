@@ -49,7 +49,7 @@
 		<Borders classes={formdata.current_shaper_enabled.val?"has-background-primary-light":"has-background-light"}>
 			<Switch 
 				name="shaperswitch" 
-				label={$_("config.shaper.enable")} 
+				label={$_("enable")} 
 				onChange={toggleShaper} 
 				bind:this={formdata.current_shaper_enabled.input} 
 				bind:checked={formdata.current_shaper_enabled.val} 

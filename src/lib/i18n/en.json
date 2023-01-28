@@ -279,8 +279,6 @@
 			"missing-www_password": "Missing password"
 		},
 		"mqtt": {
-			"enable": "Enable MQTT",
-			"disable": "Disable MQTT",
 			"missing-mqtt_server": "MQTT Host is missing",
 			"missing-mqtt_port": "MQTT Port is missing",
 			"missing-mqtt_topic": "MQTT Base Topic is missing",
@@ -301,7 +299,6 @@
 			"topic-voltage-desc": "Voltage MQTT topic to improve power calculations"
 		},
 		"rfid": {
-			"enable": "Enable RFID",
 			"managetag": "Manage scanned tags",
 			"scan": "Scan",
 			"remove": "Remove",
@@ -314,7 +311,6 @@
 			"removeall": "Remove All"
 		},
 		"shaper": {
-			"enable": "Enable Shaper",
 			"updated": "Live Power Load data up to date, throttling current...",
 			"notupdated": "Waiting for Live Power Load data",
 			"load": "Load",
@@ -404,18 +400,16 @@
 			"refresh-token": "Refresh Token"
 		},
 		"emon": {
-			"enable": "Enable Emoncms",
 			"connected": "Connected",
 			"posts": "Posts",
 			"server": "Emoncms Server",
 			"node": "Node",
 			"apikey": "Write API Key",
-			"missing-server": "Emoncms Server is missing",
-			"missing-node": "Emoncms Node is missing",
-			"missing-key": "API Key is missing"
+			"missing-emoncms_server": "Emoncms Server is missing",
+			"missing-emoncms_node": "Emoncms Node is missing",
+			"missing-emoncms_apikey": "API Key is missing"
 		},
 		"ohm": {
-			"enable": "Enable Ohm Connect",
 			"desc": "OhmConnect monitors real-time conditions on the electricity grid. When dirty and unsustainable power plants turn on, our users receive a notification to save energy.",
 			"ohmhour": "Ohm Hour",
 			"ohmkey": "Ohm Key",

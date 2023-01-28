@@ -279,8 +279,6 @@
 			"missing-www_password": "Mot de passe manquant"
     },
     "mqtt": {
-      "enable": "Activer",
-	    "disable": "Désactiver",
       "missing-mqtt_server": "Adresse du serveur MQTT manquante",
       "missing-mqtt_port": "Port du serveur MQTT manquant",
       "missing-mqtt_topic": "Le topic MQTT principal est manquant",
@@ -301,7 +299,6 @@
       "topic-voltage-desc": "Sujet MQTT de la tension (en V) pour améliorer le calcul de puissance"
     },
     "rfid": {
-      "enable": "Activer RFID",
       "managetag": "Gérer les badges authorisés",
       "scan": "Scanner",
       "remove": "Retirer",
@@ -314,7 +311,6 @@
       "removeall": "Tout Retirer"
     },
     "shaper": {
-      "enable": "Activer le Déléstage",
       "updated": "Données Puissance Totale Compteur à jours, contrôle du courant...",
       "notupdated": "En attente de la Puissance Total Compteur",
       "load": "Total Compteur",
@@ -402,22 +398,20 @@
       "refresh-token": "Refresh Token"
     },
     "emon": {
-      "enable": "Activer Emoncms",
       "connected": "Connecté",
       "posts": "Publications",
       "server": "Serveur Emoncms",
       "node": "Noeud",
       "apikey": "Clef API Ecriture",
-      "missing-server": "Adresse serveur Emoncms manquante",
-      "missing-node": "Noeud Emoncms manquant",
-      "missing-key": "Clef API manquante"
+      "missing-emoncms_server": "Adresse serveur Emoncms manquante",
+      "missing-emoncms_node": "Noeud Emoncms manquant",
+      "missing-emoncms_apikey": "Clef API manquante"
     },
     "ohm": {
-      "enable": "Activer Ohm Connect",
       "desc": "OhmConnect supervise en temps réel les conditions sur le réseau électrique. Quand les centrales les plus polluantes ou que la charge est trop elevée, nos utilisateurs reçoivent une notification afin de sauvegarder l'energie.",
       "ohmhour": "Ohm Hour",
       "ohmkey": "Clef Ohm",
-      "ohmkey-desc": "La clef Ohm peut être obtenue sur votre compte OhmConnect. Aller dans Settings et trouver le lien \"Open Source Projects\"",
+      "ohmkey-desc": "La clef Ohm peut être obtenue sur votre compte OhmConnect. <br> Aller dans Settings et trouver le lien \"Open Source Projects\"",
       "example": "Example",
       "key": "Clef",
       "missing-ohm": "Clef Ohm manquante"
