@@ -237,7 +237,8 @@
 			"pause": "Pause Status",
 			"led-bn": "Led Brightness",
 			"sensorscale": "Current scale",
-			"sensoroffset": "Current offset"
+			"sensoroffset": "Current offset",
+			"threephase": "Three-phase"
 		},
 		"safety": {
 			"test": "Test",

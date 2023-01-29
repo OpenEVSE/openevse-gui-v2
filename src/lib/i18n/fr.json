@@ -236,7 +236,8 @@
       "pause": "Mode de pause",
       "led-bn": "Luminosité des Leds",
       "sensorscale": "Echelle Courant",
-			"sensoroffset": "Décalage Courant"
+			"sensoroffset": "Décalage Courant",
+      "threephase": "Triphasé"
     },
     "safety": {
       "test": "Test",
