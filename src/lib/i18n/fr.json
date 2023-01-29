@@ -329,6 +329,7 @@
       "production": "Production",
       "excess": "Export Réseau",
       "grid": "+Import/-Export Réseau",
+      "modeboost": "mode Rapide, Divert désactivé",
       "availablecur": "Courant Disponible",
       "smoothedcur": "Courant Lissé",
       "lastupdated": "Dernière maj",

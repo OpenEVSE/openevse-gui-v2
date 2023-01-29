@@ -22,6 +22,7 @@
 		<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
 	</div>
 	{/if}
+	{#if $status_store.divertmode == 2}
 	<div class="mr-2">
 		<span>{$_("status-current-available")}:</span>
 		<span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
@@ -30,6 +31,11 @@
 		<span>{$_("status-divert-smoothed")}:</span>
 		<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
 	</div>
+	{:else if $status_store.divertmode == 1}
+	<div class="mr-2">
+		<span class="has-text-info">{$_("config.selfprod.modeboost")}:</span>
+	</div>
+	{/if}
 </div>
 {/if}
 {#if $status_store.shaper}
