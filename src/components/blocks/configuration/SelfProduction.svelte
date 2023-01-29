@@ -58,7 +58,7 @@
 
 			// backup  & restore old settings to/from local storage
 			$uisettings_store.mqtt_grid_ie = formdata.mqtt_grid_ie.val
-			formdata.mqtt_solar = $uisettings_store.mqtt_solar
+			formdata.mqtt_solar.val = $uisettings_store.mqtt_solar
 
 			formdata.mqtt_grid_ie.val = ""
 			formdata.mqtt_grid_ie.req = false
@@ -68,7 +68,7 @@
 
 			// backup & restore old settings to/from local storage
 			$uisettings_store.mqtt_solar = formdata.mqtt_solar.val
-			formdata.mqtt_grid_ie = $uisettings_store.mqtt_grid_ie
+			formdata.mqtt_grid_ie.val = $uisettings_store.mqtt_grid_ie
 
 			formdata.mqtt_solar.val = ""
 			formdata.mqtt_solar.req = false
