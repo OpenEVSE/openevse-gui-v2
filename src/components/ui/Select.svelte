@@ -69,7 +69,7 @@
 				{:else if status=="ok"}
 				<iconify-icon class="has-text-primary" icon="fa6-solid:check"></iconify-icon>
 				{:else if status=="error"}
-				<iconify-icon class="has-text-primary" icon="fa6-solid:xmark"></iconify-icon>
+				<iconify-icon class="has-text-danger" icon="fa6-solid:xmark"></iconify-icon>
 				{/if}
 			{/key}
 		</span>

@@ -10,7 +10,9 @@
 	import {EvseClients} 			from "./../../../lib/vars.js"
 	import {claims_target_store}	from "./../../../lib/stores/claims_target.js"
 	import {onMount} 				from 'svelte'
-	import {httpAPI, clientid2name}	from './../../../lib/utils.js'
+	import {httpAPI,
+			clientid2name,
+			rapiCmd}				from './../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
 	import Box 						from "./../../ui/Box.svelte"
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
@@ -25,6 +27,8 @@
 	let button_divert
 	let button_shaper
 	let waiting = false
+	let time_lmt_status = ""
+	let charge_lmt_status = ""
 
 	async function setChgCurrent(val) {
 		if ($uistates_store.charge_current == val)
@@ -176,6 +180,46 @@
 			$uistates_store.divertmode = val		
 	}
 
+	async function time_limit(limit = null) {
+		let cmd
+		if (limit) {
+			cmd = "$S3 " + limit
+		}
+		else {
+			cmd = "$G3"
+		}
+		limit?time_lmt_status = "loading":null
+		const res = await rapiCmd(cmd)
+			if (res.ok) {
+				$uistates_store.time_lmt = parseInt(res.val)
+				limit?time_lmt_status = "ok":null
+			}
+			else {
+				$uistates_store.time_lmt = 0
+				limit?time_lmt_status = "error":null
+			}
+	}
+
+	async function charge_limit(limit = null) {
+		let cmd
+		if (limit) {
+			cmd = "$SH " + limit
+		}
+		else {
+			cmd = "$GH"
+		}
+		limit?charge_lmt_status = "loading":null
+		const res = await rapiCmd(cmd)
+			if (res.ok) {
+				$uistates_store.charge_lmt = parseInt(res.val)
+				limit?charge_lmt_status = "ok":null
+			}
+			else {
+				$uistates_store.charge_lmt = 0
+				limit?charge_lmt_status = "error":null
+			}
+	}
+
 	async function removeProp(prop,tag) {
 		tag.state = "loading"
 		let client = $claims_target_store.claims[prop]
@@ -197,6 +241,9 @@
 	onMount( () => {
 		$uistates_store.manual_override = $status_store.manual_override
 		set_uistates_charge_current()
+		//get limits
+		time_limit()
+		charge_limit()
 	})
 
 
@@ -243,10 +290,20 @@ $: set_uistates_divertmode($status_store.divertmode)
 		</div>
 	
 		<div class="is-flex is-justify-content-center is-align-content pt-2 mb-2">
-			<SelectTimeLmt title={$_("charge-time-lmt")} bind:value={$uistates_store.time_lmt} disabled={true}/>
-			<SelectChargeLmt title={$_("charge-energy-lmt")} bind:value={$uistates_store.charge_lmt} disabled={true}/>
-			<!-- <SelectTimeLmt title="Time Limit" bind:value={$uistates_store.time_lmt} disabled={$uistates_store.charge_lmt!=0?true:false}/>
-			<SelectChargeLmt title="Energy Limit" bind:value={$uistates_store.charge_lmt} disabled={$uistates_store.time_lmt!=0?true:false}/>	 -->
+			<!-- <SelectTimeLmt title={$_("charge-time-lmt")} bind:value={$uistates_store.time_lmt} disabled={true}/>
+			<SelectChargeLmt title={$_("charge-energy-lmt")} bind:value={$uistates_store.charge_lmt} disabled={true}/> -->
+			<SelectTimeLmt 
+				title="Time Limit"
+				 bind:value={$uistates_store.time_lmt}
+				 bind:status={time_lmt_status}
+				 onChange={()=>time_limit($uistates_store.time_lmt)}
+				disabled={$uistates_store.charge_lmt!=0?true:false}/>
+			<SelectChargeLmt 
+				title="Energy Limit" 
+				bind:value={$uistates_store.charge_lmt} 
+				bind:status={charge_lmt_status}
+				onChange={()=>charge_limit($uistates_store.charge_lmt)}
+				disabled={$uistates_store.time_lmt!=0?true:false}/>	
 		</div>
 		<!-- <div class="is-flex is-justify-content-left mt-2">
 			<Switch name="swAutoRelease" label="Clear on disconnect" bind:checked={$uisettings_store.auto_release} 
