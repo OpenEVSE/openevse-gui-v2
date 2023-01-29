@@ -191,7 +191,8 @@
 		limit?time_lmt_status = "loading":null
 		const res = await rapiCmd(cmd)
 			if (res.ok) {
-				$uistates_store.time_lmt = parseInt(res.val)
+				if (res.val)
+					$uistates_store.time_lmt = parseInt(res.val)
 				limit?time_lmt_status = "ok":null
 			}
 			else {
@@ -211,7 +212,8 @@
 		limit?charge_lmt_status = "loading":null
 		const res = await rapiCmd(cmd)
 			if (res.ok) {
-				$uistates_store.charge_lmt = parseInt(res.val)
+				if (res.val)
+					$uistates_store.charge_lmt = parseInt(res.val)
 				limit?charge_lmt_status = "ok":null
 			}
 			else {
