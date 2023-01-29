@@ -28,6 +28,8 @@
 	let show = false
 	let typecss = "text"
 	let timeout
+	const hiddenpass = "••••••••••"
+
 	onMount(() => {
 		typecss = type
 	})
@@ -89,7 +91,7 @@
 				{/if}
 			</span>
 		</div>	
-		{#if type=="password"}
+		{#if type=="password" && value != hiddenpass}
 		<div class="mt-1 mx-3 {disabled?"has-text-grey-light":""}">
 			<label class="checkbox">
 				<input type="checkbox" bind:checked={show} {disabled}>
