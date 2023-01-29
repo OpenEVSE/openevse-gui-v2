@@ -1,7 +1,13 @@
 <script>
+	import Select from "./Select.svelte";
+
 	export let value = 0
 	export let disabled=false
     export let title
+    export let status = ""
+    export let onChange = (val)=>{}
+
+
 	let options = [
     { name: "none", value: 0 },
     { name: "1 kWh", value: 1 },
@@ -28,15 +34,17 @@
     { name: "80 kWh", value: 80 },
     { name: "90 kWh", value: 90 }
     ];
+
+
 </script>
 
 <div class="mx-2 is-flex is-align-items-center is-flex-direction-column">
 	<div class="has-text-weight-bold has-text-centered has-text-info">{title}</div>
-	<div class="select is-info">		
-		<select bind:value disabled={disabled}>
-			{#each options as option}
-			<option value={option.value}>{option.name}</option>
-			{/each}	
-		</select>
-	</div>
+    <Select 
+    bind:value
+    bind:status
+    {disabled}
+    items={options} 
+    onChange={onChange}
+    />
 </div>
