@@ -212,7 +212,7 @@ export function state2icon(state) {
 			break
 		case 1: 
 			icon.type = "mdi:car-off"
-			icon.color = "has-text-danger"
+			icon.color = "has-text-primary"
 			break
 		case 2:
 			icon.type = "mdi:car"

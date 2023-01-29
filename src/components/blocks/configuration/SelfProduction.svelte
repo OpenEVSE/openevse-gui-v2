@@ -47,7 +47,6 @@
 		if (formdata.divert_enabled.val) {
 			formdata.charge_mode.val = "eco"
 		}
-		// await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-", input: formdata.divert_enabled.input})
 		await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
 	}
 	let setProperty = async (prop) => {
