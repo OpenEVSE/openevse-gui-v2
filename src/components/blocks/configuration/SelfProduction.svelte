@@ -21,6 +21,7 @@
 
 	let formdata = {
 		divert_enabled:	  				{val: false,	input: undefined, status: "", req: false},
+		charge_mode:					{val: "eco",	input: undefined, status: "", req: false},
 		mqtt_solar: 	  				{val: "",		input: undefined, status: "", req: false},
 		mqtt_grid_ie: 	  				{val: "",		input: undefined, status: "", req: false},
 		divert_PV_ratio:  				{val: "",		input: undefined, status: "", req: true},
@@ -31,6 +32,7 @@
 
 	const updateFormData = () => {
 		formdata.divert_enabled.val 			 	= $config_store.divert_enabled
+		formdata.charge_mode.val					= $config_store.charge_mode
 		formdata.mqtt_solar.val						= $config_store.mqtt_solar
 		formdata.mqtt_solar.req 					= $uistates_store.divert_type?true:false
 		formdata.mqtt_grid_ie.val					= $config_store.mqtt_grid_ie
@@ -42,6 +44,9 @@
 	}
 
 	let toggleDivert = async () => {
+		if (formdata.divert_enabled.val) {
+			formdata.charge_mode.val = "eco"
+		}
 		// await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-", input: formdata.divert_enabled.input})
 		await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
 	}
