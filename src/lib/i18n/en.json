@@ -329,6 +329,7 @@
 			"production": "Production",
 			"excess": "Excess Power",
 			"grid": "Grid +Import/-Export",
+			"modeboost": "Boost mode, Divert disabled",
 			"availablecur": "Available Current",
 			"smoothedcur": "Smoothed Current",
 			"lastupdated": "Last updated",

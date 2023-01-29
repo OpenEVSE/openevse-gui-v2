@@ -1,4 +1,5 @@
 <script>
+	import { uisettings_store } from "./../../../lib/stores/uisettings.js";
 	import Borders from "./../../ui/Borders.svelte";
 	import { onMount }		  from "svelte";
 	import { _ } 			  from 'svelte-i18n'
@@ -50,11 +51,21 @@
 
 	let setDivertMode = async () => {
 		if ($uistates_store.divert_type == 0) {
+
+			// backup  & restore old settings to/from local storage
+			$uisettings_store.mqtt_grid_ie = formdata.mqtt_grid_ie.val
+			formdata.mqtt_solar = $uisettings_store.mqtt_solar
+
 			formdata.mqtt_grid_ie.val = ""
 			formdata.mqtt_grid_ie.req = false
 			formdata.mqtt_solar.req = true
 		}
 		else {
+
+			// backup & restore old settings to/from local storage
+			$uisettings_store.mqtt_solar = formdata.mqtt_solar.val
+			formdata.mqtt_grid_ie = $uisettings_store.mqtt_grid_ie
+
 			formdata.mqtt_solar.val = ""
 			formdata.mqtt_solar.req = false
 			formdata.mqtt_grid_ie.req = true
@@ -124,14 +135,20 @@
 								<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
 							</div>
 							{/if}
+							{#if $status_store.divertmode == 2}
 							<div class="mr-2">
 								<span>{$_("config.selfprod.availablecur")}:</span>
-								<span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
+								<span class="{$status_store.charge_rate < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
 							</div>
 							<div class="mr-2" class:is-hidden={!$status_store.smoothed_available_current}>
 								<span>{$_("config.selfprod.smoothedcur")}:</span>
 								<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
 							</div>
+							{:else if $status_store.divertmode == 1}
+							<div class="mr-2">
+								<span class="has-text-info">{$_("config.selfprod.modeboost")}:</span>
+							</div>
+							{/if}
 							<div class="mr-2">
 								<span class="has-text-weight-bold  is-size-7">{$_("config.selfprod.lastupdated")}:</span>
 								<span class="is-size-7 {$status_store.divert_update > 60?"has-text-danger":$status_store.divert_update <= 15?"has-text-primary":"has-text-orange"}">{$divertelapsed}</span>
