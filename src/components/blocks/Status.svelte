@@ -79,7 +79,7 @@
 				<StatusTile title={$_("status-tile-current")} value={$status_store.amp/1000} precision={1} unit={$_("units.A")} />
 				{#if $uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini"}
 				<!-- // Desktop & Tablet only -->
-				<StatusTile title={$_("status-tile-power")} value={($status_store.amp/1000) * $status_store.voltage * $config_store.is_threephase?3:1} unit={$_("units.W")} />
+				<StatusTile title={$_("status-tile-power")} value={$uistates_store.power} unit={$_("units.W")} />
 				{/if}
 				{#if $uistates_store.breakpoint == "desktop"}
 				<!-- // Desktop only -->

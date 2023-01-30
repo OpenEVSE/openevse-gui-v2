@@ -178,6 +178,13 @@
 		}
 	}
 
+	function refreshPower(amp) {
+		let pwr = $uistates_store.power = (amp/1000) * $status_store.voltage
+		if ($config_store.is_threephase)
+			pwr = pwr * 3
+		$uistates_store.power = pwr
+	}
+
 	onMount(()=> {
 		getDivertMode($config_store.mqtt_grid_ie)
 	})
@@ -194,6 +201,7 @@
 	$: $status_store.divert_update,        countDivertUpdate()
 	$: $status_store.vehicle_state_update, countVehicleUpdate()
 	$: $status_store.rfid_waitin, 		   countRFIDScan()
+	$: refreshPower				($status_store.amp) 
 	
 
 </script>
