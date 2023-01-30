@@ -101,7 +101,8 @@
 		"ocpp": "ocpp",
 		"rfid": "rfid",
 		"mqtt":"mqtt",
-		"shaper":"shaper"
+		"shaper":"shaper",
+		"limit": "limit"
 	},
 	"units": {
 		"kwh": "kwh",

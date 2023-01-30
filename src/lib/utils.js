@@ -164,6 +164,9 @@ export function clientid2name(id) {
 		case EvseClients["shaper"].id:
 			name = "shaper"
 			break;
+		case EvseClients["limit"].id:
+			name = "limit"
+			break;
 	}
 	return name
 
