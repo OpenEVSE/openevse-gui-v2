@@ -1,7 +1,11 @@
 import { writable }         from 'svelte/store'
 import {httpAPI}            from '../utils.js'
 
-let model = { type: "none", value: 0}
+let model = { 
+    type: "none",
+    value: 0, 
+    auto_release: true
+}
 
 function createLimitStore() {
     const P  = writable(model)
@@ -30,8 +34,10 @@ function createLimitStore() {
 
     async function remove(id) {
         let res = await httpAPI("DELETE", "/limit")
-        if (res.msg == "done")
+        if (res.msg == "done") {
+            P.update(()=>model)
             return true
+        }
         else return false
     }
 

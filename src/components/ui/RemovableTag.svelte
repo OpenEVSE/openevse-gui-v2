@@ -14,7 +14,7 @@
 	.item {
 		position: absolute;
 		overflow:visible;
-		top: 45px;
+		bottom: 17px;
 	}
 
 	.tag.but {

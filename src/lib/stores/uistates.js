@@ -14,6 +14,7 @@ const model = {
 		override_version: 0,
 		schedule_version: 0,
 		schedule_plan_version: 0,
+		limit_version: 0,
 		logidx_min: 0,
 		logidx_max: 0,
 		// (todo) derived from other stores

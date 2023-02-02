@@ -70,7 +70,7 @@
 
 </style>
 
-<div class:is-hidden={!visible} bind:this={contentbox} class="contentbox is-flex is-flex-direction-column" in:scale="{{ delay: 0, duration: 600, easing: expoInOut }}" >
+<div class:is-hidden={!visible} bind:this={contentbox} class="	contentbox is-flex is-flex-direction-column" in:scale="{{ delay: 0, duration: 600, easing: expoInOut }}" >
 	<div class="is-flex is-align-items-center">
 		<div class:is-hidden={!has_help} class="help m-0 p-0">
 			<Help>

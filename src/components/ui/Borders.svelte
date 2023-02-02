@@ -10,8 +10,10 @@
 		position: relative;
 		border-radius: 10px;
 		border: 1px solid rgb(50, 179, 212);
-		max-width: 90%;
+		/* max-width: 90%; */
 		min-width: 200px;
+		height:fit-content;
+		box-sizing: content-box;
 	}
 
 	.help {
@@ -24,7 +26,7 @@
 
 </style>
 
-<div class="borders mb-2 p-2 has-text-centered {classes} {grow?"is-flex-grow-1 is-flex-shrink-0":""}" >
+<div class="borders my-2 p-2 has-text-centered {classes} {grow?"is-flex-grow-1 is-flex-shrink-0":"is-flex-shrink-0"}">
 	<div class:is-hidden={!has_help} class="help m-0 p-0">
 		<Help>
 		<slot name="help"></slot>

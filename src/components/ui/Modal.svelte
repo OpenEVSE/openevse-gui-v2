@@ -2,6 +2,7 @@
 	import {onMount, onDestroy} from "svelte"
 	export let is_opened = false
 	export let canClose = true
+	export let fit = false
 
 	onMount (disablescroll)
 	onDestroy (enablescroll)
@@ -42,12 +43,26 @@
 		transform:translate(-50%,-50%);
 		width: 100vw;
 		height: 100%;
+		z-index: 10;
+		
 	}
-	
+	.modal-content {
+		margin-left: auto;
+		margin-right: auto;
+		overflow: hidden;
+		z-index: 10;
+		max-width: 100%;
+	}
+	.modal-content.fit {
+		width:fit-content;
+	}
+	.modal-background {
+		z-index: 10;;
+	}
 </style>
-<div class="modal" class:is-active={is_opened}>
+<div class="modal" class:is-hidden={!is_opened} class:is-active={is_opened}>
 	<div class="modal-background" on:click={closeModal} on:keypress={closeModal}></div>
-	<div class="modal-content p-3">
+	<div class="modal-content {fit?"fit ":""} ">
 		<slot>
 		</slot>
 	</div>

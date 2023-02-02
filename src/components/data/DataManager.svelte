@@ -1,4 +1,5 @@
 <script>
+	import { limit_store } from "./../../lib/stores/limit.js";
 	import { uisettings_store } from "./../../lib/stores/uisettings.js";
 	import "hacktimer/HackTimer.js"
 	import {EvseClients} 				from  "./../../lib/vars.js"
@@ -22,6 +23,7 @@
 	let refresh_target = false
 	let refresh_override = false
 	let refresh_plan = false
+	let refresh_limit = false
 
 	onMount(()=> {
 		getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
@@ -102,6 +104,27 @@
 	export async function refreshStatusStore() {
 		const res = await serialQueue.add(status_store.download)
 		return res
+	}
+
+	export async function refreshLimitStore(version) {
+		if (refresh_limit)
+			return
+		if ($uistates_store.limit_version != version) {
+			if ($status_store.limit) {
+				refresh_limit = true
+				const res = await serialQueue.add(limit_store.download)
+				refresh_limit = false
+				if (res) {
+					$uistates_store.limit_version = version
+					return res
+				}
+					
+				else return false
+			}
+			else $uistates_store.limit_version = version
+		}
+		else return true
+		
 	}
 
 	export function refreshUIState(store) {
@@ -195,6 +218,7 @@
 	$: refreshPlanStore			($status_store.schedule_plan_version)
 	$: refreshClaimsTargetStore	($status_store.claims_version)
 	$: refreshOverrideStore     ($status_store.override_version)
+	$: refreshLimitStore		($status_store.limit_version)
 	$: refreshDateTime			($status_store.time, $config_store?.time_zone)
 	$: refreshUIState			($status_store)
 	$: refreshLocale			($config_store.lang)
