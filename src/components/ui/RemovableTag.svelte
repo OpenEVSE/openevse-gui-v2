@@ -12,9 +12,10 @@
 </script>
 <style>
 	.item {
-		position: absolute;
+		/* position: absolute; */
 		overflow:visible;
-		bottom: 17px;
+		/* bottom: -2px; */
+		/* left: -8px; */
 	}
 
 	.tag.but {
@@ -34,7 +35,7 @@
 </style>
 <svelte:options accessors />
 <div class="tags has-addons is-flex is-justify-content-center is-align-items-center {client?"item":""}" >
-	<div class="tag name is-flex is-flex-grow-1 is-flex-shrink-0 {color} has-text-weight-semibold m-0" >
+	<div class="tag name is-flex is-flex-grow-1 is-flex-shrink-0 {color} has-text-weight-semibold m-0 is-capitalized" >
 		{#if client}
 		<iconify-icon class="mr-1" icon={displayIcon(clientid2name(client))}></iconify-icon>
 		{clientid2name(client)}

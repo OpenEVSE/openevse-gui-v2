@@ -125,18 +125,18 @@
 	{#if formdata.rfid_enabled.val}
 	<div class="columns is-centered m-0 p-0">
 		<div class="column is-two-thirds m-0 pb-1">
-			<div class=" is-flex is-justify-content-center">
+			<div class=" is-flex is-justify-content-center has-text-dark">
 				<Borders grow>
 					<div class="has-text-centered pb-2">
-						<div class="has-text-weight-bold mb-4">{$_("config.rfid.managetag")}</div>
+						<div class="has-text-weight-bold mb-4 has-text-dark">{$_("config.rfid.managetag")}</div>
 						<Button name={$status_store.rfid_waiting>0?$status_store.rfid_waiting:$_("config.rfid.scan")} butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
 						<!-- <div class="tag is-info {$uistates_store.rfidscan_update>0?"":"is-hidden"}">{$uistates_store.rfidscan_update}</div> -->
 						{#if $status_store.rfid_waiting > 0}
-						<div class="mt-2 has-text-weight-bold">{$_("config.rfid.placetag")}
+						<div class="mt-2 has-text-weight-bold has-text-dark">{$_("config.rfid.placetag")}
 						</div>
 						{/if}
 						{#if $status_store.rfid_input}
-						<div class="mt-2 has-text-weight-bold">{$_("config.rfid.scansuccess")}</div>
+						<div class="mt-2 has-text-weight-bold has-text-dark">{$_("config.rfid.scansuccess")}</div>
 						<div class="has-text-weight-bold my-2 has-text-info">UID: {$status_store.rfid_input}</div>
 						{#if tags.find($status_store.rfid_input)}
 						<div>{$_("config.rfid.tagregistered")}</div>

@@ -6,12 +6,12 @@
 	export let tooltip = ""
 	export let color = "is-info"
 	export let icon = null
-	export let size = 5
+	export let size = 20
 	export let color2 = "is-info"
 	export let icon2 = null
-	export let size2 = 5
+	export let size2 = 20
 	export let action = () => {}
-	export let button
+	export let button = null
 	export let breakpoint = "mobile"
 	export let visible = true
 	export let disabled = false
@@ -37,9 +37,9 @@
 				{/if}
 			{:else}
 				{#if hovered}
-				<iconify-icon icon={state?icon:icon2}  style={state?"font-size: " + round(size*1.2) + "px;":"font-size: " + round(size2*1.2) + "px;" }></iconify-icon>
+				<iconify-icon icon={state?icon:icon2}  style={"font-size: " + round(size2*1.2) +"px;"}></iconify-icon>
 				{:else}
-				<iconify-icon icon={state?icon:icon2}  style={state?"font-size: " + size + "px;":"font-size: " + size2 + "px;" }></iconify-icon>
+				<iconify-icon icon={state?icon:icon2}  style={"font-size: " + size2 + "px;" }></iconify-icon>
 				{/if}
 			{/if}
 		</div>

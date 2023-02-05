@@ -31,19 +31,23 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+	.label {
+		position: relative;
+		top: 25px;
+	}
 
 </style>
 
-<div class="sliderform">
+<div class="sliderform is-unselectable" >
 	{#if label}
-	<div class="has-text-centered has-text-weight-bold has-text-info">{label}</div>
+	<div class="label has-text-weight-bold has-text-info" >{label}</div>
 	{/if}
-	<div class="is-flex has-text-info is-flex-direction-row my-0 mx-0 py-0">
+	<div class="is-flex has-text-info is-flex-direction-row" >
 		{#if icon}
 		<iconify-icon class="mt-4 mr-3" icon={icon} style="font-size: 25px"></iconify-icon>
 
 		{/if}
-		<div class="is-flex-grow-1 is-flex-shrink-0" on:mouseenter={togglecolor} on:mouseleave={togglecolor} >			
+		<div class="is-flex-grow-1 is-flex-shrink-1" on:mouseenter={togglecolor} on:mouseleave={togglecolor} >			
 			<input class="slider is-fullwidth is-medium has-tooltip-arrow {hover||focus?'is-info':''}" 
 				data-tooltip={tooltip==""?null:tooltip} 
 				step={step?step:1} 

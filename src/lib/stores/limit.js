@@ -41,11 +41,17 @@ function createLimitStore() {
         else return false
     }
 
+    function reset() {
+        P.update(()=>model)
+        return true
+    }
+
     return {
         subscribe,
         set,
         update,
         download,
+        reset,
         remove: (id) => remove(id),
         upload: (data) => upload(data)
     }

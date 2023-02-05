@@ -59,7 +59,7 @@
 				charging = false
 				color = "is-danger"
 				iconcolor = "has-text-white"
-				icon = "fa6-solid:triangle-exclamation"
+				icon = "fluent:shield-error-24-filled"
 				break;
 			case 254: // sleeping
 				status = "disabled"

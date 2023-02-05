@@ -1,7 +1,7 @@
 <script>
-	import { limit_store } from "./../../lib/stores/limit.js";
-	import { uisettings_store } from "./../../lib/stores/uisettings.js";
-	import "hacktimer/HackTimer.js"
+	// import { derived} 				    from "svelte/store"
+	import { limit_store } 				from "./../../lib/stores/limit.js";
+	import { uisettings_store } 		from "./../../lib/stores/uisettings.js";
 	import {EvseClients} 				from  "./../../lib/vars.js"
 	import { uistates_store }			from "./../../lib/stores/uistates.js"
 	import { status_store }				from "./../../lib/stores/status.js"
@@ -14,6 +14,7 @@
 	import { serialQueue } 				from "./../../lib/queue.js";
 	import {onMount} 					from "svelte"
 	import { locale }					from 'svelte-i18n'
+	import "hacktimer/HackTimer.js"
 
 	let counter_divert_update
 	let counter_vehicle_update
@@ -119,9 +120,14 @@
 					return res
 				}
 					
-				else return false
+				else {
+					return false
+				} 
 			}
-			else $uistates_store.limit_version = version
+			else {
+				limit_store.reset()
+				$uistates_store.limit_version = version
+			}
 		}
 		else return true
 		

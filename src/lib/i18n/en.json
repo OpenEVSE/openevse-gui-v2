@@ -9,6 +9,7 @@
 	"state": "State",
 	"save": "Save",
 	"update": "Update",
+	"new": "New",
 	"close": "Close",
 	"cancel": "Cancel",
 	"back": "Back",
@@ -112,6 +113,24 @@
 		"km": "km",
 		"miles": "miles",
 		"C": "°C"
+	},
+	"limits": {
+		"limit": "LIMIT",
+		"system-limit": "SYSTEM LIMIT",
+		"set": "Set limit",
+		"hours": "hours",
+		"minutes": "minutes",
+		"input-energy": "Nb of kWh",
+		"input-soc": "Battery",
+		"input-range": "Range",
+		"left": "Left",
+		"type": {
+			"none": "None",
+			"time": "Time",
+			"energy": "Energy",
+			"soc": "Battery",
+			"range": "Range"
+		}
 	},
 	"monitoring-title": "monitoring",
 	"monitoring-tab-data": "Data",
@@ -231,7 +250,7 @@
 		"evse": {
 			"maxcur": "Max Current",
 			"random": "Scheduler Random start adjust",
-			"random-help": "<p>The maximum number of seconds to randomly add/subtract from the a scheduled charge start time, eg a value of 600 will adjust the start time my +/- 10 minutes. This is to help prevent large syncronised loads when multiple verhicles start charging at the same time.</p>",
+			"random-help": "<p>The maximum number of seconds to randomly add/subtract from the a scheduled charge start time, eg a value of 600 will adjust the start time my +/- 10 minutes. This is to help prevent large syncronised loads when multiple vehicles start charging at the same time.</p>",
 			"pause-help": "<p>Some vehicles will shutdown if left in sleep mode (pilot signal enable) and can not be woken up thereafter by the charger.</p><br><p>Changing the pause state to disable should resolve this issue.<br>However this removes the ability for the charger to detect if a vehicle is connected when paused.</p>",
 			"seconds": "seconds",
 			"service": "Service Level",

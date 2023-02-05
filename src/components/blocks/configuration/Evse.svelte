@@ -1,4 +1,5 @@
 <script>
+	import Limit from "./../main/Limit.svelte";
 	import { onMount } from "svelte";
 	import { _ } 			 	 from 'svelte-i18n'
 	import Borders 				 from "./../../ui/Borders.svelte";
@@ -59,7 +60,7 @@
 		<div class="column is-two-thirds">
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
-					<div class="has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>
+					<div class="is-uppercase has-text-info has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>
 					<SliderForm icon="fa6-solid:gauge-high" 
 						bind:value={formdata.max_current_soft.val} 
 						unit={$_("units.A")} 
@@ -69,10 +70,13 @@
 					/>
 				</Borders>
 			</div>
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Limit is_admin={true}/>
+			</div>
 			{#if $config_store.is_threephase !== 'undefined'}
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
-					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.threephase")}</div>
+					<div class="is-uppercase has-text-info has-text-weight-bold is-size-6 mb-3">{$_("config.evse.threephase")}</div>
 					<Select 
 						bind:this={formdata.is_threephase.input}
 						bind:value={formdata.is_threephase.val} 
@@ -88,7 +92,7 @@
 					<div slot="help">
 						{@html $_("config.evse.random-help")}
 					</div>
-					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.random")}</div>
+					<div class="is-uppercase has-text-info has-text-weight-bold is-size-6 mb-3">{$_("config.evse.random")}</div>
 					<div class="is-flex is-justify-content-center is-align-items-center">
 						<div class="inputbox">	
 							<InputForm 
@@ -105,7 +109,7 @@
 			</div>
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
-					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.service")}</div>
+					<div class="is-uppercase has-text-info has-text-weight-bold is-size-6 mb-3">{$_("config.evse.service")}</div>
 					<Select 
 						bind:this={formdata.service.input}
 						bind:value={formdata.service.val} 
@@ -120,7 +124,7 @@
 					<div slot="help">
 						{@html $_("config.evse.pause-help")}
 					</div>
-					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.pause")}</div>
+					<div class="is-uppercase has-text-info has-text-weight-bold is-size-6 mb-3">{$_("config.evse.pause")}</div>
 					<Switch 
 						name="pausemode" 
 						label="{formdata.pause_uses_disabled.val?"Disable":"Sleep"}" 
@@ -131,9 +135,9 @@
 					/>
 				</Borders>
 			</div>
-			<div class="mt-1 is-flex is-justify-content-center" >
+			<div class="mt-1 is-flex has-text-info is-justify-content-center " >
 				<Borders grow={true}>
-					<div class="has-text-weight-bold is-size-6">{$_("config.evse.led-bn")}</div>
+					<div class="is-uppercase has-text-info has-text-weight-bold is-size-6 mb-3">{$_("config.evse.led-bn")}</div>
 					<SliderForm 
 						icon="ic:outline-light-mode" 
 						bind:value={formdata.led_brightness.val} 
@@ -143,9 +147,9 @@
 				</Borders>
 			</div>
 
-			<div class="mt-1 is-flex is-justify-content-center" >
+			<div class="mt-1 is-flex has-text-info is-justify-content-center" >
 				<Borders grow={true}>
-					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.sensorscale")}</div>
+					<div class="is-uppercase has-text-info has-text-weight-bold is-size-6 mb-3">{$_("config.evse.sensorscale")}</div>
 					<InputForm 
 						disabled is_inline type="number" 
 						bind:this={formdata.scale.input}
@@ -156,9 +160,9 @@
 				</Borders>
 			</div>
 
-			<div class="mt-1 is-flex is-justify-content-center" >
+			<div class="mt-1 is-flex has-text-info is-justify-content-center" >
 				<Borders grow={true}>
-					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.sensoroffset")}</div>
+					<div class="is-uppercase has-text-info has-text-weight-bold is-size-6 mb-3">{$_("config.evse.sensoroffset")}</div>
 					<InputForm 
 						disabled is_inline type="number" 
 						bind:this={formdata.offset.input}

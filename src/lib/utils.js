@@ -227,37 +227,36 @@ export function state2icon(state) {
 			break
 		// Errors
 		case 4: 
-			icon.type = "fa6-solid:bolt"
-			icon.color = "has-text-warning"
+			icon.type = "fluent:shield-error-24-filled"
+			icon.color = "has-text-danger"
 			break
 
 		case 5:
-			icon.type = "fa6-solid:bolt"
-			icon.color = "has-text-warning"
+			icon.type = "fluent:shield-error-24-filled"
+			icon.color = "has-text-danger"
 			break
-
 		case 6:
-			icon.type = "fa6-solid:bolt"
-			icon.color = "has-text-warning"
+			icon.type = "fluent:shield-error-24-filled"
+			icon.color = "has-text-danger"
 			break
 		case 7:
-			icon.type = "fa6-solid:bolt"
-			icon.color = "has-text-warning"
+			icon.type = "fluent:shield-error-24-filled"
+			icon.color = "has-text-danger"
 			break
 		case 8:
-			icon.type = "fa6-solid:bolt"
-			icon.color = "has-text-warning"
+			icon.type = "fluent:shield-error-24-filled"
+			icon.color = "has-text-danger"
 			break
 		case 9:
-			icon.type = "fa6-solid:bolt"
-			icon.color = "has-text-warning"
+			icon.type = "fluent:shield-error-24-filled"
+			icon.color = "has-text-danger"
 			break
 		case 10:
-			icon.type = "fa6-solid:bolt"
-			icon.color = "has-text-warning"
+			icon.type = "fluent:shield-error-24-filled"
+			icon.color = "has-text-danger"
 			break
 		case 11:
-			icon.type = "fa6-solid:triangle-exclamation"
+			icon.type = "fluent:shield-error-24-filled"
 			icon.color = "has-text-danger"
 			break;
 		case 254: // sleeping
@@ -266,7 +265,7 @@ export function state2icon(state) {
 			break;
 		case 255: 
 			icon.color = "has-text-danger"
-			icon.type = "fa6-solid:circle-xmark"
+			icon.type = "fa6-solid:ban"
 			break;
 	}
 	return icon

@@ -10,7 +10,7 @@
 		position: relative;
 		border-radius: 10px;
 		border: 1px solid rgb(50, 179, 212);
-		/* max-width: 90%; */
+		max-width: 90%;
 		min-width: 200px;
 		height:fit-content;
 		box-sizing: content-box;

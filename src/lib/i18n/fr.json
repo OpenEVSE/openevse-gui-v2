@@ -9,6 +9,7 @@
   "state": "State",
   "save": "Sauvegarder",
   "update": "Actualiser",
+  "new": "Nouveau",
   "close": "Fermer",
   "cancel": "Annuler",
   "back": "Retour",
@@ -112,6 +113,24 @@
     "miles": "miles",
     "C": "°C"
   },
+  "limits": {
+		"limit": "LIMITE",
+    "system-limit": "LIMITE SYSTÈME",
+    "set": "Ajouter la limite",
+		"hours": "heures",
+		"minutes": "minutes",
+		"input-energy": "Nb de kWh",
+    "input-soc": "Batterie",
+		"input-range": "Autonomie",
+    "left": "Restant",
+    "type": {
+			"none": "Aucune",
+			"time": "Temps",
+      "energy": "Energie",
+			"soc": "Batterie",
+			"range": "Autonomie"
+		}
+	},
   "monitoring-title": "supervision",
   "monitoring-tab-data": "Data",
   "monitoring-tab-sensors": "Capteurs",

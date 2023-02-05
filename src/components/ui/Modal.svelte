@@ -43,21 +43,18 @@
 		transform:translate(-50%,-50%);
 		width: 100vw;
 		height: 100%;
-		z-index: 10;
+		z-index: 8;
 		
 	}
 	.modal-content {
 		margin-left: auto;
 		margin-right: auto;
 		overflow: hidden;
-		z-index: 10;
-		max-width: 100%;
+		/* z-index: 8; */
+		max-width: 90%;
 	}
 	.modal-content.fit {
 		width:fit-content;
-	}
-	.modal-background {
-		z-index: 10;;
 	}
 </style>
 <div class="modal" class:is-hidden={!is_opened} class:is-active={is_opened}>

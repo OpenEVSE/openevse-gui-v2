@@ -99,34 +99,36 @@
 			<form on:submit|preventDefault>
 				<div class="my-1 is-flex is-justify-content-center" >
 					<Borders grow={true} classes="mb-4">
-						<div class="has-text-centered">
-							<div class="is-inline-block">
-								<div class="has-text-weight-bold">{$_("config.mqtt.proto")}</div>
+						<div class="has-text-centered is-inline-block">
+							<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly">
 								<Select 
 									items={protocols} 
+									title={$_("config.mqtt.proto")}
 									bind:this={formdata.mqtt_protocol.input}
 									bind:value={formdata.mqtt_protocol.val}
 									bind:status={formdata.mqtt_protocol.status} 
 									onChange={()=> setProperty("mqtt_protocol")}/>
+							
+								<InputForm
+									is_inline size={16} 
+									title="{$_("config.mqtt.host")}*" 
+									placeholder="server IP / Hostname" 
+									bind:this={formdata.mqtt_server.input}
+									bind:value={formdata.mqtt_server.val} 
+									bind:status={formdata.mqtt_server.status} 
+									onChange={()=>setProperty("mqtt_server")}
+								/>
+								<InputForm
+									is_inline size={10} 
+									title="{$_("config.mqtt.port")}*" 
+									placeholder="1883" type="number" 
+									bind:this={formdata.mqtt_port.input}
+									bind:value={formdata.mqtt_port.val} 
+									bind:status={formdata.mqtt_port.status} 
+									onChange={()=>setProperty("mqtt_port")} 
+								/>
 							</div>
-							<InputForm
-								is_inline size={16} 
-								title="{$_("config.mqtt.host")}*" 
-								placeholder="server IP / Hostname" 
-								bind:this={formdata.mqtt_server.input}
-								bind:value={formdata.mqtt_server.val} 
-								bind:status={formdata.mqtt_server.status} 
-								onChange={()=>setProperty("mqtt_server")}
-							/>
-							<InputForm
-								is_inline size={10} 
-								title="{$_("config.mqtt.port")}*" 
-								placeholder="1883" type="number" 
-								bind:this={formdata.mqtt_port.input}
-								bind:value={formdata.mqtt_port.val} 
-								bind:status={formdata.mqtt_port.status} 
-								onChange={()=>setProperty("mqtt_port")} />
-							</div>
+						</div>
 						
 						
 						<div class="has-text-left mt-2">
@@ -175,8 +177,8 @@
 								bind:status={formdata.mqtt_topic.status} 
 								onChange={()=>setProperty("mqtt_topic")} 
 							/>
+							<div class="is-size-7 mb-2">{$_("config.mqtt.basetopic-desc")}</div>
 						</div>
-						<div class="is-size-7 mb-2">{$_("config.mqtt.basetopic-desc")}</div>
 						<div>
 							<InputForm 
 								title="{$_("config.mqtt.announcetopic")}" 
@@ -186,8 +188,9 @@
 								bind:status={formdata.mqtt_announce_topic.status} 
 								onChange={()=>setProperty("mqtt_announce_topic")} 
 							/>
+							<div class="is-size-7 mb-2">{$_("config.mqtt.announcetopic-desc")}</div>
 						</div>
-						<div class="is-size-7 mb-2">{$_("config.mqtt.announcetopic-desc")}</div>
+						
 						<div class="has-text-left">
 							<Switch 
 								name="mqttretain" 
@@ -208,10 +211,11 @@
 								bind:status={formdata.mqtt_vrms.status} 
 								onChange={()=>setProperty("mqtt_vrms")} 
 							/>
+							<div class="is-size-7">
+								{$_("config.mqtt.topic-voltage-desc")}
+							</div>
 						</div>
-						<div class="is-size-7">
-							{$_("config.mqtt.topic-voltage-desc")}
-						</div>
+
 					</Borders>	
 				</div>
 			</form>

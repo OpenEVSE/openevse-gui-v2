@@ -78,7 +78,7 @@
 
 		{#if name}
 			{#if state == ""}
-			<span class="{icon?"ml-1":""} is-capitalized">
+			<span class="{icon?"ml-1":""}">
 				{name}
 			</span>
 			{/if}

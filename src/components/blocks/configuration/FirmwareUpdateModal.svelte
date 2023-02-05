@@ -19,6 +19,7 @@
 
 	let file
 	let uploadButtonState = ""
+	let gitUpdateButtonState = ""
 	let fileSent = "no"
 	let timeout
 	let canClose = true
@@ -51,8 +52,12 @@
 			url: url
 		}
 		$status_store.ota_progress = 0
-		uploadButtonState = "loading"
-		await httpAPI("POST","/update",JSON.stringify(data))
+		gitUpdateButtonState = "loading"
+		let res = await serialQueue.add(()=>httpAPI("POST","/update",JSON.stringify(data)))
+		if (res)
+			gitUpdateButtonState = "ok"
+		else
+			gitUpdateButtonState = "error"
 	}
 
 	async function uploadFw() {
@@ -135,9 +140,26 @@
 							</td>
 							<td class="">
 								<div class="is-flex is-align-items-center is-flex-direction-row is-flex-wrap-wrap ">
-									<span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>
-									
-									<Button size="is-small" icon="fa6-solid:cloud-arrow-down" disabled={uploadButtonState == "loading"} name="{$_("config.firmware.upgrade2")} {update.version}" color="{$config_store.version != update.version ?"is-primary":"is-info	"}" butn_submit={()=>{updateToLatest(update.url)}} state={uploadButtonState}/>
+									<span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>						
+									<!-- <Button 
+										size="is-small" 
+										icon="fa6-solid:cloud-arrow-down" 
+										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
+										name="{$_("config.firmware.upgrade2")} {update.version}"
+										state={gitUpdateButtonState}
+										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
+										butn_submit={()=>{updateToLatest(update.url)}}
+									/> -->
+									<Button 
+										size="is-small" 
+										icon="fa6-solid:cloud-arrow-down" 
+										disabled={true} 
+										name="{$_("config.firmware.upgrade2")} {update.version}"
+										state={gitUpdateButtonState}
+										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
+										butn_submit={()=>{updateToLatest(update.url)}}
+										tooltip="Feature not implemented yet"
+									/>
 								</div>
 							
 							</td>
@@ -176,7 +198,14 @@
 			</div>
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-center">
-			<Button disabled={uploadButtonState == "loading"} name={$_("config.firmware.upload")} icon="fa6-solid:file-arrow-up" color="is-info" butn_submit={uploadFw} state={uploadButtonState} />
+			<Button 
+				disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
+				name={$_("config.firmware.upload")}
+				state={uploadButtonState}
+				icon="fa6-solid:file-arrow-up" 
+				color="is-info" 
+				butn_submit={uploadFw}
+			/>
 			<Button disabled={uploadButtonState == "loading"} name={$_("close")} color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{:else}

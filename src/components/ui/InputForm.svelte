@@ -76,7 +76,7 @@
 </style>
 <div class="mb-2 has-text-left {is_inline?"is-inline-block":""}">
 		{#if title}
-		<div class="has-text-weight-semibold {disabled?"has-text-grey-light":""}">{title}</div>
+		<div class="has-text-weight-semibold  {disabled?"has-text-grey-light":"has-text-info"}">{title}</div>
 		{/if}
 		<input {readonly} class="input is-info" type={typecss} placeholder={placeholder} value={value!=undefined?value:""} autocomplete="off" {maxlength} min={min} max={max}
 		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	style={size?"width: " + size + "ch;":null}>

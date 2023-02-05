@@ -1,4 +1,5 @@
 <script>
+	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 		    from 'svelte-i18n'
 	import { onMount }		from "svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
@@ -21,29 +22,34 @@
 		getMode()
 	})
 </script>
+<div class="columns is-centered">
+	<div class="column is-three-quarters is-full-mobile">
+		<div class="is-flex is-justify-content-center">
+			<Borders grow>
 
 
-<div>
-	<Select title={$_("config.vehicle.contype")} bind:value={mode} items={modes} />
-	{#if mode == 2}
-	<VechicleMQTT />
-	{:else if mode == 1}
-	<VehicleTesla />
-	{:else}
-	<div class="is-size-7 mt-1">{$_("config.vehicle.contype-desc")}</div>
-	<div class="block mt-5">
-		<h5>{$_("config.vehicle.httppush")}</h5>
-		{$_("config.vehicle.httppush-desc-1")}
-		<div class="has-text-weight-bold">http://&#123;OPENEVSE IP&#125;/status</div>
-		{$_("config.vehicle.httppush-desc-2")}<br>
-		<code>
-		&#123;<br>
-		  "battery_level": int, // SOC (%)<br>
-		  "battery_range": int, // Range (km/miles)<br>
-		  "time_to_full_charge": int // charge ETA (sec)<br>
-		  &#125;<br>
-		</code>
+					<Select title={$_("config.vehicle.contype")} bind:value={mode} items={modes} />
+					{#if mode == 2}
+					<VechicleMQTT />
+					{:else if mode == 1}
+					<VehicleTesla />
+					{:else}
+					<div class="is-size-7 mt-1">{$_("config.vehicle.contype-desc")}</div>
+					<div class="block mt-5">
+						<h5>{$_("config.vehicle.httppush")}</h5>
+						{$_("config.vehicle.httppush-desc-1")}
+						<div class="has-text-weight-bold">http://&#123;OPENEVSE IP&#125;/status</div>
+						{$_("config.vehicle.httppush-desc-2")}<br>
+						<code>
+						&#123;<br>
+						"battery_level": int, // SOC (%)<br>
+						"battery_range": int, // Range (km/miles)<br>
+						"time_to_full_charge": int // charge ETA (sec)<br>
+						&#125;<br>
+						</code>
+					</div>
+					{/if}
+			</Borders>
+		</div>
 	</div>
-	{/if}
 </div>
-

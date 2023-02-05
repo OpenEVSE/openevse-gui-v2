@@ -114,7 +114,7 @@
 	<div class="columns is-centered">
 		<div class="column is-three-quarters is-full-mobile">
 			
-			<div class="mb-2 is-flex is-align-items-center is-justify-content-center">
+			<div class="mb-2 is-flex is-justify-content-center">
 				<Borders classes={formdata.divert_enabled.val?"has-background-primary-light":"has-background-light"}>
 					<div class="enable">
 						<Switch
@@ -162,100 +162,96 @@
 				</Borders>
 			</div>
 			<div class="is-size-7 mb-2 ">{$_("config.selfprod.desc")}</div>
-			<div class="mb-2 is-flex is-align-items-center is-justify-content-center">
-				<Borders>
+			<div class="mb-2 is-flex is-justify-content-center">
+				<Borders grow={true}>
 					<Select title={$_("config.selfprod.mode")} bind:value={$uistates_store.divert_type} items={modes} onChange={setDivertMode}/>
 	
+				<div class="is-inline-block">
+					<div class:is-hidden={$uistates_store.divert_type==1} class="mb-2">
+						<InputForm
+							title="{$_("config.selfprod.feed")}*" 
+							placeholder="/topic/pv_production" 
+							bind:this={formdata.mqtt_solar.input}
+							bind:value={formdata.mqtt_solar.val} 
+							bind:status={formdata.mqtt_solar.status} 
+							onChange={()=>setProperty("mqtt_solar")}
+						/>
+						<div class="is-size-7 has-text-left">{$_("config.selfprod.feed-prod-desc")}</div>
+					</div>
 	
-				<div class:is-hidden={$uistates_store.divert_type==1} class="mb-2">
-					<InputForm
-						title="{$_("config.selfprod.feed")}*" 
-						placeholder="/topic/pv_production" 
-						bind:this={formdata.mqtt_solar.input}
-						bind:value={formdata.mqtt_solar.val} 
-						bind:status={formdata.mqtt_solar.status} 
-						onChange={()=>setProperty("mqtt_solar")}
-					/>
-					<div class="is-size-7 has-text-left">{$_("config.selfprod.feed-prod-desc")}</div>
-				</div>
-
+		
+					<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2">
+						<InputForm 
+							title="{$_("config.selfprod.feed")}*"
+							placeholder="/topic/grid_ie"
+							bind:this={formdata.mqtt_grid_ie.input}
+							bind:value={formdata.mqtt_grid_ie.val} 
+							bind:status={formdata.mqtt_grid_ie.status} 
+							onChange={()=>setProperty("mqtt_grid_ie")}
+						/>
+						<div class="is-size-7 has-text-left">{$_("config.selfprod.feed-excess-desc")}</div>
+					</div>
+					
 	
-				<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2">
-					<InputForm 
-						title="{$_("config.selfprod.feed")}*"
-						placeholder="/topic/grid_ie"
-						bind:this={formdata.mqtt_grid_ie.input}
-						bind:value={formdata.mqtt_grid_ie.val} 
-						bind:status={formdata.mqtt_grid_ie.status} 
-						onChange={()=>setProperty("mqtt_grid_ie")}
-					/>
-					<div class="is-size-7 has-text-left">{$_("config.selfprod.feed-excess-desc")}</div>
-				</div>
+		
 				
-
-	
-			
-	
-				<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2" >
-					<InputForm 
-						title="{$_("config.selfprod.powerratio")}*" 
-						type="number" 
-						placeholder="1.1"
-						bind:this={formdata.divert_PV_ratio.input}
-						bind:value={formdata.divert_PV_ratio.val} 
-						bind:status={formdata.divert_PV_ratio.status}
-						onChange={()=>setProperty("divert_PV_ratio")}
-					/>
-					<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
-				</div>
-				
-	
-	
-				<div class="mb-2">
-					<InputForm 
-						title="{$_("config.selfprod.smoothattack")}*" 
+		
+					<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2" >
+						<InputForm 
+							title="{$_("config.selfprod.powerratio")}*" 
 							type="number" 
-							placeholder="0.4" 
-							bind:this={formdata.divert_attack_smoothing_factor.input}
-							bind:value={formdata.divert_attack_smoothing_factor.val} 
-							bind:status={formdata.divert_attack_smoothing_factor.status}
-							onChange={()=>setProperty("divert_attack_smoothing_factor")}
-					/>
-					<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
+							placeholder="1.1"
+							bind:this={formdata.divert_PV_ratio.input}
+							bind:value={formdata.divert_PV_ratio.val} 
+							bind:status={formdata.divert_PV_ratio.status}
+							onChange={()=>setProperty("divert_PV_ratio")}
+						/>
+						<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
+					</div>
+					
+		
+		
+					<div class="mb-2">
+						<InputForm 
+							title="{$_("config.selfprod.smoothattack")}*" 
+								type="number" 
+								placeholder="0.4" 
+								bind:this={formdata.divert_attack_smoothing_factor.input}
+								bind:value={formdata.divert_attack_smoothing_factor.val} 
+								bind:status={formdata.divert_attack_smoothing_factor.status}
+								onChange={()=>setProperty("divert_attack_smoothing_factor")}
+						/>
+						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
+					</div>
+					
+		
+					<div class="mb-2">
+						<InputForm 
+							title="{$_("config.selfprod.smoothdecay")}*" 
+							type="number" 
+							placeholder="0.005"
+							bind:this={formdata.divert_decay_smoothing_factor.input}
+							bind:value={formdata.divert_decay_smoothing_factor.val} 
+							bind:status={formdata.divert_decay_smoothing_factor.status}
+							onChange={()=>setProperty("divert_decay_smoothing_factor")}
+						/>
+						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
+					</div>
+					
+					
+					<div class="mb-2">
+						<InputForm
+							title="{$_("config.selfprod.minchargetime")}*" 
+							type="number" 
+							placeholder="600"
+							bind:this={formdata.divert_min_charge_time.input}
+							bind:value={formdata.divert_min_charge_time.val} 
+							bind:status={formdata.divert_min_charge_time.status}
+							onChange={()=>setProperty("divert_min_charge_time")}
+						/>
+						<div class="is-size-7 has-text-left">{$_("config.selfprod.minchargetime-desc")}.</div>
+					</div>
 				</div>
-				
-	
-				<div class="mb-2">
-					<InputForm 
-						title="{$_("config.selfprod.smoothdecay")}*" 
-						type="number" 
-						placeholder="0.005"
-						bind:this={formdata.divert_decay_smoothing_factor.input}
-						bind:value={formdata.divert_decay_smoothing_factor.val} 
-						bind:status={formdata.divert_decay_smoothing_factor.status}
-						onChange={()=>setProperty("divert_decay_smoothing_factor")}
-					/>
-					<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
-				</div>
-				
-				
-				<div class="mb-2">
-					<InputForm
-						title="{$_("config.selfprod.minchargetime")}*" 
-						type="number" 
-						placeholder="600"
-						bind:this={formdata.divert_min_charge_time.input}
-						bind:value={formdata.divert_min_charge_time.val} 
-						bind:status={formdata.divert_min_charge_time.status}
-						onChange={()=>setProperty("divert_min_charge_time")}
-					/>
-					<div class="is-size-7 has-text-left">{$_("config.selfprod.minchargetime-desc")}.</div>
-				</div>
-				
-				<!-- <div class="block mt-5 pb-1">
-					<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
-				</div> -->
-				<!-- <AlertBox title={$_("error")}  body={alert_body} bind:visible={alert_visible} /> -->
 				</Borders>
 			</div>
 		</div>

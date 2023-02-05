@@ -110,7 +110,7 @@
 			<tr>
 				<td class="has-text-weight-bold">OpenEVSE</td>
 				<td>{$config_store.firmware}</td>
-				<td><div class="has-text-centered"><Button width="80px" size="is-small" name={$_("config.firmware.restart")} butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
+				<td><div class="has-text-centered"><Button width="100px" size="is-small" name={$_("config.firmware.restart")} butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
 			</tr>
 			<tr>
 				<td class="has-text-weight-bold">OpenEVSE Wifi</td>
@@ -129,13 +129,13 @@
 				<td>
 					<div class="has-text-centered is-flex is-flex-direction-column">
 						<div class="mb-2">
-							<Button  size="is-small" width="80px"name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
+							<Button  size="is-small" width="100px"name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
 						</div>
 						<div class="mb-2">
-							<Button size="is-small" width="80px" name={$_("config.firmware.restart")} butn_submit={restartESP} state={restartEspState}/>
+							<Button size="is-small" width="100px" name={$_("config.firmware.restart")} butn_submit={restartESP} state={restartEspState}/>
 						</div>
 						<div class="mb-2">
-							<Button size="is-small" width="80px" name={$_("config.firmware.reset")} butn_submit={resetESP} state={resetEspState}/>
+							<Button size="is-small" width="100px" name={$_("config.firmware.reset")} butn_submit={resetESP} state={resetEspState}/>
 						</div>
 						
 					</div>

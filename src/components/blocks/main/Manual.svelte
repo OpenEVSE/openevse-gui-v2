@@ -20,8 +20,6 @@
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
 	import Slider 					from "./../../ui/SliderForm.svelte"
 	import ButtonManual 			from "../../ui/ButtonManual.svelte"
-	import SelectTimeLmt 			from "../../ui/SelectTimeLmt.svelte"
-	import SelectChargeLmt			from "../../ui/SelectChargeLmt.svelte"
 	import RemovableTag 			from "../../ui/RemovableTag.svelte"
 
 	let setamp_tag
@@ -260,6 +258,17 @@ $: set_uistates_divertmode($status_store.divertmode)
 
 </script>
 
+<style>
+	.slider-div{
+		position: relative;
+		top: -10px;
+		height: 70px;
+	}
+	.tag-div {
+		position: relative;
+		bottom:6px;
+	}
+</style>
 <Box title={$_("charge-title")} icon="fa6-solid:bolt">
 	<div class="is-flex is-align-items-center is-flex-direction-column">
 		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-info mt-2 is-uppercase">{$_("charge-toggle")}</div>
@@ -283,18 +292,21 @@ $: set_uistates_divertmode($status_store.divertmode)
 				action={() => setShaper(!$uistates_store.shaper)} disabled={waiting} />
 		</div>
 		<Borders grow>
-			<div class="mb-3" style="width: 280px">
+			<div class="is-size-6 has-text-info has-text-weight-bold mb-2">
+				{$_("charge-rate-label")} 
+			</div>
+			<div class="slider-div" style="width: 260px;">
+
 				<Slider 
 					icon="fa6-solid:gauge-high" 
 					tooltip={$_("charge-rate-ttip")} 
 					unit="A" min=6 max={$config_store.max_current_soft} step={1} 
-					label={$_("charge-rate-label")} 
 					disabled={EvseClients[clientid2name($claims_target_store.claims?.charge_current)]?.priority > EvseClients.manual.priority || waiting} 
 					bind:value={$uistates_store.charge_current}
 					onchange={(value) => setChgCurrent(value)} 
 				/>
 				{#if $claims_target_store?.claims?.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer.id}
-				<div class="is-flex is-justify-content-center is-align-content">
+				<div class="tag-div is-flex is-justify-content-center is-align-content">
 					<RemovableTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
 				</div>
 				{/if}

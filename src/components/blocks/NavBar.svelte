@@ -37,7 +37,7 @@
 </style>
 
 <div class="mobnav is-flex-shrink-0 is-flex-grow-0  has-background-dark is-flex is-align-items-center">	
-	<div class="container  is-size-3 is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row">
+	<div class="container is-size-3 is-flex is-justify-content-space-evenly is-align-items-center is-flex-direction-row">
 		<a class=" nav-item" href="/monitoring" use:link class:active={selected=="/monitoring"}>
 			<iconify-icon  inline icon="fa6-solid:chart-simple"></iconify-icon>
 		</a>
