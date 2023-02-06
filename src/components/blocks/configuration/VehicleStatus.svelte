@@ -1,4 +1,5 @@
 <script>
+	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import { onMount } from "svelte";
 	import { _ } 		  			   from 'svelte-i18n'
 	import { config_store }			   from "./../../../lib/stores/config.js"
@@ -29,10 +30,6 @@
 <div class="columns is-centered">
 	<div class="column is-three-quarters is-full-mobile">
 		<div class="is-flex is-flex-direction-column is-justify-content-center">
-			<div class="my-3 has-text-centered" class:is-hidden={mode==0}>
-				<span class="has-text-weight-bold  is-size-7">{$_("config.vehicle.lastupdated")}:</span>
-				<span class="is-size-7 {$status_store.vehicle_state_update > 3600?"has-text-danger":$status_store.vehicle_state_update < 300?"has-text-primary":"has-text-orange"} ">{$evelapsed}</span>
-			</div>
 			<table class="table is-fullwidth ">
 				<thead>
 					<tr class="has-background-info"	>
@@ -49,15 +46,21 @@
 				</tbody>
 				{:else}
 				<tbody>
+					<tr>
+						<td>
+							{$_("config.vehicle.lastupdated")}
+						</td>
+						<td>
+							<div class="tag tags has-text-weight-bold {$status_store.vehicle_state_update > 3600 && $uistates_store.charging?"is-danger":$status_store.vehicle_state_update < 300 && $uistates_store.charging?"is-primary":$uistates_store.charging?"is-warning":"is-info"} ">{$evelapsed}</div>
+						</td>
+					</tr>
+					
 					{#if $status_store.battery_level != undefined}
 					<tr>
 						<td>{$_("config.vehicle.battery")}</td>
 						<td class="has-text-right">
-							<div class="tag tags is-info is-flex is-flex-direction-row is-align-items-center is-justify-content-center">
-								<div class="is-flex-stretch-1 is-flex-grow-1 mr-2 is-hidden-mobile ">
-									<progress class="progress {$status_store.battery_level < 20 ? "is-danger":$status_store.battery_level < 60 ?"is-warning":"is-primary"}" value={$status_store.battery_level} max="100">{$status_store.battery_level}</progress>
-								</div>
-								<div class="is-info is-size-7 has-text-weight-bold">{$status_store.battery_level}%</div>
+							<div class="tag tags is-info">
+								<div class="is-size-7 has-text-weight-bold">{$status_store.battery_level}%</div>
 							</div>
 						</td>
 					</tr>

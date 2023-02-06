@@ -3,6 +3,8 @@
 	import { _ } 			from 'svelte-i18n'
 	import {status_store} 	from "../../../lib/stores/status.js"
 	import {round}		  	from "../../../lib/utils.js"
+	import {sec2time, s2mns, miles2km} from "../../../lib/utils.js"
+
 </script>
 <style>
 	.tag {
@@ -61,6 +63,44 @@
 			</tr>
 		</tbody>
 	</table>
+	{#if $status_store.battery_level}
+	<table class="table is-fullwidth">
+		<thead>
+			<tr class="has-background-info is-size-7-mobile">
+				<th class="has-text-white py-1">{$_("config.vehicle.vehicle")}</th>
+				<th class="has-text-white has-text-centered py-1" style="width:40%">{$_("value")}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="is-size-7-mobile">
+				<td>{$_("config.vehicle.battery")}</td>
+				<td class="has-text-right"><span class="tag is-normal is-dark">{$status_store.battery_level}%</span></td>
+			</tr>
+			<tr class="is-size-7-mobile">
+				<td>{$_("config.vehicle.range")}</td>
+				<td class="has-text-right">
+					<span class="tag is-normal  is-dark">
+						{#if !$config_store.tesla_enabled || $config_store.tesla_enabled && $config_store.mqtt_vehicle_range_miles}
+						{$status_store.battery_range}
+						{:else if !$config_store.mqtt_vehicle_range_miles}
+						{miles2km($status_store.battery_range)}
+						{/if}
+						{#if $config_store.mqtt_vehicle_range_miles}
+						{$_("units.miles")}
+						{:else}
+						{$_("units.km")}
+						{/if}
+					</span>
+				</td>
+			</tr>
+			<tr class="is-size-7-mobile">
+				<td>{$_("config.vehicle.timeleft")}</td>
+				<td class="has-text-right"><span class="tag is-normal  is-dark">{sec2time($status_store.time_to_full_charge)}</span></td>
+			</tr>
+		</tbody>
+	</table>
+	{/if}
+
 	<table class="table is-fullwidth">
 
 		<thead>
