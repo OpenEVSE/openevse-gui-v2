@@ -1,4 +1,5 @@
 <script>
+	import Checkbox from "./Checkbox.svelte";
 	import { _ } 		    	from 'svelte-i18n'
 	import Loader 				from "./Loader.svelte";
 	import {onMount, onDestroy} from "svelte"
@@ -92,11 +93,13 @@
 			</span>
 		</div>	
 		{#if type=="password" && value != hiddenpass}
-		<div class="mt-1 mx-3 {disabled?"has-text-grey-light":""}">
-			<label class="checkbox">
+		<div class="mt-1 mx-2 is-flex is-flex-direction-row is-justify-content-start {disabled?"has-text-grey-light":""}">
+			<Checkbox bind:checked={show} {disabled} small  />
+			<span class="ml-2 has-text-info">{$_("show")}</span>
+			<!-- <label class="checkbox has-text-info">
 				<input type="checkbox" bind:checked={show} {disabled}>
 				{$_("show")}
-			</label>
+			</label> -->
 		</div>
 		{/if}
 </div>

@@ -114,7 +114,7 @@
 		<div class="pt-2">
 			
 			<div class="">
-				<table class="table is-fullwidth is-vcentered">
+				<table class="table is-fullwidth is-vcentered has-text-dark">
 					<tbody class="is-size-6">
 						<tr>
 							<td class="has-text-weight-semibold">{$_("config.firmware.espinfo")}</td>
@@ -126,7 +126,7 @@
 						</tr>
 						<tr>
 							<td class="has-text-weight-semibold">{$_("config.firmware.installed")}</td>
-							<td class="has-text-info">{$config_store.version}</td>
+							<td class="">{$config_store.version}</td>
 						</tr>
 						<tr>
 							<td class="has-text-weight-semibold">
@@ -161,14 +161,13 @@
 										tooltip="Feature not implemented yet"
 									/>
 								</div>
-							
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		{#if file || $status_store.ota_progress > 0}
+		{#if file || $status_store.ota_progress > 0}	
 		<div class="my-2 is-size-6 is-flex is-justify-content-center ">
 			<div class="is-flex-shrink-0 is-flex-grow-1">
 				{#if $status_store.ota == "started" || $status_store.ota_progress > 0}
@@ -181,19 +180,23 @@
 				{:else if $status_store.ota == "completed" }
 				{$_("config.firmware.complete")}
 				{:else}
-				
-					<div class="is-flex is-align-items-center is-justify-content-center is-size-6">
-						<Borders >
-							<span class="my-2 is-size-6">
+				<div class="is-flex is-justify-content-center">
+					<Borders >
+						<div class="is-flex is-align-items-center  is-justify-content-center">
+							<span class="is-size-6 mr-2">
 								{file.name}
 							</span>
-							<div class="ml-2 is-size-6 is-inline-block">
-								<IconButton icon="fa6-solid:square-minus" color="has-text-danger" butn_submit={()=>{file = null}} tooltip={$_("config.firmware.remove")} />
-							</div>
-						</Borders>
-					</div>
-
-					
+							<IconButton 
+								icon="fa6-solid:xmark" 
+								size="is-size-5" 
+								color="has-text-danger" 
+								butn_submit={()=>{file = null}} 
+								tooltip={$_("config.firmware.remove")}
+							/>
+						</div>
+						
+					</Borders>
+				</div>
 				{/if}
 			</div>
 		</div>

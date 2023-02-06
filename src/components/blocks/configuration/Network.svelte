@@ -60,17 +60,20 @@
 
 	<div class="is-flex is-justify-content-center">
 		<Borders>
-			<span class="is-size-6 has-text-weight-bold">
-				{$_("config.network.mode")}:
-			</span>
-			<span>{displayMode($status_store.mode)}</span>
-			<div class="">
-				<span class="has-text-weight-bold is-size-6">{$_("config.network.ip")}: </span><span>{$status_store.ipaddress}</span>
+			<div class="has-text-left">
+				<span class="is-size-6 has-text-weight-bold has-text-dark">
+					{$_("config.network.mode")}:
+				</span>
+				<span>{displayMode($status_store.mode)}</span>
+				<div class="">
+					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.ip")}: </span><span>{$status_store.ipaddress}</span>
+				</div>
+				<div class="is-flex is-align-items-center">
+					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.connected")}: </span>
+					<iconify-icon inline class="ml-2 is-size-5 {$status_store.net_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.net_connected==1?"fa6-solid:circle-check":"fa6-solid:circle-xmark"}></iconify-icon>
+				</div>
 			</div>
-			<div class="is-flex is-align-items-center is-justify-content-center">
-				<span class="has-text-weight-bold is-size-6">{$_("config.network.connected")}: </span>
-				<iconify-icon inline class="ml-2 is-size-5 {$status_store.net_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.net_connected==1?"fa6-solid:circle-check":"fa6-solid:circle-xmark"}></iconify-icon>
-			</div>
+			
 		</Borders>
 	</div>
 	<div class="mb-1 container">

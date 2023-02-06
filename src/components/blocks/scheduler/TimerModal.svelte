@@ -170,6 +170,7 @@
 						{#each days as day,i }
 						<div class="mx-1 is-inline-block">
 							<Checkbox 
+							color="dark" bold
 							label={$_("days." + day).substr(0,3)}  
 							bind:checked={selected_days[i]}  
 							onChange={checkDays}
@@ -180,6 +181,7 @@
 					</div>
 				</div>
 				<Checkbox 
+				color="dark" bold
 					label={selected_days[7]?$_("scheduler-uncheckall"):$_("scheduler-checkall")}
 					bind:checked={selected_days[7]}
 					onChange={() => {checkAll(selected_days[7])}}
@@ -193,7 +195,7 @@
 			<div class="is-flex is-justify-content-space-around">
 				<div class="is-inline-block">
 					<label class="has-text-weight-semibold">
-						<div class="has-text-info">{$_("scheduler-time")}</div>
+						<div class="has-text-info has-text-centered">{$_("scheduler-time")}</div>
 						{#if timer == null}
 						<input class="input is-info" id="t_start" type="time" bind:value={default_timer.time}>
 						{:else}
@@ -202,7 +204,7 @@
 					</label>
 				</div>
 				<div class="is-inline-block">
-					<div class="has-text-info has-text-weight-semibold">{$_("scheduler-state")}</div>
+					<div class="has-text-info has-text-centered has-text-weight-semibold">{$_("scheduler-state")}</div>
 					
 						{#if timer == null}
 						<div class="select {default_timer.state=="active"?"is-primary":"is-danger"}" >
