@@ -82,8 +82,8 @@
 		</span>
 	</div>
 	{/if}
-	<input type="checkbox" id={name} name={name} class:is-rtl={is_rtl} class="switch is-info {focus == true?'':'is-outlined'}" 
+	<input type="checkbox" id={name} name={name} class:is-rtl={is_rtl} class="switch is-dark {focus == true?'':'is-outlined'}" 
 	bind:checked={checked} on:focus={hoverin} on:blur={hoverout} {disabled} on:change={onChange}/>
-	<label for={name} class="has-text-info has-text-weight-bold has-text-left">{label?label:""}</label>
+	<label for={name} class="has-text-dark has-text-weight-bold has-text-left">{label?label:""}</label>
 	
 </div>

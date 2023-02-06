@@ -99,8 +99,8 @@
 			<form on:submit|preventDefault>
 				<div class="my-1 is-flex is-justify-content-center" >
 					<Borders grow={true} classes="mb-4">
-						<div class="has-text-centered is-inline-block">
-							<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly">
+						<div class="has-text-centered">
+							<div class="">
 								<Select 
 									items={protocols} 
 									title={$_("config.mqtt.proto")}

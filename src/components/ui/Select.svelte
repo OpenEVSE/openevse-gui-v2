@@ -52,9 +52,9 @@
 
 <div class="is-inline-block">
 	{#if title}
-	<div class="has-text-weight-bold has-text-info">{title}</div>
+	<div class="has-text-weight-bold has-text-dark">{title}</div>
 	{/if}
-	<div class="is-inline-block mb-2 mx-2">
+	<div class="is-inline-block mb-2 mx-1">
 		<div class="select is-info">
 			<select bind:value={value} on:change={onChange} {disabled} size=1>
 				{#each items as item }

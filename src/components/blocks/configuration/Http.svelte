@@ -123,9 +123,9 @@
 <Box title={$_("config.titles.http")} icon="mdi:web" back={true}>
 	<div class="columns is-centered">
 		<div class="column is-two-thirds">
-			<div class="my-1 is-flex is-justify-content-center" >
+			<div class="my-1 is-flex is-justify-content-center has-text-dark" >
 				<Borders grow={true}>
-					<div class="has-text-weight-bold">{$_("config.http.enable")}</div>
+					<div class="has-text-weight-bold has-text-info">{$_("config.http.enable")}</div>
 					<form class="has-text-left" on:submit|preventDefault>
 						<div class="is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
 							<Borders grow={false} classes={auth_checked?"has-background-primary-light":"has-background-light"}>
@@ -144,7 +144,7 @@
 					</form>
 				</Borders>
 			</div>
-			<div class="my-2 is-flex is-justify-content-center">
+			<div class="my-2 is-flex is-justify-content-center has-text-dark">
 				<Borders grow={true}>
 				<div class="block has-text-centered">
 					<div class="has-text-weight-semibold mb-1">{$_("config.http.lang")}</div>
