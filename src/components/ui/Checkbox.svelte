@@ -23,7 +23,7 @@ function togglefocus() {
 				on:change={onChange}
 			>
 			<span 
-				class="check is-info has-tooltip has-tooltip-arrow" 
+				class="check is-dark has-tooltip has-tooltip-arrow" 
 				data-tooltip={tooltip} >
 			</span>
 			

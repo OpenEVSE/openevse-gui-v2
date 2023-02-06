@@ -63,7 +63,7 @@
 			<div class="mt-4 mb-2 is-flex is-justify-content-center">
 				<Borders grow>
 					<div class="mb-2">
-						<div class="has-text-weight-bold has-text-centered mb-2">{$_("config.dev.consoles")}</div>
+						<div class="has-text-info has-text-weight-bold has-text-centered mb-2">{$_("config.dev.consoles")}</div>
 						<Button name="Debug" color="is-info" butn_submit={()=>openConsole("debug")} />
 						<Button name="OpenEVSE" color="is-info" butn_submit={()=>openConsole("evse")} />
 					</div>

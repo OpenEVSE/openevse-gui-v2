@@ -193,7 +193,7 @@
 			<div class="is-flex is-justify-content-space-around">
 				<div class="is-inline-block">
 					<label class="has-text-weight-semibold">
-						<div>{$_("scheduler-time")}</div>
+						<div class="has-text-info">{$_("scheduler-time")}</div>
 						{#if timer == null}
 						<input class="input is-info" id="t_start" type="time" bind:value={default_timer.time}>
 						{:else}
@@ -202,7 +202,7 @@
 					</label>
 				</div>
 				<div class="is-inline-block">
-					<div class="has-text-weight-semibold">{$_("scheduler-state")}</div>
+					<div class="has-text-info has-text-weight-semibold">{$_("scheduler-state")}</div>
 					
 						{#if timer == null}
 						<div class="select {default_timer.state=="active"?"is-primary":"is-danger"}" >
