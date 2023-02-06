@@ -79,24 +79,22 @@
 		</div>
 		<div class="back m-0 p-0" class:is-hidden={!back}>
 			<a href="/#/" class="has-text-info" on:click|preventDefault={()=>history.back()}>
-				<div class="has-text-centered" style="width: 28px; height:28px">
-					<iconify-icon inline class="is-size-4 m-0 p-0" icon="mdi:arrow-back-circle"></iconify-icon>
-				</div>
+				<iconify-icon inline class="is-size-4 m-0 p-0" icon="mdi:arrow-back-circle"></iconify-icon>
 			</a>
 		</div>
 	</div>
 	
-	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center is-justify-content-center is-flex-direction-row px-2 pt-1">
+	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center is-justify-content-center is-flex-direction-row px-2 py-1">
 
 		{#if icon}
 		<div class="mr-1 ">
-			<iconify-icon inline class="is-size-4" icon={icon}></iconify-icon>
+			<iconify-icon inline icon={icon}></iconify-icon>
 		</div>
 		{/if}
 		<span class="ml-2 is-size-5">{title}</span>
 	</div>
 
-	<div  class="mb-2 px-2"><hr></div>
+	<div  class="px-2"><hr></div>
 	<div  class="maincontent is-flex is-flex-direction-column px-2 py-2" >
 		<slot>
 		</slot>

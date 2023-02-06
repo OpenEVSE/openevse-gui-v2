@@ -37,15 +37,33 @@
 </script>
 
 <div class="mt-1 mb-1">
-	<Select title="{$_("config.vehicle.rangeunit")}:" bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
-	<InputForm title="{$_("config.vehicle.topic-soc")}:" bind:value={$config_store.mqtt_vehicle_soc} placeholder="topic/soc" is_inline={true} />
+	<div>	
+		<Select title="{$_("config.vehicle.rangeunit")}:" bind:value={$config_store.mqtt_vehicle_range_miles} items={range_unit} />
+	</div>
+
+	<InputForm 
+		title="{$_("config.vehicle.topic-soc")}:" bind:value={$config_store.mqtt_vehicle_soc} 
+		placeholder="topic/soc" 
+	
+	/>
 	<div class="is-size-7">{$_("config.vehicle.topic-soc-desc")}</div>
-	<InputForm title="{$_("config.vehicle.topic-range")}:" bind:value={$config_store.mqtt_vehicle_range} placeholder="topic/range" is_inline={true}/>
+	<InputForm 
+		title="{$_("config.vehicle.topic-range")}:" bind:value={$config_store.mqtt_vehicle_range} 
+		placeholder="topic/range" 
+		/>
 	<div class="is-size-7">{$_("config.vehicle.topic-range-desc")}</div>
-	<InputForm title="{$_("config.vehicle.topic-time2charge")}:" bind:value={$config_store.mqtt_vehicle_eta} placeholder="topic/timeleft" is_inline={true} />
+	<InputForm 
+		title="{$_("config.vehicle.topic-time2charge")}:" bind:value={$config_store.mqtt_vehicle_eta} 
+			placeholder="topic/timeleft" 
+		/>
 	<div class="is-size-7">{$_("config.vehicle.topic-time2charge-desc")}</div>
 	<div class="block mt-5">
-		<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
+		<Button 
+			name={$_("save")}
+			color="is-info" 
+			state={stg_submit_state} 
+			butn_submit={stg_submit} 
+		/>
 	</div>
 	<AlertBox title={$_("error")}  body={alert_body} bind:visible={alert_visible} />
 </div>
