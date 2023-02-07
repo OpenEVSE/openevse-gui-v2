@@ -23,9 +23,6 @@
 		box-sizing: border-box;
 		width: 100%;
 	}
-	.has-text-orange {
-		color: orange;
-	}
 </style>
 <div class="columns is-centered">
 	<div class="column is-three-quarters is-full-mobile">

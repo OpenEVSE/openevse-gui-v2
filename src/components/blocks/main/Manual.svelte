@@ -271,7 +271,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 </style>
 <Box title={$_("charge-title")} icon="fa6-solid:bolt">
 	<div class="is-flex is-align-items-center is-flex-direction-column">
-		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-info mt-2 is-uppercase">{$_("charge-toggle")}</div>
+		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-dark mt-2 is-uppercase">{$_("charge-toggle")}</div>
 		<!-- <div class="mb-4 is-italic is-size-7 has-text-left">Temporary override default settings (doesn't survive power cycle)</div> -->
 		{#if $claims_target_store.claims.state == EvseClients["rfid"].id}
 		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth || waiting} ischarging={$uistates_store.charging}/>
@@ -292,7 +292,7 @@ $: set_uistates_divertmode($status_store.divertmode)
 				action={() => setShaper(!$uistates_store.shaper)} disabled={waiting} />
 		</div>
 		<Borders grow>
-			<div class="is-size-6 has-text-info has-text-weight-bold mb-2">
+			<div class="is-size-6 has-text-dark has-text-weight-bold mb-2">
 				{$_("charge-rate-label")} 
 			</div>
 			<div class="slider-div" style="width: 260px;">

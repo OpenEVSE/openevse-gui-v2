@@ -181,7 +181,7 @@
 <Borders grow>
 	<div class:content={!is_admin} class:content_admin={is_admin}>
 		<div class="is-flex is-justify-content-center is-flex-direction-column" >
-			<div class="is-size-6 has-text-info has-text-weight-bold mb-4">
+			<div class="is-size-6 has-text-dark has-text-weight-bold mb-4">
 				{is_admin?$_("limits.system-limit"):$_("limits.limit")}
 			</div>
 			{#if $limit_store.type != "none" && (!is_admin || (is_admin && !$limit_store.auto_release))}

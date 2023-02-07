@@ -84,7 +84,7 @@
 		</div>
 	</div>
 	
-	<div class="is-uppercase has-text-info is-size-5 has-text-weight-bold is-flex is-align-items-center is-justify-content-center is-flex-direction-row px-2 py-1">
+	<div class="is-uppercase has-text-dark is-size-5 has-text-weight-bold is-flex is-align-items-center is-justify-content-center is-flex-direction-row px-2 py-1">
 
 		{#if icon}
 		<div class="mr-1 ">
