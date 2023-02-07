@@ -15,13 +15,17 @@
 	let displayValue = (val) => {
 		switch (type) {
 			case 'time':
+			if (val>0) {	
 				let h = Math.trunc(val/60)
 				let m = val % 60
 				let ret = h?h+"h":""
 				ret += m?!h?m.toString().padStart(2,'0') +"mn":m.toString().padStart(2,'0'):""
 				return ret
+			}
+			else return "0mn"
 			case 'energy':
 				return Math.round(val/1000)
+				
 			default:
 				return val
 		}

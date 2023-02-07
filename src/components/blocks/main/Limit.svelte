@@ -118,7 +118,7 @@
 		let ctval
 		switch (type) {
 			case "time":
-				ctval = val - ($status_store.elapsed/60)
+				ctval = Math.trunc(((val * 60) - $status_store.elapsed)/60)
 				break
 			case "energy": 
 				ctval = val - $status_store.session_energy
