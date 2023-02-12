@@ -1,6 +1,7 @@
 <script>
 	import { _ } 	from 'svelte-i18n'
 	import Loader 	from "./Loader.svelte";
+	import {sec2time} from "../../lib/utils.js"
 	export let icon
 	export let type
 	export let types = {}
@@ -16,10 +17,11 @@
 		switch (type) {
 			case 'time':
 			if (val>0) {	
-				let h = Math.trunc(val/60)
-				let m = val % 60
-				let ret = h?h+"h":""
-				ret += m?!h?m.toString().padStart(2,'0') +"mn":m.toString().padStart(2,'0'):""
+				// let h = Math.trunc(val/60)
+				// let m = val % 60
+				// let ret = h?h+"h":""
+				// ret += m?!h?m.toString().padStart(2,'0') +"mn":m.toString().padStart(2,'0'):""
+				let ret = sec2time(val)
 				return ret
 			}
 			else return "0mn"
@@ -56,7 +58,7 @@
 			<span class="ml-2">{types[type].name}</span>		
 		</div>
 		<span class="tag is-medium val has-text-weight-bold is-info">
-			{displayValue(value)}{unit}
+			{displayValue(value*60)}{unit}
 		</span>
 		{#if auto_release || (is_admin && !auto_release)}
 			{#if state == ""}

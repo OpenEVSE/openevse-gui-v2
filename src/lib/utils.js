@@ -67,7 +67,7 @@ export const removeDuplicateObjects = (array, key) => {
 }
 
 export function sec2time(sec) {
-	return new Date(sec * 1000).toISOString().slice(11, 16)
+	return new Date(sec * 1000).toISOString().slice(11, 19)
 }
 
 export function formatDate(t,z,format=null) {

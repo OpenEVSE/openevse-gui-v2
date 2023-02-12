@@ -284,12 +284,33 @@ $: set_uistates_divertmode($status_store.divertmode)
 		{/if}
 	
 		<div class="is-flex is-justify-content-center my-0 mb-2">
-			<ToggleButtonIcon visible={$config_store.divert_enabled} bind:button={button_divert} state={$config_store.charge_mode == "eco"?true:false} name={$config_store.charge_mode == "eco"?$_("charge-mode-eco"):$_("charge-mode-fast")} color="is-primary"
-				tooltip={$config_store.charge_mode=="eco"?$_("charge-mode-fast-ttip"):$_("charge-mode-eco-ttip")} icon="fa6-solid:solar-panel" icon2="mdi:electricity-from-grid" size={20} size2={26} breakpoint={$uistates_store.breakpoint}
-				action={() => setDivertMode($config_store.charge_mode == "eco" ? "fast" : "eco")} disabled={waiting}/>
-			<ToggleButtonIcon  visible={$config_store.current_shaper_enabled} bind:button={button_shaper} state={$uistates_store.shaper} name={$_("charge-shaper")} size={20} color="is-info" 
-				tooltip={ $uistates_store.shaper?$_("charge-shaper-disable"):$_("charge-shaper-enable")} icon="fa6-solid:building-shield" breakpoint={$uistates_store.breakpoint}
-				action={() => setShaper(!$uistates_store.shaper)} disabled={waiting} />
+			<ToggleButtonIcon 
+				visible={$config_store.divert_enabled} 
+				bind:button={button_divert} 
+				state={$config_store.charge_mode == "eco"?true:false} 
+				name={$config_store.charge_mode == "eco"?$_("charge-mode-eco"):$_("charge-mode-fast")} 
+				color="is-primary"
+				tooltip={$config_store.charge_mode=="eco"?$_("charge-mode-fast-ttip"):$_("charge-mode-eco-ttip")} 
+				icon="fa6-solid:solar-panel" 
+				icon2="mdi:electricity-from-grid" 
+				size={20} size2={26} 
+				breakpoint={$uistates_store.breakpoint}
+				action={() => setDivertMode($config_store.charge_mode == "eco" ? "fast" : "eco")} 
+				disabled={waiting}
+			/>
+			<ToggleButtonIcon  
+				visible={$config_store.current_shaper_enabled} 
+				bind:button={button_shaper} 
+				state={$uistates_store.shaper} 
+				name={$_("charge-shaper")} 
+				size={20} 
+				color="is-info" 
+				tooltip={ $uistates_store.shaper?$_("charge-shaper-disable"):$_("charge-shaper-enable")} 
+				icon="fa6-solid:building-shield" 
+				breakpoint={$uistates_store.breakpoint}
+				action={() => setShaper(!$uistates_store.shaper)} 
+				disabled={waiting} 
+			/>
 		</div>
 		<Borders grow>
 			<div class="is-size-6 has-text-dark has-text-weight-bold mb-2">
