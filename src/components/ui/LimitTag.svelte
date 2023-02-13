@@ -16,15 +16,15 @@
 	let displayValue = (val) => {
 		switch (type) {
 			case 'time':
-			if (val>0) {	
-				// let h = Math.trunc(val/60)
-				// let m = val % 60
-				// let ret = h?h+"h":""
-				// ret += m?!h?m.toString().padStart(2,'0') +"mn":m.toString().padStart(2,'0'):""
-				let ret = sec2time(val)
-				return ret
-			}
-			else return "0mn"
+				if (val>0) {	
+					// let h = Math.trunc(val/60)
+					// let m = val % 60
+					// let ret = h?h+"h":""
+					// ret += m?!h?m.toString().padStart(2,'0') +"mn":m.toString().padStart(2,'0'):""
+					let ret = sec2time(val*60)
+					return ret
+				}
+				else return "0mn"
 			case 'energy':
 				return Math.round(val/1000)
 				
@@ -58,7 +58,7 @@
 			<span class="ml-2">{types[type].name}</span>		
 		</div>
 		<span class="tag is-medium val has-text-weight-bold is-info">
-			{displayValue(value*60)}{unit}
+			{displayValue(value)}{unit}
 		</span>
 		{#if auto_release || (is_admin && !auto_release)}
 			{#if state == ""}
@@ -79,8 +79,8 @@
 		{/if}
 	</div>
 	{#if !is_admin}
-	<div class="countdown  m-0 p-0 has-text-info has-text-weight-bold">
-		{$_("limits.left")}: {displayValue(left)}{unit} 
+	<div class="countdown m-0 p-0 has-text-info has-text-weight-bold">
+		{$_("limits.left")}: {left}{unit} 
 	</div>
 	{/if}
 </div>

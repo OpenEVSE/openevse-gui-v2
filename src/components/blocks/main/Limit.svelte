@@ -1,14 +1,13 @@
 <script>
 	import { _ } 		    from 'svelte-i18n'
-	// import ToggleButtonIcon from "./../../ui/ToggleButtonIcon.svelte";
-	// import IconButton from "./../../ui/IconButton.svelte";
+	import { derived }		from "svelte/store"
 	import LimitTag from "./../../ui/LimitTag.svelte";
 	import { status_store } from "./../../../lib/stores/status.js";
 	import { serialQueue } 	from "./../../../lib/queue.js";
 	import { onMount } 		from "svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
 	import { limit_store } 	from "./../../../lib/stores/limit.js";
-	import {round} 			from "../../../lib/utils.js"
+	import {round, sec2time} 			from "../../../lib/utils.js"
 	// import Checkbox 		from "./../../ui/Checkbox.svelte";
 	import Box 				from "./../../ui/Box.svelte";
 	import Button 			from "./../../ui/Button.svelte";
@@ -18,6 +17,8 @@
 	import Borders 			from "./../../ui/Borders.svelte";
 
 	export let is_admin = false
+
+	let mounted = false
 
 	let LimitTypes = {
 		none: 	{name: $_("limits.type.none"),   unit: "", 	  icon: ""},
@@ -46,6 +47,42 @@
 
 	let time_h = 0
 	let time_m = 0
+
+	let getCountd = (store) => {
+		let ctval
+		if ($limit_store) {
+			switch ($limit_store.type) {
+				case "time":
+					ctval = sec2time($limit_store.value*60 - store.elapsed)
+					break
+				case "energy": 
+					ctval = Math.round(($limit_store.value - store.session_energy)/1000)
+					ctval = ctval<0?0:ctval
+					break;
+				case "soc":
+					ctval = $limit_store.value - store.battery_level
+					ctval = ctval<0?0:ctval
+					break
+				case "range":
+					ctval = $limit_store.value - store.battery_range
+					ctval = ctval<0?0:ctval
+					break;
+				default:
+					ctval = 0
+					break;
+			}
+		}
+		else ctval = 0
+		return ctval
+	}
+
+	let countd = derived(status_store, store => {
+		return getCountd(store)
+	})
+
+	console.log($countd)
+
+	
 
 	let getLimit = async () => {
 		let res = await serialQueue.add(()=>limit_store.download())
@@ -114,23 +151,6 @@
 		limit.value = val * 1000
 	}
 
-	let countdownValue = (val,type) => {
-		let ctval
-		switch (type) {
-			case "time":
-				ctval = (val * 60) - $status_store.elapsed
-				break
-			case "energy": 
-				ctval = val - $status_store.session_energy
-				break;
-			case "soc":
-				ctval = val - $status_store.battery_level
-				break
-			case "range":
-				ctval = val - $status_store.battery_range
-		}
-		return ctval>=0?ctval:0
-	}
 
 	onMount( () => {
 		LimitTypes.range.unit = $config_store.mqtt_vehicle_range_miles?"miles":"km"
@@ -153,7 +173,10 @@
 				typeItems[i].disabled = LimitTypes[key].disabled
 			}
 		})
+		mounted = true
 	})
+
+	$: $limit_store.val, getCountd($status_store)
 
 	
 </script>
@@ -178,6 +201,7 @@
 
 </style>
 
+{#if mounted}
 <Borders grow>
 	<div class:content={!is_admin} class:content_admin={is_admin}>
 		<div class="is-flex is-justify-content-center is-flex-direction-column" >
@@ -192,13 +216,13 @@
 					types={LimitTypes}
 					{is_admin}
 					value={$limit_store.value}
-					left={countdownValue($limit_store.value, $limit_store.type)} 
+					left={$countd}
 					unit={LimitTypes[$limit_store.type].unit}
 					icon={LimitTypes[$limit_store.type].icon}
 					onClick={removeLimit}
 					state={butn_del_state}
 					auto_release={$limit_store.auto_release}
-					/>
+				/>
 			</div>
 			{:else}
 			<div class="has-text-info">
@@ -242,3 +266,4 @@
 		</div>
 	</Box>
 </Modal>
+{/if}

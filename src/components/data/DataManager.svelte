@@ -19,6 +19,7 @@
 	let counter_divert_update
 	let counter_vehicle_update
 	let counter_rfid_scan
+	let counter_elapsed
 	let refresh_config = false
 	let refresh_schedule = false
 	let refresh_target = false
@@ -190,6 +191,17 @@
 		}
 	}
 
+	function countElapsed() { 
+		if(!counter_elapsed && $status_store.elapsed > 0) {
+			counter_elapsed = setTimeout(() => {
+				if ($uistates_store.charging)
+					$status_store.elapsed += 1
+				counter_elapsed = null
+			}, 1000);
+		}
+
+	}
+
 	function refreshLocale(lang) {
 		if ($locale != $config_store.lang) {
 			$locale = lang
@@ -231,6 +243,7 @@
 	$: $status_store.divert_update,        countDivertUpdate()
 	$: $status_store.vehicle_state_update, countVehicleUpdate()
 	$: $status_store.rfid_waitin, 		   countRFIDScan()
+	$: $status_store.elapsed,			   countElapsed()
 	$: refreshPower				($status_store.amp) 
 	
 
