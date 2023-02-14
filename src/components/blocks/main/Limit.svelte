@@ -80,10 +80,6 @@
 		return getCountd(store)
 	})
 
-	console.log($countd)
-
-	
-
 	let getLimit = async () => {
 		let res = await serialQueue.add(()=>limit_store.download())
 		if (!res) {

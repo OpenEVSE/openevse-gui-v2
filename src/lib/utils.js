@@ -6,7 +6,7 @@ import {get} 				from 'svelte/store'
 import { config_store } 	from './stores/config.js';
 import serialQueue 			from './queue.js';
 
-export async function httpAPI(method,url,body=null,type = "json",timeout = 10000) {
+export async function httpAPI(method,url,body=null,type = "json",timeout = 60000) {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
 	const controller = new AbortController();
 	let data = {
