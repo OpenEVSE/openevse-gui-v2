@@ -56,8 +56,8 @@
 					ctval = sec2time($limit_store.value*60 - store.elapsed)
 					break
 				case "energy": 
-					ctval = Math.round(($limit_store.value - store.session_energy)/1000)
-					ctval = ctval<0?0:ctval
+					ctval = round(($limit_store.value - store.session_energy)/1000,1)
+					ctval = ctval<0?0.0:ctval.toFixed(1)
 					break;
 				case "soc":
 					ctval = $limit_store.value - store.battery_level
