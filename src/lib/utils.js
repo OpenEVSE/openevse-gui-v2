@@ -416,15 +416,15 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 
 }
 
-export let rapiCmd = async (cmd) => {
-	let url = encodeURI("/r?json=1&rapi=" + cmd)
-	const res = await httpAPI("GET",url)
-	if (res != "error" && res.ret.includes("$OK")) {
-		let output = {}
-		output.ok = true
-		if (res.ret.includes(" "))
-			output.val = res.ret.split(" ")[1].split("^")[0]
-		return output
-	}
-	else return {ok: false}
-}
+// export let rapiCmd = async (cmd) => {
+// 	let url = encodeURI("/r?json=1&rapi=" + cmd)
+// 	const res = await httpAPI("GET",url)
+// 	if (res != "error" && res.ret.includes("$OK")) {
+// 		let output = {}
+// 		output.ok = true
+// 		if (res.ret.includes(" "))
+// 			output.val = res.ret.split(" ")[1].split("^")[0]
+// 		return output
+// 	}
+// 	else return {ok: false}
+// }

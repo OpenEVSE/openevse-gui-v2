@@ -7,8 +7,6 @@ const model = {
 	state: undefined,
     max_current: undefined,
     charge_current: undefined,
-    energy_limit: undefined,
-    time_limit: undefined,
 	auto_release: undefined
   }
 

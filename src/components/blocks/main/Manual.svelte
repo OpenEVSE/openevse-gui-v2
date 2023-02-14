@@ -13,8 +13,7 @@
 	import {claims_target_store}	from "./../../../lib/stores/claims_target.js"
 	import {onMount} 				from 'svelte'
 	import {httpAPI,
-			clientid2name,
-			rapiCmd}				from './../../../lib/utils.js'
+			clientid2name}				from './../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
 	import Box 						from "./../../ui/Box.svelte"
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
@@ -42,8 +41,6 @@
 			if ( 
 				$override_store.state == undefined && 
 				$override_store.max_current == undefined &&
-				$override_store.energy_limit == undefined && 
-				$override_store.time_limit == undefined &&
 				$override_store.auto_release == false
 			) {
 				if ($status_store.manual_override) {
@@ -104,12 +101,6 @@
 			// Mode Manual setting override
 			if ($override_store.max_current != undefined) {
 				data.max_current = $override_store.max_current
-			}
-			if ($override_store.time_limit != undefined) {
-				data.time_limit = $override_store.time_limit
-			}
-			if ($override_store.energy_limit != undefined) {
-				data.energy_limit = $override_store.energy_limit
 			}
 			waiting = true
 			await serialQueue.add(() => override_store.upload(data))
@@ -180,48 +171,6 @@
 			$uistates_store.divertmode = val		
 	}
 
-	async function time_limit(limit = null) {
-		let cmd
-		if (limit) {
-			cmd = "$S3 " + limit
-		}
-		else {
-			cmd = "$G3"
-		}
-		limit?time_lmt_status = "loading":null
-		const res = await rapiCmd(cmd)
-			if (res.ok) {
-				if (res.val)
-					$uistates_store.time_lmt = parseInt(res.val)
-				limit?time_lmt_status = "ok":null
-			}
-			else {
-				$uistates_store.time_lmt = 0
-				limit?time_lmt_status = "error":null
-			}
-	}
-
-	async function charge_limit(limit = null) {
-		let cmd
-		if (limit) {
-			cmd = "$SH " + limit
-		}
-		else {
-			cmd = "$GH"
-		}
-		limit?charge_lmt_status = "loading":null
-		const res = await rapiCmd(cmd)
-			if (res.ok) {
-				if (res.val)
-					$uistates_store.charge_lmt = parseInt(res.val)
-				limit?charge_lmt_status = "ok":null
-			}
-			else {
-				$uistates_store.charge_lmt = 0
-				limit?charge_lmt_status = "error":null
-			}
-	}
-
 	async function removeProp(prop,tag) {
 		tag.state = "loading"
 		let client = $claims_target_store.claims[prop]
@@ -243,9 +192,6 @@
 	onMount( () => {
 		$uistates_store.manual_override = $status_store.manual_override
 		set_uistates_charge_current()
-		//get limits
-		time_limit()
-		charge_limit()
 	})
 
 
