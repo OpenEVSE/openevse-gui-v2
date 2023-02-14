@@ -428,3 +428,11 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 // 	}
 // 	else return {ok: false}
 // }
+
+export function isFloat(n) {
+	return n === +n && n !== (n|0);
+}
+
+export function isInteger(n) {
+    return n === +n && n === (n|0);
+}
