@@ -7,7 +7,7 @@ export const EvseClients = {
 	ohm:	{ id: 65544, priority: 500},
 	ocpp:	{ id: 65545, priority: 1050},
 	rfid:	{ id: 65546, priority: 1030},
-	mqtt: 	{ id: 65547, prioirty: 500},
+	mqtt: 	{ id: 65547, priority: 500},
 	shaper: { id: 65548, priority: 5000},
 	manual: { id: 65537, priority: 1000 }
 }
