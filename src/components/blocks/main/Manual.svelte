@@ -225,6 +225,8 @@ $: set_uistates_divertmode($status_store.divertmode)
 		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={true} ischarging={$uistates_store.charging}/>
 		{:else if $schedule_store.length || $status_store.divertmode == 2 }
 		<ButtonManual bind:this={buttons_manual} isauto={true}  mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
+		{:else if $claims_target_store.claims.state == EvseClients["limit"].id}
+		<ButtonManual bind:this={buttons_manual} isauto={false} mode={2} setmode={setMode} disabled={true} ischarging={false}/>
 		{:else}
 		<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
 		{/if}
