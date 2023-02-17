@@ -63,7 +63,7 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       visualizer(),
       svelte(),
-      viteCompression({deleteOriginFile: false, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
+      viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
       VitePWA({ 
         registerType: 'autoUpdate',
         injectRegister: null,
