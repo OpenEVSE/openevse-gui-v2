@@ -8,7 +8,6 @@
 	import { config_store } from "./../../../lib/stores/config.js";
 	import { limit_store } 	from "./../../../lib/stores/limit.js";
 	import {round, sec2time} 			from "../../../lib/utils.js"
-	// import Checkbox 		from "./../../ui/Checkbox.svelte";
 	import Box 				from "./../../ui/Box.svelte";
 	import Button 			from "./../../ui/Button.svelte";
 	import SliderForm 		from "./../../ui/SliderForm.svelte";
@@ -43,7 +42,6 @@
 	let modal = false
 	let butn_set_state = ""
 	let butn_del_state = ""
-	// let butn_auto_release_inst
 
 	let time_h = 0
 	let time_m = 0

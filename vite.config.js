@@ -2,16 +2,27 @@ import { defineConfig, loadEnv } from "vite"
 import { svelte } from "@sveltejs/vite-plugin-svelte"
 import viteCompression from 'vite-plugin-compression'
 import { VitePWA } from 'vite-plugin-pwa'
-import { visualizer }		from "rollup-plugin-visualizer";
-
+import { visualizer }		from "rollup-plugin-visualizer"
 import { dependencies } from './package.json';
-function renderChunks(deps) {
-  let chunks = {};
-  Object.keys(deps).forEach((key) => {
-    // if (['luxon', 'svelte-i18n', 'iconify-icon'].includes(key)) return;
-    chunks[key] = [key];
-  });
-  return chunks;
+import fs from 'fs'
+
+// function renderChunks(deps) {
+//   let chunks = {};
+//   Object.keys(deps).forEach((key) => {
+//     // if (['luxon', 'svelte-i18n', 'iconify-icon', 'svelte-local-storage-store', 'promise-batching-queue', 'hacktimer', 'bulma-slider', 'svelte-spa-router', 'svelte-spa-chunk'].includes(key)) return;
+//     chunks[key] = [key];
+//   });
+//   return chunks;
+//}
+
+const confFolder = './src/components/blocks/configuration/';
+
+function configChunk() {
+  let files = fs.readdirSync(confFolder, {withFileTypes: true})
+  .filter(item => !item.isDirectory())
+  .map(item => confFolder + item.name)
+  console.log(files)
+ return files
 }
 
 // https://vitejs.dev/config/
@@ -26,8 +37,24 @@ export default defineConfig(({ command, mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: [],
-            ...renderChunks(dependencies),
+            vendor: ['luxon', 'svelte-i18n', 'iconify-icon', 'svelte-local-storage-store', 'hacktimer'],
+            components: [
+              './src/components/ui/Borders.svelte',
+              './src/components/ui/Button.svelte',
+              './src/components/ui/Checkbox.svelte',
+              './src/components/ui/IconButton.svelte',
+              './src/components/ui/InputForm.svelte',
+              './src/components/ui/Loader.svelte',
+              './src/components/ui/RemovableTag.svelte',
+              './src/components/ui/Select.svelte',
+              './src/components/ui/SliderForm.svelte',
+              './src/components/ui/Switch.svelte',
+              './src/components/ui/Tabs.svelte',
+              './src/components/blocks/main/Limit.svelte'
+            ],
+            config:
+              configChunk(),
+            // ...renderChunks(dependencies),
           },
         },
       },
@@ -35,7 +62,8 @@ export default defineConfig(({ command, mode }) => {
 
     plugins: [
       visualizer(),
-      svelte(),viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
+      svelte(),
+      viteCompression({deleteOriginFile: false, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
       VitePWA({ 
         registerType: 'autoUpdate',
         injectRegister: null,
