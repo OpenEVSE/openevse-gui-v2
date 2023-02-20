@@ -52,9 +52,13 @@
 		return networks
 	}
 	async function connectWifi() {
-		let param = "ssid=" + ssid + "&pass=" + key
+		let param = {
+			ssid: ssid,
+			pass: key
+		}
+		// let param = "ssid=" + ssid + "&pass=" + key
 		connectButnState = "loading"
-		let response = await serialQueue.add(()=>httpAPI("POST", "/savenetwork", param, "text"))
+		let response = await serialQueue.add(()=>httpAPI("POST", "/config", param))
 		if (!response) {
 			connectButnState = "error"
 		}
