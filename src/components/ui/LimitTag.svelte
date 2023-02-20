@@ -17,10 +17,6 @@
 		switch (type) {
 			case 'time':
 				if (val>0) {	
-					// let h = Math.trunc(val/60)
-					// let m = val % 60
-					// let ret = h?h+"h":""
-					// ret += m?!h?m.toString().padStart(2,'0') +"mn":m.toString().padStart(2,'0'):""
 					let ret = sec2time(val*60)
 					return ret
 				}

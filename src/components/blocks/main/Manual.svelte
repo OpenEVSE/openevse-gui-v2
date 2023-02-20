@@ -1,6 +1,4 @@
 <script>
-	import Borders from "./../../ui/Borders.svelte";
-	import Limit from "./Limit.svelte";
 	import { _ } 					from 'svelte-i18n'
 	import {config_store}			from "./../../../lib/stores/config.js"
 	import {claims_store} 			from "./../../../lib/stores/claims.js"
@@ -13,8 +11,10 @@
 	import {claims_target_store}	from "./../../../lib/stores/claims_target.js"
 	import {onMount} 				from 'svelte'
 	import {httpAPI,
-			clientid2name}				from './../../../lib/utils.js'
+			clientid2name}			from './../../../lib/utils.js'
 	import { serialQueue }			from "./../../../lib/queue.js";
+	import Borders 					from "./../../ui/Borders.svelte";
+	import Limit 					from "./Limit.svelte";
 	import Box 						from "./../../ui/Box.svelte"
 	import ToggleButtonIcon 		from "./../../ui/ToggleButtonIcon.svelte"
 	import Slider 					from "./../../ui/SliderForm.svelte"
@@ -26,15 +26,13 @@
 	let button_divert
 	let button_shaper
 	let waiting = false
-	let time_lmt_status = ""
-	let charge_lmt_status = ""
 
 	async function setChgCurrent(val) {
 		if ($claims_target_store.properties.charge_current == val)
 			return
 		$uistates_store.charge_current = val
 		if (val == $config_store.max_current_soft) {
-			//remove claim
+			//remove claim as val = max current soft
 			delete $override_store.charge_current
 			let res
 			// if no other properties, release override
@@ -76,7 +74,7 @@
 
 	async function setMode(m) {
 		$uistates_store.mode = m
-		// disabling buttons to prevent overlapping orders
+		// disabling buttons to prevent overlapping commands
 		buttons_manual.disabled = true
 		let data = {
 				auto_release: $uisettings_store.auto_release
@@ -200,7 +198,6 @@ $: $claims_target_store.properties.charge_current, set_uistates_charge_current()
 $: stateButtonWatcher($status_store.manual_override) 
 $: set_uistates_shaper($status_store.shaper)
 $: setShaper($uistates_store.shaper)
-$: set_uistates_divertmode($status_store.divertmode)
 
 </script>
 

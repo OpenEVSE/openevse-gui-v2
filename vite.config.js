@@ -59,7 +59,11 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-
+    resolve: {
+      alias: {
+        "~bulma": "bulma",
+      },
+    },
     plugins: [
       visualizer(),
       svelte(),

@@ -5,7 +5,6 @@ const model = {
 		charge_current: undefined,
 		manual_override: undefined,
 		shaper: undefined,
-		divertmode: undefined,
 		autorelease: true,
 		time_lmt: 0,
 		charge_lmt: 0,

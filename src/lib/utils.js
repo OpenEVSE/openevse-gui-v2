@@ -1,9 +1,9 @@
 import {_} 					from 'svelte-i18n'
 import {DateTime} 			from "luxon";
 import {EvseClients}		from "./vars.js"
-import { uistates_store } 	from "./stores/uistates.js";
+import {uistates_store} 	from "./stores/uistates.js";
 import {get} 				from 'svelte/store'
-import { config_store } 	from './stores/config.js';
+import {config_store} 		from './stores/config.js';
 import serialQueue 			from './queue.js';
 
 export async function httpAPI(method,url,body=null,type = "json",timeout = 60000) {
@@ -195,6 +195,7 @@ export function getStateDesc(state) {
 		case 9: return get(_)("logs-states.error-gfitest")
 		case 10: return get(_)("logs-states.error-temp")
 		case 11: return get(_)("logs-states.error-current")
+		// Disabled
 		case 254: return get(_)("logs-states.sleeping")
 		case 255: return get(_)("logs-states.disabled")
 	}
