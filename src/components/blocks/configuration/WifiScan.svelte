@@ -58,7 +58,7 @@
 		}
 		// let param = "ssid=" + ssid + "&pass=" + key
 		connectButnState = "loading"
-		let response = await serialQueue.add(()=>httpAPI("POST", "/config", param))
+		let response = await serialQueue.add(()=>config_store.upload(param))
 		if (!response) {
 			connectButnState = "error"
 		}
