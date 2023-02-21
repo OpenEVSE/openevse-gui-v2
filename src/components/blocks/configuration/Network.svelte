@@ -1,9 +1,11 @@
 <script>
+	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import { _ } 		   		from 'svelte-i18n'
 	import { serialQueue } 		from "./../../../lib/queue.js";
 	import {status_store}		from './../../../lib/stores/status.js'
 	import {config_store}	  	from "./../../../lib/stores/config.js"
 	import InputForm 	   		from "./../../ui/InputForm.svelte"
+	import {reload2hostname}    from "../../../lib/utils.js"
 	import WifiDisplay 	   		from "./WifiDisplay.svelte"
 	import Button 		   		from "../../ui/Button.svelte"
 	import WifiScan 	   		from "./WifiScan.svelte"
@@ -11,7 +13,7 @@
 	import Borders 				from "./../../ui/Borders.svelte";
 	
 
-	// let ipaddress = null
+	let ipaddress = null
 
 	function displayMode(mode) {
 		switch (mode) {
@@ -43,23 +45,23 @@
 		return res
 	}
 
-	// function set_ipaddress(ip) {
-	// 	if (ip != ipaddress) {
-	// 		if (ipaddress) {
-	// 			$uistates_store.alertbox.visible = true
-	// 			$uistates_store.alertbox.title = $_("notification")
-	// 			$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + $config_store.hostname + ".local"
-	// 			$uistates_store.alertbox.button = true
-	// 			$uistates_store.alertbox.action = () => {reload2hostname()}
-	// 		}
-	// 		ipaddress = ip
-	// 	}
-	// }
+	function set_ipaddress(ip) {
+		if (ip != ipaddress) {
+			if (ipaddress) {
+				$uistates_store.alertbox.visible = true
+				$uistates_store.alertbox.title = $_("notification")
+				$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + $config_store.hostname + ".local"
+				$uistates_store.alertbox.button = true
+				$uistates_store.alertbox.action = () => {reload2hostname()}
+			}
+			ipaddress = ip
+		}
+	}
 
 
 
 
-	// $: set_ipaddress($status_store.ipaddress)
+	$: set_ipaddress($status_store.ipaddress)
 
 </script>
 
