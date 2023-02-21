@@ -19,7 +19,7 @@
 	function quit() {
 		$uistates_store.wizard_step = 0
 		$uistates_store.alertbox.title = $_("notification")
-		$uistates_store.alertbox.body = $_("wizard-reload") + "<a href='http://" + $config_store.hostname + ".local" + "'>" + "http://" + $config_store.hostname + ".local" + "</a>"
+		$uistates_store.alertbox.body = $_("wizard-reload") + "<a href='#'" + "http://" + $config_store.hostname + ".local" + "</a>"
 		$uistates_store.alertbox.body += "<br>" + $_("wizard-reload2") + "<br>"
 		$uistates_store.alertbox.visible = true
 		$uistates_store.alertbox.button = true
