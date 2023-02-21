@@ -50,23 +50,25 @@
 
 	function change_ipaddress(ip) {
 		if (ip != ipaddress) {
+			if (ipaddress) {
+				$uistates_store.alertbox.visible = true
+				$uistates_store.alertbox.title = $_("notification")
+				$uistates_store.alertbox.body = $_("config.network.redirect") + ip
+				setTimeout(()=> { 
+					console.log("redirecting url")
+					let url = ""
+					if (!import.meta.env.DEV) {
+						url = "http://" + ip
+					}
+					if (is_wizard) {
+						$uistates_store.wizard_step = 3
+						url = url +  "/#/wizard/" + $uistates_store.wizard_step
+					}
+					else url = url + "/#" + $location
+					window.location.replace(url) }
+				, 3000 )
+			}
 			ipaddress = ip
-			$uistates_store.alertbox.visible = true
-			$uistates_store.alertbox.title = $_("notification")
-			$uistates_store.alertbox.body = $_("config.network.redirect") + ip
-			setTimeout(()=> { 
-				console.log("redirecting url")
-				let url = ""
-				if (!import.meta.env.DEV) {
-					url = "http://" + ipaddress
-				}
-				if (is_wizard) {
-					$uistates_store.wizard_step = 3
-					url = url +  "/#/wizard/" + $uistates_store.wizard_step
-				}
-				else url = url + "/#" + $location
-				window.location.replace(url) }
-			, 3000 )
 		}
 	}
 
