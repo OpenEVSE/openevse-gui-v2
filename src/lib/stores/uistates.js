@@ -1,4 +1,4 @@
-import { writable, derived } from 'svelte/store'
+import { writable, derived, get } from 'svelte/store'
 
 const model = {
 		// copy from other stores
@@ -33,7 +33,9 @@ const model = {
 		alertbox: {
 			title: undefined,
 			body: undefined,
-			visible: false
+			visible: false,
+			button: false,
+			action: ()=>{},
 		}
 }
 
@@ -41,10 +43,22 @@ function createUIStatesStore() {
     const P  = writable(model)
     const { subscribe, set, update } = P
 
+	function resetAlertBox() {
+		let states = get(P)
+		states.alertbox = {
+			title: undefined,
+			body: undefined,
+			visible: false,
+			button: false,
+			action: ()=>{},
+		}
+		P.update(() => states)
+	}
 	
     return {
         subscribe,
         set,
+		resetAlertBox,
         update
     }
 }
