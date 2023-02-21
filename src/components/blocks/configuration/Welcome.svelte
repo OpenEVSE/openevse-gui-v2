@@ -9,11 +9,7 @@
 		<img src={Logo} alt="logo" />
 		<div class="mt-4 mb-4">
 			First initialisation, please follow this quick setup process.
-		</div>
-		<div class="mb-6">
-			If this window is not displayed in your browser
-		</div>
-		
+		</div>	
 	</div>
 
 </Box>
