@@ -86,7 +86,7 @@
 					<Button name={$_("config.network.change")} butn_submit={selectWifi}/>
 				</div>
 				{:else}
-				<WifiScan bind:active={setWifi} ssid={$config_store.ssid} {is_wizard}/>
+				<WifiScan bind:active={setWifi} ssid={$config_store.ssid}/>
 				{/if}
 	</div>
 	{/if}

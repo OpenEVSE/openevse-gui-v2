@@ -15,7 +15,7 @@
 
 	export let active = false
 	export let ssid = ""
-	export let is_wizard = false
+	// export let is_wizard = false
 
 	let key = ""
 	let networks
