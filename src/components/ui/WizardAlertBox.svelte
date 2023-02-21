@@ -3,14 +3,10 @@
 	import { _ } from 'svelte-i18n'
 	let url
 	function copy2cb() {
-		// let uri = window.getSelection().selectAllChildren(url);
-
-
 		var range = document.createRange();
 		range.selectNode(url);
 		window.getSelection().removeAllRanges(); // clear current selection
 		window.getSelection().addRange(range); // to select text
-		// document.execCommand("copy");
 		let selection = window.getSelection().toString();
 		// Copy the text inside the text field
 		navigator.clipboard.writeText(selection);
@@ -20,7 +16,7 @@
 <div class="my-4">
 	<div class="mb-2">
 		{$_("wizard-reload")}
-		<a bind:this={url} href={null} on:click|preventDefault={copy2cb}>http://{$config_store.hostname}.local</a>
+		<a class="has-text-dark" bind:this={url} href={null} on:click|preventDefault={copy2cb}>http://{$config_store.hostname}.local</a>
 	</div>
 	
 	<div>
