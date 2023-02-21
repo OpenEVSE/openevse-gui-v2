@@ -201,6 +201,7 @@
 							title="{$_("config.selfprod.powerratio")}*" 
 							type="number" 
 							placeholder="1.1"
+							step="0.01"
 							bind:this={formdata.divert_PV_ratio.input}
 							bind:value={formdata.divert_PV_ratio.val} 
 							bind:status={formdata.divert_PV_ratio.status}
@@ -215,7 +216,8 @@
 						<InputForm 
 							title="{$_("config.selfprod.smoothattack")}*" 
 								type="number" 
-								placeholder="0.4" 
+								placeholder="0.4"
+								step="0.01" 
 								bind:this={formdata.divert_attack_smoothing_factor.input}
 								bind:value={formdata.divert_attack_smoothing_factor.val} 
 								bind:status={formdata.divert_attack_smoothing_factor.status}
@@ -229,7 +231,8 @@
 						<InputForm 
 							title="{$_("config.selfprod.smoothdecay")}*" 
 							type="number" 
-							placeholder="0.005"
+							placeholder="0.05"
+							step="0.01"
 							bind:this={formdata.divert_decay_smoothing_factor.input}
 							bind:value={formdata.divert_decay_smoothing_factor.val} 
 							bind:status={formdata.divert_decay_smoothing_factor.status}
