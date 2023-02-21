@@ -223,7 +223,7 @@
 			"pass-desc": "WPA Key",
 			"connect": "Connect",
 			"scan": "Scan",
-			"redirect": "Wifi has changed, trying to reload url using hostname, set IP manually if it fails"
+			"redirect": "IP has changed, redirecting to "
 		},
 		"firmware": {
 			"hardware": "Hardware",

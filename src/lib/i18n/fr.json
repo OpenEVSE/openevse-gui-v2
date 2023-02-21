@@ -222,7 +222,7 @@
       "pass-desc": "clef WPA",
       "connect": "Connecter",
       "scan": "Scanner",
-      "redirect": "Le réseau a changé, tentative de redirection vers le nom d'hôte, remplacez l'adresse par l'ip si cela ne fonctionne pas"
+      "redirect": "L'IP a changé, redirection vers "
     },
     "firmware": {
       "hardware": "Matériel",

@@ -171,4 +171,4 @@
 		</div>
 	</form>
 </div>
-<AlertBox title={$_("notification")} body={$_("config.network.redirect")} bind:visible={alertbox_redirect}/>
+<!-- <AlertBox title={$_("notification")} body={$_("config.network.redirect")} bind:visible={alertbox_redirect}/> -->

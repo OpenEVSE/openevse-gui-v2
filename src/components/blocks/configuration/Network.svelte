@@ -1,17 +1,22 @@
 <script>
-	import Borders from "./../../ui/Borders.svelte";
-	import { _ } 		   from 'svelte-i18n'
-	import { serialQueue } from "./../../../lib/queue.js";
-	import {status_store}  from '../../../lib/stores/status.js'
-	import {config_store}  from "../../../lib/stores/config.js"
-	import InputForm 	   from "../../ui/InputForm.svelte"
-	import WifiDisplay 	   from "./WifiDisplay.svelte"
-	import Button 		   from "../../ui/Button.svelte"
-	import WifiScan 	   from "./WifiScan.svelte"
-	import Box 			   from "../../ui/Box.svelte"
+	import { uistates_store } 	from "./../../../lib/stores/uistates.js";
+	import { onMount } 	  	  	from "svelte";
+	import { _ } 		   		from 'svelte-i18n'
+	import { serialQueue } 		from "./../../../lib/queue.js";
+	import {status_store}		from '../../../lib/stores/status.js'
+	import {config_store}	  	from "../../../lib/stores/config.js"
+	import {location} 	   		from 'svelte-spa-router'
+	import InputForm 	   		from "../../ui/InputForm.svelte"
+	import WifiDisplay 	   		from "./WifiDisplay.svelte"
+	import Button 		   		from "../../ui/Button.svelte"
+	import WifiScan 	   		from "./WifiScan.svelte"
+	import Box 			   		from "../../ui/Box.svelte"
+	import Borders 				from "./../../ui/Borders.svelte";
 	
 	
 	export let is_wizard = false
+
+	let ipaddress
 
 	function displayMode(mode) {
 		switch (mode) {
@@ -42,6 +47,35 @@
 		else input_host_status = "error"
 		return res
 	}
+
+	function change_ipaddress(ip) {
+		if (ip != ipaddress) {
+			ipaddress = ip
+			$uistates_store.alertbox.visible = true
+			$uistates_store.alertbox.title = $_("notification")
+			$uistates_store.alertbox.body = $_("config.network.redirect") + ip
+			setTimeout(()=> { 
+				console.log("redirecting url")
+				let url = ""
+				if (!import.meta.env.DEV) {
+					url = "http://" + ipaddress
+				}
+				if (is_wizard) {
+					$uistates_store.wizard_step = 3
+					url = url +  "/#/wizard/" + $uistates_store.wizard_step
+				}
+				else url = url + "/#" + $location
+				window.location.replace(url) }
+			, 3000 )
+		}
+	}
+
+	onMount(()=>{
+		ipaddress = $status_store.ipaddress
+	})
+
+	$: change_ipaddress($uistates_store.ipaddress)
+
 </script>
 
 <Box title={$_("config.titles.network")} icon="mdi:local-area-network" back={true}>
@@ -66,7 +100,7 @@
 				</span>
 				<span>{displayMode($status_store.mode)}</span>
 				<div class="">
-					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.ip")}: </span><span>{$status_store.ipaddress}</span>
+					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.ip")}: </span><span>{ipaddress}</span>
 				</div>
 				<div class="is-flex is-align-items-center">
 					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.connected")}: </span>
