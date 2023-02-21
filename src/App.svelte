@@ -15,10 +15,9 @@
 	import { _, locale } 		from 'svelte-i18n'
 	import "./lib/i18n.js"
 	import 'iconify-icon'
-	import "./lib/icons/icons.js"
 	// import "@fontsource/roboto"
 
-	// import("./lib/icons/icons.js")
+	import("./lib/icons/icons.js")
 
 	function getWindowSize() {
 		$uistates_store.breakpoint = getBreakpoint()
