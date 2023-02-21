@@ -29,7 +29,7 @@
 		if ($status_store.net_connected) {
 			let fw_update_json = await httpAPI("GET",url)
 			if (fw_update_json != "error") {
-				fw.version = fw_update_json.tag_name
+				fw.version = fw_update_json.name
 				fw.name = $config_store.buildenv + ".bin"
 				fw.html_url = fw_update_json.html_url
 				let item = fw_update_json.assets.find(obj => {
