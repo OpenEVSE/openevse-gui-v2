@@ -16,7 +16,7 @@
 	
 	export let is_wizard = false
 
-	let ipaddress
+	let ipaddress = null
 
 	function displayMode(mode) {
 		switch (mode) {
@@ -48,7 +48,7 @@
 		return res
 	}
 
-	function change_ipaddress(ip) {
+	function set_ipaddress(ip) {
 		if (ip != ipaddress) {
 			if (ipaddress) {
 				$uistates_store.alertbox.visible = true
@@ -72,11 +72,8 @@
 		}
 	}
 
-	onMount(()=>{
-		ipaddress = $status_store.ipaddress
-	})
 
-	$: change_ipaddress($uistates_store.ipaddress)
+	$: set_ipaddress($status_store.ipaddress)
 
 </script>
 
