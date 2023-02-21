@@ -1,8 +1,6 @@
 <script>
 	import Borders from "./../../ui/Borders.svelte";
-	import AlertBox from "./../../ui/AlertBox.svelte";
 	import { _ } 		  					 from 'svelte-i18n'
-	import { uistates_store } 				 from "./../../../lib/stores/uistates.js";
 	import { config_store } 				 from "./../../../lib/stores/config.js";
 	import {onMount, onDestroy} 			 from "svelte"
 	import {removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"

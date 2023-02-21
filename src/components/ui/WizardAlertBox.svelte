@@ -18,8 +18,8 @@
 		{$_("wizard-reload")}
 		<a class="has-text-dark" bind:this={url} href={null} on:click|preventDefault={copy2cb}>http://{$config_store.hostname}.local</a>
 	</div>
-	
+<!-- 	
 	<div>
 		{$_("wizard-reload2")}
-	</div>
+	</div> -->
 </div>

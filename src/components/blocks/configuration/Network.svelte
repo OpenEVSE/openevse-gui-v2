@@ -1,11 +1,8 @@
 <script>
-	import { uistates_store } 	from "./../../../lib/stores/uistates.js";
-	import { onMount } 	  	  	from "svelte";
 	import { _ } 		   		from 'svelte-i18n'
 	import { serialQueue } 		from "./../../../lib/queue.js";
 	import {status_store}		from './../../../lib/stores/status.js'
 	import {config_store}	  	from "./../../../lib/stores/config.js"
-	import {reload2hostname}	from './../../../lib/utils.js'
 	import InputForm 	   		from "./../../ui/InputForm.svelte"
 	import WifiDisplay 	   		from "./WifiDisplay.svelte"
 	import Button 		   		from "../../ui/Button.svelte"

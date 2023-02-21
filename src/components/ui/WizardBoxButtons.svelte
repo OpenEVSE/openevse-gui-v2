@@ -32,7 +32,7 @@
 			uistates_store.resetAlertBox()
 			setTimeout(() => {
 				reload2hostname()
-			}, 3000);
+			}, 6000);
 			
 		}
 	}
