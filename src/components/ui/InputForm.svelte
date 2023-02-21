@@ -13,6 +13,7 @@
 	export let maxlength = null
 	export let min = null // for type "number"
 	export let max = null // for type "number"
+	export let step = null
 	export let disabled = false
 	export let readonly = false
 	export let is_inline = false
@@ -79,7 +80,7 @@
 		{#if title}
 		<div class="has-text-weight-semibold has-text-centered  {disabled?"has-text-grey-light":"has-text-dark"}">{title}</div>
 		{/if}
-		<input {readonly} class="input is-info" type={typecss} placeholder={placeholder} value={value!=undefined?value:""} autocomplete="off" {maxlength} min={min} max={max}
+		<input {readonly} {step} class="input is-info" type={typecss} placeholder={placeholder} value={value!=undefined?value:""} autocomplete="off" {maxlength} min={min} max={max}
 		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	style={size?"width: " + size + "ch;":null}>
 		<div class="main ">
 			<span class="is-size-5 state has-background-white is-flex is-align-items-center is-justify-content-center" class:is-hidden={!status}>
@@ -96,10 +97,6 @@
 		<div class="mt-1 mx-2 is-flex is-flex-direction-row is-justify-content-start {disabled?"has-text-grey-light":""}">
 			<Checkbox bind:checked={show} {disabled} small  />
 			<span class="ml-2 has-text-info">{$_("show")}</span>
-			<!-- <label class="checkbox has-text-info">
-				<input type="checkbox" bind:checked={show} {disabled}>
-				{$_("show")}
-			</label> -->
 		</div>
 		{/if}
 </div>
