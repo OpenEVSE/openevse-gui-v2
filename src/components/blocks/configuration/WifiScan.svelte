@@ -11,7 +11,6 @@
 	import WifiIcon 						 from "./../../ui/WifiIcon.svelte";
 	import InputForm 						 from "../../ui/InputForm.svelte"
 	import Button 							 from "../../ui/Button.svelte"
-	import {location} 					     from 'svelte-spa-router'
 
 	export let active = false
 	export let ssid = ""
@@ -56,7 +55,6 @@
 			ssid: ssid,
 			pass: key
 		}
-		// let param = "ssid=" + ssid + "&pass=" + key
 		connectButnState = "loading"
 		let response = await serialQueue.add(()=>config_store.upload(param))
 		if (!response) {
@@ -64,21 +62,6 @@
 		}
 		else {
 			connectButnState = "ok"
-			// alertbox_redirect = true
-			// setTimeout(()=> { 
-			// 	console.log("redirecting url")
-			// 	active = false
-			// 	let url = ""
-			// 	if (!import.meta.env.DEV) {
-			// 		url = "http://" + $config_store.hostname + ".local"
-			// 	}
-			// 	if (is_wizard) {
-			// 		$uistates_store.wizard_step = 3
-			// 		url = url +  "/#/wizard/" + $uistates_store.wizard_step
-			// 	}
-			// 	else url = url + "/#" + $location
-			// 	window.location.replace(url) }
-			// , 5000 )
 		return true
 		}
 		

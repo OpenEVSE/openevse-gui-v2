@@ -1,17 +1,21 @@
 <script>
+	import { uistates_store } from "./../../lib/stores/uistates.js";
 	import Modal from "./Modal.svelte"
 	import {_} from "svelte-i18n"
 	export let title
 	export let body;
 	export let visible = false;
 	export let button = false
-	export let label = ""
+	export let label = "OK"
 	export let closable = true;
 	export let action = () => {}
 
 	function close() {
-		if (closable)
+		if (closable) {
 			visible = false;
+			uistates_store.resetAlertBox()
+		}
+			
 	}
 </script>
 
@@ -25,7 +29,7 @@
 			{/if}
 			</div>
 			<div class="message-body">
-				{body}
+				{@html body}
 			</div>
 			{#if button}
 			<div class="is-flex is-justify-content-center">

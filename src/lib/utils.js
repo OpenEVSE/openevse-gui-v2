@@ -5,6 +5,7 @@ import {uistates_store} 	from "./stores/uistates.js";
 import {get} 				from 'svelte/store'
 import {config_store} 		from './stores/config.js';
 import serialQueue 			from './queue.js';
+import {location} 			from 'svelte-spa-router'
 
 export async function httpAPI(method,url,body=null,type = "json",timeout = 60000) {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
@@ -417,18 +418,22 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 
 }
 
-// export let rapiCmd = async (cmd) => {
-// 	let url = encodeURI("/r?json=1&rapi=" + cmd)
-// 	const res = await httpAPI("GET",url)
-// 	if (res != "error" && res.ret.includes("$OK")) {
-// 		let output = {}
-// 		output.ok = true
-// 		if (res.ret.includes(" "))
-// 			output.val = res.ret.split(" ")[1].split("^")[0]
-// 		return output
-// 	}
-// 	else return {ok: false}
-// }
+export function reload2hostname() {
+	setTimeout(()=> { 
+				console.log("redirecting url")
+
+				let url = ""
+				// if (!import.meta.env.DEV) {
+				if (true) {
+					url = "http://" + get(config_store).hostname + ".local"
+				}
+				if (get(uistates_store).wizard_step != 0) {
+					url = url +  "/#/wizard/" + get(uistates_store).wizard_step
+				}
+				else url = url + "/#"
+				window.location.replace(url) }
+			, 2000 )
+}
 
 export function isFloat(n) {
 	return n === +n && n !== (n|0);

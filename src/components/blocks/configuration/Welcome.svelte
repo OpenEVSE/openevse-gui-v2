@@ -7,8 +7,11 @@
 	<div class="has-text-centered mt-4">
 		<div class="has-text-info is-size-4">Welcome to</div>
 		<img src={Logo} alt="logo" />
-		<div class="mt-4 mb-6">
-			First initialisation, please follow this quick setup process.	
+		<div class="mt-4 mb-4">
+			First initialisation, please follow this quick setup process.
+		</div>
+		<div class="mb-6">
+			If this window is not displayed in your browser
 		</div>
 		
 	</div>

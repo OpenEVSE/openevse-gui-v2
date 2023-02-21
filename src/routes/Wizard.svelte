@@ -2,12 +2,11 @@
 	import WizardBoxButtons   from "./../components/ui/WizardBoxButtons.svelte";
 	import Time 			  from "./../components/blocks/configuration/Time.svelte";
 	import Firmware 		  from "./../components/blocks/configuration/Firmware.svelte";
-	import EvseLight 			  from "./../components/blocks/configuration/EvseLight.svelte";
+	import EvseLight 		  from "./../components/blocks/configuration/EvseLight.svelte";
 	import Network			  from "./../components/blocks/configuration/Network.svelte";
 	import Welcome	 		  from "./../components/blocks/configuration/Welcome.svelte";
 	import { uistates_store } from "./../lib/stores/uistates.js";
 	import { onMount } 		  from "svelte";
-	import {push} 			  from 'svelte-spa-router'
 	
 	export let params = {}
 
@@ -36,7 +35,7 @@
 			{:else if params.step == 2}
 			<Time />
 			{:else if params.step == 3}
-			<Network is_wizard={true}/>
+			<Network/>
 			{:else if params.step == 4}
 			<Firmware />
 			{/if}

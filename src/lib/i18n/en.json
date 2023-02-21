@@ -94,6 +94,8 @@
 	"status-divert-smoothed": "Smoothed Current",
 	"status-shaper-houseload": "House Load",
 	"status-shaper-error": "Shaper: Live Power Load data has not been updated in time, EVSE has been disabled",
+	"wizard-reload": "Quitting wizard. Page will now redirect to ",
+	"wizard-reload2": "If you're not in a browser window, copy the link below and paste it in your browser",
 	"clients": {
 		"manual": "manual",
 		"divert": "divert",

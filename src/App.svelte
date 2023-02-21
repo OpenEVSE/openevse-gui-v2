@@ -110,6 +110,6 @@
 	{:else}
 	<FetchData />
 	{/if}
-	<AlertBox title={$uistates_store.alertbox.title} body={$uistates_store.alertbox.body} bind:visible={$uistates_store.alertbox.visible} />
+	<AlertBox title={$uistates_store.alertbox.title} body={$uistates_store.alertbox.body} bind:visible={$uistates_store.alertbox.visible} button={$uistates_store.alertbox.button} action={$uistates_store.alertbox.action} />
 </main>
 
