@@ -36,6 +36,7 @@ const model = {
 			visible: false,
 			button: false,
 			closable: true,
+			component: undefined,
 			action: ()=>{},
 		}
 }
@@ -52,6 +53,7 @@ function createUIStatesStore() {
 			visible: false,
 			button: false,
 			closable: true,
+			component: undefined,
 			action: ()=>{},
 		}
 		P.update(() => states)

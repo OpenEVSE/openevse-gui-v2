@@ -3,7 +3,8 @@
 	import Modal from "./Modal.svelte"
 	import {_} from "svelte-i18n"
 	export let title
-	export let body;
+	export let body = null;
+	export let component = null
 	export let visible = false;
 	export let button = false
 	export let label = "OK"
@@ -29,7 +30,12 @@
 			{/if}
 			</div>
 			<div class="message-body">
+				{#if body}
 				{@html body}
+				{/if}
+				{#if component}
+				<svelte:component this={component} />
+				{/if}
 			</div>
 			{#if button}
 			<div class="is-flex is-justify-content-center">

@@ -94,7 +94,7 @@
   "status-shaper-houseload": "Total Compteur",
   "status-shaper-error": "Délestage: Total Compteur n'a pas été mis à jours à temps. EVSE désactivé.",
   "wizard-reload": "Fin de l'installation. La page va être redirigée vers ",
-  "wizard-reload2": "Si vous n'êtes pas dans une fenêtre de navigateur, copier l'adresse ci-dessus dans votre navigateur",
+  "wizard-reload2": "Si vous n'êtes pas dans une fenêtre de navigateur, cliquer le lien ci-dessus va copier l'adresse pour que vous puissez la coller dans votre navigateur",
   "clients": {
     "manual": "manuel",
     "divert": "production",

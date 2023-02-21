@@ -4,8 +4,10 @@
 	import {push} 			  from 'svelte-spa-router'
 	import {reload2hostname, httpAPI}  from '../../lib/utils.js'
 	import { _ } 			  from 'svelte-i18n'
+	import AlertBody		  from  './WizardAlertBox.svelte'
 
 	export let step
+
 
 	function goNext() {
 		step +=  1
@@ -19,13 +21,14 @@
 	function quit() {
 		$uistates_store.wizard_step = 0
 		$uistates_store.alertbox.title = $_("notification")
-		$uistates_store.alertbox.body = $_("wizard-reload") + "<a href='#'>http://" + $config_store.hostname + ".local" + "</a>"
-		$uistates_store.alertbox.body += "<br>" + $_("wizard-reload2") + "<br>"
+		// $uistates_store.alertbox.body = $_("wizard-reload") + "<a href='#'>http://" + $config_store.hostname + ".local" + "</a>"
+		// $uistates_store.alertbox.body += "<br>" + $_("wizard-reload2") + "<br>"
+		$uistates_store.alertbox.component = AlertBody
 		$uistates_store.alertbox.visible = true
 		$uistates_store.alertbox.button = true
 		$uistates_store.alertbox.closable = false
 		$uistates_store.alertbox.action = () => { 
-			httpAPI("GET","/apoff")
+			httpAPI("GET","/apoff",null,"text")
 			uistates_store.resetAlertBox()
 			setTimeout(() => {
 				reload2hostname()

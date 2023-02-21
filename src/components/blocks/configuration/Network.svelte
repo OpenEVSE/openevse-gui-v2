@@ -14,7 +14,7 @@
 	import Borders 				from "./../../ui/Borders.svelte";
 	
 
-	let ipaddress = null
+	// let ipaddress = null
 
 	function displayMode(mode) {
 		switch (mode) {
@@ -46,23 +46,23 @@
 		return res
 	}
 
-	function set_ipaddress(ip) {
-		if (ip != ipaddress) {
-			if (ipaddress) {
-				$uistates_store.alertbox.visible = true
-				$uistates_store.alertbox.title = $_("notification")
-				$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + $config_store.hostname + ".local"
-				$uistates_store.alertbox.button = true
-				$uistates_store.alertbox.action = () => {reload2hostname()}
-			}
-			ipaddress = ip
-		}
-	}
+	// function set_ipaddress(ip) {
+	// 	if (ip != ipaddress) {
+	// 		if (ipaddress) {
+	// 			$uistates_store.alertbox.visible = true
+	// 			$uistates_store.alertbox.title = $_("notification")
+	// 			$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + $config_store.hostname + ".local"
+	// 			$uistates_store.alertbox.button = true
+	// 			$uistates_store.alertbox.action = () => {reload2hostname()}
+	// 		}
+	// 		ipaddress = ip
+	// 	}
+	// }
 
 
 
 
-	$: set_ipaddress($status_store.ipaddress)
+	// $: set_ipaddress($status_store.ipaddress)
 
 </script>
 
@@ -103,7 +103,7 @@
 				</span>
 				<span>{displayMode($status_store.mode)}</span>
 				<div class="">
-					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.ip")}: </span><span>{ipaddress}</span>
+					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.ip")}: </span><span>{$status_store.ipaddress}</span>
 				</div>
 				<div class="is-flex is-align-items-center">
 					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.connected")}: </span>
