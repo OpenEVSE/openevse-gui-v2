@@ -431,8 +431,7 @@ export function reload2hostname() {
 					url = url +  "/#/wizard/" + get(uistates_store).wizard_step
 				}
 				else url = url + "/#"
-				// system works only on ios
-				window.open(url,"system") }
+				window.location.replace(url) }
 			, 0)
 }
 
