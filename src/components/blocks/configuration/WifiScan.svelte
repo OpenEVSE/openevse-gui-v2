@@ -36,15 +36,16 @@
 		state = "scan"
 		scanButnState = "loading"
 		networks = []
-		let unfiltered_networks = await serialQueue.add(()=>httpAPI("GET","/scan"))
-		if (unfiltered_networks.length < 1) {
-			// scan again one time
+		let unfiltered_networks
+		// try 4 times to scan
+		for (let i = 0; i < 4; i++) {
 			unfiltered_networks = await serialQueue.add(()=>httpAPI("GET","/scan"))
+			if (unfiltered_networks.length > 0) {
+				break
+			}
 		}
-		if (unfiltered_networks.length > 0) {
-			scanButnState = "ok"
-		}
-		else scanButnState = "error"
+		scanButnState = "ok"
+		
 		networks = removeDuplicateObjects(unfiltered_networks,"ssid")
 		state = ""
 
