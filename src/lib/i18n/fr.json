@@ -225,7 +225,7 @@
       "pass-desc": "clef WPA",
       "connect": "Connecter",
       "scan": "Scanner",
-      "redirect": "L'IP a changé, redirection vers "
+      "redirect": "L'IP a changé, presser OK une fois reconnecté à votre réseau wifi pour être redirigé vers "
     },
     "firmware": {
       "hardware": "Matériel",

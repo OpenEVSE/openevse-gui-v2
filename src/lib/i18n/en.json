@@ -226,7 +226,7 @@
 			"pass-desc": "WPA Key",
 			"connect": "Connect",
 			"scan": "Scan",
-			"redirect": "IP has changed, redirecting to "
+			"redirect": "IP has changed, press OK when you're connected to your WiFi Network to be redirected to "
 		},
 		"firmware": {
 			"hardware": "Hardware",
