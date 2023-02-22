@@ -20,7 +20,6 @@
 	let state = ""
 	let scanButnState = ""
 	let connectButnState = ""
-	let alertbox_redirect = false
 
 	onMount(() => {
 		scanWifi()
@@ -30,17 +29,32 @@
 			clearTimeout(timeout)
 	})
 
+
 	async function scanWifi() {
 		state = "scan"
 		scanButnState = "loading"
 		networks = []
 		let unfiltered_networks
 		unfiltered_networks = await serialQueue.add(()=>httpAPI("GET","/scan"))
-		if (unfiltered_networks)
+		if (unfiltered_networks) {
 			networks = removeDuplicateObjects(unfiltered_networks,"ssid")
+			state = ""
+			scanButnState = "ok"
+		}
 		else networks = []
-		state = ""
-		scanButnState = "ok"
+		// repoll /scan to get result if no result yet 
+		if (!networks.length) {
+			// get scan result
+			setTimeout(async () => {
+				unfiltered_networks = await serialQueue.add(()=>httpAPI("GET","/scan"))
+				if (unfiltered_networks)
+					networks = removeDuplicateObjects(unfiltered_networks,"ssid")
+				else networks = []
+				state = ""
+				scanButnState = "ok"
+			}, 2000);
+		}
+
 
 		return networks
 	}

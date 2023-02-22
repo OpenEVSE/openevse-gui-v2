@@ -5,7 +5,6 @@
 	import {status_store}		from './../../../lib/stores/status.js'
 	import {config_store}	  	from "./../../../lib/stores/config.js"
 	import InputForm 	   		from "./../../ui/InputForm.svelte"
-	import {reload2ip}    from "../../../lib/utils.js"
 	import {location} 			from 'svelte-spa-router'
 	import WifiDisplay 	   		from "./WifiDisplay.svelte"
 	import Button 		   		from "../../ui/Button.svelte"
