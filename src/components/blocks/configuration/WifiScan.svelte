@@ -40,7 +40,7 @@
 			networks = removeDuplicateObjects(unfiltered_networks,"ssid")
 			}
 			else networks = []
-		return true
+			return true
 		}
 	}
 
@@ -74,11 +74,13 @@
 			}
 		}
 		else {
-			// retry we got http 500 during scan
-			if (await handleWifiScan()) 
-				scanButnState = "ok"
-			else scanButnState = "error"
-			state = ""
+			setTimeout(async () => {
+				// retry we got http 500 during scan
+				if (await handleWifiScan()) 
+					scanButnState = "ok"
+				else scanButnState = "error"
+				state = ""
+			}, 3000);
 		}
 	}
 
