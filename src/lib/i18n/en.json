@@ -213,6 +213,7 @@
 			},
 			"mode": "Mode",
 			"ssid": "SSID",
+			"channel": "Channel",
 			"signal": "Signal",
 			"change": "Change WiFi Network",
 			"ip": "IP address",

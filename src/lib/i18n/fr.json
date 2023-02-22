@@ -213,6 +213,7 @@
       "mode": "Mode",
       "ssid": "SSID",
       "signal": "Signal",
+      "channel": "Canal",
       "change": "Changer de réseau",
       "ip": "Adresse IP",
       "connected": "Connecté",

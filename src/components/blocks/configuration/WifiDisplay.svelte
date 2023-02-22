@@ -19,8 +19,8 @@
 	<table class="table has-text-centered is-fullwidth is-bordered is-size-7">
 		<thead>
 			<tr class="has-background-info">
-			<th class="has-text-white has-text-centered" >{$_("config.network.ssid")}</th>
-			<th class="has-text-white has-text-centered">{$_("config.network.signal")}</th>
+				<th class="has-text-white has-text-centered" >{$_("config.network.ssid")}</th>
+				<th class="has-text-white has-text-centered">{$_("config.network.signal")}</th>
 			</tr>
 		</thead>
 		<tbody>
