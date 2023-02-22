@@ -116,7 +116,7 @@
 					{:else if state == "scan"}
 					<tr class="has-background-light">
 						<td class="has-text-centered is-vcentered has-text-weight-semibold">{$_("config.network.scanning")}</td>
-						<td class="has-text-info is-size-5"><Loader /></td>
+						<td class="has-text-info is-size-5 is-flex is-justify-content-center"><Loader /></td>
 					</tr>
 					{:else}
 						<tr class="has-background-light">
