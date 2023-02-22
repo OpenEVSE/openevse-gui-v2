@@ -49,40 +49,20 @@
 	async function asyncWifiScan(auto = false) {
 		if(auto == true && $uistates_store.networks.length > 0)
 			return
-		if (!scan_cnt) {
 			state = "scan"
 			scanButnState = "loading"
-		}
 		if (await handleWifiScan()) {
-			scan_cnt += 1
-			if (!networks.length) {
-				if (scan_cnt <= 10 ) {
-					// no result yet, retry
-					timeout = setTimeout( async () => {
-					await asyncWifiScan()
-					}, scan_cnt == 1 ? 5000:1000);
-				}
-				else {
-					// no network found
-					$uistates_store.networks = []
-					state = ""
-					scanButnState = "error"
-					scan_cnt = 0
-				}
-			}
-			else {
-				// success
-				$uistates_store.networks = networks
-				state = ""
-				scanButnState = "ok"
-				scan_cnt = 0
-			}
+			// success
+			$uistates_store.networks = networks
+			state = ""
+			scanButnState = "ok"
+			scan_cnt = 0
 		}
 		else {
-			// got http 500 retry
-			timeout = setTimeout(async () => {
-				await asyncWifiScan()
-			}, scan_cnt == 1 ? 5000:1000);
+			// got http 500
+			state = ""
+			scanButnState = "error"
+			scan_cnt = 0
 		}
 	}
 
@@ -98,6 +78,7 @@
 		}
 		else {
 			connectButnState = "ok"
+			active = false
 		return true
 		}
 		
@@ -121,7 +102,7 @@
 		}
 
 		table {
-			height:100%;
+			height:fit-content;
 		}
 		.content {
 			max-width: 500px;
@@ -129,61 +110,63 @@
 			margin-right: auto;;
 		}
 </style>
-<div>
-	<div class="content">
-		<table class="table is-hoverable has-text-centered is-fullwidth is-bordered is-size-7 mb-3">
-			<thead>
-				<tr class="has-background-info ">
-					<th class="has-text-white has-text-centered">{$_("config.network.ssid")}</th>
-					<th class="has-text-white has-text-centered">{$_("config.network.signal")}</th>
-				</tr>
-			</thead>
-			<tbody>
-					{#if $uistates_store.networks && $uistates_store.networks.length > 0}
-						{#each $uistates_store.networks as network}
-							<tr class="has-background-light">
-								<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
-								<td class="pt-2 no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
-									<WifiIcon dbm={network.rssi}/>
-								</td>
-							</tr>
-						{/each}
-					{:else if state == "scan"}
-					<tr class="has-background-light">
-						<td class="has-text-centered is-vcentered has-text-weight-semibold">{$_("config.network.scanning")}</td>
-						<td class="has-text-info is-size-6"></td>
-					</tr>
-					{:else}
-						<tr class="has-background-light">
-							<th class="has-text-centered is-vcentered has-text-weight-semibold">{$_("config.network.failed")}</th>
-							<td class="has-text-info is-size-6"></td>
-						</tr>
-					{/if}
-			</tbody>
-
-		</table>
-		<div class="my-2 has-text-centered">
-			<Button name={$_("config.network.scan")} butn_submit={asyncWifiScan} bind:state={scanButnState} disabled={state == "scan"}/>
-		</div>
-	</div>
-
-
-	<form on:submit|preventDefault>
-		<div class="is-flex is-justify-content-center ">
-			<Borders>
-				<div class="is-flex is-flex-direction-column is-justify-content-center">
-					<InputForm type="text" title={$_("config.network.ssid")} placeholder={$_("config.network.ssid-desc")} bind:value={ssid} />
-					<InputForm type="password" title={$_("config.network.pass")} placeholder={$_("config.network.pass-desc")} bind:value={key} />
-				</div>
-				<div class="is-flex is-align-items-center is-justify-content-center">
-					<Button name={$_("config.network.connect")} color="is-primary" bind:state={connectButnState} butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
+<div class="content">
+	<div>
+		<Borders>
+			<form on:submit|preventDefault>
+				<div class=" ">
 					
-					{#if $config_store.ssid}
-					<Button name={$_("cancel")} color="is-danger" butn_submit={() => active = false}/>
-					{/if}
+						<div class="is-flex is-flex-direction-column is-justify-content-center ">
+							<InputForm type="text" title={$_("config.network.ssid")} placeholder={$_("config.network.ssid-desc")} bind:value={ssid} />
+							<InputForm type="password" title={$_("config.network.pass")} placeholder={$_("config.network.pass-desc")} bind:value={key} />
+						</div>
+						<div class="is-flex is-align-items-center is-justify-content-center">
+							<Button name={$_("config.network.connect")} color="is-primary" bind:state={connectButnState} butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
+							
+							{#if $config_store.ssid}
+							<Button name={$_("cancel")} color="is-danger" butn_submit={() => active = false}/>
+							{/if}
+							<div class="my-2 has-text-centered">
+								<Button name={$_("config.network.scan")} butn_submit={asyncWifiScan} bind:state={scanButnState} disabled={state == "scan"}/>
+							</div>
+						</div>
 				</div>
-			</Borders>
-		</div>
-	</form>
+			</form>
+			
+			<div class="">
+				<table class="table is-hoverable has-text-centered is-fullwidth is-bordered is-size-7 mb-3">
+					<thead>
+						<tr class="has-background-info ">
+							<th class="has-text-white has-text-centered">{$_("config.network.ssid")}</th>
+							<th class="has-text-white has-text-centered">{$_("config.network.signal")}</th>
+						</tr>
+					</thead>
+					<tbody>
+							{#if $uistates_store.networks && $uistates_store.networks.length > 0}
+								{#each $uistates_store.networks as network}
+									<tr class="has-background-light">
+										<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
+										<td class="pt-2 no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
+											<WifiIcon dbm={network.rssi}/>
+										</td>
+									</tr>
+								{/each}
+							{:else if state == "scan"}
+							<tr class="has-background-light">
+								<td class="has-text-centered is-vcentered has-text-weight-semibold">{$_("config.network.scanning")}</td>
+								<td class="has-text-info is-size-6"></td>
+							</tr>
+							{:else}
+								<tr class="has-background-light">
+									<th class="has-text-centered is-vcentered has-text-weight-semibold">{$_("config.network.failed")}</th>
+									<td class="has-text-info is-size-6"></td>
+								</tr>
+							{/if}
+					</tbody>
+
+				</table>
+			</div>
+		</Borders>
+	</div>
 </div>
 <!-- <AlertBox title={$_("notification")} body={$_("config.network.redirect")} bind:visible={alertbox_redirect}/> -->

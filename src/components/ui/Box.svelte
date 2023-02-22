@@ -1,14 +1,12 @@
 <script>
-	import Button from "./Button.svelte";
 	import { _ } 		   		from 'svelte-i18n'
 	import { onMount } 			from "svelte";
-	import { uistates_store }	from "./../../lib/stores/uistates.js";
 	import Help 			 	from "./Help.svelte"
-	import { scale, fade} 	 	from 'svelte/transition'
+	import { scale} 	 	from 'svelte/transition'
 	import { expoInOut }	 	from 'svelte/easing'	
 	import {location} 			from 'svelte-spa-router'
 
-	export let title = "title"
+	export let title = null
 	export let has_help = false
 	export let visible = true
 	export let icon = ""
@@ -83,7 +81,7 @@
 			</a>
 		</div>
 	</div>
-	
+	{#if title}
 	<div class="is-uppercase has-text-dark is-size-5 has-text-weight-bold is-flex is-align-items-center is-justify-content-center is-flex-direction-row px-2 py-1">
 
 		{#if icon}
@@ -93,6 +91,7 @@
 		{/if}
 		<span class="ml-2 is-size-5">{title}</span>
 	</div>
+	{/if}
 
 	<div  class="px-2"><hr></div>
 	<div  class="maincontent is-flex is-flex-direction-column px-2 py-2" >
