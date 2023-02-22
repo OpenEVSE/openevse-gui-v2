@@ -13,7 +13,7 @@
 	export let active = false
 	export let ssid = ""
 	// export let is_wizard = false
-
+	let scan_cnt = 0
 	let key = ""
 	let networks
 	let timeout
@@ -22,7 +22,8 @@
 	let connectButnState = ""
 
 	onMount(() => {
-		scanWifi()
+		// scanWifi()
+		asyncWifiScan()
 	})
 	onDestroy(() => {
 		if (timeout)
@@ -44,43 +45,39 @@
 		}
 	}
 
-	async function scanWifi() {
-		state = "scan"
-		scanButnState = "loading"
+	async function asyncWifiScan() {
+		if (!scan_cnt) {
+			state = "scan"
+			scanButnState = "loading"
+		}
 		if (await handleWifiScan()) {
-			// repoll /scan to get result if no result yet 
+			scan_cnt += 1
 			if (!networks.length) {
-				setTimeout(
-					async () => {
-						
-						if (await handleWifiScan()) {
-							state = ""
-							scanButnState = "ok"
-						}
-						else {
-							// retry we got http 500 during scan
-							if (await handleWifiScan()) 
-								scanButnState = "ok"
-							else scanButnState = "error"
-							state = ""
-							
-						}
-					}
-				, 3000);
+				if (scan_cnt <= 5 ) {
+					// no result yet, retry
+					setTimeout( async () => {
+					await asyncWifiScan()
+					}, 4000);
+				}
+				else {
+					// no network found
+					state = ""
+					scanButnState = "error"
+					scan_cnt = 0
+				}
 			}
 			else {
+				// success 
 				state = ""
 				scanButnState = "ok"
+				scan_cnt = 0
 			}
 		}
 		else {
+			// got http 500 retry
 			setTimeout(async () => {
-				// retry we got http 500 during scan
-				if (await handleWifiScan()) 
-					scanButnState = "ok"
-				else scanButnState = "error"
-				state = ""
-			}, 3000);
+				await asyncWifiScan()
+			}, 2000);
 		}
 	}
 
@@ -102,7 +99,8 @@
 	}
 
 	function scanAgain() {
-		scanWifi()
+		// scanWifi()
+		asyncWifiScan()
 		// networks = []
 
 		return "Scanning ..."
