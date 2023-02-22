@@ -20,6 +20,7 @@
 	let state = ""
 	let scanButnState = ""
 	let connectButnState = ""
+	let networks
 
 	onMount(() => {
 		// scanWifi()
@@ -38,9 +39,9 @@
 		}
 		else {
 			if (unfiltered_networks.length) {
-			$uistates_store.networks = removeDuplicateObjects(unfiltered_networks,"ssid")
+			networks = removeDuplicateObjects(unfiltered_networks,"ssid")
 			}
-			else $uistates_store.networks = []
+			else networks = []
 			return true
 		}
 	}
@@ -54,22 +55,24 @@
 		}
 		if (await handleWifiScan()) {
 			scan_cnt += 1
-			if (!$uistates_store.networks.length) {
-				if (scan_cnt <= 5 ) {
+			if (!networks.length) {
+				if (scan_cnt <= 10 ) {
 					// no result yet, retry
 					timeout = setTimeout( async () => {
 					await asyncWifiScan()
-					}, 4000);
+					}, scan_cnt == 1 ? 5000:1000);
 				}
 				else {
 					// no network found
+					$uistates_store.networks = []
 					state = ""
 					scanButnState = "error"
 					scan_cnt = 0
 				}
 			}
 			else {
-				// success 
+				// success
+				$uistates_store.networks = networks
 				state = ""
 				scanButnState = "ok"
 				scan_cnt = 0
@@ -79,7 +82,7 @@
 			// got http 500 retry
 			timeout = setTimeout(async () => {
 				await asyncWifiScan()
-			}, 3000);
+			}, scan_cnt == 1 ? 5000:1000);
 		}
 	}
 
