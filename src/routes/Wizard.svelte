@@ -21,7 +21,7 @@
 
 	function set_ipaddress(ip) {
 		if (ip != ipaddress) {
-			if (ip && ip != "192.168.4.1") {
+			if (ip && ip != "192.168.4.1" && ipaddress) {
 				$uistates_store.alertbox.visible = true
 				$uistates_store.alertbox.title = $_("notification")
 				$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + ip + "/#" + $location
