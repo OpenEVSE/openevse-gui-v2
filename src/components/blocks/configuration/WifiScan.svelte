@@ -29,35 +29,59 @@
 			clearTimeout(timeout)
 	})
 
+	async function handleWifiScan() {
+		let unfiltered_networks
+		unfiltered_networks = await serialQueue.add(()=>httpAPI("GET","/scan"))
+		if (unfiltered_networks == "error") {
+			return false
+		}
+		else {
+			if (unfiltered_networks.length) {
+			networks = removeDuplicateObjects(unfiltered_networks,"ssid")
+			}
+			else networks = []
+		return true
+		}
+	}
 
 	async function scanWifi() {
 		state = "scan"
 		scanButnState = "loading"
-		networks = []
-		let unfiltered_networks
-		unfiltered_networks = await serialQueue.add(()=>httpAPI("GET","/scan"))
-		if (unfiltered_networks) {
-			networks = removeDuplicateObjects(unfiltered_networks,"ssid")
-			state = ""
-			scanButnState = "ok"
-		}
-		else networks = []
-		// repoll /scan to get result if no result yet 
-		if (!networks.length) {
-			// get scan result
-			setTimeout(async () => {
-				unfiltered_networks = await serialQueue.add(()=>httpAPI("GET","/scan"))
-				if (unfiltered_networks)
-					networks = removeDuplicateObjects(unfiltered_networks,"ssid")
-				else networks = []
+		if (await handleWifiScan()) {
+			// repoll /scan to get result if no result yet 
+			if (!networks.length) {
+				setTimeout(
+					async () => {
+						
+						if (await handleWifiScan()) {
+							state = ""
+							scanButnState = "ok"
+						}
+						else {
+							// retry we got http 500 during scan
+							if (await handleWifiScan()) 
+								scanButnState = "ok"
+							else scanButnState = "error"
+							state = ""
+							
+						}
+					}
+				, 3000);
+			}
+			else {
 				state = ""
 				scanButnState = "ok"
-			}, 2000);
+			}
 		}
-
-
-		return networks
+		else {
+			// retry we got http 500 during scan
+			if (await handleWifiScan()) 
+				scanButnState = "ok"
+			else scanButnState = "error"
+			state = ""
+		}
 	}
+
 	async function connectWifi() {
 		let param = {
 			ssid: ssid,
