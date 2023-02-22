@@ -1,5 +1,5 @@
 <script>
-	import { config_store } from "./../../lib/stores/config.js";
+	import { status_store } from "./../../lib/stores/status.js";
 	import { _ } from 'svelte-i18n'
 	let url
 	function copy2cb() {
@@ -16,7 +16,7 @@
 <div class="my-4">
 	<div class="mb-2">
 		{$_("wizard-reload")}
-		<a class="has-text-dark" bind:this={url} href={null} on:click|preventDefault={copy2cb}>http://{$config_store.hostname}.local</a>
+		<a class="has-text-dark" bind:this={url} href={null} on:click|preventDefault={copy2cb}>http://{$status_store.ipaddress}</a>
 	</div>
 <!-- 	
 	<div>

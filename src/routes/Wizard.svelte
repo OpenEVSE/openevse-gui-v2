@@ -1,4 +1,5 @@
 <script>
+	import { status_store } from "./../lib/stores/status.js";
 	import WizardBoxButtons   from "./../components/ui/WizardBoxButtons.svelte";
 	import Time 			  from "./../components/blocks/configuration/Time.svelte";
 	import Firmware 		  from "./../components/blocks/configuration/Firmware.svelte";
@@ -7,13 +8,31 @@
 	import Welcome	 		  from "./../components/blocks/configuration/Welcome.svelte";
 	import { uistates_store } from "./../lib/stores/uistates.js";
 	import { onMount } 		  from "svelte";
-	
+	import {location} 		  from 'svelte-spa-router'
+	import { _ } 		   	  from 'svelte-i18n'
+
 	export let params = {}
+	let ipaddress
 
 	onMount(()=> {
 		if (params.step)
 		$uistates_store.wizard_step = parseInt(params.step)
 	})
+
+	function set_ipaddress(ip) {
+		if (ip != ipaddress) {
+			if (ip && ip != "192.168.4.1") {
+				$uistates_store.alertbox.visible = true
+				$uistates_store.alertbox.title = $_("notification")
+				$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + ip + "/#" + $location
+				$uistates_store.alertbox.button = true
+				$uistates_store.alertbox.action = () => {window.location.href = "http://" + ip + "/#" + $location}
+			}
+			ipaddress = ip
+		}
+	}
+
+	$: set_ipaddress($status_store.ipaddress)
 	$: params.step, $uistates_store.wizard_step = parseInt(params.step)?parseInt(params.step):0
 
 </script>

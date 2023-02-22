@@ -93,7 +93,7 @@
   "status-divert-smoothed": "Courant Lissé",
   "status-shaper-houseload": "Total Compteur",
   "status-shaper-error": "Délestage: Total Compteur n'a pas été mis à jours à temps. EVSE désactivé.",
-  "wizard-reload": "Fin de l'installation. En pressant OK, la page va être redirigée dans quelques secondes vers ",
+  "wizard-reload": "Fin de l'installation. La nouvelle adresse IP n'a pas pu être récupérée automatiquement. En pressant OK, la page va tenter d'être redirigée dans quelques secondes vers ",
   "wizard-reload2": "Si vous n'êtes pas dans une fenêtre de navigateur, cliquer le lien ci-dessus va copier l'adresse pour que vous puissez la coller dans votre navigateur",
   "clients": {
     "manual": "manuel",

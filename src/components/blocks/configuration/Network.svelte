@@ -13,8 +13,6 @@
 	import Borders 				from "./../../ui/Borders.svelte";
 	
 
-	let ipaddress = null
-
 	function displayMode(mode) {
 		switch (mode) {
 			case "AP":
@@ -45,23 +43,6 @@
 		return res
 	}
 
-	function set_ipaddress(ip) {
-		if (ip != ipaddress) {
-			if (ip && ip != "192.168.4.1") {
-				$uistates_store.alertbox.visible = true
-				$uistates_store.alertbox.title = $_("notification")
-				$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + ip + "/#" + $location
-				$uistates_store.alertbox.button = true
-				$uistates_store.alertbox.action = () => {window.location.href = "http://" + ip + "/#" + $location}
-			}
-			ipaddress = ip
-		}
-	}
-
-
-
-	console.log($location)
-	$: set_ipaddress($status_store.ipaddress)
 
 </script>
 
