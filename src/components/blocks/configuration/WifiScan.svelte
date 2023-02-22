@@ -50,7 +50,7 @@
 			return
 		if (!scan_cnt) {
 			state = "scan"
-			// scanButnState = "loading"
+			scanButnState = "loading"
 		}
 		if (await handleWifiScan()) {
 			scan_cnt += 1
@@ -88,7 +88,7 @@
 			ssid: ssid,
 			pass: key
 		}
-		// connectButnState = "loading"
+		connectButnState = "loading"
 		let response = await serialQueue.add(()=>config_store.upload(param))
 		if (!response) {
 			connectButnState = "error"
@@ -148,7 +148,7 @@
 					{:else if state == "scan"}
 					<tr class="has-background-light">
 						<td class="has-text-centered is-vcentered has-text-weight-semibold">{$_("config.network.scanning")}</td>
-						<td class="has-text-info is-size-5 is-flex is-justify-content-center"><Loader /></td>
+						<td class="has-text-info is-size-6"></td>
 					</tr>
 					{:else}
 						<tr class="has-background-light">
