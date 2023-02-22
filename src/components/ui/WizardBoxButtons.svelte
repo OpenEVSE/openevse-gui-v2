@@ -1,11 +1,10 @@
 <script>
-	import { status_store } from "./../../lib/stores/status.js";
-	import { config_store }   from "./../../lib/stores/config.js";
-	import { uistates_store } from "./../../lib/stores/uistates.js";
-	import {push} 			  from 'svelte-spa-router'
-	import {reload2hostname, httpAPI}  from '../../lib/utils.js'
-	import { _ } 			  from 'svelte-i18n'
-	import AlertBody		  from  './WizardAlertBox.svelte'
+	import { status_store } 	from "./../../lib/stores/status.js";
+	import { uistates_store } 	from "./../../lib/stores/uistates.js";
+	import {push} 			  	from 'svelte-spa-router'
+	import {reload2ip, httpAPI} from '../../lib/utils.js'
+	import { _ } 			  	from 'svelte-i18n'
+	import AlertBody		  	from  './WizardAlertBox.svelte'
 
 	export let step
 
@@ -33,7 +32,7 @@
 				httpAPI("GET","/apoff",null,"text")
 				uistates_store.resetAlertBox()
 				setTimeout(() => {
-					reload2hostname()
+					reload2ip()
 				}, 6000);
 			}
 		}

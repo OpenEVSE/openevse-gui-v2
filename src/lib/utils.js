@@ -6,6 +6,7 @@ import {get} 				from 'svelte/store'
 import {config_store} 		from './stores/config.js';
 import serialQueue 			from './queue.js';
 import {location} 			from 'svelte-spa-router'
+import { status_store } from './stores/status.js';
 
 export async function httpAPI(method,url,body=null,type = "json",timeout = 60000) {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
@@ -418,15 +419,22 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 
 }
 
-export function reload2hostname() {
+export function reload2ip() {
 	setTimeout(()=> { 
 				console.log("redirecting url")
 
 				let url = ""
 				// if (!import.meta.env.DEV) {
-				if (true) {
-					url = "http://" + get(config_store).hostname + ".local"
+				// 	url = "http://" + get(config_store).hostname + ".local"
+				// }
+				//using IP if ready
+				if (get(status_store).ipaddress != "192.168.4.1") {
+					url = "http://" + get(status_store)
 				}
+				// or trying with hostname
+				else 
+					url = "http://" + get(config_store).hostname + ".local"
+
 				if (get(uistates_store).wizard_step != 0) {
 					url = url +  "/#/wizard/" + get(uistates_store).wizard_step
 				}

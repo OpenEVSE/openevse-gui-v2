@@ -5,7 +5,8 @@
 	import {status_store}		from './../../../lib/stores/status.js'
 	import {config_store}	  	from "./../../../lib/stores/config.js"
 	import InputForm 	   		from "./../../ui/InputForm.svelte"
-	import {reload2hostname}    from "../../../lib/utils.js"
+	import {reload2ip}    from "../../../lib/utils.js"
+	import {location} 			from 'svelte-spa-router'
 	import WifiDisplay 	   		from "./WifiDisplay.svelte"
 	import Button 		   		from "../../ui/Button.svelte"
 	import WifiScan 	   		from "./WifiScan.svelte"
@@ -50,9 +51,9 @@
 			if (ipaddress) {
 				$uistates_store.alertbox.visible = true
 				$uistates_store.alertbox.title = $_("notification")
-				$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + $config_store.hostname + ".local"
+				$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + ip + "/#" + $location
 				$uistates_store.alertbox.button = true
-				$uistates_store.alertbox.action = () => {reload2hostname()}
+				$uistates_store.alertbox.action = () => {window.location.href = "http://" + ip + "/#" + $location}
 			}
 			ipaddress = ip
 		}
@@ -60,7 +61,7 @@
 
 
 
-
+	console.log($location)
 	$: set_ipaddress($status_store.ipaddress)
 
 </script>
