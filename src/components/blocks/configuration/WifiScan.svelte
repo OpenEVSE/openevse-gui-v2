@@ -50,14 +50,14 @@
 			return
 		if (!scan_cnt) {
 			state = "scan"
-			scanButnState = "loading"
+			// scanButnState = "loading"
 		}
 		if (await handleWifiScan()) {
 			scan_cnt += 1
 			if (!$uistates_store.networks.length) {
 				if (scan_cnt <= 5 ) {
 					// no result yet, retry
-					setTimeout( async () => {
+					timeout = setTimeout( async () => {
 					await asyncWifiScan()
 					}, 4000);
 				}
@@ -77,9 +77,9 @@
 		}
 		else {
 			// got http 500 retry
-			setTimeout(async () => {
+			timeout = setTimeout(async () => {
 				await asyncWifiScan()
-			}, 2000);
+			}, 3000);
 		}
 	}
 
@@ -88,7 +88,7 @@
 			ssid: ssid,
 			pass: key
 		}
-		connectButnState = "loading"
+		// connectButnState = "loading"
 		let response = await serialQueue.add(()=>config_store.upload(param))
 		if (!response) {
 			connectButnState = "error"
@@ -98,14 +98,6 @@
 		return true
 		}
 		
-	}
-
-	function scanAgain() {
-		// scanWifi()
-		asyncWifiScan()
-		// networks = []
-
-		return "Scanning ..."
 	}
 </script>
 
@@ -167,6 +159,9 @@
 			</tbody>
 
 		</table>
+		<div class="my-2 has-text-centered">
+			<Button name={$_("config.network.scan")} butn_submit={asyncWifiScan} bind:state={scanButnState} disabled={state == "scan"}/>
+		</div>
 	</div>
 
 
@@ -179,7 +174,7 @@
 				</div>
 				<div class="is-flex is-align-items-center is-justify-content-center">
 					<Button name={$_("config.network.connect")} color="is-primary" bind:state={connectButnState} butn_submit={connectWifi} disabled={ssid =="" || key == ""?true:false}/>
-					<Button name={$_("config.network.scan")} butn_submit={scanAgain} bind:state={scanButnState}/>
+					
 					{#if $config_store.ssid}
 					<Button name={$_("cancel")} color="is-danger" butn_submit={() => active = false}/>
 					{/if}

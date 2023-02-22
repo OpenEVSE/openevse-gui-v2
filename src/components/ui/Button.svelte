@@ -25,6 +25,9 @@
 		if (icon && !width && name) {
 			width = name.length + 6 + "ch"
 		}
+		else if (!width && name) {
+			width = name.length + 3 + "ch"
+		}
 	})
 
 	onDestroy(()=> {
