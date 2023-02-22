@@ -38,7 +38,8 @@ const model = {
 			closable: true,
 			component: undefined,
 			action: ()=>{},
-		}
+		},
+		networks: []
 }
 
 function createUIStatesStore() {
@@ -58,11 +59,18 @@ function createUIStatesStore() {
 		}
 		P.update(() => states)
 	}
+	function setObject(obj, data) {
+		//write nested object
+		let states = get(P)
+		states[obj] = data
+		P.update(()=> states)
+	}
 	
     return {
         subscribe,
         set,
 		resetAlertBox,
+		setObject,
         update
     }
 }

@@ -1,5 +1,6 @@
 <script>
-	import Borders from "./../../ui/Borders.svelte";
+	import { uistates_store } 				 from "./../../../lib/stores/uistates.js";
+	import Borders 							 from "./../../ui/Borders.svelte";
 	import { _ } 		  					 from 'svelte-i18n'
 	import { config_store } 				 from "./../../../lib/stores/config.js";
 	import {onMount, onDestroy} 			 from "svelte"
@@ -15,7 +16,6 @@
 	// export let is_wizard = false
 	let scan_cnt = 0
 	let key = ""
-	let networks
 	let timeout
 	let state = ""
 	let scanButnState = ""
@@ -23,7 +23,7 @@
 
 	onMount(() => {
 		// scanWifi()
-		asyncWifiScan()
+		asyncWifiScan(true)
 	})
 	onDestroy(() => {
 		if (timeout)
@@ -38,21 +38,23 @@
 		}
 		else {
 			if (unfiltered_networks.length) {
-			networks = removeDuplicateObjects(unfiltered_networks,"ssid")
+			$uistates_store.networks = removeDuplicateObjects(unfiltered_networks,"ssid")
 			}
-			else networks = []
+			else $uistates_store.networks = []
 			return true
 		}
 	}
 
-	async function asyncWifiScan() {
+	async function asyncWifiScan(auto = false) {
+		if(auto == true && $uistates_store.networks.length > 0)
+			return
 		if (!scan_cnt) {
 			state = "scan"
 			scanButnState = "loading"
 		}
 		if (await handleWifiScan()) {
 			scan_cnt += 1
-			if (!networks.length) {
+			if (!$uistates_store.networks.length) {
 				if (scan_cnt <= 5 ) {
 					// no result yet, retry
 					setTimeout( async () => {
@@ -142,8 +144,8 @@
 				</tr>
 			</thead>
 			<tbody>
-					{#if networks && networks.length > 0}
-						{#each networks as network}
+					{#if $uistates_store.networks && $uistates_store.networks.length > 0}
+						{#each $uistates_store.networks as network}
 							<tr class="has-background-light">
 								<td class="m-0 p-0"><button class=" is-clickable cellbutton has-text-weight-semibold" on:click={()=> {ssid=network.ssid}}>{network.ssid}</button></td>
 								<td class="pt-2 no-pointer has-tooltip-arrow has-tooltip-top nopointer" data-tooltip={network.rssi + " dBm"}>
