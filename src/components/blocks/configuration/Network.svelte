@@ -50,7 +50,7 @@
 <Box title={$_("config.titles.network")} icon="mdi:local-area-network" back={true}>
 	<div class="is-flex is-justify-content-center">
 		<Borders grow>
-			<div class="has-text-left">
+			<div class="has-text-centered">
 				<span class="is-size-6 has-text-weight-bold has-text-dark">
 					{$_("config.network.mode")}:
 				</span>
@@ -58,7 +58,7 @@
 				<div class="">
 					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.ip")}: </span><span>{$status_store.ipaddress}</span>
 				</div>
-				<div class="is-flex is-align-items-center">
+				<div class="is-flex is-align-items-center is-justify-content-center">
 					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.connected")}: </span>
 					<iconify-icon inline class="ml-2 is-size-5 {$status_store.net_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.net_connected==1?"fa6-solid:circle-check":"fa6-solid:circle-xmark"}></iconify-icon>
 				</div>
