@@ -5,8 +5,8 @@ import {uistates_store} 	from "./stores/uistates.js";
 import {get} 				from 'svelte/store'
 import {config_store} 		from './stores/config.js';
 import serialQueue 			from './queue.js';
-import {location} 			from 'svelte-spa-router'
-import { status_store } from './stores/status.js';
+import { status_store } 	from './stores/status.js';
+import { limit_store } 		from './stores/limit.js';
 
 export async function httpAPI(method,url,body=null,type = "json",timeout = 60000) {
 	let content_type = type == "json"?'application/json':'application/x-www-form-urlencoded; charset=UTF-8'
@@ -178,6 +178,17 @@ export function displayIcon(mode) {
 	switch (mode) {
 		case "manual":
 			return "fa6-solid:hand"
+		case "limit":
+			switch (get(limit_store).type) {
+				case "time":
+					return "fa6-solid:hourglass-half"
+				case "energy":
+					return "fa6-solid:bolt"
+				case "soc":
+					return "material-symbols:battery-5-bar-sharp"
+				case "range":
+					return "oi:resize-width"
+			}
 		default:
 			return "fa6-solid:robot"
 	}

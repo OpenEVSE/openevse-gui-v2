@@ -20,10 +20,10 @@
 	let mounted = false
 
 	let LimitTypes = {
-		none: 	{name: $_("limits.type.none"),   unit: "", 	  icon: ""},
+		none:   {name: $_("limits.type.none"),   unit: "", 	  icon: ""},
 		time:   {name: $_("limits.type.time"),   unit: "", 	  icon: "fa6-solid:hourglass-half"},
 		energy: {name: $_("limits.type.energy"), unit: "kWh", icon: "fa6-solid:bolt"},
-		soc:    {name: $_("limits.type.soc"),unit: "%",   icon: "material-symbols:battery-5-bar-sharp", disabled: true},
+		soc:    {name: $_("limits.type.soc"), unit: "%",   icon: "material-symbols:battery-5-bar-sharp", disabled: true},
 		range:  {name: $_("limits.type.range"),  unit: "km",  icon: "oi:resize-width", disabled: true}
 	}
 
