@@ -51,7 +51,7 @@
 		if ($limit_store) {
 			switch ($limit_store.type) {
 				case "time":
-					if ($limit_store.value >= store.elapsed)
+					if ($limit_store.value*60 >= store.elapsed)
 						ctval = sec2time($limit_store.value*60 - store.elapsed)
 					else ctval = "00:00:00"
 					break
@@ -219,6 +219,7 @@
 					state={butn_del_state}
 					auto_release={$limit_store.auto_release}
 				/>
+
 			</div>
 			{:else}
 			<div class="has-text-info">
