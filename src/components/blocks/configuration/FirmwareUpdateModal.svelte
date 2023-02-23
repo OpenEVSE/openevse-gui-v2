@@ -1,4 +1,5 @@
 <script>
+	import RemovableTag from "./../../ui/RemovableTag.svelte";
 	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 		  		from 'svelte-i18n'
 	import { config_store } 	from "./../../../lib/stores/config.js";
@@ -180,9 +181,8 @@
 				{:else if $status_store.ota == "completed" }
 				{$_("config.firmware.complete")}
 				{:else}
-				<div class="is-flex is-justify-content-center">
-					<Borders >
-						<div class="is-flex is-align-items-center  is-justify-content-center">
+				<div class="is-flex is-justify-content-center mb-2">
+						<!-- <div class="is-flex is-align-items-center  is-justify-content-center">
 							<span class="is-size-6 mr-2">
 								{file.name}
 							</span>
@@ -193,9 +193,11 @@
 								butn_submit={()=>{file = null}} 
 								tooltip={$_("config.firmware.remove")}
 							/>
-						</div>
-						
-					</Borders>
+						</div> -->
+						<RemovableTag
+							action={()=> file = null}
+							name={file.name}
+						/>
 				</div>
 				{/if}
 			</div>

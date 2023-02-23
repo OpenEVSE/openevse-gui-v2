@@ -1,4 +1,6 @@
 <script>
+	import RemovableTag from "./../../ui/RemovableTag.svelte";
+	import IconButton from "./../../ui/IconButton.svelte";
 	import Borders from "./../../ui/Borders.svelte";
 	import SelectFile from "./../../ui/SelectFile.svelte";
 	import AlertBoxNoModal from "./../../ui/AlertBoxNoModal.svelte";
@@ -137,6 +139,7 @@
 				import_butn = "ok"
 			else
 				import_butn = "error"
+			import_file = null
 		}
 		reader.readAsText(import_file);
 	}
@@ -203,9 +206,30 @@
 			</div>
 			<div class=mb-2>
 				{#if !import_file}
-				<SelectFile mini={true} width="100px" bind:file={import_file} ext=".json,.txt" title={$_("config.firmware.import")} />
+				<div>
+					<SelectFile mini={true} width="100px" bind:file={import_file} ext=".json,.txt" title={$_("config.firmware.import")} />
+				</div>
+
 				{:else}
-				<Button size="is-small" color="is-primary" width="100px" state={import_butn} name={$_("config.firmware.upload")} butn_submit={importConfig} />
+				<div>
+					<Button size="is-small" color="is-primary" width="100px" state={import_butn} name={$_("config.firmware.upload")} butn_submit={importConfig} />
+				</div>
+				
+				<div class="mt-2 is-inline-block">
+					<RemovableTag
+					action={()=> import_file = null}
+					name={import_file.name}
+				/>
+				</div>
+				
+				<!-- <div class="tags has-addons is-flex is-align-items-center  is-justify-content-center">
+					<span class="tag is-info">
+						{import_file.name}
+					</span>
+					<button class="tag is-dark is-clickable m-0" on:click|preventDefault={()=>{import_file = null}} >
+						<iconify-icon class="" icon={"fa6-solid:xmark"}></iconify-icon>
+					</button>
+				</div> -->
 				{/if}
 			</div>
 		</Borders>
