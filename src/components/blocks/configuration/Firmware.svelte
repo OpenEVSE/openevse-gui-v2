@@ -110,15 +110,13 @@
 		}
 		// copy config_store
 		let conf = {...$config_store}
-		// remove all credentials from file
-		delete conf.pass
-		delete conf.ssid
-		delete conf.www_username
-		delete conf.www_password
-		delete conf.emoncms_apikey
-		delete conf.mqtt_pass
-		delete conf.ocpp_authkey
-		delete conf.tesla_access_token
+		// remove all credentials with _DUMMY_PASSWORD from file
+		Object.keys(conf).forEach(element => {
+			if(conf[element] == "_DUMMY_PASSWORD") {
+				conf[element] = ""
+			}
+			
+		});
 		// create file
 		const file = URL.createObjectURL(new Blob([JSON.stringify(conf)], { type: 'text/plain' }))
 		export_link.href =  file
@@ -192,8 +190,8 @@
 			</tr>
 		</tbody>
 	</table>
-	<div class="is-flex is-align-items-center is-justify-content-center">
-		<Borders>
+	<div class="is-flex is-align-items-center is-justify-content-center px-6-tablet">
+		<Borders grow>
 			<div class="has-text-weight-bold has-text-dark mb-2">
 				{$_("config.firmware.backup")}
 			</div>
@@ -221,15 +219,6 @@
 					name={import_file.name}
 				/>
 				</div>
-				
-				<!-- <div class="tags has-addons is-flex is-align-items-center  is-justify-content-center">
-					<span class="tag is-info">
-						{import_file.name}
-					</span>
-					<button class="tag is-dark is-clickable m-0" on:click|preventDefault={()=>{import_file = null}} >
-						<iconify-icon class="" icon={"fa6-solid:xmark"}></iconify-icon>
-					</button>
-				</div> -->
 				{/if}
 			</div>
 		</Borders>

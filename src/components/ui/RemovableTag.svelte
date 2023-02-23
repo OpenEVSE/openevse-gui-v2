@@ -40,7 +40,7 @@
 		<iconify-icon class="mr-1" icon={displayIcon(clientid2name(client))}></iconify-icon>
 		{clientid2name(client)}
 		{:else if name}
-		<span class="has-text-centered">
+		<span class="has-text-centered" style="text-overflow: ellipsis;">
 			{name}
 		</span>
 		{/if}
