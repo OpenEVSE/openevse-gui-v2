@@ -216,7 +216,7 @@
 			{$_("config.firmware.nofile")}
 		</div>
 		<div class="is-flex is-align-items-center is-justify-content-center">
-			<SelectFile bind:file={file}/>&nbsp;
+			<SelectFile bind:file={file} ext=".bin,.hex" icon="fa6-solid:file-export"/>&nbsp;
 			<Button disabled={uploadButtonState == "loading" || fileSent == "ok"} name={$_("close")} color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{/if}

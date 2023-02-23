@@ -1,4 +1,6 @@
 <script>
+	import Borders from "./../../ui/Borders.svelte";
+	import SelectFile from "./../../ui/SelectFile.svelte";
 	import AlertBoxNoModal from "./../../ui/AlertBoxNoModal.svelte";
 	import AlertBox from "./../../ui/AlertBox.svelte";
 	import { status_store } from "./../../../lib/stores/status.js";
@@ -21,6 +23,10 @@
 	let fw = {name: undefined, version: undefined, url: undefined}
 	let alert_visible = false
 	let alert2_visible = false
+	let export_link
+	let export_butn
+	let import_file
+	let import_butn
 
 	onMount(()=>getFwUpdate())
 
@@ -93,6 +99,47 @@
 		}
 	}
 
+	async function exportConfig() {
+		export_butn = "loading"
+		// get latest config
+		if (!await config_store.download()) {
+			export_butn = "error"
+			return
+		}
+		// copy config_store
+		let conf = {...$config_store}
+		// remove all credentials from file
+		delete conf.pass
+		delete conf.ssid
+		delete conf.www_username
+		delete conf.www_password
+		delete conf.emoncms_apikey
+		delete conf.mqtt_pass
+		delete conf.ocpp_authkey
+		delete conf.tesla_access_token
+		// create file
+		const file = URL.createObjectURL(new Blob([JSON.stringify(conf)], { type: 'text/plain' }))
+		export_link.href =  file
+		export_link.download = "config.json"
+		export_butn = "ok"
+		export_link.click()
+		URL.revokeObjectURL(export_link.href);
+	}
+
+	async function importConfig() {
+		import_butn = "loading"
+		// let file = import_file.files[0]
+		let reader = new FileReader();
+ 		reader.onload = async function() {
+			let conf = JSON.parse(reader.result.toString())
+			console.log(conf)
+			if (await serialQueue.add(()=>config_store.upload(conf)))
+				import_butn = "ok"
+			else
+				import_butn = "error"
+		}
+		reader.readAsText(import_file);
+	}
 
 </script>
 
@@ -137,12 +184,34 @@
 						<div class="mb-2">
 							<Button size="is-small" width="100px" name={$_("config.firmware.reset")} butn_submit={resetESP} state={resetEspState}/>
 						</div>
-						
 					</div>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+	<div class="is-flex is-align-items-center is-justify-content-center">
+		<Borders>
+			<div class="has-text-weight-bold has-text-dark mb-2">
+				{$_("config.firmware.backup")}
+			</div>
+			<div class="mb-2">
+				<Button size="is-small" width="100px" state={export_butn} name={$_("config.firmware.export")} butn_submit={exportConfig}/>
+				<div class="is-hidden">
+					<a bind:this={export_link} href={null} >null</a>
+				</div>
+				
+			</div>
+			<div class=mb-2>
+				{#if !import_file}
+				<SelectFile mini={true} width="100px" bind:file={import_file} ext=".json,.txt" title={$_("config.firmware.import")} />
+				{:else}
+				<Button size="is-small" color="is-primary" width="100px" state={import_butn} name={$_("config.firmware.upload")} butn_submit={importConfig} />
+				{/if}
+			</div>
+		</Borders>
+	</div>
+	
+
 </Box>
 {#if fw_modal_opened}
 <FirmwareUpdateModal bind:is_opened={fw_modal_opened} update={fw} />

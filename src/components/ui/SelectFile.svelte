@@ -1,8 +1,15 @@
 <script>
 	
 	export let file = ""
+	export let mini = false
+	export let width = null
+	export let ext = ".*"
+	export let icon = null
+	export let title = "Select"
+
 	let inputfield
 	let button
+
 
 	const onFileSelected =(e)=>{
 		file = e.target.files[0];
@@ -15,10 +22,17 @@
 
 </script>
 
-<div class="is-hidden">
-	<input class="file-input" bind:this={inputfield} type="file" on:change={(e)=>onFileSelected(e)} accept=".bin,.hex" />
-</div>
-<button bind:this={button} class="button is-info is-outlined" on:click={onClick}>
-	<iconify-icon icon="fa6-solid:file-export" class="is-size-5" ></iconify-icon>
-	<span class="ml-1">Select</span>	  
+<button bind:this={button} class="button is-info is-outlined {mini?"is-small":""}" style:width={width}  on:click={onClick}>
+	<div class="is-flex is-align-items-center is-justify-content-center" style:width={width} >
+		{#if icon}
+		<div>
+			<iconify-icon inline icon={icon} class="{!mini?"is-size-5":"is-size-6"}" ></iconify-icon>
+		</div>
+		{/if}
+		<div class="">{title}</div>	
+	</div>  
 </button>
+	
+<div class="is-hidden">
+	<input class="file-input" bind:this={inputfield} type="file" on:change={(e)=>onFileSelected(e)} accept={ext} />
+</div>

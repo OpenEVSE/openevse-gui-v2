@@ -248,7 +248,10 @@
 			"remove": "Remove file",
 			"upload": "Upload",
 			"reset-warning": "This will reset device to factory default. All configuration will be lost. Please confirm",
-			"reset-reboot": "Device will reboot to it's factory state in few seconds"
+			"reset-reboot": "Device will reboot to it's factory state in few seconds",
+			"backup": "Configuration Backup",
+			"export": "Backup",
+			"import": "Import"
 		},
 		"evse": {
 			"maxcur": "Max Current",
