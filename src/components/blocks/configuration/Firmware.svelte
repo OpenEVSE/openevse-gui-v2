@@ -115,7 +115,10 @@
 			if(conf[element] == "_DUMMY_PASSWORD") {
 				conf[element] = ""
 			}
-			
+			if(element == "www_username" || element == "ssid")
+				conf[element] = ""
+			if(element == "mqtt_supported_protocols" || element == "http_supported_protocols")
+				delete conf[element]
 		});
 		// create file
 		const file = URL.createObjectURL(new Blob([JSON.stringify(conf)], { type: 'text/plain' }))
