@@ -227,7 +227,7 @@
       "scan": "Scanner",
       "connecting": "Connection en cours, veuillez patienter...",
       "con-failed": "Echec de la connection au réseau ",
-      "con-ok": "Connection réussie. Attendez d'être reconnecté au réseau WiFi, puis pressez OK pour être redirigé vers ",
+      "con-ok": "Connection réussie. Attendez d'être reconnecté au réseau WiFi, puis pressez OK pour être redirigé vers "
     },
     "firmware": {
       "hardware": "Matériel",
