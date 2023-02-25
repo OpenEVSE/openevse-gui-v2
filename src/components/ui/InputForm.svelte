@@ -80,7 +80,7 @@
 		{#if title}
 		<div class="has-text-weight-semibold has-text-centered  {disabled?"has-text-grey-light":"has-text-dark"}">{title}</div>
 		{/if}
-		<input {readonly} {step} class="input is-info" type={typecss} placeholder={placeholder} value={value!=undefined?value:""} autocomplete="off" {maxlength} min={min} max={max}
+		<input {readonly} {step} class="input is-info" type={typecss} placeholder={placeholder} value={value!=undefined?value:""} {maxlength} min={min} max={max}
 		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	style={size?"width: " + size + "ch;":null}>
 		<div class="main ">
 			<span class="is-size-5 state has-background-white is-flex is-align-items-center is-justify-content-center" class:is-hidden={!status}>
