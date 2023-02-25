@@ -432,24 +432,20 @@ export let submitFormData = async ({form, prop = null,prop_enable = null, i18n_p
 
 export function reload2ip() {
 	setTimeout(()=> { 
-				console.log("redirecting url")
-
+				console.log("redirecting to main page")
 				let url = ""
 				// if (!import.meta.env.DEV) {
 				// 	url = "http://" + get(config_store).hostname + ".local"
 				// }
 				//using IP if ready
-				if (get(status_store).ipaddress != "192.168.4.1") {
-					url = "http://" + get(status_store)
+				if (get(status_store).ipaddress != window.location.host) {
+					url = "http://" + get(status_store).ipaddress
 				}
-				// or trying with hostname
-				else 
-					url = "http://" + get(config_store).hostname + ".local"
 
 				if (get(uistates_store).wizard_step != 0) {
 					url = url +  "/#/wizard/" + get(uistates_store).wizard_step
 				}
-				else url = url + "/#"
+				else url = url + "/#/"
 				window.location.replace(url) }
 			, 0)
 }

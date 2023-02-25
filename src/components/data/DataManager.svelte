@@ -10,7 +10,7 @@
 	import { config_store } 			from "./../../lib/stores/config.js"
 	import { claims_target_store } 		from "./../../lib/stores/claims_target.js"
 	import { override_store } 			from "./../../lib/stores/override.js"
-	import { clientid2name, formatDate} from "./../../lib/utils.js"
+	import { clientid2name, formatDate, httpAPI } from "./../../lib/utils.js"
 	import { serialQueue } 				from "./../../lib/queue.js";
 	import {onMount} 					from "svelte"
 	import { locale }					from 'svelte-i18n'
@@ -230,13 +230,15 @@
 		$uistates_store.power = pwr
 	}
 
-	function set_ipaddress(ip) {
+	async function set_ipaddress(ip) {
 		if (ip != ipaddress) {
 			if (ip && ip != "192.168.4.1" && ipaddress) {
+				await serialQueue.add(httpAPI("GET","/apoff",null,"text"))
 				$uistates_store.alertbox.visible = true
 				$uistates_store.alertbox.title = $_("notification")
-				$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + ip + "/#" + $location
+				$uistates_store.alertbox.body = $_("config.network.conf-ok") + ip 
 				$uistates_store.alertbox.button = true
+				$uistates_store.alertbox.closable = false
 				$uistates_store.alertbox.action = () => {window.location.href = "http://" + ip + "/#" + $location}
 			}
 			ipaddress = ip

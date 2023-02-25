@@ -27,7 +27,6 @@
 			$uistates_store.alertbox.button = true
 			$uistates_store.alertbox.closable = false
 			$uistates_store.alertbox.action = () => { 
-				httpAPI("GET","/apoff",null,"text")
 				uistates_store.resetAlertBox()
 				setTimeout(() => {
 					reload2ip()

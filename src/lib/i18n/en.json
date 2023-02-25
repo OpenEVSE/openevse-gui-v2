@@ -226,7 +226,9 @@
 			"pass-desc": "WPA Key",
 			"connect": "Connect",
 			"scan": "Scan",
-			"redirect": "IP has changed, press OK when you're connected to your WiFi Network to be redirected to "
+			"connecting": "Connecting, please wait...",
+			"con-failed": "Couldn't connect to network ",
+			"con-ok": "Connection successfull. Wait for your device to be reconnected to the WiFi network, then press OK to be redirected to "
 		},
 		"firmware": {
 			"hardware": "Hardware",

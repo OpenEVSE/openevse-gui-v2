@@ -225,7 +225,9 @@
       "pass-desc": "clef WPA",
       "connect": "Connecter",
       "scan": "Scanner",
-      "redirect": "L'IP a changé, presser OK une fois reconnecté à votre réseau wifi pour être redirigé vers "
+      "connecting": "Connection en cours, veuillez patienter...",
+      "con-failed": "Echec de la connection au réseau ",
+      "con-ok": "Connection réussie. Attendez d'être reconnecté au réseau WiFi, puis pressez OK pour être redirigé vers ",
     },
     "firmware": {
       "hardware": "Matériel",

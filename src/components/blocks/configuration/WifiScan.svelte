@@ -78,9 +78,18 @@
 		else {
 			connectButnState = "ok"
 			active = false
-		return true
 		}
-		
+		$uistates_store.alertbox.visible = true
+		$uistates_store.alertbox.title = $_("notification")
+		$uistates_store.alertbox.body = $_("config.network.connecting")
+		$uistates_store.alertbox.closable = false
+
+		setTimeout(() => {
+			$uistates_store.alertbox.visible = true
+			$uistates_store.alertbox.title = $_("error")
+			$uistates_store.alertbox.body = $_("config.network.con-failed") + $config_store.ssid
+			$uistates_store.alertbox.closable = true
+		}, 10000);
 	}
 </script>
 
