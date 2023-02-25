@@ -3,7 +3,7 @@ import { svelte } from "@sveltejs/vite-plugin-svelte"
 import viteCompression from 'vite-plugin-compression'
 import { VitePWA } from 'vite-plugin-pwa'
 import { visualizer }		from "rollup-plugin-visualizer"
-import { dependencies } from './package.json';
+// import { dependencies } from './package.json';
 import fs from 'fs'
 
 // function renderChunks(deps) {

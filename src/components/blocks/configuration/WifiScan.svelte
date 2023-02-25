@@ -1,15 +1,14 @@
 <script>
 	import { uistates_store } 				 from "./../../../lib/stores/uistates.js";
-	import Borders 							 from "./../../ui/Borders.svelte";
 	import { _ } 		  					 from 'svelte-i18n'
 	import { config_store } 				 from "./../../../lib/stores/config.js";
 	import {onMount, onDestroy} 			 from "svelte"
 	import {removeDuplicateObjects, httpAPI} from "../../../lib/utils.js"
 	import { serialQueue } 					 from "./../../../lib/queue.js";
-	import Loader 							 from "./../../ui/Loader.svelte";
 	import WifiIcon 						 from "./../../ui/WifiIcon.svelte";
 	import InputForm 						 from "../../ui/InputForm.svelte"
 	import Button 							 from "../../ui/Button.svelte"
+	import Borders 							 from "./../../ui/Borders.svelte";
 
 	export let active = false
 	export let ssid = ""
@@ -161,4 +160,3 @@
 		</table>
 	</div>
 </Borders>
-<!-- <AlertBox title={$_("notification")} body={$_("config.network.redirect")} bind:visible={alertbox_redirect}/> -->

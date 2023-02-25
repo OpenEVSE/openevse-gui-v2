@@ -1,9 +1,7 @@
 <script>
 	import RemovableTag from "./../../ui/RemovableTag.svelte";
-	import IconButton from "./../../ui/IconButton.svelte";
 	import Borders from "./../../ui/Borders.svelte";
 	import SelectFile from "./../../ui/SelectFile.svelte";
-	import AlertBoxNoModal from "./../../ui/AlertBoxNoModal.svelte";
 	import AlertBox from "./../../ui/AlertBox.svelte";
 	import { status_store } from "./../../../lib/stores/status.js";
 	import { _ } 		  		from 'svelte-i18n'
@@ -235,5 +233,5 @@
 {#if fw_modal_opened}
 <FirmwareUpdateModal bind:is_opened={fw_modal_opened} update={fw} />
 {/if}
-<AlertBox title={$_("warning")} body={$_("config.firmware.reset-warning")} label={$_("reset")} button={true} action={()=>resetESP(false)} bind:visible={alert_visible}></AlertBox>
+<AlertBox title={$_("warning")} body={$_("config.firmware.reset-warning")} label={$_("config.firmware.reset")} button={true} action={()=>resetESP(false)} bind:visible={alert_visible}></AlertBox>
 <AlertBox title={$_("warning")}  body={$_("config.firmware.reset-reboot")} bind:visible={alert2_visible}/>

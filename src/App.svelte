@@ -31,7 +31,7 @@
 		console.log("Disconnected...so sad!!!")
 	})
 
-	$: console.log("network: " + navigator.onLine)
+
 </script>
 <style>
 	main {

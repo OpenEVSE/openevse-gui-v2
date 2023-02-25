@@ -1,17 +1,14 @@
 <script>
-	import Modal from "./../../ui/Modal.svelte";
-	import { uistates_store } from "./../../../lib/stores/uistates.js";
+	import WifiScan 			from "./WifiScan.svelte"
 	import { _ } 		   		from 'svelte-i18n'
-	import { serialQueue } 		from "./../../../lib/queue.js";
+	import { serialQueue } 		from "./../../../lib/queue.js"
 	import {status_store}		from './../../../lib/stores/status.js'
 	import {config_store}	  	from "./../../../lib/stores/config.js"
 	import InputForm 	   		from "./../../ui/InputForm.svelte"
-	import {location} 			from 'svelte-spa-router'
 	import WifiDisplay 	   		from "./WifiDisplay.svelte"
 	import Button 		   		from "../../ui/Button.svelte"
-	import WifiScan 	   		from "./WifiScan.svelte"
 	import Box 			   		from "../../ui/Box.svelte"
-	import Borders 				from "./../../ui/Borders.svelte";
+	import Borders 				from "./../../ui/Borders.svelte"
 	
 
 	function displayMode(mode) {
@@ -83,9 +80,6 @@
 						<div class="mt-3 is-flex is-justify-content-center" >
 							<Button name={$_("config.network.change")} butn_submit={selectWifi}/>
 						</div>
-						<!-- {:else}
-						<WifiScan bind:active={setWifi} ssid={$config_store.ssid}/>
-						{/if} -->
 			</div>
 		</Borders>
 		{:else}

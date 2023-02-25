@@ -34,12 +34,6 @@
 	})
 </script>
 
-<style>
-	/* .inputbox {
-		max-width: 100px;
-	} */
-</style>
-
 {#if mounted}
 <Box title={$_("config.titles.evse")} icon="mdi:evse" back={true}>
 	<div class="columns is-centered is-vcentered">

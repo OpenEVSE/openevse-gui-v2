@@ -10,7 +10,6 @@
 	import Switch 					from "../../ui/Switch.svelte";
 	import InputForm 				from "../../ui/InputForm.svelte";
 	import Box 						from "../../ui/Box.svelte"
-	import { submitFormData } 	from "./../../../lib/utils.js";
 
 	let mounted = false
 	let alert_body

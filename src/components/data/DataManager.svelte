@@ -14,6 +14,8 @@
 	import { serialQueue } 				from "./../../lib/queue.js";
 	import {onMount} 					from "svelte"
 	import { locale }					from 'svelte-i18n'
+	import {location} 		 			from 'svelte-spa-router'
+	import { _ } 		   	 			from 'svelte-i18n'
 	import "hacktimer/HackTimer.js"
 
 	let counter_divert_update
@@ -26,6 +28,8 @@
 	let refresh_override = false
 	let refresh_plan = false
 	let refresh_limit = false
+	let ipaddress
+	let ip_changed = false
 
 	onMount(()=> {
 		getMode($claims_target_store.properties.state,$claims_target_store.claims.state)
@@ -226,6 +230,20 @@
 		$uistates_store.power = pwr
 	}
 
+	function set_ipaddress(ip) {
+		if (ip != ipaddress) {
+			if (ip && ip != "192.168.4.1" && ipaddress) {
+				$uistates_store.alertbox.visible = true
+				$uistates_store.alertbox.title = $_("notification")
+				$uistates_store.alertbox.body = $_("config.network.redirect") + "http://" + ip + "/#" + $location
+				$uistates_store.alertbox.button = true
+				$uistates_store.alertbox.action = () => {window.location.href = "http://" + ip + "/#" + $location}
+			}
+			ipaddress = ip
+			ip_changed = true
+		}
+	}
+
 	onMount(()=> {
 		getDivertMode($config_store.mqtt_grid_ie)
 	})
@@ -245,6 +263,6 @@
 	$: $status_store.rfid_waitin, 		   countRFIDScan()
 	$: $status_store.elapsed,			   countElapsed()
 	$: refreshPower				($status_store.amp) 
-	
+	$: set_ipaddress($status_store.ipaddress)
 
 </script>

@@ -111,13 +111,4 @@
 		
 		</div>
 	</div>
-
-
-	
-	
-
-<!-- 	
-	<div class="block mt-5 mb-1">
-		<Button name={$_("save")} color="is-info" state={stg_submit_state} butn_submit={stg_submit} />
-	</div> -->
 </Box>
