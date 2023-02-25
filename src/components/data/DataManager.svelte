@@ -236,7 +236,7 @@
 				uistates_store.resetAlertBox()
 				$uistates_store.alertbox.visible = true
 				$uistates_store.alertbox.title = $_("notification")
-				$uistates_store.alertbox.body = $_("config.network.conf-ok") + ip 
+				$uistates_store.alertbox.body = $_("config.network.con-ok") + ip 
 				$uistates_store.alertbox.button = true
 				$uistates_store.alertbox.closable = false
 				$uistates_store.alertbox.action = () => {window.location.href = "http://" + ip + "/#" + $location}

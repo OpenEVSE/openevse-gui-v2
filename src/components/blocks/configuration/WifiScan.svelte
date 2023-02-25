@@ -1,4 +1,5 @@
 <script>
+	import { status_store } from "./../../../lib/stores/status.js";
 	import { uistates_store } 				 from "./../../../lib/stores/uistates.js";
 	import { _ } 		  					 from 'svelte-i18n'
 	import { config_store } 				 from "./../../../lib/stores/config.js";
@@ -83,13 +84,15 @@
 		$uistates_store.alertbox.title = $_("notification")
 		$uistates_store.alertbox.body = $_("config.network.connecting")
 		$uistates_store.alertbox.closable = false
-
+		let ip = $status_store.ipaddress
 		setTimeout(() => {
-			$uistates_store.alertbox.visible = true
-			$uistates_store.alertbox.title = $_("error")
-			$uistates_store.alertbox.body = $_("config.network.con-failed") + $config_store.ssid
-			$uistates_store.alertbox.closable = true
-		}, 10000);
+			if (!$status_store.net_connected) {
+				$uistates_store.alertbox.visible = true
+				$uistates_store.alertbox.title = $_("error")
+				$uistates_store.alertbox.body = $_("config.network.con-failed") + $config_store.ssid
+				$uistates_store.alertbox.closable = true
+			}
+		}, 20000);
 	}
 </script>
 
