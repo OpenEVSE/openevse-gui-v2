@@ -233,6 +233,7 @@
 	async function set_ipaddress(ip) {
 		if (ip != ipaddress) {
 			if (ip && ip != "192.168.4.1" && ipaddress) {
+				uistates_store.resetAlertBox()
 				await serialQueue.add(httpAPI("GET","/apoff",null,"text"))
 				$uistates_store.alertbox.visible = true
 				$uistates_store.alertbox.title = $_("notification")
