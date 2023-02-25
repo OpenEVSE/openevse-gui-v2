@@ -29,7 +29,7 @@
 			</tr>
 			<tr class="is-size-7-mobile">
 				<td>{$_("total")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_energy,1)} {$_("units.kwh")}</span></td>
+				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_energy/1000,1)} {$_("units.kwh")}</span></td>
 			</tr>
 		</tbody>
 	</table>
