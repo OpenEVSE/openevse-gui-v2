@@ -86,7 +86,7 @@
 		$uistates_store.alertbox.closable = false
 		let ip = $status_store.ipaddress
 		setTimeout(() => {
-			if ($status_store.ipaddress == "192.168.4.1") {
+			if ($status_store.net_connected) {
 				$uistates_store.alertbox.visible = true
 				$uistates_store.alertbox.title = $_("error")
 				$uistates_store.alertbox.body = $_("config.network.con-failed") + $config_store.ssid
