@@ -230,7 +230,7 @@
 		$uistates_store.power = pwr
 	}
 
-	async function set_ipaddress(ip) {
+	async function redirect2ip(ip) {
 		if (ip != ipaddress) {
 			if (ip && ip != "192.168.4.1" && ipaddress) {
 				uistates_store.resetAlertBox()
@@ -265,6 +265,6 @@
 	$: $status_store.rfid_waitin, 		   countRFIDScan()
 	$: $status_store.elapsed,			   countElapsed()
 	$: refreshPower				($status_store.amp) 
-	$: set_ipaddress($status_store.ipaddress)
+	$: redirect2ip($status_store.ipaddress)
 
 </script>

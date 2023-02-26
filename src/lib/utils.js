@@ -69,6 +69,8 @@ export const removeDuplicateObjects = (array, key) => {
 }
 
 export function sec2time(sec) {
+	if (!sec)
+		sec = 0
 	return new Date(sec * 1000).toISOString().slice(11, 19)
 }
 
@@ -317,6 +319,13 @@ export function s2mns(s){return(s-(s%=60))/60+(9<s?'mn ':'mn 0')+s+'s'}
 export function miles2km(d) {
 	return d * 1.60934
 }
+
+export function displayRange(r) {
+	if (get(config_store).tesla_enabled && get(config_store).mqtt_vehicle_range_miles)
+		miles2km(r)
+	else return r
+}
+
 export function validateFormData({data, i18n_path, req=false, form=null}) {
 	let resp = { 
 		ok: true,
