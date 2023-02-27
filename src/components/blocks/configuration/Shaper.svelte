@@ -69,7 +69,7 @@
 							<span class="has-text-info">{$status_store.shaper_live_pwr} {$_("units.W")}</span>
 							</span>
 							<span class="is-size-7 has-text-weight-bold has-text-dark">
-								{$_("config.shaper.curavail")}: 
+								{$_("config.shaper.available")}: 
 								<span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">
 								{$status_store.shaper_cur} {$_("units.A")}
 							</span>

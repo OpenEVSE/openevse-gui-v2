@@ -126,31 +126,30 @@
 							disabled={formdata.divert_enabled.status=="loading"}
 							onChange={toggleDivert}
 							/>
-						<div class:is-hidden={!$config_store.divert_enabled} class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
-							{#if $uistates_store.divert_type == 0}
+						<div class:is-hidden={!$config_store.divert_enabled} class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">	
 							<div class="mr-2 is-inline-block">
+								{#if $uistates_store.divert_type == 0}
 								<span>{$_("config.selfprod.production")}:</span>
 								<span class="has-text-primary">{$status_store.solar}{$_("units.W")}</span>
-							</div>
-						
-							{:else}
-							<div class="mr-2">
+								{:else}
 								<span>{$_("config.selfprod.grid")}</span>
 								<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
-							</div>
-							{/if}
-							{#if $status_store.divertmode == 2}
-							<div class="mr-2">
-								<span>{$_("config.selfprod.availablecur")}:</span>
+								{/if}
+								<span>|</span>
 								<span class="{$status_store.charge_rate < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
 							</div>
-							<div class="mr-2" class:is-hidden={!$status_store.smoothed_available_current}>
-								<span>{$_("config.selfprod.smoothedcur")}:</span>
+							{#if $status_store.divert_active}
+							<div class="mr-2 has-text-dark" class:is-hidden={!$status_store.smoothed_available_current}>
+								<span>{$_("status-divert-smoothed")}:</span>
 								<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
 							</div>
-							{:else if $status_store.divertmode == 1}
-							<div class="mr-2">
-								<span class="has-text-info">{$_("config.selfprod.modeboost")}:</span>
+							{:else}
+							<div class="mx-1">
+								{#if $config_store.charge_mode == "eco"}
+								<span class="has-text-info">{$_("config.selfprod.disabled")}</span>
+								{:else}
+								<span class="has-text-info">{$_("config.selfprod.modeboost")}</span>
+								{/if}
 							</div>
 							{/if}
 							<div class="mr-2">
