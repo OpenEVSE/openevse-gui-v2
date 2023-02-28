@@ -66,6 +66,7 @@
     "saturday": "samedi",
     "sunday": "dimanche"
   },
+  "status-items-starting": "Démarrage",
   "status-items-waiting": "En attente du VE",
   "status-items-ready": "Prêt à charger",
   "status-items-charging": "Charge en cours",

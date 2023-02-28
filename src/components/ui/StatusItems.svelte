@@ -22,7 +22,13 @@
 
 		message = getStateDesc(state)
 		switch (state) {
-			case 0: // Unknown
+			case 0: // Starting
+				status = "disabled"
+				charging = false
+				message = $_("status-items-starting")
+				color = "is-info"
+				iconcolor = "has-text-white"
+				icon = "majesticons:rocket-3-start-line"
 				break
 			case 1: // Not connected
 				status = "active"

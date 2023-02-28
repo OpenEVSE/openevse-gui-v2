@@ -67,6 +67,7 @@
 		"saturday": "saturday",
 		"sunday": "sunday"
 		},
+	"status-items-starting": "Starting",
 	"status-items-waiting": "Waiting for EV",
 	"status-items-ready": "Ready to charge",
 	"status-items-charging": "Charging",
