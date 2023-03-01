@@ -231,7 +231,7 @@
 			"scan": "Scan",
 			"connecting": "Connecting, please wait...",
 			"con-failed": "Couldn't connect to network ",
-			"con-ok": "Connection successfull. Wait for your device to be reconnected to the WiFi network, then press OK to be redirected to "
+			"con-ok": "Connection successful. Wait for your device to be reconnected to the WiFi network, then press OK to be redirected to "
 		},
 		"firmware": {
 			"hardware": "Hardware",
@@ -249,7 +249,7 @@
 			"upgrade2": "Upgrade to",
 			"progress": "Firmware update in progress...",
 			"failed": "Upload failed",
-			"complete": "Firmware upgrade successfull, page will reload in few sec",
+			"complete": "Firmware upgrade successful, page will reload in few sec",
 			"remove": "Remove file",
 			"upload": "Upload",
 			"reset-warning": "This will reset device to factory default. All configuration will be lost. Please confirm",

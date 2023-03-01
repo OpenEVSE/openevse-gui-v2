@@ -122,7 +122,7 @@
 			}
 		});
 		// create file
-		const file = URL.createObjectURL(new Blob([JSON.stringify(conf)], { type: 'text/plain' }))
+		const file = URL.createObjectURL(new Blob([JSON.stringify(conf,null,4)], { type: 'text/plain' }))
 		export_link.href =  file
 		export_link.download = "config.json"
 		export_butn = "ok"
