@@ -1,7 +1,7 @@
 <script>
 	import { _ } 	from 'svelte-i18n'
 	import Loader 	from "./Loader.svelte";
-	import {sec2time} from "../../lib/utils.js"
+	import {sec2time, round} from "../../lib/utils.js"
 	export let icon
 	export let type
 	export let types = {}

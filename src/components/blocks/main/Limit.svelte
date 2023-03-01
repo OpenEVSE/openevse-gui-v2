@@ -56,8 +56,8 @@
 					else ctval = "00:00:00"
 					break
 				case "energy": 
-					ctval = round(($limit_store.value - store.session_energy)/1000,1)
-					ctval = ctval<0?0.0:ctval.toFixed(1)
+					ctval = round(($limit_store.value - store.session_energy)/1000,2)
+					ctval = ctval<0?0.0:ctval.toFixed(2)
 					break;
 				case "soc":
 					ctval = $limit_store.value - store.battery_level
