@@ -17,6 +17,6 @@
 <div class="box has-text-centered mx-2 mb-2 px-1 py-1 tiles has-background-dark has-text-white" class:is-hidden={!visible}>
 
 		<p class="heading has-text-weight-semibold has-text-primary">{title}</p>
-		<p class="is-size-5 is-size-6-mobile has-text-weight-bold">{typeof(value) == "number"?isFloat(value)?round(value,precision):value:value} {unit?unit:""}</p>
+		<p class="is-size-5 is-size-6-mobile has-text-weight-bold">{typeof(value) == "number"?isFloat(value)?round(value,precision).toFixed(precision):value:value} {unit?unit:""}</p>
 	
 </div>
