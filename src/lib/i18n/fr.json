@@ -254,7 +254,8 @@
       "reset-reboot": "L'appareil va redémarrer en mode usine dans quelques secondes",
       "backup": "Sauvegarde Configuration",
       "export": "Sauvegarder",
-			"import": "Importer"
+			"import": "Importer",
+      "backup-desc": "Attention! Aucuns mots de passe ou clefs ne seront sauvegardés"
     },
     "evse": {
       "maxcur": "Courant Maxi",

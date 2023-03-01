@@ -256,7 +256,8 @@
 			"reset-reboot": "Device will reboot to it's factory state in few seconds",
 			"backup": "Configuration Backup",
 			"export": "Backup",
-			"import": "Import"
+			"import": "Import",
+			"backup-desc": "Warning! It won't backup any passwords & keys"
 		},
 		"evse": {
 			"maxcur": "Max Current",

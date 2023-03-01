@@ -200,6 +200,9 @@
 				{$_("config.firmware.backup")}
 			</div>
 			<div class="mb-2">
+				<div class="has-text-info has-text-weight-bold mb-1">
+					{$_("config.firmware.backup-desc")}
+				</div>
 				<Button size="is-small" width="100px" state={export_butn} name={$_("config.firmware.export")} butn_submit={exportConfig}/>
 				<div class="is-hidden">
 					<a bind:this={export_link} href={null} >null</a>
