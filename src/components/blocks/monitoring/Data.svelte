@@ -25,7 +25,7 @@
 		<tbody>
 			<tr class="is-size-7-mobile">
 				<td>{$_("session")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark">{round($status_store.session_energy/1000,1)} {$_("units.kwh")}</span></td>
+				<td class="has-text-right"><span class="tag is-normal is-dark">{round($status_store.session_energy/1000,2)} {$_("units.kwh")}</span></td>
 			</tr>
 			<tr class="is-size-7-mobile">
 				<td>{$_("total")}</td>
