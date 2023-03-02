@@ -146,7 +146,7 @@
   "monitoring-energy-service": "Niveau de Service",
   "monitoring-energy-servicemin": "Niveau 2 Minimum",
   "monitoring-energy-servicemax": "Niveau 2 Maximum",
-  "monitoring-energy-delivered": "Energie Délivrée",
+  "monitoring-energy-delivered": "Compteur d'Energie",
   "monitoring-energy-params": "Paramètres",
   "monitoring-sensors-pilot": "Control Pilot",
   "monitoring-sensors-current": "Courant",
@@ -155,6 +155,10 @@
   "monitoring-sensors-esptemp": "ESP32 T°",
   "monitoring-sensors-sensorscale": "Echelle Courant",
   "monitoring-sensors-sensoroffset": "Décalage Courant",
+  "monitoring-total-day": "Aujourd'hui",
+  "monitoring-total-week": "Semaine",
+  "monitoring-total-month": "Mois",
+  "monitoring-total-year": "Année",
   "logs-title": "Historique",
   "logs-loading": "Chargement des données",
   "logs-time": "Heure",
@@ -282,7 +286,8 @@
       "count": "Compte",
       "gfci": "GFCI",
       "noground": "Mauvaise Terre",
-      "stuck": "Relai Collé"
+      "stuck": "Relai Collé",
+      "switches": "Total de Contacts"
     },
     "time": {
       "date": "Date/Heure",

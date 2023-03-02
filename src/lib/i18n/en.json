@@ -148,7 +148,7 @@
 	"monitoring-energy-service": "Service Level",
 	"monitoring-energy-servicemin": "Level 2 Minimum",
 	"monitoring-energy-servicemax": "Level 2 Maximum",
-	"monitoring-energy-delivered": "Energy Delivered",
+	"monitoring-energy-delivered": "Energy Meter",
 	"monitoring-energy-params": "Parameters",
 	"monitoring-sensors-pilot": "Control Pilot",
 	"monitoring-sensors-current": "Current",
@@ -157,6 +157,10 @@
 	"monitoring-sensors-esptemp": "ESP32 T°",
 	"monitoring-sensors-sensorscale": "Current Scale",
 	"monitoring-sensors-sensoroffset": "Current Offset",
+	"monitoring-total-day": "Today",
+	"monitoring-total-week": "Week",
+	"monitoring-total-month": "Month",
+	"monitoring-total-year": "Year",
 	"logs-title": "History",
 	"logs-loading": "Loading Data",
 	"logs-time": "Time",
@@ -284,7 +288,8 @@
 			"count": "Count",
 			"gfci": "GFCI",
 			"noground": "No Ground",
-			"stuck": "Stuck Contact"
+			"stuck": "Stuck Contact",
+			"switches": "Total Contacts"
 		},
 		"time": {
 			"date": "Date",

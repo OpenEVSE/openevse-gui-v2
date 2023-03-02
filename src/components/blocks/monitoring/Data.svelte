@@ -31,6 +31,30 @@
 				<td>{$_("total")}</td>
 				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_energy,1)} {$_("units.kwh")}</span></td>
 			</tr>
+			{#if (typeof $status_store.total_day !== "undefined") }
+			<tr class="is-size-7-mobile">
+				<td>{$_("monitoring-total-day")}</td>
+				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_day,1)} {$_("units.kwh")}</span></td>
+			</tr>
+			{/if}
+			{#if (typeof $status_store.total_week !== "undefined") }
+			<tr class="is-size-7-mobile">
+				<td>{$_("monitoring-total-week")}</td>
+				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_week,1)} {$_("units.kwh")}</span></td>
+			</tr>
+			{/if}
+			{#if (typeof $status_store.total_month !== "undefined") }
+			<tr class="is-size-7-mobile">
+				<td>{$_("monitoring-total-month")}</td>
+				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_month,1)} {$_("units.kwh")}</span></td>
+			</tr>
+			{/if}
+			{#if (typeof $status_store.total_year !== "undefined") }
+			<tr class="is-size-7-mobile">
+				<td>{$_("monitoring-total-year")}</td>
+				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_year,1)} {$_("units.kwh")}</span></td>
+			</tr>
+			{/if}
 		</tbody>
 	</table>
 	<table class="table is-fullwidth">

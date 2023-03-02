@@ -2,6 +2,8 @@
 	import { _ } 		  from 'svelte-i18n'
 	import {status_store} from "../../../lib/stores/status.js"
 
+	const relay_specs = { warning: 20000, alert: 40000}
+
 </script>
 <style>
 	.tag {
@@ -29,6 +31,10 @@
 		<tr class="is-size-7-mobile">
 			<td>{$_("config.safety.stuck")}</td>
 			<td class="has-text-centered"><span class="tag is-normal {$status_store.stuckcount==0?'is-primary':'is-danger'}">{$status_store.stuckcount}</span></td>
+		</tr>
+		<tr class="is-size-7-mobile">
+			<td>{$_("config.safety.switches")}</td>
+			<td class="has-text-centered"><span class="tag is-normal {$status_store.total_switches <= relay_specs.alert?'is-primary':$status_store.total_switches <= relay_specs.alert?'is-warning':'is-danger'}">{$status_store.total_switches}</span></td>
 		</tr>
 	</tbody>
 </table>
