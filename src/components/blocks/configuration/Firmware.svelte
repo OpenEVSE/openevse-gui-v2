@@ -150,22 +150,27 @@
 				console.log("Error parsing json")
 				console.log(e)
 				import_butn = "error"
-				import_file = null
+				setTimeout(() => {
+					import_file = null
+				}, 2000);
 				return false;
 			}
 			console.log(conf)
 			let res
 			if (await serialQueue.add(()=>config_store.upload(conf))) {
 				import_butn = "ok"
-				import_file = null
-				return true;
 			}
 			else {
 				console.log("Error uploading data")
 				import_butn = "error"
-				import_file = null
-				return false;
 			}
+			setTimeout(() => {
+					import_file = null
+				}, 2000);
+			if (import_butn == "error") {
+				return false
+			}
+			else return true
 			
 		}
 		reader.readAsText(import_file);
