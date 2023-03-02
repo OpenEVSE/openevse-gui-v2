@@ -32,9 +32,20 @@
 			<td>{$_("config.safety.stuck")}</td>
 			<td class="has-text-centered"><span class="tag is-normal {$status_store.stuckcount==0?'is-primary':'is-danger'}">{$status_store.stuckcount}</span></td>
 		</tr>
+	</tbody>
+</table>
+<table class="table is-fullwidth">
+	<thead>
+		<tr class="has-background-info is-size-7-mobile">
+			<th class="has-text-white py-1">{$_("config.safety.infos")}</th>
+			<th class="has-text-white has-text-centered py-1">{$_("config.safety.count")}</th>
+		</tr>
+	</thead>
+	<tbody>
 		<tr class="is-size-7-mobile">
 			<td>{$_("config.safety.switches")}</td>
 			<td class="has-text-centered"><span class="tag is-normal {$status_store.total_switches <= relay_specs.alert?'is-primary':$status_store.total_switches <= relay_specs.alert?'is-warning':'is-danger'}">{$status_store.total_switches}</span></td>
 		</tr>
 	</tbody>
 </table>
+

@@ -287,7 +287,8 @@
       "gfci": "GFCI",
       "noground": "Mauvaise Terre",
       "stuck": "Relai Collé",
-      "switches": "Total de Contacts"
+      "switches": "Total de commutations relais",
+      "infos": "Infos"
     },
     "time": {
       "date": "Date/Heure",

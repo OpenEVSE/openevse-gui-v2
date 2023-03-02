@@ -289,7 +289,8 @@
 			"gfci": "GFCI",
 			"noground": "No Ground",
 			"stuck": "Stuck Contact",
-			"switches": "Total Contacts"
+			"switches": "Total Relay Toggles",
+			"infos": "Infos"
 		},
 		"time": {
 			"date": "Date",
