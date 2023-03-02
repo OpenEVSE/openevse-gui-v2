@@ -115,7 +115,15 @@
 				element == "www_username" 				||
 				element == "ssid" 						||
 				element == "mqtt_supported_protocols" 	||
-				element == "http_supported_protocols"
+				element == "http_supported_protocols"	||
+				element == "firmware"					||
+				element == "protocol"					||
+				element == "espflash"					||
+				element == "espinfo"						||
+				element == "buildenv"					||
+				element == "version"						||
+				element == "evse_serial"					||
+				element == "wifi_serial"				
 			
 			) {
 				delete conf[element]
