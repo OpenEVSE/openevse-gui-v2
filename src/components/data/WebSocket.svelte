@@ -69,9 +69,9 @@
 			return
 		}
 		
-		// if (s && s.readyState == s.OPEN) {  
-		// 	s.send("{\"ping\":1}");  
-		// }  
+		if (s && s.readyState == s.OPEN) {  
+			s.send("ping");  
+		}  
 		timerId = setTimeout(()=>keepAlive(s), 5000);  
 		return
 	}

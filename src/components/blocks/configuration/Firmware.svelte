@@ -122,7 +122,7 @@
 			}
 		});
 		// create file
-		const file = URL.createObjectURL(new Blob([JSON.stringify(conf,null,4)], { type: 'text/plain' }))
+		const file = URL.createObjectURL(new Blob([JSON.stringify(conf,null,4)], { type: 'application/json' }))
 		export_link.href =  file
 		export_link.download = "config.json"
 		export_butn = "ok"
@@ -135,13 +135,30 @@
 		// let file = import_file.files[0]
 		let reader = new FileReader();
  		reader.onload = async function() {
-			let conf = JSON.parse(reader.result.toString())
-			console.log(conf)
-			if (await serialQueue.add(()=>config_store.upload(conf)))
-				import_butn = "ok"
-			else
+			let conf
+			try {
+				conf = JSON.parse(reader.result.toString())
+			} catch (e) {
+				console.log("Error parsing json")
+				console.log(e)
 				import_butn = "error"
-			import_file = null
+				import_file = null
+				return false;
+			}
+			console.log(conf)
+			let res
+			if (await serialQueue.add(()=>config_store.upload(conf))) {
+				import_butn = "ok"
+				import_file = null
+				return true;
+			}
+			else {
+				console.log("Error uploading data")
+				import_butn = "error"
+				import_file = null
+				return false;
+			}
+			
 		}
 		reader.readAsText(import_file);
 	}
