@@ -255,7 +255,7 @@
       "backup": "Sauvegarde Configuration",
       "export": "Sauvegarder",
 			"import": "Importer",
-      "backup-desc": "Attention! Aucuns mots de passe ou clefs ne seront sauvegardés"
+      "backup-desc": "Attention! Aucun mot de passe ou clef ne sera sauvegardé"
     },
     "evse": {
       "maxcur": "Courant Maxi",
