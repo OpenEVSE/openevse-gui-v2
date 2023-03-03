@@ -225,15 +225,15 @@
 
 	function refreshPower(amp)
 	 {
-		if (!$status_store.hasOwnProperty('power')) {
+		if (typeof $status_store.power === 'undefined') {
 			// old fw version, generate power on client side
-			let pwr = $uistates_store.power = (amp/1000) * $status_store.voltage
+			let pwr = (amp/1000) * $status_store.voltage
 			if ($config_store.is_threephase)
 				pwr = pwr * 3
 			$uistates_store.power = pwr
 		}
 		else {
-			$uistates_store = $status_store.power
+			$uistates_store.power = $status_store.power
 		}
 		
 	}

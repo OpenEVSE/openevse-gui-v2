@@ -107,17 +107,18 @@
 	{/if}
 	<DataManager />
 	<WebSocket />
+	<AlertBox 
+		title={$uistates_store?.alertbox.title} 
+		bind:visible={$uistates_store.alertbox.visible} 
+		closable={$uistates_store?.alertbox.closable} 
+		button={$uistates_store?.alertbox.button} 
+		body={$uistates_store?.alertbox.body}
+		component={$uistates_store?.alertbox.component}
+		action={$uistates_store?.alertbox.action}
+	/>
 	{:else}
 	<FetchData />
 	{/if}
-	<AlertBox 
-		title={$uistates_store.alertbox.title} 
-		bind:visible={$uistates_store.alertbox.visible} 
-		closable={$uistates_store.alertbox.closable} 
-		button={$uistates_store.alertbox.button} 
-		body={$uistates_store.alertbox.body}
-		component={$uistates_store.alertbox.component}
-		action={$uistates_store.alertbox.action}
-	/>
+
 </main>
 
