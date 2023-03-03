@@ -6,7 +6,6 @@
 	import {plan_store} 			from "./../../lib/stores/plan.js"
 	import {uistates_store} 		from "./../../lib/stores/uistates.js"
 	import {sec2time,
-			miles2km, 
 			displayRange} 			from "../../lib/utils.js"
 	import { scale } 				from 'svelte/transition';
 	import { expoInOut } 			from 'svelte/easing';
@@ -21,9 +20,10 @@
 	let mounted = false
 
 	let isTileVisible = (tile,pos) => {
+		console.log("pos: " + pos + " breakpoint: " + $uistates_store.breakpoint)
 		if (
 			(pos <= 2 ) ||
-			(pos == 3 && ($uistates_store.breakpoint != "mobile" || $uistates_store.breakpoint != "mobilemini")) ||
+			(pos == 3 && ($uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini")) ||
 			(pos == 4 && $uistates_store.breakpoint == "desktop")
 		) {
 			if (tile.display == undefined || tile.display) {
@@ -100,18 +100,18 @@
 
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded && mounted}
 <div class="container statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
-in:scale="{{ delay: 0, duration: 300, easing: expoInOut }}" >
+in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"  
+>
 	<div>
 		<div class="mb-2 mx-0">
 			<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />
 		</div>
 		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center is-flex-wrap-wrap">
-		{#each tiles as tile, i}
-			<StatusTile title={$_("status-tile-" + tile.title)} value={tile.value} precision={tile.precision} unit={tile.unit} visible={isTileVisible(tile,i)}/>
-			
-		{/each}
+			{#each tiles as tile, i}
+			<StatusTile title={$_("status-tile-" + tile.title)} value={tile.value} precision={tile.precision} unit={tile.unit} visible={isTileVisible(tile,i)}/>	
+			{/each}
 		</div>
-
+		
 		<div class="is-flex mt-3 mt-4 mb-1 ml-4 ">
 			<div class="columns">
 				{#if $uistates_store.stateclaimfrom == "manual" || !$claims_target_store.claims?.state}
