@@ -223,11 +223,19 @@
 		}
 	}
 
-	function refreshPower(amp) {
-		let pwr = $uistates_store.power = (amp/1000) * $status_store.voltage
-		if ($config_store.is_threephase)
-			pwr = pwr * 3
-		$uistates_store.power = pwr
+	function refreshPower(amp)
+	 {
+		if (!$status_store.hasOwnProperty('power')) {
+			// old fw version, generate power on client side
+			let pwr = $uistates_store.power = (amp/1000) * $status_store.voltage
+			if ($config_store.is_threephase)
+				pwr = pwr * 3
+			$uistates_store.power = pwr
+		}
+		else {
+			$uistates_store = $status_store.power
+		}
+		
 	}
 
 	async function redirect2ip(ip) {
