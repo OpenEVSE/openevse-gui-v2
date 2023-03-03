@@ -20,7 +20,6 @@
 	let mounted = false
 
 	let isTileVisible = (tile,pos) => {
-		console.log("pos: " + pos + " breakpoint: " + $uistates_store.breakpoint)
 		if (
 			(pos <= 2 ) ||
 			(pos == 3 && ($uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini")) ||
