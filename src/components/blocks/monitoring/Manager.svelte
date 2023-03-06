@@ -25,7 +25,7 @@
 		{#each Object.entries($claims_target_store.claims) as [claim, val], i}
 		<tr>
 			<td class="has-text-left is-italic is-size-7-mobile">{claim}</td>
-			<td class="has-text-centered  is-flex is-justify-content-right">
+			<td class="has-text-centered  is-flex is-justify-content-center">
 				<ManagerTag cli={val} val={$claims_target_store.properties[claim]} />
 			</td>
 		</tr>
