@@ -18,7 +18,7 @@
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info is-size-7-mobile"	>
-				<th class="has-text-white py-1">{$_("monitoring-energy-delivered")}</th>
+				<th class="has-text-white py-1" style="width: 70%">{$_("monitoring-energy-delivered")}</th>
 				<th class="has-text-white has-text-centered py-1" style="width:40%">{$_("units.kwh")}</th>
 			</tr>
 		</thead>
@@ -60,7 +60,7 @@
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info is-size-7-mobile"	>
-				<th class="has-text-white py-1">{$_("monitoring-tab-sensors")}</th>
+				<th class="has-text-white py-1" style="width: 70%">{$_("monitoring-tab-sensors")}</th>
 				<th class="has-text-white has-text-centered py-1" style="width:40%">{$_("value")}</th>
 			</tr>
 		</thead>
@@ -91,7 +91,7 @@
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info is-size-7-mobile">
-				<th class="has-text-white py-1">{$_("config.vehicle.vehicle")}</th>
+				<th class="has-text-white py-1" style="width: 70%">{$_("config.vehicle.vehicle")}</th>
 				<th class="has-text-white has-text-centered py-1" style="width:40%">{$_("value")}</th>
 			</tr>
 		</thead>
@@ -129,7 +129,7 @@
 
 		<thead>
 			<tr class="has-background-info is-size-7-mobile"	>
-				<th class="has-text-white py-1">{$_("monitoring-energy-params")}</th>
+				<th class="has-text-white py-1" style="width: 70%">{$_("monitoring-energy-params")}</th>
 				<th class="has-text-white has-text-centered py-1" style="width:40%">{$_("value")}</th>
 			</tr>
 		</thead>
