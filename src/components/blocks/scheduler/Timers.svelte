@@ -82,8 +82,7 @@
 			<div class="content">{$_("scheduler-empty")}</div>
 			{/if}	
 		</Borders>
-		<div class="mt-4"><Button name={$_("scheduler-newtimer")} butn_submit={addTimer}/></div>
-		
+		<div class="mt-4"><Button name={$_("scheduler-newtimer")} butn_submit={addTimer} disabled={$schedule_store.length >= 50}/></div>
 	</div>
 	
 </Box>
