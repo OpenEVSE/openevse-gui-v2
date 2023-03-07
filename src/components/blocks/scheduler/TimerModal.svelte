@@ -1,18 +1,19 @@
 <script>
-	import Box from "./../../ui/Box.svelte";
-	import Checkbox from "./../../ui/Checkbox.svelte";
-	import Borders from "./../../ui/Borders.svelte";
-	import { _ } 			from 'svelte-i18n'
-	import BoxModal 		from "./../../ui/BoxModal.svelte";
-	import { serialQueue }	from "../../../lib/queue.js";
-	import {schedule_store} from "../../../lib/stores/schedule.js"
-	import AlertBox 		from "../../ui/AlertBox.svelte"
-	import Modal 			from "../../ui/Modal.svelte"
-	import Button 			from "../../ui/Button.svelte"
-	import {onDestroy} 		from "svelte"
+	import Box 				     from "./../../ui/Box.svelte";
+	import Checkbox 			 from "./../../ui/Checkbox.svelte";
+	import Borders 				 from "./../../ui/Borders.svelte";
+	import { _ } 				 from 'svelte-i18n'
+	import { serialQueue }		 from "../../../lib/queue.js";
+	import {schedule_store} 	 from "../../../lib/stores/schedule.js"
+	import AlertBox 			 from "../../ui/AlertBox.svelte"
+	import Modal 			 	 from "../../ui/Modal.svelte"
+	import Button 			     from "../../ui/Button.svelte"
+	import {onDestroy, onMount}  from "svelte"
 
 	export let is_opened = false;
 	export let timer = null;
+
+	let schedules = []
 	let timeout
 	let days = [
 		"monday",
@@ -37,6 +38,7 @@
 	let selected_days = [true,true,true,true,true,true,true,true];
 	
 	$: if (is_opened) {
+		schedules = Object.assign({}, $schedule_store);
 		populate_checkboxes();
 		}
 	
@@ -45,13 +47,14 @@
 			clearTimeout(timeout)
 	})
 
+
 	function populate_checkboxes() {
 		
 	        if (timer == null) {
 				days2table(default_timer.days)
 			}
 			else {
-				days2table($schedule_store[timer].days)
+				days2table(schedules[timer].days)
 			}
 		}
 
@@ -96,7 +99,7 @@
 		for (let i = 0; i < selected_days.length; i++) {
 			if (selected_days[i] == true) sched.days.push(days[i]);
 		}
-		$schedule_store = $schedule_store; 
+		sched = sched
 	}
 
 	async function saveTimer() {
@@ -107,10 +110,11 @@
 			saveTimerState = "loading"
 			let schedule;
 			if (timer == null) schedule = {...default_timer};
-			else 			   schedule = $schedule_store[timer];
+			else 			   schedule = schedules[timer];
 			table2days(schedule);
-
 			if (timer == null) {
+				console.log("schedules length " + $schedule_store.length)
+				console.log($schedule_store)
 				if ($schedule_store.length) {
 					schedule.id = $schedule_store[$schedule_store.length-1].id + 1;
 				}
@@ -162,7 +166,7 @@
 <Modal fit bind:is_opened>
 
 	<AlertBox title={$_("error")}  body="You must select at least one day" bind:visible={alert_visible} />
-	<Box title={timer == null?$_("scheduler-newtimer"): $_("scheduler-timer")+" #" + $schedule_store[timer].id} >
+	<Box title={timer == null?$_("scheduler-newtimer"): $_("scheduler-timer")+" #" + schedules[timer].id} >
 		<div class="mt-2 is-size-6">	
 			<Borders grow>
 				<div class="is-flex is-justify-content-center">
@@ -199,7 +203,7 @@
 						{#if timer == null}
 						<input class="input is-info" id="t_start" type="time" bind:value={default_timer.time}>
 						{:else}
-						<input class="input is-info" id="t_start" type="time" bind:value={$schedule_store[timer].time}>
+						<input class="input is-info" id="t_start" type="time" bind:value={schedules[timer].time}>
 						{/if}
 					</label>
 				</div>
@@ -214,8 +218,8 @@
 							</select>
 							</div>
 						{:else}
-						<div class="select {$schedule_store[timer].state=="active"?"is-primary":"is-danger"}" >
-							<select bind:value={$schedule_store[timer].state}>
+						<div class="select {schedules[timer].state=="active"?"is-primary":"is-danger"}" >
+							<select bind:value={schedules[timer].state}>
 								<option value="active">{$_("active")}</option>
 								<option value="disabled">{$_("disabled")}</option>
 							</select>
@@ -225,7 +229,7 @@
 		</div>
 		<div class="mt-4 is-flex is-justify-content-center mb-4">
 			<Button name={$_("save")} color="is-info" butn_submit={saveTimer} state={saveTimerState}/>
-			<Button name={$_("close")} color="is-danger" butn_submit={()=>is_opened = false} />
+			<Button name={$_("cancel")} color="is-danger" butn_submit={()=>is_opened = false} />
 		</div>
 	</Box>
 </Modal>
