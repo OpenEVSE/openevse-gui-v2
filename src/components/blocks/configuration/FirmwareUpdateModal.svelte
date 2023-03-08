@@ -142,7 +142,7 @@
 							<td class="">
 								<div class="is-flex is-align-items-center is-flex-direction-row is-flex-wrap-wrap ">
 									<span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>						
-									<!-- <Button 
+									<Button 
 										size="is-small" 
 										icon="fa6-solid:cloud-arrow-down" 
 										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
@@ -150,8 +150,8 @@
 										state={gitUpdateButtonState}
 										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
 										butn_submit={()=>{updateToLatest(update.url)}}
-									/> -->
-									<Button 
+									/>
+									<!-- <Button 
 										size="is-small" 
 										icon="fa6-solid:cloud-arrow-down" 
 										disabled={true} 
@@ -160,7 +160,7 @@
 										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
 										butn_submit={()=>{updateToLatest(update.url)}}
 										tooltip="Feature not implemented yet"
-									/>
+									/> -->
 								</div>
 							</td>
 						</tr>
