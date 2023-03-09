@@ -31,16 +31,19 @@
 		text-overflow: ellipsis;
 		/* max-width: 80%; */
 	}
+	.tagname::first-letter {
+  		text-transform: uppercase;
+	}
 
 </style>
 <svelte:options accessors />
 <div class="tags has-addons is-flex is-justify-content-center is-align-items-center {client?"item":""}" >
-	<div class="tag name is-flex is-flex-grow-1 is-flex-shrink-0 {color} has-text-weight-semibold m-0 is-capitalized" >
+	<div class="tag name is-flex is-flex-grow-1 is-flex-shrink-0 {color} has-text-weight-semibold m-0" >
 		{#if client}
 		<iconify-icon class="mr-1" icon={displayIcon(clientid2name(client))}></iconify-icon>
 		{clientid2name(client)}
 		{:else if name}
-		<span class="has-text-centered" style="text-overflow: ellipsis;">
+		<span class:tagname={client} class="has-text-centered" style="text-overflow: ellipsis;">
 			{name}
 		</span>
 		{/if}

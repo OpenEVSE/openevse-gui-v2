@@ -253,6 +253,7 @@
 			"upgrade2": "Upgrade to",
 			"gh-install": "Install latest release automatically",
 			"confirm": "Confirm?",
+			"installation": "Installation",
 			"progress": "Firmware update in progress...",
 			"failed": "Upload failed",
 			"complete": "Firmware upgrade successful, page will reload in few sec",

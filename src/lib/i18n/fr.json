@@ -251,6 +251,7 @@
       "upgrade2": "Installer",
       "gh-install": "Installer automatiquement la dernière version",
       "confirm": "Confirmer?",
+      "installation": "Installation",
       "progress": "Mise à jours en cours...",
       "failed": "Echec de l'envoi",
       "complete": "Mise à jours terminée avec succès, la page va recharger dans quelques secondes.",

@@ -19,6 +19,7 @@
 	export let update = {}
 
 	let file
+	let http_update = false
 	let uploadButtonState = ""
 	let gitUpdateButtonState = ""
 	let fileSent = "no"
@@ -54,12 +55,13 @@
 			url: url
 		}
 		$status_store.ota_progress = 0
+		http_update = true
 		gitUpdateButtonState = "loading"
 		let res = await serialQueue.add(()=>httpAPI("POST","/update",JSON.stringify(data)))
-		if (res)
-			gitUpdateButtonState = "ok"
-		else
+		if (!res) {
 			gitUpdateButtonState = "error"
+			http_update = false
+		}
 		confirmed = false
 	}
 
@@ -87,17 +89,29 @@
 
 	function displayOta() {
 		if ($status_store.ota == "started") {
-			if (uploadButtonState != "loading")
+			if (http_update) {
+				gitUpdateButtonState = "loading"
+			}
+			else {
 				uploadButtonState = "loading"
+			}
 		}
 		else if ($status_store.ota == "completed") {
-			uploadButtonState = "ok"
+			if (http_update)
+				gitUpdateButtonState = "ok"
+			else
+				uploadButtonState = "ok"
 			canClose = true
 			$status_store.ota_progress = 0
 			timeout = setTimeout(()=> location.reload(),6000)
 		}
 		else if ($status_store.ota == "failed") {
-			uploadButtonState = "error"
+			if (http_update)
+				gitUpdateButtonState = "error"
+			else {
+				uploadButtonState = "error"
+			}
+			http_update = false
 			$status_store.ota_progress = 0
 			canClose = true
 			timeout = setTimeout(()=> $status_store.ota = "",3000)
@@ -113,7 +127,7 @@
 
 </style>
 
-<Modal bind:is_opened fit {canClose}>
+<Modal bind:is_opened {canClose}>
 	<Box title={$_("config.titles.firmware-update")} icon="fa6-solid:microchip">
 		<div class="pt-2">
 			
@@ -145,46 +159,37 @@
 							<td class="">
 								<div class="is-flex is-align-items-center">
 									{#if !confirmed}
-									<Button 
+									<div class="mb-2">
+										<Button 
 										size="is-responsive" 
 										icon="fa6-solid:cloud-arrow-down" 
 										tooltip={$_("config.firmware.gh-install")}
 										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
 										name="{$_("config.firmware.upgrade2")} {update.version}"
-										state={gitUpdateButtonState}
 										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
 										butn_submit={()=>{confirmed=true}}
-									/>
+										/>
+									</div>
+									
 									{:else}
 									<div class="is-flex is-justify-content-center is-align-items-baseline is-flex-wrap-wrap">
-									<Button 
-										size="is-responsive mb-2" 
-										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
-										name="{$_("config.firmware.confirm")}"
-										state={gitUpdateButtonState}
-										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
-										butn_submit={()=>{updateToLatest(update.url)}}
-									/>
-									<Button 
-										size="is-responsive" 
-										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
-										name="{$_("cancel")}"
-										color="{"is-danger"}" 
-										butn_submit={()=>{confirmed=false}}
-									/>
+										<Button 
+											size="is-responsive mb-2" 
+											disabled={gitUpdateButtonState == "loading"} 
+											name={$_("config.firmware.confirm")}
+											color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
+											butn_submit={()=>{updateToLatest(update.url)}}
+										/>
+										<Button 
+											size="is-responsive mb-2" 
+											disabled={gitUpdateButtonState == "loading"} 
+											name="{$_("cancel")}"
+											color="{"is-danger"}" 
+											butn_submit={()=>{confirmed=false}}
+										/>
 									</div>
 
 									{/if}
-									<!-- <Button 
-										size="is-small" 
-										icon="fa6-solid:cloud-arrow-down" 
-										disabled={true} 
-										name="{$_("config.firmware.upgrade2")} {update.version}"
-										state={gitUpdateButtonState}
-										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
-										butn_submit={()=>{updateToLatest(update.url)}}
-										tooltip="Feature not implemented yet"
-									/> -->
 								</div>
 							</td>
 						</tr>
@@ -192,7 +197,7 @@
 				</table>
 			</div>
 		</div>
-		{#if file || $status_store.ota_progress > 0}	
+		{#if file || http_update}	
 		<div class="my-2 is-size-6 is-flex is-justify-content-center ">
 			<div class="is-flex-shrink-0 is-flex-grow-1">
 				{#if $status_store.ota == "started" || $status_store.ota_progress > 0}
@@ -208,7 +213,7 @@
 				<div class="is-flex is-justify-content-center mb-2">
 						<RemovableTag
 							action={()=> file = null}
-							name={file.name}
+							name={http_update?update.name:file.name}
 						/>
 				</div>
 				{/if}
@@ -223,7 +228,7 @@
 				color="is-info" 
 				butn_submit={uploadFw}
 			/>
-			<Button disabled={uploadButtonState == "loading"} name={$_("close")} color="is-danger" butn_submit={()=>is_opened=false} />
+			<Button disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} name={$_("close")} color="is-danger" butn_submit={()=>is_opened=false} />
 		</div>
 		{:else}
 		<div class="is-flex is-align-items-center is-justify-content-center my-2 is-size-6">
