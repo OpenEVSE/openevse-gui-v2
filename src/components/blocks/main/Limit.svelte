@@ -189,7 +189,8 @@
 	.modal-content {
 		max-width: 500px;
 		min-width: 290px;
-		overflow: hidden;
+		overflow: auto;;
+		max-height: 95%;
 	}
 	.slider {
 		width:100%;

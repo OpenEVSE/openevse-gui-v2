@@ -34,7 +34,7 @@
 		background-color: white;
 		/* max-height: calc(100% + 5px); */
 		min-height: 50%;
-		height: 100%; 
+		height: fit-content; 
 	}
 	/* .contentbox.is-full-height {
 		height: 100%;

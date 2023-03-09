@@ -110,7 +110,7 @@
 
 </style>
 
-<Modal bind:is_opened {canClose}>
+<Modal bind:is_opened fit {canClose}>
 	<Box title={$_("config.titles.firmware-update")} icon="fa6-solid:microchip">
 		<div class="pt-2">
 			
@@ -131,17 +131,17 @@
 						</tr>
 						<tr>
 							<td class="has-text-weight-semibold">
-								<div class="is-flex is-align-items-center">
-									{$_("config.firmware.latest")}
+								<div class="is-flex ">
+									<span class="m-0 p-0">{$_("config.firmware.latest")}</span>
 									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-black ml-2">
-										<iconify-icon icon="mdi:github" class="is-size-4 mt-2"></iconify-icon>
+										<iconify-icon inline icon="mdi:github" class="is-size-4"></iconify-icon>
 									</a>
 								</div>
 								
 							</td>
 							<td class="">
-								<div class="is-flex is-align-items-center is-flex-direction-row is-flex-wrap-wrap ">
-									<span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>						
+								<div class="is-flex is-align-items-center">
+									<!-- <span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>						 -->
 									<Button 
 										size="is-small" 
 										icon="fa6-solid:cloud-arrow-down" 

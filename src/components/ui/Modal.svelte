@@ -42,16 +42,20 @@
 		left:50%;
 		transform:translate(-50%,-50%);
 		width: 100vw;
-		height: 100%;
+		height: 100vh;
 		z-index: 8;
 		
 	}
 	.modal-content {
 		margin-left: auto;
 		margin-right: auto;
-		overflow: hidden;
+		margin-top: auto;
+		margin-bottom: auto;
+		overflow: auto;
+		max-height: 80%;
 		/* z-index: 8; */
 		max-width: 90%;
+
 	}
 	.modal-content.fit {
 		width:fit-content;
