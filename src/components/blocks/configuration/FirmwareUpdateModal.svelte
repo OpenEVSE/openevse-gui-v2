@@ -24,6 +24,7 @@
 	let fileSent = "no"
 	let timeout
 	let canClose = true
+	let confirmed = false
 
 	onDestroy(() => {
 		clearTimeout(timeout)
@@ -59,7 +60,9 @@
 			gitUpdateButtonState = "ok"
 		else
 			gitUpdateButtonState = "error"
+		confirmed = false
 	}
+
 
 	async function uploadFw() {
 		// Prevent UI to send any request while OTA is in progress
@@ -130,10 +133,10 @@
 							<td class="">{$config_store.version}</td>
 						</tr>
 						<tr>
-							<td class="has-text-weight-semibold">
-								<div class="is-flex ">
-									<span class="m-0 p-0">{$_("config.firmware.latest")}</span>
-									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-black ml-2">
+							<td class="has-text-weight-semibold pt-3">
+								<div class="is-flex is-align-items-center">
+									<span class="">{$_("config.firmware.latest")}</span>
+									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-black is-flex is-align-items-center ml-2">
 										<iconify-icon inline icon="mdi:github" class="is-size-4"></iconify-icon>
 									</a>
 								</div>
@@ -142,6 +145,7 @@
 							<td class="">
 								<div class="is-flex is-align-items-center">
 									<!-- <span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>						 -->
+									{#if !confirmed}
 									<Button 
 										size="is-small" 
 										icon="fa6-solid:cloud-arrow-down" 
@@ -149,8 +153,19 @@
 										name="{$_("config.firmware.upgrade2")} {update.version}"
 										state={gitUpdateButtonState}
 										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
+										butn_submit={()=>{confirmed=true}}
+									/>
+									{:else}
+									<Button 
+										size="is-small" 
+										icon="fa6-solid:cloud-arrow-down" 
+										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
+										name="{$_("config.firmware.confirm")}"
+										state={gitUpdateButtonState}
+										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
 										butn_submit={()=>{updateToLatest(update.url)}}
 									/>
+									{/if}
 									<!-- <Button 
 										size="is-small" 
 										icon="fa6-solid:cloud-arrow-down" 

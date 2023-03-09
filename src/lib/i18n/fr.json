@@ -249,6 +249,7 @@
       "latest": "Dernière",
       "nofile": "Aucun fichier sélectionné",
       "upgrade2": "Installer",
+      "confirm": "Confirmer la maj?",
       "progress": "Mise à jours en cours...",
       "failed": "Echec de l'envoi",
       "complete": "Mise à jours terminée avec succès, la page va recharger dans quelques secondes.",
