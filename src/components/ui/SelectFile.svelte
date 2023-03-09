@@ -22,11 +22,11 @@
 
 </script>
 
-<button bind:this={button} class="button is-info is-outlined {mini?"is-small":""}" style:width={width}  on:click={onClick}>
+<button bind:this={button} class="button is-info is-outlined {mini?"is-responsive":""}" style:width={width}  on:click={onClick}>
 	<div class="is-flex is-align-items-center is-justify-content-center" style:width={width} >
 		{#if icon}
 		<div>
-			<iconify-icon inline icon={icon} class="{!mini?"is-size-5":"is-size-6"}" ></iconify-icon>
+			<iconify-icon inline icon={icon} class="{!mini?"is-size-5-mobile is-size-6":"is-size-6"}" ></iconify-icon>
 		</div>
 		{/if}
 		<div class="">{title}</div>	

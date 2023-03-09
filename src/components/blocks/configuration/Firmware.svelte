@@ -192,7 +192,7 @@
 			<tr>
 				<td class="has-text-weight-bold">OpenEVSE</td>
 				<td>{$config_store.firmware}</td>
-				<td><div class="has-text-centered"><Button width="100px" size="is-small" name={$_("config.firmware.restart")} butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
+				<td><div class="has-text-centered"><Button width="100px" size="is-responsive" name={$_("config.firmware.restart")} butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
 			</tr>
 			<tr>
 				<td class="has-text-weight-bold">OpenEVSE Wifi</td>
@@ -211,13 +211,13 @@
 				<td>
 					<div class="has-text-centered is-flex is-flex-direction-column">
 						<div class="mb-2">
-							<Button  size="is-small" width="100px"name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
+							<Button  size="is-responsive" width="100px"name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
 						</div>
 						<div class="mb-2">
-							<Button size="is-small" width="100px" name={$_("config.firmware.restart")} butn_submit={restartESP} state={restartEspState}/>
+							<Button size="is-responsive" width="100px" name={$_("config.firmware.restart")} butn_submit={restartESP} state={restartEspState}/>
 						</div>
 						<div class="mb-2">
-							<Button size="is-small" width="100px" name={$_("config.firmware.reset")} butn_submit={resetESP} state={resetEspState}/>
+							<Button size="is-responsive" width="100px" name={$_("config.firmware.reset")} butn_submit={resetESP} state={resetEspState}/>
 						</div>
 					</div>
 				</td>
@@ -233,7 +233,7 @@
 				<div class="has-text-info has-text-weight-bold mb-1">
 					{$_("config.firmware.backup-desc")}
 				</div>
-				<Button size="is-small" width="100px" state={export_butn} name={$_("config.firmware.export")} butn_submit={exportConfig}/>
+				<Button size="is-responsive" width="100px" state={export_butn} name={$_("config.firmware.export")} butn_submit={exportConfig}/>
 				<div class="is-hidden">
 					<a bind:this={export_link} href={null} >null</a>
 				</div>
@@ -247,7 +247,7 @@
 
 				{:else}
 				<div>
-					<Button size="is-small" color="is-primary" width="100px" state={import_butn} name={$_("config.firmware.upload")} butn_submit={importConfig} />
+					<Button size="is-responsive" color="is-primary" width="100px" state={import_butn} name={$_("config.firmware.upload")} butn_submit={importConfig} />
 				</div>
 				
 				<div class="mt-2 is-inline-block">
