@@ -3,11 +3,13 @@
 	import { DateTime } 		  from "luxon";
 	import { status_store }		  from './../../lib/stores/status.js'
 	import { onMount, onDestroy } from 'svelte'
+	import { JSONTryParse }		  from './../../lib/utils.js'
 	
 	let socket
 	let timerId
 	let lastmsg
 	let timeout
+	let ping_cnt = 0
 
 
 	onMount(() => {
@@ -35,10 +37,7 @@
 			} )
 			s.addEventListener("message", function (e) {
 				lastmsg = DateTime.now().toUnixInteger()
-				const jsondata = JSON.parse(e.data.toString())
-				let store = Object.assign({}, $status_store);
-				store = {...store, ...jsondata}
-				status_store.update(() => store)
+				parseMessage(e.data.toString())
 			})
 			s.addEventListener("error", function (e) {
 				console.error('Socket encountered error: ', e.message, 'Closing socket');
@@ -57,22 +56,52 @@
 		}
 	}
 
+	function parseMessage(msg) {
+		const jsondata = JSONTryParse(msg)
+		if (jsondata) {
+			let store = Object.assign({}, $status_store);
+			store = {...store, ...jsondata}
+			status_store.update(() => store)
+			return true
+		}
+		else if (msg = "PONG") {
+			lastmsg = DateTime.now().toUnixInteger()
+			return true
+		}
+		else {
+			console.log("Can't parse ws msg")
+			return false
+		}
+	}
+
+
 	function keepAlive(s) { 
-		let newmsg = DateTime.now().toUnixInteger()
-		let timing = newmsg - lastmsg
-		if (timing >= 120) {
-			// Roger we have a problem, try to reconnect the websocket
+		let now = DateTime.now().toUnixInteger()
+		let timing = now - lastmsg
+		if (!ping_cnt && timing >= 5) {
+			// send a ping to check connectivity
+			if (s && s.readyState == s.OPEN) {  
+				s.send("PING")
+				ping_cnt += 1
+			}  
+			
+		}
+		else if (ping_cnt <= 3) {
+			// resend a ping
+			if (s && s.readyState == s.OPEN) {  
+				s.send("PING")
+				ping_cnt += 1
+			}
+		}
+		else if (ping_cnt > 3) {
+			// restart ws connection
 			console.log("No msg over websocket for " + timing + " sec, restart websocket")
 			s.close()
 			lastmsg = DateTime.now().toUnixInteger()
-			cancelKeepAlive()  
+			cancelKeepAlive()
 			return
 		}
-		
-		if (s && s.readyState == s.OPEN) {  
-			s.send("ping");  
-		}  
-		timerId = setTimeout(()=>keepAlive(s), 5000);  
+		timerId = setTimeout(()=>keepAlive(s), 1000);
 		return
 	}
 	

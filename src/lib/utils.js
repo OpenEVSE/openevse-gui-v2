@@ -466,3 +466,20 @@ export function isFloat(n) {
 export function isInteger(n) {
     return n === +n && n === (n|0);
 }
+
+export function JSONTryParse(input) {
+	try {
+		//check if the string exists
+		if (input) {
+			var o = JSON.parse(input);
+
+			//validate the result too
+			if (o && o.constructor === Object) {
+				return o;
+			}
+		}
+	}
+	catch (e) {
+	}
+	return false;
+};
