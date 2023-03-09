@@ -51,7 +51,8 @@
 		margin-right: auto;
 		margin-top: auto;
 		margin-bottom: auto;
-		overflow: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
 		max-height: 80%;
 		/* z-index: 8; */
 		max-width: 90%;

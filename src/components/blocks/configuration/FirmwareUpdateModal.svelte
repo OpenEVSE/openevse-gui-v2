@@ -144,11 +144,11 @@
 							</td>
 							<td class="">
 								<div class="is-flex is-align-items-center">
-									<!-- <span class="mr-2 is-underlined"><a href={update.url} class="{$config_store.version != update.version ?"has-text-primary":"has-text-info"}">{update.version}</a></span>						 -->
 									{#if !confirmed}
 									<Button 
-										size="is-small" 
+										size="is-responsive" 
 										icon="fa6-solid:cloud-arrow-down" 
+										tooltip={$_("config.firmware.gh-install")}
 										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
 										name="{$_("config.firmware.upgrade2")} {update.version}"
 										state={gitUpdateButtonState}
@@ -156,15 +156,24 @@
 										butn_submit={()=>{confirmed=true}}
 									/>
 									{:else}
+									<div class="is-flex is-justify-content-center is-align-items-baseline is-flex-wrap-wrap">
 									<Button 
-										size="is-small" 
-										icon="fa6-solid:cloud-arrow-down" 
+										size="is-responsive mb-2" 
 										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
 										name="{$_("config.firmware.confirm")}"
 										state={gitUpdateButtonState}
 										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
 										butn_submit={()=>{updateToLatest(update.url)}}
 									/>
+									<Button 
+										size="is-responsive" 
+										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
+										name="{$_("cancel")}"
+										color="{"is-danger"}" 
+										butn_submit={()=>{confirmed=false}}
+									/>
+									</div>
+
 									{/if}
 									<!-- <Button 
 										size="is-small" 
