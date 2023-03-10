@@ -119,10 +119,10 @@
 				element == "firmware"					||
 				element == "protocol"					||
 				element == "espflash"					||
-				element == "espinfo"						||
+				element == "espinfo"					||
 				element == "buildenv"					||
-				element == "version"						||
-				element == "evse_serial"					||
+				element == "version"					||
+				element == "evse_serial"				||
 				element == "wifi_serial"				
 			
 			) {

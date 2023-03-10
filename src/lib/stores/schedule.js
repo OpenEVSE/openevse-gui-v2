@@ -1,6 +1,5 @@
 import { writable } from 'svelte/store'
 import {httpAPI} from '../utils.js'
-import { uistates_store } from './uistates.js'
 
 function createScheduleStore() {
     const P  = writable([])

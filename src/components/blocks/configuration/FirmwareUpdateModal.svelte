@@ -103,6 +103,7 @@
 				uploadButtonState = "ok"
 			canClose = true
 			$status_store.ota_progress = 0
+			file = null
 			timeout = setTimeout(()=> location.reload(),6000)
 		}
 		else if ($status_store.ota == "failed") {
