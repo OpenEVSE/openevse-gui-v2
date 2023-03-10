@@ -33,7 +33,7 @@
 	"alert-nonetwork-body": "Aucun réseau detecté; en attente de connection",
   "alert-portrait-title": "Attention",
   "alert-portrait-body": "Cette application est destinée à un affichage portrait sur smartphone",
-  "charge-title": "Charge",
+  "charge-title": "Session de Charge",
   "charge-toggle": "Contrôle",
   "charge-enable": "Activer la Charge",
   "charge-disable": "Désactiver la Charge",
