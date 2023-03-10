@@ -82,20 +82,12 @@
 	function keepAlive(s) { 
 		let now = DateTime.now().toUnixInteger()
 		let timing = now - lastmsg
-		if (!ping_cnt && timing >= 5) {
+		if ((!ping_cnt && timing >= 5) || ( ping_cnt && ping_cnt <= 3 )) {
 			// send a ping to check connectivity
 			if (s && s.readyState == s.OPEN) {  
 				s.send('{"ping": 1}')
 				ping_cnt += 1
-			}  
-			
-		}
-		else if (ping_cnt && ping_cnt <= 3) {
-			// resend a ping
-			if (s && s.readyState == s.OPEN) {  
-				s.send('{"ping": 1}')
-				ping_cnt += 1
-			}
+			}  	
 		}
 		else if (ping_cnt > 3 && timing >= 5) {
 			// restart ws connection
