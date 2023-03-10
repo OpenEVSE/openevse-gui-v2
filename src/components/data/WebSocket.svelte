@@ -27,7 +27,7 @@
 		let host 	= window.location.host
 		let ishttps = location.protocol === "https:"
 		let proto 	= ishttps?"wss://":"ws://"
-		if (!s) {
+		// if (!s) {
 			console.log("opening socket")
 			s = new WebSocket(proto + host + "/ws")
 			s.addEventListener("open", function (event) {
@@ -55,7 +55,7 @@
 				setTimeout(()=>connect2socket(), 1000)
 				
 			})
-		}
+		// }
 	}
 
 	function parseMessage(msg) {
@@ -97,9 +97,11 @@
 				ping_cnt += 1
 			}
 		}
-		else if (ping_cnt > 3) {
+		else if (ping_cnt > 3 && timing >= 5) {
 			// restart ws connection
 			console.log("No msg over websocket for " + timing + " sec, restart websocket")
+			ping_cnt = 0
+			$uistates_store.ws_connected = false
 			s.close()
 			lastmsg = DateTime.now().toUnixInteger()
 			cancelKeepAlive()
