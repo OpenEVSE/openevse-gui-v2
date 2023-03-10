@@ -37,7 +37,9 @@
 			} )
 			s.addEventListener("message", function (e) {
 				lastmsg = DateTime.now().toUnixInteger()
-				parseMessage(e.data.toString())
+				if (parseMessage(e.data.toString())) {
+					ping_cnt = 0
+				}
 			})
 			s.addEventListener("error", function (e) {
 				console.error('Socket encountered error: ', e.message, 'Closing socket');
@@ -59,14 +61,16 @@
 	function parseMessage(msg) {
 		const jsondata = JSONTryParse(msg)
 		if (jsondata) {
-			let store = Object.assign({}, $status_store);
-			store = {...store, ...jsondata}
-			status_store.update(() => store)
-			return true
-		}
-		else if (msg = "PONG") {
 			lastmsg = DateTime.now().toUnixInteger()
-			return true
+			if (!jsondata.pong) {
+				// todo: could verify data first
+				let store = Object.assign({}, $status_store);
+				store = {...store, ...jsondata}
+				status_store.update(() => store)
+				return true
+			}
+			else return true
+			
 		}
 		else {
 			console.log("Can't parse ws msg")
@@ -81,15 +85,15 @@
 		if (!ping_cnt && timing >= 5) {
 			// send a ping to check connectivity
 			if (s && s.readyState == s.OPEN) {  
-				s.send("PING")
+				s.send('{"ping": 1}')
 				ping_cnt += 1
 			}  
 			
 		}
-		else if (ping_cnt <= 3) {
+		else if (ping_cnt && ping_cnt <= 3) {
 			// resend a ping
 			if (s && s.readyState == s.OPEN) {  
-				s.send("PING")
+				s.send('{"ping": 1}')
 				ping_cnt += 1
 			}
 		}
@@ -101,8 +105,7 @@
 			cancelKeepAlive()
 			return
 		}
-		timerId = setTimeout(()=>keepAlive(s), 1000);
-		return
+		timerId = setTimeout(()=>keepAlive(s), ping_cnt?1000:5000);
 	}
 	
 	function cancelKeepAlive() {  
