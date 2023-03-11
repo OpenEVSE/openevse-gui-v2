@@ -114,8 +114,16 @@ export function createTzObj(tz) {
 	if (tz) {
 		var tzobj = []
 		// @ts-ignore
-		Object.entries(tz).forEach((element,index,array) => {
-			tzobj[index] = {name: element[0], value: element[0] + "|" + element[1]}
+		let idx = 0
+		Object.entries(tz).forEach((element) => {
+			if (!element[0].startsWith("Etc")) {
+				console.log("element ok")
+				tzobj[idx] = { name: element[0], value: element[0] + "|" + element[1] }
+				idx++
+			}
+			else {
+				console.log("element has Etc")
+			}
 		})
 		return tzobj
 	}

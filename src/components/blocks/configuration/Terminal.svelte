@@ -44,10 +44,6 @@
 					data = data.slice(-data.length,-data.length + 200)
 					content.innerHTML = data.join('\n')
 				}
-				
-				if (content.length > 51200)
-					content = ""
-				// terminal += line
 				if (line) {
 					content.append(line)
 					scrollToBottom(content)
