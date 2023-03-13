@@ -1,6 +1,5 @@
 <script>
 	import RemovableTag from "./../../ui/RemovableTag.svelte";
-	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 		  		from 'svelte-i18n'
 	import { config_store } 	from "./../../../lib/stores/config.js";
 	import { serialQueue }		from "./../../../lib/queue.js";
@@ -9,7 +8,6 @@
 	import {onDestroy, onMount} from "svelte"
 	import Box 					from "../../ui/Box.svelte"
 	import Button 				from "../../ui/Button.svelte"
-	import IconButton 			from "../../ui/IconButton.svelte"
 	import Modal 				from "../../ui/Modal.svelte"
 	import SelectFile 			from "../../ui/SelectFile.svelte"
 	import ProgressBar			from "../../ui/ProgressBar.svelte";
@@ -151,8 +149,8 @@
 							<td class="has-text-weight-semibold pt-3">
 								<div class="is-flex is-align-items-center">
 									<span class="">{$_("config.firmware.latest")}</span>
-									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-black is-flex is-align-items-center ml-2">
-										<iconify-icon inline icon="mdi:github" class="is-size-4"></iconify-icon>
+									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-dark is-flex is-align-items-center ml-2">
+										<iconify-icon inline icon="icon-park-outline:github" class="is-size-4"></iconify-icon>
 									</a>
 								</div>
 								

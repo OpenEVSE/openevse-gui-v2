@@ -104,7 +104,11 @@
 	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-right {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?$_("status-items-connected"):$_("status-items-notconnected")}>
 		<StatusIcon icon={vehicle?"mdi:car":"mdi:car-off"} color="has-text-white" bp={bp}/>
 	</div>
-	<div class="is-flex-grow-1 has-text-centered {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini" ?"is-hidden":""}" ><a href="/" use:link><img src={Logo} alt="logo" /></a></div>
+	<div class="is-flex-grow-1 has-text-centered {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini" ?"is-hidden":""}" >
+		<a href="/" use:link>
+			<img src={Logo} alt="logo" />
+		</a>
+	</div>
 	
 	<div class="is-flex no-pointer {bp != "mobilemini"?"mt-1 is-medium":"mt-0 is-medium"} mb-1 ml-auto mr-2 is-capitalized  has-text-weight-semibold has-text-dark is-dark">
 		<div class="my-0 py-0 is-flex is-flex-direction-column is-align-items-center is-justify-content-top" >
