@@ -30,12 +30,16 @@
 	]
 
 	function updateDateField(t) {
+		console.log(t)
 		if (allow_time_update && t != undefined) {
 			let zone = "UTC"
 			if ($config_store.time_zone)
 				zone = $config_store.time_zone.split("|")[0]
-			const dt = DateTime.fromISO(t).setZone(zone)
+			console.log("zone: " + zone)
+			const dt = DateTime.fromISO(t, { setZone: true})
 			date = dt.toFormat("yyyy-MM-dd'T'HH:mm")
+			console.log(date)
+			//date = DateTime.fromISO(t).setZone(zone).toFormat("yyyy-MM-dd'T'HH:mm")
 		}	
 	}
 
