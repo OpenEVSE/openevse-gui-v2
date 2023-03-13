@@ -78,7 +78,7 @@ export function formatDate(t,z,format=null) {
 	let d
 	if (z) {
 		let tz = z.split("|")[0]
-		d = DateTime.fromISO(t, {setZone: true})
+		d = DateTime.fromISO(t, {zone: tz})
 	}
 	else d = DateTime.fromISO(t)
 	const arr = d.toLocaleString(DateTime.DATETIME_SHORT).split(" ")
