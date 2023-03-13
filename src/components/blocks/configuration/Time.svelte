@@ -35,8 +35,8 @@
 			let zone = "UTC"
 			if ($config_store.time_zone)
 				zone = $config_store.time_zone.split("|")[0]
-			console.log("zone: " + zone)
-			const dt = DateTime.fromISO(t, { zone: zone})
+			console.log("zone: " + zone)	
+			const dt = DateTime.fromISO(t).setZone(zone)
 			date = dt.toFormat("yyyy-MM-dd'T'HH:mm")
 			console.log(date)
 			//date = DateTime.fromISO(t).setZone(zone).toFormat("yyyy-MM-dd'T'HH:mm")
@@ -61,7 +61,7 @@
 		if (timemode == 0 || timemode == 1) {
 
 			const zone = $config_store.time_zone.split("|")[0]
-			var newdate = DateTime.fromISO(date)
+			var newdate = DateTime.fromISO(date,{zone: zone})
 			formData.set('ntp', 'false');
 			formData.set('tz', tz);
 			formData.set('time', newdate.toISO());
@@ -94,22 +94,7 @@
 		const data = {
 			sntp_enabled: timemode==2?true:false,
 		}
-		if (timemode != 2) {
-			// dirty hack until manual time OpenEVSE bug is solved
-			//save tz in local storage
-			if (tz != "Etc/Universal|UTC0")
-				$uisettings_store.tz = tz
-			//set to UTC as OpenEVSE
-			tz = "Etc/Universal|UTC0"
-		}
-		else {
-			// dirty hack
-			// get tz from localstorage
-			if ($uisettings_store.tz )
-				tz = $uisettings_store.tz 
-			else tz = "Etc/Universal|UTC0"
-		}
-		data.time_zone = tz 
+		data.time_zone = tz
 		// end dirty hack
 		if (await config_store.upload(data)) 
 			{
@@ -147,7 +132,6 @@
 		if (await config_store.upload(data)) 
 			{
 				selectTimeZoneState = "ok"
-				$uisettings_store.tz = tz
 				return true
 			}
 		else {
@@ -158,8 +142,9 @@
 
 	function timeNow() {
 		allow_time_update = false
-		const localdate = DateTime.now()
-		date = localdate.toFormat("yyyy-MM-dd'T'HH:mm")
+		//const localdate = DateTime.now()
+		date = DateTime.now()
+		//date = localdate.toFormat("yyyy-MM-dd'T'HH:mm")
 		return true
 	}
 
