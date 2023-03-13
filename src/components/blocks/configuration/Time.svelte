@@ -117,10 +117,6 @@
 				}
 				else {
 					setTime(false)
-					//dirty hack timer bug
-					setTimeout(() => {
-						setTime(false)
-					}, 100);
 				}
 				
 				if (butn_settime)
