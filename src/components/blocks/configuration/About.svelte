@@ -12,38 +12,40 @@ import Logo  from "../../../assets/logo-mini.png"
 
 	<div class="is-flex is-flex-direction-column is-align-items-center">
 		<div>
-			<div class="has-text-weight-bold is-size-6 mt-2">
-				<a href="https://openevse.stoplight.io/docs/openevse-wifi-v4/6e3b6e2f1b976-open-evse-wi-fi-esp-32-gateway-v4" class="has-text-dark" 
+			<div class="has-text-weight-bold is-size-6 mt-2 mb-2">
+				<a href="https://openevse.stoplight.io/docs/openevse-wifi-v4/6e3b6e2f1b976-open-evse-wi-fi-esp-32-gateway-v4"  
 					on:click|preventDefault={()=>{window.open("https://openevse.stoplight.io/docs/openevse-wifi-v4/6e3b6e2f1b976-open-evse-wi-fi-esp-32-gateway-v4");return false}}>	
 					<iconify-icon inline icon="fa6-solid:book"></iconify-icon>
 						Documentation
 				</a>
 			</div>
-			<div class="has-text-weight-bold is-size-6 mt-2 has-text-dark">
-				<iconify-icon inline icon="icon-park-outline:github"></iconify-icon>
+			<!-- <div class="has-text-weight-bold is-size-6 mt-2 has-text-dark">
 				Repositories
-			</div>
-			<div class="is-inline-block">
+			</div> -->
+			<div class="is-inline-block has-text-weight-bold">
 				<div class="my-1">
-					<a class="is-size-5 is-flex is-align-items-center" href="https://github.com/KipK/openevse-gui-v2" on:click|preventDefault={()=>{window.open("https://github.com/KipK/openevse-gui-v2");return false}}>	
-						<span class="ml-1 is-size-6">OpenEVSE-UI</span>
+					<a class="is-size-6 is-flex is-align-items-center" href="https://github.com/KipK/openevse-gui-v2" on:click|preventDefault={()=>{window.open("https://github.com/KipK/openevse-gui-v2");return false}}>	
+						<iconify-icon inline icon="icon-park-outline:github"></iconify-icon>
+						<span class="ml-1">OpenEVSE-UI</span>
 					</a>
 				</div>
 				<div class="my-1">
-					<a class="is-size-5 is-flex is-align-items-center" href="https://github.com/OpenEVSE/ESP32_WiFi_V4.x" on:click|preventDefault={()=>{window.open("https://github.com/OpenEVSE/ESP32_WiFi_V4.x");return false}}>
-						<span class="ml-1 is-size-6">OpenEVSE WiFi</span>
+					<a class="is-size-6 is-flex is-align-items-center" href="https://github.com/OpenEVSE/ESP32_WiFi_V4.x" on:click|preventDefault={()=>{window.open("https://github.com/OpenEVSE/ESP32_WiFi_V4.x");return false}}>
+						<iconify-icon inline icon="icon-park-outline:github"></iconify-icon>
+						<span class="ml-1">OpenEVSE WiFi</span>
 					</a>
 				</div>
 				<div class="my-1">
-					<a class="is-size-5 is-flex is-align-items-center" href="https://github.com/OpenEVSE/open_evse" on:click|preventDefault={()=>{window.open("https://github.com/OpenEVSE/open_evse");return false}}>
-						<span class="ml-1 is-size-6">OpenEVSE</span>
+					<a class="is-size-6 is-flex is-align-items-center" href="https://github.com/OpenEVSE/open_evse" on:click|preventDefault={()=>{window.open("https://github.com/OpenEVSE/open_evse");return false}}>
+						<iconify-icon inline icon="icon-park-outline:github"></iconify-icon>
+						<span class="ml-1">OpenEVSE</span>
 					</a>
 				</div>
 			</div>	
 		</div>
 		
 		<div class="">
-			<div class="has-text-weight-bold is-size-6 mt-2">User interface powered by</div>
+			<div class="has-text-weight-bold is-size-6 mt-2 has-text-dark">User interface made with</div>
 			<div class="is-size-6">
 				<a href="https://svelte.dev/" on:click|preventDefault={()=>{window.open("https://svelte.dev/");return false}}><iconify-icon inline icon="vscode-icons:file-type-svelte"></iconify-icon>Svelte </a>
 				<a href="https://vitejs.dev/" on:click|preventDefault={()=>{window.open("https://vitejs.dev/");return false}}><iconify-icon inline icon="vscode-icons:file-type-vite"></iconify-icon>Vite </a>
@@ -51,7 +53,7 @@ import Logo  from "../../../assets/logo-mini.png"
 			</div>
 			
 		</div>
-		<div class="has-text-centered is-size-7 mt-4">
+		<div class="has-text-centered is-size-7 mt-4 has-text-dark">
 			Powered by <a href="https://www.openevse.com/">OpenEVSE</a> and <a href="https://openenergymonitor.org">OpenEnergyMonitor</a>
 		</div>
 	</div>
