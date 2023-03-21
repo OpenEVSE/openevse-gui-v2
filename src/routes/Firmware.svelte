@@ -6,5 +6,5 @@
 
 <CentralView>
 	<Firmware />
-</CentralView>>
+</CentralView>
 		

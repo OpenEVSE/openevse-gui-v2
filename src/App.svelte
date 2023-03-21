@@ -1,9 +1,9 @@
 <script>
-	import AlertBox from "./components/ui/AlertBox.svelte";
-	import WebSocket 			from "./components/data/WebSocket.svelte";
-	import { status_store } 	from "./lib/stores/status.js";
+	import AlertBox 			from "./components/ui/AlertBox.svelte"
+	import WebSocket 			from "./components/data/WebSocket.svelte"
+	import { status_store } 	from "./lib/stores/status.js"
 	import { uistates_store } 	from './lib/stores/uistates.js'
-	import Status 				from "./components/blocks/Status.svelte";
+	import Status 				from "./components/blocks/Status.svelte"
 	import {location} 			from 'svelte-spa-router'
 	import NavBar 				from "./components/blocks/NavBar.svelte"
 	import DataManager 			from "./components/data/DataManager.svelte"
@@ -12,7 +12,7 @@
 	import FetchData 			from './components/data/FetchData.svelte'
 	import {getBreakpoint} 		from "./lib/utils.js"
 	import AlertBoxNoModal 		from "./components/ui/AlertBoxNoModal.svelte"
-	import { _, locale } 		from 'svelte-i18n'
+	import { _ , locale } 		from 'svelte-i18n'
 	import "./lib/i18n.js"
 	import 'iconify-icon'
 	// import "@fontsource/roboto"
@@ -98,7 +98,8 @@
 			<AlertBoxNoModal title={$_("alert-nonetwork-title")} body={$_("alert-nonetwork-body")} visible={navigator.onLine?false:true} /> 
 			<Router {routes} />
 		</div>
-
+    
+	
 	{#if !$location.includes("/wizard")}
 	<div class="nav">
 		<NavBar charging={$uistates_store.charging} selected={$location} />

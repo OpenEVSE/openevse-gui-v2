@@ -212,8 +212,8 @@ export function getStateDesc(state) {
 		// Errors
 		case 4: return get(_)("logs-states.error-vent")
 		case 5: return get(_)("logs-states.error-diode")
-		case 6:return get(_)("logs-states.error-gfi")
-		case 7: return  get(_)("logs-states.error-ground")
+		case 6: return get(_)("logs-states.error-gfi")
+		case 7: return get(_)("logs-states.error-ground")
 		case 8: return get(_)("logs-states.error-relay")
 		case 9: return get(_)("logs-states.error-gfitest")
 		case 10: return get(_)("logs-states.error-temp")
