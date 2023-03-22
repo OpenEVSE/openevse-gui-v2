@@ -57,7 +57,7 @@
 
 	async function setTime(loader=true) {
 		let data = { 
-			sntp_enable: true,
+			sntp_enabled: true,
 			time: undefined,
 			time_zone: undefined
 		}
@@ -68,22 +68,14 @@
 
 			const zone = $config_store.time_zone.split("|")[0]
 			var newdate = DateTime.fromISO(date).toUTC()
-			data.sntp_enable = false
+			data.sntp_enabled = false
 			data.time_zone = tz
 			data.time = newdate
-			// formData.set('ntp', 'false');
-			// formData.set('tz', tz);
-			// formData.set('time', newdate.toISO());
 		}
 		else {
-			data.sntp_enable = true
+			data.sntp_enabled = true
 			data.time_zone = tz
-			// formData.set('ntp', "true");
-			// formData.set('tz', tz);
 		}
-		
-		// @ts-ignore
-		// const payload = new URLSearchParams(formData).toString()
 		allow_time_update = true
 		let res = await serialQueue.add(() => httpAPI("POST","/time",JSON.stringify(data)))
 		if (res.msg == "done" )  {
