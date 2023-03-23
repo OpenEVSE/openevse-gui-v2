@@ -1,5 +1,4 @@
 <script>
-	
 	export let value;
 	export let min;
 	export let max;

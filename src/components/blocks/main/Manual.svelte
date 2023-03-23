@@ -155,6 +155,8 @@
 		$uistates_store.charge_current = getChgCurrent()
 		if ($uistates_store.charge_current > $config_store.max_current_soft) 
 			$uistates_store.charge_current = $config_store.max_current_soft
+		else if ($uistates_store.charge_current < $config_store.min_current_hard)
+			$uistates_store.charge_current = $config_store.min_current_hard
 	}	
 	function set_uistates_shaper(val) {
 		val = val == 1?true:false
