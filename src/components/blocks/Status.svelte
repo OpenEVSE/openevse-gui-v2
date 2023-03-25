@@ -31,21 +31,11 @@
 			(pos == 3 && ($uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini")) ||
 			(pos == 4 && $uistates_store.breakpoint == "desktop")
 		) {
-			if (tile.display == undefined || tile.display) {
-				return true
-			}
-			else return false
+			return true
 		}
 		else {
-			if (tile.display == undefined || tile.display) {
-				hidden_tiles = 1
-				if ($uistates_store.status_expanded == true)
-					return true
-				else return false
-			}
-			else {
-				return false
-			}
+			hidden_tiles = 1
+			return false
 		}
 	}
 
@@ -111,9 +101,20 @@ in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"
 			<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />
 		</div>
 		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center is-flex-wrap-wrap">
+			{#key redraw}
+			{#each tiles as tile, i}
+			{#if isTileVisible(tile,i) && (tile.display || tile.display == undefined)}
+			<StatusTile title={$_("status-tile-" + tile.title)} value={tile.value} precision={tile.precision} unit={tile.unit}/>	
+			{/if}
+			{/each}
+			{/key}
+		</div>
+		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center is-flex-wrap-wrap" class:is-hidden={!$uistates_store.status_expanded}>
 			{#key $uistates_store.status_expanded || redraw}
 			{#each tiles as tile, i}
-			<StatusTile title={$_("status-tile-" + tile.title)} value={tile.value} precision={tile.precision} unit={tile.unit} visible={isTileVisible(tile,i)}/>	
+			{#if !isTileVisible(tile,i) && (tile.display || tile.display == undefined)}
+			<StatusTile title={$_("status-tile-" + tile.title)} value={tile.value} precision={tile.precision} unit={tile.unit}/>	
+			{/if}
 			{/each}
 			{/key}
 		</div>
