@@ -172,7 +172,7 @@
 		mounted = true
 	})
 
-	$: $limit_store.val, getCountd($status_store)
+	$: $limit_store.val, $status_store = $status_store
 
 	
 </script>
