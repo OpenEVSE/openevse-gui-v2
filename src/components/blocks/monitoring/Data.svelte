@@ -50,7 +50,7 @@
 
 	const expanded = 
 	{
-		emeter: false,
+		emeter: true,
 		sensors: false,
 		vehicle: false,
 		service: false
