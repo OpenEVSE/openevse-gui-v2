@@ -19,6 +19,7 @@
 
 	let hidden_tiles = 0
 	let mounted = false
+	let redraw = 0
 
 	// set keyed derived stores
 	const elapsed = keyed(uistates_store, 'elapsed');
@@ -100,7 +101,7 @@
 		}
 
 </style>
-
+<svelte:window on:resize={()=>redraw++} />
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded && mounted}
 <div class="container statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
 in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"  
@@ -110,7 +111,7 @@ in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"
 			<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />
 		</div>
 		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center is-flex-wrap-wrap">
-			{#key $uistates_store.status_expanded}
+			{#key $uistates_store.status_expanded || redraw}
 			{#each tiles as tile, i}
 			<StatusTile title={$_("status-tile-" + tile.title)} value={tile.value} precision={tile.precision} unit={tile.unit} visible={isTileVisible(tile,i)}/>	
 			{/each}
