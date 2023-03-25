@@ -21,7 +21,7 @@
 	let mounted = false
 
 	// set keyed derived stores
-	const time = keyed(status_store, 'time');
+	const elapsed = keyed(uistates_store, 'elapsed');
 
 
 	let isTileVisible = (tile,pos) => {
@@ -53,7 +53,7 @@
 	})
 
 	$: tiles = [
-		{ title: "elapsed", value: sec2time($status_store.elapsed)},
+		{ title: "elapsed", value: sec2time($elapsed)},
 		{ title: "delivered", value: $status_store.session_energy/1000, precision: 2, unit: $_("units.kwh") },
 		{ title: "current", value: $status_store.amp/1000, precision: 1, unit: $_("units.A") },
 		{ title: "power", value: $status_store.power, unit: $_("units.W") },
@@ -110,9 +110,11 @@ in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"
 			<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />
 		</div>
 		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center is-flex-wrap-wrap">
+			{#key $uistates_store.status_expanded}
 			{#each tiles as tile, i}
 			<StatusTile title={$_("status-tile-" + tile.title)} value={tile.value} precision={tile.precision} unit={tile.unit} visible={isTileVisible(tile,i)}/>	
 			{/each}
+			{/key}
 		</div>
 		
 		<div class="is-flex mt-3 mt-4 mb-1 ml-4 ">
