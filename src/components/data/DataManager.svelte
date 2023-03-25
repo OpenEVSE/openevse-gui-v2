@@ -1,5 +1,5 @@
 <script>
-	// import { derived} 				    from "svelte/store"
+	import { derived} 				    from "svelte/store"
 	import { limit_store } 				from "./../../lib/stores/limit.js";
 	import { uisettings_store } 		from "./../../lib/stores/uisettings.js";
 	import {EvseClients} 				from  "./../../lib/vars.js"
@@ -10,25 +10,45 @@
 	import { config_store } 			from "./../../lib/stores/config.js"
 	import { claims_target_store } 		from "./../../lib/stores/claims_target.js"
 	import { override_store } 			from "./../../lib/stores/override.js"
-	import { clientid2name, formatDate, httpAPI } from "./../../lib/utils.js"
+	import { clientid2name, 
+			formatDate }				from "./../../lib/utils.js"
 	import { serialQueue } 				from "./../../lib/queue.js";
 	import {onMount} 					from "svelte"
 	import { locale }					from 'svelte-i18n'
 	import {location} 		 			from 'svelte-spa-router'
 	import { _ } 		   	 			from 'svelte-i18n'
+	import { keyed } 					from 'svelte-keyed'
 	import "hacktimer/HackTimer.js"
 
+	// setTimeout instances
 	let counter_divert_update
 	let counter_vehicle_update
 	let counter_rfid_scan
 	let counter_elapsed
+
+	// set keyed derived stores
+	const time = keyed(status_store, 'time')
+	const config_version = keyed(status_store, 'config_version')
+	const schedule_version = keyed(status_store, 'schedule_version')
+	const schedule_plan_version = keyed(status_store, 'schedule_plan_version')
+	const claims_version = keyed(status_store, 'claims_version')
+	const override_version = keyed(status_store, 'override_version')
+	const limit_version = keyed(status_store, 'limit_version')
+	const state = keyed(status_store, 'state')
+	const charging = derived(state, $state => $state==3?true:false)
+	const divert_update = keyed(status_store, 'divert_update')
+	const vehicle_state_update = keyed(status_store, 'vehicle_state_update')
+	const rfid_waiting = keyed(status_store, 'rfid_waiting')
+	const elapsed = keyed(status_store, 'elapsed')
+	const ipaddress = keyed(status_store, 'ipaddress')
+
 	let refresh_config = false
 	let refresh_schedule = false
 	let refresh_target = false
 	let refresh_override = false
 	let refresh_plan = false
 	let refresh_limit = false
-	let ipaddress
+	let prev_ip
 	let ip_changed = false
 
 	onMount(()=> {
@@ -38,6 +58,7 @@
 	export function refreshDateTime(t,tz) { // params: time (isostring) , timezone
 		$uistates_store.time_localestring = formatDate(t,tz)
 	}
+
 	export async function refreshConfigStore(ver) {
 		if (refresh_config)
 			return
@@ -138,8 +159,8 @@
 		
 	}
 
-	export function refreshUIState(store) {
-		$uistates_store.charging = store.state == 3
+	export function refreshChargingState(val) {
+		$uistates_store.charging = val
 	}
 
 
@@ -164,46 +185,42 @@
 		}
 	}
 
-	function countDivertUpdate() { 
-		if(!counter_divert_update) {
-			counter_divert_update = setTimeout(() => {
-				$status_store.divert_update += 1
-				counter_divert_update = null
-			}, 1000);
-		}
+	function countDivertUpdate(val) {
+		$uistates_store.divert_update = val
+		clearInterval(counter_divert_update)
+		counter_divert_update = setInterval(() => {
+			$uistates_store.divert_update++
+		}, 1000);
 
 	}
 
-	function countVehicleUpdate() {
-		if (!counter_vehicle_update) {
-			counter_vehicle_update = setTimeout(() => {
-				$status_store.vehicle_state_update += 1
-				counter_vehicle_update = null
+	function countVehicleUpdate(val) {
+		$uistates_store.counter_vehicle_update = val
+		clearInterval(counter_vehicle_update)
+		counter_vehicle_update = setInterval(() => {
+			$uistates_store.vehicle_state_update++
 		}, 1000);
-		}
+	}
 
+	function countRFIDScan(val) {
+		$uistates_store.rfid_waiting = val
+		clearInterval(counter_rfid_scan)
+		counter_rfid_scan = setInterval(() => {
+			$uistates_store.rfid_waiting--
+			if ($uistates_store.rfid_waiting==0) {
+				clearInterval(counter_rfid_scan)
+			}
+		}, 1000);
 	}
 	
-	function countRFIDScan() {
-		if (!counter_rfid_scan) {
-			if ($status_store.rfid_waiting > 0) {
-				counter_rfid_scan = setTimeout(() => {
-					$status_store.rfid_waiting -= 1
-					counter_rfid_scan = null
-				}, 1000);
-			}
-		}
-	}
-
-	function countElapsed() { 
-		if(!counter_elapsed && $status_store.elapsed > 0) {
-			counter_elapsed = setTimeout(() => {
-				if ($uistates_store.charging)
-					$status_store.elapsed += 1
-				counter_elapsed = null
+	function countElapsed(val) {
+		$uistates_store.elapsed = val
+		clearInterval(counter_elapsed)
+		if ($uistates_store.charging) {
+			counter_elapsed = setInterval(() => {
+				$uistates_store.elapsed++
 			}, 1000);
 		}
-
 	}
 
 	function refreshLocale(lang) {
@@ -223,24 +240,9 @@
 		}
 	}
 
-	function refreshPower(amp)
-	 {
-		if (!$status_store.hasOwnProperty('power')) {
-			// old fw version, generate power on client side
-			let pwr = (amp/1000) * $status_store.voltage
-			if ($config_store.is_threephase)
-				pwr = pwr * 3
-			$uistates_store.power = pwr
-		}
-		else {
-			$uistates_store.power = $status_store.power
-		}
-		
-	}
-
 	async function redirect2ip(ip) {
-		if (ip != ipaddress) {
-			if (ip && ip != "192.168.4.1" && ipaddress) {
+		if (ip != prev_ip) {
+			if (ip && ip != "192.168.4.1" && prev_ip) {
 				uistates_store.resetAlertBox()
 				$uistates_store.alertbox.visible = true
 				$uistates_store.alertbox.title = $_("notification")
@@ -249,7 +251,7 @@
 				$uistates_store.alertbox.closable = false
 				$uistates_store.alertbox.action = () => {window.location.href = "http://" + ip + "/#" + $location}
 			}
-			ipaddress = ip
+			prev_ip = ip
 			ip_changed = true
 		}
 	}
@@ -259,20 +261,22 @@
 	})
 
 	// Refresh stores when new version is published over websocket
-	$: refreshConfigStore		($status_store.config_version)
-	$: refreshSchedulestore		($status_store.schedule_version)
-	$: refreshPlanStore			($status_store.schedule_plan_version)
-	$: refreshClaimsTargetStore	($status_store.claims_version)
-	$: refreshOverrideStore     ($status_store.override_version)
-	$: refreshLimitStore		($status_store.limit_version)
-	$: refreshDateTime			($status_store.time, $config_store?.time_zone)
-	$: refreshUIState			($status_store)
+	$: refreshConfigStore		($config_version)
+	$: refreshSchedulestore		($schedule_version)
+	$: refreshPlanStore			($schedule_plan_version)
+	$: refreshClaimsTargetStore	($claims_version)
+	$: refreshOverrideStore     ($override_version)
+	$: refreshLimitStore		($limit_version)
+
+	$: refreshDateTime			($time, $config_store?.time_zone)
+	$: refreshChargingState		($charging)
 	$: refreshLocale			($config_store.lang)
-	$: $status_store.divert_update,        countDivertUpdate()
-	$: $status_store.vehicle_state_update, countVehicleUpdate()
-	$: $status_store.rfid_waitin, 		   countRFIDScan()
-	$: $status_store.elapsed,			   countElapsed()
-	$: refreshPower				($status_store.amp) 
-	$: redirect2ip($status_store.ipaddress)
+
+	$: countDivertUpdate($divert_update)
+	$: countVehicleUpdate( $vehicle_state_update)
+	$: countRFIDScan($rfid_waiting)
+	$: countElapsed($elapsed)
+
+	$: redirect2ip($ipaddress)
 
 </script>

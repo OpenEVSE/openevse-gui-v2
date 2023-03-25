@@ -17,7 +17,7 @@
 	
 	let mounted = false
 	let modes = [{name: $_("config.selfprod.production"), value: 0}, {name:$_("config.selfprod.excess"), value: 1}]
-	let divertelapsed = derived(status_store, store => s2mns(store.divert_update))
+	let divertelapsed = derived(uistates_store, store => s2mns(store.divert_update))
 
 	let formdata = {
 		divert_enabled:	  				{val: false,	input: undefined, status: "", req: false},
