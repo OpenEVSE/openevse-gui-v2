@@ -7,7 +7,7 @@
 	import { derived} 				   from "svelte/store"
 	import {sec2time, s2mns, miles2km} from "../../../lib/utils.js"
 
-	let evelapsed = derived(status_store, store => s2mns(store.vehicle_state_update))
+	let evelapsed = derived(uistates_store, store => s2mns(store.vehicle_state_update))
 	let mode
 	function getMode() {
 		if ($config_store.tesla_enabled)

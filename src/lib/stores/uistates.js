@@ -30,6 +30,10 @@ const model = {
 		breakpoint: undefined,
 		has_fetched: false,
 		wizard_step: 0,
+		vehicle_state_update: 0,
+		divert_update: 0,
+		rfid_waiting: 0,
+		elapsed:0,
 		alertbox: {
 			title: undefined,
 			body: undefined,

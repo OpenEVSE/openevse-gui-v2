@@ -1,151 +1,79 @@
 <script>
+	import Expandable from "./../../ui/Expandable.svelte";
 	import { config_store } from "../../../lib/stores/config.js";
 	import { _ } 			from 'svelte-i18n'
 	import {status_store} 	from "../../../lib/stores/status.js"
 	import {round}		  	from "../../../lib/utils.js"
-	import {sec2time, s2mns, miles2km} from "../../../lib/utils.js"
+	import {sec2time, displayRange} from "../../../lib/utils.js"
+
+
+	$: data_emeter = {
+		title: $_("monitoring-energy-delivered"),
+		items: [
+			{name: $_("session"), value: round($status_store.session_energy/1000,1), unit: $_("units.kwh")},
+			{name: $_("total"), value: round($status_store.total_energy,1), unit: $_("units.kwh")},
+			{name: $_("monitoring-total-day"), value: round($status_store.total_day,1), unit: $_("units.kwh")},
+			{name: $_("monitoring-total-week"), value: round($status_store.total_week,1), unit: $_("units.kwh")},
+			{name: $_("monitoring-total-month"), value: round($status_store.total_month,1), unit: $_("units.kwh")},
+			{name: $_("monitoring-total-year"), value: round($status_store.total_year,1), unit: $_("units.kwh")},
+		]
+	}
+
+	$: data_sensors = {
+		title: $_("monitoring-tab-sensors"),
+		items: [
+			{name: $_("monitoring-sensors-pilot"), value: $status_store.pilot, unit: $_("units.A")},
+			{name: $_("monitoring-sensors-current"), value: $status_store.amp/1000, unit: $_("units.A")},
+			{name: $_("monitoring-sensors-voltage"), value: $status_store.voltage, unit: $_("units.V")},
+			{name: $_("monitoring-sensors-evsetemp"), value: round($status_store.temp/10,1), unit: $_("units.C")},
+			{name: $_("monitoring-sensors-esptemp"), value: round($status_store.temp4/10,1), unit: $_("units.C")},
+		]
+	}
+
+	$: data_service = {
+		title: $_("monitoring-service"),
+		items: [
+			{name: $_("monitoring-service-level"), value: $status_store.service_level},
+			{name: $_("monitoring-service-servicemin"), value: $config_store.min_current_hard, unit: $_("units.A")},
+			{name: $_("monitoring-service-servicemax"), value: $config_store.max_current_soft, unit: $_("units.A")},
+		]
+	}
+
+	$: data_vehicle = {
+		title: $_("config.vehicle.vehicle"),
+		items: [
+			{name: $_("config.vehicle.battery"), value: $status_store.battery_level, unit: "%"},
+			{name: $_("config.vehicle.range"), value: displayRange($status_store.battery_range), unit: $config_store.mqtt_vehicle_range_miles?$_("units.miles"):$_("units.km")},
+			{name: $_("config.vehicle.timeleft"), value: sec2time($status_store.time_to_full_charge)}
+		]
+	}
+
+	const expanded = 
+	{
+		emeter: true,
+		sensors: false,
+		vehicle: false,
+		service: false
+	}
+
+	function handleMessage(event) {
+		//alert(event.detail.text);
+		if (event.detail.text == "closeAll") {
+			Object.keys(expanded).forEach(function(key,index) {
+				expanded[key] = false
+			});
+		}
+	}
+
 
 </script>
-<style>
-	.tag {
-		box-sizing: border-box;
-		width: 100%;
-		font-size: medium;
-	}
-</style>
 
 <div>
-	<table class="table is-fullwidth">
-		<thead>
-			<tr class="has-background-info is-size-7-mobile"	>
-				<th class="has-text-white py-1" style="width: 70%">{$_("monitoring-energy-delivered")}</th>
-				<th class="has-text-white has-text-centered py-1" style="width:40%">{$_("units.kwh")}</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="is-size-7-mobile">
-				<td>{$_("session")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark">{round($status_store.session_energy/1000,1)} {$_("units.kwh")}</span></td>
-			</tr>
-			<tr class="is-size-7-mobile">
-				<td>{$_("total")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_energy,1)} {$_("units.kwh")}</span></td>
-			</tr>
-			{#if (typeof $status_store.total_day !== "undefined") }
-			<tr class="is-size-7-mobile">
-				<td>{$_("monitoring-total-day")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_day,1)} {$_("units.kwh")}</span></td>
-			</tr>
-			{/if}
-			{#if (typeof $status_store.total_week !== "undefined") }
-			<tr class="is-size-7-mobile">
-				<td>{$_("monitoring-total-week")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_week,1)} {$_("units.kwh")}</span></td>
-			</tr>
-			{/if}
-			{#if (typeof $status_store.total_month !== "undefined") }
-			<tr class="is-size-7-mobile">
-				<td>{$_("monitoring-total-month")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_month,1)} {$_("units.kwh")}</span></td>
-			</tr>
-			{/if}
-			{#if (typeof $status_store.total_year !== "undefined") }
-			<tr class="is-size-7-mobile">
-				<td>{$_("monitoring-total-year")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark ">{round($status_store.total_year,1)} {$_("units.kwh")}</span></td>
-			</tr>
-			{/if}
-		</tbody>
-	</table>
-	<table class="table is-fullwidth">
-		<thead>
-			<tr class="has-background-info is-size-7-mobile"	>
-				<th class="has-text-white py-1" style="width: 70%">{$_("monitoring-tab-sensors")}</th>
-				<th class="has-text-white has-text-centered py-1" style="width:40%">{$_("value")}</th>
-			</tr>
-		</thead>
-		<tbody class="is-size-7-mobile has-text">
-			<tr>
-				<td>{$_("monitoring-sensors-pilot")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark">{$status_store.pilot} {$_("units.A")}</span></td>
-			</tr>
-			<tr>
-				<td>{$_("monitoring-sensors-current")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark">{$status_store.amp/1000} {$_("units.A")}</span></td>
-			</tr>
-			<tr>
-				<td>{$_("monitoring-sensors-voltage")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark">{$status_store.voltage} {$_("units.V")}</span></td>
-			</tr>
-			<tr>
-				<td>{$_("monitoring-sensors-evsetemp")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark">{round($status_store.temp/10,1)} {$_("units.C")}</span></td>
-			</tr>
-			<tr>
-				<td>{$_("monitoring-sensors-esptemp")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark">{round($status_store.temp4/10,1)} {$_("units.C")}</span></td>
-			</tr>
-		</tbody>
-	</table>
-	{#if $status_store.battery_level}
-	<table class="table is-fullwidth">
-		<thead>
-			<tr class="has-background-info is-size-7-mobile">
-				<th class="has-text-white py-1" style="width: 70%">{$_("config.vehicle.vehicle")}</th>
-				<th class="has-text-white has-text-centered py-1" style="width:40%">{$_("value")}</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="is-size-7-mobile">
-				<td>{$_("config.vehicle.battery")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark">{$status_store.battery_level}%</span></td>
-			</tr>
-			<tr class="is-size-7-mobile">
-				<td>{$_("config.vehicle.range")}</td>
-				<td class="has-text-right">
-					<span class="tag is-normal  is-dark">
-						{#if !$config_store.tesla_enabled || $config_store.tesla_enabled && $config_store.mqtt_vehicle_range_miles}
-						{$status_store.battery_range}
-						{:else if !$config_store.mqtt_vehicle_range_miles}
-						{miles2km($status_store.battery_range)}
-						{/if}
-						{#if $config_store.mqtt_vehicle_range_miles}
-						{$_("units.miles")}
-						{:else}
-						{$_("units.km")}
-						{/if}
-					</span>
-				</td>
-			</tr>
-			<tr class="is-size-7-mobile">
-				<td>{$_("config.vehicle.timeleft")}</td>
-				<td class="has-text-right"><span class="tag is-normal  is-dark">{sec2time($status_store.time_to_full_charge)}</span></td>
-			</tr>
-		</tbody>
-	</table>
+
+	<Expandable data={data_emeter} bind:expanded={expanded.emeter} on:message={handleMessage}/>
+	<Expandable data={data_sensors} bind:expanded={expanded.sensors} on:message={handleMessage} />
+	{#if $status_store.battery_level != undefined || $status_store.battery_range != undefined  || $config_store.time_to_full_charge}
+	<Expandable data={data_vehicle} bind:expanded={expanded.vehicle} on:message={handleMessage} />
 	{/if}
-
-	<table class="table is-fullwidth">
-
-		<thead>
-			<tr class="has-background-info is-size-7-mobile"	>
-				<th class="has-text-white py-1" style="width: 70%">{$_("monitoring-energy-params")}</th>
-				<th class="has-text-white has-text-centered py-1" style="width:40%">{$_("value")}</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="is-size-7-mobile">
-				<td>{$_("monitoring-energy-service")}</td>
-				<td class="has-text-right"><span class="tag is-normal is-dark">{$status_store.service_level}</span></td>
-			</tr>
-			<tr class="is-size-7-mobile">
-				<td>{$_("monitoring-energy-servicemin")}</td>
-				<td class="has-text-right"><span class="tag is-normal  is-dark">{$config_store.min_current_hard} A</span></td>
-			</tr>
-			<tr class="is-size-7-mobile">
-				<td>{$_("monitoring-energy-servicemax")}</td>
-				<td class="has-text-right"><span class="tag is-normal  is-dark">{$config_store.max_current_soft} A</span></td>
-			</tr>
-		</tbody>
-	</table>
+	<Expandable data={data_service} bind:expanded={expanded.service} on:message={handleMessage} />
 </div>

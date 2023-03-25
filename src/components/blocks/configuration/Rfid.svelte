@@ -30,7 +30,7 @@
 	})
 	$: $config_store.rfid_storage, resetStates()
 	$: updateTags($config_store.rfid_storage)
-	$: scanState($status_store.rfid_waiting)
+	$: scanState($uistates_store.rfid_waiting)
 
 	let updateFormData = () => {
 		formdata = {
@@ -129,9 +129,9 @@
 				<Borders grow>
 					<div class="has-text-centered pb-2">
 						<div class="has-text-weight-bold mb-4 has-text-dark">{$_("config.rfid.managetag")}</div>
-						<Button name={$status_store.rfid_waiting>0?$status_store.rfid_waiting:$_("config.rfid.scan")} butn_submit={scanTag} bind:state={but_scan_state} disabled={$status_store.rfid_waiting > 0}/>
+						<Button name={$uistates_store.rfid_waiting>0?$uistates_store.rfid_waiting:$_("config.rfid.scan")} butn_submit={scanTag} bind:state={but_scan_state} disabled={$uistates_store.rfid_waiting > 0}/>
 						<!-- <div class="tag is-info {$uistates_store.rfidscan_update>0?"":"is-hidden"}">{$uistates_store.rfidscan_update}</div> -->
-						{#if $status_store.rfid_waiting > 0}
+						{#if $uistates_store.rfid_waiting > 0}
 						<div class="mt-2 has-text-weight-bold has-text-dark">{$_("config.rfid.placetag")}
 						</div>
 						{/if}

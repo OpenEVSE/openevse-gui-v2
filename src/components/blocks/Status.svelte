@@ -1,23 +1,29 @@
 <script>
-	import { onMount } 				from "svelte";
+	import { onMount } 				from "svelte"
 	import { _ } 					from 'svelte-i18n'
-	import { config_store } 		from "./../../lib/stores/config.js";
+	import { config_store } 		from "./../../lib/stores/config.js"
 	import {status_store} 			from "./../../lib/stores/status.js"
 	import {plan_store} 			from "./../../lib/stores/plan.js"
 	import {uistates_store} 		from "./../../lib/stores/uistates.js"
+	import { claims_target_store }  from "./../../lib/stores/claims_target.js"
 	import {sec2time,
 			displayRange} 			from "../../lib/utils.js"
-	import { scale } 				from 'svelte/transition';
-	import { expoInOut } 			from 'svelte/easing';
-	import { claims_target_store }  from "./../../lib/stores/claims_target.js";
-	import DivertShaperStatus 		from "./../ui/DivertShaperStatus.svelte";
-	import TaskDisplay 				from "../ui/TaskDisplay.svelte";
+	import { scale } 				from 'svelte/transition'
+	import { expoInOut } 			from 'svelte/easing'
+	import { keyed } 				from 'svelte-keyed'
+	import DivertShaperStatus 		from "./../ui/DivertShaperStatus.svelte"
+	import TaskDisplay 				from "../ui/TaskDisplay.svelte"
 	import StatusTile 				from "../ui/StatusTile.svelte"
 	import StatusItems 				from "../ui/StatusItems.svelte"
 	import ExpandArrow 				from "../ui/ExpandArrow.svelte"
 
 	let hidden_tiles = 0
 	let mounted = false
+	let redraw = 0
+
+	// set keyed derived stores
+	const elapsed = keyed(uistates_store, 'elapsed');
+
 
 	let isTileVisible = (tile,pos) => {
 		if (
@@ -29,7 +35,6 @@
 				return true
 			}
 			else return false
-				
 		}
 		else {
 			if (tile.display == undefined || tile.display) {
@@ -49,10 +54,10 @@
 	})
 
 	$: tiles = [
-		{ title: "elapsed", value: sec2time($status_store.elapsed)},
+		{ title: "elapsed", value: sec2time($elapsed)},
 		{ title: "delivered", value: $status_store.session_energy/1000, precision: 2, unit: $_("units.kwh") },
 		{ title: "current", value: $status_store.amp/1000, precision: 1, unit: $_("units.A") },
-		{ title: "power", value: $uistates_store.power, unit: $_("units.W") },
+		{ title: "power", value: $status_store.power, unit: $_("units.W") },
 		{ title: "setpoint", value: $status_store.pilot, unit: $_("units.A") },
 		{ title: "selfprod", value: $status_store.charge_rate,  unit: $_("units.A"), display: $config_store.divert_enabled },
 		{ title: "shaper", value: $status_store.shaper_cur,  unit: $_("units.A"), display: $config_store.current_shaper_enabled },
@@ -96,7 +101,7 @@
 		}
 
 </style>
-
+<svelte:window on:resize={()=>redraw++} />
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded && mounted}
 <div class="container statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
 in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"  
@@ -106,9 +111,11 @@ in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"
 			<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />
 		</div>
 		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center is-flex-wrap-wrap">
+			{#key $uistates_store.status_expanded || redraw}
 			{#each tiles as tile, i}
 			<StatusTile title={$_("status-tile-" + tile.title)} value={tile.value} precision={tile.precision} unit={tile.unit} visible={isTileVisible(tile,i)}/>	
 			{/each}
+			{/key}
 		</div>
 		
 		<div class="is-flex mt-3 mt-4 mb-1 ml-4 ">

@@ -327,9 +327,11 @@ export function miles2km(d) {
 }
 
 export function displayRange(r) {
-	if (get(config_store).tesla_enabled && get(config_store).mqtt_vehicle_range_miles)
-		miles2km(r)
-	else return r
+	if (!get(config_store).tesla_enabled || get(config_store).tesla_enabled && get(config_store).mqtt_vehicle_range_miles) {
+		return r
+	}
+	else if (get(config_store).mqtt_vehicle_range_miles)
+		return miles2km(r)
 }
 
 export function validateFormData({data, i18n_path, req=false, form=null}) {
