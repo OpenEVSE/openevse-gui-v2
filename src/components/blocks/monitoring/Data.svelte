@@ -7,7 +7,7 @@
 	import {sec2time, displayRange} from "../../../lib/utils.js"
 
 
-	const data_emeter = {
+	$: data_emeter = {
 		title: $_("monitoring-energy-delivered"),
 		items: [
 			{name: $_("session"), value: round($status_store.session_energy/1000,1), unit: $_("units.kwh")},
@@ -19,7 +19,7 @@
 		]
 	}
 
-	const data_sensors = {
+	$: data_sensors = {
 		title: $_("monitoring-tab-sensors"),
 		items: [
 			{name: $_("monitoring-sensors-pilot"), value: $status_store.pilot, unit: $_("units.A")},
@@ -30,7 +30,7 @@
 		]
 	}
 
-	const data_service = {
+	$: data_service = {
 		title: $_("monitoring-service"),
 		items: [
 			{name: $_("monitoring-service-level"), value: $status_store.service_level},
@@ -39,7 +39,7 @@
 		]
 	}
 
-	const data_vehicle = {
+	$: data_vehicle = {
 		title: $_("config.vehicle.vehicle"),
 		items: [
 			{name: $_("config.vehicle.battery"), value: $status_store.battery_level, unit: "%"},

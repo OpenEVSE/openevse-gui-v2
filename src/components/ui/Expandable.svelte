@@ -36,8 +36,8 @@
 <div class="mb-1">
 	<a href={null} on:click={expand} class="" aria-label="display">
 		<div class="header has-background-info has-text-white py-1"	>
-				<iconify-icon class="arrow mx-2" inline icon={expanded?"fa6-solid:angle-up":"fa6-solid:angle-down"}></iconify-icon>
-				<span class="ml-2 has-text-white has-text-weight-bold">{data.title}</span>
+			<span class="ml-2 has-text-white has-text-weight-bold">{data.title}</span>
+			<iconify-icon class="arrow mx-2" inline icon={expanded?"fa6-solid:angle-up":"fa6-solid:angle-down"}></iconify-icon>	
 		</div>
 	</a>
 	{#if expanded}
