@@ -26,7 +26,7 @@ import Logo  from "../../../assets/logo-mini.png"
 				<div class="my-1">
 					<a class="is-size-6 is-flex is-align-items-center" href="https://github.com/KipK/openevse-gui-v2" on:click|preventDefault={()=>{window.open("https://github.com/KipK/openevse-gui-v2");return false}}>	
 						<iconify-icon inline icon="icon-park-outline:github"></iconify-icon>
-						<span class="ml-1">OpenEVSE-UI</span>
+						<span class="ml-1">OpenEVSE GUI v2</span>
 					</a>
 				</div>
 				<div class="my-1">
@@ -45,7 +45,7 @@ import Logo  from "../../../assets/logo-mini.png"
 		</div>
 		
 		<div class="">
-			<div class="has-text-weight-bold is-size-6 mt-2 has-text-dark">User interface made with</div>
+			<div class="has-text-weight-bold is-size-6 mt-2 has-text-dark">Gui V2 by <a href="http://www.github.com/KipK/" target="_blank">@KipK</a> with</div>
 			<div class="is-size-6">
 				<a href="https://svelte.dev/" on:click|preventDefault={()=>{window.open("https://svelte.dev/");return false}}><iconify-icon inline icon="vscode-icons:file-type-svelte"></iconify-icon>Svelte </a>
 				<a href="https://vitejs.dev/" on:click|preventDefault={()=>{window.open("https://vitejs.dev/");return false}}><iconify-icon inline icon="vscode-icons:file-type-vite"></iconify-icon>Vite </a>
