@@ -51,7 +51,7 @@
 		if ($limit_store) {
 			switch ($limit_store.type) {
 				case "time":
-					if ($limit_store.value*60 >= store.elapsed)
+					if ($limit_store.value*60 >= store.session_elapsed)
 						ctval = sec2time($limit_store.value*60 - store.elapsed)
 					else ctval = "00:00:00"
 					break
