@@ -286,6 +286,7 @@
 			"stuck-detect": "Stuck Contact Detection",
 			"temp-monitor": "Temperature Monitoring",
 			"diode-check" : "Diode Check",
+			"vent-check": "Ventilation Check",
 			"vent-requ": "Vent Required",
 			"errors": "Errors",
 			"count": "Count",

@@ -39,7 +39,7 @@
 	const divert_update = keyed(status_store, 'divert_update')
 	const vehicle_state_update = keyed(status_store, 'vehicle_state_update')
 	const rfid_waiting = keyed(status_store, 'rfid_waiting')
-	const elapsed = keyed(status_store, 'elapsed')
+	const elapsed = keyed(status_store, 'session_elapsed')
 	const ipaddress = keyed(status_store, 'ipaddress')
 
 	let refresh_config = false

@@ -51,29 +51,30 @@
 	}
 
 	async function setTime(loader=true) {
-		const formData = new FormData();
+		let data = { 
+			sntp_enabled: true,
+			time: undefined,
+			time_zone: undefined
+		}
+
+		// const formData = new FormData();
 		setTimeButnState = loader?"loading":""
 		if (timemode == 0 || timemode == 1) {
 
 			const zone = $config_store.time_zone.split("|")[0]
-			var newdate = DateTime.fromISO(date)
-			formData.set('ntp', 'false');
-			formData.set('tz', tz);
-			formData.set('time', newdate.toISO());
+			var newdate = DateTime.fromISO(date).toUTC()
+			data.sntp_enabled = false
+			data.time_zone = tz
+			data.time = newdate
 		}
 		else {
-			formData.set('ntp', "true");
-			formData.set('tz', tz);
+			data.sntp_enabled = true
+			data.time_zone = tz
 		}
-		
-		// @ts-ignore
-		const payload = new URLSearchParams(formData).toString()
 		allow_time_update = true
-		let res = await serialQueue.add(() => httpAPI("POST","/settime",payload, "text"))
-		if (res == "set" )  {
+		let res = await serialQueue.add(() => httpAPI("POST","/time",JSON.stringify(data)))
+		if (res.msg == "done" )  {
 			setTimeButnState = loader?"ok":""
-			//refresh status to get fresh time ( time sent after /settime is wrong ) 
-			status_store.download()
 			return true
 		}
 		else {
@@ -89,23 +90,7 @@
 		const data = {
 			sntp_enabled: timemode==2?true:false,
 		}
-		if (timemode != 2) {
-			// dirty hack until manual time OpenEVSE bug is solved
-			//save tz in local storage
-			if (tz != "Etc/Universal|UTC0")
-				$uisettings_store.tz = tz
-			//set to UTC as OpenEVSE
-			tz = "Etc/Universal|UTC0"
-		}
-		else {
-			// dirty hack
-			// get tz from localstorage
-			if ($uisettings_store.tz )
-				tz = $uisettings_store.tz 
-			else tz = "Etc/Universal|UTC0"
-		}
-		data.time_zone = tz 
-		// end dirty hack
+		data.time_zone = tz
 		if (await config_store.upload(data)) 
 			{
 				selectTimeModeState = "ok"
@@ -142,7 +127,6 @@
 		if (await config_store.upload(data)) 
 			{
 				selectTimeZoneState = "ok"
-				$uisettings_store.tz = tz
 				return true
 			}
 		else {
@@ -153,8 +137,7 @@
 
 	function timeNow() {
 		allow_time_update = false
-		const localdate = DateTime.now()
-		date = localdate.toFormat("yyyy-MM-dd'T'HH:mm")
+		date = DateTime.now()
 		return true
 	}
 
@@ -162,6 +145,9 @@
 	onMount(() => {
 		tz = $config_store.time_zone
 		getTimeMode($config_store.sntp_enabled)
+		// get tz from browser
+		if (!tz)
+			tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
 		})
 
 
@@ -183,7 +169,8 @@
 				status={inputSntpState} onChange={() => {setNTP($config_store.sntp_hostname)}}/>
 			{/if}
 			<Select title="{$_("config.time.settimefrom")}:" status={selectTimeModeState} bind:value={timemode} items={timemodes} onChange={setTimeMode} />
-			{#if timemode==2}
+			<!-- {#if timemode==2} -->
+			{#if true}
 			<Select title="{$_("config.time.timezone")}:" status={selectTimeZoneState} bind:value={tz} items={createTzObj(timeZone)} onChange={setTimeZone} />
 			{/if}
 		</div>

@@ -24,7 +24,7 @@
 			<SafetyTableRow title={$_("config.safety.stuck-detect")} name="relay_check"	bind:checked={$config_store.relay_check}  {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("relay_check", $config_store.relay_check))} />
 			<SafetyTableRow title={$_("config.safety.temp-monitor")} name="temp_check" 	bind:checked={$config_store.temp_check}   {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("temp_check",  $config_store.temp_check))} />
 			<SafetyTableRow title={$_("config.safety.diode-check")}	 name="diode_check" 	bind:checked={$config_store.diode_check}  {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("diode_check", $config_store.diode_check ))} />
-			<SafetyTableRow title={$_("config.safety.vent-requ")}	 name="vent_check" 	bind:checked={$config_store.vent_check}   {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("vent_check",  $config_store.vent_check  ))} />
+			<SafetyTableRow title={$_("config.safety.vent-check")}	 name="vent_check" 	bind:checked={$config_store.vent_check}   {editable} onChange={()=>serialQueue.add(()=> config_store.saveParam("vent_check",  $config_store.vent_check  ))} />
 		</tbody>
 		<thead>
 			<tr class="has-background-info">

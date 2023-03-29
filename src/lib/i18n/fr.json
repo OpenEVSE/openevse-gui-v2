@@ -284,6 +284,7 @@
       "stuck-detect": "Détection Relai Collé",
       "temp-monitor": "Surveillance Température",
       "diode-check": "Test Diode",
+      "vent-check": "Test Ventilation",
       "vent-requ": "Ventilation Requise",
       "errors": "Erreurs",
       "count": "Compte",
