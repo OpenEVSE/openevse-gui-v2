@@ -18,6 +18,6 @@ jobs:
         with:
           workflow: Build/Release OpenEVSE
           repo: OpenEVSE/ESP32_WiFi_V4.x
-          ref: build_v2_gui
+          ref: master
           token: ${{ secrets.PERSONAL_TOKEN }}
           inputs: '{ "v2_ref": "${{ github.ref_name }}" }'
