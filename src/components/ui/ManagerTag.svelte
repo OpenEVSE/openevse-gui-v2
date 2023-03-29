@@ -33,7 +33,7 @@
 			<iconify-icon  class="has-text-white mr-1" icon={icon}></iconify-icon>
 			<span>{$_("clients." + name)}</span>		
 	</span>
-	<span class="tag val has-text-weight-bold is-size-7-mobile {val == "active"?"is-primary":val == "disabled"?"is-danger":"is-dark"} is-capitalized">
+	<span class="tag val has-text-weight-bold is-size-7-mobile {val == "active"?"is-primary":val == "disabled"?"is-dark":"is-dark"} is-capitalized">
 		{#if val == "active" || val == "disabled"}
 		{$_(val)}
 		{:else}

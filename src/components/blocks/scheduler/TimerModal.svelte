@@ -218,7 +218,7 @@
 							</select>
 							</div>
 						{:else}
-						<div class="select {schedules[timer].state=="active"?"is-primary":"is-danger"}" >
+						<div class="select {schedules[timer].state=="active"?"is-primary":"is-dark"}" >
 							<select bind:value={schedules[timer].state}>
 								<option value="active">{$_("active")}</option>
 								<option value="disabled">{$_("disabled")}</option>

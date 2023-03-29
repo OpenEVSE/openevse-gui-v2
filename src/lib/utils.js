@@ -282,11 +282,11 @@ export function state2icon(state) {
 			icon.color = "has-text-danger"
 			break;
 		case 254: // sleeping
-			icon.color = "has-text-danger"
+			icon.color = "has-text-dark"
 			icon.type = "fa6-solid:ban"
 			break;
 		case 255: 
-			icon.color = "has-text-danger"
+			icon.color = "has-text-dark"
 			icon.type = "fa6-solid:ban"
 			break;
 	}

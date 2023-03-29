@@ -40,7 +40,7 @@
 <tr>
 	<!-- <th>{t_id}</th> -->
 	<th style="width:20%" class="is-size-7-mobile has-text-dark">{displayTime(t_time)}</th>
-	<th style="width:10%"><span class="tag {t_state === 'active'?'is-primary':'is-danger'} tags py-0 is-capitalized">{t_state == "active"?$_("active"):$_("disabled")}</span></th>
+	<th style="width:10%"><span class="tag {t_state === 'active'?'is-primary':'is-dark'} tags py-0 is-capitalized">{t_state == "active"?$_("active"):$_("disabled")}</span></th>
 	<th style="" class="is-size-4 m0 py-1">
 		<div class="is-flex is-justify-content-center">
 

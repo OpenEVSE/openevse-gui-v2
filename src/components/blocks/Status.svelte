@@ -68,6 +68,11 @@
 	}
 	
 	.statusbox.disabled {
+		box-shadow: 0 0.5em 1em -0.125em hsl(201, 82%, 22%), 0 0px 0 1px rgb(255, 255, 255);
+		// border: dashed 0.2em;
+		border-color: hsl(201, 82%, 22%);
+	}
+	.statusbox.error {
 		box-shadow: 0 0.5em 1em -0.125em hsl(348, 100%, 61%), 0 0px 0 1px rgb(255, 255, 255);
 		// border: dashed 0.2em;
 		border-color: hsl(348, 100%, 61%);

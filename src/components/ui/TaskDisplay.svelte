@@ -17,7 +17,7 @@
 		<iconify-icon class="has-text-white" icon={displayIcon(mode)}></iconify-icon>
 		&nbsp; {mode}
 	</span>
-	<span class="tag is-flex-grow-1 is-flex-shrink-1 has-text-weight-semibold {state=="active"?"is-primary":"is-danger"}">
+	<span class="tag is-flex-grow-1 is-flex-shrink-1 has-text-weight-semibold {state=="active"?"is-primary":"is-dark"}">
 		{#if time != ""}
 		{msg} {displayTime(time)}
 		{:else}

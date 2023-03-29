@@ -27,6 +27,7 @@
 	let counter_elapsed
 
 	// set keyed derived stores
+	const evsestate = keyed(status_store, 'state')
 	const time = keyed(status_store, 'time')
 	const config_version = keyed(status_store, 'config_version')
 	const schedule_version = keyed(status_store, 'schedule_version')
@@ -41,7 +42,7 @@
 	const rfid_waiting = keyed(status_store, 'rfid_waiting')
 	const elapsed = keyed(status_store, 'session_elapsed')
 	const ipaddress = keyed(status_store, 'ipaddress')
-
+	
 	let refresh_config = false
 	let refresh_schedule = false
 	let refresh_target = false
@@ -256,6 +257,14 @@
 		}
 	}
 
+	function setErrorState(state) {
+		if (state >= 4 && state <= 11) {
+			// error state
+			$uistates_store.error = true
+		}
+			$uistates_store.error = false
+	}
+
 	onMount(()=> {
 		getDivertMode($config_store.mqtt_grid_ie)
 	})
@@ -278,5 +287,6 @@
 	$: countElapsed($elapsed)
 
 	$: redirect2ip($ipaddress)
+	$: setErrorState($state)
 
 </script>

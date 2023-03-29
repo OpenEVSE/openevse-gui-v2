@@ -12,7 +12,7 @@
 	let color
 
 	onMount(()=>{
-		color = role == 0 ? "is-info" : role == 1 ? "is-primary" : "is-danger"
+		color = role == 0 ? "is-info" : role == 1 ? "is-primary" : "is-dark"
 	})
 </script>
 <style>

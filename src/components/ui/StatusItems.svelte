@@ -71,14 +71,14 @@
 			case 254: // sleeping
 				status = "disabled"
 				charging = false
-				color = "is-danger"
+				color = "is-dark"
 				iconcolor = "has-text-white"
 				icon = "fa6-solid:ban"
 				break;
 			case 255: 
 				status = "disabled"
 				charging = false
-				color = "is-danger"
+				color = "is-dark"
 				iconcolor = "has-text-white"
 				icon = "fa6-solid:circle-xmark"
 				break;
@@ -101,7 +101,7 @@
 	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-right {color}" data-tooltip={message}>
 		<StatusIcon icon={icon} color={iconcolor} bp={bp}/>
 	</div>
-	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-right {vehicle?"is-primary":"is-danger"}" data-tooltip={vehicle?$_("status-items-connected"):$_("status-items-notconnected")}>
+	<div class="tag no-pointer {bp != "mobilemini"?"is-large":"is-medium"} mb-1 mx-1 has-tooltip-arrow has-tooltip-right {vehicle?"is-primary":"is-dark"}" data-tooltip={vehicle?$_("status-items-connected"):$_("status-items-notconnected")}>
 		<StatusIcon icon={vehicle?"mdi:car":"mdi:car-off"} color="has-text-white" bp={bp}/>
 	</div>
 	<div class="is-flex-grow-1 has-text-centered {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini" ?"is-hidden":""}" >
