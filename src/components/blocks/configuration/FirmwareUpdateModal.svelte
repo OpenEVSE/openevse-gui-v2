@@ -1,4 +1,5 @@
 <script>
+	import Checkbox from "./../../ui/Checkbox.svelte";
 	import Switch from "./../../ui/Switch.svelte";
 	import RemovableTag from "./../../ui/RemovableTag.svelte";
 	import { _ } 		  		from 'svelte-i18n'
@@ -28,6 +29,7 @@
 	let canClose = true
 	let confirmed = false
 	let useDailyBuild = false
+	let build_type = 1
 	let mounted = false
 
 	onDestroy(() => {
@@ -132,21 +134,17 @@
 		else {
 			github_upd = daily
 		}
-		console.log(github_upd)
-		// {name: undefined, version: undefined, url: undefined}
-
+		// "update" object model {name: undefined, version: undefined, url: undefined, updated_at: undefined}
 		update.version = github_upd.name
 		if (github_upd.tag_name == "v2_gui")
 			update.name = $config_store.buildenv + "_gui-v2" + ".bin"
 		else update.name = $config_store.buildenv + ".bin"
-		console.log(update.name)
 		update.html_url = github_upd.html_url
 		let item = github_upd.assets.find(obj => {
 			return obj.name === update.name
 		})
 		update.updated_at = item.updated_at
 		update.url = item.browser_download_url
-		console.log(update.url)
 	}
 
 	$: $status_store.ota,displayOta()
@@ -186,6 +184,28 @@
 									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-dark is-flex is-align-items-center ml-2">
 										<iconify-icon inline icon="icon-park-outline:github" class="is-size-4"></iconify-icon>
 									</a>
+								</div>
+								<div class="is-flex is-justify-content-start mt-2">
+									<div class="mr-2">
+										<Checkbox 
+											small bold
+											color="dark"
+											label="Stable"
+											checked={!useDailyBuild}
+											onChange={() => {useDailyBuild = !useDailyBuild}}
+											tooltip={null}
+									/>
+									</div>
+									<div class="">
+										<Checkbox 
+											small bold
+											color="dark"
+											label="Dev"
+											checked={useDailyBuild}
+											onChange={() => {useDailyBuild = !useDailyBuild}}
+											tooltip={null}
+										/>
+									</div>
 								</div>
 								
 							</td>
@@ -229,12 +249,10 @@
 												butn_submit={()=>{confirmed=false}}
 											/>
 										</div>
-
 										{/if}
 										{/key}
 									</div>
 								</div>
-								
 							</td>
 						</tr>
 					</tbody>
@@ -242,13 +260,7 @@
 			</div>
 		</div>
 		
-		<div>
-			<Switch 
-				name="switchdev" 
-				label="Daily Build" 
-				bind:checked={useDailyBuild}
-			/>
-		</div>
+		
 		{#if file || http_update}	
 		<div class="my-2 is-size-6 is-flex is-justify-content-center ">
 			<div class="is-flex-shrink-0 is-flex-grow-1">

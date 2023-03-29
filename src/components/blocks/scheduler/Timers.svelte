@@ -87,5 +87,5 @@
 	
 </Box>
 {#if timers_modal_opened}
-<TimerModal bind:is_opened={timers_modal_opened} timer={timer}/>
+<TimerModal bind:is_opened={timers_modal_opened} timer={timer} />
 {/if}
