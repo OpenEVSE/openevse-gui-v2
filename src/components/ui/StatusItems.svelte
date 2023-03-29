@@ -55,18 +55,68 @@
 				icon = "fa6-solid:bolt"
 				break;
 			case 4: // Error
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fluent:shield-error-24-filled"
+				message = $_("logs-states.error-vent")
+				break;
 			case 5:
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fluent:shield-error-24-filled"
+				message = $_("logs-states.error-diode")
+				break;
 			case 6:
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fluent:shield-error-24-filled"
+				message = $_("logs-states.error-gfi")
+				break;
 			case 7:
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fluent:shield-error-24-filled"
+				message = $_("logs-states.error-ground")
+				break;
 			case 8:
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fluent:shield-error-24-filled"
+				message = $_("logs-states.error-relay")
+				break;
 			case 9:
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fluent:shield-error-24-filled"
+				message = $_("logs-states.error-gfitest")
+				break;
 			case 10:
+				status = "disabled"
+				charging = false
+				color = "is-danger"
+				iconcolor = "has-text-white"
+				icon = "fluent:shield-error-24-filled"
+				message = $_("logs-states.error-temp")
+				break;
 			case 11:
 				status = "disabled"
 				charging = false
 				color = "is-danger"
 				iconcolor = "has-text-white"
 				icon = "fluent:shield-error-24-filled"
+				message = $_("logs-states.error-current")
 				break;
 			case 254: // sleeping
 				status = "disabled"
