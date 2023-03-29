@@ -1,4 +1,5 @@
 <script>
+	import Switch from "./../../ui/Switch.svelte";
 	import RemovableTag from "./../../ui/RemovableTag.svelte";
 	import { _ } 		  		from 'svelte-i18n'
 	import { config_store } 	from "./../../../lib/stores/config.js";
@@ -14,7 +15,9 @@
 	
 	
 	export let is_opened = false
-	export let update = {}
+	export let release = {}
+	export let daily = {}
+	let update = {}
 
 	let file
 	let http_update = false
@@ -24,12 +27,15 @@
 	let timeout
 	let canClose = true
 	let confirmed = false
+	let useDailyBuild = false
+	let mounted = false
 
 	onDestroy(() => {
 		clearTimeout(timeout)
 	})
 
 	onMount(()=> {
+		mounted = true
 	})	
 
 	
@@ -117,7 +123,34 @@
 		}
 	}
 
+	function switchBuilds(is_dev) {
+		let github_upd
+		if (!is_dev) {
+			// use stable release
+			github_upd = release
+		}
+		else {
+			github_upd = daily
+		}
+		console.log(github_upd)
+		// {name: undefined, version: undefined, url: undefined}
+
+		update.version = github_upd.name
+		if (github_upd.tag_name == "v2_gui")
+			update.name = $config_store.buildenv + "_gui-v2" + ".bin"
+		else update.name = $config_store.buildenv + ".bin"
+		console.log(update.name)
+		update.html_url = github_upd.html_url
+		let item = github_upd.assets.find(obj => {
+			return obj.name === update.name
+		})
+		update.updated_at = item.updated_at
+		update.url = item.browser_download_url
+		console.log(update.url)
+	}
+
 	$: $status_store.ota,displayOta()
+	$: switchBuilds(useDailyBuild)
 
 
 </script>
@@ -126,6 +159,7 @@
 
 </style>
 
+{#if mounted}
 <Modal bind:is_opened {canClose}>
 	<Box title={$_("config.titles.firmware-update")} icon="fa6-solid:microchip">
 		<div class="pt-2">
@@ -134,7 +168,7 @@
 				<table class="table is-fullwidth is-vcentered has-text-dark">
 					<tbody class="is-size-6">
 						<tr>
-							<td class="has-text-weight-semibold">{$_("config.firmware.espinfo")}</td>
+							<td class="has-text-weight-semibold" width="15%">{$_("config.firmware.espinfo")}</td>
 							<td class="">{$config_store.espinfo}</td>
 						</tr>
 						<tr>
@@ -156,45 +190,64 @@
 								
 							</td>
 							<td class="">
-								<div class="is-flex is-align-items-center">
-									{#if !confirmed}
-									<div class="mb-2">
-										<Button 
-										size="is-responsive" 
-										icon="fa6-solid:cloud-arrow-down" 
-										tooltip={$_("config.firmware.gh-install")}
-										disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
-										name="{$_("config.firmware.upgrade2")} {update.version}"
-										color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
-										butn_submit={()=>{confirmed=true}}
-										/>
+								<div class="is-flex is-align-items-center  is-flex-wrap-wrap">
+									<div class="is-inline-block">
+										<div class="is-size-6 has-text-weight-bold">{update.version} </div>
+										<div class="is-size-7">{update.updated_at}</div>
 									</div>
-									
-									{:else}
-									<div class="is-flex is-justify-content-center is-align-items-baseline is-flex-wrap-wrap">
-										<Button 
-											size="is-responsive mb-2" 
-											disabled={gitUpdateButtonState == "loading"} 
-											name={$_("config.firmware.confirm")}
+									<div class="ml-4">
+										{#key update.version}
+										{#if !confirmed}
+										<div class="mb-2">
+											
+											<Button 
+											size="is-responsive" 
+											icon="fa6-solid:cloud-arrow-down" 
+											tooltip={$_("config.firmware.gh-install")}
+											disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
+											name={update.version}
 											color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
-											butn_submit={()=>{updateToLatest(update.url)}}
-										/>
-										<Button 
-											size="is-responsive mb-2" 
-											disabled={gitUpdateButtonState == "loading"} 
-											name="{$_("cancel")}"
-											color="{"is-danger"}" 
-											butn_submit={()=>{confirmed=false}}
-										/>
-									</div>
+											butn_submit={()=>{confirmed=true}}
 
-									{/if}
+											/>
+										</div>
+										
+										{:else}
+										<div class="is-flex is-justify-content-center is-align-items-baseline is-flex-wrap-wrap is-inline-block">
+											<Button 
+												size="is-responsive mb-2" 
+												disabled={gitUpdateButtonState == "loading"} 
+												name={$_("config.firmware.confirm")}
+												color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
+												butn_submit={()=>{updateToLatest(update.url)}}
+											/>
+											<Button 
+												size="is-responsive mb-2" 
+												disabled={gitUpdateButtonState == "loading"} 
+												name="{$_("cancel")}"
+												color="{"is-danger"}" 
+												butn_submit={()=>{confirmed=false}}
+											/>
+										</div>
+
+										{/if}
+										{/key}
+									</div>
 								</div>
+								
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+		</div>
+		
+		<div>
+			<Switch 
+				name="switchdev" 
+				label="Daily Build" 
+				bind:checked={useDailyBuild}
+			/>
 		</div>
 		{#if file || http_update}	
 		<div class="my-2 is-size-6 is-flex is-justify-content-center ">
@@ -240,3 +293,4 @@
 		{/if}
 	</Box>
 </Modal>
+{/if}

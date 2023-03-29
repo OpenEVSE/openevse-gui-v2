@@ -23,7 +23,7 @@
 	onMount(()=> {
 		state = ""
 		if (icon && !width && name) {
-			width = name.length + 6 + "ch"
+			width = name.length + 10 + "ch"
 		}
 		else if (!width && name) {
 			width = name.length + 3 + "ch"
@@ -89,7 +89,6 @@
 	</div>
 	
 </button>
-
 <!-- <button bind:this={button} class="button is-info is-outlined" on:click={onClick}>
 	<iconify-icon icon="fa6-solid:file-export" class="is-size-5" ></iconify-icon>
 	<span class="ml-1">Select</span>	  
