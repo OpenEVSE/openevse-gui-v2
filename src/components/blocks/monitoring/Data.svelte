@@ -33,7 +33,7 @@
 	$: data_service = {
 		title: $_("monitoring-service"),
 		items: [
-			{name: $_("monitoring-service-level"), value: $status_store.service_level},
+			{name: $_("monitoring-service-level"), value: $status_store.service_level, unit: ""},
 			{name: $_("monitoring-service-servicemin"), value: $config_store.min_current_hard, unit: $_("units.A")},
 			{name: $_("monitoring-service-servicemax"), value: $config_store.max_current_soft, unit: $_("units.A")},
 		]
@@ -44,7 +44,7 @@
 		items: [
 			{name: $_("config.vehicle.battery"), value: $status_store.battery_level, unit: "%"},
 			{name: $_("config.vehicle.range"), value: displayRange($status_store.battery_range), unit: $config_store.mqtt_vehicle_range_miles?$_("units.miles"):$_("units.km")},
-			{name: $_("config.vehicle.timeleft"), value: sec2time($status_store.time_to_full_charge)}
+			{name: $_("config.vehicle.timeleft"), value: sec2time($status_store.time_to_full_charge), unit: ""}
 		]
 	}
 
