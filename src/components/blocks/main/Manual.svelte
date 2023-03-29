@@ -1,4 +1,5 @@
 <script>
+	import ToggleButtonDouble from "./../../ui/ToggleButtonDouble.svelte";
 	import { _ } 					from 'svelte-i18n'
 	import {config_store}			from "./../../../lib/stores/config.js"
 	import {claims_store} 			from "./../../../lib/stores/claims.js"
@@ -23,7 +24,7 @@
 
 	let setamp_tag
 	let buttons_manual
-	let button_divert
+	// let button_divert
 	let button_shaper
 	let waiting = false
 
@@ -134,12 +135,13 @@
 
 	async function setDivertMode(mode) {
 		if (mode != $config_store.charge_mode) {
+			$config_store.charge_mode = mode
 			waiting = true
 			let res = await serialQueue.add(() => config_store.saveParam("charge_mode",mode))
 			waiting = false
 		}
-		if (button_divert)
-			button_divert.blur()
+		// if (button_divert)
+		// 	button_divert.blur()
 	}
 
 	async function stateButtonWatcher(val) {
@@ -231,11 +233,11 @@ $: setShaper($uistates_store.shaper)
 		{/if}
 	
 		<div class="is-flex is-justify-content-center my-0 mb-2">
-			<ToggleButtonIcon 
+			<ToggleButtonDouble 
 				visible={$config_store.divert_enabled} 
-				bind:button={button_divert} 
 				state={$config_store.charge_mode == "eco"?true:false} 
-				name={$config_store.charge_mode == "eco"?$_("charge-mode-eco"):$_("charge-mode-fast")} 
+				name={$_("charge-mode-eco")} 
+				name2={$_("charge-mode-fast")}
 				color="is-primary"
 				tooltip={$config_store.charge_mode=="eco"?$_("charge-mode-fast-ttip"):$_("charge-mode-eco-ttip")} 
 				icon="fa6-solid:solar-panel" 
@@ -245,7 +247,7 @@ $: setShaper($uistates_store.shaper)
 				action={() => setDivertMode($config_store.charge_mode == "eco" ? "fast" : "eco")} 
 				disabled={waiting}
 			/>
-			<ToggleButtonIcon  
+			<ToggleButtonIcon
 				visible={$config_store.current_shaper_enabled} 
 				bind:button={button_shaper} 
 				state={$uistates_store.shaper} 

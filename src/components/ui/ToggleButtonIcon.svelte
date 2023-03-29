@@ -1,5 +1,4 @@
 <script>
-	
 	import {round} from "../../lib/utils.js"
 	export let name = ""
 	export let state = false
@@ -20,6 +19,10 @@
 <style>
 	.icon {
 		min-width: 80px;
+	}
+	.name {
+		position: relative;
+		top: 1px;
 	}
 </style>
 
@@ -45,7 +48,7 @@
 		</div>
 	</button>
 	{#if name}
-	<div class="has-text-centered has-text-weight-bold is-size-7 is-uppercase">{name}</div>
+	<div class="name has-text-centered has-text-weight-bold is-size-7 is-uppercase">{name}</div>
 	{/if}
 </div>
 {/if}

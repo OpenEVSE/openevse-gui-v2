@@ -22,7 +22,7 @@
 	}
 	.no-pointer {
 		cursor: default;
-		pointer-events: hover;
+		pointer-events: none;
 	}
 	.noborderleft {
 		border-left:0px
