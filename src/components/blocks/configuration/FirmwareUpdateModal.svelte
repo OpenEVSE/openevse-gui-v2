@@ -179,7 +179,7 @@
 						</tr>
 						<tr>
 							<td class="has-text-weight-semibold pt-3">
-								<div class="is-flex is-align-items-center">
+								<div class="is-flex is-align-items-start">
 									<span class="">{$_("config.firmware.latest")}</span>
 									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-dark is-flex is-align-items-center ml-2">
 										<iconify-icon inline icon="icon-park-outline:github" class="is-size-4"></iconify-icon>
@@ -210,7 +210,7 @@
 								
 							</td>
 							<td class="">
-								<div class="is-flex is-align-items-center  is-flex-wrap-wrap">
+								<div class="is-flex is-align-content-start is-flex-wrap-wrap">
 									<div class="is-inline-block">
 										<div class="is-size-6 has-text-weight-bold">{update.version} </div>
 										<div class="is-size-7">{update.updated_at}</div>
@@ -225,13 +225,15 @@
 											icon="fa6-solid:cloud-arrow-down" 
 											tooltip={$_("config.firmware.gh-install")}
 											disabled={uploadButtonState == "loading" || gitUpdateButtonState == "loading"} 
-											name={update.version}
+											name={$_("config.firmware.install")}
 											color="{$config_store.version != update.version ?"is-primary":"is-info	"}" 
 											butn_submit={()=>{confirmed=true}}
 
 											/>
 										</div>
-										
+										{#if http_update && !$status_store.ota_progress && $status_store.ota != "completed"}
+										<div class="has-text-centered has-text-dark has-text-weight-bold">Starting update, please wait</div>
+										{/if}
 										{:else}
 										<div class="is-flex is-justify-content-center is-align-items-baseline is-flex-wrap-wrap is-inline-block">
 											<Button 
