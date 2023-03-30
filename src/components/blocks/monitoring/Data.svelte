@@ -1,11 +1,14 @@
 <script>
-	import Expandable from "./../../ui/Expandable.svelte";
-	import { config_store } from "../../../lib/stores/config.js";
-	import { _ } 			from 'svelte-i18n'
-	import {status_store} 	from "../../../lib/stores/status.js"
-	import {round}		  	from "../../../lib/utils.js"
+	import { uistates_store } 		from "./../../../lib/stores/uistates.js";
+	import Expandable 				from "./../../ui/Expandable.svelte";
+	import { config_store } 		from "../../../lib/stores/config.js";
+	import { _ } 					from 'svelte-i18n'
+	import {status_store} 			from "../../../lib/stores/status.js"
+	import { derived} 				from "svelte/store"
+	import {round, s2mns}			from "../../../lib/utils.js"
 	import {sec2time, displayRange} from "../../../lib/utils.js"
 
+	let evelapsed = derived(uistates_store, store => s2mns(store.vehicle_state_update))
 
 	$: data_emeter = {
 		title: $_("monitoring-energy-delivered"),
@@ -15,7 +18,7 @@
 			{name: $_("monitoring-total-day"), value: round($status_store.total_day,1), unit: $_("units.kwh")},
 			{name: $_("monitoring-total-week"), value: round($status_store.total_week,1), unit: $_("units.kwh")},
 			{name: $_("monitoring-total-month"), value: round($status_store.total_month,1), unit: $_("units.kwh")},
-			{name: $_("monitoring-total-year"), value: round($status_store.total_year,1), unit: $_("units.kwh")},
+			{name: $_("monitoring-total-year"), value: round($status_store.total_year,1), unit: $_("units.kwh")}
 		]
 	}
 
@@ -26,7 +29,7 @@
 			{name: $_("monitoring-sensors-current"), value: $status_store.amp/1000, unit: $_("units.A")},
 			{name: $_("monitoring-sensors-voltage"), value: $status_store.voltage, unit: $_("units.V")},
 			{name: $_("monitoring-sensors-evsetemp"), value: round($status_store.temp/10,1), unit: $_("units.C")},
-			{name: $_("monitoring-sensors-esptemp"), value: round($status_store.temp4/10,1), unit: $_("units.C")},
+			{name: $_("monitoring-sensors-esptemp"), value: round($status_store.temp4/10,1), unit: $_("units.C")}
 		]
 	}
 
@@ -35,13 +38,14 @@
 		items: [
 			{name: $_("monitoring-service-level"), value: $status_store.service_level, unit: ""},
 			{name: $_("monitoring-service-servicemin"), value: $config_store.min_current_hard, unit: $_("units.A")},
-			{name: $_("monitoring-service-servicemax"), value: $config_store.max_current_soft, unit: $_("units.A")},
+			{name: $_("monitoring-service-servicemax"), value: $config_store.max_current_soft, unit: $_("units.A")}
 		]
 	}
 
 	$: data_vehicle = {
 		title: $_("config.vehicle.vehicle"),
 		items: [
+			{name: $_("config.vehicle.lastupdated"), value: $evelapsed, unit: ""},
 			{name: $_("config.vehicle.battery"), value: $status_store.battery_level, unit: "%"},
 			{name: $_("config.vehicle.range"), value: displayRange($status_store.battery_range), unit: $config_store.mqtt_vehicle_range_miles?$_("units.miles"):$_("units.km")},
 			{name: $_("config.vehicle.timeleft"), value: sec2time($status_store.time_to_full_charge), unit: ""}
