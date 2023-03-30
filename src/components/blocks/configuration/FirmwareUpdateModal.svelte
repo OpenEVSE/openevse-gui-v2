@@ -16,10 +16,11 @@
 	
 	
 	export let is_opened = false
-	export let release = {}
-	export let daily = {}
-	let update = {}
+	export let release
+	export let daily
 
+	let github_upd
+	let update = {}
 	let file
 	let http_update = false
 	let uploadButtonState = ""
@@ -31,6 +32,7 @@
 	let useDailyBuild = false
 	let build_type = 1
 	let mounted = false
+	
 
 	onDestroy(() => {
 		clearTimeout(timeout)
@@ -126,23 +128,28 @@
 	}
 
 	function switchBuilds(is_dev) {
-		let github_upd
 		if (!is_dev) {
 			// use stable release
-			github_upd = release
+			if (release)
+				github_upd = release
 		}
 		else {
-			github_upd = daily
+			if (daily)
+				github_upd = daily
 		}
-		// "update" object model {name: undefined, version: undefined, url: undefined, updated_at: undefined}
-		update.version = github_upd.name
-		update.name = $config_store.buildenv
-		update.html_url = github_upd.html_url
-		let item = github_upd.assets.find(obj => {
-			return obj.name === update.name + ".bin" || obj.name === update.name + "_gui-v2.bin"
-		})
-		update.updated_at = item.updated_at
-		update.url = item.browser_download_url
+		console.log(github_upd)
+		if (github_upd) {
+			// "update" object model {name: undefined, version: undefined, url: undefined, updated_at: undefined}
+			update.version = github_upd.name?github_upd.name:""
+			update.name = $config_store.buildenv
+			update.html_url = github_upd.html_url?github_upd.html_url:""
+			let item = github_upd.assets?.find(obj => {
+				return obj.name === update.name + ".bin" || obj.name === update.name + "_gui-v2.bin"
+			})
+			update.updated_at = item?.updated_at
+			update.url = item?.browser_download_url
+		}
+
 	}
 
 	$: $status_store.ota,displayOta()
@@ -175,6 +182,7 @@
 							<td class="has-text-weight-semibold">{$_("config.firmware.installed")}</td>
 							<td class="">{$config_store.version}</td>
 						</tr>
+						{#if github_upd}
 						<tr>
 							<td class="has-text-weight-semibold pt-3">
 								<div class="is-flex is-align-items-start">
@@ -255,6 +263,7 @@
 								</div>
 							</td>
 						</tr>
+						{/if}
 					</tbody>
 				</table>
 			</div>
