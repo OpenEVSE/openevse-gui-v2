@@ -133,10 +133,15 @@ in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"
 					mode={$_("clients." + $uistates_store.stateclaimfrom )}  
 					msg={!$status_store.rfid_auth?$_("status-task-rfid-msg"):$status_store.rfid_auth} 
 					state={$claims_target_store.properties.state} />
+				{:else if $uistates_store.stateclaimfrom == "divert"}
+				<TaskDisplay 
+					mode={$_("clients." + $uistates_store.stateclaimfrom )}  
+					state={$status_store.status == "disabled"?$_("standby"):$status_store.status} />
 				{:else if $uistates_store.stateclaimfrom != "timer"}
 				<TaskDisplay 
 					mode={$_("clients." + $uistates_store.stateclaimfrom)} 
 					state={$claims_target_store.properties?.state} />
+
 				{:else if $uistates_store.stateclaimfrom == "timer"}
 				<TaskDisplay 
 					mode={$_("clients.timer")}
