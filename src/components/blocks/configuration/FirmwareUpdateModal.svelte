@@ -137,7 +137,6 @@
 			if (daily)
 				github_upd = daily
 		}
-		console.log(github_upd)
 		if (github_upd) {
 			// "update" object model {name: undefined, version: undefined, url: undefined, updated_at: undefined}
 			update.version = github_upd.name?github_upd.name:""
