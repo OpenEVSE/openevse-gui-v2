@@ -74,6 +74,7 @@
 			formdata.mqtt_solar.req = false
 			formdata.mqtt_grid_ie.req = true
 		}
+		await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
 	}
 
 	let getDivertMode = () => {
