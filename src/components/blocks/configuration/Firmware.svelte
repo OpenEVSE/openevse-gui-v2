@@ -19,9 +19,8 @@
 	let resetEspState = ""
 	let fw_modal_opened = false
 	let fw_has_update = false
-	//let url = "https://api.github.com/repos/OpenEVSE/ESP32_WiFi_V4.x/releases/latest"
 	let url = "https://api.github.com/repos/OpenEVSE/ESP32_WiFi_V4.x/releases"
-	let fw = {name: undefined, version: undefined, url: undefined}
+	let fw = {name: undefined, version: undefined}
 	let alert_visible = false
 	let alert2_visible = false
 	let export_link
@@ -30,25 +29,23 @@
 	let import_butn
 	let firmware_release
 	let firmware_daily
+	let mounted
 
-	onMount(()=>getFwUpdate())
+	onMount(()=> {
+		getFwUpdate()
+		mounted = true
+	})
 
 
 	async function getFwUpdate() {
 		if ($status_store.net_connected) {
 			const fw_update_json = await httpAPI("GET",url)
-			if (fw_update_json != "error") {
-				firmware_release = fw_update_json.find(el => el.prerelease == false)
-				firmware_daily = fw_update_json.find(el => el.tag_name == "v2_gui")
-
-				fw.version = firmware_release.name
-				fw.name = $config_store.buildenv + ".bin"
-				fw.html_url = firmware_release.html_url
-				let item = firmware_release.assets.find(obj => {
-					return obj.name === fw.name
-				})
-				if (item)
-					fw.url = item.browser_download_url
+			if (fw_update_json != "error" ) {
+				if (Object.keys(fw_update_json).length) {
+					firmware_release = fw_update_json.find(el => el.prerelease == false)
+					firmware_daily = fw_update_json.find(el => el.tag_name == "v2_gui")
+				}
+				fw.version = firmware_release.name?firmware_release.name:""
 				if (fw.version != $config_store.version) {
 					fw_has_update = true
 				}
@@ -184,7 +181,7 @@
 
 </script>
 
-
+{#if mounted}
 <Box title={$_("config.titles.firmware")} icon="fa6-solid:microchip" back={true}>
 	<table class="table is-fullwidth is-narrow has-text-dark">
 		<thead>
@@ -274,3 +271,4 @@
 {/if}
 <AlertBox title={$_("warning")} body={$_("config.firmware.reset-warning")} label={$_("config.firmware.reset")} button={true} action={()=>resetESP(false)} bind:visible={alert_visible}></AlertBox>
 <AlertBox title={$_("warning")}  body={$_("config.firmware.reset-reboot")} bind:visible={alert2_visible}/>
+{/if}
