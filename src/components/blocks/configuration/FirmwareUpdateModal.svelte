@@ -136,12 +136,10 @@
 		}
 		// "update" object model {name: undefined, version: undefined, url: undefined, updated_at: undefined}
 		update.version = github_upd.name
-		if (github_upd.tag_name == "v2_gui")
-			update.name = $config_store.buildenv + "_gui-v2" + ".bin"
-		else update.name = $config_store.buildenv + ".bin"
+		update.name = $config_store.buildenv
 		update.html_url = github_upd.html_url
 		let item = github_upd.assets.find(obj => {
-			return obj.name === update.name
+			return obj.name === update.name + ".bin" || obj.name === update.name + "_gui-v2.bin"
 		})
 		update.updated_at = item.updated_at
 		update.url = item.browser_download_url
