@@ -22,7 +22,7 @@
 		<ul>
 			{#each tabs as tab,i}
 			<li class:is-active={activetab==i}>
-				<a bind:this={linkid[i]} class="tab" href={tab.url} use:link on:click|preventDefault={() => {onClick(i); linkid[i].blur()}}>
+				<a bind:this={linkid[i]} class="tab" class:has-text-danger={tab.alert} href={tab.url} use:link on:click|preventDefault={() => {onClick(i); linkid[i].blur()}}>
 				<span class="has-text-weight-bold">{tab.name}</span>
 				</a>
 			</li>
