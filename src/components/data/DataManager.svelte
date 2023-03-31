@@ -196,10 +196,10 @@
 	}
 
 	function countVehicleUpdate(val) {
-		$uistates_store.counter_vehicle_update = val
+		$uistates_store.vehicle_state_update = val
 		clearInterval(counter_vehicle_update)
 		counter_vehicle_update = setInterval(() => {
-			$uistates_store.vehicle_state_update++
+			$uistates_store.vehicle_state_update ++
 		}, 1000);
 	}
 
