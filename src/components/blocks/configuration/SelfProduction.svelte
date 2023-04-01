@@ -1,4 +1,5 @@
 <script>
+	import SliderForm from "./../../ui/SliderForm.svelte";
 	import { uisettings_store } from "./../../../lib/stores/uisettings.js";
 	import Borders 			  from "./../../ui/Borders.svelte";
 	import { onMount }		  from "svelte";
@@ -213,7 +214,7 @@
 		
 		
 					<div class="mb-2">
-						<InputForm 
+						<!-- <InputForm 
 							title="{$_("config.selfprod.smoothattack")}*" 
 								type="number" 
 								placeholder="0.4"
@@ -224,13 +225,21 @@
 								bind:value={formdata.divert_attack_smoothing_factor.val} 
 								bind:status={formdata.divert_attack_smoothing_factor.status}
 								onChange={()=>setProperty("divert_attack_smoothing_factor")}
+						/> -->
+						<SliderForm 
+							label="{$_("config.selfprod.smoothattack")}*"
+							bind:this={formdata.divert_attack_smoothing_factor.input}
+							bind:value={formdata.divert_attack_smoothing_factor.val} 
+							min=0.01 max=1.0 step=0.01
+							color="has-text-dark"
+							onchange={()=>setProperty("divert_attack_smoothing_factor")} 
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
 					</div>
 					
 		
 					<div class="mb-2">
-						<InputForm 
+						<!-- <InputForm 
 							title="{$_("config.selfprod.smoothdecay")}*" 
 							type="number" 
 							placeholder="0.05"
@@ -241,6 +250,13 @@
 							bind:value={formdata.divert_decay_smoothing_factor.val} 
 							bind:status={formdata.divert_decay_smoothing_factor.status}
 							onChange={()=>setProperty("divert_decay_smoothing_factor")}
+						/> -->
+						<SliderForm 
+							label="{$_("config.selfprod.smoothdecay")}*"
+							bind:value={formdata.divert_decay_smoothing_factor.val} 
+							min=0.01 max=1.0 step=0.01
+							color="has-text-dark"
+							onchange={()=>setProperty("divert_decay_smoothing_factor")} 
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
 					</div>

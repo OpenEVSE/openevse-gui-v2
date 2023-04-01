@@ -9,6 +9,7 @@
 	export let icon = null
 	export let onchange = (val) => {};
 	export let disabled = false
+	export let color = "has-text-info"
 
 	let hover = false
 	let focus = false
@@ -39,9 +40,9 @@
 
 <div class="sliderform is-unselectable" >
 	{#if label}
-	<div class="label has-text-weight-bold has-text-info" >{label}</div>
+	<div class="label has-text-weight-bold {color}" >{label}</div>
 	{/if}
-	<div class="is-flex has-text-info is-flex-direction-row" >
+	<div class="is-flex {color} is-flex-direction-row" >
 		{#if icon}
 		<iconify-icon class="mt-4 mr-3" icon={icon} style="font-size: 25px"></iconify-icon>
 
