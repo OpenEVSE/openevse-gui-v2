@@ -1,6 +1,6 @@
 <script>
 	import { uisettings_store } from "./../../../lib/stores/uisettings.js";
-	import Borders from "./../../ui/Borders.svelte";
+	import Borders 			  from "./../../ui/Borders.svelte";
 	import { onMount }		  from "svelte";
 	import { _ } 			  from 'svelte-i18n'
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
@@ -218,6 +218,8 @@
 								type="number" 
 								placeholder="0.4"
 								step="0.01" 
+								min="0.001"
+								max="1"
 								bind:this={formdata.divert_attack_smoothing_factor.input}
 								bind:value={formdata.divert_attack_smoothing_factor.val} 
 								bind:status={formdata.divert_attack_smoothing_factor.status}
@@ -233,6 +235,8 @@
 							type="number" 
 							placeholder="0.05"
 							step="0.01"
+							min="0.001"
+							max="1"
 							bind:this={formdata.divert_decay_smoothing_factor.input}
 							bind:value={formdata.divert_decay_smoothing_factor.val} 
 							bind:status={formdata.divert_decay_smoothing_factor.status}
@@ -247,6 +251,8 @@
 							title="{$_("config.selfprod.minchargetime")}*" 
 							type="number" 
 							placeholder="600"
+							min="0"
+							step="1"
 							bind:this={formdata.divert_min_charge_time.input}
 							bind:value={formdata.divert_min_charge_time.val} 
 							bind:status={formdata.divert_min_charge_time.status}
