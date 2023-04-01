@@ -135,6 +135,7 @@
 					/>
 				</Borders>
 			</div>
+			{#if $config_store.led_brightness != undefined}
 			<div class="mt-1 is-flex is-justify-content-center " >
 				<Borders grow={true}>
 					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.led-bn")}</div>
@@ -146,6 +147,7 @@
 					/>
 				</Borders>
 			</div>
+			{/if}
 
 			<div class="mt-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
