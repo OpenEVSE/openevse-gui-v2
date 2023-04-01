@@ -28,6 +28,7 @@
 	let import_file
 	let import_butn
 	let firmware_release
+	let firmware_prerelease
 	let firmware_daily
 	let mounted
 
@@ -43,6 +44,7 @@
 			if (fw_update_json != "error" ) {
 				if (Object.keys(fw_update_json).length) {
 					firmware_release = fw_update_json.find(el => el.prerelease == false)
+					firmware_prerelease = fw_update_json.find(el => el.prerelease == true && !isNaN(el.tag_name.charAt(1)))
 					firmware_daily = fw_update_json.find(el => el.tag_name == "v2_gui")
 				}
 				fw.version = firmware_release.name?firmware_release.name:""
@@ -267,7 +269,7 @@
 
 </Box>
 {#if fw_modal_opened}
-<FirmwareUpdateModal bind:is_opened={fw_modal_opened} release={firmware_release} daily={firmware_daily} />
+<FirmwareUpdateModal bind:is_opened={fw_modal_opened} release={firmware_release} prerelease={firmware_prerelease} daily={firmware_daily} />
 {/if}
 <AlertBox title={$_("warning")} body={$_("config.firmware.reset-warning")} label={$_("config.firmware.reset")} button={true} action={()=>resetESP(false)} bind:visible={alert_visible}></AlertBox>
 <AlertBox title={$_("warning")}  body={$_("config.firmware.reset-reboot")} bind:visible={alert2_visible}/>

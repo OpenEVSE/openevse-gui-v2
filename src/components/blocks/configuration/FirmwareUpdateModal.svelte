@@ -17,6 +17,7 @@
 	
 	export let is_opened = false
 	export let release
+	export let prerelease
 	export let daily
 
 	let github_upd
@@ -29,8 +30,7 @@
 	let timeout
 	let canClose = true
 	let confirmed = false
-	let useDailyBuild = false
-	let build_type = 1
+	let build_type = 1 // 1: release, 2: prerelease , 3: dev
 	let mounted = false
 	
 
@@ -127,15 +127,25 @@
 		}
 	}
 
-	function switchBuilds(is_dev) {
-		if (!is_dev) {
-			// use stable release
-			if (release)
-				github_upd = release
-		}
-		else {
-			if (daily)
-				github_upd = daily
+	function switchBuilds(type) {
+		switch (type) {
+			case 1: 
+				// use release
+				if (release)
+					github_upd = release
+				break;
+			case 2:
+				// use prerelease
+				if (prerelease)
+					github_upd = prerelease
+				break;
+			case 3:
+				// use daily build
+				if (daily)
+					github_upd = daily
+				break;
+			default:
+				break;
 		}
 		if (github_upd) {
 			// "update" object model {name: undefined, version: undefined, url: undefined, updated_at: undefined}
@@ -152,7 +162,7 @@
 	}
 
 	$: $status_store.ota,displayOta()
-	$: switchBuilds(useDailyBuild)
+	$: switchBuilds(build_type)
 
 
 </script>
@@ -167,7 +177,7 @@
 		<div class="pt-2">
 			
 			<div class="">
-				<table class="table is-fullwidth is-vcentered has-text-dark">
+				<table class="table is-fullwidth is-vcentered has-text-dark mb-0">
 					<tbody class="is-size-6">
 						<tr>
 							<td class="has-text-weight-semibold" width="15%">{$_("config.firmware.espinfo")}</td>
@@ -189,30 +199,7 @@
 									<a href={update.html_url} target="_blank" rel="noreferrer" class="has-text-dark is-flex is-align-items-center ml-2">
 										<iconify-icon inline icon="icon-park-outline:github" class="is-size-4"></iconify-icon>
 									</a>
-								</div>
-								<div class="is-flex is-justify-content-start mt-2">
-									<div class="mr-2">
-										<Checkbox 
-											small bold
-											color="dark"
-											label="Stable"
-											checked={!useDailyBuild}
-											onChange={() => {useDailyBuild = !useDailyBuild}}
-											tooltip={null}
-									/>
-									</div>
-									<div class="">
-										<Checkbox 
-											small bold
-											color="dark"
-											label="Dev"
-											checked={useDailyBuild}
-											onChange={() => {useDailyBuild = !useDailyBuild}}
-											tooltip={null}
-										/>
-									</div>
-								</div>
-								
+								</div>	
 							</td>
 							<td class="">
 								<div class="is-flex is-align-content-start is-flex-wrap-wrap">
@@ -265,6 +252,38 @@
 						{/if}
 					</tbody>
 				</table>
+				<div class="is-flex is-justify-content-space-evenly">
+					<div class="">
+						<Checkbox 
+							 bold
+							color="dark"
+							label="Release"
+							checked={build_type == 1}
+							onChange={() => {build_type = 1}}
+							tooltip={null}
+					/>
+					</div>
+					<div class="">
+						<Checkbox 
+							 bold
+							color="dark"
+							label="PreRelease"
+							checked={build_type == 2}
+							onChange={() => {build_type = 2}}
+							tooltip={null}
+						/>
+					</div>
+					<div class="">
+						<Checkbox 
+							 bold
+							color="dark"
+							label="Dev"
+							checked={build_type == 3}
+							onChange={() => {build_type = 3}}
+							tooltip={null}
+						/>
+					</div>
+				</div>
 			</div>
 		</div>
 		
