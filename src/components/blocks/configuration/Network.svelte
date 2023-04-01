@@ -57,7 +57,7 @@
 				</div>
 				<div class="is-flex is-align-items-center is-justify-content-center">
 					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.connected")}: </span>
-					<iconify-icon inline class="ml-2 is-size-5 {$status_store.net_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.net_connected==1?"fa6-solid:circle-check":"fa6-solid:circle-xmark"}></iconify-icon>
+					<iconify-icon inline class="ml-2 is-size-5 {$status_store.wifi_client_connected||$status_store.eth_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.wifi_client_connected||$status_store.eth_connected==1?"fa6-solid:circle-check":"fa6-solid:circle-xmark"}></iconify-icon>
 				</div>
 			</div>
 			<div class="my-1 container">
