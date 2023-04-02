@@ -6,7 +6,8 @@
 	import { status_store } from "./../../../lib/stores/status.js";
 	import { _ } 		  		from 'svelte-i18n'
 	import { onMount } 			from "svelte";
-	import {httpAPI} 			from "../../../lib/utils.js"
+	import {httpAPI,
+			compareVersion} 	from "../../../lib/utils.js"
 	import { serialQueue } 		from "../../../lib/queue.js";
 	import {config_store} 		from "../../../lib/stores/config.js"
 	import Box 					from "../../ui/Box.svelte"
@@ -204,11 +205,11 @@
 				<td class="has-text-weight-bold">OpenEVSE Wifi</td>
 				<td>
 					<div>{$config_store.version}</div>
-					{#if fw.version && $config_store.version != fw.version}
+					{#if fw.version && compareVersion(fw.version, $config_store.version, )}
 					<div class="tag is-primary is-small has-text-weight-bold">
 						{fw.version}
 					</div>
-					{:else if fw.version && $config_store.version == fw.version}
+					{:else if fw.version}
 					<div class="tag is-info is-small has-text-weight-bold">
 						{$_("config.firmware.up2date")}
 					</div>

@@ -496,3 +496,24 @@ export function JSONTryParse(input) {
 	}
 	return false;
 };
+
+export function compareVersion(last, old) {
+	if (typeof last !== 'string') return false
+	if (typeof old !== 'string') return false
+	if (last[0] == "v") {
+		last = last.substring(1)
+	}
+	if (old[0] == "v") {
+		old = old.substring(1)
+	}
+	last = last.split('.')
+	old = old.split('.')
+	const k = Math.min(last.length, old.length)
+	for (let i = 0; i < k; ++i) {
+		last[i] = parseInt(last[i], 10)
+		old[i] = parseInt(old[i], 10)
+		if (last [i] > old[i]) return 1
+		if (last [i] < old[i]) return -1
+	}
+	return last.length == old.length ? 0 : (last.length < old.length ? -1 : 1)
+}

@@ -6,7 +6,8 @@
 	import { config_store } 	from "./../../../lib/stores/config.js";
 	import { serialQueue }		from "./../../../lib/queue.js";
 	import { status_store } 	from "../../../lib/stores/status.js"
-	import {httpAPI}			from "../../../lib/utils.js" 
+	import {httpAPI, 
+			compareVersion}		from "../../../lib/utils.js" 
 	import {onDestroy, onMount} from "svelte"
 	import Box 					from "../../ui/Box.svelte"
 	import Button 				from "../../ui/Button.svelte"
@@ -263,6 +264,7 @@
 							tooltip={null}
 					/>
 					</div>
+					{#if compareVersion(prerelease.tag_name, release.tag_name) == 1 }
 					<div class="">
 						<Checkbox 
 							 bold
@@ -273,6 +275,7 @@
 							tooltip={null}
 						/>
 					</div>
+					{/if}
 					<div class="">
 						<Checkbox 
 							 bold
