@@ -44,7 +44,8 @@
 			if (fw_update_json != "error" ) {
 				if (Object.keys(fw_update_json).length) {
 					firmware_release = fw_update_json.find(el => el.prerelease == false)
-					firmware_prerelease = fw_update_json.find(el => el.prerelease == true && !isNaN(el.tag_name.charAt(1)))
+					firmware_prerelease = fw_update_json.find(el => el.prerelease == true && 
+					(!isNaN(el.tag_name.charAt(1)) && el.tag_name.charAt(2) == "." && !isNaN(el.tag_name.charAt(3))))
 					firmware_daily = fw_update_json.find(el => el.tag_name == "v2_gui")
 				}
 				fw.version = firmware_release.name?firmware_release.name:""
