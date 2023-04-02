@@ -365,7 +365,7 @@
 			"livepower": "Live power load MQTT Topic (in W)",
 			"minpausetime": "Minimum time staying in pause ( in s)",
 			"maxinterval": "Max time between live power data before entering failsafe (in s)",
-			"smoothing": "Smoothing factor to add to filtered live power used to get out of pause. Value of 1 means it starts immediately when recovering",
+			"smoothing": "Smoothing factor edded to filtered live power used to get out of pause. Value of 1 means it starts immediately when recovering",
 			"missing-current_shaper_max_pwr": "Max Power value missing",
 			"missing-mqtt_live_pwr": "Live power MQTT topic missing",
 			"missing-current_shaper_min_pause_time": "Minimum pause time is missing",
