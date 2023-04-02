@@ -363,8 +363,13 @@
 			"shaperdesc": "Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.",
 			"maxpower": "Max power allowed (in W)",
 			"livepower": "Live power load MQTT Topic (in W)",
+			"minpausetime": "Minimum time staying in pause ( in mn)",
+			"maxinterval": "Max time between live power data before entering failsafe (in s)",
+			"smoothing": "Smoothing factor to add to filtered live power used to get out of pause. Value of 1 means it starts immediately when recovering",
 			"missing-current_shaper_max_pwr": "Max Power value missing",
 			"missing-mqtt_live_pwr": "Live power MQTT topic missing",
+			"missing-current_shaper_min_pause_time": "Minimum pause time is missing",
+			"missing-current_shaper_data_maxinterval": "Max data interval is missing",
 			"help-mqtt": "If MQTT is not an option, you can HTTP POST {data} periodically to `/status`",
 			"help-main": "OpenEVSE can shape max current according to your real time house load, preventing to exceed the maximum power your energy plan can handle. <br> Once the module is enabled, it will need to receive live power total load data (in W) from an MQTT topic. <br>Data should be refreshed every 6mn max or OpenEVSE will temporary disable itself."
 		},

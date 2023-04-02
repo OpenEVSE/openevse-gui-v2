@@ -361,8 +361,13 @@
       "shaperdesc": "Module le courant de charge selon la puissance totale instantanée de votre compteur afin de ne pas dépasser votre contrat.",
       "maxpower": "Puissance Maxi authorisée (en W)",
       "livepower": "Sujet MQTT Puissance Instantanée compteur (en W)",
+      "minpausetime": "Temps minimum en pause ( in mn)",
+      "maxinterval": "Intervalle max entre 2 mises à jours de puissance instanée avant de se mettre en sécurité. ( en s)",
+      "smoothing": "Facteur de lissage puissance instantanée utilisé pour sortir de pause. Une valeur de 1 signifie un départ instantané.",
       "missing-current_shaper_max_pwr": "Valeur puissance Max manquante",
 			"missing-mqtt_live_pwr": "Sujet MQTT puissance instantanée manquant",
+      "missing-current_shaper_min_pause_time": "Temps de pause min manquant",
+      "missing-current_shaper_data_maxinterval": "Intervalle max puissance inst manquant",
       "help-mqtt": "Si MQTT n'est pas une option, vous pouvez POST {data} périodiquement sur '/status'",
       "help-main": "OpenEVSE peut moduler le courant max en fonction de la puissance instantanée de votre compteur afin d'éviter de dépasser votre abonnement. <br> Une fois que le module est activé, il va avoir besoin de recevoir la puissance instantanée (en W) depuis un topic MQTT. <br>Les données doivent être rafraichies toutes les 6mn au max, ou OpenEVSE se mettra en veille."
     },

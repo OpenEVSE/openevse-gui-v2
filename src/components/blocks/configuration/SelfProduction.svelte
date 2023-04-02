@@ -214,18 +214,6 @@
 		
 		
 					<div class="mb-2">
-						<!-- <InputForm 
-							title="{$_("config.selfprod.smoothattack")}*" 
-								type="number" 
-								placeholder="0.4"
-								step="0.01" 
-								min="0.001"
-								max="1"
-								bind:this={formdata.divert_attack_smoothing_factor.input}
-								bind:value={formdata.divert_attack_smoothing_factor.val} 
-								bind:status={formdata.divert_attack_smoothing_factor.status}
-								onChange={()=>setProperty("divert_attack_smoothing_factor")}
-						/> -->
 						<SliderForm 
 							label="{$_("config.selfprod.smoothattack")}*"
 							bind:this={formdata.divert_attack_smoothing_factor.input}
@@ -239,18 +227,6 @@
 					
 		
 					<div class="mb-2">
-						<!-- <InputForm 
-							title="{$_("config.selfprod.smoothdecay")}*" 
-							type="number" 
-							placeholder="0.05"
-							step="0.01"
-							min="0.001"
-							max="1"
-							bind:this={formdata.divert_decay_smoothing_factor.input}
-							bind:value={formdata.divert_decay_smoothing_factor.val} 
-							bind:status={formdata.divert_decay_smoothing_factor.status}
-							onChange={()=>setProperty("divert_decay_smoothing_factor")}
-						/> -->
 						<SliderForm 
 							label="{$_("config.selfprod.smoothdecay")}*"
 							bind:value={formdata.divert_decay_smoothing_factor.val} 
