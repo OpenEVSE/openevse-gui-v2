@@ -300,7 +300,7 @@
 		},
 		"time": {
 			"date": "Date",
-			"usebrowsertime": "Set local Time",
+			"usebrowsertime": "Local time",
 			"ntpserver": "NTP Server",
 			"ntpserver-desc": "NTP server adress",
 			"settimefrom": "Set time from",
@@ -308,7 +308,7 @@
 			"manual": "Manual",
 			"local": "Local Time",
 			"timezone": "Time Zone",
-			"settime": "Set Time"
+			"settime": "Save"
 		},
 		"http": {
 			"enable": "Authentication",

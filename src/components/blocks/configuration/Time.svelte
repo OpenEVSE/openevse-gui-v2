@@ -137,10 +137,10 @@
 
 	function timeNow() {
 		allow_time_update = false
-		date = DateTime.now()
+		date = DateTime.now().toString().slice(0,16)
+
 		return true
 	}
-
 
 	onMount(() => {
 		tz = $config_store.time_zone
@@ -160,12 +160,18 @@
 <Box title={$_("config.titles.time")} icon="fa6-solid:clock" back={true}>
 	<div class="is-flex is-flex-direction-column is-align-items-center">
 		<div class="is-flex is-flex-direction-column is-align-items-start">
-			<div class="">
+			
 				<InputForm type="datetime-local" title="{$_("config.time.date")}:" placeholder="" bind:value={date} disabled={timemode==0?false:true} onFocus={() => {allow_time_update = false}} />
 				{#if timemode == 0}
-				<Button name={$_("config.time.settime")} butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
+				<div class="is-flex is-flex-direction-row is-flex-wrap-wrap">
+					<div class="mb-1 is-inline-block">
+						<Button name={$_("config.time.usebrowsertime")} butn_submit={()=>{timeNow()}} />
+					</div>
+					<div class="mb-1 is-inline-block">
+						<Button name={$_("config.time.settime")} color="is-primary" butn_submit={setTime} bind:this={butn_settime} bind:state={setTimeButnState}/>
+					</div>
+				</div>
 				{/if}
-			</div>
 			{#if timemode == 2}
 			<InputForm type="text" title="{$_("config.time.ntpserver")}:" placeholder={$_("config.time.ntpserver-desc")}  bind:value={$config_store.sntp_hostname} 
 				status={inputSntpState} onChange={() => {setNTP($config_store.sntp_hostname)}}/>
