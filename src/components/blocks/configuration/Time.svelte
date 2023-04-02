@@ -144,19 +144,14 @@
 
 	onMount(() => {
 		tz = $config_store.time_zone
-		
 		getTimeMode($config_store.sntp_enabled)
 		// get tz from browser
 		if (!tz) {
-			let tzshort = Intl.DateTimeFormat().resolvedOptions().timeZone;
+			let tzshort = Intl.DateTimeFormat().resolvedOptions().timeZone
 			tz = createTzObj(timeZone).filter(function(el){return el.name == tzshort})[0].value
-		}
-			
-		console.log(tz)
-		})
-		
-		
-
+			setTimeZone()
+		}	
+	})
 
 	$: $status_store.time, updateDateField($status_store.time)
 	$: $config_store.time_zone, ()=> {tz = $config_store.time_zone }
