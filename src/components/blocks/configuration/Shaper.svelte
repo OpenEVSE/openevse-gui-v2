@@ -141,9 +141,9 @@
 							bind:value={formdata.current_shaper_smoothing_factor.val} 
 							min=0.01 max=1.0 step=0.01
 							color="has-text-dark"
+							tooltip={$_("config.shaper.smoothing-desc")}
 							onchange={()=>setProperty("current_shaper_smoothing_factor")} 
 						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
 					</div>
 
 					<div class="block mt-5 pb-1">
