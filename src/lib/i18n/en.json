@@ -363,7 +363,7 @@
 			"shaperdesc": "Throttle charge current following your house loads to prevent exceeding what your energy plan can deliver.",
 			"maxpower": "Max power allowed (in W)",
 			"livepower": "Live power load MQTT Topic (in W)",
-			"minpausetime": "Minimum time staying in pause ( in mn)",
+			"minpausetime": "Minimum time staying in pause ( in s)",
 			"maxinterval": "Max time between live power data before entering failsafe (in s)",
 			"smoothing": "Smoothing factor to add to filtered live power used to get out of pause. Value of 1 means it starts immediately when recovering",
 			"missing-current_shaper_max_pwr": "Max Power value missing",
