@@ -111,20 +111,19 @@ export function getTZ(s) {
 }
 
 export function createTzObj(tz) {
-	if (tz) {
-		var tzobj = []
-		// @ts-ignore
-		let idx = 0
-		Object.entries(tz).forEach((element) => {
-			if (!element[0].startsWith("Etc")) {
-				tzobj[idx] = { name: element[0], value: element[0] + "|" + element[1] }
-				idx++
-			}
-			else {
-			}
-		})
-		return tzobj
-	}
+	var tzobj = []
+	// @ts-ignore
+	let idx = 0
+	Object.entries(tz).forEach((element) => {
+		if (!element[0].startsWith("Etc")) {
+			tzobj[idx] = { name: element[0], value: element[0] + "|" + element[1] }
+			idx++
+		}
+		else {
+		}
+	})
+	console.log(tzobj)
+	return tzobj
 }
 
 export function round(value, precision = null) {

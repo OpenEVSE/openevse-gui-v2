@@ -17,7 +17,7 @@
 	let inputSntpState = ""
 	let date
 	let timemode = 2 // 0: manual, 1: Browser, 2: NTP
-	let tz = "Etc/Universal|UTC0"
+	let tz = ""
 	let setTimeButnState = ""
 	let selectTimeModeState = ""
 	let selectTimeZoneState = ""
@@ -144,11 +144,18 @@
 
 	onMount(() => {
 		tz = $config_store.time_zone
+		
 		getTimeMode($config_store.sntp_enabled)
 		// get tz from browser
-		if (!tz)
-			tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+		if (!tz) {
+			let tzshort = Intl.DateTimeFormat().resolvedOptions().timeZone;
+			tz = createTzObj(timeZone).filter(function(el){return el.name == tzshort})[0].value
+		}
+			
+		console.log(tz)
 		})
+		
+		
 
 
 	$: $status_store.time, updateDateField($status_store.time)
