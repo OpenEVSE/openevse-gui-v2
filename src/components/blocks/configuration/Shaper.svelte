@@ -15,7 +15,7 @@
 	let formdata = {
 			current_shaper_enabled: {val: false, status: "", input: undefined, req: false},
 			current_shaper_max_pwr:	{val: null,  status: "", input: undefined, req: true},
-			current_shaper_smoothing_factor: {val: null, status: "", input: undefined, req: true},
+			current_shaper_smoothing_time: {val: null, status: "", input: undefined, req: true},
 			current_shaper_min_pause_time: {val: null, status: "", input: undefined, req: true},
 			current_shaper_data_maxinterval: {val: null, status: "", input: undefined, req: true},
 			mqtt_live_pwr:			{val: null,  status: "", input: undefined, req: false}
@@ -24,7 +24,7 @@
 	let updateFormData = () => {
 		formdata.current_shaper_enabled.val = $config_store.current_shaper_enabled
 		formdata.current_shaper_max_pwr.val = $config_store.current_shaper_max_pwr
-		formdata.current_shaper_smoothing_factor.val = $config_store.current_shaper_smoothing_factor
+		formdata.current_shaper_smoothing_time.val = $config_store.current_shaper_smoothing_time
 		formdata.current_shaper_min_pause_time.val = $config_store.current_shaper_min_pause_time
 		formdata.current_shaper_data_maxinterval.val = $config_store.current_shaper_data_maxinterval
 		formdata.mqtt_live_pwr.val 			= $config_store.mqtt_live_pwr	
@@ -138,11 +138,11 @@
 					<div class="mb-2">
 						<SliderForm
 							label="{$_("config.shaper.smoothing")}*"
-							bind:value={formdata.current_shaper_smoothing_factor.val} 
+							bind:value={formdata.current_shaper_smoothing_time.val} 
 							min=0 max=300 step=1
 							color="has-text-dark"
 							tooltip={$_("config.shaper.smoothing-desc")}
-							onchange={()=>setProperty("current_shaper_smoothing_factor")} 
+							onchange={()=>setProperty("current_shaper_smoothing_time")} 
 						/>
 					</div>
 
