@@ -26,8 +26,8 @@
 		mqtt_solar: 	  				{val: "",		input: undefined, status: "", req: false},
 		mqtt_grid_ie: 	  				{val: "",		input: undefined, status: "", req: false},
 		divert_PV_ratio:  				{val: "",		input: undefined, status: "", req: true},
-		divert_attack_smoothing_factor: {val: "",		input: undefined, status: "", req: true},
-		divert_decay_smoothing_factor:	{val: "",		input: undefined, status: "", req: true},
+		divert_attack_smoothing_time: {val: "",		input: undefined, status: "", req: true},
+		divert_decay_smoothing_time:	{val: "",		input: undefined, status: "", req: true},
 		divert_min_charge_time:			{val: "",		input: undefined, status: "", req: true}
 	}
 
@@ -39,8 +39,8 @@
 		formdata.mqtt_grid_ie.val					= $config_store.mqtt_grid_ie
 		formdata.mqtt_grid_ie.req 					= $uistates_store.divert_type?false:true
 		formdata.divert_PV_ratio.val				= $config_store.divert_PV_ratio
-		formdata.divert_attack_smoothing_factor.val	= $config_store.divert_attack_smoothing_factor
-		formdata.divert_decay_smoothing_factor.val	= $config_store.divert_decay_smoothing_factor
+		formdata.divert_attack_smoothing_time.val	= $config_store.divert_attack_smoothing_time
+		formdata.divert_decay_smoothing_time.val	= $config_store.divert_decay_smoothing_time
 		formdata.divert_min_charge_time.val			= $config_store.divert_min_charge_time
 	}
 
@@ -216,11 +216,11 @@
 					<div class="mb-2">
 						<SliderForm 
 							label="{$_("config.selfprod.smoothattack")}*"
-							bind:this={formdata.divert_attack_smoothing_factor.input}
-							bind:value={formdata.divert_attack_smoothing_factor.val} 
-							min=0.01 max=1.0 step="0.01"
+							bind:this={formdata.divert_attack_smoothing_time.input}
+							bind:value={formdata.divert_attack_smoothing_time.val} 
+							min=0 max=600 step=1
 							color="has-text-dark"
-							onchange={()=>setProperty("divert_attack_smoothing_factor")} 
+							onchange={()=>setProperty("divert_attack_smoothing_time")} 
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
 					</div>
@@ -229,10 +229,11 @@
 					<div class="mb-2">
 						<SliderForm 
 							label="{$_("config.selfprod.smoothdecay")}*"
-							bind:value={formdata.divert_decay_smoothing_factor.val} 
-							min=0.01 max=1.0 step="0.01"
+							bind:this={formdata.divert_decay_smoothing_time.input}
+							bind:value={formdata.divert_decay_smoothing_time.val} 
+							min=0 max=600 step=1
 							color="has-text-dark"
-							onchange={()=>setProperty("divert_decay_smoothing_factor")} 
+							onchange={()=>setProperty("divert_decay_smoothing_time")} 
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
 					</div>

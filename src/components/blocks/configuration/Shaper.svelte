@@ -139,7 +139,7 @@
 						<SliderForm
 							label="{$_("config.shaper.smoothing")}*"
 							bind:value={formdata.current_shaper_smoothing_time.val} 
-							min=0 max=300 step=1
+							min=0 max=600 step=1
 							color="has-text-dark"
 							tooltip={$_("config.shaper.smoothing-desc")}
 							onchange={()=>setProperty("current_shaper_smoothing_time")} 
