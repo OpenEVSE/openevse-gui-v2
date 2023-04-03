@@ -218,7 +218,7 @@
 							title="{$_("config.selfprod.smoothattack")}*"
 							bind:this={formdata.divert_attack_smoothing_time.input}
 							bind:value={formdata.divert_attack_smoothing_time.val} 
-							min=0 max=600 step=1
+							min=0 max=600 step="1"
 							onChange={()=>setProperty("divert_attack_smoothing_time")} 
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
@@ -230,7 +230,7 @@
 							title="{$_("config.selfprod.smoothdecay")}*"
 							bind:this={formdata.divert_decay_smoothing_time.input}
 							bind:value={formdata.divert_decay_smoothing_time.val} 
-							min=0 max=600 step=1
+							min=0 max=600 step="1"
 							onChange={()=>setProperty("divert_decay_smoothing_time")} 
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
