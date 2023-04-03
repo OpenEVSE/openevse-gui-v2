@@ -230,7 +230,7 @@
 							label="{$_("config.selfprod.smoothattack")}*"
 							bind:this={formdata.divert_attack_smoothing_factor.input}
 							bind:value={formdata.divert_attack_smoothing_factor.val} 
-							min=0.01 max=1.0 step=0.01
+							min=0.01 max=1.0 step="0.01"
 							color="has-text-dark"
 							onchange={()=>setProperty("divert_attack_smoothing_factor")} 
 						/>
@@ -254,7 +254,7 @@
 						<SliderForm 
 							label="{$_("config.selfprod.smoothdecay")}*"
 							bind:value={formdata.divert_decay_smoothing_factor.val} 
-							min=0.01 max=1.0 step=0.01
+							min=0.01 max=1.0 step="0.01"
 							color="has-text-dark"
 							onchange={()=>setProperty("divert_decay_smoothing_factor")} 
 						/>
