@@ -18,10 +18,4 @@
 		{values: {data: '{"shaper_live_pwr": xxx}'}}
 	)}
 	</p>
-	<p class="">	
-		<!-- {@html $_('config.shaper.help-mqtt', {
-			data: "{\"shaper_live_pwr\": value}"
-		})} -->
-		
-	</p>
 </div>

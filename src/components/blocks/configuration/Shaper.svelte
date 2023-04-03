@@ -124,6 +124,7 @@
 							placeholder="120" 
 							onChange={()=>setProperty("current_shaper_data_maxinterval")}
 						/>
+						<div class="is-size-7 has-text-left">{$_("config.shaper.maxinterval-desc")}</div>
 					</div>
 					<div>
 						<InputForm
