@@ -214,26 +214,24 @@
 		
 		
 					<div class="mb-2">
-						<SliderForm 
-							label="{$_("config.selfprod.smoothattack")}*"
+						<InputForm 
+							title="{$_("config.selfprod.smoothattack")}*"
 							bind:this={formdata.divert_attack_smoothing_time.input}
 							bind:value={formdata.divert_attack_smoothing_time.val} 
 							min=0 max=600 step=1
-							color="has-text-dark"
-							onchange={()=>setProperty("divert_attack_smoothing_time")} 
+							onChange={()=>setProperty("divert_attack_smoothing_time")} 
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
 					</div>
 					
 		
 					<div class="mb-2">
-						<SliderForm 
-							label="{$_("config.selfprod.smoothdecay")}*"
+						<InputForm 
+							title="{$_("config.selfprod.smoothdecay")}*"
 							bind:this={formdata.divert_decay_smoothing_time.input}
 							bind:value={formdata.divert_decay_smoothing_time.val} 
 							min=0 max=600 step=1
-							color="has-text-dark"
-							onchange={()=>setProperty("divert_decay_smoothing_time")} 
+							onChange={()=>setProperty("divert_decay_smoothing_time")} 
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
 					</div>

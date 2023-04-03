@@ -137,14 +137,14 @@
 						/>
 					</div>
 					<div class="mb-2">
-						<SliderForm
-							label="{$_("config.shaper.smoothing")}*"
+						<InputForm
+							title="{$_("config.shaper.smoothing")}*"
 							bind:value={formdata.current_shaper_smoothing_time.val} 
+							bind:this={formdata.current_shaper_smoothing_time.input}
 							min=0 max=600 step=1
-							color="has-text-dark"
-							tooltip={$_("config.shaper.smoothing-desc")}
-							onchange={()=>setProperty("current_shaper_smoothing_time")} 
+							onChange={()=>setProperty("current_shaper_smoothing_time")} 
 						/>
+						<div class="is-size-7 has-text-left">{$_("config.shaper.smoothing-desc")}</div>
 					</div>
 
 					<div class="block mt-5 pb-1">
