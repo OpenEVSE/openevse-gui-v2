@@ -28,15 +28,15 @@
 			name: "No waste",
 			desc: "No waste of produced energy. Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
 			id: 0,
-			divert_attack_smoothing_time: 300,
-			divert_decay_smoothing_time: 20
+			divert_attack_smoothing_time: 20,
+			divert_decay_smoothing_time: 300
 		},
 		{
 			name: "No import",
 			desc: "Try to limit grid usage. Will slow down the charge rate quickly, but increase slower when energy is going back.",
 			id: 1,
-			divert_attack_smoothing_time: 20,
-			divert_decay_smoothing_time: 300
+			divert_attack_smoothing_time: 300,
+			divert_decay_smoothing_time: 20
 		},
 		{
 			name: "Average",
@@ -251,11 +251,7 @@
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.feed-excess-desc")}</div>
 					</div>
-					
-	
-		
-				
-		
+
 					<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2" >
 						<InputForm 
 							title="{$_("config.selfprod.powerratio")}*" 
@@ -269,11 +265,24 @@
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
 					</div>
-					
+										<div class="mb-2">
+						<InputForm
+							title="{$_("config.selfprod.minchargetime")}*" 
+							type="number" 
+							placeholder="600"
+							min="0"
+							step="1"
+							bind:this={formdata.divert_min_charge_time.input}
+							bind:value={formdata.divert_min_charge_time.val} 
+							bind:status={formdata.divert_min_charge_time.status}
+							onChange={()=>setProperty("divert_min_charge_time")}
+						/>
+						<div class="is-size-7 has-text-left">{$_("config.selfprod.minchargetime-desc")}.</div>
+					</div>
 					<div class="mb-2 is-flex is-justify-content-center">
 						<Borders>
 							<div class="is-size-6 has-text-dark has-text-weight-bold mb-2">
-							Pre-Settings
+							Filter Settings
 						</div>
 						<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly">
 							{#each presets as setting}
@@ -289,47 +298,31 @@
 							</div>
 							{/each}
 						</div>
+						<div class="mb-2">
+							<InputForm 
+								title="{$_("config.selfprod.smoothattack")}*"
+								bind:this={formdata.divert_attack_smoothing_time.input}
+								bind:value={formdata.divert_attack_smoothing_time.val} 
+								min=0 max=600 step="1"
+								onChange={()=>setProperty("divert_attack_smoothing_time")} 
+							/>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
+						</div>
+						
+			
+						<div class="mb-2">
+							<InputForm 
+								title="{$_("config.selfprod.smoothdecay")}*"
+								bind:this={formdata.divert_decay_smoothing_time.input}
+								bind:value={formdata.divert_decay_smoothing_time.val} 
+								min=0 max=600 step="1"
+								onChange={()=>setProperty("divert_decay_smoothing_time")} 
+							/>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
+						</div>
+
 						</Borders>
 						
-					</div>
-		
-					<div class="mb-2">
-						<InputForm 
-							title="{$_("config.selfprod.smoothattack")}*"
-							bind:this={formdata.divert_attack_smoothing_time.input}
-							bind:value={formdata.divert_attack_smoothing_time.val} 
-							min=0 max=600 step="1"
-							onChange={()=>setProperty("divert_attack_smoothing_time")} 
-						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
-					</div>
-					
-		
-					<div class="mb-2">
-						<InputForm 
-							title="{$_("config.selfprod.smoothdecay")}*"
-							bind:this={formdata.divert_decay_smoothing_time.input}
-							bind:value={formdata.divert_decay_smoothing_time.val} 
-							min=0 max=600 step="1"
-							onChange={()=>setProperty("divert_decay_smoothing_time")} 
-						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
-					</div>
-					
-					
-					<div class="mb-2">
-						<InputForm
-							title="{$_("config.selfprod.minchargetime")}*" 
-							type="number" 
-							placeholder="600"
-							min="0"
-							step="1"
-							bind:this={formdata.divert_min_charge_time.input}
-							bind:value={formdata.divert_min_charge_time.val} 
-							bind:status={formdata.divert_min_charge_time.status}
-							onChange={()=>setProperty("divert_min_charge_time")}
-						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.minchargetime-desc")}.</div>
 					</div>
 				</div>
 				</Borders>
