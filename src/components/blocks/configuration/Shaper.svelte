@@ -6,7 +6,8 @@
 	import { _ } 			    from 'svelte-i18n'
 	import { status_store } 	from "./../../../lib/stores/status.js";
 	import { config_store } 	from "../../../lib/stores/config.js";
-	import { submitFormData } 	from "./../../../lib/utils.js"
+	import { submitFormData,
+			round } 			from "./../../../lib/utils.js"
 	import InputForm 			from "../../ui/InputForm.svelte";
 	import Box 					from "../../ui/Box.svelte";
 	import Switch 				from "../../ui/Switch.svelte";
@@ -78,7 +79,7 @@
 							<span class="is-size-7 has-text-weight-bold has-text-dark">
 								{$_("config.shaper.available")}: 
 								<span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">
-								{$status_store.shaper_cur} {$_("units.A")}
+								{round($status_store.shaper_cur,2)} {$_("units.A")}
 							</span>
 						</span>
 					</div>

@@ -45,7 +45,7 @@
 <div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-6 has-text-weight-bold" style="padding-left: 3px;">
 	<iconify-icon class="has-text-info mr-1" icon="fa6-solid:building-shield"></iconify-icon>
 	<span class="is-size-7 mr-2 has-text-weight-bold has-text-dark">{$_("config.shaper.load")}: <span class="has-text-info">{$status_store.shaper_live_pwr} W</span></span>
-	<span class="is-size-7 mr-2 has-text-weight-bold has-text-dark">{$_("config.shaper.available")}: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{$status_store.shaper_cur} A</span></span>
+	<span class="is-size-7 mr-2 has-text-weight-bold has-text-dark">{$_("config.shaper.available")}: <span class="{$status_store.shaper_cur < 6?"has-text-danger":"has-text-primary"}">{round($status_store.shaper_cur,2)} A</span></span>
 </div>
 	{#if $status_store.shaper_updated == false}
 	<div class="is-size-7 mr-2 has-text-danger">{$_("status-shaper-error")}</div>
