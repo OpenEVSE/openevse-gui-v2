@@ -25,6 +25,8 @@
 
 	const presets = [
 		{
+			// needs to do some simulations to get new good default data 
+			// those are empirical for now
 			name: "No waste",
 			desc: "No waste of produced energy. Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
 			id: 0,

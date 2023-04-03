@@ -366,7 +366,7 @@
 			"minpausetime": "Minimum time staying in pause ( in s)",
 			"maxinterval": "Max time between live power data before entering failsafe (in s)",
 			"smoothing": "Input Filter Time constant",
-			"smoothing-desc": "Time constant for the input filter used to get out of pause (in sec). Value of 0 means no filtering",
+			"smoothing-desc": "Time constant for the input filter used to get out of pause (in sec). more is longer to recover, less is shorter. Value of 0 means no filtering",
 			"missing-current_shaper_max_pwr": "Max Power value missing",
 			"missing-mqtt_live_pwr": "Live power MQTT topic missing",
 			"missing-current_shaper_min_pause_time": "Minimum pause time is missing",
