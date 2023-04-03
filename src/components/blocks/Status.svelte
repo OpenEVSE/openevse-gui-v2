@@ -75,8 +75,8 @@
 		{ title: "current", value: $status_store.amp/1000, precision: 1, unit: $_("units.A") },
 		{ title: "power", value: $status_store.power, unit: $_("units.W") },
 		{ title: "setpoint", value: $status_store.pilot, unit: $_("units.A") },
-		{ title: "selfprod", value: $status_store.charge_rate,  unit: $_("units.A"), display: $config_store.divert_enabled },
-		{ title: "shaper", value: $status_store.shaper_cur,  unit: $_("units.A"), display: $config_store.current_shaper_enabled },
+		{ title: "selfprod", value: $status_store.charge_rate,  unit: $_("units.A"), precision: 1, display: $config_store.divert_enabled },
+		{ title: "shaper", value: $status_store.shaper_cur,  unit: $_("units.A"), precision: 1, display: $config_store.current_shaper_enabled },
 		{ title: "battery", value: $status_store.battery_level, unit: "%", display: $status_store.battery_level?true:false},
 		{ title: "range", value: displayRange($status_store.battery_range), unit: $config_store.mqtt_vehicle_range_miles?$_("units.miles"):$_("units.km"), display: $status_store.battery_range?true:false},
 		{ title: "remaining", value: sec2time($status_store.time_to_full_charge), display: $status_store.time_to_full_charge?true:false }
