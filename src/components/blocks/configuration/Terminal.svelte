@@ -36,7 +36,7 @@
 			} )
 			socket.addEventListener("message", function (e) {
 				let line
-				line = e.data
+				line = e.data.toString();
 				line = line.replace(/(\r\n|\n|\r)/gm, "\n");
 
 				var data = content.innerHTML.split(/\r?\n/);
