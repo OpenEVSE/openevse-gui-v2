@@ -17,7 +17,7 @@ function togglefocus() {
 </style>
 
 <div class="is-flex is-flex-direction-column is-align-items-center">
-	<div class="control-label is-capitalized has-text-dark mb-0 {small?"is-size-7":"is-size-6"} {bold?"has-text-weight-bold":"has-text-weight-normal"}" class:is-hidden={!label}>{label}</div>
+	<div class="control-label is-capitalized has-text-{color} mb-0 {small?"is-size-7":"is-size-6"} {bold?"has-text-weight-bold":"has-text-weight-normal"}" class:is-hidden={!label}>{label}</div>
 	<div class="is-inline-block">
 		<label class="b-checkbox checkbox m-0 p-0" class:is-small={small}>
 			<input 
@@ -28,7 +28,7 @@ function togglefocus() {
 				{disabled}
 			>
 			<span 
-				class="check is-{color} has-tooltip has-tooltip-arrow" 
+				class="check is-{color} has-tooltip has-tooltip-arrow has-tooltip-multiline" 
 				data-tooltip={tooltip} >
 			</span>
 			

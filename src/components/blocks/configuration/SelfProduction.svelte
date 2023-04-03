@@ -1,4 +1,5 @@
 <script>
+	import Checkbox from "./../../ui/Checkbox.svelte";
 	import SliderForm from "./../../ui/SliderForm.svelte";
 	import { uisettings_store } from "./../../../lib/stores/uisettings.js";
 	import Borders 			  from "./../../ui/Borders.svelte";
@@ -19,6 +20,36 @@
 	let mounted = false
 	let modes = [{name: $_("config.selfprod.production"), value: 0}, {name:$_("config.selfprod.excess"), value: 1}]
 	let divertelapsed = derived(uistates_store, store => s2mns(store.divert_update))
+
+	let preset = 3
+
+	const presets = [
+		{
+			name: "No waste",
+			desc: "No waste of produced energy. Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
+			id: 0,
+			divert_attack_smoothing_time: 300,
+			divert_decay_smoothing_time: 20
+		},
+		{
+			name: "No import",
+			desc: "Try to limit grid usage. Will slow down the charge rate quickly, but increase slower when energy is going back.",
+			id: 1,
+			divert_attack_smoothing_time: 20,
+			divert_decay_smoothing_time: 300
+		},
+		{
+			name: "Average",
+			desc: "Average behavior. Average speed identical for booth curve.",
+			id: 2,
+			divert_attack_smoothing_time: 120,
+			divert_decay_smoothing_time: 120
+		},
+		{
+			name: "Custom",
+			id: 3,
+		}
+	]
 
 	let formdata = {
 		divert_enabled:	  				{val: false,	input: undefined, status: "", req: false},
@@ -91,6 +122,33 @@
 		}
 	}
 
+	let set_preset = async (id) => {
+		if (presets[id] && id != 3) {
+			$config_store.divert_attack_smoothing_time = presets[id].divert_attack_smoothing_time
+			$config_store.divert_decay_smoothing_time = presets[id].divert_decay_smoothing_time
+			updateFormData()
+			preset = get_preset()
+			setDivertMode()
+			await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
+
+		}
+		preset = id
+	}
+	let get_preset = () => {
+		let preset
+		if ($config_store.divert_attack_smoothing_time == presets[0].divert_attack_smoothing_time
+			&& $config_store.divert_decay_smoothing_time == presets[0].divert_decay_smoothing_time
+		) preset = 0
+		else if ($config_store.divert_attack_smoothing_time == presets[1].divert_attack_smoothing_time
+			&& $config_store.divert_decay_smoothing_time == presets[1].divert_decay_smoothing_time
+		) preset = 1
+		else if ($config_store.divert_attack_smoothing_time == presets[2].divert_attack_smoothing_time
+			&& $config_store.divert_decay_smoothing_time == presets[2].divert_decay_smoothing_time
+		) preset = 2
+		else preset = 3
+		return preset
+	}
+
 	onMount(()=>{
 		updateFormData()
 		getDivertMode()
@@ -99,6 +157,7 @@
 				formdata[key].val = ""
 			}
 		})
+		preset = get_preset();
 		mounted = true
 	})
 
@@ -211,7 +270,28 @@
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
 					</div>
 					
-		
+					<div class="mb-2 is-flex is-justify-content-center">
+						<Borders>
+							<div class="is-size-6 has-text-dark has-text-weight-bold mb-2">
+							Pre-Settings
+						</div>
+						<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly">
+							{#each presets as setting}
+							<div class="mx-2">
+								<Checkbox 
+									bold
+									color="info"
+									checked={preset == setting.id}
+									onChange={() => {set_preset(setting.id)}}
+									label={setting.name}
+									tooltip={setting.desc}
+								/>	
+							</div>
+							{/each}
+						</div>
+						</Borders>
+						
+					</div>
 		
 					<div class="mb-2">
 						<InputForm 
