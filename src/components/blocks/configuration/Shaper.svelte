@@ -102,6 +102,17 @@
 						/>
 					</div>
 					<div>
+						<InputForm
+							title="{$_("config.shaper.livepower")}" 
+							bind:this={formdata.mqtt_live_pwr.input} 
+							bind:value={formdata.mqtt_live_pwr.val} 
+							bind:status={formdata.mqtt_live_pwr.status} 
+							disabled={formdata.mqtt_live_pwr.status =="loading"} 
+							placeholder="/topic/powerload" 
+							onChange={()=>setProperty("mqtt_live_pwr")} 
+						/>
+					</div>
+					<div>
 						<InputForm 
 							title="{$_("config.shaper.minpausetime")}*" 
 							bind:this={formdata.current_shaper_min_pause_time.input} 
@@ -125,17 +136,6 @@
 							onChange={()=>setProperty("current_shaper_data_maxinterval")}
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.shaper.maxinterval-desc")}</div>
-					</div>
-					<div>
-						<InputForm
-							title="{$_("config.shaper.livepower")}" 
-							bind:this={formdata.mqtt_live_pwr.input} 
-							bind:value={formdata.mqtt_live_pwr.val} 
-							bind:status={formdata.mqtt_live_pwr.status} 
-							disabled={formdata.mqtt_live_pwr.status =="loading"} 
-							placeholder="/topic/powerload" 
-							onChange={()=>setProperty("mqtt_live_pwr")} 
-						/>
 					</div>
 					<div class="mb-2">
 						<InputForm

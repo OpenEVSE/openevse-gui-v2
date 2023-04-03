@@ -84,7 +84,10 @@
 		await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
 	}
 	let setProperty = async (prop) => {
+		$config_store[prop] = formdata[prop].val
+		preset = get_preset()
 		await submitFormData({prop: prop, form: formdata , prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
+		
 	}
 
 	let setDivertMode = async () => {
@@ -287,6 +290,7 @@
 							Filter Settings
 						</div>
 						<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly">
+							{#key preset}
 							{#each presets as setting}
 							<div class="mx-2">
 								<Checkbox 
@@ -299,6 +303,7 @@
 								/>	
 							</div>
 							{/each}
+							{/key}
 						</div>
 						<div class="mb-2">
 							<InputForm 
