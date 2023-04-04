@@ -466,7 +466,7 @@
       "send": "Envoyer",
       "clear": "Effacer",
       "consoles": "Consoles",
-      "exportdata": "Exporter les données",
+      "exportdata": "Exporter toutes les données",
       "export": "Exporter"
     },
     "ocpp": {

@@ -470,7 +470,7 @@
 			"send": "Send",
 			"clear": "Clear",
 			"consoles": "Consoles",
-			"exportdata": "Export data",
+			"exportdata": "Export all data",
 			"export": "Export"
 		},
 		"ocpp": {
