@@ -1,4 +1,5 @@
 <script>
+	import { uisettings_store } from "./../../lib/stores/uisettings.js";
 	import { status_store } 	from "./../../lib/stores/status.js";
 	import { uistates_store } 	from "./../../lib/stores/uistates.js";
 	import {push} 			  	from 'svelte-spa-router'
@@ -20,6 +21,8 @@
 	}
 	function quit() {
 		$uistates_store.wizard_step = 0
+		// save to local storage until we have a flag on fw side
+		$uisettings_store.wizard_done = true
 		if ($status_store.ipaddress == "192.168.4.1") {
 			$uistates_store.alertbox.title = $_("notification")
 			$uistates_store.alertbox.component = AlertBody

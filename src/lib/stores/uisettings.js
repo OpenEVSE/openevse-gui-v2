@@ -6,5 +6,6 @@ export const uisettings_store = writable('settings', {
 	term_fontbig: false,
 	tz : undefined,
 	mqtt_grid_ie: undefined,
-	mqtt_solar: undefined
+	mqtt_solar: undefined,
+	wizard_done: false
   })
