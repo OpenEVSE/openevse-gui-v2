@@ -24,21 +24,21 @@ import Logo  from "../../../assets/logo-mini.png"
 			</div> -->
 			<div class="is-inline-block has-text-weight-bold">
 				<div class="my-1">
-					<a class="is-size-6 is-flex is-align-items-center" href="https://github.com/KipK/openevse-gui-v2" on:click|preventDefault={()=>{window.open("https://github.com/KipK/openevse-gui-v2");return false}}>	
-						<iconify-icon inline icon="icon-park-outline:github"></iconify-icon>
-						<span class="ml-1">OpenEVSE GUI v2</span>
-					</a>
-				</div>
-				<div class="my-1">
 					<a class="is-size-6 is-flex is-align-items-center" href="https://github.com/OpenEVSE/ESP32_WiFi_V4.x" on:click|preventDefault={()=>{window.open("https://github.com/OpenEVSE/ESP32_WiFi_V4.x");return false}}>
 						<iconify-icon inline icon="icon-park-outline:github"></iconify-icon>
-						<span class="ml-1">OpenEVSE WiFi</span>
+						<span class="ml-1">OpenEVSE WiFi firmware</span>
 					</a>
 				</div>
 				<div class="my-1">
 					<a class="is-size-6 is-flex is-align-items-center" href="https://github.com/OpenEVSE/open_evse" on:click|preventDefault={()=>{window.open("https://github.com/OpenEVSE/open_evse");return false}}>
 						<iconify-icon inline icon="icon-park-outline:github"></iconify-icon>
-						<span class="ml-1">OpenEVSE</span>
+						<span class="ml-1">OpenEVSE module firmware</span>
+					</a>
+				</div>
+				<div class="my-1">
+					<a class="is-size-6 is-flex is-align-items-center" href="https://github.com/KipK/openevse-gui-v2" on:click|preventDefault={()=>{window.open("https://github.com/KipK/openevse-gui-v2");return false}}>	
+						<iconify-icon inline icon="icon-park-outline:github"></iconify-icon>
+						<span class="ml-1">OpenEVSE GUI v2</span>
 					</a>
 				</div>
 			</div>	
