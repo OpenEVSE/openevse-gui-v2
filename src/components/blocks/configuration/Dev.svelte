@@ -1,4 +1,14 @@
 <script>
+	import { tesla_store } from "./../../../lib/stores/tesla.js";
+	import { schedule_store } from "./../../../lib/stores/schedule.js";
+	import { plan_store } from "./../../../lib/stores/plan.js";
+	import { override_store } from "./../../../lib/stores/override.js";
+	import { limit_store } from "./../../../lib/stores/limit.js";
+	import { uistates_store } from "./../../../lib/stores/uistates.js";
+	import { status_store } from "./../../../lib/stores/status.js";
+	import { claims_store } from "./../../../lib/stores/claims.js";
+	import { claims_target_store } from "./../../../lib/stores/claims_target.js";
+	import { config_store } from "./../../../lib/stores/config.js";
 	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 		from 'svelte-i18n'
 	import InputForm 	from "./../../ui/InputForm.svelte";
@@ -14,6 +24,8 @@
 	let button_send_state = ""
 	let opened = false
 	let mode
+	let export_link
+	let button_export_state
 
 	function openConsole(cons) {
 		// let url
@@ -53,6 +65,39 @@
 
 	}
 
+	async function exportData() {
+		button_export_state = "loading"
+		// get usefull data
+		let data = {}
+		
+		// copy stores
+		data.target = {...$claims_target_store}
+		// get claims store not cached here
+		if (!await claims_store.download()) {
+			button_export_state = "error"
+			return
+		}
+		data.override = {...$override_store}
+		data.claims = {...$claims_store}
+		data.status = {...$status_store}
+		data.plan = {...$plan_store}
+		data.schedule = {...$schedule_store}
+		data.config = {...$config_store}
+		data.limits = {...$limit_store}
+		data.tesla = {...$tesla_store}
+		
+		data.uistates = {...$uistates_store}
+
+
+		// create file
+		const file = URL.createObjectURL(new Blob([JSON.stringify(data,null,4)], { type: 'application/json' }))
+		export_link.href =  file
+		export_link.download = "export.json"
+		button_export_state = "ok"
+		export_link.click()
+		URL.revokeObjectURL(export_link.href);
+	}
+
 </script>
 <style>
 </style>
@@ -90,6 +135,15 @@
 							</form>
 						</div>
 					</div>
+				</Borders>
+			</div>
+			<div class="mt-4 mb-1 is-flex is-justify-content-center">
+				<Borders grow>
+					<div class="has-text-dark has-text-weight-bold has-text-centered mb-2">{$_("config.dev.exportdata")}</div>
+						<Button name={$_("config.dev.export")} color="is-info" butn_submit={exportData} state={button_export_state}/>
+						<div class="is-hidden">
+							<a bind:this={export_link} href={null} >null</a>
+						</div>
 				</Borders>
 			</div>
 		</div>

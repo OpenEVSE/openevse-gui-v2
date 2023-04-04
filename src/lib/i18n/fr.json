@@ -465,7 +465,9 @@
       "rapi-cmd": "Commandes Rapi",
       "send": "Envoyer",
       "clear": "Effacer",
-      "consoles": "Consoles"
+      "consoles": "Consoles",
+      "exportdata": "Exporter les données",
+      "export": "Exporter"
     },
     "ocpp": {
       "server": "URL Système Central",

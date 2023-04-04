@@ -469,7 +469,9 @@
 			"rapi-cmd": "Rapi Commands",
 			"send": "Send",
 			"clear": "Clear",
-			"consoles": "Consoles"
+			"consoles": "Consoles",
+			"exportdata": "Export data",
+			"export": "Export"
 		},
 		"ocpp": {
 			"server": "Central System URL",
