@@ -17,7 +17,7 @@
 			First initialisation, please follow this quick setup process.
 			{#if navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad/i)}
 			<div class="mt-4">
-				If you're not in a browser window, click on button below
+				If you're not in a browser (but in captive portal window), click on button below
 				<div class="has-text-centered">
 					<button class="button is-info" on:click={openurl}>
 						Open in browser
