@@ -233,14 +233,6 @@
 		}
 	}
 
-	function getDivertMode(grid = "") {
-		if (grid) {
-			$uistates_store.divert_type = 1
-		}
-		else {
-			$uistates_store.divert_type = 0
-		}
-	}
 
 	async function redirect2ip(ip) {
 		if (ip != prev_ip) {
@@ -266,9 +258,6 @@
 		else $uistates_store.error = false
 	}
 
-	onMount(()=> {
-		getDivertMode($config_store.mqtt_grid_ie)
-	})
 
 	// Refresh stores when new version is published over websocket
 	$: refreshConfigStore		($config_version)

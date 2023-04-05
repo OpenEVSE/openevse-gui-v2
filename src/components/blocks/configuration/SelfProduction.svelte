@@ -17,7 +17,7 @@
 	import Switch 			  from "./../../ui/Switch.svelte";
 	
 	let mounted = false
-	let modes = [{name: $_("config.selfprod.production"), value: 0}, {name:$_("config.selfprod.excess"), value: 1}]
+	let modes = [{name: $_("config.selfprod.production"), value: 1}, {name:$_("config.selfprod.excess"), value: 2}]
 	let divertelapsed = derived(uistates_store, store => s2mns(store.divert_update))
 
 	let preset = 3
@@ -62,6 +62,7 @@
 
 	let formdata = {
 		divert_enabled:	  				{val: false,	input: undefined, status: "", req: false},
+		divert_type:					{val: -1,		input: undefined, status: "", req: false},
 		charge_mode:					{val: "eco",	input: undefined, status: "", req: false},
 		mqtt_solar: 	  				{val: "",		input: undefined, status: "", req: false},
 		mqtt_grid_ie: 	  				{val: "",		input: undefined, status: "", req: false},
@@ -73,6 +74,7 @@
 
 	const updateFormData = () => {
 		formdata.divert_enabled.val 			 	= $config_store.divert_enabled
+		formdata.divert_type.val					= $config_store.divert_type
 		formdata.charge_mode.val					= $config_store.charge_mode
 		formdata.mqtt_solar.val						= $config_store.mqtt_solar
 		formdata.mqtt_grid_ie.val					= $config_store.mqtt_grid_ie
@@ -92,42 +94,11 @@
 		
 	}
 
-	let setDivertMode = async () => {
-		if ($uistates_store.divert_type == 0) {
-
-			// backup  & restore old settings to/from local storage
-			$uisettings_store.mqtt_grid_ie = formdata.mqtt_grid_ie.val
-			formdata.mqtt_solar.val = $uisettings_store.mqtt_solar
-
-			formdata.mqtt_grid_ie.val = ""
-			formdata.mqtt_grid_ie.req = false
-			formdata.mqtt_solar.req = true
-		}
-		else {
-
-			// backup & restore old settings to/from local storage
-			$uisettings_store.mqtt_solar = formdata.mqtt_solar.val
-			formdata.mqtt_grid_ie.val = $uisettings_store.mqtt_grid_ie
-
-			formdata.mqtt_solar.val = ""
-			formdata.mqtt_solar.req = false
-			formdata.mqtt_grid_ie.req = true
-		}
+	let setDivertType = async () => {
+		await setProperty("divert_type")
 		await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
 	}
 
-	let getDivertMode = () => {
-		if (formdata.mqtt_grid_ie.val) {
-			$uistates_store.divert_type = 1
-			formdata.mqtt_grid_ie.req = true
-			formdata.mqtt_solar.req = false
-		}
-		else {
-			$uistates_store.divert_type = 0
-			formdata.mqtt_solar.req = true
-			formdata.mqtt_grid_ie.req = false
-		}
-	}
 
 	let set_preset = async (id) => {
 		if (presets[id] && id != 3) {
@@ -157,7 +128,6 @@
 
 	onMount(()=>{
 		updateFormData()
-		getDivertMode()
 		Object.keys(formdata).forEach(key => {
 			if (formdata[key].val == undefined) {
 				formdata[key].val = ""
@@ -195,10 +165,10 @@
 							/>
 						<div class:is-hidden={!$config_store.divert_enabled} class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">	
 							<div class="mr-2 is-inline-block">
-								{#if $uistates_store.divert_type == 0}
+								{#if $config_store.divert_type == 0}
 								<span>{$_("config.selfprod.production")}:</span>
 								<span class="has-text-primary">{$status_store.solar}{$_("units.W")}</span>
-								{:else}
+								{:else if $config_store.divert_type == 1}
 								<span>{$_("config.selfprod.grid")}</span>
 								<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
 								{/if}
@@ -244,7 +214,7 @@
 			<div class="is-size-7 mb-2 ">{$_("config.selfprod.desc")}</div>
 			<div class="mb-2 is-flex is-justify-content-center">
 				<Borders grow={true}>
-					<Select title={$_("config.selfprod.mode")} bind:value={$uistates_store.divert_type} items={modes} onChange={setDivertMode}/>
+					<Select title={$_("config.selfprod.mode")} bind:value={formdata.divert_type.val} items={modes} onChange={setDivertType}/>
 	
 				<div class="is-inline-block">
 					<div class:is-hidden={$uistates_store.divert_type==1} class="mb-2">
