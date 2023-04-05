@@ -39,6 +39,30 @@
 		}
 	}
 
+	let state2color = (state) => {
+		switch (state) {
+			case 1:
+			case 2:
+				return "active"
+			case 3:
+				return "charging"
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+			case 10:
+			case 11:
+				return "error"
+			case 254:
+			case 255:
+				return "disabled"
+			default:
+				return ""
+		}
+	}
+
 	onMount(()=> {
 		mounted = true
 	})
@@ -98,7 +122,7 @@
 </style>
 <svelte:window on:resize={()=>redraw++} />
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded && mounted}
-<div class="container statusbox {$status_store.status == "disabled" ? "disabled":$status_store.state==3?"charging":"active"} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
+<div class="container statusbox {state2color($status_store.state)} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
 in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"  
 >
 	<div>
