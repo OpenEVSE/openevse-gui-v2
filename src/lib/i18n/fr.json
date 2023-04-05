@@ -294,7 +294,8 @@
       "noground": "Mauvaise Terre",
       "stuck": "Relai Collé",
       "switches": "Total de commutations relais",
-      "infos": "Infos"
+      "infos": "Infos",
+      "warningmsg": "Tout les tests de sécurité ne sont pas activés, veuillez faire particulièrement attention en chargeant votre véhicle."
     },
     "time": {
       "date": "Date/Heure",

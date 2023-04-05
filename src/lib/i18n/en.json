@@ -296,7 +296,8 @@
 			"noground": "No Ground",
 			"stuck": "Stuck Contact",
 			"switches": "Total Relay Toggles",
-			"infos": "Infos"
+			"infos": "Infos",
+			"warningmsg": "Not all the safety tests are enabled, please take extra care before charging your vehicle."
 		},
 		"time": {
 			"date": "Date",

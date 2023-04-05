@@ -1,16 +1,44 @@
 <script>
+	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 		   from 'svelte-i18n'
 	import { serialQueue } from "./../../../lib/queue.js";
 	import SafetyTableRow  from "../../ui/SafetyTableRow.svelte";
 	import {config_store}  from "../../../lib/stores/config.js"
 	import {status_store}  from "../../../lib/stores/status.js"
+	import { derived} 	   from "svelte/store"
 	import Box 			   from "../../ui/Box.svelte"
 
 	export let editable = true
 
+	const areAllChecksActivated = derived(config_store, $config_store => {
+		return (
+		$config_store.gfci_check  &&
+		$config_store.ground_check  &&
+		$config_store.relay_check  &&
+		$config_store.temp_check  &&
+		$config_store.diode_check  &&
+		$config_store.vent_check
+		)
+	})
+
+
 </script>
 
 <Box title={$_("config.titles.safety")} icon="mdi:shield-alert-outline" back={true}>
+	{#if !$areAllChecksActivated}
+	<div class="is-flex is-justify-content-center">
+		<Borders>
+		<span class="has-text-danger">
+			{$_("warning")}!
+		</span>
+		<span>
+			{$_("config.safety.warningmsg")}
+		</span>
+		
+		</Borders>
+	</div>
+	{/if}
+
 	<table class="table is-fullwidth">
 		<thead>
 			<tr class="has-background-info"	>
