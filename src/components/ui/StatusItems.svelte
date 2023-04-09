@@ -156,7 +156,7 @@
 	</div>
 	<div class="is-flex-grow-1 has-text-centered {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini" ?"is-hidden":""}" >
 		<a href="/" use:link>
-			<img src={Logo} alt="logo" />
+			<img src={Logo}  alt="logo" />
 		</a>
 	</div>
 	

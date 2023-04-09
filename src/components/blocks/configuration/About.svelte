@@ -1,14 +1,17 @@
 <script>
+	import { uistates_store } from "./../../../lib/stores/uistates.js";
 import { _ } from 'svelte-i18n'
 import Box	 from "./../../ui/Box.svelte";
 import Logo  from "../../../assets/logo-mini.png"
 </script>
 <Box title={$_("config.titles.about")} icon="mdi:about-circle-outline" back={true}>
+	{#if $uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini"}
 	<div class="has-text-centered">
 		<img src={Logo} alt="logo" />
 		<!-- <span class="is-size-6 has-text-weight-bold">OpenEVSE</span> -->
 		<!-- <span class="is-size-7">- {import.meta.env.VITE_VERSION}</span> -->
 	</div>
+	{/if}
 
 	<div class="is-flex is-flex-direction-column is-align-items-center">
 		<div>
