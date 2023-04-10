@@ -262,7 +262,7 @@
 			// error state
 			$uistates_store.error = true
 		}
-			$uistates_store.error = false
+		else $uistates_store.error = false
 	}
 
 	onMount(()=> {
@@ -290,6 +290,7 @@
 	$: setErrorState($state)
 
 	// for dev only
-	//$: $status_store.state, $status_store.state != 4 ? $status_store.state = 4 : null
+	$: $status_store.state, $status_store.state != 5 ? $status_store.state = 5 : null
+	$: $uistates_store.error, $uistates_store.error = true
 
 </script>

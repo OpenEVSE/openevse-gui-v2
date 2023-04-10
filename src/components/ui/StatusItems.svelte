@@ -25,7 +25,6 @@
 			case 0: // Starting
 				status = "disabled"
 				charging = false
-				message = $_("status-items-starting")
 				color = "is-info"
 				iconcolor = "has-text-white"
 				icon = "majesticons:rocket-3-start-line"
@@ -33,7 +32,6 @@
 			case 1: // Not connected
 				status = "active"
 				charging = false
-				message = $_("status-items-waiting")
 				color = "is-primary"
 				iconcolor = "has-text-white"
 				icon = "fa6-solid:hourglass-half"
@@ -41,7 +39,6 @@
 			case 2: // Connected
 				status = "active"
 				charging = false
-				message = $_("status-items-ready")
 				color = "is-primary"
 				iconcolor = "has-text-white"
 				icon = "fa6-solid:thumbs-up"
@@ -49,7 +46,6 @@
 			case 3: // Charging
 				status = "active"
 				charging = true
-				message = $_("status-items-charging")
 				color = "is-primary"
 				iconcolor = "has-text-warning"
 				icon = "fa6-solid:bolt"
@@ -60,7 +56,6 @@
 				color = "is-danger"
 				iconcolor = "has-text-white"
 				icon = "fluent:shield-error-24-filled"
-				message = $_("logs-states.error-vent")
 				break;
 			case 5:
 				status = "disabled"
@@ -68,7 +63,6 @@
 				color = "is-danger"
 				iconcolor = "has-text-white"
 				icon = "fluent:shield-error-24-filled"
-				message = $_("logs-states.error-diode")
 				break;
 			case 6:
 				status = "disabled"
@@ -76,7 +70,6 @@
 				color = "is-danger"
 				iconcolor = "has-text-white"
 				icon = "fluent:shield-error-24-filled"
-				message = $_("logs-states.error-gfi")
 				break;
 			case 7:
 				status = "disabled"
@@ -84,7 +77,6 @@
 				color = "is-danger"
 				iconcolor = "has-text-white"
 				icon = "fluent:shield-error-24-filled"
-				message = $_("logs-states.error-ground")
 				break;
 			case 8:
 				status = "disabled"
@@ -92,7 +84,6 @@
 				color = "is-danger"
 				iconcolor = "has-text-white"
 				icon = "fluent:shield-error-24-filled"
-				message = $_("logs-states.error-relay")
 				break;
 			case 9:
 				status = "disabled"
@@ -100,7 +91,6 @@
 				color = "is-danger"
 				iconcolor = "has-text-white"
 				icon = "fluent:shield-error-24-filled"
-				message = $_("logs-states.error-gfitest")
 				break;
 			case 10:
 				status = "disabled"
@@ -108,7 +98,6 @@
 				color = "is-danger"
 				iconcolor = "has-text-white"
 				icon = "fluent:shield-error-24-filled"
-				message = $_("logs-states.error-temp")
 				break;
 			case 11:
 				status = "disabled"
@@ -116,7 +105,6 @@
 				color = "is-danger"
 				iconcolor = "has-text-white"
 				icon = "fluent:shield-error-24-filled"
-				message = $_("logs-states.error-current")
 				break;
 			case 254: // sleeping
 				status = "disabled"

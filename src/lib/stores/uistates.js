@@ -23,6 +23,7 @@ const model = {
 		time_localestring: null,
 		divert_type: 0,
 		error: false,
+		error_desc: "",
 		// local states
 		data_loaded: false,
 		ws_connected: true,

@@ -1,6 +1,8 @@
 <script>
-	import { _ } 		  from 'svelte-i18n'
-	import {status_store} from "../../../lib/stores/status.js"
+	import { uistates_store } 	from "./../../../lib/stores/uistates.js";
+	import { status_store } 	from "./../../../lib/stores/status.js";
+	import { _ } 		  		from 'svelte-i18n'
+	import {getStateDesc} 		from "../../../lib/utils.js"
 
 	const relay_specs = { warning: 20000, alert: 40000}
 
@@ -20,6 +22,12 @@
 		</tr>
 	</thead>
 	<tbody>
+		{#if $uistates_store.error}
+		<tr class="is-size-7-mobile">
+			<td>{$_("logs-states.error")}</td>
+			<td class="has-text-centered"><span class="tag is-normal is-danger ">{getStateDesc($status_store.state)}</span></td>
+		</tr>
+		{/if}
 		<tr class="is-size-7-mobile">
 			<td>{$_("config.safety.gfci")}</td>
 			<td class="has-text-centered"><span class="tag is-normal {$status_store.gfcicount==0?'is-primary':'is-danger'} is-primary ">{$status_store.gfcicount}</span></td>

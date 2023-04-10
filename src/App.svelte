@@ -10,7 +10,8 @@
 	import Router 				from 'svelte-spa-router'
 	import { routes } 			from "./lib/routes.js"
 	import FetchData 			from './components/data/FetchData.svelte'
-	import {getBreakpoint} 		from "./lib/utils.js"
+	import {getBreakpoint,
+			getStateDesc} 		from "./lib/utils.js"
 	import AlertBoxNoModal 		from "./components/ui/AlertBoxNoModal.svelte"
 	import { _ , locale } 		from 'svelte-i18n'
 	import "./lib/i18n.js"
@@ -93,9 +94,15 @@
 				<Status />
 			</div>
 			{/if}
-			<AlertBoxNoModal title={$_("alert-evsemissing-title")} body={$_("alert-evsemissing-body")} visible={!$status_store.evse_connected} />
-			<AlertBoxNoModal title={$_("alert-conerror-title")} body={$_("alert-conerror-body")} visible={!$uistates_store.ws_connected && navigator.onLine} />
-			<AlertBoxNoModal title={$_("alert-nonetwork-title")} body={$_("alert-nonetwork-body")} visible={navigator.onLine?false:true} /> 
+			{#if !$status_store.evse_connected}
+			<AlertBoxNoModal title={$_("alert-evsemissing-title")} body={$_("alert-evsemissing-body")} visible={true} />
+			{/if}
+			{#if !$uistates_store.ws_connected}
+			<AlertBoxNoModal title={$_("alert-conerror-title")} body={$_("alert-conerror-body")} visible={true} />
+			{/if}
+			{#if $uistates_store.error}
+			<AlertBoxNoModal title={$_("alert-error")} body={getStateDesc($status_store.state)} visible={true} /> 
+			{/if}
 			<Router {routes} />
 		</div>
     

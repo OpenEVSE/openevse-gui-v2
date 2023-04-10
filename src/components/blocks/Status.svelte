@@ -7,7 +7,8 @@
 	import {uistates_store} 		from "./../../lib/stores/uistates.js"
 	import { claims_target_store }  from "./../../lib/stores/claims_target.js"
 	import {sec2time,
-			displayRange} 			from "../../lib/utils.js"
+			displayRange,
+			getStateDesc} 			from "../../lib/utils.js"
 	import { scale } 				from 'svelte/transition'
 	import { expoInOut } 			from 'svelte/easing'
 	import { keyed } 				from 'svelte-keyed'
