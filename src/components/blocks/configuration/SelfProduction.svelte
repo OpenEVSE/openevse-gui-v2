@@ -1,6 +1,5 @@
 <script>
 	import Checkbox from "./../../ui/Checkbox.svelte";
-	import SliderForm from "./../../ui/SliderForm.svelte";
 	import { uisettings_store } from "./../../../lib/stores/uisettings.js";
 	import Borders 			  from "./../../ui/Borders.svelte";
 	import { onMount }		  from "svelte";
@@ -68,9 +67,9 @@
 		formdata.divert_enabled.val 			 	= $config_store.divert_enabled
 		formdata.charge_mode.val					= $config_store.charge_mode
 		formdata.mqtt_solar.val						= $config_store.mqtt_solar
-		formdata.mqtt_solar.req 					= $uistates_store.divert_type?true:false
+		formdata.mqtt_solar.req 					= $uistates_store.divert_type?false:true
 		formdata.mqtt_grid_ie.val					= $config_store.mqtt_grid_ie
-		formdata.mqtt_grid_ie.req 					= $uistates_store.divert_type?false:true
+		formdata.mqtt_grid_ie.req 					= $uistates_store.divert_type?true:false
 		formdata.divert_PV_ratio.val				= $config_store.divert_PV_ratio
 		formdata.divert_attack_smoothing_time.val	= $config_store.divert_attack_smoothing_time
 		formdata.divert_decay_smoothing_time.val	= $config_store.divert_decay_smoothing_time
@@ -133,7 +132,6 @@
 			$config_store.divert_decay_smoothing_time = presets[id].divert_decay_smoothing_time
 			updateFormData()
 			preset = get_preset()
-			setDivertMode()
 			await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
 
 		}

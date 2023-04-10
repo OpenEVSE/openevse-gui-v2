@@ -21,7 +21,7 @@ const model = {
 		charging: false,
 		stateclaimfrom: null, // "manual", "timer", "divert", "shaper", "ocpp", "mqtt", "rfid"
 		time_localestring: null,
-		divert_type: 0,
+		divert_type: 0, 
 		error: false,
 		error_desc: "",
 		// local states
