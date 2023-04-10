@@ -289,8 +289,5 @@
 	$: redirect2ip($ipaddress)
 	$: setErrorState($state)
 
-	// for dev only
-	$: $status_store.state, $status_store.state != 5 ? $status_store.state = 5 : null
-	$: $uistates_store.error, $uistates_store.error = true
 
 </script>
