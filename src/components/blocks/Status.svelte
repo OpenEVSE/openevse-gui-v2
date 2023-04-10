@@ -42,8 +42,9 @@
 	let state2color = (state) => {
 		switch (state) {
 			case 1:
-			case 2:
 				return "active"
+			case 2:
+				return "connected"
 			case 3:
 				return "charging"
 			case 4:
@@ -87,35 +88,49 @@
 <style lang="scss">
 	.statusbox {
 		border-radius: 6px;
-		color: black;
+		// color: black;
 		background-color: hsl(0, 0%, 96%);
 	}
 	
 	.statusbox.disabled {
-		box-shadow: 0 0.5em 1em -0.125em hsl(201, 82%, 22%), 0 0px 0 1px rgb(255, 255, 255);
+		box-shadow: 0 0.5em 1em -0.125em hsl(201, 82%, 22%);
 		// border: dashed 0.2em;
+		border: solid 0.1em;
 		border-color: hsl(201, 82%, 22%);
+		transition: opacity 0.5s ease-in-out;
 	}
 	.statusbox.error {
-		box-shadow: 0 0.5em 1em -0.125em hsl(348, 100%, 61%), 0 0px 0 1px rgb(255, 255, 255);
+		box-shadow: 0 0.5em 1em -0.125em hsl(348, 100%, 61%);
 		// border: dashed 0.2em;
+		border: solid 0.1em;
 		border-color: hsl(348, 100%, 61%);
+		transition: opacity 0.5s ease-in-out;
 	}
 	.statusbox.active {
-		box-shadow: 0 0.5em 1em -0.125em hsl(153, 62%,54%), 0 0px 0 1px rgb(255, 255, 255);
+		box-shadow: 0 0.5em 1em -0.125em hsl(153, 62%,54%);
 		// border: dashed 0.2em;
+		border: solid 0.1em;
 		border-color:hsl(153, 62%, 54%);
 		transition: opacity 0.5s ease-in-out;
 	}
-	.statusbox.charging {
-		 box-shadow: 0 0.5em 1em -0.125em hsl(57, 93%, 30%), 0 0px 0 1px rgb(255, 255, 255);
+	.statusbox.connected {
+		box-shadow: 0 0.5em 1em -0.125em hsl(57, 93%, 48%);
 		// border: dashed 0.2em;
+		border: solid 0.1em;
 		border-color:hsl(57, 93%, 48%);
-		animation: charge 3s infinite ;
+		transition: opacity 0.5s ease-in-out;
+	}
+	.statusbox.charging {
+		 box-shadow: 0 0.5em 1em -0.125em  hsl(57, 93%, 48%);
+		 border: solid 0.1em;
+		// border-color:hsl(57, 93%, 48%);
+		border-color:#0cfbe7;
+		animation: charge 3s infinite;
+		transition: opacity 0.5s ease-in-out;
 	}
 	@keyframes charge {
             50% {
-               box-shadow: 0 0.5em 1em -0.125em hsl(57, 93%, 48%), 0 0px 0 1px rgb(255, 255, 255);
+               box-shadow: 0 0.5em 3em -0.125em #0cfbe7;
             }
 		}
 

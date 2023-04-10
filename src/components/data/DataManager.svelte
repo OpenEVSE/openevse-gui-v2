@@ -214,10 +214,10 @@
 		}, 1000);
 	}
 	
-	function countElapsed(val) {
+	function countElapsed(val,charging) {
 		$uistates_store.elapsed = val
 		clearInterval(counter_elapsed)
-		if ($uistates_store.charging) {
+		if (charging) {
 			counter_elapsed = setInterval(() => {
 				$uistates_store.elapsed++
 			}, 1000);
@@ -284,9 +284,12 @@
 	$: countDivertUpdate($divert_update)
 	$: countVehicleUpdate( $vehicle_state_update)
 	$: countRFIDScan($rfid_waiting)
-	$: countElapsed($elapsed)
+	$: countElapsed($elapsed,$charging)
 
 	$: redirect2ip($ipaddress)
 	$: setErrorState($state)
+
+	// for dev only
+	//$: $status_store.state, $status_store.state != 4 ? $status_store.state = 4 : null
 
 </script>

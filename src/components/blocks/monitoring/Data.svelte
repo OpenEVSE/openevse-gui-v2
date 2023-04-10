@@ -29,7 +29,10 @@
 			{name: $_("monitoring-sensors-current"), value: $status_store.amp/1000, unit: $_("units.A")},
 			{name: $_("monitoring-sensors-voltage"), value: $status_store.voltage, unit: $_("units.V")},
 			{name: $_("monitoring-sensors-evsetemp"), value: round($status_store.temp/10,1), unit: $_("units.C")},
-			{name: $_("monitoring-sensors-esptemp"), value: round($status_store.temp4/10,1), unit: $_("units.C")}
+			{name: "temp1", value: !$status_store.temp1.isNaN?round($status_store.temp1/10,1):"", unit: $_("units.C")},
+			{name: "temp2", value: !$status_store.temp2.isNaN?round($status_store.temp2/10,1):"", unit: $_("units.C")},
+			{name: "temp3", value: !$status_store.temp3.isNaN?round($status_store.temp3/10,1):"", unit: $_("units.C")},
+			{name: "temp4", value: !$status_store.temp3.isNaN?round($status_store.temp4/10,1):"", unit: $_("units.C")}
 		]
 	}
 
