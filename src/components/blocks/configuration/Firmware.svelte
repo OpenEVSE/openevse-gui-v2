@@ -1,4 +1,5 @@
 <script>
+	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import RemovableTag from "./../../ui/RemovableTag.svelte";
 	import Borders from "./../../ui/Borders.svelte";
 	import SelectFile from "./../../ui/SelectFile.svelte";
@@ -184,27 +185,33 @@
 	}
 
 </script>
+<style>
+	.version {
+		max-width: 100px;
+		word-wrap: break-word;
+	}
+</style>
 
 {#if mounted}
 <Box title={$_("config.titles.firmware")} icon="fa6-solid:microchip" back={true}>
 	<table class="table is-fullwidth is-narrow has-text-dark">
 		<thead>
 			<tr class="has-background-info"	>
-				<th class="has-text-white ">{$_("config.firmware.hardware")}</th>
+				<th class="has-text-white">{$_("config.firmware.hardware")}</th>
 				<th class="has-text-white">{$_("config.firmware.version")}</th>
 				<th class="has-text-white has-text-centered" >{$_("config.firmware.action")}</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td class="has-text-weight-bold">OpenEVSE</td>
-				<td>{$config_store.firmware}</td>
+				<td class="has-text-weight-bold is-size-7-mobile">OpenEVSE</td>
+				<td class="is-size-7-mobile">{$config_store.firmware}</td>
 				<td><div class="has-text-centered"><Button width="100px" size="is-responsive" name={$_("config.firmware.restart")} butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
 			</tr>
 			<tr>
-				<td class="has-text-weight-bold">OpenEVSE Wifi</td>
-				<td>
-					<div>{$config_store.version}</div>
+				<td class="has-text-weight-bold is-size-7-mobile">OpenEVSE Wifi</td>
+				<td style="is-size-7-mobile">
+					<div class="is-size-7-mobile is-inline-block {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini"?"version":""}">{$config_store.version}</div>
 					{#if fw.version && compareVersion(fw.version, $config_store.version, )}
 					<div class="tag is-primary is-small has-text-weight-bold">
 						{fw.version}
