@@ -122,6 +122,7 @@ export function createTzObj(tz) {
 		else {
 		}
 	})
+	console.log(tzobj)
 	return tzobj
 }
 
@@ -504,6 +505,7 @@ export function compareVersion(last, old) {
 	if (old[0] == "v") {
 		old = old.substring(1)
 	}
+	else return 0
 	last = last.split('.')
 	old = old.split('.')
 	const k = Math.min(last.length, old.length)

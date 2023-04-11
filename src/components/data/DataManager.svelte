@@ -1,4 +1,5 @@
 <script>
+	import { github_store } from "./../../lib/stores/github.js";
 	import { derived} 				    from "svelte/store"
 	import { limit_store } 				from "./../../lib/stores/limit.js";
 	import { uisettings_store } 		from "./../../lib/stores/uisettings.js";

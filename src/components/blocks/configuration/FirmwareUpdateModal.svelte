@@ -266,7 +266,7 @@
 					/>
 					</div>
 					{/if}
-					{#if compareVersion(prerelease?.tag_name, release?.tag_name) == 1 }
+					{#if prerelease && compareVersion(prerelease?.tag_name, release?.tag_name) >= 0 }
 					<div class="">
 						<Checkbox 
 							 bold

@@ -1,4 +1,5 @@
 <script>
+	import { github_store } from "./../../../lib/stores/github.js";
 	import { uistates_store } from "./../../../lib/stores/uistates.js";
 	import RemovableTag from "./../../ui/RemovableTag.svelte";
 	import Borders from "./../../ui/Borders.svelte";
@@ -41,20 +42,27 @@
 
 
 	async function getFwUpdate() {
-		if ($status_store.net_connected) {
-			const fw_update_json = await httpAPI("GET",url)
-			if (fw_update_json != "error" ) {
-				if (Object.keys(fw_update_json).length) {
-					firmware_release = fw_update_json.find(el => el.prerelease == false)
-					firmware_prerelease = fw_update_json.find(el => el.prerelease == true && 
-					(!isNaN(el.tag_name.charAt(1)) && el.tag_name.charAt(2) == "." && !isNaN(el.tag_name.charAt(3))))
-					firmware_daily = fw_update_json.find(el => el.tag_name == "v2_gui")
-				}
-				fw.version = firmware_release.name?firmware_release.name:""
-				if (fw.version != $config_store.version) {
-					fw_has_update = true
-				}
+		if (!$github_store) {
+			await github_store.download()
+		}
+		if ($github_store) {
+			if (Object.keys($github_store).length) {
+				firmware_release = $github_store.find(el => el.prerelease == false)
+				firmware_prerelease = $github_store.find(el => el.prerelease == true && 
+				(!isNaN(el.tag_name.charAt(1)) && el.tag_name.charAt(2) == "." && !isNaN(el.tag_name.charAt(3))))
+				firmware_daily = $github_store.find(el => el.tag_name == "v2_gui")
 			}
+			
+			if (compareVersion(firmware_release.name,$config_store.version) == 1) {
+				fw_has_update = true
+				fw.version = firmware_release.name?firmware_release.name:""
+			}
+			else if (compareVersion(firmware_prerelease.name,$config_store.version) == 1) {
+				// test if pre-release is > installed version
+				fw_has_update = true
+				fw.version = firmware_prerelease.name?firmware_release.name:""
+			}
+			else fw_has_update = false
 		}
 	}
 	
@@ -211,10 +219,10 @@
 			<tr>
 				<td class="has-text-weight-bold is-size-7-mobile">OpenEVSE Wifi</td>
 				<td style="is-size-7-mobile">
-					<div class="is-size-7-mobile is-inline-block {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini"?"version":""}">{$config_store.version}</div>
+					<div class="is-size-7-mobile {$uistates_store.breakpoint == "mobile" || $uistates_store.breakpoint == "mobilemini"?"version":""}">{$config_store.version}</div>
 					{#if fw.version && compareVersion(fw.version, $config_store.version, )}
 					<div class="tag is-primary is-small has-text-weight-bold">
-						{fw.version}
+						Latest stable: {fw.version}
 					</div>
 					{:else if fw.version}
 					<div class="tag is-info is-small has-text-weight-bold">
