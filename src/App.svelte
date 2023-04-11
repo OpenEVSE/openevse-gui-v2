@@ -89,7 +89,7 @@
 	{#if $uistates_store.data_loaded}
 
 		<div class="route" class:wizard={$location.includes("/wizard")}>
-			{#if $status_store?.evse_connected}
+			{#if $status_store?.evse_connected && !$location.includes("/wizard")}
 			<div class="status mx-3 mt-1 p-0">
 				<Status />
 			</div>

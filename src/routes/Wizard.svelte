@@ -42,8 +42,7 @@
 			<Network/>
 			{:else if params.step == 4}
 			<Firmware />
-			{/if}
-			
+			{/if}	
 		</div>
 	</div>	
 </div>
