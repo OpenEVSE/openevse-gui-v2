@@ -254,6 +254,7 @@
 					</tbody>
 				</table>
 				<div class="is-flex is-justify-content-space-evenly">
+					{#if release}
 					<div class="">
 						<Checkbox 
 							 bold
@@ -264,7 +265,8 @@
 							tooltip={null}
 					/>
 					</div>
-					{#if compareVersion(prerelease.tag_name, release.tag_name) == 1 }
+					{/if}
+					{#if compareVersion(prerelease?.tag_name, release?.tag_name) == 1 }
 					<div class="">
 						<Checkbox 
 							 bold
@@ -276,6 +278,7 @@
 						/>
 					</div>
 					{/if}
+					{#if daily}
 					<div class="">
 						<Checkbox 
 							 bold
@@ -286,6 +289,7 @@
 							tooltip={null}
 						/>
 					</div>
+					{/if}
 				</div>
 			</div>
 		</div>
