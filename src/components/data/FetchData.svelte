@@ -103,8 +103,8 @@
 	}
 	.logo {
 		border-radius: 10px;
-  		border: 2px solid white;
-		background: hsl(0, 0%, 96%);
+  		/* border: 2px solid white; */
+		background: hsl(0, 0%, 96%, 95%);
 		padding: 5px;
 	}
 </style>
@@ -112,7 +112,7 @@
 	<div class="loadercontent">
 		<div class="is-flex is-justify-content-center is-align-items-center">
 			<!-- <span class="has-text-white is-size-3 pt-1">OPEN</span><span class="has-text-primary">EVSE</span> -->
-			<div class="is-flex is-align-items-center logo" ><img src={Logo} alt="logo" /></div>
+			<div class="is-flex is-align-items-center logo p-4" ><img src={Logo} alt="logo" /></div>
 			
 		</div>
 		<div class="mt-5"><ProgressBar value={progress} /></div>
