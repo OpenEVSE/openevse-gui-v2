@@ -1,17 +1,16 @@
 <script>
-	import { github_store } from "./../../../lib/stores/github.js";
-	import { uistates_store } from "./../../../lib/stores/uistates.js";
-	import RemovableTag from "./../../ui/RemovableTag.svelte";
-	import Borders from "./../../ui/Borders.svelte";
-	import SelectFile from "./../../ui/SelectFile.svelte";
-	import AlertBox from "./../../ui/AlertBox.svelte";
-	import { status_store } from "./../../../lib/stores/status.js";
+	import { github_store }   	from "./../../../lib/stores/github.js";
+	import { uistates_store } 	from "./../../../lib/stores/uistates.js";
 	import { _ } 		  		from 'svelte-i18n'
 	import { onMount } 			from "svelte";
 	import {httpAPI,
 			compareVersion} 	from "../../../lib/utils.js"
 	import { serialQueue } 		from "../../../lib/queue.js";
 	import {config_store} 		from "../../../lib/stores/config.js"
+	import RemovableTag 	  	from "./../../ui/RemovableTag.svelte";
+	import Borders 			  	from "./../../ui/Borders.svelte";
+	import SelectFile 		  	from "./../../ui/SelectFile.svelte";
+	import AlertBox 			from "./../../ui/AlertBox.svelte";
 	import Box 					from "../../ui/Box.svelte"
 	import Button 				from "../../ui/Button.svelte"
 	import FirmwareUpdateModal 	from "./FirmwareUpdateModal.svelte"
@@ -22,7 +21,6 @@
 	let resetEspState = ""
 	let fw_modal_opened = false
 	let fw_has_update = false
-	let url = "https://api.github.com/repos/OpenEVSE/ESP32_WiFi_V4.x/releases"
 	let fw = {name: undefined, version: undefined}
 	let alert_visible = false
 	let alert2_visible = false
