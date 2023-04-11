@@ -29,7 +29,7 @@
 			name: "No waste",
 			desc: "No waste of produced energy. Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
 			id: 0,
-			divert_attack_smoothing_time: 20,
+			divert_attack_smoothing_time: 8,
 			divert_decay_smoothing_time: 300
 		},
 		{
@@ -37,18 +37,11 @@
 			desc: "Try to limit grid usage. Will slow down the charge rate quickly, but increase slower when energy is going back.",
 			id: 1,
 			divert_attack_smoothing_time: 300,
-			divert_decay_smoothing_time: 20
-		},
-		{
-			name: "Average",
-			desc: "Average behavior. Average speed identical for booth curve.",
-			id: 2,
-			divert_attack_smoothing_time: 120,
-			divert_decay_smoothing_time: 120
+			divert_decay_smoothing_time: 8
 		},
 		{
 			name: "Custom",
-			id: 3,
+			id: 2,
 		}
 	]
 
@@ -145,10 +138,7 @@
 		else if ($config_store.divert_attack_smoothing_time == presets[1].divert_attack_smoothing_time
 			&& $config_store.divert_decay_smoothing_time == presets[1].divert_decay_smoothing_time
 		) preset = 1
-		else if ($config_store.divert_attack_smoothing_time == presets[2].divert_attack_smoothing_time
-			&& $config_store.divert_decay_smoothing_time == presets[2].divert_decay_smoothing_time
-		) preset = 2
-		else preset = 3
+		else preset = 2
 		return preset
 	}
 
