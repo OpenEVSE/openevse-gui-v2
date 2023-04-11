@@ -138,9 +138,10 @@
 </style>
 <svelte:window on:resize={()=>redraw++} />
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded && mounted}
-<div class="container statusbox {state2color($status_store.state)} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
+<!-- <div class="container statusbox {state2color($status_store.state)} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
 in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"  
->
+> -->
+<div class="container statusbox {state2color($status_store.state)} has-background-color-light px-1 pt-2 pb-1 has-background-light">
 	<div>
 		<div class="mb-2 mx-0">
 			<StatusItems state={$status_store.state} vehicle={$status_store.vehicle} time={$uistates_store.time_localestring} bp={$uistates_store.breakpoint} />
