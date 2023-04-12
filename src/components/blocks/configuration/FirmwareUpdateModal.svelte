@@ -154,7 +154,7 @@
 			update.name = $config_store.buildenv
 			update.html_url = github_upd.html_url?github_upd.html_url:""
 			let item = github_upd.assets?.find(obj => {
-				return obj.name === update.name + ".bin" || obj.name === update.name + "_gui-v2.bin"
+				return obj.name === update.name + "_gui-v2.bin" || obj.name === update.name + ".bin"
 			})
 			update.updated_at = item?.updated_at
 			update.url = item?.browser_download_url
