@@ -251,6 +251,7 @@
       "upgrade2": "Installer",
       "gh-install": "Installer automatiquement depuis GitHub",
       "confirm": "Confirmer?",
+      "httpota-start": "Mise à jours...",
       "installation": "Installation",
       "progress": "Mise à jours en cours...",
       "failed": "Echec de l'envoi",

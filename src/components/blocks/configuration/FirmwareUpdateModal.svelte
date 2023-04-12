@@ -1,6 +1,5 @@
 <script>
 	import Checkbox from "./../../ui/Checkbox.svelte";
-	import Switch from "./../../ui/Switch.svelte";
 	import RemovableTag from "./../../ui/RemovableTag.svelte";
 	import { _ } 		  		from 'svelte-i18n'
 	import { config_store } 	from "./../../../lib/stores/config.js";
@@ -33,6 +32,9 @@
 	let confirmed = false
 	let build_type = 1 // 1: release, 2: prerelease , 3: dev
 	let mounted = false
+	let release_has_build = false
+	let prerelease_has_build = false
+	let daily_has_build = false
 	
 
 	onDestroy(() => {
@@ -162,6 +164,19 @@
 
 	}
 
+	onMount(() => {
+		// check if github releases have build for current platform
+		release_has_build = release.assets?.find(obj => {
+			return obj.name === update.name + "_gui-v2.bin" || obj.name === update.name + ".bin"
+		})?true:false
+		prerelease_has_build = prerelease.assets?.find(obj => {
+			return obj.name === update.name + "_gui-v2.bin" || obj.name === update.name + ".bin"
+		})?true:false
+		daily_has_build = daily.assets?.find(obj => {
+			return obj.name === update.name + "_gui-v2.bin" || obj.name === update.name + ".bin"
+		})?true:false
+	})
+
 	$: $status_store.ota,displayOta()
 	$: switchBuilds(build_type)
 
@@ -186,7 +201,8 @@
 						</tr>
 						<tr>
 							<td class="has-text-weight-semibold">{$_("config.firmware.build")}</td>
-							<td class="">{$config_store.buildenv}</td>
+							<td
+							 class="">{$config_store.buildenv}</td>
 						</tr>
 						<tr>
 							<td class="has-text-weight-semibold">{$_("config.firmware.installed")}</td>
@@ -210,7 +226,7 @@
 									</div>
 									<div class="ml-4">
 										{#key update.version}
-										{#if !confirmed}
+										{#if !confirmed && release_has_build || prerelease_has_build || daily_has_build}
 										<div class="mb-2">
 											
 											<Button 
@@ -225,7 +241,7 @@
 											/>
 										</div>
 										{#if http_update && !$status_store.ota_progress && $status_store.ota != "completed"}
-										<div class="has-text-centered has-text-dark has-text-weight-bold">Starting update, please wait</div>
+										<div class="has-text-centered has-text-dark has-text-weight-bold">{$_("config.firmware.httpota-start")}</div>
 										{/if}
 										{:else}
 										<div class="is-flex is-justify-content-center is-align-items-baseline is-flex-wrap-wrap is-inline-block">
@@ -253,8 +269,9 @@
 						{/if}
 					</tbody>
 				</table>
+				{#if !http_update && !$status_store.ota_progress && github_upd}
 				<div class="is-flex is-justify-content-space-evenly">
-					{#if release}
+					{#if release_has_build}
 					<div class="">
 						<Checkbox 
 							 bold
@@ -266,7 +283,7 @@
 					/>
 					</div>
 					{/if}
-					{#if prerelease && compareVersion(prerelease?.tag_name, release?.tag_name) >= 0 }
+					{#if prerelease_has_build && compareVersion(prerelease?.tag_name, release?.tag_name) >= 0 }
 					<div class="">
 						<Checkbox 
 							 bold
@@ -278,7 +295,7 @@
 						/>
 					</div>
 					{/if}
-					{#if daily}
+					{#if daily_has_build}
 					<div class="">
 						<Checkbox 
 							 bold
@@ -291,6 +308,7 @@
 					</div>
 					{/if}
 				</div>
+				{/if}
 			</div>
 		</div>
 		

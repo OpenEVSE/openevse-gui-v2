@@ -253,6 +253,7 @@
 			"upgrade2": "Upgrade to",
 			"gh-install": "Auto Install from GitHub",
 			"confirm": "Confirm?",
+			"httpota-start": "Starting update...",
 			"installation": "Installation",
 			"progress": "Firmware update in progress...",
 			"failed": "Upload failed",
