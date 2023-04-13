@@ -166,13 +166,13 @@
 
 	onMount(() => {
 		// check if github releases have build for current platform
-		release_has_build = release.assets?.find(obj => {
+		release_has_build = release?.assets?.find(obj => {
 			return obj.name === update.name + "_gui-v2.bin" || obj.name === update.name + ".bin"
 		})?true:false
-		prerelease_has_build = prerelease.assets?.find(obj => {
+		prerelease_has_build = prerelease?.assets?.find(obj => {
 			return obj.name === update.name + "_gui-v2.bin" || obj.name === update.name + ".bin"
 		})?true:false
-		daily_has_build = daily.assets?.find(obj => {
+		daily_has_build = daily?.assets?.find(obj => {
 			return obj.name === update.name + "_gui-v2.bin" || obj.name === update.name + ".bin"
 		})?true:false
 	})

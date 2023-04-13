@@ -51,11 +51,11 @@
 				firmware_daily = $github_store.find(el => el.tag_name == "v2_gui")
 			}
 			
-			if (compareVersion(firmware_release.name,$config_store.version) == 1) {
+			if (firmware_release && compareVersion(firmware_release.name,$config_store.version) == 1) {
 				fw_has_update = true
 				fw.version = firmware_release.name?firmware_release.name:""
 			}
-			else if (compareVersion(firmware_prerelease.name,$config_store.version) == 1) {
+			else if (firmware_prerelease && compareVersion(firmware_prerelease.name,$config_store.version) == 1) {
 				// test if pre-release is > installed version
 				fw_has_update = true
 				fw.version = firmware_prerelease.name?firmware_release.name:""
