@@ -226,7 +226,7 @@
 									</div>
 									<div class="ml-4">
 										{#key update.version}
-										{#if !confirmed && release_has_build || prerelease_has_build || daily_has_build}
+										{#if !confirmed && (release_has_build || prerelease_has_build || daily_has_build)}
 										<div class="mb-2">
 											
 											<Button 
