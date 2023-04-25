@@ -7,10 +7,7 @@
 	import {uistates_store} 		from "./../../lib/stores/uistates.js"
 	import { claims_target_store }  from "./../../lib/stores/claims_target.js"
 	import {sec2time,
-			displayRange,
-			getStateDesc} 			from "../../lib/utils.js"
-	import { scale } 				from 'svelte/transition'
-	import { expoInOut } 			from 'svelte/easing'
+			displayRange} 			from "../../lib/utils.js"
 	import { keyed } 				from 'svelte-keyed'
 	import DivertShaperStatus 		from "./../ui/DivertShaperStatus.svelte"
 	import TaskDisplay 				from "../ui/TaskDisplay.svelte"
@@ -18,15 +15,15 @@
 	import StatusItems 				from "../ui/StatusItems.svelte"
 	import ExpandArrow 				from "../ui/ExpandArrow.svelte"
 
-	let hidden_tiles = 0
 	let mounted = false
 	let redraw = 0
+	let expand_div
 
 	// set keyed derived stores
 	const elapsed = keyed(uistates_store, 'elapsed');
 
 
-	let isTileVisible = (tile,pos) => {
+	let isTileVisible = (tile,pos,area) => {
 		if (
 			(pos <= 2 ) ||
 			(pos == 3 && ($uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini")) ||
@@ -35,7 +32,6 @@
 			return true
 		}
 		else {
-			hidden_tiles = 1
 			return false
 		}
 	}
@@ -65,6 +61,17 @@
 		}
 	}
 
+	let has_html = (el) => {
+		console.log(el)
+		if (el) {
+			const hasHTML = el.innerHTML.trim() !== '';
+			console.log("hasHtml: " + hasHTML)
+			return hasHTML
+		}
+		else return false
+		
+	}
+
 	onMount(()=> {
 		mounted = true
 	})
@@ -81,7 +88,6 @@
 		{ title: "range", value: displayRange($status_store.battery_range), unit: $config_store.mqtt_vehicle_range_miles?$_("units.miles"):$_("units.km"), display: $status_store.battery_range?true:false},
 		{ title: "remaining", value: sec2time($status_store.time_to_full_charge), display: $status_store.time_to_full_charge?true:false }
 	]
-	$: tiles, hidden_tiles = 0
 
 	
 </script>
@@ -138,9 +144,6 @@
 </style>
 <svelte:window on:resize={()=>redraw++} />
 {#if $status_store.evse_connected == 1 && $uistates_store.data_loaded && mounted}
-<!-- <div class="container statusbox {state2color($status_store.state)} has-background-color-light px-1 pt-2 pb-1 has-background-light" 
-in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"  
-> -->
 <div class="container statusbox {state2color($status_store.state)} has-background-color-light px-1 pt-2 pb-1 has-background-light">
 	<div>
 		<div class="mb-2 mx-0">
@@ -155,7 +158,7 @@ in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"
 			{/each}
 			{/key}
 		</div>
-		<div class="mx-0 is-flex is-align-content-space-between is-justify-content-center is-flex-wrap-wrap" class:is-hidden={!$uistates_store.status_expanded}>
+		<div bind:this={expand_div} class="mx-0 is-flex is-align-content-space-between is-justify-content-center is-flex-wrap-wrap" class:is-hidden={!$uistates_store.status_expanded}>
 			{#key $uistates_store.status_expanded || redraw}
 			{#each tiles as tile, i}
 			{#if !isTileVisible(tile,i) && (tile.display || tile.display == undefined)}
@@ -203,9 +206,11 @@ in:scale="{{ delay: 0, duration: 400, easing: expoInOut }}"
 		{#if $uistates_store.status_expanded}
 		<DivertShaperStatus />
 		{/if}
-		<div class="mt-1" class:is-hidden={!hidden_tiles}>
+		{#key $uistates_store.status_expanded || redraw}
+		<div class="mt-1" class:is-hidden={!has_html(expand_div)}>
 			<ExpandArrow bind:expand={$uistates_store.status_expanded} />
 		</div>
+		{/key}
 	</div>
 </div>
 {:else}
