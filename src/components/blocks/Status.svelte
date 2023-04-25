@@ -23,7 +23,7 @@
 	const elapsed = keyed(uistates_store, 'elapsed');
 
 
-	let isTileVisible = (tile,pos,area) => {
+	let isTileVisible = (tile,pos) => {
 		if (
 			(pos <= 2 ) ||
 			(pos == 3 && ($uistates_store.breakpoint != "mobile" && $uistates_store.breakpoint != "mobilemini")) ||
@@ -62,10 +62,8 @@
 	}
 
 	let has_html = (el) => {
-		console.log(el)
 		if (el) {
 			const hasHTML = el.innerHTML.trim() !== '';
-			console.log("hasHtml: " + hasHTML)
 			return hasHTML
 		}
 		else return false
