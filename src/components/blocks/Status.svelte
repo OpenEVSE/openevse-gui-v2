@@ -173,7 +173,7 @@
 				{:else if $uistates_store.stateclaimfrom == "rfid"}
 				<TaskDisplay 
 					mode={$_("clients." + $uistates_store.stateclaimfrom )}  
-					msg={!$status_store.rfid_auth?$_("status-task-rfid-msg"):$status_store.rfid_auth} 
+					msg={!$status_store.rfid_auth?$_("status-task-rfid-msg"):$_("status-task-rfidok-msg")} 
 					state={$claims_target_store.properties.state} />
 				{:else if $uistates_store.stateclaimfrom == "divert"}
 				<TaskDisplay 

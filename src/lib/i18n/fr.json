@@ -85,6 +85,7 @@
   "status-tile-range": "portée",
   "status-tile-remaining": "restant",
   "status-task-rfid-msg": "En attente de badge RFID",
+  "status-task-rfidok-msg": "Badge RFID ok, activation en cours",
   "status-task-timer-activated": "Activé depuis",
   "status-task-timer-disabled": "Désactivé depuis",
   "status-task-timer-activate": "Activé à",
