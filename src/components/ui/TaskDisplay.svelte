@@ -21,10 +21,12 @@
 		{#if time != ""}
 		{msg} {displayTime(time)}
 		{:else}
+		{#if state}
 		{$_(state)}
-			{#if msg}
-			&nbsp;{msg}
-			{/if}
+		{/if}
+		{#if msg}
+		&nbsp;{msg}
+		{/if}
 		{/if}
 	</span>
 </div>
