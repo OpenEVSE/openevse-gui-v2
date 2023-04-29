@@ -48,7 +48,7 @@
 							{$_("config.vehicle.lastupdated")}
 						</td>
 						<td>
-							<div class="tag tags has-text-weight-bold {$status_store.vehicle_state_update > 3600 && $uistates_store.charging?"is-danger":$status_store.vehicle_state_update < 300 && $uistates_store.charging?"is-primary":$uistates_store.charging?"is-warning":"is-info"} ">{$evelapsed}</div>
+							<div class="tag tags {$status_store.vehicle_state_update > 3600 && $uistates_store.charging?"is-danger":$status_store.vehicle_state_update < 300 && $uistates_store.charging?"is-primary":$uistates_store.charging?"is-warning":"is-info"} ">{$evelapsed}</div>
 						</td>
 					</tr>
 					
@@ -57,7 +57,7 @@
 						<td>{$_("config.vehicle.battery")}</td>
 						<td class="has-text-right">
 							<div class="tag tags is-info">
-								<div class="is-size-7 has-text-weight-bold">{$status_store.battery_level}%</div>
+								<div class="is-size-7">{$status_store.battery_level}%</div>
 							</div>
 						</td>
 					</tr>

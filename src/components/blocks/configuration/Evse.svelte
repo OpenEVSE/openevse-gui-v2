@@ -1,4 +1,5 @@
 <script>
+	import Firmware from "./../../../routes/Firmware.svelte";
 	import Limit from "./../main/Limit.svelte";
 	import { onMount } from "svelte";
 	import { _ } 			 	 from 'svelte-i18n'
@@ -107,6 +108,7 @@
 					</div>
 				</Borders>
 			</div>
+			{#if !$config_store.firmware.endsWith(".EU") && !$config_store.firmware.endsWith(".T2")}
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
 					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.service")}</div>
@@ -119,6 +121,7 @@
 					/>
 				</Borders>
 			</div>
+			{/if}
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true} has_help={true}>
 					<div slot="help">

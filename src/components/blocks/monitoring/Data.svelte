@@ -64,9 +64,8 @@
 	}
 
 	function handleMessage(event) {
-		//alert(event.detail.text);
 		if (event.detail.text == "closeAll") {
-			Object.keys(expanded).forEach(function(key,index) {
+			Object.keys(expanded).forEach(function(key) {
 				expanded[key] = false
 			});
 		}
@@ -77,7 +76,7 @@
 
 <div>
 
-	<Expandable data={data_emeter} bind:expanded={expanded.emeter} on:message={handleMessage}/>
+	<Expandable data={data_emeter}  bind:expanded={expanded.emeter}  on:message={handleMessage}/>
 	<Expandable data={data_sensors} bind:expanded={expanded.sensors} on:message={handleMessage} />
 	{#if $status_store.battery_level != undefined || $status_store.battery_range != undefined  || $config_store.time_to_full_charge}
 	<Expandable data={data_vehicle} bind:expanded={expanded.vehicle} on:message={handleMessage} />

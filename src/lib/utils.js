@@ -497,8 +497,8 @@ export function JSONTryParse(input) {
 };
 
 export function compareVersion(last, old) {
-	if (typeof last !== 'string') return false
-	if (typeof old !== 'string') return false
+	if (typeof last !== 'string') return 0
+	if (typeof old !== 'string') return 0
 	if (last[0] == "v") {
 		last = last.substring(1)
 	}

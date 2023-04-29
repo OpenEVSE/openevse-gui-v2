@@ -46,7 +46,8 @@
 	}
 
 	function updateTags(store) {
-		tags = store.split(",")
+		if (store)
+			tags = store.split(",")
 	}
 
 	async function toggleRFID() {
@@ -93,6 +94,17 @@
 
 	async function registerTag(tag,inst) {
 		inst.state="loading"
+		tags.push(tag)
+		const output = tags.join(",")
+		const jsondata = {
+			rfid_storage: output
+		}
+		let res = await serialQueue.add(() => config_store.upload(jsondata)) 
+		$status_store.rfid_input = ""
+		if (res) {
+			inst.state="ok"
+		}
+		else inst.state="error"
 	}
 
 	function resetStates() {
@@ -134,11 +146,10 @@
 						{#if $uistates_store.rfid_waiting > 0}
 						<div class="mt-2 has-text-weight-bold has-text-dark">{$_("config.rfid.placetag")}
 						</div>
-						{/if}
-						{#if $status_store.rfid_input}
+						{:else if $status_store.rfid_input}
 						<div class="mt-2 has-text-weight-bold has-text-dark">{$_("config.rfid.scansuccess")}</div>
 						<div class="has-text-weight-bold my-2 has-text-info">UID: {$status_store.rfid_input}</div>
-						{#if tags.find($status_store.rfid_input)}
+						{#if tags.find(element => element == $status_store.rfid_input)}
 						<div>{$_("config.rfid.tagregistered")}</div>
 						<Button bind:this={button_inst} width="80px" size="is-small" name={$_("config.rfid.remove")} color="is-danger" butn_submit={()=>removeTag($status_store.rfid_input,button_inst)} />
 						{:else}
@@ -152,7 +163,7 @@
 		</div>
 	</div>
 	{/if}
-	{#if tags[0] != "" }
+	{#if tags.length > 0 }
 	<div class="columns is-centered m-0 pb-1">
 		<div class="column is-two-thirds m-0">
 			<div class="is-flex is-justify-content-center">
