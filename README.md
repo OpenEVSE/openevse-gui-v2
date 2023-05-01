@@ -2,7 +2,7 @@
 
 New User Interface for OpenEVSE Wifi module
 
-![image](https://user-images.githubusercontent.com/488789/208377272-baad6326-868e-4178-b89b-0c49bd0db7ca.png)
+![image](https://user-images.githubusercontent.com/488789/235537900-f9ee2c65-d46f-4b92-b244-723a052c8bce.png)
 
 
 	Framework: Svelte ( https://svelte.dev/ )  / Vite ( https://vitejs.dev/ ) 
