@@ -138,7 +138,7 @@
 					<Select title={$_("config.selfprod.mode")} bind:value={formdata.divert_type.val} items={modes} onChange={setDivertType}/>
 	
 				<div class="is-inline-block">
-					<div class:is-hidden={$uistates_store.divert_type==1} class="mb-2">
+					<div class:is-hidden={$config_store.divert_type==1} class="mb-2">
 						<InputForm
 							title="{$_("config.selfprod.feed")}*" 
 							placeholder="/topic/pv_production" 
@@ -151,7 +151,7 @@
 					</div>
 	
 		
-					<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2">
+					<div class:is-hidden={$config_store.divert_type==0} class="mb-2">
 						<InputForm 
 							title="{$_("config.selfprod.feed")}*"
 							placeholder="/topic/grid_ie"
@@ -162,7 +162,7 @@
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.feed-excess-desc")}</div>
 					</div>
-					<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2" >
+					<div class:is-hidden={$config_store.divert_type==0} class="mb-2" >
 						<InputForm 
 							title="{$_("config.selfprod.powerratio")}*" 
 							type="number" 
