@@ -416,7 +416,6 @@
         "mqtt": "MQTT"
       },
       "contype": "Type de Connection",
-      "contype-desc": "Selectionner le type de connection aux données véhicule",
       "httppush": "HTTP Push (Toujours Actif)",
       "httppush-desc-1": "Pour mettre à jours manuellement les données véhicule, envoyez une requête HTTP POST vers:",
       "httppush-desc-2": "contenant les données json suivantes dans le 'body':",

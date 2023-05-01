@@ -1,4 +1,5 @@
 <script>
+	import { serialQueue } from "./../../../lib/queue.js";
 	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 		    from 'svelte-i18n'
 	import { onMount }		from "svelte";
@@ -7,20 +8,24 @@
 	import VechicleMQTT 	from "./VechicleMQTT.svelte";
 	import Select 			from "./../../ui/Select.svelte";
 	
-	let mode = 0 // 0: none, 1: Tesla, 2: MQTT
-	let modes = [{name: $_("config.vehicle.mode.none"), value: 0}, {name:$_("config.vehicle.mode.tesla"), value: 1}, {name: $_("config.vehicle.mode.mqtt"), value: 2}]
+	let mode = 0
+	let selector
+	let modes = [{name: $_("config.vehicle.mode.none"), value: 0}, {name:$_("config.vehicle.mode.tesla"), value: 1}, {name: $_("config.vehicle.mode.mqtt"), value: 2}, {name: $_("config.vehicle.mode.http"), value: 3}]
+	onMount( () => {
+		mode = $config_store.vehicle_data_src?$config_store.vehicle_data_src:0
+	})
 
-	function getMode() {
-		if ($config_store.tesla_enabled)
-			mode = 1
-		else if ($config_store.mqtt_vehicle_soc)
-			mode = 2
-		else mode = 0
+	let setDataSrc = () => {
+		const data = {
+			vehicle_data_src: mode
+		}
+		selector.setStatus("loading")
+		const res = serialQueue.add(config_store.upload(data))
+		if (res) selector.setStatus("ok")
+		else selector.setStatus("error")
 	}
 
-	onMount(() => {
-		getMode()
-	})
+
 </script>
 <div class="columns is-centered">
 	<div class="column is-three-quarters is-full-mobile">
@@ -28,13 +33,12 @@
 			<Borders grow>
 
 
-					<Select title={$_("config.vehicle.contype")} bind:value={mode} items={modes} />
-					{#if mode == 2}
+					<Select bind:this={selector} title={$_("config.vehicle.contype")} bind:value={mode} items={modes} onChange={setDataSrc} />
+					{#if $config_store.vehicle_data_src == 2}
 					<VechicleMQTT />
-					{:else if mode == 1}
+					{:else if $config_store.vehicle_data_src == 1}
 					<VehicleTesla />
-					{:else}
-					<div class="is-size-7 mt-1">{$_("config.vehicle.contype-desc")}</div>
+					{:else if $config_store.vehicle_data_src == 3}
 					<div class="block mt-5">
 						<h5>{$_("config.vehicle.httppush")}</h5>
 						{$_("config.vehicle.httppush-desc-1")}

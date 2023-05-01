@@ -415,12 +415,12 @@
 			"range": "Battery Range",
 			"timeleft": "Time to full charge",
 			"mode": {
-				"none": "None/HTTP",
+				"none": "None",
 				"tesla": "Tesla",
-				"mqtt": "MQTT"
+				"mqtt": "MQTT",
+				"http": "HTTP"
 			},
 			"contype": "Connection Type",
-			"contype-desc": "Select the vehicle connection type",
 			"httppush": "HTTP Push (Always Active)",
 			"httppush-desc-1": "To update manually vehicule data, send HTTP POST request to:",
 			"httppush-desc-2": "containing json data in body:",
