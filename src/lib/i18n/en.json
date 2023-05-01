@@ -224,6 +224,7 @@
 			"signal": "Signal",
 			"change": "Change WiFi Network",
 			"ip": "IP address",
+			"mac": "MAC address",
 			"connected": "Connected",
 			"host": "Host Name",
 			"scanning": "Scanning Networks",
