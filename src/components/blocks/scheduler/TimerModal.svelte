@@ -113,8 +113,6 @@
 			else 			   schedule = schedules[timer];
 			table2days(schedule);
 			if (timer == null) {
-				console.log("schedules length " + $schedule_store.length)
-				console.log($schedule_store)
 				if ($schedule_store.length) {
 					schedule.id = $schedule_store[$schedule_store.length-1].id + 1;
 				}
