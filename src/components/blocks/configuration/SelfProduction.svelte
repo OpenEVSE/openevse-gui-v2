@@ -17,7 +17,10 @@
 	import Switch 			  from "./../../ui/Switch.svelte";
 	
 	let mounted = false
-	let modes = [{name: $_("config.selfprod.production"), value: 1}, {name:$_("config.selfprod.excess"), value: 2}]
+	let modes = [
+		{name: $_("config.selfprod.production"), value: 0},
+		{name:$_("config.selfprod.excess"), value: 1}
+	]
 	let divertelapsed = derived(uistates_store, store => s2mns(store.divert_update))
 
 	let formdata = {
@@ -34,7 +37,7 @@
 
 	const updateFormData = () => {
 		formdata.divert_enabled.val 			 	= $config_store.divert_enabled
-		formdata.divert_type.val					= $config_store.divert_type
+		formdata.divert_type.val					= $config_store.divert_type != -1 ? $config_store.divert_type : 0
 		formdata.charge_mode.val					= $config_store.charge_mode
 		formdata.mqtt_solar.val						= $config_store.mqtt_solar
 		formdata.mqtt_solar.req 					= $uistates_store.divert_type?true:false
