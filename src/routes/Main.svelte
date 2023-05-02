@@ -9,7 +9,7 @@
 	import Manual 				from "./../components/blocks/main/Manual.svelte"
 
 	onMount(()=> {
-		if ( !$uisettings_store.wizard_done && ($status_store.mode == "AP" || ($uistates_store.mode == "STA+AP" && !$config_store.ssid))) {
+		if (!$config_store.wizard_passed) {
 			replace('/wizard')
 		}
 	})
