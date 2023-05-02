@@ -122,7 +122,6 @@ export function createTzObj(tz) {
 		else {
 		}
 	})
-	console.log(tzobj)
 	return tzobj
 }
 
