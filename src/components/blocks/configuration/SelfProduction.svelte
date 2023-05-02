@@ -1,6 +1,5 @@
 <script>
 	import SliderForm from "./../../ui/SliderForm.svelte";
-	import { uisettings_store } from "./../../../lib/stores/uisettings.js";
 	import Borders 			  from "./../../ui/Borders.svelte";
 	import { onMount }		  from "svelte";
 	import { _ } 			  from 'svelte-i18n'

@@ -15,12 +15,13 @@
 		mode = $config_store.vehicle_data_src?$config_store.vehicle_data_src:0
 	})
 
-	let setDataSrc = () => {
+	let setDataSrc = async () => {
 		const data = {
 			vehicle_data_src: mode
 		}
+		$config_store.vehicle_data_src = mode
 		selector.setStatus("loading")
-		const res = serialQueue.add(config_store.upload(data))
+		const res = await serialQueue.add(() => config_store.upload(data))
 		if (res) selector.setStatus("ok")
 		else selector.setStatus("error")
 	}
