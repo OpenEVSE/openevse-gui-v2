@@ -29,19 +29,24 @@
 			name: "No waste",
 			desc: "No waste of produced energy. Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
 			id: 0,
-			divert_attack_smoothing_time: 8,
-			divert_decay_smoothing_time: 300
+			divert_attack_smoothing_time: 20,
+			divert_decay_smoothing_time: 300,
+			divert_min_charge_time: 600
 		},
 		{
 			name: "No import",
 			desc: "Try to limit grid usage. Will slow down the charge rate quickly, but increase slower when energy is going back.",
 			id: 1,
 			divert_attack_smoothing_time: 300,
-			divert_decay_smoothing_time: 8
+			divert_decay_smoothing_time: 20,
+			divert_min_charge_time: 600
 		},
 		{
 			name: "Custom",
 			id: 2,
+			divert_attack_smoothing_time: 20,
+			divert_decay_smoothing_time: 300,
+			divert_min_charge_time: 600
 		}
 	]
 
@@ -51,7 +56,7 @@
 		mqtt_solar: 	  				{val: "",		input: undefined, status: "", req: false},
 		mqtt_grid_ie: 	  				{val: "",		input: undefined, status: "", req: false},
 		divert_PV_ratio:  				{val: "",		input: undefined, status: "", req: true},
-		divert_attack_smoothing_time: {val: "",		input: undefined, status: "", req: true},
+		divert_attack_smoothing_time:   {val: "",		input: undefined, status: "", req: true},
 		divert_decay_smoothing_time:	{val: "",		input: undefined, status: "", req: true},
 		divert_min_charge_time:			{val: "",		input: undefined, status: "", req: true}
 	}
@@ -120,9 +125,10 @@
 	}
 
 	let set_preset = async (id) => {
-		if (presets[id] && id != 3) {
+		if (presets[id] && id != 2) {
 			$config_store.divert_attack_smoothing_time = presets[id].divert_attack_smoothing_time
 			$config_store.divert_decay_smoothing_time = presets[id].divert_decay_smoothing_time
+			$config_store.divert_min_charge_time = presets[id].divert_min_charge_time
 			updateFormData()
 			preset = get_preset()
 			await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
@@ -134,9 +140,11 @@
 		let preset
 		if ($config_store.divert_attack_smoothing_time == presets[0].divert_attack_smoothing_time
 			&& $config_store.divert_decay_smoothing_time == presets[0].divert_decay_smoothing_time
+			&& $config_store.divert_min_charge_time == presets[0].divert_min_charge_time
 		) preset = 0
 		else if ($config_store.divert_attack_smoothing_time == presets[1].divert_attack_smoothing_time
 			&& $config_store.divert_decay_smoothing_time == presets[1].divert_decay_smoothing_time
+			&& $config_store.divert_min_charge_time == presets[1].divert_min_charge_time
 		) preset = 1
 		else preset = 2
 		return preset
@@ -258,20 +266,7 @@
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
 					</div>
-										<div class="mb-2">
-						<InputForm
-							title="{$_("config.selfprod.minchargetime")}*" 
-							type="number" 
-							placeholder="600"
-							min="0"
-							step="1"
-							bind:this={formdata.divert_min_charge_time.input}
-							bind:value={formdata.divert_min_charge_time.val} 
-							bind:status={formdata.divert_min_charge_time.status}
-							onChange={()=>setProperty("divert_min_charge_time")}
-						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.minchargetime-desc")}.</div>
-					</div>
+					
 					<div class="mb-2 is-flex is-justify-content-center">
 						<Borders>
 							<div class="is-size-6 has-text-dark has-text-weight-bold mb-2">
@@ -294,10 +289,25 @@
 							{/key}
 						</div>
 						<div class="mb-2">
+							<InputForm
+								title="{$_("config.selfprod.minchargetime")}*" 
+								type="number" 
+								placeholder="600"
+								min="0"
+								step="1"
+								bind:this={formdata.divert_min_charge_time.input}
+								bind:value={formdata.divert_min_charge_time.val} 
+								bind:status={formdata.divert_min_charge_time.status}
+								onChange={()=>setProperty("divert_min_charge_time")}
+							/>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.minchargetime-desc")}.</div>
+						</div>
+						<div class="mb-2">
 							<InputForm 
 								title="{$_("config.selfprod.smoothattack")}*"
 								bind:this={formdata.divert_attack_smoothing_time.input}
-								bind:value={formdata.divert_attack_smoothing_time.val} 
+								bind:value={formdata.divert_attack_smoothing_time.val}
+								bind:status={formdata.divert_attack_smoothing_time.status}
 								min=0 max=600 step="1"
 								onChange={()=>setProperty("divert_attack_smoothing_time")} 
 							/>
@@ -309,7 +319,8 @@
 							<InputForm 
 								title="{$_("config.selfprod.smoothdecay")}*"
 								bind:this={formdata.divert_decay_smoothing_time.input}
-								bind:value={formdata.divert_decay_smoothing_time.val} 
+								bind:value={formdata.divert_decay_smoothing_time.val}
+								bind:status={formdata.divert_decay_smoothing_time.status}
 								min=0 max=600 step="1"
 								onChange={()=>setProperty("divert_decay_smoothing_time")} 
 							/>
