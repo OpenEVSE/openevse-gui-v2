@@ -1,5 +1,6 @@
 <script>
-	import { uisettings_store } from "./../../lib/stores/uisettings.js";
+	import { config_store } 	from "./../../lib/stores/config.js";
+	import { serialQueue } 		from "./../../lib/queue.js";
 	import { status_store } 	from "./../../lib/stores/status.js";
 	import { uistates_store } 	from "./../../lib/stores/uistates.js";
 	import {push} 			  	from 'svelte-spa-router'
@@ -21,8 +22,8 @@
 	}
 	function quit() {
 		$uistates_store.wizard_step = 0
-		// save to local storage until we have a flag on fw side
-		$uisettings_store.wizard_done = true
+		if (!$config_store.wizard_passed)
+			serialQueue.add(config_store.saveParam("wizard_passed", true))
 		if ($status_store.ipaddress == "192.168.4.1") {
 			$uistates_store.alertbox.title = $_("notification")
 			$uistates_store.alertbox.component = AlertBody
