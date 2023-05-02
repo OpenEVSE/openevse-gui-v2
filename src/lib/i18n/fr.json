@@ -278,7 +278,8 @@
       "led-bn": "Luminosité des Leds",
       "sensorscale": "Echelle Courant",
 			"sensoroffset": "Décalage Courant",
-      "threephase": "Triphasé"
+      "threephase": "Triphasé",
+      "defaultstate": "Etat par défaut"
     },
     "safety": {
       "test": "Test",

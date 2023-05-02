@@ -280,7 +280,8 @@
 			"led-bn": "Led Brightness",
 			"sensorscale": "Current scale",
 			"sensoroffset": "Current offset",
-			"threephase": "Three-phase"
+			"threephase": "Three-phase",
+			"defaultstate": "Default State"
 		},
 		"safety": {
 			"test": "Test",
