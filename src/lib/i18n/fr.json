@@ -222,6 +222,7 @@
       "channel": "Canal",
       "change": "Changer de réseau",
       "ip": "Adresse IP",
+      "mac": "Adresse Mac",
       "connected": "Connecté",
       "host": "Nom d'Hôte",
       "scanning": "Recherche de réseaux WiFi",

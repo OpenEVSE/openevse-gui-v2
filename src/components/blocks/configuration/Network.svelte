@@ -55,6 +55,11 @@
 				<div class="">
 					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.ip")}: </span><span>{$status_store.ipaddress}</span>
 				</div>
+				{#if $status_store.macaddress}
+				<div class="">
+					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.mac")}: </span><span>{$status_store.macaddress}</span>
+				</div>
+				{/if}
 				<div class="is-flex is-align-items-center is-justify-content-center">
 					<span class="has-text-weight-bold is-size-6 has-text-dark">{$_("config.network.connected")}: </span>
 					<iconify-icon inline class="ml-2 is-size-5 {$status_store.wifi_client_connected||$status_store.eth_connected==1?"has-text-primary":"has-text-danger"}" icon={$status_store.wifi_client_connected||$status_store.eth_connected==1?"fa6-solid:circle-check":"fa6-solid:circle-xmark"}></iconify-icon>

@@ -30,11 +30,8 @@
 
 	function updateDateField(t) {
 		if (allow_time_update && t != undefined) {
-			let zone = "UTC"
-			if ($config_store.time_zone)
-				zone = $config_store.time_zone.split("|")[0]
-			const dt = DateTime.fromISO(t, { zone: zone})
-			date = dt.toFormat("yyyy-MM-dd'T'HH:mm")
+			date = t.slice(0,16)
+			console.log(date)
 		}	
 	}
 
@@ -153,7 +150,7 @@
 		}	
 	})
 
-	$: $status_store.time, updateDateField($status_store.time)
+	$: $status_store.time, updateDateField($status_store.local_time)
 	$: $config_store.time_zone, ()=> {tz = $config_store.time_zone }
 </script>
 
