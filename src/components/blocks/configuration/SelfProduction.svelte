@@ -29,16 +29,16 @@
 			name: "No waste",
 			desc: "No waste of produced energy. Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
 			id: 0,
-			divert_attack_smoothing_time: 20,
-			divert_decay_smoothing_time: 300,
+			divert_attack_smoothing_time: 300,
+			divert_decay_smoothing_time: 20,
 			divert_min_charge_time: 600
 		},
 		{
 			name: "No import",
 			desc: "Try to limit grid usage. Will slow down the charge rate quickly, but increase slower when energy is going back.",
 			id: 1,
-			divert_attack_smoothing_time: 300,
-			divert_decay_smoothing_time: 20,
+			divert_attack_smoothing_time: 20,
+			divert_decay_smoothing_time: 300,
 			divert_min_charge_time: 600
 		},
 		{
