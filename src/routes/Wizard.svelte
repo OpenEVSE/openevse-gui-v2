@@ -37,9 +37,9 @@
 			{:else if params.step == 1}
 			<EvseLight />
 			{:else if params.step == 2}
-			<Time />
-			{:else if params.step == 3}
 			<Network/>
+			{:else if params.step == 3}
+			<Time />
 			{:else if params.step == 4}
 			<Firmware />
 			{/if}	
