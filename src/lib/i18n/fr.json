@@ -230,6 +230,8 @@
       "ssid-desc": "Nom du réseau WiFi",
       "pass": "Mot de passe WiFi",
       "pass-desc": "clef WPA",
+      "apssid": "AP SSID",
+      "appass": "AP Mot de passe",
       "connect": "Connecter",
       "scan": "Scanner",
       "connecting": "Connection en cours, veuillez patienter...",
