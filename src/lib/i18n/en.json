@@ -232,6 +232,8 @@
 			"ssid-desc": "WiFi SSID",
 			"pass": "WiFi Password",
 			"pass-desc": "WPA Key",
+			"apssid": "AP SSID",
+			"appass": "AP password",
 			"connect": "Connect",
 			"scan": "Scan",
 			"connecting": "Connecting, please wait...",
