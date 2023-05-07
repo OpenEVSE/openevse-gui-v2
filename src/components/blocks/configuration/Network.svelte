@@ -107,9 +107,10 @@
 
 	<div class="has-text-dark has-text-weight-bold">{$_("config.network.modes.ap")}</div>
 	<div class="my-3">
-		<InputForm is_inline type="text" title={$_("config.network.apssid")} placeholder="" bind:value={formdata.ap_ssid.val} 
+		{$_("config.network.apdefault")}
+		<InputForm is_inline type="text" title={$_("config.network.apssid")} placeholder="openevse" bind:value={formdata.ap_ssid.val} 
 				   status={formdata.ap_ssid.status} onChange={()=>setProperty("ap_ssid")}/>
-		<InputForm is_inline type="text" title={$_("config.network.appass")} placeholder="" bind:value={formdata.ap_pass.val} 
+		<InputForm is_inline type="text" title={$_("config.network.appass")} placeholder="openevse" bind:value={formdata.ap_pass.val} 
 				   status={formdata.ap_pass.status} onChange={()=>setProperty("ap_pass")}/>
 	</div>
 </Box>

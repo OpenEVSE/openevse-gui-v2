@@ -234,6 +234,7 @@
 			"pass-desc": "WPA Key",
 			"apssid": "AP SSID",
 			"appass": "AP password",
+			"apdefault": "If unset, default to SSID: openevse-[chipID], password: openevse",
 			"connect": "Connect",
 			"scan": "Scan",
 			"connecting": "Connecting, please wait...",

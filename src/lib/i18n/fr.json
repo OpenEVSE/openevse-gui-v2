@@ -232,6 +232,7 @@
       "pass-desc": "clef WPA",
       "apssid": "AP SSID",
       "appass": "AP Mot de passe",
+      "apdefault": "Si non configuré, SSID: openevse-[chipID], pass: openevse",
       "connect": "Connecter",
       "scan": "Scanner",
       "connecting": "Connection en cours, veuillez patienter...",
