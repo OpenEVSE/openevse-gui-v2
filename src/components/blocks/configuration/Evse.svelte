@@ -23,9 +23,7 @@
 			scheduler_start_window:	{val: 0,      status: "", input: undefined, req: false},
 			pause_uses_disabled:	{val: null,   status: "", input: undefined, req: false},
 			service:				{val: false,  status: "", input: undefined, req: false},
-			led_brightness:			{val: "",     status: "", input: undefined, req: false},
-			scale:					{val: false,  status: "", input: undefined, req: false},
-			offset:					{val: false,  status: "", input: undefined, req: false}
+			led_brightness:			{val: "",     status: "", input: undefined, req: false}
 		}	
 
 	let updateFormData = () => {
@@ -35,8 +33,6 @@
 		formdata.pause_uses_disabled.val =  $config_store.pause_uses_disabled
 		formdata.service.val = $config_store.service
 		formdata.led_brightness.val = $config_store.led_brightness
-		formdata.scale.val = $config_store.scale
-		formdata.offset.val = $config_store.offset
 	}
 
 	let setProperty = async (prop) => {
@@ -151,32 +147,6 @@
 				</Borders>
 			</div>
 			{/if}
-
-			<div class="mt-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
-					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.sensorscale")}</div>
-					<InputForm 
-						disabled is_inline type="number" 
-						bind:this={formdata.scale.input}
-						bind:value={formdata.scale.val} 
-						bind:status={formdata.scale.status} 
-						onChange={()=>setProperty("scale")} 
-					/>
-				</Borders>
-			</div>
-
-			<div class="mt-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
-					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.sensoroffset")}</div>
-					<InputForm 
-						disabled is_inline type="number" 
-						bind:this={formdata.offset.input}
-						bind:value={formdata.offset.val} 
-						bind:status={formdata.offset.status} 
-						onChange={()=>setProperty("offset")} 
-					/>
-				</Borders>
-			</div>
 		</div>	
 	</div>
 

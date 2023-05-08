@@ -44,7 +44,7 @@
 	<div class="is-collapsible" transition:slide|local={{ duration: 300 }}>
 		{#each data.items as item, i}
 			{#if item.value != undefined}
-			<MonitoringItem name={item.name} value={item.value} unit={item.unit} />
+			<MonitoringItem name={item.name} value={item.value} unit={item.unit!=undefined?item.unit:""} />
 				{#if i < data.items.length - 1}
 				<hr class="m-0 p-0"/>
 				{/if}
