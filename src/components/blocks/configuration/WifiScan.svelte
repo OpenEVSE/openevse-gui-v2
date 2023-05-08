@@ -1,5 +1,5 @@
 <script>
-	import { status_store } from "./../../../lib/stores/status.js";
+	import { status_store } 				 from "./../../../lib/stores/status.js";
 	import { uistates_store } 				 from "./../../../lib/stores/uistates.js";
 	import { _ } 		  					 from 'svelte-i18n'
 	import { config_store } 				 from "./../../../lib/stores/config.js";
