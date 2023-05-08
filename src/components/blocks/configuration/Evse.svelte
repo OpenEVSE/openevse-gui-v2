@@ -59,7 +59,10 @@
 	<div class="columns is-centered is-vcentered has-text-dark">
 		<div class="column is-two-thirds">
 			<div class="my-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
+				<Borders grow={true} has_help>
+					<div slot="help">
+						{@html $_("config.evse.maxcur-help")}
+					</div>
 					<div class="is-uppercase has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>
 					<SliderForm icon="fa6-solid:gauge-high" 
 						bind:value={formdata.max_current_soft.val} 
@@ -76,7 +79,10 @@
 
 			{#if $config_store.default_state !== 'undefined'}
 			<div class="my-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
+				<Borders grow={true} has_help={true}>
+					<div slot="help">
+						{@html $_("config.evse.defaultstate-help")}
+					</div>
 					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.defaultstate")}</div>
 					<Select 
 						bind:this={formdata.default_state.input}
@@ -91,7 +97,10 @@
 
 			{#if $config_store.is_threephase !== 'undefined'}
 			<div class="my-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
+				<Borders grow={true} has_help>
+					<div slot="help">
+						{@html $_("config.evse.threephase-help")}
+					</div>
 					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.threephase")}</div>
 					<Select 
 						bind:this={formdata.is_threephase.input}
@@ -155,7 +164,11 @@
 			</div>
 			{#if $config_store.led_brightness != undefined}
 			<div class="mt-1 is-flex is-justify-content-center " >
-				<Borders grow={true}>
+				
+				<Borders grow={true} has_help>
+					<div slot="help">
+						{@html $_("config.evse.led-bn-help")}
+					</div>
 					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.led-bn")}</div>
 					<SliderForm 
 						icon="ic:outline-light-mode" 
