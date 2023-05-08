@@ -274,6 +274,7 @@
 		},
 		"evse": {
 			"maxcur": "Max Current",
+			"maxcur-help": "Max current the hardware setup can handle",
 			"random": "Scheduler Random start adjust",
 			"random-help": "<p>The maximum number of seconds to randomly add/subtract from the a scheduled charge start time, eg a value of 600 will adjust the start time my +/- 10 minutes. This is to help prevent large syncronised loads when multiple vehicles start charging at the same time.</p>",
 			"pause-help": "<p>Some vehicles will shutdown if left in sleep mode (pilot signal enable) and can not be woken up thereafter by the charger.</p><br><p>Changing the pause state to disable should resolve this issue.<br>However this removes the ability for the charger to detect if a vehicle is connected when paused.</p>",
@@ -281,10 +282,14 @@
 			"service": "Service Level",
 			"pause": "Pause Status",
 			"led-bn": "Led Brightness",
+			"led-bn-help": "RGB leds brightness (not related to LCD panel brightness)",
 			"sensorscale": "Current scale",
 			"sensoroffset": "Current offset",
 			"threephase": "Three-phase",
-			"defaultstate": "Default State"
+			"threephase-help": "Enable this switch when charging with three phases to get correct power calculation",
+			"defaultstate": "Default State",
+			"defaultstate-help": "OpenEVSE will take this default state when there is no pending command",
+			"limit-help": "Set charge limit that will survive reboot"
 		},
 		"safety": {
 			"test": "Test",
