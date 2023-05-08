@@ -13,7 +13,7 @@
 	import Borders 				from "./../../ui/Borders.svelte"
 
 	let setWifi = false
-	let input_host_status
+
 	let formdata = {
 			hostname: 			{val: false, 		input: undefined, status: "", req: false},
 			ap_ssid: 		{val: false, 		input: undefined, status: "", req: false},
@@ -46,6 +46,7 @@
 
 	function selectWifi() {
 		setWifi = true
+	}
 	
 
 	onMount(
