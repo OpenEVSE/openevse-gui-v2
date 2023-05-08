@@ -48,7 +48,7 @@ import Logo  from "../../../assets/logo-mini.png"
 		</div>
 		
 		<div class="">
-			<div class="has-text-weight-bold is-size-6 mt-2 has-text-dark">Gui V2 by <a href="http://www.github.com/KipK/" target="_blank">@KipK</a> with</div>
+			<div class="has-text-weight-bold is-size-6 mt-2 has-text-dark">Gui V2 built with</div>
 			<div class="is-size-6">
 				<a href="https://svelte.dev/" on:click|preventDefault={()=>{window.open("https://svelte.dev/");return false}}><iconify-icon inline icon="vscode-icons:file-type-svelte"></iconify-icon>Svelte </a>
 				<a href="https://vitejs.dev/" on:click|preventDefault={()=>{window.open("https://vitejs.dev/");return false}}><iconify-icon inline icon="vscode-icons:file-type-vite"></iconify-icon>Vite </a>
