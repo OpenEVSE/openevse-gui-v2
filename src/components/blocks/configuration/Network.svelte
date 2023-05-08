@@ -15,9 +15,9 @@
 	let setWifi = false
 
 	let formdata = {
-			hostname: 			{val: false, 		input: undefined, status: "", req: false},
-			ap_ssid: 		{val: false, 		input: undefined, status: "", req: false},
-			ap_pass:		{val: false, 		input: undefined, status: "", req: false}
+			hostname: 		{val: undefined, input: undefined, status: "", req: false},
+			ap_ssid: 		{val: undefined, input: undefined, status: "", req: false},
+			ap_pass:		{val: undefined, input: undefined, status: "", req: false}
 	}
 
 	function displayMode(mode) {
@@ -34,9 +34,9 @@
 	}
 
 	let updateFormData = () => {
-		formdata.host.val = $config_store.host,
-		formdata.ap_ssid  = $config_store.ap_ssid,
-		formdata.ap_pass = $config_store.ap_pass
+		formdata.hostname.val = $config_store.host,
+		formdata.ap_ssid.val  = $config_store.ap_ssid,
+		formdata.ap_pass.val = $config_store.ap_pass
 	}
 
 	let setProperty = async (prop) => {
@@ -106,12 +106,20 @@
 	</div>
 	{/if}
 
-	<div class="has-text-dark has-text-weight-bold">{$_("config.network.modes.ap")}</div>
-	<div class="my-3">
-		{$_("config.network.apdefault")}
-		<InputForm is_inline type="text" title={$_("config.network.apssid")} placeholder="openevse" bind:value={formdata.ap_ssid.val} 
-				   status={formdata.ap_ssid.status} onChange={()=>setProperty("ap_ssid")}/>
-		<InputForm is_inline type="text" title={$_("config.network.appass")} placeholder="openevse" bind:value={formdata.ap_pass.val} 
-				   status={formdata.ap_pass.status} onChange={()=>setProperty("ap_pass")}/>
+	<div class="is-flex is-justify-content-center">
+		<Borders grow>
+			<div class="my-3 has-text-dark has-text-weight-bold">{$_("config.network.modes.ap")}</div>
+			{$_("config.network.apdefault")}
+			<form on:submit|preventDefault>
+				<div>
+					<InputForm is_inline type="text" title={$_("config.network.apssid")} placeholder="openevse" bind:value={formdata.ap_ssid.val} 
+							status={formdata.ap_ssid.status} onChange={()=>setProperty("ap_ssid")}/>
+				</div>
+				<div>
+					<InputForm is_inline type="password" title={$_("config.network.appass")} placeholder="openevse" bind:value={formdata.ap_pass.val} 
+							status={formdata.ap_pass.status} onChange={()=>setProperty("ap_pass")}/>
+				</div>
+			</form>
+		</Borders>
 	</div>
 </Box>
