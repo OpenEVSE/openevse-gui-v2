@@ -15,9 +15,9 @@
 	let setWifi = false
 
 	let formdata = {
-			hostname: 		{val: undefined, input: undefined, status: "", req: false},
-			ap_ssid: 		{val: undefined, input: undefined, status: "", req: false},
-			ap_pass:		{val: undefined, input: undefined, status: "", req: false}
+			hostname: 		{val: "", input: undefined, status: "", req: false},
+			ap_ssid: 		{val: "", input: undefined, status: "", req: false},
+			ap_pass:		{val: "", input: undefined, status: "", req: false}
 	}
 
 	function displayMode(mode) {
@@ -112,12 +112,20 @@
 			{$_("config.network.apdefault")}
 			<form on:submit|preventDefault>
 				<div>
-					<InputForm is_inline type="text" title={$_("config.network.apssid")} placeholder="openevse" bind:value={formdata.ap_ssid.val} 
-							status={formdata.ap_ssid.status} onChange={()=>setProperty("ap_ssid")}/>
+					<InputForm is_inline type="text" title={$_("config.network.apssid")} 
+						placeholder="openevse" 
+						bind:this={formdata.ap_ssid.input}
+						bind:value={formdata.ap_ssid.val} 
+						bind:status={formdata.ap_ssid.status} 
+						onChange={()=>setProperty("ap_ssid")}/>
 				</div>
 				<div>
-					<InputForm is_inline type="password" title={$_("config.network.appass")} placeholder="openevse" bind:value={formdata.ap_pass.val} 
-							status={formdata.ap_pass.status} onChange={()=>setProperty("ap_pass")}/>
+					<InputForm is_inline type="password" title={$_("config.network.appass")} 
+						placeholder="openevse"
+						bind:this={formdata.ap_pass.input}
+						bind:value={formdata.ap_pass.val} 
+						bind:status={formdata.ap_pass.status}
+						onChange={()=>setProperty("ap_pass")}/>
 				</div>
 			</form>
 		</Borders>
