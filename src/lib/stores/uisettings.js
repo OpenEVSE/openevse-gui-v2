@@ -1,6 +1,6 @@
-import { writable } from 'svelte-local-storage-store'
+import { persisted } from 'svelte-local-storage-store'
 
-export const uisettings_store = writable('settings', {
+export const uisettings_store = persisted('settings', {
 	lang: "en",
 	auto_release: true,
 	term_fontbig: false,
