@@ -1,6 +1,4 @@
----
-
-name: Build OpenEVSE firmware
+name: Build gui
 
 on:
   push:
@@ -11,13 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Invoke workflow in OpenEVSE repo
-        uses: aurelien-baudet/workflow-dispatch@v2
+      - uses: actions/checkout@v3
         with:
-          workflow: Build/Release OpenEVSE
-          repo: OpenEVSE/ESP32_WiFi_V4.x
-          ref: master
-          token: ${{ secrets.PERSONAL_TOKEN }}
-          inputs: '{ "v2_ref": "${{ github.ref_name }}" }'
+          repository: ${{ github.repository }}
+          submodules: recursive
+      - name: Install dependencies
+        run: |
+          npm install
+      - name: Build GUI
+        run: |
+          npm run build
