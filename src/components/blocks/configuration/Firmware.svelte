@@ -66,15 +66,13 @@
 	
 	async function restartOpenEvse() {
 		restartOpenEvseState = "loading"
-		const payload = "json=1&rapi=$FR"
-		let res = await serialQueue.add(()=>httpAPI("POST","/r",payload, "text"))
-		if (res == "set" )  {
+		let res = await serialQueue.add(()=>httpAPI("POST","/restartevse",null, "text"))
+		if (res == "1" )  {
 			restartOpenEvseState = "ok"
 			return true
 		}
 		else {
-			// cheating as openEVSE api always answer HTTP 500 on reboot command
-			restartOpenEvseState = "ok"
+			restartOpenEvseState = "error"
 			return false
 		}
 	}
