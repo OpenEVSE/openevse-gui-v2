@@ -16,8 +16,8 @@
 	import FirmwareUpdateModal 	from "./FirmwareUpdateModal.svelte"
 
 
-	let restartOpenEvseState = ""
-	let restartEspState = ""
+	let restartEvseInst
+	let restartEspInst
 	let resetEspState = ""
 	let fw_modal_opened = false
 	let fw_has_update = false
@@ -65,15 +65,21 @@
 	}
 
 	async function restart(device) {
-		restartOpenEvseState = "loading"
+		let inst
+		if (device == "gateway") {
+			inst = restartEspInst
+		} else if (device == "evse") {
+			inst = restartEvseInst
+		}
+		inst.state = "loading"
 		const payload = { device: device }
 		let res = await serialQueue.add(()=>httpAPI("POST","/restart",JSON.stringify(payload)))
 		if (res.msg == "restart " + device )  {
-			restartOpenEvseState = "ok"
+			inst.state = "ok"
 			return true
 		}
 		else {
-			restartOpenEvseState = "error"
+			inst.state = "error"
 			return false
 		}
 	}
@@ -94,8 +100,6 @@
 				alert_visible = true
 				resetEspState = "error"
 			}
-
-
 		}
 	}
 
@@ -196,7 +200,7 @@
 			<tr>
 				<td class="has-text-weight-bold is-size-7-mobile">OpenEVSE</td>
 				<td class="is-size-7-mobile">{$config_store.firmware}</td>
-				<td><div class="has-text-centered"><Button width="100px" size="is-responsive" name={$_("config.firmware.restart")} butn_submit={() => restart("evse")} state={restartOpenEvseState}/></div></td>
+				<td><div class="has-text-centered"><Button bind:this={restartEvseInst} width="100px" size="is-responsive" name={$_("config.firmware.restart")} butn_submit={() => restart("evse")}/></div></td>
 			</tr>
 			<tr>
 				<td class="has-text-weight-bold is-size-7-mobile">OpenEVSE Wifi</td>
@@ -218,7 +222,7 @@
 							<Button  size="is-responsive" width="100px"name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
 						</div>
 						<div class="mb-2">
-							<Button size="is-responsive" width="100px" name={$_("config.firmware.restart")} butn_submit={() => restart("gateway")} state={restartEspState}/>
+							<Button bind:this={restartEspInst} size="is-responsive" width="100px" name={$_("config.firmware.restart")} butn_submit={() => restart("gateway")}/>
 						</div>
 						<div class="mb-2">
 							<Button size="is-responsive" width="100px" name={$_("config.firmware.reset")} butn_submit={resetESP} state={resetEspState}/>
