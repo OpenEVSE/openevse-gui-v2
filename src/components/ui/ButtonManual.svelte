@@ -6,10 +6,8 @@
 	export let ischarging = false
 	export let setmode = (m) => {}
 	export let isauto = false
+	export let noenable = false
 	export let disabled = false
-
-	let mode1 = "ON"
-	let mode2 = "OFF"
 
 	
 </script>
@@ -22,7 +20,9 @@
 
 <svelte:options accessors/>
 <div class="is-flex is-flex-wrap-nowrap buttonblock buttons field is-grouped has-addons">
+	{#if !noenable}
 	<ButtonManualItem mode={mode} role={1} {ischarging} {disabled} onClick = {()=>setmode(1)} icon="fa6-solid:bolt" tooltip={disabled?null:$_("charge-enable")}   />
+	{/if}
 	{#if isauto}
 	<ButtonManualItem mode={mode} role={0} {ischarging} {disabled} onClick = {()=>setmode(0)} icon="fa6-solid:robot" tooltip={disabled?null:$_("charge-auto")}   />
 	{/if}
