@@ -48,7 +48,7 @@
 				firmware_release = $github_store.find(el => el.prerelease == false)
 				firmware_prerelease = $github_store.find(el => el.prerelease == true && 
 				(!isNaN(el.tag_name.charAt(1)) && el.tag_name.charAt(2) == "." && !isNaN(el.tag_name.charAt(3))))
-				firmware_daily = $github_store.find(el => el.tag_name == "v2_gui")
+				firmware_daily = $github_store.find(el => el.tag_name == "latest")
 			}
 			
 			if (firmware_release && compareVersion(firmware_release.name,$config_store.version) == 1) {
