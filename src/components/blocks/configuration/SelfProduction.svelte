@@ -24,29 +24,39 @@
 
 	const presets = [
 		{
-			// needs to do some simulations to get new good default data 
-			// those are empirical for now
-			name: "No waste",
-			desc: "No waste of produced energy. Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
+			name: "Default",
+			desc: "Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
 			id: 0,
 			divert_attack_smoothing_time: 20,
-			divert_decay_smoothing_time: 200,
-			divert_min_charge_time: 600
+			divert_decay_smoothing_time: 600,
+			divert_min_charge_time: 600,
+			divert_PV_ratio: 1.1
+		},
+		{
+			name: "No waste",
+			desc: "No waste of produced energy. Same as default but will import more from the grid to not waste any solar energy",
+			id: 1,
+			divert_attack_smoothing_time: 20,
+			divert_decay_smoothing_time: 600,
+			divert_min_charge_time: 600,
+			divert_PV_ratio: 0.5
 		},
 		{
 			name: "No import",
 			desc: "Try to limit grid usage. Will slow down the charge rate quickly, but increase slower when energy is going back.",
-			id: 1,
+			id: 2,
 			divert_attack_smoothing_time: 300,
 			divert_decay_smoothing_time: 20,
-			divert_min_charge_time: 600
+			divert_min_charge_time: 600,
+			divert_PV_ratio: 1.1
 		},
 		{
 			name: "Custom",
-			id: 2,
+			id: 3,
 			divert_attack_smoothing_time: 20,
-			divert_decay_smoothing_time: 200,
-			divert_min_charge_time: 600
+			divert_decay_smoothing_time: 600,
+			divert_min_charge_time: 600,
+			divert_PV_ratio: 1.1
 		}
 	]
 
@@ -123,10 +133,11 @@
 	}
 
 	let set_preset = async (id) => {
-		if (presets[id] && id != 2) {
+		if (presets[id] && id != 3) {
 			$config_store.divert_attack_smoothing_time = presets[id].divert_attack_smoothing_time
 			$config_store.divert_decay_smoothing_time = presets[id].divert_decay_smoothing_time
 			$config_store.divert_min_charge_time = presets[id].divert_min_charge_time
+			$config_store.divert_PV_ratio = presets[id].divert_PV_ratio
 			updateFormData()
 			preset = get_preset()
 			await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
@@ -136,15 +147,14 @@
 	}
 	let get_preset = () => {
 		let preset
-		if ($config_store.divert_attack_smoothing_time == presets[0].divert_attack_smoothing_time
-			&& $config_store.divert_decay_smoothing_time == presets[0].divert_decay_smoothing_time
-			&& $config_store.divert_min_charge_time == presets[0].divert_min_charge_time
-		) preset = 0
-		else if ($config_store.divert_attack_smoothing_time == presets[1].divert_attack_smoothing_time
-			&& $config_store.divert_decay_smoothing_time == presets[1].divert_decay_smoothing_time
-			&& $config_store.divert_min_charge_time == presets[1].divert_min_charge_time
-		) preset = 1
-		else preset = 2
+		for (let i=0; i<3; i++) {
+			if ($config_store.divert_attack_smoothing_time == presets[i].divert_attack_smoothing_time
+			&& $config_store.divert_decay_smoothing_time == presets[i].divert_decay_smoothing_time
+			&& $config_store.divert_min_charge_time == presets[i].divert_min_charge_time
+			&& $config_store.divert_PV_ratio == presets[i].divert_PV_ratio)
+				preset = i
+			else preset = 3
+		}
 		return preset
 	}
 
@@ -250,20 +260,6 @@
 						/>
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.feed-excess-desc")}</div>
 					</div>
-
-					<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2" >
-						<InputForm 
-							title="{$_("config.selfprod.powerratio")}*" 
-							type="number" 
-							placeholder="1.1"
-							step="0.01"
-							bind:this={formdata.divert_PV_ratio.input}
-							bind:value={formdata.divert_PV_ratio.val} 
-							bind:status={formdata.divert_PV_ratio.status}
-							onChange={()=>setProperty("divert_PV_ratio")}
-						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
-					</div>
 					
 					<div class="mb-2 is-flex is-justify-content-center">
 						<Borders>
@@ -285,6 +281,19 @@
 							</div>
 							{/each}
 							{/key}
+						</div>
+						<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2" >
+							<InputForm 
+								title="{$_("config.selfprod.powerratio")}*" 
+								type="number" 
+								placeholder="1.1"
+								step="0.01"
+								bind:this={formdata.divert_PV_ratio.input}
+								bind:value={formdata.divert_PV_ratio.val} 
+								bind:status={formdata.divert_PV_ratio.status}
+								onChange={()=>setProperty("divert_PV_ratio")}
+							/>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
 						</div>
 						<div class="mb-2">
 							<InputForm
