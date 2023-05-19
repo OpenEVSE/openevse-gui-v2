@@ -49,9 +49,6 @@
 	}
 
 	let toggleDivert = async () => {
-		if (formdata.divert_enabled.val) {
-			formdata.charge_mode.val = "eco"
-		}
 		await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
 	}
 	let setProperty = async (prop) => {
@@ -132,6 +129,20 @@
 							</div>
 						</div>
 					</div>
+				</Borders>
+			</div>
+			<div class="is-flex is-justify-content-center">
+				<Borders grow>
+					<div class="has-text-weight-bold has-text-dark">{$_("config.selfprod.defaultmode")}</div>
+					<Switch
+							name="divertbootstate"
+							bind:this={formdata.charge_mode.input}
+							bind:checked={formdata.charge_mode.val}
+							bind:status={formdata.charge_mode.status} 
+							label={formdata.charge_mode.val?$_("yes"):$_("no")} 
+							disabled={formdata.charge_mode.status=="loading"}
+							onChange={() => setProperty("charge_mode")}
+							/>
 				</Borders>
 			</div>
 			<div class="is-size-7 mb-2 ">{$_("config.selfprod.desc")}</div>
