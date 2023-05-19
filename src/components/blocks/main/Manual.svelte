@@ -136,12 +136,14 @@
 		if (mode != $status_store.divertmode) {
 			$status_store.divertmode = mode
 			if (mode == 2) {  // eco
-				// remove active override state if there's some
+				// remove any active override if there's some
 				if ($override_store.state === "active") {
 					override_store.removeProp("state")
 				}
 			}
 			waiting = true
+			let data = "divertmode=" + mode
+			let res = await serialQueue.add(() => httpAPI("POST", "/divertmode", data, "text"))
 			let data = "divertmode=" + mode
 			let res = await serialQueue.add(() => httpAPI("POST", "/divertmode", data, "text"))
 			waiting = false
