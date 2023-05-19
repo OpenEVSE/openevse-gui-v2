@@ -438,7 +438,7 @@
 				"http": "HTTP"
 			},
 			"contype": "Connection Type",
-			"httppush": "HTTP Push (Always Active)",
+			"httppush": "HTTP Push",
 			"httppush-desc-1": "To update manually vehicule data, send HTTP POST request to:",
 			"httppush-desc-2": "containing json data in body:",
 			"help-1": "The Tesla login may break from time-to-time as Tesla change their login API, hopefully OpenEVSE will be able to resolve the issue on our server, but should the login fail you can use a 3rd Party app to generate the appropriate tokens.",
