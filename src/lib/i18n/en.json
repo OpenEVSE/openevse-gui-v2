@@ -380,6 +380,7 @@
 		},
 		"selfprod": {
 			"desc": "Dynamically adjust charge rate based on self production or excess power (grid export).",
+			"defaultmode": "Activate Eco mode at startup",
 			"production": "Production",
 			"excess": "Export",
 			"grid": "Grid +Import/-Export",
