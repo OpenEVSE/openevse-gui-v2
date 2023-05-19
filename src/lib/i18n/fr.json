@@ -371,6 +371,7 @@
     },
     "selfprod": {
       "desc": "Ajuste dynamiquement la puissance de charge en fonction de l'energie produite ou de l'export vers le réseau (+I/-E).",
+      "defaultmode": "Activer le mode Eco au démarrage",
       "production": "Production",
       "excess": "Export",
       "grid": "+Import/-Export Réseau",

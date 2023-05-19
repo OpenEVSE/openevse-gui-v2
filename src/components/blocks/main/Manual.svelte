@@ -134,16 +134,17 @@
 	}
 
 	async function setDivertMode(mode) {
-		if (mode != $config_store.charge_mode) {
-			$config_store.charge_mode = mode
-			if (mode =="eco") {
+		if (mode != $status_store.divertmode) {
+			$status_store.divertmode = mode
+			if (mode == 2) {  // eco
 				// remove any active override if there's some
 				if ($override_store.state === "active") {
 					override_store.removeProp("state")
 				}
 			}
 			waiting = true
-			let res = await serialQueue.add(() => config_store.saveParam("charge_mode",mode))
+			let data = "divertmode=" + mode
+			let res = await serialQueue.add(() => httpAPI("POST", "/divertmode", data, "text"))
 			waiting = false
 		}
 		// if (button_divert)
@@ -241,16 +242,16 @@ $: setShaper($uistates_store.shaper)
 		<div class="is-flex is-justify-content-center my-0 mb-2">
 			<ToggleButtonDouble 
 				visible={$config_store.divert_enabled} 
-				state={$config_store.charge_mode == "eco"?true:false} 
+				state={$status_store.divertmode == 2?true:false} 
 				name={$_("charge-mode-eco")} 
 				name2={$_("charge-mode-fast")}
 				color="is-primary"
-				tooltip={$config_store.charge_mode=="eco"?$_("charge-mode-fast-ttip"):$_("charge-mode-eco-ttip")} 
+				tooltip={$status_store.divertmode==2?$_("charge-mode-fast-ttip"):$_("charge-mode-eco-ttip")} 
 				icon="fa6-solid:solar-panel" 
 				icon2="mdi:electricity-from-grid" 
 				size={20} size2={26} 
 				breakpoint={$uistates_store.breakpoint}
-				action={() => setDivertMode($config_store.charge_mode == "eco" ? "fast" : "eco")} 
+				action={() => setDivertMode($status_store.divertmode == 2 ? 1 : 2)} 
 				disabled={waiting}
 			/>
 			<ToggleButtonIcon
