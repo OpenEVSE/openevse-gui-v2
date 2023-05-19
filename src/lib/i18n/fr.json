@@ -426,7 +426,7 @@
         "mqtt": "MQTT"
       },
       "contype": "Type de Connection",
-      "httppush": "HTTP Push (Toujours Actif)",
+      "httppush": "HTTP Push",
       "httppush-desc-1": "Pour mettre à jours manuellement les données véhicule, envoyez une requête HTTP POST vers:",
       "httppush-desc-2": "contenant les données json suivantes dans le 'body':",
       "help-1": "L'identification Tesla peut cesser de fonctionner de temps en temps quand Tesla change son API, heureusement OpenEVSE est capable de résoudre le problème sur notre serveur. Mais si elle échoue, vous pouvez utiliser une application externe pour générer le token approprié.",
