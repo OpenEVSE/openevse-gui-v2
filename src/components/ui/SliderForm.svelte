@@ -2,7 +2,7 @@
 	export let value;
 	export let min;
 	export let max;
-	export let step = "1";
+	export let step = 1;
 	export let label = "";
 	export let tooltip = "";
 	export let unit = "";
