@@ -107,7 +107,8 @@
     "rfid": "rfid",
     "mqtt": "mqtt",
     "shaper": "délestage",
-    "limit": "limite"
+    "limit": "limite",
+    "boost": "rapide"
   },
   "units": {
     "kwh": "kwh",

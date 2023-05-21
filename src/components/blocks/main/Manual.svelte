@@ -118,7 +118,7 @@
 			}
 			waiting = false
 		}
-		buttons_manual.disabled = false
+		buttons_manual?buttons_manual.disabled = false:null
 	}
 
 	async function setShaper(state) {
