@@ -34,7 +34,7 @@
 	}
 
 	let updateFormData = () => {
-		formdata.hostname.val = $config_store.host,
+		formdata.hostname.val = $config_store.hostname,
 		formdata.ap_ssid.val  = $config_store.ap_ssid,
 		formdata.ap_pass.val = $config_store.ap_pass
 	}
