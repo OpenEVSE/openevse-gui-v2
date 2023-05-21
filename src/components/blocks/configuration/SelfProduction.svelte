@@ -117,14 +117,13 @@
 		preset = id
 	}
 	let get_preset = () => {
-		let ps
+		let ps = 3
 		for (let i=0; i<3; i++) {
 			if ($config_store.divert_attack_smoothing_time == presets[i].divert_attack_smoothing_time
 			&& $config_store.divert_decay_smoothing_time == presets[i].divert_decay_smoothing_time
 			&& $config_store.divert_min_charge_time == presets[i].divert_min_charge_time
 			&& $config_store.divert_PV_ratio == presets[i].divert_PV_ratio)
 				ps = i
-			else ps = 3
 		}
 		return ps
 	}
