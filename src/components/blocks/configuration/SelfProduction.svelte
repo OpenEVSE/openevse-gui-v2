@@ -102,6 +102,11 @@
 		await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
 	}
 
+	let setChargeMode = async () => {
+		formdata.charge_mode.val = formdata.charge_mode.input.checked ? "eco" : "fast"
+		setProperty("charge_mode")
+	}
+
 
 	let set_preset = async (id) => {
 		if (presets[id] && id != 3) {
@@ -205,11 +210,11 @@
 					<Switch
 							name="divertbootstate"
 							bind:this={formdata.charge_mode.input}
-							bind:checked={formdata.charge_mode.val}
+							checked={formdata.charge_mode.val=="eco"?true:false}
 							bind:status={formdata.charge_mode.status} 
 							label={formdata.charge_mode.val?$_("yes"):$_("no")} 
 							disabled={formdata.charge_mode.status=="loading"}
-							onChange={() => setProperty("charge_mode")}
+							onChange={() => setChargeMode()}
 							/>
 				</Borders>
 			</div>

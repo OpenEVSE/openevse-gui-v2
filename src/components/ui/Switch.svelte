@@ -67,7 +67,7 @@
 
     }
 </style>
-
+<svelte:options accessors/>
 <div class="switch is-flex-shrink-0 is-inline-block {tooltip?"has-tooltip-arrow has-tooltip-" + tooltip_pos + " has-tooltip-multiline":""} {hidden?"is-hidden":""}" data-tooltip={tooltip} on:mouseenter={hoverin} on:mouseleave={hoverout}>
 	{#if loader}
 	<div class="main" class:is-hidden={status==""?true:false}>
