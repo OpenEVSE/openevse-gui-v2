@@ -2,7 +2,7 @@
 	export let value;
 	export let min;
 	export let max;
-	export let step = "1";
+	export let step = 1;
 	export let label = "";
 	export let tooltip = "";
 	export let unit = "";
@@ -48,7 +48,7 @@
 
 		{/if}
 		<div class="is-flex-grow-1 is-flex-shrink-1" on:mouseenter={togglecolor} on:mouseleave={togglecolor} >			
-			<input class="slider is-fullwidth is-medium has-tooltip-arrow {hover||focus?'is-info':''}" 
+			<input class="slider is-fullwidth is-medium has-tooltip-arrow has-tooltip-multiline {hover||focus?'is-info':''}" 
 				data-tooltip={tooltip==""?null:tooltip} 
 				step={step?step:"1"} 
 				min={min} max={max} 

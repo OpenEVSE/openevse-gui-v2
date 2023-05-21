@@ -219,7 +219,7 @@
 								</div>	
 							</td>
 							<td class="">
-								<div class="is-flex is-align-content-start is-flex-wrap-wrap">
+								<div class="is-flex is-justify-content-space-between is-flex-wrap-wrap">
 									<div class="is-inline-block">
 										<div class="is-size-6 has-text-weight-bold">{update.version} </div>
 										<div class="is-size-7">{update.updated_at}</div>

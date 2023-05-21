@@ -1,5 +1,5 @@
 <script>
-	import SliderForm from "./../../ui/SliderForm.svelte";
+	import Checkbox from "./../../ui/Checkbox.svelte";
 	import { uisettings_store } from "./../../../lib/stores/uisettings.js";
 	import Borders 			  from "./../../ui/Borders.svelte";
 	import { onMount }		  from "svelte";
@@ -20,14 +20,54 @@
 	let modes = [{name: $_("config.selfprod.production"), value: 0}, {name:$_("config.selfprod.excess"), value: 1}]
 	let divertelapsed = derived(uistates_store, store => s2mns(store.divert_update))
 
+	let preset = 3
+
+	const presets = [
+		{
+			name: "Default",
+			desc: "Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
+			id: 0,
+			divert_attack_smoothing_time: 20,
+			divert_decay_smoothing_time: 600,
+			divert_min_charge_time: 600,
+			divert_PV_ratio: 1.1
+		},
+		{
+			name: "No waste",
+			desc: "No waste of produced energy. Same as default but will import more from the grid to not waste any solar energy",
+			id: 1,
+			divert_attack_smoothing_time: 20,
+			divert_decay_smoothing_time: 600,
+			divert_min_charge_time: 600,
+			divert_PV_ratio: 0.5
+		},
+		{
+			name: "No import",
+			desc: "Try to limit grid usage. Will slow down the charge rate quickly, but increase slower when energy is going back.",
+			id: 2,
+			divert_attack_smoothing_time: 300,
+			divert_decay_smoothing_time: 20,
+			divert_min_charge_time: 600,
+			divert_PV_ratio: 1.1
+		},
+		{
+			name: "Custom",
+			id: 3,
+			divert_attack_smoothing_time: 20,
+			divert_decay_smoothing_time: 600,
+			divert_min_charge_time: 600,
+			divert_PV_ratio: 1.1
+		}
+	]
+
 	let formdata = {
 		divert_enabled:	  				{val: false,	input: undefined, status: "", req: false},
 		charge_mode:					{val: "eco",	input: undefined, status: "", req: false},
 		mqtt_solar: 	  				{val: "",		input: undefined, status: "", req: false},
 		mqtt_grid_ie: 	  				{val: "",		input: undefined, status: "", req: false},
 		divert_PV_ratio:  				{val: "",		input: undefined, status: "", req: true},
-		divert_attack_smoothing_factor: {val: "",		input: undefined, status: "", req: true},
-		divert_decay_smoothing_factor:	{val: "",		input: undefined, status: "", req: true},
+		divert_attack_smoothing_time:   {val: "",		input: undefined, status: "", req: true},
+		divert_decay_smoothing_time:	{val: "",		input: undefined, status: "", req: true},
 		divert_min_charge_time:			{val: "",		input: undefined, status: "", req: true}
 	}
 
@@ -35,12 +75,10 @@
 		formdata.divert_enabled.val 			 	= $config_store.divert_enabled
 		formdata.charge_mode.val					= $config_store.charge_mode
 		formdata.mqtt_solar.val						= $config_store.mqtt_solar
-		formdata.mqtt_solar.req 					= $uistates_store.divert_type?true:false
 		formdata.mqtt_grid_ie.val					= $config_store.mqtt_grid_ie
-		formdata.mqtt_grid_ie.req 					= $uistates_store.divert_type?false:true
 		formdata.divert_PV_ratio.val				= $config_store.divert_PV_ratio
-		formdata.divert_attack_smoothing_factor.val	= $config_store.divert_attack_smoothing_factor
-		formdata.divert_decay_smoothing_factor.val	= $config_store.divert_decay_smoothing_factor
+		formdata.divert_attack_smoothing_time.val	= $config_store.divert_attack_smoothing_time
+		formdata.divert_decay_smoothing_time.val	= $config_store.divert_decay_smoothing_time
 		formdata.divert_min_charge_time.val			= $config_store.divert_min_charge_time
 	}
 
@@ -48,7 +86,10 @@
 		await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
 	}
 	let setProperty = async (prop) => {
+		$config_store[prop] = formdata[prop].val
+		preset = get_preset()
 		await submitFormData({prop: prop, form: formdata , prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
+		
 	}
 
 	let setDivertMode = async () => {
@@ -88,6 +129,32 @@
 		}
 	}
 
+	let set_preset = async (id) => {
+		if (presets[id] && id != 3) {
+			$config_store.divert_attack_smoothing_time = presets[id].divert_attack_smoothing_time
+			$config_store.divert_decay_smoothing_time = presets[id].divert_decay_smoothing_time
+			$config_store.divert_min_charge_time = presets[id].divert_min_charge_time
+			$config_store.divert_PV_ratio = presets[id].divert_PV_ratio
+			updateFormData()
+			preset = get_preset()
+			await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
+
+		}
+		preset = id
+	}
+	let get_preset = () => {
+		let ps
+		for (let i=0; i<3; i++) {
+			if ($config_store.divert_attack_smoothing_time == presets[i].divert_attack_smoothing_time
+			&& $config_store.divert_decay_smoothing_time == presets[i].divert_decay_smoothing_time
+			&& $config_store.divert_min_charge_time == presets[i].divert_min_charge_time
+			&& $config_store.divert_PV_ratio == presets[i].divert_PV_ratio)
+				ps = i
+			else ps = 3
+		}
+		return ps
+	}
+
 	onMount(()=>{
 		updateFormData()
 		getDivertMode()
@@ -96,6 +163,7 @@
 				formdata[key].val = ""
 			}
 		})
+		preset = get_preset();
 		mounted = true
 	})
 
@@ -204,87 +272,81 @@
 						<div class="is-size-7 has-text-left">{$_("config.selfprod.feed-excess-desc")}</div>
 					</div>
 					
-	
-		
-				
-		
-					<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2" >
-						<InputForm 
-							title="{$_("config.selfprod.powerratio")}*" 
-							type="number" 
-							placeholder="1.1"
-							step="0.01"
-							bind:this={formdata.divert_PV_ratio.input}
-							bind:value={formdata.divert_PV_ratio.val} 
-							bind:status={formdata.divert_PV_ratio.status}
-							onChange={()=>setProperty("divert_PV_ratio")}
-						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
-					</div>
-					
-		
-		
-					<div class="mb-2">
-						<!-- <InputForm 
-							title="{$_("config.selfprod.smoothattack")}*" 
+					<div class="mb-2 is-flex is-justify-content-center">
+						<Borders>
+							<div class="is-size-6 has-text-dark has-text-weight-bold mb-2">
+							Filter Settings
+						</div>
+						<div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-evenly">
+							{#key preset}
+							{#each presets as setting}
+							<div class="mx-2">
+								<Checkbox 
+									bold
+									color="info"
+									checked={preset == setting.id}
+									onChange={() => {set_preset(setting.id)}}
+									label={setting.name}
+									tooltip={setting.desc}
+								/>	
+							</div>
+							{/each}
+							{/key}
+						</div>
+						<div class="mb-2" >
+							<InputForm 
+								title="{$_("config.selfprod.powerratio")}*" 
 								type="number" 
-								placeholder="0.4"
-								step="0.01" 
-								min="0.001"
-								max="1"
-								bind:this={formdata.divert_attack_smoothing_factor.input}
-								bind:value={formdata.divert_attack_smoothing_factor.val} 
-								bind:status={formdata.divert_attack_smoothing_factor.status}
-								onChange={()=>setProperty("divert_attack_smoothing_factor")}
-						/> -->
-						<SliderForm 
-							label="{$_("config.selfprod.smoothattack")}*"
-							bind:value={formdata.divert_attack_smoothing_factor.val} 
-							min=0.01 max=1.0 step="0.01"
-							color="has-text-dark"
-							onchange={()=>setProperty("divert_attack_smoothing_factor")} 
-						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
-					</div>
-					
-		
-					<div class="mb-2">
-						<!-- <InputForm 
-							title="{$_("config.selfprod.smoothdecay")}*" 
-							type="number" 
-							placeholder="0.05"
-							step="0.01"
-							min="0.001"
-							max="1"
-							bind:this={formdata.divert_decay_smoothing_factor.input}
-							bind:value={formdata.divert_decay_smoothing_factor.val} 
-							bind:status={formdata.divert_decay_smoothing_factor.status}
-							onChange={()=>setProperty("divert_decay_smoothing_factor")}
-						/> -->
-						<SliderForm 
-							label="{$_("config.selfprod.smoothdecay")}*"
-							bind:value={formdata.divert_decay_smoothing_factor.val} 
-							min=0.01 max=1.0 step="0.01"
-							color="has-text-dark"
-							onchange={()=>setProperty("divert_decay_smoothing_factor")} 
-						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
-					</div>
-					
-					
-					<div class="mb-2">
-						<InputForm
-							title="{$_("config.selfprod.minchargetime")}*" 
-							type="number" 
-							placeholder="600"
-							min="0"
-							step="1"
-							bind:this={formdata.divert_min_charge_time.input}
-							bind:value={formdata.divert_min_charge_time.val} 
-							bind:status={formdata.divert_min_charge_time.status}
-							onChange={()=>setProperty("divert_min_charge_time")}
-						/>
-						<div class="is-size-7 has-text-left">{$_("config.selfprod.minchargetime-desc")}.</div>
+								placeholder="1.1"
+								step="0.01"
+								bind:this={formdata.divert_PV_ratio.input}
+								bind:value={formdata.divert_PV_ratio.val} 
+								bind:status={formdata.divert_PV_ratio.status}
+								onChange={()=>setProperty("divert_PV_ratio")}
+							/>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
+						</div>
+						<div class="mb-2">
+							<InputForm
+								title="{$_("config.selfprod.minchargetime")}*" 
+								type="number" 
+								placeholder="600"
+								min="0"
+								step="1"
+								bind:this={formdata.divert_min_charge_time.input}
+								bind:value={formdata.divert_min_charge_time.val} 
+								bind:status={formdata.divert_min_charge_time.status}
+								onChange={()=>setProperty("divert_min_charge_time")}
+							/>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.minchargetime-desc")}.</div>
+						</div>
+						<div class="mb-2">
+							<InputForm 
+								title="{$_("config.selfprod.smoothattack")}*"
+								bind:this={formdata.divert_attack_smoothing_time.input}
+								bind:value={formdata.divert_attack_smoothing_time.val}
+								bind:status={formdata.divert_attack_smoothing_time.status}
+								min=0 max=600 step="1"
+								onChange={()=>setProperty("divert_attack_smoothing_time")} 
+							/>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothattack-desc")}</div>
+						</div>
+						
+			
+						<div class="mb-2">
+							<InputForm 
+								title="{$_("config.selfprod.smoothdecay")}*"
+								bind:this={formdata.divert_decay_smoothing_time.input}
+								bind:value={formdata.divert_decay_smoothing_time.val}
+								bind:status={formdata.divert_decay_smoothing_time.status}
+								min=0 max=600 step="1"
+								onChange={()=>setProperty("divert_decay_smoothing_time")} 
+							/>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.smoothdecay-desc")}</div>
+						</div>
+
+						</Borders>
+						
 					</div>
 				</div>
 				</Borders>
