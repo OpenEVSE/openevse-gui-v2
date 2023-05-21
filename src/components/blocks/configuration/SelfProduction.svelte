@@ -293,7 +293,7 @@
 							{/each}
 							{/key}
 						</div>
-						<div class:is-hidden={$uistates_store.divert_type==0} class="mb-2" >
+						<div class="mb-2" >
 							<InputForm 
 								title="{$_("config.selfprod.powerratio")}*" 
 								type="number" 
