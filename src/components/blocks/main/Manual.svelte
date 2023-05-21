@@ -81,14 +81,13 @@
 				auto_release: $uisettings_store.auto_release
 			}
 
-		// keep charge_current claim	
-		if ($claims_target_store.claims.charge_current == EvseClients["manual"]["id"]) {
-				data.charge_current = $claims_target_store.properties.charge_current
-			}
+
 		switch(m) {
 			case 0: break
 			case 1: 
 				data.state = "active"
+				// disable Eco mode
+				setDivertMode(1)
 				break
 			case 2:
 				data.state = "disabled"
@@ -97,9 +96,9 @@
 		}
 
 		if(data.state != undefined ) {
-			// Mode Manual setting override
-			if ($override_store.max_current != undefined) {
-				data.max_current = $override_store.max_current
+			// keep charge_current 	property
+			if ($override_store.charge_current != undefined) {
+				data.charge_current = $override_store.charge_current
 			}
 			waiting = true
 			await serialQueue.add(() => override_store.upload(data))
@@ -111,7 +110,7 @@
 			if (data.charge_current)
 				await serialQueue.add(() => override_store.upload(data))
 			// Mode Auto, clearing override
-			else if ($claims_target_store.claims.state == EvseClients["manual"]["id"] ) {
+			else if ($override_store.state != undefined) {
 				if ($status_store.manual_override) { 
 					let res = await serialQueue.add(override_store.clear)
 				}
@@ -137,7 +136,7 @@
 		if (mode != $status_store.divertmode) {
 			$status_store.divertmode = mode
 			if (mode == 2) {  // eco
-				// remove any active override if there's some
+				// remove active override state if there's some
 				if ($override_store.state === "active") {
 					override_store.removeProp("state")
 				}
@@ -232,7 +231,7 @@ $: setShaper($uistates_store.shaper)
 		{:else if $claims_target_store.claims.state == EvseClients["ocpp"].id}
 		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={true} ischarging={$uistates_store.charging}/>
 		{:else if $schedule_store.length || $status_store.divertmode == 2 }
-		<ButtonManual bind:this={buttons_manual} isauto={true} noenable={$status_store.divertmode == 2}  mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={true}  mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
 		{:else if $claims_target_store.claims.state == EvseClients["limit"].id}
 		<ButtonManual bind:this={buttons_manual} isauto={false} mode={2} setmode={setMode} disabled={true} ischarging={false}/>
 		{:else}
@@ -240,15 +239,14 @@ $: setShaper($uistates_store.shaper)
 		{/if}
 	
 		<div class="is-flex is-justify-content-center my-0 mb-2">
-			<ToggleButtonDouble 
+			<ToggleButtonIcon 
 				visible={$config_store.divert_enabled} 
 				state={$status_store.divertmode == 2?true:false} 
-				name={$_("charge-mode-eco")} 
-				name2={$_("charge-mode-fast")}
+				name={$_("charge-mode-eco")}
 				color="is-primary"
+				color2="is-primary"
 				tooltip={$status_store.divertmode==2?$_("charge-mode-fast-ttip"):$_("charge-mode-eco-ttip")} 
 				icon="fa6-solid:solar-panel" 
-				icon2="mdi:electricity-from-grid" 
 				size={20} size2={26} 
 				breakpoint={$uistates_store.breakpoint}
 				action={() => setDivertMode($status_store.divertmode == 2 ? 1 : 2)} 
