@@ -144,8 +144,6 @@
 			waiting = true
 			let data = "divertmode=" + mode
 			let res = await serialQueue.add(() => httpAPI("POST", "/divertmode", data, "text"))
-			let data = "divertmode=" + mode
-			let res = await serialQueue.add(() => httpAPI("POST", "/divertmode", data, "text"))
 			waiting = false
 		}
 		// if (button_divert)
