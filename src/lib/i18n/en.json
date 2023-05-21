@@ -109,7 +109,8 @@
 		"rfid": "rfid",
 		"mqtt":"mqtt",
 		"shaper":"shaper",
-		"limit": "limit"
+		"limit": "limit",
+		"boost": "fast"
 	},
 	"units": {
 		"kwh": "kwh",
