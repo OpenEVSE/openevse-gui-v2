@@ -79,8 +79,13 @@
 				</div>
 			</div>
 			<div class="my-1 container">
-				<InputForm is_inline type="text" title={$_("config.network.host")} placeholder="openevse" bind:value={formdata.hostname.val} 
-					status={formdata.hostname.status} onChange={()=>setProperty("hostname")}/>
+				<InputForm is_inline type="text" 
+					title={$_("config.network.host")} 
+					placeholder="openevse" 
+					bind:this={formdata.hostname.input}
+					bind:value={formdata.hostname.val} 
+					status={formdata.hostname.status} 
+					onChange={()=>setProperty("hostname")}/>
 			</div>
 		</Borders>
 	</div>
