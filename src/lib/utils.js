@@ -122,7 +122,6 @@ export function createTzObj(tz) {
 		else {
 		}
 	})
-	console.log(tzobj)
 	return tzobj
 }
 
@@ -147,38 +146,13 @@ export let getBreakpoint = function () {
 };
 
 export function clientid2name(id) {
-	let name
-	switch (id) {
-		case EvseClients["manual"].id:
-			name =  "manual"
-			break;
-		case EvseClients["divert"].id:
-			name = "divert"
-			break;
-		case EvseClients["timer"].id:
-			name = "timer"
-			break;
-		case EvseClients["ohm"].id:
-			name = "ohm"
-			break;
-		case EvseClients["ocpp"].id:
-			name = "ocpp"
-			break;
-		case EvseClients["rfid"].id:
-			name = "rfid"
-			break;
-		case EvseClients["mqtt"].id:
-			name = "mqtt"
-			break;
-		case EvseClients["shaper"].id:
-			name = "shaper"
-			break;
-		case EvseClients["limit"].id:
-			name = "limit"
-			break;
-	}
-	return name
-
+	let output = "null"
+	Object.keys(EvseClients).forEach(key => {
+		if (id == EvseClients[key].id) {
+			output = key
+		}
+	})
+	return output
 }
 
 export function displayIcon(mode) {

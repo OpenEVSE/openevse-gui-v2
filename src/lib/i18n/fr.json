@@ -107,7 +107,8 @@
     "rfid": "rfid",
     "mqtt": "mqtt",
     "shaper": "délestage",
-    "limit": "limite"
+    "limit": "limite",
+    "boost": "rapide"
   },
   "units": {
     "kwh": "kwh",
@@ -230,6 +231,9 @@
       "ssid-desc": "Nom du réseau WiFi",
       "pass": "Mot de passe WiFi",
       "pass-desc": "clef WPA",
+      "apssid": "AP SSID",
+      "appass": "AP Mot de passe",
+      "apdefault": "Si non configuré, SSID: openevse-[chipID], pass: openevse",
       "connect": "Connecter",
       "scan": "Scanner",
       "connecting": "Connection en cours, veuillez patienter...",
@@ -269,6 +273,7 @@
     },
     "evse": {
       "maxcur": "Courant Maxi",
+      "maxcur-help": "Courant maximum prévu par l'installation",
       "random": "Départ aléatoire du Planificateur",
 	    "random-help": "<p>Le nombre maximum de secondes à ajouter/soustraire à un départ de charge planifié. <br> Par ex une valeur de 600 va ajuster l'heure du départ de +/- 10 minutes. <br> Cela permet d'éviter les pics de charge lors des changements tarifaires</p>",
       "pause-help": "<p>Certains véhicules vont s'éteindre si laissés en mode veille (Control Pilot actif) et ne peuvent être réveillés ensuite par le chargeur.</p><br><p>Changer le mode de pause sur Désactiver devrait résoudre ce soucis.<br>Cependant, cela retire la possibilité au chargeur de détecter pendant la pause si le véhicule est connecté.",
@@ -276,9 +281,14 @@
       "service": "Niveau de Service",
       "pause": "Mode de pause",
       "led-bn": "Luminosité des Leds",
+      "led-bn-help": "Luminiosité des leds RGB (ne concerne pas la luminisoité du LCD )",
       "sensorscale": "Echelle Courant",
 			"sensoroffset": "Décalage Courant",
-      "threephase": "Triphasé"
+      "threephase": "Triphasé",
+      "threephase-help": "Activer quand la charge se fait en triphasé pour avoir un calcul correct de la puissance",
+      "defaultstate": "Etat par défaut",
+      "defaultstate-help": "OpenEVSE prendra cet état par défaut si il n'y a pas d'autres consignes",
+      "limit-help": "Définir une limite de charge qui survivra après redemarrage"
     },
     "safety": {
       "test": "Test",
@@ -424,8 +434,7 @@
         "mqtt": "MQTT"
       },
       "contype": "Type de Connection",
-      "contype-desc": "Selectionner le type de connection aux données véhicule",
-      "httppush": "HTTP Push (Toujours Actif)",
+      "httppush": "HTTP Push",
       "httppush-desc-1": "Pour mettre à jours manuellement les données véhicule, envoyez une requête HTTP POST vers:",
       "httppush-desc-2": "contenant les données json suivantes dans le 'body':",
       "help-1": "L'identification Tesla peut cesser de fonctionner de temps en temps quand Tesla change son API, heureusement OpenEVSE est capable de résoudre le problème sur notre serveur. Mais si elle échoue, vous pouvez utiliser une application externe pour générer le token approprié.",

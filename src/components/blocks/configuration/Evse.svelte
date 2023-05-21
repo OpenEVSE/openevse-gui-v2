@@ -14,11 +14,13 @@
 	import { submitFormData } 	 from "./../../../lib/utils.js"
 
 	let mounted = false
+	const states_items = [{name: $_("disabled"), value: false}, {name: $_("active"), value: true}]
 	const service_items = [{name: "Auto", value: 0},{name: "Level 1", value: 1},{name: "Level 2", value: 2}]
 	const phase_items = [{name: $_("no"), value: false}, {name: $_("yes"), value: true}]
 	
 	let formdata = {
 			max_current_soft: 		{val: 32,  	  status: "", input: undefined, req: false},
+			default_state:			{val: false,  status: "", input: undefined, req: false},
 			is_threephase:			{val: false,  status: "", input: undefined, req: false},
 			scheduler_start_window:	{val: 0,      status: "", input: undefined, req: false},
 			pause_uses_disabled:	{val: null,   status: "", input: undefined, req: false},
@@ -28,6 +30,7 @@
 
 	let updateFormData = () => {
 		formdata.max_current_soft.val = $config_store.max_current_soft
+		formdata.default_state.val = $config_store.default_state
 		formdata.is_threephase.val = $config_store.is_threephase
 		formdata.scheduler_start_window.val = $config_store.scheduler_start_window
 		formdata.pause_uses_disabled.val =  $config_store.pause_uses_disabled
@@ -56,7 +59,10 @@
 	<div class="columns is-centered is-vcentered has-text-dark">
 		<div class="column is-two-thirds">
 			<div class="my-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
+				<Borders grow={true} has_help>
+					<div slot="help">
+						{@html $_("config.evse.maxcur-help")}
+					</div>
 					<div class="is-uppercase has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>
 					<SliderForm icon="fa6-solid:gauge-high" 
 						bind:value={formdata.max_current_soft.val} 
@@ -70,9 +76,31 @@
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Limit is_admin={true}/>
 			</div>
+
+			{#if $config_store.default_state !== 'undefined'}
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Borders grow={true} has_help={true}>
+					<div slot="help">
+						{@html $_("config.evse.defaultstate-help")}
+					</div>
+					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.defaultstate")}</div>
+					<Select 
+						bind:this={formdata.default_state.input}
+						bind:value={formdata.default_state.val} 
+						bind:status={formdata.default_state.status} 
+						items={states_items} 
+						onChange={()=>setProperty("default_state")}
+					/>
+				</Borders>
+			</div>
+			{/if}
+
 			{#if $config_store.is_threephase !== 'undefined'}
 			<div class="my-1 is-flex is-justify-content-center" >
-				<Borders grow={true}>
+				<Borders grow={true} has_help>
+					<div slot="help">
+						{@html $_("config.evse.threephase-help")}
+					</div>
 					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.threephase")}</div>
 					<Select 
 						bind:this={formdata.is_threephase.input}
@@ -136,7 +164,11 @@
 			</div>
 			{#if $config_store.led_brightness != undefined}
 			<div class="mt-1 is-flex is-justify-content-center " >
-				<Borders grow={true}>
+				
+				<Borders grow={true} has_help>
+					<div slot="help">
+						{@html $_("config.evse.led-bn-help")}
+					</div>
 					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.led-bn")}</div>
 					<SliderForm 
 						icon="ic:outline-light-mode" 

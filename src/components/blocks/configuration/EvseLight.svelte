@@ -10,22 +10,25 @@
 	import { submitFormData } 	 from "./../../../lib/utils.js"
 
 	let mounted = false
+	const states_items = [{name: $_("disabled"), value: false}, {name: $_("active"), value: true}]
 	const phase_items = [{name: $_("no"), value: false}, {name: $_("yes"), value: true}]
 	
 	let formdata = {
 			max_current_soft: 		{val: false,  status: "", input: undefined, req: false},
+			default_state:			{val: false,  status: "", input: undefined, req: false},
 			is_threephase:			{val: false,  status: "", input: undefined, req: false},
 			scheduler_start_window:	{val: null,   status: "", input: undefined, req: false}
 		}	
 
 	let updateFormData = () => {
 		formdata.max_current_soft.val = $config_store.max_current_soft
+		formdata.default_state.val = $config_store.default_state
 		formdata.is_threephase.val = $config_store.is_threephase
 		formdata.scheduler_start_window.val = $config_store.scheduler_start_window
 	}
 
 	let setProperty = async (prop) => {
-		await submitFormData({prop: prop, form: formdata , i18n_path: "config.shaper.missing-"})
+		await submitFormData({prop: prop, form: formdata})
 	}
 	
 	onMount(()=> {
@@ -50,6 +53,20 @@
 					/>
 				</Borders>
 			</div>
+			{#if $config_store.default_state !== 'undefined'}
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Borders grow={true}>
+					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.defaultstate")}</div>
+					<Select 
+						bind:this={formdata.default_state.input}
+						bind:value={formdata.default_state.val} 
+						bind:status={formdata.default_state.status} 
+						items={states_items} 
+						onChange={()=>setProperty("default_state")}
+					/>
+				</Borders>
+			</div>
+			{/if}
 			{#if $config_store.is_threephase !== 'undefined'}
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>

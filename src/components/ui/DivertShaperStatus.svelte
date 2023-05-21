@@ -10,7 +10,7 @@
 {#if $config_store.divert_enabled}
 <div class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">
 	<iconify-icon class="has-text-primary is-size-6 mr-1" icon="fa6-solid:solar-panel"></iconify-icon>
-	{#if $uistates_store.divert_type == 0}
+	{#if $config_store.divert_type == 0}
 	<div class="mr-1 is-inline-block has-text-dark">
 		<span>{$_("status-divert-production")}:</span>
 		<span class="{$status_store.solar < 6?"has-text-danger":"has-text-primary"}">{$status_store.solar}W</span>
@@ -18,7 +18,7 @@
 		<span class="{$status_store.solar < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
 	</div>
 
-	{:else}
+	{:else if $config_store.divert_type == 1}
 	<div class="mr-1 has-text-dark">
 		<span>{$_("status-divert-grid")}:</span>
 		<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>

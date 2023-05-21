@@ -109,7 +109,8 @@
 		"rfid": "rfid",
 		"mqtt":"mqtt",
 		"shaper":"shaper",
-		"limit": "limit"
+		"limit": "limit",
+		"boost": "fast"
 	},
 	"units": {
 		"kwh": "kwh",
@@ -232,6 +233,9 @@
 			"ssid-desc": "WiFi SSID",
 			"pass": "WiFi Password",
 			"pass-desc": "WPA Key",
+			"apssid": "AP SSID",
+			"appass": "AP password",
+			"apdefault": "If unset, default to SSID: openevse-[chipID], password: openevse",
 			"connect": "Connect",
 			"scan": "Scan",
 			"connecting": "Connecting, please wait...",
@@ -271,6 +275,7 @@
 		},
 		"evse": {
 			"maxcur": "Max Current",
+			"maxcur-help": "Max current the hardware setup can handle",
 			"random": "Scheduler Random start adjust",
 			"random-help": "<p>The maximum number of seconds to randomly add/subtract from the a scheduled charge start time, eg a value of 600 will adjust the start time my +/- 10 minutes. This is to help prevent large syncronised loads when multiple vehicles start charging at the same time.</p>",
 			"pause-help": "<p>Some vehicles will shutdown if left in sleep mode (pilot signal enable) and can not be woken up thereafter by the charger.</p><br><p>Changing the pause state to disable should resolve this issue.<br>However this removes the ability for the charger to detect if a vehicle is connected when paused.</p>",
@@ -278,9 +283,14 @@
 			"service": "Service Level",
 			"pause": "Pause Status",
 			"led-bn": "Led Brightness",
+			"led-bn-help": "RGB leds brightness (not related to LCD panel brightness)",
 			"sensorscale": "Current scale",
 			"sensoroffset": "Current offset",
-			"threephase": "Three-phase"
+			"threephase": "Three-phase",
+			"threephase-help": "Enable this switch when charging with three phases to get correct power calculation",
+			"defaultstate": "Default State",
+			"defaultstate-help": "OpenEVSE will take this default state when there is no pending command",
+			"limit-help": "Set charge limit that will survive reboot"
 		},
 		"safety": {
 			"test": "Test",
@@ -423,13 +433,13 @@
 			"range": "Battery Range",
 			"timeleft": "Time to full charge",
 			"mode": {
-				"none": "None/HTTP",
+				"none": "None",
 				"tesla": "Tesla",
-				"mqtt": "MQTT"
+				"mqtt": "MQTT",
+				"http": "HTTP"
 			},
 			"contype": "Connection Type",
-			"contype-desc": "Select the vehicle connection type",
-			"httppush": "HTTP Push (Always Active)",
+			"httppush": "HTTP Push",
 			"httppush-desc-1": "To update manually vehicule data, send HTTP POST request to:",
 			"httppush-desc-2": "containing json data in body:",
 			"help-1": "The Tesla login may break from time-to-time as Tesla change their login API, hopefully OpenEVSE will be able to resolve the issue on our server, but should the login fail you can use a 3rd Party app to generate the appropriate tokens.",

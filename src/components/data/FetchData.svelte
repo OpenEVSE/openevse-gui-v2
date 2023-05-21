@@ -9,6 +9,7 @@
 	import { config_store } 		from "./../../lib/stores/config.js"
 	import { claims_target_store } 	from "./../../lib/stores/claims_target.js"
 	import { override_store } 		from "./../../lib/stores/override.js"
+	import {replace}				from 'svelte-spa-router'
 	import Logo 					from "./../../assets/logo-mini.png"
 	import AlertBox 				from "./../ui/AlertBox.svelte"
 	import ProgressBar 				from "../ui/ProgressBar.svelte";
@@ -79,9 +80,14 @@
 			status = "Loading ok"
 			$uistates_store.claims_version = $status_store.claims_version
 			setTimeout(() => {
+				// check if we need to route to Wizard 
+				if (!$config_store.wizard_passed) {
+					replace('/wizard')
+				}
 				$uistates_store.data_loaded = true;
 			}, 1000);
 		}
+		
 		
 	}
 	onMount(() => {

@@ -14,10 +14,10 @@
 	import Box 					from "../../ui/Box.svelte"
 	import Button 				from "../../ui/Button.svelte"
 	import FirmwareUpdateModal 	from "./FirmwareUpdateModal.svelte"
-	
 
-	let restartOpenEvseState = ""
-	let restartEspState = ""
+
+	let restartEvseInst
+	let restartEspInst
 	let resetEspState = ""
 	let fw_modal_opened = false
 	let fw_has_update = false
@@ -46,11 +46,11 @@
 		if ($github_store) {
 			if (Object.keys($github_store).length) {
 				firmware_release = $github_store.find(el => el.prerelease == false)
-				firmware_prerelease = $github_store.find(el => el.prerelease == true && 
+				firmware_prerelease = $github_store.find(el => el.prerelease == true &&
 				(!isNaN(el.tag_name.charAt(1)) && el.tag_name.charAt(2) == "." && !isNaN(el.tag_name.charAt(3))))
 				firmware_daily = $github_store.find(el => el.tag_name == "latest")
 			}
-			
+
 			if (firmware_release && compareVersion(firmware_release.name,$config_store.version) == 1) {
 				fw_has_update = true
 				fw.version = firmware_release.name?firmware_release.name:""
@@ -63,31 +63,23 @@
 			else fw_has_update = false
 		}
 	}
-	
-	async function restartOpenEvse() {
-		restartOpenEvseState = "loading"
-		const payload = "json=1&rapi=$FR"
-		let res = await serialQueue.add(()=>httpAPI("POST","/r",payload, "text"))
-		if (res == "set" )  {
-			restartOpenEvseState = "ok"
-			return true
-		}
-		else {
-			// cheating as openEVSE api always answer HTTP 500 on reboot command
-			restartOpenEvseState = "ok"
-			return false
-		}
-	}
 
-	async function restartESP() {
-		restartEspState = "loading"
-		let res = await serialQueue.add(()=>httpAPI("POST","/restart",null,"text"))
-		if (res == "1" )  {
-			restartEspState = "ok"
+	async function restart(device) {
+		let inst
+		if (device == "gateway") {
+			inst = restartEspInst
+		} else if (device == "evse") {
+			inst = restartEvseInst
+		}
+		inst.state = "loading"
+		const payload = { device: device }
+		let res = await serialQueue.add(()=>httpAPI("POST","/restart",JSON.stringify(payload)))
+		if (res.msg == "restart " + device )  {
+			inst.state = "ok"
 			return true
 		}
 		else {
-			restartEspState = "error"
+			inst.state = "error"
 			return false
 		}
 	}
@@ -96,7 +88,7 @@
 		if (confirm) {
 			alert_visible = true
 		}
-		else {	
+		else {
 			resetEspState = "loading"
 			alert_visible = false
 			let res = httpAPI("GET", "/reset")
@@ -108,8 +100,6 @@
 				alert_visible = true
 				resetEspState = "error"
 			}
-
-
 		}
 	}
 
@@ -137,8 +127,7 @@
 				element == "buildenv"					||
 				element == "version"					||
 				element == "evse_serial"				||
-				element == "wifi_serial"				
-			
+				element == "wifi_serial"
 			) {
 				delete conf[element]
 			}
@@ -185,7 +174,6 @@
 				return false
 			}
 			else return true
-			
 		}
 		reader.readAsText(import_file);
 	}
@@ -212,7 +200,7 @@
 			<tr>
 				<td class="has-text-weight-bold is-size-7-mobile">OpenEVSE</td>
 				<td class="is-size-7-mobile">{$config_store.firmware}</td>
-				<td><div class="has-text-centered"><Button width="100px" size="is-responsive" name={$_("config.firmware.restart")} butn_submit={restartOpenEvse} state={restartOpenEvseState}/></div></td>
+				<td><div class="has-text-centered"><Button bind:this={restartEvseInst} width="100px" size="is-responsive" name={$_("config.firmware.restart")} butn_submit={() => restart("evse")}/></div></td>
 			</tr>
 			<tr>
 				<td class="has-text-weight-bold is-size-7-mobile">OpenEVSE Wifi</td>
@@ -234,7 +222,7 @@
 							<Button  size="is-responsive" width="100px"name={$_("config.firmware.update")} butn_submit={()=>fw_modal_opened=true} color="{fw.version && $config_store.version != fw.version?"is-primary":"is-info"}" />
 						</div>
 						<div class="mb-2">
-							<Button size="is-responsive" width="100px" name={$_("config.firmware.restart")} butn_submit={restartESP} state={restartEspState}/>
+							<Button bind:this={restartEspInst} size="is-responsive" width="100px" name={$_("config.firmware.restart")} butn_submit={() => restart("gateway")}/>
 						</div>
 						<div class="mb-2">
 							<Button size="is-responsive" width="100px" name={$_("config.firmware.reset")} butn_submit={resetESP} state={resetEspState}/>
@@ -257,7 +245,6 @@
 				<div class="is-hidden">
 					<a bind:this={export_link} href={null} >null</a>
 				</div>
-				
 			</div>
 			<div class=mb-2>
 				{#if !import_file}
@@ -269,7 +256,6 @@
 				<div>
 					<Button size="is-responsive" color="is-primary" width="100px" state={import_butn} name={$_("config.firmware.upload")} butn_submit={importConfig} />
 				</div>
-				
 				<div class="mt-2 is-inline-block">
 					<RemovableTag
 					action={()=> import_file = null}
@@ -280,7 +266,6 @@
 			</div>
 		</Borders>
 	</div>
-	
 
 </Box>
 {#if fw_modal_opened}

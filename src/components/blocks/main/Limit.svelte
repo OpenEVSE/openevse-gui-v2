@@ -199,7 +199,10 @@
 </style>
 
 {#if mounted}
-<Borders grow>
+<Borders grow has_help={is_admin?true:false}>
+	<div slot="help">
+		{@html $_("config.evse.limit-help")}
+	</div>
 	<div class:content={!is_admin} class:content_admin={is_admin}>
 		<div class="is-flex is-justify-content-center is-flex-direction-column" >
 			<div class="is-size-6 has-text-dark has-text-weight-bold mb-4">

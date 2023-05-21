@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import AlertBox 			from "./components/ui/AlertBox.svelte"
 	import WebSocket 			from "./components/data/WebSocket.svelte"
 	import { status_store } 	from "./lib/stores/status.js"
@@ -8,6 +9,7 @@
 	import NavBar 				from "./components/blocks/NavBar.svelte"
 	import DataManager 			from "./components/data/DataManager.svelte"
 	import Router 				from 'svelte-spa-router'
+	import {replace}			from 'svelte-spa-router'
 	import { routes } 			from "./lib/routes.js"
 	import FetchData 			from './components/data/FetchData.svelte'
 	import {getBreakpoint,
@@ -23,15 +25,6 @@
 	function getWindowSize() {
 		$uistates_store.breakpoint = getBreakpoint()
 	}
-
-	window.addEventListener("online", function() {
-		console.log("I am connected to the internet")
-	})
-
-	window.addEventListener("offline", function() {
-		console.log("Disconnected...so sad!!!")
-	})
-
 
 </script>
 <style>

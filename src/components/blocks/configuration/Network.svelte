@@ -1,5 +1,7 @@
 <script>
+	import { onMount } 			from "svelte";
 	import WifiScan 			from "./WifiScan.svelte"
+	import { submitFormData } 	from "./../../../lib/utils.js";
 	import { _ } 		   		from 'svelte-i18n'
 	import { serialQueue } 		from "./../../../lib/queue.js"
 	import {status_store}		from './../../../lib/stores/status.js'
@@ -9,7 +11,14 @@
 	import Button 		   		from "../../ui/Button.svelte"
 	import Box 			   		from "../../ui/Box.svelte"
 	import Borders 				from "./../../ui/Borders.svelte"
-	
+
+	let setWifi = false
+
+	let formdata = {
+			hostname: 		{val: "", input: undefined, status: "", req: false},
+			ap_ssid: 		{val: "", input: undefined, status: "", req: false},
+			ap_pass:		{val: "", input: undefined, status: "", req: false}
+	}
 
 	function displayMode(mode) {
 		switch (mode) {
@@ -24,22 +33,26 @@
 		}
 	}
 
-	let setWifi = false
-	let input_host_status
+	let updateFormData = () => {
+		formdata.hostname.val = $config_store.hostname,
+		formdata.ap_ssid.val  = $config_store.ap_ssid,
+		formdata.ap_pass.val = $config_store.ap_pass
+	}
+
+	let setProperty = async (prop) => {
+		await submitFormData({prop: prop, form: formdata})
+	}
+
 
 	function selectWifi() {
 		setWifi = true
 	}
+	
 
-	async function onChange(prop,val) {
-		input_host_status = "loading"
-		let res = await serialQueue.add(()=>config_store.saveParam(prop, val))
-		if (res) {
-			input_host_status = "ok"
-		}
-		else input_host_status = "error"
-		return res
-	}
+	onMount(
+		() => updateFormData()
+
+		)
 
 
 </script>
@@ -66,8 +79,13 @@
 				</div>
 			</div>
 			<div class="my-1 container">
-				<InputForm is_inline type="text" title={$_("config.network.host")} placeholder="openevse" bind:value={$config_store.hostname} 
-					status={input_host_status} onChange={()=>onChange("hostname", $config_store.hostname)}/>
+				<InputForm is_inline type="text" 
+					title={$_("config.network.host")} 
+					placeholder="openevse" 
+					bind:this={formdata.hostname.input}
+					bind:value={formdata.hostname.val} 
+					status={formdata.hostname.status} 
+					onChange={()=>setProperty("hostname")}/>
 			</div>
 		</Borders>
 	</div>
@@ -92,4 +110,29 @@
 		{/if}
 	</div>
 	{/if}
+
+	<div class="is-flex is-justify-content-center">
+		<Borders grow>
+			<div class="my-3 has-text-dark has-text-weight-bold">{$_("config.network.modes.ap")}</div>
+			{$_("config.network.apdefault")}
+			<form on:submit|preventDefault>
+				<div>
+					<InputForm is_inline type="text" title={$_("config.network.apssid")} 
+						placeholder="openevse" 
+						bind:this={formdata.ap_ssid.input}
+						bind:value={formdata.ap_ssid.val} 
+						bind:status={formdata.ap_ssid.status} 
+						onChange={()=>setProperty("ap_ssid")}/>
+				</div>
+				<div>
+					<InputForm is_inline type="password" title={$_("config.network.appass")} 
+						placeholder="openevse"
+						bind:this={formdata.ap_pass.input}
+						bind:value={formdata.ap_pass.val} 
+						bind:status={formdata.ap_pass.status}
+						onChange={()=>setProperty("ap_pass")}/>
+				</div>
+			</form>
+		</Borders>
+	</div>
 </Box>
