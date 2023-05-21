@@ -136,7 +136,7 @@
 		if (mode != $status_store.divertmode) {
 			$status_store.divertmode = mode
 			if (mode == 2) {  // eco
-				// remove any active override if there's some
+				// remove active override state if there's some
 				if ($override_store.state === "active") {
 					override_store.removeProp("state")
 				}
@@ -233,7 +233,7 @@ $: setShaper($uistates_store.shaper)
 		{:else if $claims_target_store.claims.state == EvseClients["ocpp"].id}
 		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={true} ischarging={$uistates_store.charging}/>
 		{:else if $schedule_store.length || $status_store.divertmode == 2 }
-		<ButtonManual bind:this={buttons_manual} isauto={true} noenable={$status_store.divertmode == 2}  mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={true}  mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
 		{:else if $claims_target_store.claims.state == EvseClients["limit"].id}
 		<ButtonManual bind:this={buttons_manual} isauto={false} mode={2} setmode={setMode} disabled={true} ischarging={false}/>
 		{:else}
