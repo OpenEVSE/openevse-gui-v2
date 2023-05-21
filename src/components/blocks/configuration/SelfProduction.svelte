@@ -239,7 +239,6 @@
 						/> -->
 						<SliderForm 
 							label="{$_("config.selfprod.smoothattack")}*"
-							bind:this={formdata.divert_attack_smoothing_factor.input}
 							bind:value={formdata.divert_attack_smoothing_factor.val} 
 							min=0.01 max=1.0 step="0.01"
 							color="has-text-dark"
