@@ -20,10 +20,10 @@
 		step -= 1
 		push('/wizard/' + step)
 	}
-	function quit() {
+	async function quit() {
 		$uistates_store.wizard_step = 0
 		if (!$config_store.wizard_passed)
-			serialQueue.add(config_store.saveParam("wizard_passed", true))
+			await serialQueue.add(config_store.saveParam("wizard_passed", true))
 		if ($status_store.ipaddress == "192.168.4.1") {
 			$uistates_store.alertbox.title = $_("notification")
 			$uistates_store.alertbox.component = AlertBody

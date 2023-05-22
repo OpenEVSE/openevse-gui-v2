@@ -171,13 +171,6 @@
 		if ($uistates_store.shaper != val)
 			$uistates_store.shaper = val
 	}
-	// function set_uistates_divertmode(val) {
-	// 	val = val == 2?true:false
-	// 	if ($claims_target_store.claims.state == EvseClients.timer.id && $claims_target_store.properties.state == "active")
-	// 			$uistates_store.divertmode = false
-	//     else
-	// 		$uistates_store.divertmode = val		
-	// }
 
 	async function removeProp(prop,tag) {
 		tag.state = "loading"
