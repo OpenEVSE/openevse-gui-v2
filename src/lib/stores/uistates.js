@@ -3,7 +3,6 @@ import { writable, derived, get } from 'svelte/store'
 const model = {
 		// copy from other stores
 		charge_current: undefined,
-		manual_override: undefined,
 		shaper: undefined,
 		autorelease: true,
 		time_lmt: 0,

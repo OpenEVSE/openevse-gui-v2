@@ -168,7 +168,9 @@
 		
 		<div class="is-flex mt-3 mt-4 mb-1 ml-4 ">
 			<div class="columns">
-				{#if $uistates_store.stateclaimfrom == "manual" || !$claims_target_store.claims?.state}
+				{#if !$claims_target_store.claims?.state}
+				<TaskDisplay mode={$_("clients.default")} state={$status_store.status} />
+				{:else if $uistates_store.stateclaimfrom == "manual"}
 				<TaskDisplay mode={$_("clients.manual")} state={$status_store.status} />
 				{:else if $uistates_store.stateclaimfrom == "rfid"}
 				<TaskDisplay 

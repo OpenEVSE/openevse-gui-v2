@@ -33,22 +33,24 @@
 			return
 		$uistates_store.charge_current = val
 		if (val == $config_store.max_current_soft) {
-			//remove claim as val = max current soft
-			delete $override_store.charge_current
 			let res
-			// if no other properties, release override
+			// if no other properties than charge_current, release override
 			if ( 
 				$override_store.state == undefined && 
 				$override_store.max_current == undefined &&
 				$override_store.auto_release == false
 			) {
-				if ($status_store.manual_override) {
+				if ($override_store.charge_current != undefined) {
 					waiting = true
 					res = await override_store.clear()
 					waiting = false
 				}
 			}
-			else res = await serialQueue.add(() => override_store.upload($override_store))
+			else {
+				//remove max_current as equal to max_current_soft
+				delete $override_store.charge_current
+				res = await serialQueue.add(() => override_store.upload($override_store))
+			}
 			$uistates_store.charge_current = val
 			return res
 		}
@@ -83,7 +85,8 @@
 
 
 		switch(m) {
-			case 0: break
+			case 0: 
+				break
 			case 1: 
 				data.state = "active"
 				// disable Eco mode
@@ -92,14 +95,14 @@
 			case 2:
 				data.state = "disabled"
 				break
-			default: break
+			default: 
+				break
 		}
-
+		// keep charge_current 	property
+		if ($override_store.charge_current != undefined) {
+			data.charge_current = $override_store.charge_current
+		}
 		if(data.state != undefined ) {
-			// keep charge_current 	property
-			if ($override_store.charge_current != undefined) {
-				data.charge_current = $override_store.charge_current
-			}
 			waiting = true
 			await serialQueue.add(() => override_store.upload(data))
 			waiting = false
@@ -110,10 +113,9 @@
 			if (data.charge_current)
 				await serialQueue.add(() => override_store.upload(data))
 			// Mode Auto, clearing override
-			else if ($override_store.state != undefined) {
-				if ($status_store.manual_override) { 
-					let res = await serialQueue.add(override_store.clear)
-				}
+			else {
+				console.log("clearing override ")
+				await serialQueue.add(override_store.clear)
 			}
 			waiting = false
 		}
@@ -150,15 +152,6 @@
 		// 	button_divert.blur()
 	}
 
-	async function stateButtonWatcher(val) {
-		if (val != undefined && $uistates_store.data_loaded == true ) {
-			if (val != $uistates_store.manual_override) {
-				$uistates_store.manual_override = val
-			}
-		}
-		
-	}
-
 	function set_uistates_charge_current() {
 		$uistates_store.charge_current = getChgCurrent()
 		if ($uistates_store.charge_current > $config_store.max_current_soft) 
@@ -191,14 +184,12 @@
 	}
 
 	onMount( () => {
-		$uistates_store.manual_override = $status_store.manual_override
 		set_uistates_charge_current()
 	})
 
 
 // ## Reactive functions ##
 $: $claims_target_store.properties.charge_current, set_uistates_charge_current()
-$: stateButtonWatcher($status_store.manual_override) 
 $: set_uistates_shaper($status_store.shaper)
 $: setShaper($uistates_store.shaper)
 
@@ -223,12 +214,10 @@ $: setShaper($uistates_store.shaper)
 		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={!$config_store.rfid_auth || waiting} ischarging={$uistates_store.charging}/>
 		{:else if $claims_target_store.claims.state == EvseClients["ocpp"].id}
 		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={true} ischarging={$uistates_store.charging}/>
-		{:else if $schedule_store.length || $status_store.divertmode == 2 }
-		<ButtonManual bind:this={buttons_manual} isauto={true}  mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
 		{:else if $claims_target_store.claims.state == EvseClients["limit"].id}
-		<ButtonManual bind:this={buttons_manual} isauto={false} mode={2} setmode={setMode} disabled={true} ischarging={false}/>
+		<ButtonManual bind:this={buttons_manual} isauto={true} mode={0} setmode={setMode} disabled={true} ischarging={false}/>
 		{:else}
-		<ButtonManual bind:this={buttons_manual} isauto={false} mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
+		<ButtonManual bind:this={buttons_manual} isauto={true} mode={$uistates_store.mode} setmode={setMode} disabled={waiting} ischarging={$uistates_store.charging}/>
 		{/if}
 	
 		<div class="is-flex is-justify-content-center my-0 mb-2">

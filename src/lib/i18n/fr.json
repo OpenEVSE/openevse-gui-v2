@@ -108,7 +108,8 @@
     "mqtt": "mqtt",
     "shaper": "délestage",
     "limit": "limite",
-    "boost": "rapide"
+    "boost": "rapide",
+    "default": "défaut"
   },
   "units": {
     "kwh": "kwh",

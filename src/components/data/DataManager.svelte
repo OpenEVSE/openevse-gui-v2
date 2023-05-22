@@ -28,7 +28,6 @@
 	let counter_elapsed
 
 	// set keyed derived stores
-	const evsestate = keyed(status_store, 'state')
 	const time = keyed(status_store, 'time')
 	const config_version = keyed(status_store, 'config_version')
 	const schedule_version = keyed(status_store, 'schedule_version')
@@ -168,7 +167,7 @@
 
 	function getMode(state,clientid) {
 		$uistates_store.stateclaimfrom = clientid2name(clientid)
-		if (clientid == EvseClients["manual"].id || clientid == undefined) {
+		if (clientid == EvseClients["manual"].id ) {
 			// Mode Manual		
 			switch (state) {
 				case "active":

@@ -15,15 +15,13 @@ function createOverrideStore() {
     const { subscribe, set, update } = P
 
 	async function download() {
-        if (get(status_store)?.manual_override == 1) {
 		let res = await httpAPI("GET", "/override")
-        if (res && (res.msg != "error" && res != "error")) {
+        if (res && (!res.msg)) {
 		    P.update(() => res)
             return true
             }
-		return false
-        }  
-}
+		return false 
+    }
     async function upload(data) {
         // let override = get(P)
 		// let newoverridestore = {...override, ...data}
@@ -32,7 +30,7 @@ function createOverrideStore() {
         return P
     }
     async function clear() {
-        if (get(status_store).manual_override == 1) {
+        if (get(override_store)) {
             let res = await httpAPI("DELETE", "/override")
             if (res) {
                 P.update((s) => {return model})
