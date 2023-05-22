@@ -18,7 +18,7 @@
 			ocpp_enabled: 		{val: false,  status: "", input: undefined, req: false},
 			ocpp_chargeBoxId:	{val: null,   status: "", input: undefined, req: true},
 			ocpp_server:		{val: null,   status: "", input: undefined, req: true},
-			ocpp_authkey:		{val: null,   status: "", input: undefined, req: true, pwd: true},
+			ocpp_authkey:		{val: null,   status: "", input: undefined, req: false, pwd: true},
 			ocpp_auth_auto:		{val: false,  status: "", input: undefined, req: false},
 			ocpp_idtag:			{val: "",     status: "", input: undefined, req: false},
 			ocpp_auth_offline:	{val: false,  status: "", input: undefined, req: false},
