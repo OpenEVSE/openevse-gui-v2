@@ -8,6 +8,7 @@
 	export let client = ""
 	export let name = ""
 	export let color = "is-info"
+	export let nobutton = false
 	let icon
 </script>
 <style>
@@ -49,7 +50,7 @@
 		{/if}
 
 	</div>
-	{#if state == "" && (name || (client && (clientid2name(client) == "manual" || clientid2name(client) == "mqtt") ))}
+	{#if state == "" && !nobutton && (name || (client && ((clientid2name(client) == "manual" )|| clientid2name(client) == "mqtt") ))}
 	<button class="tag but is-dark is-clickable m-0 p-2" on:click|preventDefault={()=>action()} >
 		<iconify-icon class="" icon={"fa6-solid:xmark"}></iconify-icon>
 	</button>
