@@ -1,11 +1,9 @@
 <script>
-	import ToggleButtonDouble from "./../../ui/ToggleButtonDouble.svelte";
 	import { _ } 					from 'svelte-i18n'
 	import {config_store}			from "./../../../lib/stores/config.js"
 	import {claims_store} 			from "./../../../lib/stores/claims.js"
 	import {override_store} 		from "./../../../lib/stores/override.js";
 	import {status_store} 			from "./../../../lib/stores/status.js"
-	import {schedule_store} 		from "./../../../lib/stores/schedule.js"
 	import {uistates_store} 		from "./../../../lib/stores/uistates.js"
 	import {uisettings_store} 		from "./../../../lib/stores/uisettings.js"
 	import {EvseClients} 			from "./../../../lib/vars.js"
@@ -116,8 +114,6 @@
 			await serialQueue.add(() => httpAPI("POST", "/divertmode", data, "text"))
 			waiting = false
 		}
-		// if (button_divert)
-		// 	button_divert.blur()
 	}
 
 	function set_uistates_charge_current() {
