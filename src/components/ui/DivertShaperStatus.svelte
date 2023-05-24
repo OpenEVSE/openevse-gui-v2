@@ -25,12 +25,11 @@
 		<span class="{$status_store.grid_ie < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
 	</div>
 	{/if}
-	{#if $status_store.divert_active}
 	<div class="mr-2 has-text-dark" class:is-hidden={!$status_store.smoothed_available_current}>
 		<span>{$_("status-divert-smoothed")}:</span>
 		<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
 	</div>
-	{:else}
+	{#if !$status_store.divert_active}
 	<div class="mx-1">
 		{#if $config_store.charge_mode == "eco"}
 		<span class="has-text-info">{$_("config.selfprod.disabled")}</span>

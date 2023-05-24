@@ -1,5 +1,4 @@
 <script>
-	import { github_store } from "./../../lib/stores/github.js";
 	import { derived} 				    from "svelte/store"
 	import { limit_store } 				from "./../../lib/stores/limit.js";
 	import { uisettings_store } 		from "./../../lib/stores/uisettings.js";
@@ -27,7 +26,7 @@
 	let counter_rfid_scan
 	let counter_elapsed
 
-	// set keyed derived stores
+	// set keyed derived stores ( note: keyed stores do not trigger an update if the same value is published )
 	const time = keyed(status_store, 'time')
 	const config_version = keyed(status_store, 'config_version')
 	const schedule_version = keyed(status_store, 'schedule_version')
@@ -37,8 +36,8 @@
 	const limit_version = keyed(status_store, 'limit_version')
 	const state = keyed(status_store, 'state')
 	const charging = derived(state, $state => $state==3?true:false)
-	const divert_update = keyed(status_store, 'divert_update')
-	const vehicle_state_update = keyed(status_store, 'vehicle_state_update')
+	// const divert_update = keyed(status_store, 'divert_update')
+	// const vehicle_state_update = keyed(status_store, 'vehicle_state_update')
 	const rfid_waiting = keyed(status_store, 'rfid_waiting')
 	const elapsed = keyed(status_store, 'session_elapsed')
 	const ipaddress = keyed(status_store, 'ipaddress')
@@ -187,6 +186,7 @@
 	}
 
 	function countDivertUpdate(val) {
+		console.log("countdivertupdate: val: " + val)
 		$uistates_store.divert_update = val
 		clearInterval(counter_divert_update)
 		counter_divert_update = setInterval(() => {
@@ -270,8 +270,8 @@
 	$: refreshChargingState		($charging)
 	$: refreshLocale			($config_store.lang)
 
-	$: countDivertUpdate($divert_update)
-	$: countVehicleUpdate( $vehicle_state_update)
+	$: countDivertUpdate($status_store.divert_update)
+	$: countVehicleUpdate($status_store.vehicle_state_update)
 	$: countRFIDScan($rfid_waiting)
 	$: countElapsed($elapsed,$charging)
 
