@@ -17,7 +17,6 @@ function createOverrideStore() {
 
 	async function download() {
         let res = await httpAPI("GET", "/override")
-        console.log(res.ok)
         if (res?.msg == undefined) {
             P.update(() => res)
             return true
