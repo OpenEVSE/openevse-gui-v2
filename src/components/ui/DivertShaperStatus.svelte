@@ -1,8 +1,8 @@
 <script>
+	import { override_store } from "./../../lib/stores/override.js";
 	import { config_store } from "./../../lib/stores/config.js";
 	import { _ } 			  from 'svelte-i18n'
 	import { status_store }   from "./../../lib/stores/status.js";
-	import { uistates_store } from "./../../lib/stores/uistates.js";
 	import {round} 			  from "../../lib/utils.js"
 	
 </script>
@@ -31,7 +31,7 @@
 	</div>
 	{#if !$status_store.divert_active}
 	<div class="mx-1">
-		{#if $config_store.charge_mode == "eco"}
+		{#if $status_store.divertmode == 2 && $override_store?.state == undefined}
 		<span class="has-text-info">{$_("config.selfprod.disabled")}</span>
 		{:else}
 		<span class="has-text-info">{$_("config.selfprod.modeboost")}</span>
