@@ -186,7 +186,6 @@
 	}
 
 	function countDivertUpdate(val) {
-		console.log("countdivertupdate: val: " + val)
 		$uistates_store.divert_update = val
 		clearInterval(counter_divert_update)
 		counter_divert_update = setInterval(() => {
