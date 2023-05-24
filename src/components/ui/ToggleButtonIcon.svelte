@@ -28,8 +28,8 @@
 
 {#if visible}
 <div class="mx-1 mb-0 has-text-centered has-text-dark" >
-	<button bind:this={button} class="button {state?"":"is-outlined"}  has-tooltip-arrow has-tooltip px-2 {state?color:color2} {breakpoint=="mobilemini"?"is-normal":breakpoint=="dekstop"?"is-medium":""}"
-	data-tooltip={tooltip} on:click={action} on:mouseenter={()=>hovered = true} on:focus={()=>hovered = true} on:mouseleave={()=>hovered = false} on:blur={()=>hovered = false} {disabled}
+	<button bind:this={button} class="button {state?"":"is-outlined"} has-tooltip has-tooltip-arrow px-2 {state?color:color2} {breakpoint=="mobilemini"?"is-normal":breakpoint=="dekstop"?"is-medium":""}"
+	data-tooltip={disabled?null:tooltip} on:click={action} on:mouseenter={()=>hovered = true} on:focus={()=>hovered = true} on:mouseleave={()=>hovered = false} on:blur={()=>hovered = false} {disabled}
 	>
 		<div class="icon">
 			{#if !icon2}

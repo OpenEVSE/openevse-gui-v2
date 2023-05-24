@@ -29,12 +29,10 @@
 	let waiting = false
 
 	async function setChgCurrent(val) {
-		if ($claims_target_store.properties.charge_current == val)
-			return
 		$uistates_store.charge_current = val
-		if (val == $config_store.max_current_soft) {
+		if (val == $status_store.max_current && $uistates_store.mode == 0) {
 			let res
-			// if no other properties than charge_current, release override
+			// if no other properties than charge_current, release override in mode Auto
 			if ( 
 				$override_store.state == undefined && 
 				$override_store.max_current == undefined &&
@@ -42,16 +40,15 @@
 			) {
 				if ($override_store.charge_current != undefined) {
 					waiting = true
-					res = await override_store.clear()
+					res = await serialQueue.add(() => override_store.clear())
 					waiting = false
 				}
 			}
 			else {
-				//remove max_current as equal to max_current_soft
+				//remove charge_current as equal to max_current_soft
 				delete $override_store.charge_current
 				res = await serialQueue.add(() => override_store.upload($override_store))
 			}
-			$uistates_store.charge_current = val
 			return res
 		}
 		else {
@@ -61,7 +58,6 @@
 			waiting = true
 			let res = await serialQueue.add(() => override_store.upload($override_store))
 			waiting = false
-			$uistates_store.charge_current = val
 			return res
 		}
 	}
@@ -79,45 +75,23 @@
 		$uistates_store.mode = m
 		// disabling buttons to prevent overlapping commands
 		buttons_manual.disabled = true
-		let data = {
-				auto_release: $uisettings_store.auto_release
-			}
-
-
 		switch(m) {
 			case 0: 
+				await serialQueue.add(() => override_store.clear())
 				break
-			case 1: 
-				data.state = "active"
-				// disable Eco mode
-				setDivertMode(1)
-				break
+			case 1:
 			case 2:
-				data.state = "disabled"
+				let data = {
+					state: m==1?"active":"disabled"
+				}
+				if ($override_store.charge_current != undefined)
+					data.charge_current = $override_store.charge_current
+				else 
+					data.charge_current = $config_store.max_current_soft
+				await serialQueue.add(() => override_store.upload(data))
 				break
 			default: 
 				break
-		}
-		// keep charge_current 	property
-		if ($override_store.charge_current != undefined) {
-			data.charge_current = $override_store.charge_current
-		}
-		if(data.state != undefined ) {
-			waiting = true
-			await serialQueue.add(() => override_store.upload(data))
-			waiting = false
-		}
-		else {
-			// if there's no other claim property ( only charge_current for now )
-			waiting = true
-			if (data.charge_current)
-				await serialQueue.add(() => override_store.upload(data))
-			// Mode Auto, clearing override
-			else {
-				console.log("clearing override ")
-				await serialQueue.add(override_store.clear)
-			}
-			waiting = false
 		}
 		buttons_manual?buttons_manual.disabled = false:null
 	}
@@ -232,7 +206,7 @@ $: setShaper($uistates_store.shaper)
 				size={20} size2={26} 
 				breakpoint={$uistates_store.breakpoint}
 				action={() => setDivertMode($status_store.divertmode == 2 ? 1 : 2)} 
-				disabled={waiting}
+				disabled={waiting||$uistates_store.mode != 0}
 			/>
 			<ToggleButtonIcon
 				visible={$config_store.current_shaper_enabled} 
@@ -264,7 +238,12 @@ $: setShaper($uistates_store.shaper)
 				/>
 				{#if $claims_target_store?.claims?.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer.id}
 				<div class="tag-div is-flex is-justify-content-center is-align-content">
-					<RemovableTag bind:this={setamp_tag} client={$claims_target_store.claims.charge_current} action={()=>removeProp("charge_current",setamp_tag)} />
+					<RemovableTag 
+						bind:this={setamp_tag} 
+						client={$claims_target_store.claims.charge_current} 
+						nobutton={$uistates_store.mode != 0}
+						action={()=>removeProp("charge_current",setamp_tag)} 
+					/>
 				</div>
 				{/if}
 			</div>
