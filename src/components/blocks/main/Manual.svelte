@@ -187,7 +187,7 @@ $: setShaper($uistates_store.shaper)
 		<div class="is-flex is-justify-content-center my-0 mb-2">
 			<ToggleButtonIcon 
 				visible={$config_store.divert_enabled} 
-				state={$status_store.divertmode == 2?true:false} 
+				state={$status_store.divertmode == 2 && $uistates_store.mode == 0 ?true:false} 
 				name={$_("charge-mode-eco")}
 				color="is-primary"
 				color2="is-primary"
