@@ -25,9 +25,9 @@
 	// let button_divert
 	let button_shaper
 	let waiting = false
+	let mounted = false
 
 	async function setChgCurrent(val) {
-		$uistates_store.charge_current = val
 		if (val == $status_store.max_current && $uistates_store.mode == 0) {
 			let res
 			// if no other properties than charge_current, release override in mode Auto
@@ -116,13 +116,6 @@
 		}
 	}
 
-	function set_uistates_charge_current() {
-		$uistates_store.charge_current = getChgCurrent()
-		if ($uistates_store.charge_current > $config_store.max_current_soft) 
-			$uistates_store.charge_current = $config_store.max_current_soft
-		else if ($uistates_store.charge_current < $config_store.min_current_hard)
-			$uistates_store.charge_current = $config_store.min_current_hard
-	}	
 	function set_uistates_shaper(val) {
 		val = val == 1?true:false
 		if ($uistates_store.shaper != val)
@@ -148,12 +141,11 @@
 	}
 
 	onMount( () => {
-		set_uistates_charge_current()
+		mounted = true
 	})
 
 
 // ## Reactive functions ##
-$: $claims_target_store.properties.charge_current, set_uistates_charge_current()
 $: set_uistates_shaper($status_store.shaper)
 $: setShaper($uistates_store.shaper)
 
@@ -170,6 +162,8 @@ $: setShaper($uistates_store.shaper)
 		bottom:6px;
 	}
 </style>
+
+{#if mounted}
 <Box title={$_("charge-title")} icon="fa6-solid:bolt">
 	<div class="is-flex is-align-items-center is-flex-direction-column">
 		<div class="has-text-centered mb-0 pb-0 has-text-weight-bold has-text-dark mt-2 is-uppercase">{$_("charge-toggle")}</div>
@@ -222,8 +216,8 @@ $: setShaper($uistates_store.shaper)
 					icon="fa6-solid:gauge-high" 
 					tooltip={$_("charge-rate-ttip")} 
 					unit="A" min=6 max={$config_store.max_current_soft} step={1} 
-					disabled={EvseClients[clientid2name($claims_target_store.claims?.charge_current)]?.priority > EvseClients.manual.priority || waiting} 
-					bind:value={$uistates_store.charge_current}
+					disabled={EvseClients[clientid2name($claims_target_store.claims?.charge_current)]?.priority > EvseClients.manual.priority || waiting || $status_store.divertmode == 2} 
+					value={$claims_target_store.properties?.charge_current?$claims_target_store.properties.charge_current:$config_store.max_current_soft}
 					onchange={(value) => setChgCurrent(value)} 
 				/>
 				{#if $claims_target_store?.claims?.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer.id}
@@ -241,3 +235,4 @@ $: setShaper($uistates_store.shaper)
 		<Limit />
 	</div>
 </Box>
+{/if}
