@@ -498,7 +498,7 @@
 			"server": "URL del sistema central",
 			"chargeBoxId": "ID de caja de carga",
 			"authkey": "Clave de autenticación",
-			"authkey-desc": "Clave WebSocket (perfil de seguridad 2){
+			"authkey-desc": "Clave WebSocket (perfil de seguridad 2)",
 	"active": "Activo",
 	"disabled": "Desactivado",
 	"disable": "Desactivar",
@@ -594,7 +594,7 @@
 	"status-task-timer-disable": "Desactivar en",
 	"status-divert-production": "Producción",
 	"status-divert-grid": "Grid +Importar/-Exportar",
-	"status-current-available": "Corriente disponible,
+	"status-current-available": "Corriente disponible",
 	"status-divert-smoothed": "Corriente aproximada",
 	"status-shaper-houseload": "Consumo en casa",
 	"status-shaper-error": "Shaper: los datos de Live Power Load no se han actualizado a tiempo, EVSE se ha desactivado",
@@ -1013,22 +1013,4 @@
 			"missing-ocpp_idtag": "falta ID-tag"
 		}
 	}
-
-}
-
-			"auth": "Autorización de carga",
-			"auth-auto": "Autorizar automáticamente",
-			"idtag": "ID-Tag",
-			"auth-offline": "Omitir autorización cuando no esté conectado",
-			"controls": "Controles",
-			"suspend-evse": "OCPP puede suspender EVSE",
-			"energize-plug": "OCPP puede activar el conector",
-			"connected": "Conectado",
-			"missing-ocpp_server": "falta URL del servidor OCPP",
-			"missing-ocpp_chargeBoxId": "Falta ID de caja de carga",
-			"missing-ocpp_authkey": "falta clave de autorización",
-			"missing-ocpp_idtag": "falta ID-tag"
-		}
-	}
-
 }
