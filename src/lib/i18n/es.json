@@ -57,8 +57,7 @@
 	"scheduler-checkall": "Activar todo",
 	"scheduler-uncheckall": "Desactivar todo",
 	"scheduler-empty": "No hay temporizadores registrados",
-	"days": 
-		{
+	"days": {
 		"monday": "lunes",
 		"tuesday": "martes",
 		"wednesday": "miercoles",
@@ -66,7 +65,7 @@
 		"friday": "viernes",
 		"saturday": "sábado",
 		"sunday": "domingo"
-		},
+	},
 	"status-items-starting": "Iniciando",
 	"status-items-waiting": "Esperando vehículo",
 	"status-items-ready": "Listo para cargar",
@@ -107,8 +106,8 @@
 		"ohm": "ohm",
 		"ocpp": "ocpp",
 		"rfid": "rfid",
-		"mqtt":"mqtt",
-		"shaper":"shaper",
+		"mqtt": "mqtt",
+		"shaper": "shaper",
 		"limit": "limit",
 		"boost": "rápido",
 		"default": "predeterminado"
@@ -255,7 +254,7 @@
 			"espinfo": "ESP info",
 			"build": "Build",
 			"installed": "Instalada",
-			"latest":	"Última versión",
+			"latest": "Última versión",
 			"nofile": "Ningún archivo seleccionado",
 			"upgrade2": "Actualizar a",
 			"gh-install": "Instalación automática desde GitHub",
@@ -299,7 +298,7 @@
 			"gnd-monitor": "Monitoreo de tierra",
 			"stuck-detect": "Detección de contacto atascado",
 			"temp-monitor": "Monitoreo de temperatura",
-			"diode-check" : "Comprobación de diodos",
+			"diode-check": "Comprobación de diodos",
 			"vent-check": "Comprobación de ventilación",
 			"vent-requ": "Requiere ventilación",
 			"errors": "Errores",
@@ -416,14 +415,12 @@
 			"help-3": "Si EVSE está inactivo: la carga comenzará cuando la energía solar fotovoltaica/exceso de energía > tasa de carga mínima.",
 			"help-4": "La carga se detendrá si el exceso de energía cae por debajo de la tasa de carga mínima durante un período de tiempo.",
 			"help-5": "Nota: La energía EVSE está incluida en la alimentación de la red.",
-
 			"missing-divert_PV_ratio": "Falta la relación de potencia fotovoltaica",
 			"missing-divert_attack_smoothing_time": "Falta divert smoothing attack",
 			"missing-divert_decay_smoothing_time": "Falta divert smoothing decay",
 			"missing-divert_min_charge_time": "Falta el tiempo mínimo de carga",
 			"missing-mqtt_solar": "Falta topic MQTT de producción propia",
 			"missing-mqtt_grid_ie": "Falta topic MQTT Grid (+I/-E)"
-
 		},
 		"vehicle": {
 			"status": "Estado",
@@ -481,7 +478,7 @@
 			"desc": "OhmConnect monitorea las condiciones en tiempo real en la red eléctrica. Cuando se encienden centrales eléctricas sucias e insostenibles, nuestros usuarios reciben una notificación para ahorrar energía.",
 			"ohmhour": "Ohm Hour",
 			"ohmkey": "Clave Ohm",
-			"ohmkey-desc" :"La clave Ohm se puede obtener iniciando sesión en OhmConnect, ingresando a Configuración y localizando el enlace en 'Proyectos de código abierto'.",
+			"ohmkey-desc": "La clave Ohm se puede obtener iniciando sesión en OhmConnect, ingresando a Configuración y localizando el enlace en 'Proyectos de código abierto'.",
 			"example": "Ejemplo",
 			"key": "Clave",
 			"missing-ohm": "Falta Clave Ohm"
