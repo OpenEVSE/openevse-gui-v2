@@ -217,7 +217,7 @@ $: setShaper($uistates_store.shaper)
 					tooltip={$_("charge-rate-ttip")} 
 					unit="A" min=6 max={$config_store.max_current_soft} step={1} 
 					disabled={EvseClients[clientid2name($claims_target_store.claims?.charge_current)]?.priority > EvseClients.manual.priority || waiting || $status_store.divertmode == 2} 
-					value={$claims_target_store.properties?.charge_current?$claims_target_store.properties.charge_current:$config_store.max_current_soft}
+					value={$claims_target_store.properties?.charge_current?$claims_target_store.properties.charge_current<$config_store.max_current_soft?$claims_target_store.properties.charge_current:$config_store.max_current_soft:$config_store.max_current_soft}
 					onchange={(value) => setChgCurrent(value)} 
 				/>
 				{#if $claims_target_store?.claims?.charge_current && $claims_target_store.claims.charge_current != EvseClients.timer.id}
