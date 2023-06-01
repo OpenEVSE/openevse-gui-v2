@@ -65,7 +65,11 @@ export const removeDuplicateObjects = (array, key) => {
 export function sec2time(sec) {
 	if (!sec)
 		sec = 0
-	return new Date(sec * 1000).toISOString().slice(11, 19)
+	const hours = Math.floor(sec / 3600)
+	sec %= 3600
+	const minutes = Math.floor(sec / 60);
+	const seconds = sec % 60;
+	return hours.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + ':' + minutes.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + ':' + seconds.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })
 }
 
 export function formatDate(t,z,format=null) {
