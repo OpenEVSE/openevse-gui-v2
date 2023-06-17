@@ -33,7 +33,8 @@
 			divert_attack_smoothing_time: 20,
 			divert_decay_smoothing_time: 600,
 			divert_min_charge_time: 600,
-			divert_PV_ratio: 1.1
+            divert_reserve_power_w: 200,
+            divert_hysteresis_power_w: 600
 		},
 		{
 			name: "No waste",
@@ -42,7 +43,8 @@
 			divert_attack_smoothing_time: 20,
 			divert_decay_smoothing_time: 600,
 			divert_min_charge_time: 600,
-			divert_PV_ratio: 0.5
+            divert_reserve_power_w: 0,
+            divert_hysteresis_power_w: 120
 		},
 		{
 			name: "No import",
@@ -51,7 +53,8 @@
 			divert_attack_smoothing_time: 300,
 			divert_decay_smoothing_time: 20,
 			divert_min_charge_time: 600,
-			divert_PV_ratio: 1.1
+            divert_reserve_power_w: 200,
+            divert_hysteresis_power_w: 600
 		},
 		{
 			name: "Custom",
@@ -59,7 +62,8 @@
 			divert_attack_smoothing_time: 20,
 			divert_decay_smoothing_time: 600,
 			divert_min_charge_time: 600,
-			divert_PV_ratio: 1.1
+            divert_reserve_power_w: 200,
+            divert_hysteresis_power_w: 600
 		}
 	]
 
@@ -69,7 +73,8 @@
 		charge_mode:					{val: "eco",	input: undefined, status: "", req: false},
 		mqtt_solar: 	  				{val: "",		input: undefined, status: "", req: false},
 		mqtt_grid_ie: 	  				{val: "",		input: undefined, status: "", req: false},
-		divert_PV_ratio:  				{val: "",		input: undefined, status: "", req: true},
+		divert_reserve_power_w:         {val: "",		input: undefined, status: "", req: true},
+		divert_hysteresis_power_w:      {val: "",		input: undefined, status: "", req: true},
 		divert_attack_smoothing_time:   {val: "",		input: undefined, status: "", req: true},
 		divert_decay_smoothing_time:	{val: "",		input: undefined, status: "", req: true},
 		divert_min_charge_time:			{val: "",		input: undefined, status: "", req: true}
@@ -81,7 +86,8 @@
 		formdata.charge_mode.val					= $config_store.charge_mode
 		formdata.mqtt_solar.val						= $config_store.mqtt_solar
 		formdata.mqtt_grid_ie.val					= $config_store.mqtt_grid_ie
-		formdata.divert_PV_ratio.val				= $config_store.divert_PV_ratio
+		formdata.divert_reserve_power_w.val		    = $config_store.divert_reserve_power_w
+		formdata.divert_hysteresis_power_w.val		= $config_store.divert_hysteresis_power_w
 		formdata.divert_attack_smoothing_time.val	= $config_store.divert_attack_smoothing_time
 		formdata.divert_decay_smoothing_time.val	= $config_store.divert_decay_smoothing_time
 		formdata.divert_min_charge_time.val			= $config_store.divert_min_charge_time
@@ -113,7 +119,8 @@
 			$config_store.divert_attack_smoothing_time = presets[id].divert_attack_smoothing_time
 			$config_store.divert_decay_smoothing_time = presets[id].divert_decay_smoothing_time
 			$config_store.divert_min_charge_time = presets[id].divert_min_charge_time
-			$config_store.divert_PV_ratio = presets[id].divert_PV_ratio
+			$config_store.divert_reserve_power_w = presets[id].divert_reserve_power_w
+			$config_store.divert_hysteresis_power_w = presets[id].divert_hysteresis_power_w
 			updateFormData()
 			preset = get_preset()
 			await submitFormData({form: formdata, prop_enable: "divert_enabled", i18n_path: "config.selfprod.missing-"})
@@ -127,7 +134,8 @@
 			if ($config_store.divert_attack_smoothing_time == presets[i].divert_attack_smoothing_time
 			&& $config_store.divert_decay_smoothing_time == presets[i].divert_decay_smoothing_time
 			&& $config_store.divert_min_charge_time == presets[i].divert_min_charge_time
-			&& $config_store.divert_PV_ratio == presets[i].divert_PV_ratio)
+			&& $config_store.divert_reserve_power_w == presets[i].divert_reserve_power_w
+			&& $config_store.divert_hysteresis_power_w == presets[i].divert_hysteresis_power_w)
 				ps = i
 		}
 		return ps
@@ -272,17 +280,31 @@
 						</div>
 						<div class="mb-2" >
 							<InputForm 
-								title="{$_("config.selfprod.powerratio")}*" 
+								title="{$_("config.selfprod.reserve_power")}*" 
 								type="number" 
-								placeholder="1.1"
-								step="0.01"
-								bind:this={formdata.divert_PV_ratio.input}
-								bind:value={formdata.divert_PV_ratio.val} 
-								bind:status={formdata.divert_PV_ratio.status}
-								onChange={()=>setProperty("divert_PV_ratio")}
+								placeholder="200"
+								step="10"
+								bind:this={formdata.divert_reserve_power_w.input}
+								bind:value={formdata.divert_reserve_power_w.val} 
+								bind:status={formdata.divert_reserve_power_w.status}
+								onChange={()=>setProperty("divert_reserve_power_w")}
 							/>
-							<div class="is-size-7 has-text-left">{$_("config.selfprod.powerratio-desc")}</div>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.reserve_power-desc")}</div>
 						</div>
+						<div class="mb-2" >
+							<InputForm 
+								title="{$_("config.selfprod.hysteresis_power")}*" 
+								type="number" 
+								placeholder="600"
+								step="10"
+								bind:this={formdata.divert_hysteresis_power_w.input}
+								bind:value={formdata.divert_hysteresis_power_w.val} 
+								bind:status={formdata.divert_hysteresis_power_w.status}
+								onChange={()=>setProperty("divert_hysteresis_power_w")}
+							/>
+							<div class="is-size-7 has-text-left">{$_("config.selfprod.hysteresis_power-desc")}</div>
+						</div>
+
 						<div class="mb-2">
 							<InputForm
 								title="{$_("config.selfprod.minchargetime")}*" 
