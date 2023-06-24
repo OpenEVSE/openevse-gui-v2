@@ -30,11 +30,11 @@
 			name: "Default",
 			desc: "Slowly decrease charge rate, using grid to compensate, but increase faster when energy is going back.",
 			id: 0,
-			divert_attack_smoothing_time: 20,
+			divert_attack_smoothing_time: 300,
 			divert_decay_smoothing_time: 600,
 			divert_min_charge_time: 600,
             divert_reserve_power_w: 200,
-            divert_hysteresis_power_w: 600
+            divert_hysteresis_power_w: 500
 		},
 		{
 			name: "No waste",
@@ -43,7 +43,7 @@
 			divert_attack_smoothing_time: 20,
 			divert_decay_smoothing_time: 600,
 			divert_min_charge_time: 600,
-            divert_reserve_power_w: 0,
+            divert_reserve_power_w: 50,
             divert_hysteresis_power_w: 120
 		},
 		{
@@ -59,11 +59,11 @@
 		{
 			name: "Custom",
 			id: 3,
-			divert_attack_smoothing_time: 20,
+			divert_attack_smoothing_time: 60,
 			divert_decay_smoothing_time: 600,
 			divert_min_charge_time: 600,
             divert_reserve_power_w: 200,
-            divert_hysteresis_power_w: 600
+            divert_hysteresis_power_w: 300
 		}
 	]
 
@@ -181,19 +181,30 @@
 						<div class:is-hidden={!$config_store.divert_enabled} class="mt-2 mb-0 ml-1 is-flex is-flex-direction-row is-justify-content-left is-align-items-center is-flex-wrap-wrap is-size-7 has-text-weight-bold">	
 							<div class="mr-2 is-inline-block">
 								{#if $config_store.divert_type == 0}
-								<span>{$_("config.selfprod.production")}:</span>
-								<span class="has-text-primary">{$status_store.solar}{$_("units.W")}</span>
+
+                                    <span>{$_("config.selfprod.production")}:</span>
+                                    <span class="has-text-primary">{$status_store.solar}{$_("units.W")}</span>
+                                    <span>{$_("config.selfprod.available")}</span>
+                                    <span class="{$status_store.divert_available_current < 6 ?  "has-text-danger":"has-text-primary"}">{round($status_store.divert_available_current,1)} A</span>
+
 								{:else if $config_store.divert_type == 1}
-								<span>{$_("config.selfprod.grid")}</span>
-								<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
+
+                                    <span>{$_("config.selfprod.grid")}</span>
+                                    <span class="{$status_store.divert_grid_ie_w < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.divert_grid_ie_w} W ({round($status_store.divert_grid_ie_a,1)} A)</span>
+
+                                    <span>{$_("config.selfprod.available")}</span>
+                                    <span class="{$status_store.divert_available_current < 6 ?  "has-text-danger":"has-text-primary"}">{round($status_store.divert_available_current,1)} A</span>
+
+                                    <span>{$_("config.selfprod.trigger")}</span>
+                                    <span class="{$status_store.divert_trigger_current < 6 ?  "has-text-danger":"has-text-primary"}">{round($status_store.divert_trigger_current,1)} A</span>
+                                    
+
 								{/if}
-								<span>|</span>
-								<span class="{$status_store.charge_rate < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
 							</div>
 							{#if $status_store.divert_active}
-							<div class="mr-2 has-text-dark" class:is-hidden={!$status_store.smoothed_available_current}>
+							<div class="mr-2 has-text-dark" class:is-hidden={!$status_store.divert_smoothed_available_current}>
 								<span>{$_("status-divert-smoothed")}:</span>
-								<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
+								<span class="has-text-info">{round($status_store.divert_smoothed_available_current,1)}A</span>
 							</div>
 							{:else}
 							<div class="mx-1">
@@ -248,7 +259,7 @@
 					<div class:is-hidden={$config_store.divert_type==0} class="mb-2">
 						<InputForm 
 							title="{$_("config.selfprod.feed")}*"
-							placeholder="/topic/grid_ie"
+							placeholder="/topic/grid_ie_w"
 							bind:this={formdata.mqtt_grid_ie.input}
 							bind:value={formdata.mqtt_grid_ie.val} 
 							bind:status={formdata.mqtt_grid_ie.status} 
@@ -283,7 +294,8 @@
 								title="{$_("config.selfprod.reserve_power")}*" 
 								type="number" 
 								placeholder="200"
-								step="10"
+								step="50"
+                                min="0"
 								bind:this={formdata.divert_reserve_power_w.input}
 								bind:value={formdata.divert_reserve_power_w.val} 
 								bind:status={formdata.divert_reserve_power_w.status}
@@ -296,7 +308,8 @@
 								title="{$_("config.selfprod.hysteresis_power")}*" 
 								type="number" 
 								placeholder="600"
-								step="10"
+								step="50"
+                                min="0"
 								bind:this={formdata.divert_hysteresis_power_w.input}
 								bind:value={formdata.divert_hysteresis_power_w.val} 
 								bind:status={formdata.divert_hysteresis_power_w.status}
