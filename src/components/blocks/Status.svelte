@@ -77,7 +77,7 @@
 	$: tiles = [
 		{ title: "elapsed", value: sec2time($elapsed)},
 		{ title: "delivered", value: $status_store.session_energy/1000, precision: 2, unit: $_("units.kwh") },
-		{ title: "current", value: $status_store.amp/1000, precision: 1, unit: $_("units.A") },
+		{ title: "current", value: $status_store.amp, precision: 1, unit: $_("units.A") },
 		{ title: "power", value: $status_store.power, unit: $_("units.W") },
 		{ title: "setpoint", value: $status_store.pilot, unit: $_("units.A") },
 		//{ title: "available", value: $status_store.divert_available_current,  unit: $_("units.A"), precision: 1, display: $config_store.divert_enabled },
