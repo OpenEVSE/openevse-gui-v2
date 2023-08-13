@@ -113,7 +113,7 @@
 		"default": "predeterminado"
 	},
 	"units": {
-		"kwh": "kwh",
+		"kwh": "kWh",
 		"A": "A",
 		"V": "V",
 		"W": "W",
