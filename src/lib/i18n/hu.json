@@ -278,7 +278,7 @@
 			"maxcur-help": "Maximális áramerősség, amelyet a hardverbeállítás képes kezelni",
 			"random": "Ütemező Véletlenszerű indítás beállítása",
 			"random-help": "<p>Az ütemezett töltés kezdési időpontjához véletlenszerűen hozzáadandó/levonható másodpercek maximális száma, pl. 600, a kezdési időt +/- 10 perccel módosítja. Ez segít elkerülni a nagy szinkronizált terheléseket, amikor több jármű egyszerre kezd el tölteni.</p>",
-			"pause-help": "<p>Egyes járművek leállnak, ha alvó módban hagyják őket (pilótajel engedélyezése), és ezután a töltő nem tudja felébreszteni őket.</p><br><p>A szünet állapotának letiltásra történő módosítása megoldja ezt a problémát.< br>Ezzel azonban megszűnik a töltő azon képessége, hogy észlelje, ha egy jármű csatlakozik, amikor szünetel.</p>",
+			"pause-help": "<p>Egyes járművek leállnak, ha alvó módban hagyják őket (pilótajel engedélyezése), és ezután a töltő nem tudja felébreszteni őket.</p><br><p>A szünet állapotának letiltásra történő módosítása megoldja ezt a problémát.<br>Ezzel azonban megszűnik a töltő azon képessége, hogy észlelje, ha egy jármű csatlakozik, amikor szünetel.</p>",
 			"seconds": "másodpercek",
 			"service": "Szolgáltatási Szint",
 			"pause": "Szünet Állapota",
