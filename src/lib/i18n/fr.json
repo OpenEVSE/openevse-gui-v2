@@ -81,6 +81,7 @@
     "status-tile-setpoint": "consigne",
     "status-tile-shaper": "Délestage",
     "status-tile-selfprod": "Production",
+    "status-tile-divert-available": "Production Avl",
     "status-tile-battery": "batterie",
     "status-tile-range": "portée",
     "status-tile-remaining": "restant",
@@ -112,7 +113,7 @@
         "default": "défaut"
     },
     "units": {
-        "kwh": "kwh",
+        "kwh": "kWh",
         "A": "A",
         "V": "V",
         "W": "W",
@@ -182,10 +183,10 @@
         "error": "Erreur",
         "error-vent": "Ventilation requise",
         "error-diode": "Echec Test Diode",
+        "error-relay": "Relai défaillant",
         "error-gfi": "Défaillance GFCI",
         "error-gfitest": "Echec Test GFCI",
         "error-ground": "Echec Test prise de Terre",
-        "error-relay": "Relai défaillant",
         "error-temp": "Surchauffe",
         "error-current": "Surintensité",
         "sleeping": "Désactivé - En Veille",
@@ -220,8 +221,8 @@
             },
             "mode": "Mode",
             "ssid": "SSID",
-            "signal": "Signal",
             "channel": "Canal",
+            "signal": "Signal",
             "change": "Changer de réseau",
             "ip": "Adresse IP",
             "mac": "Adresse Mac",
@@ -430,9 +431,10 @@
             "range": "Portée Batterie",
             "timeleft": "Temps restant (100%)",
             "mode": {
-                "none": "Aucun/HTTP",
+                "none": "Aucun",
                 "tesla": "Tesla",
-                "mqtt": "MQTT"
+                "mqtt": "MQTT",
+                "http": "HTTP"
             },
             "contype": "Type de Connection",
             "httppush": "HTTP Push",

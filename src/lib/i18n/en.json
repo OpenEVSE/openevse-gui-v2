@@ -97,7 +97,7 @@
     "status-divert-smoothed": "Smoothed Current",
     "status-shaper-houseload": "House Load",
     "status-shaper-error": "Shaper: Live Power Load data has not been updated in time, EVSE has been disabled",
-    "wizard-reload": "Quitting wizard. Seems we couldn't get the new ip adress. Redirecting to hostname. When pressing OK, it will redirect in few seconds to ",
+    "wizard-reload": "Quitting wizard. Seems we couldn't get the new ip address. Redirecting to hostname. When pressing OK, it will redirect in few seconds to ",
     "wizard-reload2": "If you're not in a browser window, clicking the link below will copy the link to your clipboard. You can then paste it in your browser",
     "clients": {
         "manual": "manual",
@@ -113,7 +113,7 @@
         "default": "default"
     },
     "units": {
-        "kwh": "kwh",
+        "kwh": "kWh",
         "A": "A",
         "V": "V",
         "W": "W",
@@ -314,7 +314,7 @@
             "date": "Date",
             "usebrowsertime": "Local time",
             "ntpserver": "NTP Server",
-            "ntpserver-desc": "NTP server adress",
+            "ntpserver-desc": "NTP server address",
             "settimefrom": "Set time from",
             "ntp": "NTP",
             "manual": "Manual",
@@ -438,7 +438,7 @@
             },
             "contype": "Connection Type",
             "httppush": "HTTP Push",
-            "httppush-desc-1": "To update manually vehicule data, send HTTP POST request to:",
+            "httppush-desc-1": "To update manually vehicle data, send HTTP POST request to:",
             "httppush-desc-2": "containing json data in body:",
             "help-1": "The Tesla login may break from time-to-time as Tesla change their login API, hopefully OpenEVSE will be able to resolve the issue on our server, but should the login fail you can use a 3rd Party app to generate the appropriate tokens.",
             "help-2": "These can be entered in the `Advanced` section as an alternative method of logging in.",
