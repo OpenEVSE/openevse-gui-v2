@@ -123,7 +123,7 @@
 	
 </style>
 {#if mounted}
-<Box title="RFID" icon="bx:rfid" back={true}>
+<Box title={$_("config.titles.rfid")} icon="bx:rfid" back={true}>
 
 	<div class="pb-1 is-flex is-align-items-center is-justify-content-center">
 		<Borders classes={$config_store.rfid_enabled?"has-background-primary-light":"has-background-light"}>
