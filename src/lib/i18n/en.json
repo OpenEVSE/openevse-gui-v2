@@ -210,6 +210,7 @@
             "emon": "Energy Monitoring",
             "ohm": "OhmConnect",
             "dev": "Developer",
+            "certificates": "Certificates",
             "about": "About"
         },
         "network": {
@@ -508,6 +509,17 @@
             "missing-ocpp_chargeBoxId": "missing Charge Box ID",
             "missing-ocpp_authkey": "missing Auth Key",
             "missing-ocpp_idtag": "missing Id Tag"
+        },
+        "certificates": {
+          "id": "Id",
+          "type": "Type",
+          "name": "Name",
+          "name_placeholder": "Certificate name",
+          "root": "Root",
+          "client": "Client",
+          "add": "Add Certificate",
+          "certificate": "Certificate",
+          "private_key": "Private key"
         }
     }
 }

@@ -16,6 +16,7 @@
 	export let step = null
 	export let disabled = false
 	export let readonly = false
+	export let multiline = false
 	export let is_inline = false
 	export let size = null
 	export let onChange = () => {}
@@ -80,8 +81,12 @@
 		{#if title}
 		<div class="has-text-weight-semibold has-text-centered  {disabled?"has-text-grey-light":"has-text-dark"}">{title}</div>
 		{/if}
+		{#if !multiline}
 		<input {readonly} {step} class="input is-info" type={typecss} placeholder={placeholder} value={value!=undefined?value:""} {maxlength} min={min} max={max}
 		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	style={size?"width: " + size + "ch;":null}>
+		{:else}
+		<textarea {readonly} class="input is-info" placeholder={placeholder} {maxlength} {disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue} style={size?"width: " + size + "ch;":null}>{value!=undefined?value:""}</textarea>
+		{/if}
 		<div class="main ">
 			<span class="is-size-5 state has-background-white is-flex is-align-items-center is-justify-content-center" class:is-hidden={!status}>
 				{#if status=="loading"}
@@ -92,7 +97,7 @@
 				<iconify-icon class="has-text-primary" icon="fa6-solid:xmark"></iconify-icon>
 				{/if}
 			</span>
-		</div>	
+		</div>
 		{#if type=="password" && value != hiddenpass}
 		<div class="mt-1 mx-2 is-flex is-flex-direction-row is-justify-content-start {disabled?"has-text-grey-light":""}">
 			<Checkbox bind:checked={show} {disabled} small  />
