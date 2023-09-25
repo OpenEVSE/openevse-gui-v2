@@ -372,7 +372,7 @@
 			"updated": "Datos de carga de energía en vivo actualizados, corriente de estrangulamiento (throttling)...",
 			"notupdated": "Esperando datos de carga de energía en vivo",
 			"load": "Carga",
-			"available": "Gratis",
+			"available": "Libre",
 			"shaperdesc": "Acelera la corriente de carga siguiendo las cargas de tu casa para evitar exceder lo que tu plan de energía puede ofrecer.",
 			"maxpower": "Potencia máxima permitida (W)",
 			"livepower": "Tema MQTT para carga de potencia activa (W)",
