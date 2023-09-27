@@ -1,6 +1,7 @@
 <script>
 	import { tesla_store } from "./../../../lib/stores/tesla.js";
 	import { schedule_store } from "./../../../lib/stores/schedule.js";
+	import { certificate_store } from "./../../../lib/stores/certificates.js";
 	import { plan_store } from "./../../../lib/stores/plan.js";
 	import { override_store } from "./../../../lib/stores/override.js";
 	import { limit_store } from "./../../../lib/stores/limit.js";
@@ -82,6 +83,7 @@
 		data.status = {...$status_store}
 		data.plan = {...$plan_store}
 		data.schedule = {...$schedule_store}
+		data.certificates = {...$certificate_store}
 		data.config = {...$config_store}
 		data.limits = {...$limit_store}
 		data.tesla = {...$tesla_store}

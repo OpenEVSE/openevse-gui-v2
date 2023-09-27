@@ -519,7 +519,9 @@
           "client": "Client",
           "add": "Add Certificate",
           "certificate": "Certificate",
-          "private_key": "Private key"
+          "private_key": "Private key",
+          "upload": "new certificate",
+          "empty": "No custom certificates"
         }
     }
 }

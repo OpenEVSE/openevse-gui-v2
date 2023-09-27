@@ -17,8 +17,10 @@
 	export let disabled = false
 	export let readonly = false
 	export let multiline = false
+	export let monospace = false
 	export let is_inline = false
 	export let size = null
+	export let rows = 5
 	export let onChange = () => {}
 	export let onFocus = () => {}
 	export const setStatus = (val) => {
@@ -74,7 +76,6 @@
 		width: 28px;
 		height: 28px;
 		border: 1px none rgb(50, 179, 212);
-
     }
 </style>
 <div class="mb-2 mx-1 has-text-left {is_inline?"is-inline-block":""}">
@@ -85,7 +86,7 @@
 		<input {readonly} {step} class="input is-info" type={typecss} placeholder={placeholder} value={value!=undefined?value:""} {maxlength} min={min} max={max}
 		{disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue}	style={size?"width: " + size + "ch;":null}>
 		{:else}
-		<textarea {readonly} class="input is-info" placeholder={placeholder} {maxlength} {disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue} style={size?"width: " + size + "ch;":null}>{value!=undefined?value:""}</textarea>
+		<textarea {readonly} class="input is-info" placeholder={placeholder} {maxlength} {disabled} on:change|preventDefault={onChange} on:focus={onFocus} on:input={inputValue} style={(size?"width: " + size + "ch;":"") + (monospace?"font-family: monospace;":"")+("height:"+(2.5*rows)+"em")} rows={rows}>{value!=undefined?value:""}</textarea>
 		{/if}
 		<div class="main ">
 			<span class="is-size-5 state has-background-white is-flex is-align-items-center is-justify-content-center" class:is-hidden={!status}>
