@@ -47,10 +47,10 @@
       certificate: formdata.certificate.val
     };
     if (formdata.type.val === "client") {
-      certificate.private_key = formdata.private_key.val;
+      certificate.key = formdata.private_key.val;
     }
     let res = await serialQueue.add(() => certificate_store.upload(certificate));
-    if(res)
+    if(res.success)
     {
       saveCertificateState = "ok";
       certificate.type = formdata.type.val;
@@ -61,7 +61,7 @@
       }, 500)
     } else {
       saveCertificateState = "error";
-      alert($_("config.certificates.error"))
+      alert(res.msg)
     }
     $certificate_store = $certificate_store
   }

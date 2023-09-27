@@ -16,9 +16,8 @@ function createCertificateStore() {
 
   async function upload(data) {
     let res = await httpAPI("POST", "/certificates", JSON.stringify(data))
-    if (res.msg == "done")
-      return true
-    else return false
+    res.success = res.msg == "done"
+    return res
   }
 
   async function remove(id) {
