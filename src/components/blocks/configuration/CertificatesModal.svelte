@@ -1,5 +1,4 @@
 <script>
-  import { uistates_store }   from "../../../lib/stores/uistates.js";
   import { _ }                from 'svelte-i18n'
   import Box                  from "../../ui/Box.svelte";
   import Borders              from "../../ui/Borders.svelte";
@@ -7,10 +6,11 @@
 	import Select               from "../../ui/Select.svelte";
 	import InputForm            from "../../ui/InputForm.svelte";
   import { serialQueue }      from "../../../lib/queue.js";
-  import { httpAPI }          from "../../../lib/utils.js"
-	import { onDestroy }        from "svelte"
   import Modal                from "../..//ui/Modal.svelte";
-	import {certificate_store}  from "../../../lib/stores/certificates.js"
+	import { certificate_store } from "../../../lib/stores/certificates.js"
+	import { validateFormData } from "./../../../lib/utils.js";
+  import { uistates_store }   from "./../../../lib/stores/uistates.js";
+  import { get }              from 'svelte/store'
 
   export let is_opened = false;
 
@@ -24,9 +24,24 @@
 	let saveCertificateState = ""
   let timeout
 
+  function alert(msg) {
+    get(uistates_store).alertbox.title = "error"
+    get(uistates_store).alertbox.body = msg
+    get(uistates_store).alertbox.visible = true
+  }
+
   async function saveCertificate()
   {
     saveCertificateState = "loading";
+
+    formdata.private_key.req = formdata.type.val === "client";
+    let valid = validateFormData({data: formdata, i18n_path: "config.certificates.missing-", req: true});
+    if (!valid.ok) {
+      saveCertificateState = "error";
+      alert(valid.msg)
+      return;
+    }
+
     let certificate = {
       name: formdata.name.val,
       certificate: formdata.certificate.val
@@ -46,6 +61,7 @@
       }, 500)
     } else {
       saveCertificateState = "error";
+      alert($_("config.certificates.error"))
     }
     $certificate_store = $certificate_store
   }

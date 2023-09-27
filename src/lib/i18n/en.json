@@ -511,17 +511,21 @@
             "missing-ocpp_idtag": "missing Id Tag"
         },
         "certificates": {
-          "id": "Id",
-          "type": "Type",
-          "name": "Name",
-          "name_placeholder": "Certificate name",
-          "root": "Root",
-          "client": "Client",
-          "add": "Add Certificate",
-          "certificate": "Certificate",
-          "private_key": "Private key",
-          "upload": "new certificate",
-          "empty": "No custom certificates"
+            "id": "Id",
+            "type": "Type",
+            "name": "Name",
+            "name_placeholder": "Certificate name",
+            "root": "Root",
+            "client": "Client",
+            "add": "Add Certificate",
+            "certificate": "Certificate",
+            "private_key": "Private key",
+            "upload": "new certificate",
+            "empty": "No custom certificates",
+            "missing-name": "Certificate name is missing",
+            "missing-certificate": "Certificate is missing",
+            "missing-private_key": "Private key is missing",
+            "error": "Error adding certificate"
         }
     }
 }
