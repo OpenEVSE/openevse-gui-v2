@@ -4,10 +4,26 @@
   import Box                  from "./../../ui/Box.svelte";
   import Borders              from "./../../ui/Borders.svelte";
   import Button               from "../../ui/Button.svelte"
+  import IconButton           from "../../ui/IconButton.svelte"
 	import CertificatesModal    from "./CertificatesModal.svelte";
-	import {certificate_store}  from "../../../lib/stores/certificates.js"
+	import { certificate_store }  from "../../../lib/stores/certificates.js"
+	import { serialQueue }      from "./../../../lib/queue.js";
 
   let certificates_modal_opened = false
+  let removeCertificateState = ""
+  
+	async function removeCertificate(id) {
+    let certificate = $certificate_store.findIndex(item => item.id === id)
+    removeCertificateState = "loading"
+    if (certificate > -1)
+    {
+      if(await serialQueue.add(() => certificate_store.remove(id)))
+      {
+        $certificate_store.splice(certificate,1)
+        $certificate_store = $certificate_store
+      }
+    }
+  }
 
   function uploadCertificate() {
     certificates_modal_opened = true;
@@ -35,7 +51,17 @@
               <td class="has-text-dark">{ $_("config.certificates."+item.type) }</td>
               <td class="has-text-dark">{ item.name }</td>
               <td class="has-text-dark">
-                <Button icon="mdi:delete"></Button>
+                <div class="delabs">
+                  <div class="del">
+                    <IconButton 
+                    icon="fa6-solid:xmark" 
+                    size="is-size-5" 
+                    state={removeCertificateState} 
+                    color="has-text-danger" 
+                    butn_submit={()=>{removeCertificate(item.id)}} 
+                  />
+                  </div>
+                </div>
               </td>
             </tr>
             {/each}
