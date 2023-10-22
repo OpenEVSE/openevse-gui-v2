@@ -106,10 +106,10 @@
 		width: 24,
 		height: 24,
 	});
-	addIcon('custom:arduinoocpp', {
-		body: '<path fill="currentColor" d="M 272 95 L 272 129 Q 272 144 287 144 L 289 144 Q 304 144 319 147 Q 384 160 384 241 Q 384 256 384 271 Q 384 352 319 365 Q 304 368 289 368 L 287 368 Q 272 368 272 383 L 272 417 Q 272 432 287 432 L 321 432 Q 336 432 350 428 Q 448 400 448 271 Q 448 256 448 241 Q 448 112 350 84 Q 336 80 321 80 L 287 80 Q 272 80 272 95 Z"/><ellipse fill="currentColor" cx="291" cy="256" rx="50" ry="57"/><path fill="currentColor" d="M 63 432 L 97 432 Q 112 432 117 418 L 235 94 Q 240 80 225 80 L 191 80 Q 176 80 171 94 L 53 418 Q 48 432 63 432 Z"/>',
-		width: 512,
-		height: 512,
+	addIcon('custom:ocpp', {
+		body: '<path fill="currentColor" d="M 15 7 C 10 7 0 9 0 20 C 0 29 7 41 24 41 C 34 41 48 37 48 27 C 48 17 29 7 15 7 Z M 16 11 C 16 11 13 13 13 21 C 13 32 19 37 19 37 C 19 37 5 34 5 20 C 5 19 5 11 16 11 Z"/><path fill="currentColor" d="M 15 16 L 15 20 L 4 20 L 4 16 Z M 15 25 L 15 29 L 4 29 L 4 25 Z"/>',
+		width: 48,
+		height: 48,
 	});
 	addIcon('ic:outline-save-alt', {
 		body: '<path fill="currentColor" d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5l-5-5l1.41-1.41L11 12.67V3h2v9.67z"/>',
