@@ -15,7 +15,7 @@
     "@vitejs/plugin-legacy": "^4.1.1",
     "bulma": "^0.9.4",
     "rollup-plugin-visualizer": "^5.9.0",
-    "sass": "^1.53.0",
+    "sass": "^1.69.5",
     "svelte": "^3.54.0",
     "svelte-preprocess": "^5.0.0",
     "terser": "^5.16.1",
