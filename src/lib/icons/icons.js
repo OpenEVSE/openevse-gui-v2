@@ -1,7 +1,7 @@
 	
 	import { addIcon, addCollection } from 'iconify-icon';
-	import col_mdi 					  from './mdi.json'
-	import col_fa6_solid              from  './fa6-solid.json'
+	import col_mdi 					  from './mdi.json' assert { type: 'json' };
+	import col_fa6_solid              from  './fa6-solid.json' assert { type: 'json' };
 
 
 	// Disable all caching
