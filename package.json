@@ -16,7 +16,7 @@
     "bulma": "^0.9.4",
     "rollup-plugin-visualizer": "^5.9.2",
     "sass": "^1.69.5",
-    "svelte": "^3.54.0",
+    "svelte": "^3.59.2",
     "svelte-preprocess": "^5.0.0",
     "terser": "^5.16.1",
     "vite": "^4.5.0",
