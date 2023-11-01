@@ -46,14 +46,13 @@ const iconSet = new IconSet({
             // Cleanup icon code
             await cleanupSVG(svg);
 
-            // Assume icon is monotone: replace color with currentColor, add if missing
-            // If icon is not monotone, remove this code
-            //await parseColors(svg, {
-            //    defaultColor: 'currentColor',
-            //    callback: (attr, colorStr, color) => {
-            //        return !color || isEmptyColor(color) ? colorStr : 'currentColor';
-            //    },
-            //});
+            // Assume icon is monotone: replace color with #ff, add if missing
+            await parseColors(svg, {
+                defaultColor: '#fff',
+                callback: (attr, colorStr, color) => {
+                    return !color || isEmptyColor(color) ? colorStr : '#fff';
+                },
+            });
 
             // Optimise
             await runSVGO(svg);
@@ -85,12 +84,14 @@ const iconSet = new IconSet({
                         mode: 'width', // or height
                         value: 24,
                     },
+                    background: '#32b3d4'
                 }
             },
             function (error, buffer) {
                 // returns a Buffer
-                fs.writeFile(`output/${name}.png`, buffer);
-                console.log(`Saved output/${name}.png (${buffer.length} bytes)`);
+                let file = `output/${name}.png`;
+                fs.writeFile(file, buffer);
+                console.log(`Saved ${file} (${buffer.length} bytes)`);
             });
     });
 })();
