@@ -71,7 +71,7 @@
 </style>
 
 {#if mounted}
-<Box title={$_("config.titles.ocpp")} icon="custom:arduinoocpp" has_help={true} back={true}>
+<Box title={$_("config.titles.ocpp")} icon="custom:ocpp" has_help={true} back={true}>
 	<div slot="help">
 		<OcppHelp />
 	</div>
