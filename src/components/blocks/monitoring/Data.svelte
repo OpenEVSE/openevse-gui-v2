@@ -32,7 +32,7 @@
 			{name: "temp1", value: !$status_store.temp1.isNaN?round($status_store.temp1/10,1):"", unit: $_("units.C")},
 			{name: "temp2", value: !$status_store.temp2.isNaN?round($status_store.temp2/10,1):"", unit: $_("units.C")},
 			{name: "temp3", value: !$status_store.temp3.isNaN?round($status_store.temp3/10,1):"", unit: $_("units.C")},
-			{name: "temp4", value: !$status_store.temp3.isNaN?round($status_store.temp4/10,1):"", unit: $_("units.C")},
+			{name: "temp4", value: !$status_store.temp4.isNaN?round($status_store.temp4/10,1):"", unit: $_("units.C")},
 			{name: $_("monitoring-sensors-sensorscale"), value: $config_store.scale},
 			{name: $_("monitoring-sensors-sensoroffset"), value: $config_store.offset}
 		]
