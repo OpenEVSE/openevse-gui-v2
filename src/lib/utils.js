@@ -128,6 +128,13 @@ export function round(value, precision = null) {
 	return Math.round(value * multiplier) / multiplier;
 }
 
+export function temp_round(value) {
+	if (isNaN(value)) {
+		return ""
+	}
+	return round(value/10,1)
+}
+
 export let getBreakpoint = function () {
 	const mobilemini = 410 
     const mobile = 640
