@@ -7,6 +7,7 @@
   import IconButton           from "../../ui/IconButton.svelte"
 	import CertificatesModal    from "./CertificatesModal.svelte";
 	import { certificate_store }  from "../../../lib/stores/certificates.js"
+	import { config_store } 	  from "./../../../lib/stores/config.js";
 	import { serialQueue }      from "./../../../lib/queue.js";
 
   let certificates_modal_opened = false
@@ -19,6 +20,18 @@
     {
       if(await serialQueue.add(() => certificate_store.remove(id)))
       {
+        let config = { };
+        [
+          "mqtt_certitficate_id",
+          "www_certitficate_id"
+        ].forEach(key => {
+          if ($config_store[key] == id) {
+            config[key] = ""
+          }
+        });
+        if (Object.keys(config).length > 0) {
+          await serialQueue.add(() => config_store.upload(config));
+        }
         $certificate_store.splice(certificate,1)
         $certificate_store = $certificate_store
         removeCertificateState = ""
