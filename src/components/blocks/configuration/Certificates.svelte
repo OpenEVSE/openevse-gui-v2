@@ -11,7 +11,7 @@
 
   let certificates_modal_opened = false
   let removeCertificateState = ""
-  
+
 	async function removeCertificate(id) {
     let certificate = $certificate_store.findIndex(item => item.id === id)
     removeCertificateState = "loading"
@@ -21,6 +21,7 @@
       {
         $certificate_store.splice(certificate,1)
         $certificate_store = $certificate_store
+        removeCertificateState = ""
       }
     }
   }
@@ -53,13 +54,13 @@
               <td class="has-text-dark">
                 <div class="delabs">
                   <div class="del">
-                    <IconButton 
-                    icon="fa6-solid:xmark" 
-                    size="is-size-5" 
-                    state={removeCertificateState} 
-                    color="has-text-danger" 
-                    butn_submit={()=>{removeCertificate(item.id)}} 
-                  />
+                    <IconButton
+                      icon="fa6-solid:xmark"
+                      size="is-size-5"
+                      state={removeCertificateState}
+                      color="has-text-danger"
+                      butn_submit={()=>{removeCertificate(item.id)}}
+                    />
                   </div>
                 </div>
               </td>
@@ -69,7 +70,7 @@
       </table>
 			{:else}
 			<div class="content">{$_("config.certificates.empty")}</div>
-			{/if}	
+			{/if}
     </Borders>
 		<div class="mt-4">
       <Button name={$_("config.certificates.upload")} butn_submit={uploadCertificate}/>
