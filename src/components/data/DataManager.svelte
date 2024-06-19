@@ -6,6 +6,7 @@
 	import { uistates_store }			from "./../../lib/stores/uistates.js"
 	import { status_store }				from "./../../lib/stores/status.js"
 	import { schedule_store } 			from "./../../lib/stores/schedule.js"
+	import { certificate_store } 		from "./../../lib/stores/certificates.js";
 	import { plan_store } 				from "./../../lib/stores/plan.js"
 	import { config_store } 			from "./../../lib/stores/config.js"
 	import { claims_target_store } 		from "./../../lib/stores/claims_target.js"
@@ -44,6 +45,7 @@
 	
 	let refresh_config = false
 	let refresh_schedule = false
+	let refresh_certificate = false
 	let refresh_target = false
 	let refresh_override = false
 	let refresh_plan = false
@@ -80,6 +82,18 @@
 			$uistates_store.schedule_version=ver
 			const res = await serialQueue.add(schedule_store.download)
 			refresh_schedule = false
+			return res
+		}
+	}
+
+	export async function refreshCertificateStore(ver) {
+		if (refresh_certificate)
+			return
+		if (ver != $uistates_store.certificate_version) {
+			refresh_certificate = true
+			$uistates_store.certificate_version=ver
+			const res = await serialQueue.add(certificate_store.download)
+			refresh_certificate = false
 			return res
 		}
 	}
