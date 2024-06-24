@@ -13,21 +13,26 @@
 	{#if $config_store.divert_type == 0}
 	<div class="mr-1 is-inline-block has-text-dark">
 		<span>{$_("status-divert-production")}:</span>
-		<span class="{$status_store.solar < 6?"has-text-danger":"has-text-primary"}">{$status_store.solar}W</span>
+		<span class="{$status_store.divert_solar_w < 1440?"has-text-danger":"has-text-primary"}">{$status_store.divert_solar_w}W</span>
 		<span>|</span>
-		<span class="{$status_store.solar < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
+		<span class="{$status_store.divert_solar_a < 6?"has-text-danger":"has-text-primary"}">{$status_store.divert_charge_current}A</span>
 	</div>
 
 	{:else if $config_store.divert_type == 1}
 	<div class="mr-1 has-text-dark">
 		<span>{$_("status-divert-grid")}:</span>
-		<span class="{$status_store.grid_ie < 0 ? "has-text-primary":"has-text-danger"}">{$status_store.grid_ie}W</span>
-		<span class="{$status_store.grid_ie < 6?"has-text-danger":"has-text-primary"}">{$status_store.charge_rate}A</span>
+		<span class="{$status_store.divert_grid_ie_w > 0 ? "has-text-danger":"has-text-primary"}">{$status_store.divert_grid_ie_w} W</span>
+		<span class="{$status_store.divert_grid_ie_a > 0 ? "has-text-danger":"has-text-primary"}">{round($status_store.divert_grid_ie_a,1)} A</span>
 	</div>
 	{/if}
-	<div class="mr-2 has-text-dark" class:is-hidden={!$status_store.smoothed_available_current}>
+
+	<div class="mr-1 has-text-dark" class:is-hidden={!$status_store.divert_available_current}>
+		<span>{$_("status-current-available")}:</span>
+		<span class="has-text-info">{round($status_store.divert_available_current,1)} A</span>
+	</div>
+	<div class="mr-1 has-text-dark" class:is-hidden={!$status_store.divert_smoothed_available_current}>
 		<span>{$_("status-divert-smoothed")}:</span>
-		<span class="has-text-info">{round($status_store.smoothed_available_current,1)}A</span>
+		<span class="has-text-info">{round($status_store.divert_smoothed_available_current,1)} A</span>
 	</div>
 	{#if !$status_store.divert_active}
 	<div class="mx-1">
