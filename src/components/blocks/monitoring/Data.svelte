@@ -5,7 +5,7 @@
 	import { _ } 					from 'svelte-i18n'
 	import {status_store} 			from "../../../lib/stores/status.js"
 	import { derived} 				from "svelte/store"
-	import {round, s2mns}			from "../../../lib/utils.js"
+	import {round, temp_round, s2mns}	from "../../../lib/utils.js"
 	import {sec2time, displayRange} from "../../../lib/utils.js"
 
 	let evelapsed = derived(uistates_store, store => s2mns(store.vehicle_state_update))
@@ -29,10 +29,10 @@
 			{name: $_("monitoring-sensors-current"), value: $status_store.amp/1000, unit: $_("units.A")},
 			{name: $_("monitoring-sensors-voltage"), value: $status_store.voltage, unit: $_("units.V")},
 			{name: $_("monitoring-sensors-evsetemp"), value: round($status_store.temp/10,1), unit: $_("units.C")},
-			{name: "temp1", value: !$status_store.temp1.isNaN?round($status_store.temp1/10,1):"", unit: $_("units.C")},
-			{name: "temp2", value: !$status_store.temp2.isNaN?round($status_store.temp2/10,1):"", unit: $_("units.C")},
-			{name: "temp3", value: !$status_store.temp3.isNaN?round($status_store.temp3/10,1):"", unit: $_("units.C")},
-			{name: "temp4", value: !$status_store.temp3.isNaN?round($status_store.temp4/10,1):"", unit: $_("units.C")},
+			{name: "temp1", value: temp_round($status_store.temp1), unit: $_("units.C")},
+			{name: "temp2", value: temp_round($status_store.temp2), unit: $_("units.C")},
+			{name: "temp3", value: temp_round($status_store.temp3), unit: $_("units.C")},
+			{name: "temp4", value: temp_round($status_store.temp4), unit: $_("units.C")},
 			{name: $_("monitoring-sensors-sensorscale"), value: $config_store.scale},
 			{name: $_("monitoring-sensors-sensoroffset"), value: $config_store.offset}
 		]
