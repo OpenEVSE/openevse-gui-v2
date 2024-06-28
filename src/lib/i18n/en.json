@@ -484,7 +484,7 @@
             "missing-ohm": "Ohm Key is missing"
         },
         "dev": {
-            "rapi-cmd": "Rapi Commands",
+            "rapi-cmd": "RAPI Commands",
             "send": "Send",
             "clear": "Clear",
             "consoles": "Consoles",

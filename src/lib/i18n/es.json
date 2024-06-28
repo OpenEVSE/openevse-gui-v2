@@ -484,7 +484,7 @@
 			"missing-ohm": "Falta Clave Ohm"
 		},
 		"dev": {
-			"rapi-cmd": "Comando Rapi",
+			"rapi-cmd": "Comando RAPI",
 			"send": "enviar",
 			"clear": "Limpiar",
 			"consoles": "Consolas",
