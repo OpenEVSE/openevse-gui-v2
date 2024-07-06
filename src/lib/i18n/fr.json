@@ -485,7 +485,7 @@
             "missing-ohm": "Clef Ohm manquante"
         },
         "dev": {
-            "rapi-cmd": "Commandes Rapi",
+            "rapi-cmd": "Commandes RAPI",
             "send": "Envoyer",
             "clear": "Effacer",
             "consoles": "Consoles",
