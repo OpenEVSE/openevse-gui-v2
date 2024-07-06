@@ -25,3 +25,5 @@ dist-ssr
 
 # Stats
 stats.html
+.env*
+!.env.example
