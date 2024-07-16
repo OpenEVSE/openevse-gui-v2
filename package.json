@@ -18,7 +18,7 @@
     "sass": "^1.77.8",
     "svelte": "^4.2.18",
     "svelte-preprocess": "^6.0.2",
-    "terser": "^5.31.2",
+    "terser": "^5.31.3",
     "vite": "^4.5.3",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-pwa": "^0.20.0",
