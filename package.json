@@ -21,7 +21,7 @@
     "terser": "^5.31.2",
     "vite": "^4.5.3",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-pwa": "^0.20.0",
+    "vite-plugin-pwa": "^0.20.1",
     "workbox-window": "^7.1.0"
   },
   "dependencies": {
