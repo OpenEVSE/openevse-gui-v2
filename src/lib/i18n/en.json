@@ -210,6 +210,7 @@
             "emon": "Energy Monitoring",
             "ohm": "OhmConnect",
             "dev": "Developer",
+            "certificates": "Certificates",
             "about": "About"
         },
         "network": {
@@ -354,7 +355,8 @@
             "announcetopic-desc": "Topic where OpenEVSE will post announce data and LWT",
             "retain": "Retain published data",
             "topic-voltage": "Voltage Topic",
-            "topic-voltage-desc": "Voltage MQTT topic to improve power calculations"
+            "topic-voltage-desc": "Voltage MQTT topic to improve power calculations",
+            "client-certificate": "Client Certificate"
         },
         "rfid": {
             "managetag": "Manage scanned tags",
@@ -508,6 +510,23 @@
             "missing-ocpp_chargeBoxId": "missing Charge Box ID",
             "missing-ocpp_authkey": "missing Auth Key",
             "missing-ocpp_idtag": "missing Id Tag"
+        },
+        "certificates": {
+            "id": "Id",
+            "type": "Type",
+            "name": "Name",
+            "name_placeholder": "Certificate name",
+            "root": "Root",
+            "client": "Client",
+            "add": "Add Certificate",
+            "certificate": "Certificate",
+            "private_key": "Private key",
+            "upload": "new certificate",
+            "empty": "No custom certificates",
+            "missing-name": "Certificate name is missing",
+            "missing-certificate": "Certificate is missing",
+            "missing-private_key": "Private key is missing",
+            "error": "Error adding certificate"
         }
     }
 }

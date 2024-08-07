@@ -5,6 +5,7 @@
 	import { uistates_store }		from "./../../lib/stores/uistates.js"
 	import { status_store }			from "./../../lib/stores/status.js"
 	import { schedule_store } 		from "./../../lib/stores/schedule.js"
+	import { certificate_store } 	from "./../../lib/stores/certificates.js";
 	import { plan_store } 			from "./../../lib/stores/plan.js"
 	import { config_store } 		from "./../../lib/stores/config.js"
 	import { claims_target_store } 	from "./../../lib/stores/claims_target.js"
@@ -72,6 +73,13 @@
 		if (!res) {
 			 status = "error"
 			 return false
+		}
+		progress = 90
+		status = "Loading step 8"
+		res = await certificate_store.download()
+		if (!res) {
+			 status = "error"
+			return false
 		}
 		if (status != "error") {
 			progress = 100
