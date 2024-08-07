@@ -13,7 +13,7 @@
     "@creativebulma/bulma-tooltip": "^1.2.0",
     "@sveltejs/vite-plugin-svelte": "^2.5.3",
     "@vitejs/plugin-legacy": "^4.1.1",
-    "bulma": "^0.9.4",
+    "bulma": "^1.0.2",
     "rollup-plugin-visualizer": "^5.12.0",
     "sass": "^1.77.8",
     "svelte": "^4.2.18",
