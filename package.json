@@ -32,7 +32,7 @@
     "iconify-icon": "^2.1.0",
     "luxon": "^3.5.0",
     "promise-batching-queue": "^0.0.5",
-    "svelte-i18n": "^4.0.0",
+    "svelte-i18n": "^4.0.1",
     "svelte-keyed": "^2.0.0",
     "svelte-local-storage-store": "^0.6.4",
     "svelte-spa-router": "^4.0.1"
