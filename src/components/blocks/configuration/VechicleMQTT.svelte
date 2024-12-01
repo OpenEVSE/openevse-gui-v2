@@ -14,26 +14,25 @@
 
 	let stg_submit = async () => {
 
-	stg_submit_state = "loading"
+		stg_submit_state = "loading"
 
-	const data = {
-		mqtt_vehicle_soc: $config_store.mqtt_vehicle_soc,
-		mqtt_vehicle_range: $config_store.mqtt_vehicle_range,
-		mqtt_vehicle_eta: $config_store.mqtt_vehicle_eta,
-		mqtt_vehicle_range_miles: $config_store.mqtt_vehicle_range_miles
-	}
-
-	if (await serialQueue.add(()=>config_store.upload(data))) 
-		{
-			stg_submit_state = "ok"
-			return true
+		const data = {
+			mqtt_vehicle_soc: $config_store.mqtt_vehicle_soc,
+			mqtt_vehicle_range: $config_store.mqtt_vehicle_range,
+			mqtt_vehicle_eta: $config_store.mqtt_vehicle_eta,
+			mqtt_vehicle_range_miles: $config_store.mqtt_vehicle_range_miles
 		}
-	else {
-		stg_submit_state = "error"
-		return false
-	}
 
-}
+		if (await serialQueue.add(()=>config_store.upload(data))) 
+			{
+				stg_submit_state = "ok"
+				return true
+			}
+		else {
+			stg_submit_state = "error"
+			return false
+		}
+	}
 </script>
 
 <div class="mt-1 mb-1">

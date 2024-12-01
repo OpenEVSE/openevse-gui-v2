@@ -285,6 +285,7 @@
             "pause": "Pause Status",
             "led-bn": "Led Brightness",
             "led-bn-help": "RGB leds brightness (not related to LCD panel brightness)",
+            "scale": "Adjust current sensor scale and offset",
             "sensorscale": "Current scale",
             "sensoroffset": "Current offset",
             "threephase": "Three-phase",
