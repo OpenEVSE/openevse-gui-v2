@@ -285,8 +285,9 @@
             "pause": "Mode de pause",
             "led-bn": "Luminosité des LEDs",
             "led-bn-help": "Luminosité des LEDs RGB (ne concerne pas la luminosité du LCD)",
-            "sensorscale": "Échelle courant",
-            "sensoroffset": "Décalage courant",
+            "scale": "Ajuster l'échelle et offset du capteur de courant",
+            "sensorscale": "Échelle capteur de courant",
+            "sensoroffset": "Offset capteur de courant",
             "threephase": "Triphasé",
             "threephase-help": "Activer quand la charge se fait en triphasé pour avoir un calcul correct de la puissance",
             "defaultstate": "État par défaut",
@@ -485,7 +486,7 @@
             "missing-ohm": "Clef Ohm manquante"
         },
         "dev": {
-            "rapi-cmd": "Commandes Rapi",
+            "rapi-cmd": "Commandes RAPI",
             "send": "Envoyer",
             "clear": "Effacer",
             "consoles": "Consoles",

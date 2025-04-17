@@ -37,7 +37,7 @@ $body-color: $dark;
 @import "../node_modules/bulma/sass/grid/_all";
 @import "../node_modules/bulma/sass/helpers/_all";
 @import "../node_modules/bulma/sass/utilities/_all";
-@import "../node_modules/bulma/sass/components/level";	
+@import "../node_modules/bulma/sass/components/level";
 @import "../node_modules/bulma/sass/components/modal";
 @import "../node_modules/bulma/sass/components/tabs";
 @import "../node_modules/bulma/sass/components/message";
@@ -64,7 +64,7 @@ $breadcrumb-item-color: $text;
 	box-sizing: border-box;
   }
 
-  
+
 // body::-webkit-scrollbar { display: none; }
 
 
@@ -89,7 +89,7 @@ html {
 ::-webkit-scrollbar {
 	width: 8px;
   }
-  
+
   /* Track */
 ::-webkit-scrollbar-track {
 	background: none;
@@ -98,16 +98,16 @@ html {
 
 ::-webkit-scrollbar-track:hover {
 	background: #fbf9ed;
-	
+
 }
-	
-  
+
+
   /* Handle */
 ::-webkit-scrollbar-thumb {
 	// background: hsl(189, 53%, 47%);
 	background:  #32b3d4;;
 	border-radius: 8px;
-	
+
 }
 
 @media screen and (max-width: 768px){
@@ -123,3 +123,14 @@ scrollbar-color: hsl(189, 53%, 47%) white;
 scrollbar-width: thin;
 }
 
+.rapi-cmd {
+  color: $cyan;
+}
+
+.rapi-res {
+  color: $green;
+}
+
+.rapi-error {
+  color: #cc0f35;
+}

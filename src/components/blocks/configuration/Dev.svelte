@@ -1,6 +1,7 @@
 <script>
 	import { tesla_store } from "./../../../lib/stores/tesla.js";
 	import { schedule_store } from "./../../../lib/stores/schedule.js";
+	import { certificate_store } from "./../../../lib/stores/certificates.js";
 	import { plan_store } from "./../../../lib/stores/plan.js";
 	import { override_store } from "./../../../lib/stores/override.js";
 	import { limit_store } from "./../../../lib/stores/limit.js";
@@ -50,7 +51,7 @@
 		if (res=="error") {
 			button_send_state = "error"
 			return false
-		} 
+		}
 		else {
 			button_send_state = "ok"
 			rapi_cmd_result.push(res)
@@ -69,7 +70,7 @@
 		button_export_state = "loading"
 		// get usefull data
 		let data = {}
-		
+
 		// copy stores
 		data.target = {...$claims_target_store}
 		// get claims store not cached here
@@ -82,10 +83,11 @@
 		data.status = {...$status_store}
 		data.plan = {...$plan_store}
 		data.schedule = {...$schedule_store}
+		data.certificates = {...$certificate_store}
 		data.config = {...$config_store}
 		data.limits = {...$limit_store}
 		data.tesla = {...$tesla_store}
-		
+
 		data.uistates = {...$uistates_store}
 
 
@@ -119,9 +121,10 @@
 					<div class="mb-2">
 						<div>
 							<div class="is-size-7 has-text-left my-2 mx-2">
-							{#each rapi_cmd_result as { cmd, ret } }
-							&gt; {cmd} <br>
-							&lt; {ret} <br>
+							{#each rapi_cmd_result as { cmd, ret, error } }
+							&gt; <span class="rapi-cmd">{cmd}</span><br>
+							&lt; {#if ret !== undefined}<span class="rapi-res">{ret}</span>{/if}
+              {#if error !== undefined}<span class="rapi-error">{error}</span>{/if} <br>
 							{/each}
 							</div>
 							<form on:submit|preventDefault={send_rapi_cmd}>
