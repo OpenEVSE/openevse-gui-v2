@@ -116,13 +116,13 @@ const iconColours = {
             if (!parsed) {
                throw new Error('Invalid icon')
             }
-            
+
             // Validate and clean up attributes, return object with attributes and body
             const icon = convertParsedSVG(parsed);
             if (!icon) {
                throw new Error('Invalid icon')
             }
-            
+
             const x = (46 - icon.width) / 2;
 
             const newIcon = {
@@ -142,7 +142,7 @@ const iconColours = {
             });
 
             svg = tempIconSet.toSVG('temp');
-            
+
         } catch (err) {
             // Invalid icon
             console.error(`Error parsing ${name}:`, err);
