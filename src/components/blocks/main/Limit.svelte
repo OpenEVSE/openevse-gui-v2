@@ -3,6 +3,7 @@
 	import { derived }		from "svelte/store"
 	import LimitTag from "./../../ui/LimitTag.svelte";
 	import { status_store } from "./../../../lib/stores/status.js";
+	import { uistates_store } 		from "./../../../lib/stores/uistates.js"
 	import { serialQueue } 	from "./../../../lib/queue.js";
 	import { onMount } 		from "svelte";
 	import { config_store } from "./../../../lib/stores/config.js";
@@ -31,7 +32,7 @@
 	const minItems = [0,5,10,15,20,25,30,35,40,45,50,55]
 
 	let typeItems = []
-	
+
 
 	let limit = {
 		type: "none",
@@ -51,11 +52,11 @@
 		if ($limit_store) {
 			switch ($limit_store.type) {
 				case "time":
-					if ($limit_store.value*60 >= store.session_elapsed)
-						ctval = sec2time($limit_store.value*60 - store.elapsed)
+          if ($limit_store.value*60 >= $uistates_store.elapsed)
+            ctval = sec2time($limit_store.value*60 - $uistates_store.elapsed)
 					else ctval = "00:00:00"
 					break
-				case "energy": 
+				case "energy":
 					ctval = round(($limit_store.value - store.session_energy)/1000,2)
 					ctval = ctval<0?0.0:ctval.toFixed(2)
 					break;
@@ -174,7 +175,7 @@
 
 	$: $limit_store.val, $status_store = $status_store
 
-	
+
 </script>
 <style>
 	.content {
@@ -211,8 +212,8 @@
 			{#if $limit_store.type != "none" && (!is_admin || (is_admin && !$limit_store.auto_release))}
 			<!-- if is_admin only display auto_release=false limit -->
 			<div class="mb-2 is-flex is-align-items-center is-justify-content-center">
-				<LimitTag 
-					type={$limit_store.type} 
+				<LimitTag
+					type={$limit_store.type}
 					types={LimitTypes}
 					{is_admin}
 					value={$limit_store.value}
@@ -227,7 +228,7 @@
 			</div>
 			{:else}
 			<div class="has-text-info">
-				<Button name={$_("new")} butn_submit={()=> modal = true}/>	
+				<Button name={$_("new")} butn_submit={()=> modal = true}/>
 			</div>
 			{/if}
 		</div>
@@ -257,11 +258,11 @@
 			</div>
 			{/if}
 			<div class="mt-2">
-				<Button 
-					name={$_("limits.set")} 
-					bind:state={butn_set_state} 
-					butn_submit={setLimit} 
-					disabled={!limit.value} 
+				<Button
+					name={$_("limits.set")}
+					bind:state={butn_set_state}
+					butn_submit={setLimit}
+					disabled={!limit.value}
 				/>
 			</div>
 		</div>
