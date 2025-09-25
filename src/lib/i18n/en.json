@@ -292,7 +292,10 @@
             "threephase-help": "Enable this switch when charging with three phases to get correct power calculation",
             "defaultstate": "Default State",
             "defaultstate-help": "OpenEVSE will take this default state when there is no pending command",
-            "limit-help": "Set charge limit that will survive reboot"
+            "limit-help": "Set charge limit that will survive reboot",
+            "set_hardware_max": "Set hardware maximum current",
+            "confirm_set_hardware_max": "Ok, set hardware maximum current",
+            "set_hardware_max_warning": "This is a one time operation. Once changed this can not be updated to any other value and is not cleared by a factory reset. Please be sure you are setting this to the correct value"
         },
         "safety": {
             "test": "Test",
