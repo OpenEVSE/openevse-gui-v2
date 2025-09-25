@@ -210,6 +210,7 @@
             "emon": "Emoncms",
             "ohm": "OhmConnect",
             "dev": "Développeur",
+            "certificates": "Certificats",
             "about": "À propos"
         },
         "network": {
@@ -356,7 +357,8 @@
             "announcetopic-desc": "Sujet dans lequel OpenEVSE va publier les données d'annonce et LWT",
             "retain": "Retenir les publications (Retain)",
             "topic-voltage": "Sujet tension (V)",
-            "topic-voltage-desc": "Sujet MQTT de la tension (en V) pour améliorer le calcul de puissance"
+            "topic-voltage-desc": "Sujet MQTT de la tension (en V) pour améliorer le calcul de puissance",
+            "client-certificate": "Certificat client"
         },
         "rfid": {
             "managetag": "Gérer les badges autorisés",
@@ -510,6 +512,23 @@
             "missing-ocpp_chargeBoxId": "ID Chargeur manquant",
             "missing-ocpp_authkey": "Clef d'authentification manquante",
             "missing-ocpp_idtag": "Tag ID manquant"
+        },
+        "certificates": {
+            "id": "Id",
+            "type": "Type",
+            "name": "Nom",
+            "name_placeholder": "Nom du certificat",
+            "root": "Racine",
+            "client": "Client",
+            "add": "Ajouter un certificat",
+            "certificate": "Certificat",
+            "private_key": "Clé privée",
+            "upload": "nouveau certificat",
+            "empty": "Aucun certificat personnalisé",
+            "missing-name": "Le nom du certificat est manquant",
+            "missing-certificate": "Le certificat est manquant",
+            "missing-private_key": "La clé privée est manquante",
+            "error": "Erreur lors de l'ajout du certificat"
         }
     }
 }
