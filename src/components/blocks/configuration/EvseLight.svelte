@@ -13,7 +13,7 @@
 	let mounted = false
 	const states_items = [{name: $_("disabled"), value: false}, {name: $_("active"), value: true}]
 	const phase_items = [{name: $_("no"), value: false}, {name: $_("yes"), value: true}]
-	
+
 	let formdata = {
 			max_current: 			{val: false,  status: "", input: undefined, req: false},
 			max_current_soft: 		{val: false,  status: "", input: undefined, req: false},
@@ -24,7 +24,7 @@
 	}
 
 	let set_hardware_max = false;
-	let hardware_max_disabled = false;
+	let hardware_max_disabled = $config_store.max_current_hard != $config_store.max_current_firmware;
 
 	let updateFormData = () => {
 		formdata.max_current.val = $config_store.max_current_soft
@@ -46,7 +46,7 @@
 		}
 		await submitFormData({prop: prop, form: formdata})
 	}
-	
+
 	onMount(()=> {
 		updateFormData()
 		mounted = true
@@ -60,12 +60,12 @@
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
 					<div class="has-text-weight-bold is-size-6">{$_("config.evse.maxcur")}</div>
-					<SliderForm icon="fa6-solid:gauge-high" 
-						bind:value={formdata.max_current.val} 
-						unit={$_("units.A")} 
-						min={$config_store.min_current_hard?$config_store.min_current_hard:6} 
-						max={$config_store.max_current_hard?$config_store.max_current_hard:32} 
-						onchange={()=>{ if(false === set_hardware_max) { setProperty("max_current_soft")}}} 
+					<SliderForm icon="fa6-solid:gauge-high"
+						bind:value={formdata.max_current.val}
+						unit={$_("units.A")}
+						min={$config_store.min_current_hard?$config_store.min_current_hard:6}
+						max={$config_store.max_current_hard?$config_store.max_current_hard:32}
+						onchange={()=>{ if(false === set_hardware_max) { setProperty("max_current_soft")}}}
 					/>
 					<div class="mt-2">
 						<Switch name="set_hardware_max" bind:checked={set_hardware_max} label="{$_("config.evse.set_hardware_max")}" disabled={hardware_max_disabled} />
@@ -86,11 +86,11 @@
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
 					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.defaultstate")}</div>
-					<Select 
+					<Select
 						bind:this={formdata.default_state.input}
-						bind:value={formdata.default_state.val} 
-						bind:status={formdata.default_state.status} 
-						items={states_items} 
+						bind:value={formdata.default_state.val}
+						bind:status={formdata.default_state.status}
+						items={states_items}
 						onChange={()=>setProperty("default_state")}
 					/>
 				</Borders>
@@ -100,11 +100,11 @@
 			<div class="my-1 is-flex is-justify-content-center" >
 				<Borders grow={true}>
 					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.threephase")}</div>
-					<Select 
+					<Select
 						bind:this={formdata.is_threephase.input}
-						bind:value={formdata.is_threephase.val} 
-						bind:status={formdata.is_threephase.status} 
-						items={phase_items} 
+						bind:value={formdata.is_threephase.val}
+						bind:status={formdata.is_threephase.status}
+						items={phase_items}
 						onChange={()=>setProperty("is_threephase")}
 					/>
 				</Borders>
@@ -117,12 +117,12 @@
 					</div>
 					<div class="has-text-weight-bold is-size-6 mb-3">{$_("config.evse.random")}</div>
 					<div class="is-flex is-justify-content-center is-align-items-center">
-						<div class="inputbox">	
-							<InputForm 
-								is_inline type="number" min=0 max=3600  
+						<div class="inputbox">
+							<InputForm
+								is_inline type="number" min=0 max=3600
 								bind:this={formdata.scheduler_start_window.input}
-								bind:value={formdata.scheduler_start_window.val} 
-								bind:status={formdata.scheduler_start_window.status} 
+								bind:value={formdata.scheduler_start_window.val}
+								bind:status={formdata.scheduler_start_window.status}
 								onChange={()=>setProperty("scheduler_start_window")}
 							/>
 						</div>
@@ -130,7 +130,7 @@
 					</div>
 				</Borders>
 			</div>
-		</div>	
+		</div>
 	</div>
 
 </Box>
