@@ -47,7 +47,7 @@
 	function selectWifi() {
 		setWifi = true
 	}
-	
+
 
 	onMount(
 		() => updateFormData()
@@ -79,12 +79,12 @@
 				</div>
 			</div>
 			<div class="my-1 container">
-				<InputForm is_inline type="text" 
-					title={$_("config.network.host")} 
-					placeholder="openevse" 
+				<InputForm is_inline type="text"
+					title={$_("config.network.host")}
+					placeholder="openevse"
 					bind:this={formdata.hostname.input}
-					bind:value={formdata.hostname.val} 
-					status={formdata.hostname.status} 
+					bind:value={formdata.hostname.val}
+					status={formdata.hostname.status}
 					onChange={()=>setProperty("hostname")}/>
 			</div>
 		</Borders>
@@ -111,28 +111,30 @@
 	</div>
 	{/if}
 
-	<div class="is-flex is-justify-content-center">
+  {#if $config_store.wizard_passed }
+	<div class="is-flex is-justify-content-center" >
 		<Borders grow>
 			<div class="my-3 has-text-dark has-text-weight-bold">{$_("config.network.modes.ap")}</div>
 			{$_("config.network.apdefault")}
 			<form on:submit|preventDefault>
 				<div>
-					<InputForm is_inline type="text" title={$_("config.network.apssid")} 
-						placeholder="openevse" 
+					<InputForm is_inline type="text" title={$_("config.network.apssid")}
+						placeholder="openevse"
 						bind:this={formdata.ap_ssid.input}
-						bind:value={formdata.ap_ssid.val} 
-						bind:status={formdata.ap_ssid.status} 
+						bind:value={formdata.ap_ssid.val}
+						bind:status={formdata.ap_ssid.status}
 						onChange={()=>setProperty("ap_ssid")}/>
 				</div>
 				<div>
-					<InputForm is_inline type="password" title={$_("config.network.appass")} 
+					<InputForm is_inline type="password" title={$_("config.network.appass")}
 						placeholder="openevse"
 						bind:this={formdata.ap_pass.input}
-						bind:value={formdata.ap_pass.val} 
+						bind:value={formdata.ap_pass.val}
 						bind:status={formdata.ap_pass.status}
 						onChange={()=>setProperty("ap_pass")}/>
 				</div>
 			</form>
 		</Borders>
 	</div>
+  {/if}
 </Box>
