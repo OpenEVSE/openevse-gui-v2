@@ -79,19 +79,38 @@ export function formatDate(t,z,format=null) {
 		d = DateTime.fromISO(t, {zone: tz})
 	}
 	else d = DateTime.fromISO(t)
-	const arr = d.toLocaleString(DateTime.DATETIME_SHORT).split(" ")
-	let datearr = arr[0].split("/")
-	if (format=="short") {
-		//remove year
-		datearr.pop()
+
+	let separator = "/"
+	let datearr = d.toLocaleString(DateTime.DATE_SHORT).split(separator)
+	if (!datearr[1]) {
+		separator = ". "
+		datearr = d.toLocaleString(DateTime.DATE_SHORT).split(separator)
+	}
+	else if (!datearr[1]) {
+		separator = "."
+		datearr = d.toLocaleString(DateTime.DATE_SHORT).split(separator)
+	}
+	else if (!datearr[1]) {
+		separator = "-"
+		datearr = d.toLocaleString(DateTime.DATE_SHORT).split(separator)
+	}
+	
+	if (format == "short") {					// remove year
+		if (datearr[2].length == 4) {
+			datearr.pop()
+		}
+		else 
+		if (datearr[0].length == 4) {
+			datearr.shift()
+		}
 	}
 	// fixing missing trailing 0 luxxon bug on US locale
 	datearr[0] = datearr[0]?.length == 1?"0"+datearr[0]:datearr[0]
 	datearr[1] = datearr[1]?.length == 1?"0"+datearr[1]:datearr[1]
-	const date = datearr.join("/")
-	let time = arr[1]
-	if (arr[2]) 
-		time += " " + arr[2]
+	if (separator == ". ") separator = "."		// remove space - shorter form
+	const date = datearr.join(separator)
+
+	let time = DateTime.fromISO(t).toLocaleString(DateTime.TIME_SIMPLE)
 
 	return date + " " + time
 }
