@@ -113,6 +113,7 @@ export default defineConfig(({ command, mode }) => {
     base: './',
     server: {
       host: "0.0.0.0",
+      port: env.VITE_PORT ? parseInt(env.VITE_PORT) : 5173,
       proxy: {
         '/api': {
           target: 'http://' + env.VITE_OPENEVSEHOST,

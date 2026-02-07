@@ -1,0 +1,62 @@
+version: '3.4'
+
+# Docker Compose configuration for running multiple OpenEVSE GUI instances
+# This is useful for:
+# - Testing with multiple OpenEVSE emulators
+# - Development of multi-device features
+# - Integration testing scenarios
+#
+# Usage:
+#   docker-compose -f docker-compose.multi-instance.yml up
+#
+# Each GUI instance connects to a different OpenEVSE host and runs on a different port
+
+services:
+  # First OpenEVSE GUI instance - connects to openevse1.local on port 5173
+  gui-instance-1:
+    image: wifigui-1
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: openevse-gui-1
+    environment:
+      NODE_ENV: development
+      VITE_OPENEVSEHOST: "openevse1.local"
+    ports:
+      - "5173:5173"
+    networks:
+      - openevse-network
+
+  # Second OpenEVSE GUI instance - connects to openevse2.local on port 5174
+  gui-instance-2:
+    image: wifigui-2
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: openevse-gui-2
+    environment:
+      NODE_ENV: development
+      VITE_OPENEVSEHOST: "openevse2.local"
+    ports:
+      - "5174:5173"
+    networks:
+      - openevse-network
+
+  # Third OpenEVSE GUI instance - connects to openevse3.local on port 5175
+  gui-instance-3:
+    image: wifigui-3
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: openevse-gui-3
+    environment:
+      NODE_ENV: development
+      VITE_OPENEVSEHOST: "openevse3.local"
+    ports:
+      - "5175:5173"
+    networks:
+      - openevse-network
+
+networks:
+  openevse-network:
+    driver: bridge

@@ -27,3 +27,4 @@ dist-ssr
 stats.html
 .env*
 !.env.example
+!.env.instance*.example
