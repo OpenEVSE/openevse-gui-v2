@@ -45,19 +45,9 @@ for i in $(seq 1 $NUM_INSTANCES); do
     echo "  Connecting to: $HOST"
     echo ""
     
-    # Create temporary .env file for this instance
-    TEMP_ENV=$(mktemp)
-    cat > "$TEMP_ENV" << EOF
-VITE_OPENEVSEHOST = "$HOST"
-NODE_ICU_DATA = "\$(pwd)/node_modules/full-icu" node
-EOF
-    
-    # Start the dev server in background
+    # Start the dev server in background with environment variables
     VITE_PORT=$PORT VITE_OPENEVSEHOST=$HOST npm run dev > "/tmp/openevse-gui-${i}.log" 2>&1 &
     pids+=($!)
-    
-    # Clean up temp env file
-    rm "$TEMP_ENV"
     
     # Give it a moment to start
     sleep 2
