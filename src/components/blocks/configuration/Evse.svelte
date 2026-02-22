@@ -30,6 +30,7 @@
 			scale:                  {var: 220,    status: "", input: undefined, req: false},
 			offset:					{var: 0,      status: "", input: undefined, req: false},
 			pause_uses_disabled:	{val: null,   status: "", input: undefined, req: false},
+			button_enabled:			{val: false,  status: "", input: undefined, req: false},
 			service:				{val: false,  status: "", input: undefined, req: false},
 			led_brightness:			{val: "",     status: "", input: undefined, req: false}
 		}
@@ -47,6 +48,7 @@
 		formdata.scale.val = $config_store.scale
 		formdata.offset.val = $config_store.offset
 		formdata.pause_uses_disabled.val =  $config_store.pause_uses_disabled
+		formdata.button_enabled.val = $config_store.button_enabled
 		formdata.service.val = $config_store.service
 		formdata.led_brightness.val = $config_store.led_brightness
 	}
@@ -245,6 +247,22 @@
 						bind:checked={formdata.pause_uses_disabled.val}
 						bind:status={formdata.pause_uses_disabled.status}
 						onChange={()=>setProperty("pause_uses_disabled")}
+					/>
+				</Borders>
+			</div>
+			<div class="my-1 is-flex is-justify-content-center" >
+				<Borders grow={true} has_help={true}>
+					<div slot="help">
+						{@html $_("config.evse.button-help")}
+					</div>
+					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.button")}</div>
+					<Switch
+						name="buttonenabled"
+						label="{formdata.button_enabled.val?$_("enabled"):$_("disabled")}"
+						bind:this={formdata.button_enabled.input}
+						bind:checked={formdata.button_enabled.val}
+						bind:status={formdata.button_enabled.status}
+						onChange={()=>setProperty("button_enabled")}
 					/>
 				</Borders>
 			</div>

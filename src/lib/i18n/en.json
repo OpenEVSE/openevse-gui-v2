@@ -283,6 +283,8 @@
             "seconds": "seconds",
             "service": "Service Level",
             "pause": "Pause Status",
+            "button": "Front Button",
+            "button-help": "<p>Enable or disable the front button on the OpenEVSE unit.</p><br><p>Disabling the button prevents tampering of settings or interrupting a charge, which is useful for outdoor or publicly accessible installations.</p>",
             "led-bn": "Led Brightness",
             "led-bn-help": "RGB leds brightness (not related to LCD panel brightness)",
             "scale": "Adjust current sensor scale and offset",
