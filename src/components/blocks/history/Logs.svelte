@@ -57,6 +57,7 @@
 		link.href = url
 		link.download = "session-history.csv"
 		link.click()
+		link.remove()
 	}
 
 	function getUserDisplay(rfidTag) {
@@ -67,7 +68,7 @@
 
 	onMount(async ()=>{
 		await loadRfidUsers()
-		init()
+		await init()
 
 	})
 

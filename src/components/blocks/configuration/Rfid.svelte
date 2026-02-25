@@ -170,8 +170,9 @@
 		const result = await serialQueue.add(() => httpAPI("DELETE", `/rfid/users?rfid=${encodeURIComponent(tag)}`))
 		
 		if (result && result !== "error") {
-			delete rfidUsers[tag]
-			rfidUsers = rfidUsers // trigger reactivity
+			// Create new object to trigger Svelte reactivity
+			const { [tag]: _, ...rest } = rfidUsers
+			rfidUsers = rest
 			editingInst.state = "ok"
 			setTimeout(() => {
 				editingTag = null
@@ -299,6 +300,7 @@
 										{/if}
 									</div>
 									<div class="ml-2">
+										<!-- Empty name - tag removal handled by RemovableTag icon -->
 										<RemovableTag bind:this={tags_inst[i]} name="" action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
 									</div>
 								</div>
