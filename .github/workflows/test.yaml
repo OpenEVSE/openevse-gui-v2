@@ -51,6 +51,7 @@ jobs:
           name: Test Results
           path: test-results/junit.xml
           reporter: java-junit
+          use-actions-summary: 'false'
 
       - name: Coverage summary
         if: always() && github.event_name == 'pull_request'
