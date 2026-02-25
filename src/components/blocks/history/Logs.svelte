@@ -57,7 +57,8 @@
 		link.href = url
 		link.download = "session-history.csv"
 		link.click()
-		link.remove()
+		// Remove after allowing browser time to process download
+		setTimeout(() => link.remove(), 100)
 	}
 
 	function getUserDisplay(rfidTag) {
