@@ -37,6 +37,13 @@ jobs:
           name: test-results
           path: test-results/junit.xml
 
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+
       - name: Publish test results
         if: always()
         uses: dorny/test-reporter@v1
@@ -44,3 +51,9 @@ jobs:
           name: Test Results
           path: test-results/junit.xml
           reporter: java-junit
+
+      - name: Coverage summary
+        if: always() && github.event_name == 'pull_request'
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          json-summary-path: coverage/coverage-summary.json

@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "npm run css-watch",
-    "test": "vitest run",
+    "test": "vitest run --coverage",
     "test:watch": "vitest"
   },
   "devDependencies": {
@@ -17,6 +17,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/svelte": "^5.3.1",
     "@vitejs/plugin-legacy": "^4.1.1",
+    "@vitest/coverage-v8": "^4.0.18",
     "bulma": "^0.9.4",
     "jsdom": "^28.1.0",
     "rollup-plugin-visualizer": "^5.12.0",

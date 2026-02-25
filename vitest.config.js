@@ -11,6 +11,13 @@ export default defineConfig({
     outputFile: {
       junit: 'test-results/junit.xml',
     },
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json-summary', 'html'],
+      reportsDirectory: 'coverage',
+      include: ['src/lib/**/*.js'],
+      exclude: ['src/lib/**/__tests__/**'],
+    },
   },
   resolve: {
     alias: {

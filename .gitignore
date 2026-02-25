@@ -30,3 +30,4 @@ stats.html
 
 # Test results
 test-results/
+coverage/
