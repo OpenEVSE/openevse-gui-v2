@@ -11,6 +11,7 @@
 	import Button 			  from "./../../ui/Button.svelte";
 	import Switch 			  from "./../../ui/Switch.svelte";
 	import Box 				  from "../../ui/Box.svelte"
+	import InputForm 		  from "./../../ui/InputForm.svelte";
 
 	let mounted = false
 	let scanning = false
@@ -19,13 +20,18 @@
 	let but_scan_state
 	let button_inst
 	let button2_inst
+	let rfidUsers = {}
+	let editingTag = null
+	let editingName = ""
+	let editingInst = null
 
 	let formdata
 
 	
-	onMount(() => {
+	onMount(async () => {
 		updateTags($config_store.rfid_storage)
 		updateFormData()
+		await loadRfidUsers()
 		mounted = true
 	})
 	$: $config_store.rfid_storage, resetStates()
@@ -114,6 +120,68 @@
 		}
 	}
 
+	async function loadRfidUsers() {
+		const result = await httpAPI("GET", "/rfid/users")
+		if (result && result !== "error") {
+			rfidUsers = result
+		}
+	}
+
+	function startEditingName(tag) {
+		editingTag = tag
+		editingName = rfidUsers[tag] || ""
+	}
+
+	function cancelEditingName() {
+		editingTag = null
+		editingName = ""
+		if (editingInst) {
+			editingInst.state = ""
+		}
+	}
+
+	async function saveUserName(tag) {
+		if (!editingInst) return
+		editingInst.state = "loading"
+		
+		const body = JSON.stringify({
+			rfid: tag,
+			name: editingName
+		})
+		
+		const result = await serialQueue.add(() => httpAPI("POST", "/rfid/users", body))
+		
+		if (result && result !== "error") {
+			rfidUsers[tag] = editingName
+			editingInst.state = "ok"
+			setTimeout(() => {
+				editingTag = null
+				editingName = ""
+			}, 500)
+		} else {
+			editingInst.state = "error"
+		}
+	}
+
+	async function removeUserName(tag) {
+		if (!editingInst) return
+		editingInst.state = "loading"
+		
+		const result = await serialQueue.add(() => httpAPI("DELETE", `/rfid/users?rfid=${encodeURIComponent(tag)}`))
+		
+		if (result && result !== "error") {
+			delete rfidUsers[tag]
+			rfidUsers = rfidUsers // trigger reactivity
+			editingInst.state = "ok"
+			setTimeout(() => {
+				editingTag = null
+				editingName = ""
+			}, 500)
+		} else {
+			editingInst.state = "error"
+		}
+	}
+
 	
 </script>
 <style>
@@ -174,7 +242,67 @@
 					</div>
 					<div class="scrollable my-2">
 						{#each tags as tag,i}
-							<RemovableTag bind:this={tags_inst[i]} name={tag} action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
+							<div class="mb-3 px-2">
+								<div class="is-flex is-align-items-center is-justify-content-between">
+									<div class="is-flex-grow-1">
+										<div class="has-text-weight-bold has-text-dark">UID: {tag}</div>
+										{#if editingTag === tag}
+											<div class="mt-2">
+												<InputForm 
+													bind:value={editingName}
+													placeholder={$_("config.rfid.username")}
+													type="text"
+													size="20"
+												/>
+												<div class="is-flex is-justify-content-start mt-2">
+													<Button 
+														bind:this={editingInst}
+														name={$_("save")} 
+														color="is-primary" 
+														size="is-small"
+														width="80px"
+														butn_submit={()=>saveUserName(tag)} 
+													/>
+													<Button 
+														name={$_("cancel")} 
+														color="is-light" 
+														size="is-small"
+														width="80px"
+														butn_submit={cancelEditingName} 
+													/>
+													{#if rfidUsers[tag]}
+													<Button 
+														name={$_("config.rfid.removename")} 
+														color="is-danger" 
+														size="is-small"
+														butn_submit={()=>removeUserName(tag)} 
+													/>
+													{/if}
+												</div>
+											</div>
+										{:else}
+											<div class="mt-1 is-flex is-align-items-center">
+												{#if rfidUsers[tag]}
+													<span class="has-text-info mr-2">{rfidUsers[tag]}</span>
+													<button class="button is-small is-ghost" on:click={() => startEditingName(tag)}>
+														<iconify-icon icon="fa6-solid:pencil" class="has-text-info"></iconify-icon>
+													</button>
+												{:else}
+													<Button 
+														name={$_("config.rfid.addusername")} 
+														color="is-info" 
+														size="is-small"
+														butn_submit={()=>startEditingName(tag)} 
+													/>
+												{/if}
+											</div>
+										{/if}
+									</div>
+									<div class="ml-2">
+										<RemovableTag bind:this={tags_inst[i]} name="" action={()=>removeTag(tag,tags_inst[i])} color={$status_store.rfid_input == tag?"is-primary":"is-info"}/>
+									</div>
+								</div>
+							</div>
 						{/each}
 					</div>
 				</Borders>
