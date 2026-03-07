@@ -27,3 +27,7 @@ dist-ssr
 stats.html
 .env*
 !.env.example
+
+# Test results
+test-results/
+coverage/

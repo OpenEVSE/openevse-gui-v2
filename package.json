@@ -7,13 +7,19 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "npm run css-watch"
+    "start": "npm run css-watch",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@creativebulma/bulma-tooltip": "^1.2.0",
     "@sveltejs/vite-plugin-svelte": "^2.5.3",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/svelte": "^5.3.1",
     "@vitejs/plugin-legacy": "^4.1.1",
+    "@vitest/coverage-v8": "^4.0.18",
     "bulma": "^0.9.4",
+    "jsdom": "^28.1.0",
     "rollup-plugin-visualizer": "^5.12.0",
     "sass": "^1.81.0",
     "svelte": "^4.2.19",
@@ -22,6 +28,7 @@
     "vite": "^4.5.3",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-pwa": "^0.21.0",
+    "vitest": "^4.0.18",
     "workbox-window": "^7.3.0"
   },
   "dependencies": {
