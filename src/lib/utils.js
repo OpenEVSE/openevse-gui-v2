@@ -80,39 +80,22 @@ export function formatDate(t,z,format=null) {
 	}
 	else d = DateTime.fromISO(t)
 
-	let separator = "/"
-	let datearr = d.toLocaleString(DateTime.DATE_SHORT).split(separator)
-	if (!datearr[1]) {
-		separator = ". "
-		datearr = d.toLocaleString(DateTime.DATE_SHORT).split(separator)
-	}
-	else if (!datearr[1]) {
-		separator = "."
-		datearr = d.toLocaleString(DateTime.DATE_SHORT).split(separator)
-	}
-	else if (!datearr[1]) {
-		separator = "-"
-		datearr = d.toLocaleString(DateTime.DATE_SHORT).split(separator)
-	}
-	
-	if (format == "short") {					// remove year
-		if (datearr[2].length == 4) {
-			datearr.pop()
-		}
-		else 
-		if (datearr[0].length == 4) {
-			datearr.shift()
-		}
-	}
-	// fixing missing trailing 0 luxxon bug on US locale
-	datearr[0] = datearr[0]?.length == 1?"0"+datearr[0]:datearr[0]
-	datearr[1] = datearr[1]?.length == 1?"0"+datearr[1]:datearr[1]
-	if (separator == ". ") separator = "."		// remove space - shorter form
-	const date = datearr.join(separator)
+	let d1
+    if (format == "short")					// remove year
+		d1 = d.toLocaleString({month: '2-digit', day: '2-digit'})
+	else
+		d1 = d.toLocaleString({year: 'numeric', month: '2-digit', day: '2-digit'})
 
-	let time = DateTime.fromISO(t).toLocaleString(DateTime.TIME_SIMPLE)
+	let datearr = d1.split(". ")			// remove space - shorter form
+	if (datearr[1]) d1 = datearr.join(".")
 
-	return date + " " + time
+	// Select your preferred format TIME_SIMPLE or 2-digit hours and minutes.
+	// TIME_SIMPLE is locale aware but some locales do not use leading zeros for hours
+	// which causes layout issues.
+//    let time = d.toLocaleString(DateTime.TIME_SIMPLE)
+    let time = d.toLocaleString({hour: '2-digit', minute: '2-digit'})
+
+	return d1 + " " + time
 }
 
 export function displayTime(t) {
