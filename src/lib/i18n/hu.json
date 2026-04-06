@@ -65,7 +65,7 @@
 		"friday": "péntek",
 		"saturday": "szombat",
 		"sunday": "vasárnap"
-		},
+	},
 	"status-items-starting": "Starting",
 	"status-items-waiting": "EV-re várva",
 	"status-items-ready": "Töltésre kész",
@@ -210,6 +210,7 @@
 			"emon": "Energy Monitoring",
 			"ohm": "OhmConnect",
 			"dev": "Fejlesztő",
+			"certificates": "Tanúsítványok",
 			"about": "Kapcsolat"
 		},
 		"network": {
@@ -284,13 +285,17 @@
 			"pause": "Szünet Állapota",
 			"led-bn": "LED fényerő",
 			"led-bn-help": "RGB ledek fényereje (nem kapcsolódik az LCD panel fényerejéhez)",
+			"scale": "Áramérzékelő skála és eltolás beállítása",
 			"sensorscale": "Áram szorzó",
 			"sensoroffset": "Áram eltolás",
 			"threephase": "Három fázis",
 			"threephase-help": "Engedélyezze ezt a kapcsolót háromfázisú töltéskor a megfelelő teljesítményszámítás érdekében",
 			"defaultstate": "Alapértelmezett Állapot",
 			"defaultstate-help": "Az OpenEVSE ezt az alapértelmezett állapotot veszi fel, ha nincs függőben lévő parancs",
-			"limit-help": "Állítsa be a töltési korlátot, amely túléli az újraindítást"
+			"limit-help": "Állítsa be a töltési korlátot, amely túléli az újraindítást",
+			"set_hardware_max": "A hardver maximális áramának beállítása",
+			"confirm_set_hardware_max": "Ok, A hardver maximális árama beállítva",
+			"set_hardware_max_warning": "Ez egy egyszeri művelet. A módosítás után ez az érték nem frissíthető más értékre, és a gyári beállítások visszaállítása sem törli azt. Kérjük, győződjön meg róla, hogy a helyes értéket állítja be."
 		},
 		"safety": {
 			"test": "Teszt",
@@ -354,7 +359,8 @@
 			"announcetopic-desc": "Téma, ahol az OpenEVSE közlemént és LWT adatokat tesz közzé",
 			"retain": "Közzétett adatok megőrzése",
 			"topic-voltage": "Feszültség téma",
-			"topic-voltage-desc": "Feszültség téma a teljesítmény számítások javítása érdekében"
+			"topic-voltage-desc": "Feszültség téma a teljesítmény számítások javítása érdekében",
+			"client-certificate": "Ügyfél tanúsítvány"
 		},
 		"rfid": {
 			"managetag": "Beolvasott címkék kezelése",
@@ -508,6 +514,23 @@
 			"missing-ocpp_chargeBoxId": "Hiányzik a \"Charge Box ID\"",
 			"missing-ocpp_authkey": "Hiányzik az \"Auth Key\"",
 			"missing-ocpp_idtag": "Hiányzik az \"Id Tag\""
+		},
+		"certificates": {
+			"id": "Azonosító",
+			"type": "Típus",
+			"name": "Név",
+			"name_placeholder": "Tanúsítvány neve",
+			"root": "Root",
+			"client": "Ügyfél",
+			"add": "Tanúsítvány hozzáadása",
+			"certificate": "Tanúsítvány",
+			"private_key": "Privát kulcs",
+			"upload": "Új tanúsítvány",
+			"empty": "Nincsenek egyéni tanúsítványok",
+			"missing-name": "Hiányzik a tanúsítvány neve",
+			"missing-certificate": "Hiányzik a tanúsítvány",
+			"missing-private_key": "A privát kulcs hiányzik",
+			"error": "Hiba a tanúsítvány hozzáadásakor"
 		}
 	}
 }
