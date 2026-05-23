@@ -7,6 +7,7 @@
 	import {status_store}  from "../../../lib/stores/status.js"
 	import { derived} 	   from "svelte/store"
 	import Box 			   from "../../ui/Box.svelte"
+	import SliderForm      from "../../ui/SliderForm.svelte"
 
 	export let editable = true
 
@@ -73,5 +74,35 @@
 				<td>{$_("config.safety.stuck")}</td>
 				<td class="has-text-centered"><span class="tag {$status_store.stuckcount==0?'is-primary':'is-danger'}">{$status_store.stuckcount}</span></td>
 			</tr>
+		</tbody>
+		<thead>
+			<tr class="has-background-info">
+				<th class="has-text-white" colspan="2">{$_("config.safety.temp-throttle-title")}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<SafetyTableRow
+				title={$_("config.safety.temp-throttle-enable")}
+				name="temp_throttle_enabled"
+				bind:checked={$config_store.temp_throttle_enabled}
+				{editable}
+				onChange={()=>serialQueue.add(()=> config_store.saveParam("temp_throttle_enabled", $config_store.temp_throttle_enabled))}
+			/>
+			{#if $config_store.temp_throttle_enabled}
+			<tr>
+				<td colspan="2" class="pt-3 pb-2">
+					<SliderForm
+						label={$_("config.safety.temp-throttle-setpoint")}
+						bind:value={$config_store.temp_throttle_setpoint}
+						min={40}
+						max={80}
+						step={1}
+						unit={$_("units.C")}
+						onchange={(val) => serialQueue.add(() => config_store.saveParam("temp_throttle_setpoint", val))}
+					/>
+					<div class="is-size-7 has-text-centered mt-1">{$_("config.safety.temp-throttle-desc")}</div>
+				</td>
+			</tr>
+			{/if}
 		</tbody>
 	</Box>

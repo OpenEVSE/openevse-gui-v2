@@ -310,7 +310,11 @@
             "stuck": "Relais collé",
             "switches": "Total de commutations relais",
             "infos": "Infos",
-            "warningmsg": "Tous les tests de sécurité ne sont pas activés, veuillez faire particulièrement attention en chargeant votre véhicle."
+            "warningmsg": "Tous les tests de sécurité ne sont pas activés, veuillez faire particulièrement attention en chargeant votre véhicle.",
+            "temp-throttle-title": "Temperature Throttling",
+            "temp-throttle-enable": "Enable Temperature Throttling",
+            "temp-throttle-setpoint": "Throttle Setpoint",
+            "temp-throttle-desc": "Reduces charge current by 1A per 30s when temperature reaches setpoint, and recovers 1A per 30s when cool."
         },
         "time": {
             "date": "Date/Heure",
