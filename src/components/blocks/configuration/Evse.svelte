@@ -37,6 +37,18 @@
 	let set_hardware_max = false;
 	let hardware_max_disabled = $config_store.max_current_hard != $config_store.max_current_firmware;
 
+	let voltage_state = ""
+	let voltage_val = $config_store.voltage
+		? $config_store.voltage / 100
+		: ($config_store.service === 1 ? 120.00 : 240.00)
+
+	async function setVoltage() {
+		voltage_state = "loading"
+		const centivolt = Math.round(voltage_val * 100)
+		const ok = await serialQueue.add(() => config_store.saveParam("voltage", centivolt))
+		voltage_state = ok ? "ok" : "error"
+	}
+
 	let updateFormData = () => {
 		formdata.max_current.val = $config_store.max_current_soft
 		formdata.max_current_soft.val = $config_store.max_current_soft
@@ -128,6 +140,25 @@
 						</div>
 						</div>
 					{/if}
+				</Borders>
+			</div>
+			<div class="my-1 is-flex is-justify-content-center">
+				<Borders grow={true} has_help={true}>
+					<div slot="help">
+						{@html $_("config.evse.voltage-help")}
+					</div>
+					<div class="is-uppercase has-text-weight-bold is-size-6 mb-3">{$_("config.evse.voltage")}</div>
+					<div class="is-flex is-justify-content-center is-align-items-center">
+						<div class="inputbox">
+							<InputForm
+								is_inline type="number" min=100 max=300 step=0.01
+								bind:value={voltage_val}
+								status={voltage_state}
+								onChange={setVoltage}
+							/>
+						</div>
+						<div class="ml-2 is-inline-block">{$_("units.V")}</div>
+					</div>
 				</Borders>
 			</div>
 			<div class="my-1 is-flex is-justify-content-center" >

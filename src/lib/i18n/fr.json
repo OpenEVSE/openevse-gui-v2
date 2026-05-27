@@ -495,7 +495,14 @@
             "clear": "Effacer",
             "consoles": "Consoles",
             "exportdata": "Exporter toutes les données",
-            "export": "Exporter"
+            "export": "Exporter",
+            "sysinfo": "Informations système",
+            "ram": "RAM",
+            "flash-fs": "Flash (LittleFS)",
+            "app-part": "Partition app",
+            "total": "Total",
+            "free": "Libre",
+            "used": "Utilisé"
         },
         "ocpp": {
             "server": "URL système central",

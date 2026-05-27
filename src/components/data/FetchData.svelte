@@ -52,9 +52,8 @@
 		if ($uisettings_store.lang != $config_store.lang) {
 			$locale = $config_store.lang
 			let settings = {lang: $locale}
-			uisettings_store.set({...$uisettings_store, ...settings}) 
+			uisettings_store.set({...$uisettings_store, ...settings})
 		}
-		
 		progress = 60
 		$uistates_store.config_version = $status_store.config_version
 		status = "Loading step 5"

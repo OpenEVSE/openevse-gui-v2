@@ -499,7 +499,14 @@
 			"clear": "Kitöröl",
 			"consoles": "Konzolok",
 			"exportdata": "Minden adat exportálása",
-			"export": "Exportálás"
+			"export": "Exportálás",
+			"sysinfo": "Rendszerinformáció",
+			"ram": "RAM",
+			"flash-fs": "Flash (LittleFS)",
+			"app-part": "App partíció",
+			"total": "Összesen",
+			"free": "Szabad",
+			"used": "Felhasznált"
 		},
 		"ocpp": {
 			"server": "Központi rendszer URL",
