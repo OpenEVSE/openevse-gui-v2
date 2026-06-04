@@ -1,5 +1,6 @@
 {
 	"active": "Activo",
+	"eco": "Eco",
 	"disabled": "Desactivado",
 	"disable": "Desactivar",
 	"enabled": "Activado",
@@ -89,8 +90,10 @@
 	"status-task-rfidok-msg": "Tarjeta RFID correcta, habilitada carga",
 	"status-task-timer-activated": "Activada desde",
 	"status-task-timer-disabled": "Desactivada desde",
+	"status-task-timer-eco": "Eco desde",
 	"status-task-timer-activate": "Activar en",
 	"status-task-timer-disable": "Desactivar en",
+	"status-task-timer-eco-at": "Eco en",
 	"status-divert-production": "Producción",
 	"status-divert-grid": "Grid +Importar/-Exportar",
 	"status-current-available": "Corriente disponible",

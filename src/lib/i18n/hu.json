@@ -1,5 +1,6 @@
 {
 	"active": "Aktív",
+	"eco": "Eco",
 	"disabled": "Letiltva",
 	"disable": "Letiltás",
 	"enabled": "Engedélyezve",
@@ -89,8 +90,10 @@
 	"status-task-rfidok-msg": "RFID jelvény rendben, töltés engedélyezése",
 	"status-task-timer-activated": "Aktiválva",
 	"status-task-timer-disabled": "Letiltva",
+	"status-task-timer-eco": "Eco óta",
 	"status-task-timer-activate": "Aktiválás",
 	"status-task-timer-disable": "Letiltás",
+	"status-task-timer-eco-at": "Eco időpont",
 	"status-divert-production": "Termelés",
 	"status-divert-grid": "Hálózat +Import / -Export",
 	"status-current-available": "Elérhető Áram",

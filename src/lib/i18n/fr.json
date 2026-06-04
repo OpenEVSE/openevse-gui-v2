@@ -1,5 +1,6 @@
 {
     "active": "Activé",
+    "eco": "Eco",
     "disabled": "Désactivé",
     "disable": "Désactiver",
     "enabled": "Activé",
@@ -89,8 +90,10 @@
     "status-task-rfidok-msg": "Badge RFID ok, activation en cours",
     "status-task-timer-activated": "Activé depuis",
     "status-task-timer-disabled": "Désactivé depuis",
+    "status-task-timer-eco": "Eco depuis",
     "status-task-timer-activate": "Activé à",
     "status-task-timer-disable": "Désactivé à",
+    "status-task-timer-eco-at": "Eco à",
     "status-divert-production": "Production",
     "status-divert-grid": "Réseau +Import/-Export",
     "status-current-available": "Courant disponible",

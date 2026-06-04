@@ -209,16 +209,18 @@
 					<div class="has-text-dark has-text-centered has-text-weight-semibold">{$_("scheduler-state")}</div>
 					
 						{#if timer == null}
-						<div class="select {default_timer.state=="active"?"is-primary":"is-danger"}" >
+						<div class="select {default_timer.state=="active"?"is-primary":default_timer.state=="eco"?"is-warning":"is-danger"}" >
 							<select bind:this={select} bind:value={default_timer.state}>
 								<option value="active" selected>{$_("active")}</option>
+								<option value="eco">{$_("eco")}</option>
 								<option value="disabled">{$_("disabled")}</option>
 							</select>
 							</div>
 						{:else}
-						<div class="select {schedules[timer].state=="active"?"is-primary":"is-dark"}" >
+						<div class="select {schedules[timer].state=="active"?"is-primary":schedules[timer].state=="eco"?"is-warning":"is-dark"}" >
 							<select bind:value={schedules[timer].state}>
 								<option value="active">{$_("active")}</option>
+								<option value="eco">{$_("eco")}</option>
 								<option value="disabled">{$_("disabled")}</option>
 							</select>
 						</div>

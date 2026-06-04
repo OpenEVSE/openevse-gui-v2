@@ -187,17 +187,17 @@
 					state={$claims_target_store.properties?.state} />
 
 				{:else if $uistates_store.stateclaimfrom == "timer"}
-				<TaskDisplay 
+				<TaskDisplay
 					mode={$_("clients.timer")}
-					msg={$plan_store.current_event?.state=="active"?$_("status-task-timer-activated"):$_("status-task-timer-disabled")} 
-					state={$plan_store.current_event?.state} 
+					msg={$plan_store.current_event?.state=="active"?$_("status-task-timer-activated"):$plan_store.current_event?.state=="eco"?$_("status-task-timer-eco"):$_("status-task-timer-disabled")}
+					state={$plan_store.current_event?.state}
 					time={$plan_store.current_event?.time} />
 
 					{#if $plan_store.current_event?.state != $plan_store.next_event?.state}
-					<TaskDisplay 
-						mode="timer" 
-						msg={$plan_store.next_event.state=="active"?$_("status-task-timer-activate"):$_("status-task-timer-disable")} 
-						state={$plan_store.next_event?.state} 
+					<TaskDisplay
+						mode="timer"
+						msg={$plan_store.next_event.state=="active"?$_("status-task-timer-activate"):$plan_store.next_event.state=="eco"?$_("status-task-timer-eco-at"):$_("status-task-timer-disable")}
+						state={$plan_store.next_event?.state}
 						time={$plan_store.next_event?.time} />
 					{/if}
 				{/if}

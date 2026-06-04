@@ -11,6 +11,7 @@ function createScheduleStore() {
                 for ( let t = 0; t < res.length ; t++) {
                     res[t].time = res[t].time.slice(0,5) // remove useless seconds
                 }
+                res.sort((a, b) => a.time.localeCompare(b.time))
                 P.update(() => res)
                 return true
             }

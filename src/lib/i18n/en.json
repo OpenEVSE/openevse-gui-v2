@@ -1,5 +1,6 @@
 {
     "active": "Active",
+    "eco": "Eco",
     "disabled": "Disabled",
     "disable": "Disable",
     "enabled": "Enabled",
@@ -89,8 +90,10 @@
     "status-task-rfidok-msg": "RFID badge ok, enabling charge",
     "status-task-timer-activated": "Activated since",
     "status-task-timer-disabled": "Disabled since",
+    "status-task-timer-eco": "Eco since",
     "status-task-timer-activate": "Activate at",
     "status-task-timer-disable": "Disable at",
+    "status-task-timer-eco-at": "Eco at",
     "status-divert-production": "Production",
     "status-divert-grid": "Grid +Import/-Export",
     "status-current-available": "Available Current",
