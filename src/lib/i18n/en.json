@@ -170,6 +170,8 @@
     "logs-energy": "Energy",
     "logs-temp": "Temperature",
     "logs-T": "T°",
+    "logs-user": "User",
+    "logs-export": "Export CSV",
     "logs-types": {
         "information": "information",
         "notification": "notification",
@@ -372,7 +374,12 @@
             "tagregistered": "Tag already registered",
             "newtag": "New tag detected",
             "registeredtags": "Registered Tags",
-            "removeall": "Remove All"
+            "removeall": "Remove All",
+            "addusername": "Add user name",
+            "username": "User name",
+            "edit": "Edit",
+            "savename": "Save name",
+            "removename": "Remove name"
         },
         "shaper": {
             "updated": "Live Power Load data up to date, throttling current...",

@@ -13,10 +13,12 @@
 			state2icon,
 			type2icon} 			from "../../../lib/utils.js"
 	import Box 					from "./../../ui/Box.svelte"
+	import Button 				from "./../../ui/Button.svelte"
 
 	let index
 	let loaded = false
 	let progress = 0
+	let rfidUsers = {}
 
 	async function init() {
 		index = await serialQueue.add(() => httpAPI("GET","/logs"))
@@ -42,20 +44,52 @@
 		
 	}
 
-	onMount(()=>{
-		init()
+	async function loadRfidUsers() {
+		const result = await httpAPI("GET", "/rfid/users")
+		if (result && result !== "error") {
+			rfidUsers = result
+		}
+	}
+
+	function exportCSV() {
+		const url = import.meta.env.DEV ? "/api/logs/export" : "/logs/export"
+		const link = document.createElement('a')
+		link.href = url
+		link.download = "session-history.csv"
+		link.click()
+		// Remove after allowing browser time to process download
+		setTimeout(() => link.remove(), 100)
+	}
+
+	function getUserDisplay(rfidTag) {
+		if (!rfidTag) return "-"
+		if (rfidUsers[rfidTag]) return rfidUsers[rfidTag]
+		return rfidTag
+	}
+
+	onMount(async ()=>{
+		await loadRfidUsers()
+		await init()
 
 	})
 
 </script>
 <style>
 	.table {
-		max-width: 600px;
+		max-width: 800px;
 	}
 	
 </style>
 
 <Box title={$_("logs-title")} icon="icon-park-outline:history-query">
+	<div class="has-text-centered mb-3">
+		<Button 
+			name={$_("logs-export")} 
+			icon="fa6-solid:file-export"
+			color="is-info" 
+			butn_submit={exportCSV} 
+		/>
+	</div>
 	<div class="has-text-centered is-flex-grow-1 is-flex is-justify-content-center has-text-dark">
 		{#if !loaded}
 		<div class="is-flex-shrink-0 is-flex-grow-1 is-flex is-align-items-center is-justify-content-center">
@@ -75,6 +109,7 @@
 						<th class="has-text-centered has-text-dark"><abbr title={$_("logs-type")}>{$_("logs-type")}</abbr></th>
 						<th class="has-text-centered has-text-dark"><abbr title="{$_("logs-status")}">{$_("logs-status")}</abbr></th>
 						<th class="has-text-centered has-text-dark"><abbr title="{$_("logs-energy")}">{$_("units.kwh")}</abbr></th>
+						<th class="has-text-centered has-text-dark"><abbr title="{$_("logs-user")}">{$_("logs-user")}</abbr></th>
 						<th class="has-text-centered has-text-dark"><abbr title={$_("logs-temp")}>{$_("logs-T")}</abbr></th>
 					</tr>
 				</thead>
@@ -89,6 +124,7 @@
 							<iconify-icon  class="{state2icon(item.evseState).color} is-size-5" icon={state2icon(item.evseState).type}></iconify-icon>
 						</td>
 						<td class="has-text-weight-bold">{round(item.energy/1000,1).toFixed(1)}</td>
+						<td class="has-text-dark">{getUserDisplay(item.rfidTag)}</td>
 						<td class="has-text-weight-bold">{round(item.temperature,1).toFixed(1)}</td>
 					</tr>
 					{/each}
