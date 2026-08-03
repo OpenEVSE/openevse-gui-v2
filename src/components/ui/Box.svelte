@@ -6,6 +6,7 @@
 	// import { expoInOut }	 	from 'svelte/easing'	
 	import {location} 			from 'svelte-spa-router'
 
+	/** @type {string | null} */
 	export let title = null
 	export let has_help = false
 	export let visible = true

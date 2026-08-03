@@ -125,6 +125,10 @@
 				element == "espflash"					||
 				element == "espinfo"					||
 				element == "buildenv"					||
+				element == "heap_size"					||
+				element == "littlefs_size"				||
+				element == "app0_size"					||
+				element == "sketch_size"				||
 				element == "version"					||
 				element == "evse_serial"				||
 				element == "wifi_serial"

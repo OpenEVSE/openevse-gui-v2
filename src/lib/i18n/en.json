@@ -210,7 +210,7 @@
             "emon": "Energy Monitoring",
             "ohm": "OhmConnect",
             "dev": "Developer",
-            "certificates": "Certificates",
+            "certificates": "Security",
             "about": "About"
         },
         "network": {
@@ -274,6 +274,17 @@
             "import": "Import",
             "backup-desc": "Warning! It won't backup any passwords & keys"
         },
+        "security": {
+            "boot-lock-section": "Boot Lock",
+            "boot-lock-enable": "Enable Boot Lock",
+            "heartbeat-section": "Heartbeat Supervision",
+            "heartbeat-enable": "Enable Heartbeat Supervision",
+            "heartbeat-fail-current": "Fail State Current",
+            "heartbeat-interval": "Heartbeat Interval",
+            "heartbeat-interval-unit": "s",
+            "front-button-section": "Front Button",
+            "front-button-enable": "Enable Front Button"
+        },
         "evse": {
             "maxcur": "Max Current",
             "maxcur-help": "Max current the hardware setup can handle",
@@ -295,7 +306,9 @@
             "limit-help": "Set charge limit that will survive reboot",
             "set_hardware_max": "Set hardware maximum current",
             "confirm_set_hardware_max": "Ok, set hardware maximum current",
-            "set_hardware_max_warning": "This is a one time operation. Once changed this can not be updated to any other value and is not cleared by a factory reset. Please be sure you are setting this to the correct value"
+            "set_hardware_max_warning": "This is a one time operation. Once changed this can not be updated to any other value and is not cleared by a factory reset. Please be sure you are setting this to the correct value",
+            "voltage": "Voltage",
+            "voltage-help": "Set the voltage used for power calculations. Level 1 default: 120V, Level 2 default: 240V."
         },
         "safety": {
             "test": "Test",
@@ -305,6 +318,7 @@
             "temp-monitor": "Temperature Monitoring",
             "diode-check": "Diode Check",
             "vent-check": "Ventilation Check",
+            "overcurrent-monitor": "Over Current Monitoring",
             "vent-requ": "Vent Required",
             "errors": "Errors",
             "count": "Count",
@@ -313,7 +327,14 @@
             "stuck": "Stuck Contact",
             "switches": "Total Relay Toggles",
             "infos": "Infos",
-            "warningmsg": "Not all the safety tests are enabled, please take extra care before charging your vehicle."
+            "clear-counters": "Clear Counters",
+            "warningmsg": "Not all the safety tests are enabled, please take extra care before charging your vehicle.",
+            "temp-throttle-title": "Temperature Throttling",
+            "temp-throttle-enable": "Enable Temperature Throttling",
+            "temp-throttle-setpoint": "Throttle Setpoint",
+            "temp-throttle-desc": "Reduces charge current by 1A per 30s when temperature reaches setpoint, and recovers 1A per 30s when cool.",
+            "over-temp-shutdown": "Over Temperature Shutdown",
+            "over-temp-shutdown-desc": "Shuts down charging when temperature exceeds this value."
         },
         "time": {
             "date": "Date",
@@ -495,7 +516,14 @@
             "clear": "Clear",
             "consoles": "Consoles",
             "exportdata": "Export all data",
-            "export": "Export"
+            "export": "Export",
+            "sysinfo": "System Info",
+            "ram": "RAM",
+            "flash-fs": "Flash (LittleFS)",
+            "app-part": "App Partition",
+            "total": "Total",
+            "free": "Free",
+            "used": "Used"
         },
         "ocpp": {
             "server": "Central System URL",

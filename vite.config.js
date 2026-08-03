@@ -5,6 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { visualizer }		from "rollup-plugin-visualizer"
 // import { dependencies } from './package.json';
 import fs from 'fs'
+import { registerEnergyMocks } from './mock/energy.js'
 
 // function renderChunks(deps) {
 //   let chunks = {};
@@ -65,6 +66,12 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     plugins: [
+      {
+        name: 'energy-mock',
+        configureServer(server) {
+          registerEnergyMocks(server.middlewares);
+        },
+      },
       visualizer(),
       svelte(),
       viteCompression({deleteOriginFile: true, algorithm: "gzip",filter: /\.(js|mjs|json|css|html)$/i}),
@@ -114,6 +121,10 @@ export default defineConfig(({ command, mode }) => {
     server: {
       host: "0.0.0.0",
       proxy: {
+        '/api/energy': {
+          target: 'http://' + env.VITE_OPENEVSEHOST,
+          changeOrigin: true,
+        },
         '/api': {
           target: 'http://' + env.VITE_OPENEVSEHOST,
           changeOrigin: true,
