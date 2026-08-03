@@ -79,21 +79,23 @@ export function formatDate(t,z,format=null) {
 		d = DateTime.fromISO(t, {zone: tz})
 	}
 	else d = DateTime.fromISO(t)
-	const arr = d.toLocaleString(DateTime.DATETIME_SHORT).split(" ")
-	let datearr = arr[0].split("/")
-	if (format=="short") {
-		//remove year
-		datearr.pop()
-	}
-	// fixing missing trailing 0 luxxon bug on US locale
-	datearr[0] = datearr[0]?.length == 1?"0"+datearr[0]:datearr[0]
-	datearr[1] = datearr[1]?.length == 1?"0"+datearr[1]:datearr[1]
-	const date = datearr.join("/")
-	let time = arr[1]
-	if (arr[2]) 
-		time += " " + arr[2]
 
-	return date + " " + time
+	let d1
+    if (format == "short")					// remove year
+		d1 = d.toLocaleString({month: '2-digit', day: '2-digit'})
+	else
+		d1 = d.toLocaleString({year: 'numeric', month: '2-digit', day: '2-digit'})
+
+	let datearr = d1.split(". ")			// remove space - shorter form
+	if (datearr[1]) d1 = datearr.join(".")
+
+	// Select your preferred format TIME_SIMPLE or 2-digit hours and minutes.
+	// TIME_SIMPLE is locale aware but some locales do not use leading zeros for hours
+	// which causes layout issues.
+//    let time = d.toLocaleString(DateTime.TIME_SIMPLE)
+    let time = d.toLocaleString({hour: '2-digit', minute: '2-digit'})
+
+	return d1 + " " + time
 }
 
 export function displayTime(t) {
