@@ -10,6 +10,13 @@
 	import { claims_store } from "./../../../lib/stores/claims.js";
 	import { claims_target_store } from "./../../../lib/stores/claims_target.js";
 	import { config_store } from "./../../../lib/stores/config.js";
+
+	function fmtBytes(b) {
+		if (b == null || b === undefined) return "—";
+		if (b >= 1048576) return (b / 1048576).toFixed(2) + " MB";
+		if (b >= 1024)    return (b / 1024).toFixed(1) + " KB";
+		return b + " B";
+	}
 	import Borders from "./../../ui/Borders.svelte";
 	import { _ } 		from 'svelte-i18n'
 	import InputForm 	from "./../../ui/InputForm.svelte";
@@ -138,6 +145,41 @@
 							</form>
 						</div>
 					</div>
+				</Borders>
+			</div>
+			<div class="mt-4 mb-1 is-flex is-justify-content-center">
+				<Borders grow>
+					<div class="has-text-dark has-text-weight-bold has-text-centered mb-2">{$_("config.dev.sysinfo")}</div>
+					<table class="table is-narrow is-fullwidth is-size-7">
+						<thead>
+							<tr>
+								<th></th>
+								<th class="has-text-right">{$_("config.dev.total")}</th>
+								<th class="has-text-right">{$_("config.dev.free")}</th>
+								<th class="has-text-right">{$_("config.dev.used")}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="has-text-weight-bold">{$_("config.dev.ram")}</td>
+								<td class="has-text-right">{fmtBytes($config_store.heap_size)}</td>
+								<td class="has-text-right">{fmtBytes($status_store?.free_heap)}</td>
+								<td class="has-text-right">{fmtBytes($config_store.heap_size && $status_store?.free_heap != null ? $config_store.heap_size - $status_store.free_heap : undefined)}</td>
+							</tr>
+							<tr>
+								<td class="has-text-weight-bold">{$_("config.dev.flash-fs")}</td>
+								<td class="has-text-right">{fmtBytes($config_store.littlefs_size)}</td>
+								<td class="has-text-right">{fmtBytes($status_store?.littlefs_free)}</td>
+								<td class="has-text-right">{fmtBytes($status_store?.littlefs_used)}</td>
+							</tr>
+							<tr>
+								<td class="has-text-weight-bold">{$_("config.dev.app-part")}</td>
+								<td class="has-text-right">{fmtBytes($config_store.app0_size)}</td>
+								<td class="has-text-right">{fmtBytes($config_store.app0_size && $config_store.sketch_size != null ? $config_store.app0_size - $config_store.sketch_size : undefined)}</td>
+								<td class="has-text-right">{fmtBytes($config_store.sketch_size)}</td>
+							</tr>
+						</tbody>
+					</table>
 				</Borders>
 			</div>
 			<div class="mt-4 mb-1 is-flex is-justify-content-center">

@@ -19,6 +19,7 @@
 	import Slider 					from "./../../ui/SliderForm.svelte"
 	import ButtonManual 			from "../../ui/ButtonManual.svelte"
 	import RemovableTag 			from "../../ui/RemovableTag.svelte"
+	import EnergyRawChart			from "../energy/EnergyRawChart.svelte"
 
 	let setamp_tag
 	let buttons_manual
@@ -206,6 +207,7 @@ $: setShaper($uistates_store.shaper)
 				disabled={waiting} 
 			/>
 		</div>
+		<EnergyRawChart showNav={false} historyLink={true} />
 		<Borders grow>
 			<div class="is-size-6 has-text-dark has-text-weight-bold mb-2">
 				{$_("charge-rate-label")} 
